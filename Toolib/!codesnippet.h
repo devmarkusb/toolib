@@ -1,0 +1,17 @@
+// Markus Borris, 2011
+// This file is part of my Toolib library. Open source.
+
+//!
+/**
+*/
+//! \file
+
+#pragma once
+#ifndef XXX_H_INCL_cnktrgtvn485
+#define XXX_H_INCL_cnktrgtvn485
+
+namespace too
+{
+}
+
+#endif

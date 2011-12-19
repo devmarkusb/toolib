@@ -1,0 +1,46 @@
+// Markus Borris, 2011
+// This file is part of my Toolib library. Open source.
+
+//!
+/** Contains useful tools for debugging, like run-time breakpoints.
+*/
+//! \file
+
+#pragma once
+#ifndef DEBUG_MISC_H_INCL_n9283zr823rz832
+#define DEBUG_MISC_H_INCL_n9283zr823rz832
+
+#include "../PPDEFS.h"
+
+//! Define a breakpoint macro for debugging.
+/** Just call TOO_DEBUG_BREAK_IF(...); with some if-condition as parameter.*/
+#if TOO_DEBUG
+	#if TOO_WINDOWS && TOO_MS_VISUAL_STUDIO_CPP
+		#if TOO_WINDOWS_64 // using portable common solution for x64 configuration
+			#include <crtdbg.h>
+			#define TOO_DEBUG_BREAK_IF(_CONDITION_)	if ((_CONDITION_)) { _CrtDbgBreak(); }
+		#else
+			#define TOO_DEBUG_BREAK_IF(_CONDITION_)	if ((_CONDITION_)) { _asm int 3 }
+		#endif
+	#else
+		#include <assert.h>
+		#define TOO_DEBUG_BREAK_IF(_CONDITION_)		assert(!(_CONDITION_))
+	#endif
+#else
+	#define TOO_DEBUG_BREAK_IF(_CONDITION_)			sizeof((_CONDITION_))
+#endif
+
+//! Function signature.
+#if TOO_MS_VISUAL_STUDIO_CPP
+	#define TOO_FUNCTIONSIGN __FUNCSIG__
+#else
+	#define TOO_FUNCTIONSIGN ""
+#endif
+
+//! Use something along the following as string literal: TOO_LOCATION"some message"
+/** This would evaluate to "...somepath.../Toolib/debug/debug_misc.h (71) : some message".*/
+#define TOO_AUXDEF_CONCATENATE_DIRECT_WITH(x) #x
+#define TOO_AUXDEF_CONCATENATE_INDIRECT_WITH(x) TOO_AUXDEF_CONCATENATE_DIRECT_WITH(x)
+#define TOO_LOCATION __FILE__" ("TOO_AUXDEF_CONCATENATE_INDIRECT_WITH(__LINE__)") : "
+
+#endif
