@@ -89,13 +89,13 @@
 // Main debug-macro definition
 
 #if TOO_MS_VISUAL_STUDIO_CPP
-#if _DEBUG
+#ifdef _DEBUG
 #define TOO_DEBUG	1
 #else
 #define TOO_DEBUG	0
 #endif
 #else
-#if NDEBUG
+#ifdef NDEBUG
 #define TOO_DEBUG	0
 #else
 #define TOO_DEBUG	1

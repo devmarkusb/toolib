@@ -6,7 +6,7 @@
 (wrapping just the standard procedure of Visual Studio). If you want to use vld.h for the latter,
 if available, just define TOO_USE_VLD in front of the header inclusion.
 Note: For leak detection this file has to be the last one included in your main module.
-If you do not want leak detection, define TOO_NO_LEAK_DETECTION in front of the inclusion.
+If you do want leak detection, define TOO_LEAK_DETECTION as 1 in front of the inclusion.
 Known issue: problems occur when you try to overload operator new after including leak detection.
 */
 //! \file
@@ -17,7 +17,7 @@ Known issue: problems occur when you try to overload operator new after includin
 
 //! For further informations, see included files.
 #include "debug/debug_misc.h"
-#ifndef TOO_NO_LEAK_DETECTION
+#if TOO_LEAK_DETECTION
 	#include "debug/debug_leaks.h"
 #endif
 

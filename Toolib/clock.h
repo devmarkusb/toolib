@@ -30,17 +30,17 @@ namespace too
 		//! Time units used by the class.
 		/** Note that nano- and microseconds are not supported by this class. They can be used but there is
 		no precision below milliseconds.*/
-		enum EUnits {
-			NANOSEC = 0,
-			MICROSEC,
-			MILLISEC,
-			SEC,
-			MIN,
-			HOURS,
-			DAYS,
-			WEEKS,
-			EUNITS_COUNT
-		};
+		//enum EUnits {
+		//	NANOSEC = 0,
+		//	MICROSEC,
+		//	MILLISEC,
+		//	SEC,
+		//	MIN,
+		//	HOURS,
+		//	DAYS,
+		//	WEEKS,
+		//	EUNITS_COUNT
+		//};
 		//!
 		enum EPrecision {
 			PREC_MICROSEC,
@@ -88,14 +88,14 @@ namespace too
 		\param return_unit specifies the unit in which the time interval length is returned.
 		\param bSetNewMeasuringPoint stores a new measuring point, when true. Otherwise the next
 		call of elapsed just adds up to the result of this one.*/
-		clock_t elapsed(EUnits return_unit, bool bSetNewMeasuringPoint = true)
-		{
-			clock_t t = gettime(m_prec);
-			clock_t ret = static_cast<clock_t>(m_fSpeedFactor * (t - m_last_measurement) * unit[return_unit]);
-			if (bSetNewMeasuringPoint)
-				m_last_measurement = t;
-			return ret;
-		}
+		//clock_t elapsed(EUnits return_unit, bool bSetNewMeasuringPoint = true)
+		//{
+		//	clock_t t = gettime(m_prec);
+		//	clock_t ret = static_cast<clock_t>(m_fSpeedFactor * (t - m_last_measurement) * unit[return_unit]);
+		//	if (bSetNewMeasuringPoint)
+		//		m_last_measurement = t;
+		//	return ret;
+		//}
 		//! Little bit faster version, always returns in milliseconds, *if* CLOCKS_PER_SEC is 1000.
 		/** \see elapsed().*/
 		clock_t elapsed(bool bSetNewMeasuringPoint = true)
@@ -111,33 +111,36 @@ namespace too
 		system clock speed, 0.5 is half slow-motion, 2.0 would be twice the normal speed.*/
 		f32& SpeedFactor() { return m_fSpeedFactor; }
 	private:
-		static const f64 unit[EUNITS_COUNT]; // factors for calculation
+		//static const f64 unit[EUNITS_COUNT]; // factors for calculation
 		clock_t m_last_measurement; // stores the last measuring point
 		f32 m_fSpeedFactor; // stores the "time zoom" factor
 		EPrecision m_prec; // precision used by gettime()
 	};
 	// Initialising internal calculation factors, indexed according to clock::EUnits.
-	const f64 clock::unit[EUNITS_COUNT] = {
-		1000000000.0 / CLOCKS_PER_SEC,		// ns
-		1000000.0 / CLOCKS_PER_SEC,			// micros
-		1000.0 / CLOCKS_PER_SEC,			// ms
-		1.0 / CLOCKS_PER_SEC,				// s
-		1.0 / CLOCKS_PER_SEC / 60.0,		// min
-		1.0 / CLOCKS_PER_SEC / 3600.0,		// h
-		1.0 / CLOCKS_PER_SEC / 86400.0,		// d
-		1.0 / CLOCKS_PER_SEC / 604800.0,	// w
-	};
+	//const f64 clock::unit[EUNITS_COUNT] = {
+	//	1000000000.0 / CLOCKS_PER_SEC,		// ns
+	//	1000000.0 / CLOCKS_PER_SEC,			// micros
+	//	1000.0 / CLOCKS_PER_SEC,			// ms
+	//	1.0 / CLOCKS_PER_SEC,				// s
+	//	1.0 / CLOCKS_PER_SEC / 60.0,		// min
+	//	1.0 / CLOCKS_PER_SEC / 3600.0,		// h
+	//	1.0 / CLOCKS_PER_SEC / 86400.0,		// d
+	//	1.0 / CLOCKS_PER_SEC / 604800.0,	// w
+	//};
 
 	//! High precision clock, Windows only.
 #if TOO_WINDOWS && TOO_CLOCK_USE_WINDOWS_HP
+	//! Usage: clock_hp c; /* do sth. ... */ double dMillisecTaken = c.elapsed();
 	class clock_hp
 	{
 	public:
-		class ErrNotAvailable : public std::exception {};
-
 		//! Initializes processor tick frequency and a first absolute tick count.
-		clock_hp() : m_Freq(initFreq()), m_LastCount(getCount()) {}
-
+		clock_hp() : m_bIsBroken(false), m_Freq(initFreq()), m_LastCount(getCount())  {}
+		//! If strange things happen, you could ask whether the clock is broken.
+		bool IsBroken() const
+		{
+			return m_bIsBroken;
+		}
 		//! \returns difference in seconds to last call of elapsed() or constructor.
 		/** \param bSetNewMeasuringPoint false would accumulate times without resetting.*/
 		double elapsed(bool bSetNewMeasuringPoint = true)
@@ -153,28 +156,26 @@ namespace too
 			m_LastCount = getCount();
 		}
 	private:
-		const LONGLONG m_Freq; // count per second
+		bool m_bIsBroken;
+		LONGLONG m_Freq; // count per second
 		LONGLONG m_LastCount;
 
 		clock_hp(const clock_hp&);
 		clock_hp& operator=(const clock_hp&);
-
 		LONGLONG initFreq()
 		{
 			LONGLONG f;
 			if (!QueryPerformanceFrequency(reinterpret_cast<LARGE_INTEGER*>(&f)) || !f)
-				throw ErrNotAvailable();
+				m_bIsBroken = true;
 			return f;
 		}
-
 		LONGLONG getCount()
 		{
 			LONGLONG c;
 			if (!QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&c)))
-				throw ErrNotAvailable();
+				m_bIsBroken = true;
 			return c;
 		}
-
 	};
 #endif
 

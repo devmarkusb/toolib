@@ -15,6 +15,9 @@
 //! Define a breakpoint macro for debugging.
 /** Just call TOO_DEBUG_BREAK_IF(...); with some if-condition as parameter.*/
 #if TOO_DEBUG
+	#include <assert.h>
+	#define TOO_ASSERT(_CONDITION_)					assert((_CONDITION_))
+	#define TOO_VERIFY(_CONDITION_)					assert((_CONDITION_))
 	#if TOO_WINDOWS && TOO_MS_VISUAL_STUDIO_CPP
 		#if TOO_WINDOWS_64 // using portable common solution for x64 configuration
 			#include <crtdbg.h>
@@ -23,11 +26,12 @@
 			#define TOO_DEBUG_BREAK_IF(_CONDITION_)	if ((_CONDITION_)) { _asm int 3 }
 		#endif
 	#else
-		#include <assert.h>
-		#define TOO_DEBUG_BREAK_IF(_CONDITION_)		assert(!(_CONDITION_))
+		#define TOO_DEBUG_BREAK_IF(_CONDITION_)		TOO_ASSERT(!(_CONDITION_))
 	#endif
 #else
-	#define TOO_DEBUG_BREAK_IF(_CONDITION_)			sizeof((_CONDITION_))
+	#define TOO_ASSERT(_CONDITION_)
+	#define TOO_VERIFY(_CONDITION_)					sizeof((_CONDITION_))
+	#define TOO_DEBUG_BREAK_IF(_CONDITION_)			/*sizeof((_CONDITION_)) <- don't want this; produces code in release version */
 #endif
 
 //! Function signature.

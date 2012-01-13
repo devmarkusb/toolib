@@ -17,47 +17,18 @@ namespace too
 {
 	namespace err
 	{
+		//!
 		std::string getTypename(const std::exception& e);
+
+		//! Objects of this class can be thrown with some text information.
+		class CException_info : virtual public std::exception
+		{
+			std::string m_s;
+		public:
+			CException_info(const std::string& s = "") : m_s(s) {}
+			const std::string& getInfo() const { return m_s; }
+		};
 	} // err
 } // too
-
-//todo need sth. like this:
-//#include <string>
-//#include <sstream> 
-////! A simple exception class
-///*!
-//	The key of this exception is the ability to store text. 
-//	The user is able to pump custom infos into the exception object using the << operator, e.g.
-//	int i = 666; // holds the error code.
-//	throw (DefaultException () << "The following error occured: " << i);
-//*/
-//class DefaultException
-//{
-//public:
-//	//! Constructs an empty exception object.
-//	DefaultException (){}
-//	virtual ~DefaultException (){}
-//	//! Use this operator to pump some additional infos into the exception text.
-//	template <typename T>
-//	inline DefaultException & operator<< (const T & stream)
-//	{
-//		std::stringstreamT ss;
-//		ss << stream;
-//		text_ += ss.str ().c_str ();
-//		return *this;
-//	}
-//	//! Returns the text of the default exeption.
-//	/*!
-//		\return char const * A pointer to the text the exception holds.
-//	*/
-//	TCHAR const * what () const
-//	{
-//		return text_.c_str ();
-//	}
-//
-//protected:
-//	//! Holds the exception text.
-//	std::stringT text_;
-//};
 
 #endif
