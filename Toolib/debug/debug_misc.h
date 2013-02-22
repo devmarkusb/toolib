@@ -42,9 +42,16 @@
 #endif
 
 //! Use something along the following as string literal: TOO_LOCATION"some message"
-/** This would evaluate to "...somepath.../Toolib/debug/debug_misc.h (71) : some message".*/
+/** This would evaluate to "...somepath.../Toolib/debug/debug_misc.h (71) : some message". Useful e.g. as #pragma message (TOO_LOCATION"some message")*/
 #define TOO_AUXDEF_CONCATENATE_DIRECT_WITH(x) #x
 #define TOO_AUXDEF_CONCATENATE_INDIRECT_WITH(x) TOO_AUXDEF_CONCATENATE_DIRECT_WITH(x)
 #define TOO_LOCATION __FILE__" ("TOO_AUXDEF_CONCATENATE_INDIRECT_WITH(__LINE__)") : "
+
+////! User-defined compiler (warning) message.
+//#if TOO_MS_VISUAL_STUDIO_CPP
+//#define TOO_COMPILER_MSG(x) #pragma message(x) // doesn't work; only formal parameter
+//#else
+//#define TOO_COMPILER_MSG(x)
+//#endif
 
 #endif

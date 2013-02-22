@@ -10,13 +10,13 @@
 #include <fstream>
 #include <sstream>
 #include <cstdio>
-#include "Toolib/filesys.h"
-#include "Toolib/PPDEFS.h"
+#include "../Toolib/filesys.h"
+#include "../Toolib/PPDEFS.h"
 #ifdef TOO_WINDOWS
 #include <windows.h>
 #endif
-#include "Toolib/log.h"
-#include "Toolib/LOGDEF.h"
+#include "../Toolib/log.h"
+#include "../Toolib/LOGDEF.h"
 
 namespace too
 {
