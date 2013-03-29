@@ -18,9 +18,10 @@ namespace too
 	//! Alias toog::.
 	namespace game
 	{
-		//=============
-		//=== IMain ===
-		//=============
+
+		//##############################################################################################################
+		// IMain
+
 		//! Implementation interface for the frame program of a game.
 		/** Gameplay itself shall be started with game() implemented with the help of special
 			IGame-implementation, \see IGame. Please study main() and mainloop() for the basic logic.*/
@@ -77,9 +78,10 @@ namespace too
 			}
 		};
 
-		//=============
-		//=== IGame ===
-		//=============
+
+		//##############################################################################################################
+		// IGame
+
 		//! Implementation interface for actual gameplay, supposed to start its loop by the game() member.
 		class IGame
 		{

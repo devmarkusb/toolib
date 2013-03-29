@@ -12,6 +12,26 @@
 
 #include "../PPDEFS.h"
 
+
+//##############################################################################################################
+// Main debug-macro definition
+
+#if TOO_MS_VISUAL_STUDIO_CPP
+#ifdef _DEBUG
+#define TOO_DEBUG	1
+#else
+#define TOO_DEBUG	0
+#endif
+#else
+#ifdef NDEBUG
+#define TOO_DEBUG	0
+#else
+#define TOO_DEBUG	1
+#endif
+#endif
+
+
+//##############################################################################################################
 //! Define a breakpoint macro for debugging.
 /** Just call TOO_DEBUG_BREAK_IF(...); with some if-condition as parameter.*/
 #if TOO_DEBUG
@@ -28,10 +48,12 @@
 	#else
 		#define TOO_DEBUG_BREAK_IF(_CONDITION_)		TOO_ASSERT(!(_CONDITION_))
 	#endif
+	#define TOO_DEBUG_BREAK							TOO_DEBUG_BREAK_IF(true)
 #else
 	#define TOO_ASSERT(_CONDITION_)
 	#define TOO_VERIFY(_CONDITION_)					sizeof((_CONDITION_))
 	#define TOO_DEBUG_BREAK_IF(_CONDITION_)			/*sizeof((_CONDITION_)) <- don't want this; produces code in release version */
+	#define TOO_DEBUG_BREAK
 #endif
 
 //! Function signature.

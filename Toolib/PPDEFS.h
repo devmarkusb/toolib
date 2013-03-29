@@ -2,7 +2,7 @@
 // This file is part of my Toolib library. Open source.
 
 //!
-/** Also defines the main debug macro TOO_DEBUG to be 1 or 0.
+/** Most common and basic preprocessor defines.
 */
 //! \file
 
@@ -82,24 +82,6 @@
 
 #ifdef __embedded_cplusplus
 #define TOO_STANDARD_EMBCPP		1
-#endif
-
-
-//##############################################################################################################
-// Main debug-macro definition
-
-#if TOO_MS_VISUAL_STUDIO_CPP
-#ifdef _DEBUG
-#define TOO_DEBUG	1
-#else
-#define TOO_DEBUG	0
-#endif
-#else
-#ifdef NDEBUG
-#define TOO_DEBUG	0
-#else
-#define TOO_DEBUG	1
-#endif
 #endif
 
 
