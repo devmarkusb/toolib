@@ -2,9 +2,11 @@
 // This file is part of my Toolib library. Open source.
 
 //!
-/** Usage: The following steps are for a DLL as intended target. The absolute same applys for a LIB - you just
-	leave out the define TOO_BUILDANDUSE_DLL from the global compiler options. The project then remains flexible,
-	whether to be compiled to DLL or LIB.
+/** NOTE: This file remains just as a documentation. It doesn't make much sense. Every dll should use its own
+    export define.
+    Usage: The following steps are for a DLLs as intended target. The absolute same applies for a LIBs - you just
+	leave out the define TOO_BUILDANDUSE_DLLS from the global compiler options. The project then remains flexible,
+	whether to be compiled to DLLs or LIBs.
 	(1) Include this file into all your library headers that export things and ought to be used
 	from the outside, too.
 	(2) Exporting for possible DLL target then goes like this:
@@ -15,7 +17,7 @@
 	TOO_DLL_DECLSPEC void g(...);
 	TOO_DLL_DECLSPEC int i;
 	\endcode
-	(2) Define TOO_BUILDANDUSE_DLL as global compiler option when compiling *and* using as DLL.
+	(2) Define TOO_BUILDANDUSE_DLLS as global compiler option when compiling *and* using as DLL.
 	(3) Define TOO_DLL_EXPORT if compiling the DLL, and don't define it when using it (corresponds to
 	alternatively define TOO_DLL_IMPORT.
 	(4) When using outside, import the DLL/LIB by
@@ -60,12 +62,14 @@
 #ifndef DLL_DEFS_H_INCL_fvhnbil8rw75t
 #define DLL_DEFS_H_INCL_fvhnbil8rw75t
 
-#include "PPDEFS.h"
+#if THIS_DLL_IS_NOT_DEPRECATED__DLL_DEFS_H_INCL_fvhnbil8rw75t
+
+#include "PPDEFS.H"
 
 //##############################################################################################################
 
-//! TOO_BUILDANDUSE_DLL must be defined when you compile the library as DLL and also when you use it.
-#if defined(TOO_BUILDANDUSE_DLL) && TOO_WINDOWS
+//! TOO_BUILDANDUSE_DLLS must be defined when you compile a library as DLL and also when you use it.
+#if defined(TOO_BUILDANDUSE_DLLS) && TOO_WINDOWS
 //! TOO_DLL_EXPORT must be defined when compiling the dll, otherwise it mustn't.
 #if defined(TOO_DLL_EXPORT) && !defined(TOO_DLL_IMPORT)
 //! For exporting the library to a dll.
@@ -101,6 +105,9 @@
 #define TOO_WINAPI
 #endif
 #define TOO_APIENTRY    WINAPI
+
+
+#endif THIS_DLL_IS_NOT_DEPRECATED__DLL_DEFS_H_INCL_fvhnbil8rw75t
 
 //##############################################################################################################
 #endif
