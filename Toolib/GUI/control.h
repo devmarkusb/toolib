@@ -1,6 +1,5 @@
-// Copyright (C) 2011 Markus Borris
-// This file is part of the Toolib library.
-// For conditions of distribution and use, see copyright notice in toolib.h.
+// Markus Borris, 2011
+// This file is part of my Toolib library. Open source.
 
 //!
 /** Abstract base class for all user controls, also called widgets.
