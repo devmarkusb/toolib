@@ -7,7 +7,7 @@ according to the article by Andrei Alexandrescu and Petru Marginean, December 01
 */
 //! \file
 
-#pragma once
+
 #ifndef SCOPEGUARD_H_INCL_n2zxr732rmyrz3n2ur
 #define SCOPEGUARD_H_INCL_n2zxr732rmyrz3n2ur
 
@@ -26,11 +26,11 @@ namespace too
 	// ... do other stuff that might throw ...
 	guardSVPush.NoRollback();
 	\endcode
-	
+
 	This is an example for usage with a member function with no parameters as possible rollback procedure.
 	There exist overloads of MakeObjGuard() and MakeGuard() suitable for use cases with 1 or 2 parameters and
 	for usual functions, also with 0, 1, or 2 parameters.
-	
+
 	If you like to transfer a parameter by reference, use too::ByRef(some_variable) instead of some_variable as parameter.
 
 	The call to NoRollback() is of course optional.*/
@@ -52,7 +52,7 @@ namespace too
 		ScopeGuardImplBase() : m_bRollback(true){}
 		//! Copy, takes over responsibility.
 		ScopeGuardImplBase(const ScopeGuardImplBase& other) : m_bRollback(other.m_bRollback)
-		{   
+		{
 			other.NoRollback();
 		}
 		//! Does nothing.

@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef COLOR_H_INCL
 #define COLOR_H_INCL
 

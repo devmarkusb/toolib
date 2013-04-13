@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef BITS_H_INCL_inewhjr4382zrn83
 #define BITS_H_INCL_inewhjr4382zrn83
 

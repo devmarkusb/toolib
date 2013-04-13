@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef GUI_WCONS_H_INCL
 #define GUI_WCONS_H_INCL
 

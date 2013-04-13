@@ -6,7 +6,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef PP_C_ARRAY_H_INCL_lnm45hxn73rmnfy2738yrn873rg
 #define PP_C_ARRAY_H_INCL_lnm45hxn73rmnfy2738yrn873rg
 

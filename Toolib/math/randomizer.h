@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef RANDOMIZER_H_INCL_238zrxn2rrfhf
 #define RANDOMIZER_H_INCL_238zrxn2rrfhf
 

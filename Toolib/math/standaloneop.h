@@ -9,7 +9,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef STANDALONEOP_H_INCL_98243rz823xr
 #define STANDALONEOP_H_INCL_98243rz823xr
 

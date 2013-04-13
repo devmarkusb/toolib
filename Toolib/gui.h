@@ -6,7 +6,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef GUI_H_INCL_cpewoifweofewiucr89243
 #define GUI_H_INCL_cpewoifweofewiucr89243
 

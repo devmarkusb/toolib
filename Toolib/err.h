@@ -6,7 +6,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef ERR_H_INCL_eeicgjm5iewtio4euih54
 #define ERR_H_INCL_eeicgjm5iewtio4euih54
 

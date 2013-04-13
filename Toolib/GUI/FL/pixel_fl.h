@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef PIXEL_FL_H_INCL
 #define PIXEL_FL_H_INCL
 

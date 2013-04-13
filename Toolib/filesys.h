@@ -6,7 +6,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef FILESYS_H_INCL_xcsabgzduzbvfget32
 #define FILESYS_H_INCL_xcsabgzduzbvfget32
 

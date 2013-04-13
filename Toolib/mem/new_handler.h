@@ -2,11 +2,11 @@
 // This file is part of my Toolib library. Open source.
 
 //!
-/** 
+/**
 */
 //! \file
 
-#pragma once
+
 #ifndef NEW_HANDLER_H_INCL_n2io38zre2387xnz27r
 #define NEW_HANDLER_H_INCL_n2io38zre2387xnz27r
 

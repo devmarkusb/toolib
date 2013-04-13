@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef STRING_TRIM_H_INCL_cidusbfi243i7324
 #define STRING_TRIM_H_INCL_cidusbfi243i7324
 

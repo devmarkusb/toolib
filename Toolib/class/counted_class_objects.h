@@ -8,7 +8,7 @@
 
 // Implementation taken from Meyers' book.
 
-#pragma once
+
 #ifndef COUNTED_CLASS_OBJECTS_H_INCL_cirewhct34bctgu4372
 #define COUNTED_CLASS_OBJECTS_H_INCL_cirewhct34bctgu4372
 

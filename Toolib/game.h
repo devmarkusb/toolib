@@ -6,7 +6,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef GAME_H_INCL_aubzstex3zubte632yet7
 #define GAME_H_INCL_aubzstex3zubte632yet7
 
@@ -146,7 +145,7 @@ namespace too
 			{
 				try
 				{
-					if (!GetEvents())					
+					if (!GetEvents())
 					{
 						et = ET_USER_EXIT;
 						return false;

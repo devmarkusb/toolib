@@ -7,12 +7,12 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef COLOR_WX_H_INCL
 #define COLOR_WX_H_INCL
 
 #include "color.h"
-	
+
 namespace too
 {
 	namespace gui

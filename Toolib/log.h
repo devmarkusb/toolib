@@ -23,7 +23,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef LOG_H_INCL_mpv6nu3icnzunzxdtd4n5xtc8
 #define LOG_H_INCL_mpv6nu3icnzunzxdtd4n5xtc8
 

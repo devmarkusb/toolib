@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 //#ifndef GUI_ENGINE_HEADER_INCL
 //#define GUI_ENGINE_HEADER_INCL
 
@@ -29,7 +29,7 @@ namespace too
 
 			virtual int main() = 0;
 			virtual int wait() = 0;
-			
+
 			virtual int screen_w() const =0;
 			virtual int screen_h() const =0;
 			virtual int screen_left() const =0; //!< Usually 0.

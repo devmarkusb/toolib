@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef PROMPT_H_INCL_8jr82ctrz2tn
 #define PROMPT_H_INCL_8jr82ctrz2tn
 

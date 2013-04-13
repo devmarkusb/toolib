@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef TEXT_FL_H_INCL
 #define TEXT_FL_H_INCL
 

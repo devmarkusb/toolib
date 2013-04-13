@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef ROUND_H_INCL_9mj238fz23nf8z
 #define ROUND_H_INCL_9mj238fz23nf8z
 

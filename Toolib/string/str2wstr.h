@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef STR2WSTR_H_INCL_827rt82rtrxjr38t
 #define STR2WSTR_H_INCL_827rt82rtrxjr38t
 
@@ -54,7 +54,7 @@ namespace too
 					slength = std::numeric_limits<int>::max();
 #pragma pop_macro("max")
 				}
-				int len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0); 
+				int len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
 				wchar_t* buf = new wchar_t[len];
 				try
 				{

@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef DEBUG_MISC_H_INCL_n9283zr823rz832
 #define DEBUG_MISC_H_INCL_n9283zr823rz832
 

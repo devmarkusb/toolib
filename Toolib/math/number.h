@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef NUMBER_H_INCL_f29jh8hnf238hrxz23
 #define NUMBER_H_INCL_f29jh8hnf238hrxz23
 

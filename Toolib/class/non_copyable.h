@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef NON_COPYABLE_H_INCL_imcutoiu34o5
 #define NON_COPYABLE_H_INCL_imcutoiu34o5
 

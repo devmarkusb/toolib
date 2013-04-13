@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef CONTROL_H_INCL
 #define CONTROL_H_INCL
 

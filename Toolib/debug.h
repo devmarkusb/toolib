@@ -11,7 +11,6 @@ Known issue: problems occur when you try to overload operator new after includin
 */
 //! \file
 
-#pragma once
 #ifndef DEBUG_H_INCL_comwcicjhr98234nr
 #define DEBUG_H_INCL_comwcicjhr98234nr
 

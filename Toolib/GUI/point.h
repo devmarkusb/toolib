@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef POINT_H_INCL
 #define POINT_H_INCL
 

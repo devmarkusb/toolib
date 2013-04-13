@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef KEY_H_INCL
 #define KEY_H_INCL
 

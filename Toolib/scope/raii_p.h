@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef RAII_P_H_INCL_on824f287xrz2387r
 #define RAII_P_H_INCL_on824f287xrz2387r
 
@@ -46,7 +46,7 @@ namespace too
 		}
 		//! Releases the internally managed memory for the object.
 		~raii_p() { flush(); }
-		
+
 		//! Gives opportunity to use raii_p<T> just like T*. Do not delete the return value!
 		/** This can be extraordinarily relevant for performance issues, that is the use of loops. There
 		you should always prefer this cast() to all the other member calls.*/
@@ -109,7 +109,7 @@ namespace too
 		}
 		//! Releases the internally managed memory for the object.
 		~raii_ap() { flush(); }
-		
+
 		//! Gives opportunity to use raii_ap<T> just like T*. Do not delete the return value!
 		T* cast() const {
 			TOO_DEBUG_BREAK_IF(!m_ptr);
@@ -188,7 +188,7 @@ namespace too
 		}
 		//! Releases the internally managed memory for the object.
 		~raii_aap() { flush(); }
-		
+
 		//! Gives opportunity to use raii_aap<T> just like T**. Do not delete the return value!
 		T** cast() const {
 			TOO_DEBUG_BREAK_IF(!m_ptr);

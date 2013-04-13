@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef MATRIX_H_INCL_mx02983urx23
 #define MATRIX_H_INCL_mx02983urx23
 
@@ -193,7 +193,7 @@ namespace too
 				return res;
 			}
 			//! Scalar reciprocal multiplying a matrix.
-			/** Throws error_division_by_zero, where m[.][.]==T() is taken as "zero".*/			
+			/** Throws error_division_by_zero, where m[.][.]==T() is taken as "zero".*/
 			friend const matrix<T> operator/(const T& t, const matrix<T>& m)
 			{
 				u32
@@ -395,7 +395,7 @@ namespace too
 				for (u32 i = 0; i < r; ++i)
 					reselem[i][0] = melem[i][col];
 				return res;
-			}	
+			}
 
 			//=========================================
 			// Operations for quadratic matrices only.
@@ -493,7 +493,7 @@ namespace too
 				//todo
 			}
 			//todo ... lots of operations
-			
+
 
 			//==========================
 			// Implementational details.
@@ -543,7 +543,7 @@ namespace too
 				}
 				// The representation is no longer needed (normally a consequence of the counter approaching 0).
 				~MRep() { try { free(); } catch (...) {} }
-				
+
 				/* This method is usually called when someone wants to change the matrix. If the represention
 				is only single, changing is immediately allowed. If it is shared twice or more often, it has to
 				be extracted to a new single representation. In either case the method returns the appropriate
@@ -601,7 +601,7 @@ namespace too
 			}
 			/* Changes a matrix entry. Of course the representation has to duplicate itself first, when more than
 			one matrices share the representations content.*/
-			void put(u32 row, u32 col, const T& t) 
+			void put(u32 row, u32 col, const T& t)
 			{
 				m_rep = m_rep->get_own_copy();
 				m_rep->m[row][col] = t;

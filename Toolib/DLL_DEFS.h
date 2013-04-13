@@ -57,7 +57,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef DLL_DEFS_H_INCL_fvhnbil8rw75t
 #define DLL_DEFS_H_INCL_fvhnbil8rw75t
 

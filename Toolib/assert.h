@@ -6,7 +6,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef ASSERT_H_INCL_onvdr589tz3758ct438tzcn
 #define ASSERT_H_INCL_onvdr589tz3758ct438tzcn
 
@@ -71,7 +70,7 @@ namespace too
 
 	//! Which one?
 	#define TOO_STATIC_ASSERT TOO_STATIC_ASSERTv3
-	#define TOO_STATIC_ASSERT_L TOO_STATIC_ASSERTv2L	
+	#define TOO_STATIC_ASSERT_L TOO_STATIC_ASSERTv2L
 }
 
 #endif

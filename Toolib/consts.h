@@ -6,7 +6,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef CONSTS_H_INCL_cosndzcriwu4ezr3
 #define CONSTS_H_INCL_cosndzcriwu4ezr3
 

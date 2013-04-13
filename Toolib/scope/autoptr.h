@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef AUTOPTR_H_INCL_ni238z37z2734z32
 #define AUTOPTR_H_INCL_ni238z37z2734z32
 

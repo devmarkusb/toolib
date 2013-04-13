@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef CIRCLE_H_INCL
 #define CIRCLE_H_INCL
 

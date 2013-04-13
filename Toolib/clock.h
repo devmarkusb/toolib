@@ -7,7 +7,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef CLOCK_H_INCL_ncf3z78g8on1x7fnm
 #define CLOCK_H_INCL_ncf3z78g8on1x7fnm
 

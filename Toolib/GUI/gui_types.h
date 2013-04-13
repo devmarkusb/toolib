@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef GUI_TYPES_H_INCL
 #define GUI_TYPES_H_INCL
 

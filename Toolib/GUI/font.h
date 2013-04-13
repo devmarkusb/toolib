@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef FONT_H_INCL
 #define FONT_H_INCL
 

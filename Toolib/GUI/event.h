@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef EVENT_H_INCL
 #define EVENT_H_INCL
 

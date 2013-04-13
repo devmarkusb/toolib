@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef RECTANGLE_H_INCL
 #define RECTANGLE_H_INCL
 

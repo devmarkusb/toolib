@@ -6,7 +6,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef LOCALE_H_INCL_condwhxnu23mhy8mr
 #define LOCALE_H_INCL_condwhxnu23mhy8mr
 

@@ -6,7 +6,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef LEX_CAST_H_INCL_sopaiem3p2oium32omo
 #define LEX_CAST_H_INCL_sopaiem3p2oium32omo
 

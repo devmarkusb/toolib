@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef VECTOR_H_INCL_c8x3u923z4zr87r2
 #define VECTOR_H_INCL_c8x3u923z4zr87r2
 
@@ -225,7 +225,7 @@ namespace too
 			//todo normalize, distancefrom, rotateby, getangle, setlength
 
 		}; // vector
-		
+
 		//! 2D specific vector for easier initialization or special operations or just using the name.
 		template <class T> class vector2d : public vector<T, 2>
 		{
@@ -311,7 +311,7 @@ namespace too
 				x[0] = x0; x[1] = x1; x[2] = x2;
 			}
 		};
-		
+
 		// 4D specific vector for easier initialization or special operations or just using the name.
 		//todo
 		/*template <class T> class vector4d : public vector<T, 4>
@@ -340,7 +340,7 @@ namespace too
 		typedef vector3d<f32> vector3df; // float
 		typedef vector3d<f64> vector3dd; // double
 		/*typedef vector4d<f32> vector4df; // float
-		typedef vector4d<f64> vector4dd; // double*/		
+		typedef vector4d<f64> vector4dd; // double*/
 	} // math
 } // too
 

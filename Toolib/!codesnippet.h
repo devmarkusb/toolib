@@ -6,7 +6,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef XXX_H_INCL_cnktrgtvn485
 #define XXX_H_INCL_cnktrgtvn485
 

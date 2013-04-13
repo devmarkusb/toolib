@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef TEXT_WCONS_H_INCL
 #define TEXT_WCONS_H_INCL
 

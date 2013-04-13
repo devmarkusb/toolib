@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef SHAPE_H_INCL
 #define SHAPE_H_INCL
 

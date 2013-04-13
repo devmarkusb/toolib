@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef WINDOW_WCONS_H_INCL
 #define WINDOW_WCONS_H_INCL
 

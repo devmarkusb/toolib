@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 //#ifndef WINDOW_HEADER_INCL
 //#define WINDOW_HEADER_INCL
 

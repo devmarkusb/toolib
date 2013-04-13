@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef CATCH_EXIT_H_INCL_34trcx83943g
 #define CATCH_EXIT_H_INCL_34trcx83943g
 
@@ -27,7 +27,7 @@ namespace too
 				if (m_bRequestedExit)
 				{
 					m_bRequestedExit = false;
-					return true; 
+					return true;
 				}
 				else
 				{

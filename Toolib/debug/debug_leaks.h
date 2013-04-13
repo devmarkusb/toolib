@@ -7,7 +7,7 @@ If you want to use vld.h instead, if available, just define TOO_USE_VLD in front
 */
 //! \file
 
-#pragma once
+
 #ifndef DEBUG_LEAKS_H_INCL_dj823xfz23xzfn
 #define DEBUG_LEAKS_H_INCL_dj823xfz23xzfn
 

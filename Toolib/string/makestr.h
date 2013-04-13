@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef MAKESTR_H_INCL_92nzr29h3f8
 #define MAKESTR_H_INCL_92nzr29h3f8
 

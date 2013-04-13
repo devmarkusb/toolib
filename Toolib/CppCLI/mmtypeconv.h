@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef MMTYPECONV_H_INCL_nbi4lnv5
 #define MMTYPECONV_H_INCL_nbi4lnv5
 

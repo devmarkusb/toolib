@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef PIXEL_WCONS_H_INCL
 #define PIXEL_WCONS_H_INCL
 

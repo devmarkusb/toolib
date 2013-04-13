@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef PAIR_H_INCL_x2ur832rx823r8r
 #define PAIR_H_INCL_x2ur832rx823r8r
 

@@ -6,7 +6,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef STRING_DELIM_H_INCL_uwireiwubefeubf
 #define STRING_DELIM_H_INCL_uwireiwubefeubf
 

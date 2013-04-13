@@ -7,7 +7,7 @@
 */
 //! \file
 
-#pragma once
+
 #ifndef RECTANGLE_WCONS_H_INCL
 #define RECTANGLE_WCONS_H_INCL
 

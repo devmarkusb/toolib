@@ -7,7 +7,6 @@
 */
 //! \file
 
-#pragma once
 #ifndef LOGDEF_H_INCL_fvuio45zui45zv
 #define LOGDEF_H_INCL_fvuio45zui45zv
 
