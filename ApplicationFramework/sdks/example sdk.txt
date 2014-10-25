@@ -1,0 +1,4 @@
+SDK: SomeSDK
+Version: 4.2.7
+Folder link to archived originals: /projects/_dev_utils_archive/sdks, libs/.../SomeSDK/....zip
+Folder link to installation for actual usage (from here): /projects/externlibs/SomeSDK
