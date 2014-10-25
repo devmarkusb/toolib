@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="tests">
+</Property><Property Name="Projektmappendatei" Value="C:\projects\Toolib\test\tests.sln">
+</Property><Property Name="Benutzeroptionendatei" Value="C:\projects\Toolib\test\tests.suo">
+</Property><Property Name="Date" Value="Montag, 1. April 2013">
+</Property><Property Name="Time" Value="19:50">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="tests.sln" Description="Datei wurde erfolgreich als &quot;C:\projects\Toolib\test\tests.sln.old&quot; gesichert">
+</Event><Event ErrorLevel="0" Project="" Source="tests.suo" Description="Datei wurde erfolgreich als &quot;C:\projects\Toolib\test\tests.suo.old&quot; gesichert">
+</Event><Event ErrorLevel="0" Project="test_misc01" Source="test_misc01.vcproj" Description="Converting project file 'C:\projects\Toolib\test\test_misc01.vcproj'.">
+</Event><Event ErrorLevel="1" Project="test_misc01" Source="test_misc01.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="1" Project="test_misc01" Source="test_misc01.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="test_misc01" Source="test_misc01.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="test_misc01" Source="test_misc01.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="test_misc01" Source="test_misc01.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="test_misc01" Source="test_misc01.vcproj" Description="Done converting to new project file 'C:\projects\Toolib\test\test_misc01.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="test_misc01" Source="test_misc01.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="test_log" Source="test_log.vcproj" Description="Converting project file 'C:\projects\Toolib\test\test_log.vcproj'.">
+</Event><Event ErrorLevel="1" Project="test_log" Source="test_log.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="1" Project="test_log" Source="test_log.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="test_log" Source="test_log.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="test_log" Source="test_log.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="test_log" Source="test_log.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="test_log" Source="test_log.vcproj" Description="Done converting to new project file 'C:\projects\Toolib\test\test_log.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="test_log" Source="test_log.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="test_matrix" Source="test_matrix\test_matrix.vcproj" Description="Converting project file 'C:\projects\Toolib\test\test_matrix\test_matrix.vcproj'.">
+</Event><Event ErrorLevel="1" Project="test_matrix" Source="test_matrix\test_matrix.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="1" Project="test_matrix" Source="test_matrix\test_matrix.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="test_matrix" Source="test_matrix\test_matrix.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="test_matrix" Source="test_matrix\test_matrix.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="test_matrix" Source="test_matrix\test_matrix.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="test_matrix" Source="test_matrix\test_matrix.vcproj" Description="Done converting to new project file 'C:\projects\Toolib\test\test_matrix\test_matrix.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="test_matrix" Source="test_matrix\test_matrix.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="test_vector" Source="test_vector\test_vector.vcproj" Description="Converting project file 'C:\projects\Toolib\test\test_vector\test_vector.vcproj'.">
+</Event><Event ErrorLevel="1" Project="test_vector" Source="test_vector\test_vector.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="1" Project="test_vector" Source="test_vector\test_vector.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="test_vector" Source="test_vector\test_vector.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="test_vector" Source="test_vector\test_vector.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="test_vector" Source="test_vector\test_vector.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="test_vector" Source="test_vector\test_vector.vcproj" Description="Done converting to new project file 'C:\projects\Toolib\test\test_vector\test_vector.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="test_vector" Source="test_vector\test_vector.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="tests.sln" Description="Die Projektmappe wurde erfolgreich konvertiert.">
+</Event><Event ErrorLevel="3" Project="" Source="tests.sln" Description="Converted">
+</Event></UpgradeLog>
