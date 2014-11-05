@@ -10,10 +10,21 @@
 #ifndef TOOTYPES_H_INCL_com3iur982zxr920z427
 #define TOOTYPES_H_INCL_com3iur982zxr920z427
 
+#include <string>
 #include "PPDEFS.H"
 
 namespace too
 {
+#if TOO_WINDOWS
+    using string = std::u16string;  // ATTENTION: std::basic_string<X> is a must!
+    #define _TOOSTR(x)     u ## x
+    // try not using wstring anymore...
+//    using string = std::wstring;    // ATTENTION: std::basic_string<X> is a must!
+//    #define _TOOSTR(x)     L ## x
+#else
+    using string = std::string;     // ATTENTION: std::basic_string<X> is a must!
+    #define _TOOSTR(x)     x
+#endif
 
 #if TOO_MS_VISUAL_STUDIO_CPP
 	typedef unsigned __int8		u8;
