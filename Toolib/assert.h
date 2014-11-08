@@ -45,8 +45,8 @@ namespace too
 
 	//! Compile time assert.
 	/** Alexey Malistov, SO*/
-	template <bool> struct static_assert;
-	template <> struct static_assert<true> {};
+    template <bool> struct StaticAssert_v0;
+    template <> struct StaticAssert_v0<true> {};
 
 	//! Compile time assert.
 	#define TOO_STATIC_ASSERTv1_CONCAT_(a, b) a##b
@@ -69,8 +69,10 @@ namespace too
 	#define TOO_STATIC_ASSERTv3(t, msg) typedef char static_assertion_##msg[(t)?1:-1]
 
 	//! Which one?
-	#define TOO_STATIC_ASSERT TOO_STATIC_ASSERTv3
-	#define TOO_STATIC_ASSERT_L TOO_STATIC_ASSERTv2L
+//	#define TOO_STATIC_ASSERT TOO_STATIC_ASSERTv3
+//	#define TOO_STATIC_ASSERT_L TOO_STATIC_ASSERTv2L
+    /** ... now with C++11 the problem is settled.*/
+    #define TOO_STATIC_ASSERT   static_assert
 }
 
 #endif

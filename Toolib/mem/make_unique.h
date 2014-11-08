@@ -1,3 +1,11 @@
+// Markus Borris, 2014
+// This file is part of my Toolib library. Open source.
+
+//!
+/**
+*/
+//! \file
+
 #ifndef MAKE_UNIQUE_H
 #define MAKE_UNIQUE_H
 
