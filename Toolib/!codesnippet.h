@@ -1,4 +1,4 @@
-// Markus Borris, 2011
+// Markus Borris, 2014
 // This file is part of my Toolib library. Open source.
 
 //!

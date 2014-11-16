@@ -11,35 +11,122 @@
 #define STR2WSTR_H_INCL_827rt82rtrxjr38t
 
 #include "../PPDEFS.h"
+#include "../argsused.h"
 
 #include <string>
 #include <limits>
+#include <vector>
+//! Unfortunately the following C++11 feature isn't yet supported by mingw (and ... ?). Try it with future versions.
+#define STR2WSTR_TRY_CODECVT_SUPPORT    0
+#if STR2WSTR_TRY_CODECVT_SUPPORT
+#include <codecvt>
+#endif
 #if TOO_WINDOWS
 #include <winnls.h>
-#endif TOO_WINDOWS
+#endif
 
 namespace too
 {
 	namespace str
 	{
-		// fwds (implementation details, do not use from the outside)
-		namespace str_impl
-		{
+        // fwd. decl.
+        namespace str_impl
+        {
 #if TOO_WINDOWS
-			inline std::wstring s2ws_windows(const std::string&);
-#endif TOO_WINDOWS
-			inline std::wstring s2ws_std(const std::string&);
-		}
+            std::wstring s2ws_windows(const std::string& s);
+#endif
+            std::wstring s2ws_std(const std::string& s);
+        }
 
-		//! Convert string to wstring.
+        //! DEPRECATED! Convert string to wstring.
+        /** You probably want to use sth. more precise, like Utf8_string_To_Utf16_wstring or
+            Utf8_string_To_Utf8_wstring.*/
 		inline std::wstring s2ws(const std::string& s)
 		{
 #if TOO_WINDOWS
-			return str_impl::s2ws_windows(s);
-#else TOO_WINDOWS
+            return str_impl::s2ws_windows(s);
+#else
 			return str_impl::s2ws_std(s);
-#endif TOO_WINDOWS
+#endif
 		}
+
+        //! DEPRECATED! Convert wstring to string. Cf. comment for s2ws.
+        inline std::string ws2s(const std::wstring& s)
+        {
+            return std::string(s.begin(), s.end());
+        }
+
+        std::string Utf16_wstring_To_Utf8_string(const std::wstring& wstr)
+        {
+#if TOO_WINDOWS
+            std::string convertedString;
+            int requiredSize = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, 0, 0, 0, 0);
+            if (requiredSize > 0)
+            {
+                std::vector<char> buffer(requiredSize);
+                WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, &buffer[0], requiredSize, 0, 0);
+                convertedString.assign(buffer.begin(), buffer.end() - 1);
+            }
+            return convertedString;
+#else
+//#error "You may need/want to re-implement the code from the if-branch."
+            assert(false);
+            too::ignore_arg(wstr);
+            return std::string();
+#endif
+        }
+
+        std::wstring Utf8_string_To_Utf16_wstring(const std::string& str)
+        {
+#if TOO_WINDOWS
+            std::wstring convertedString;
+            int requiredSize = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, 0, 0);
+            if (requiredSize > 0)
+            {
+                std::vector<wchar_t> buffer(requiredSize);
+                MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, &buffer[0], requiredSize);
+                convertedString.assign(buffer.begin(), buffer.end() - 1);
+            }
+            return convertedString;
+#else
+//#error "You may need/want to re-implement the code from the if-branch."
+            assert(false);
+            too::ignore_arg(str);
+            return std::string();
+#endif
+        }
+
+        //! Convert string to wstring. Keeping UTF-8.
+        inline std::wstring Utf8_string_To_Utf8_wstring(const std::string& str)
+        {
+#if STR2WSTR_TRY_CODECVT_SUPPORT
+            typedef std::codecvt_utf8<wchar_t> convert_typeX;
+            std::wstring_convert<convert_typeX, wchar_t> converterX;
+
+            return converterX.from_bytes(str);
+#else
+//#error "You may need/want to re-implement the code from the if-branch."
+            assert(false);
+            too::ignore_arg(str);
+            return std::wstring();
+#endif
+        }
+
+        //! Convert wstring to string. Keeping UTF-8.
+        inline std::string Utf8_wstring_To_Utf8_string(const std::wstring& wstr)
+        {
+#if STR2WSTR_TRY_CODECVT_SUPPORT
+            typedef std::codecvt_utf8<wchar_t> convert_typeX;
+            std::wstring_convert<convert_typeX, wchar_t> converterX;
+
+            return converterX.to_bytes(wstr);
+#else
+//#error "You may need/want to re-implement the code from the if-branch."
+            assert(false);
+            too::ignore_arg(wstr);
+            return std::string();
+#endif
+        }
 
 		namespace str_impl
 		{
@@ -69,7 +156,7 @@ namespace too
 					return L"";
 				}
 			}
-#endif TOO_WINDOWS
+#endif
 			inline std::wstring s2ws_std(const std::string& s)
 			{
 				std::wstring ws(s.length(), L' ');

@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef VECTOR_H_sixe38grf38gxfn34x8gfn4
+#define VECTOR_H_sixe38grf38gxfn34x8gfn4
 
 #include <vector>
 #include <stddef.h>
@@ -37,4 +37,4 @@ namespace vector
 }
 }
 
-#endif // VECTOR_H
+#endif

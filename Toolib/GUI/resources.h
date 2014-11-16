@@ -1,5 +1,5 @@
-#ifndef RESOURCES_H
-#define RESOURCES_H
+#ifndef RESOURCES_H_sngfxzgunyfz73i6rg4yrgfn3f723gfv4f
+#define RESOURCES_H_sngfxzgunyfz73i6rg4yrgfn3f723gfv4f
 
 namespace too
 {
@@ -9,4 +9,4 @@ namespace too
     }
 }
 
-#endif // RESOURCES_H
+#endif

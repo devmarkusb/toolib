@@ -1,5 +1,5 @@
-#ifndef RESOURCE_STRING_H
-#define RESOURCE_STRING_H
+#ifndef RESOURCE_STRING_H_sjzbxgf3uin4fg2n97ytgfvn32y
+#define RESOURCE_STRING_H_sjzbxgf3uin4fg2n97ytgfvn32y
 
 #include "../types.h"
 #include "resources.h"
@@ -18,4 +18,4 @@ namespace too
     }
 }
 
-#endif // RESOURCE_STRING_H
+#endif

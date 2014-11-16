@@ -102,6 +102,10 @@
 #define TOO_CONCATENATE_INDIRECT(s1, s2)	TOO_CONCATENATE_DIRECT(s1, s2)
 #define TOO_ANONYMOUS_VARIABLE(str)			TOO_CONCATENATE_INDIRECT(str, __LINE__)
 
+//! Only for information. Since #error is plain standard you should just use it!
+/** Actually it doesn't seem to be technically possible to define sth. like this
+    #define TOO_COMPILER_ERROR(x)       #error x*/
+
 
 //##############################################################################################################
 #endif

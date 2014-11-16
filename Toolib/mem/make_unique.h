@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef MAKE_UNIQUE_H
-#define MAKE_UNIQUE_H
+#ifndef MAKE_UNIQUE_H_kjhsdnxuwezkngfywzui6r
+#define MAKE_UNIQUE_H_kjhsdnxuwezkngfywzui6r
 
 //! File should be deprecated with C++14.
 
@@ -24,4 +24,4 @@ namespace std
 }
 #endif
 
-#endif // MAKE_UNIQUE_H
+#endif

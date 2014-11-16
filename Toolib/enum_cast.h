@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef ENUM_CAST_H
-#define ENUM_CAST_H
+#ifndef ENUM_CAST_H_ydjgfrenxzuigfnewgyf8e3q2ygn4
+#define ENUM_CAST_H_ydjgfrenxzuigfnewgyf8e3q2ygn4
 
 namespace too
 {
@@ -20,4 +20,4 @@ namespace too
     }
 }
 
-#endif // ENUM_CAST_H
+#endif

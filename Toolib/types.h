@@ -15,16 +15,52 @@
 
 namespace too
 {
-#if TOO_WINDOWS
-    using string = std::u16string;  // ATTENTION: std::basic_string<X> is a must!
-    #define _TOOSTR(x)     u ## x
-    // try not using wstring anymore...
-//    using string = std::wstring;    // ATTENTION: std::basic_string<X> is a must!
-//    #define _TOOSTR(x)     L ## x
-#else
-    using string = std::string;     // ATTENTION: std::basic_string<X> is a must!
-    #define _TOOSTR(x)     x
+    //! String type.
+    /** Two choices are to be considered
+        1. which type out of char==char8_t, wchar_t, char16_t, char32_t
+            (Here you have to notice, that wchar_t is the worst choice, because it doesn't have platform independent
+            fixed size, whereas char is always 8 Bit, and the other are 16, 32 Bit respectively.
+        2. which encoding out of local (whatever that may be, perhaps ISO-8859-1 Latin 1 on german systems),
+            wide character (whatever that superimposes on the local whatever-thing, but usually UTF-16 or UTF-32),
+            UTF-8, UTF-16, UTF-32
+            (Here you should notice that UTF-8 seems to be to most common choice on the internet.)
+
+        So, what's your choice for the time being?
+        Decision (to updated...):
+            char and UTF-8
+        Downside (always inevitable, but looking for the lesser of two evils):
+            i) Convert to UTF16/32 encoding and suitable type whenever appropriate for languages,
+                or frameworks/libraries (e.g. Windows API would require conversions to/from UTF-16 + wchar_t)
+            ii) Convert to UTF16 + char for std::fstream & Co. as long as necessary
+            iii) Exclusively write english/ASCII source code files if your compiler doesn't support the u8 string literal
+                declaration prefix yet*/
+
+    #define _ENCODING_LOCAL(x)          x
+    #define _ENCODING_LOCAL_WIDE(x)     L ## x
+    #define _ENCODING_UTF8(x)           u8 ## x
+    #define _ENCODING_UTF16(x)          u ## x
+    #define _ENCODING_UTF32(x)          U ## x
+
+    template <typename CHAR_TYPE> using stdbasicstring_chartype = std::basic_string<CHAR_TYPE>;
+#ifndef char8_t
+    typedef char char8_t;
 #endif
+#if TOO_WINDOWS
+//    using string = stdbasicstring_chartype<char16_t>;
+//    #define _TOOSTR(x)     _ENCODING_UTF16(x)
+    // try not using wstring anymore... but is u16string above a worthy alternative!?
+//    using string = stdbasicstring_chartype<wchar_t>;
+//    #define _TOOSTR(x)     _ENCODING_LOCAL_WIDE(x)
+    // finally opt for a decision candidate
+    using string = stdbasicstring_chartype<char8_t>;
+    #define _TOOSTR(x)      _ENCODING_UTF8(x)
+#else
+    using string = stdbasicstring_chartype<char8_t>;
+    #define _TOOSTR(x)      _ENCODING_UTF8(x)
+#endif
+
+
+    //############################################################################################################
 
 #if TOO_MS_VISUAL_STUDIO_CPP
 	typedef unsigned __int8		u8;
