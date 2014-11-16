@@ -45,19 +45,45 @@ namespace too
 #ifndef char8_t
     typedef char char8_t;
 #endif
+
+    //! Number suffixes below denote bits.
+    using string8   = stdbasicstring_chartype<char8_t>;
+    using string16  = stdbasicstring_chartype<char16_t>;
+    using string32  = stdbasicstring_chartype<char32_t>;
+    using stringw   = stdbasicstring_chartype<wchar_t>;
+
+    //! Number suffixes below denote specific UTF encoding..
+    #define _TOOSTR_LOCAL(x)        _ENCODING_LOCAL(x)
+    #define _TOOSTR_LOCALWIDE(x)    _ENCODING_LOCAL_WIDE(x)
+    #define _TOOSTR_UTF8(x)         _ENCODING_UTF8(x)
+    #define _TOOSTR_UTF16(x)        _ENCODING_UTF16(x)
+    #define _TOOSTR_UTF32(x)        _ENCODING_UTF32(x)
+
 #if TOO_WINDOWS
-//    using string = stdbasicstring_chartype<char16_t>;
-//    #define _TOOSTR(x)     _ENCODING_UTF16(x)
+//    using string = string16;
+//    #define _TOOSTR(x)     _TOOSTR_UTF16(x)
     // try not using wstring anymore... but is u16string above a worthy alternative!?
-//    using string = stdbasicstring_chartype<wchar_t>;
-//    #define _TOOSTR(x)     _ENCODING_LOCAL_WIDE(x)
+//    using string = stringw;
+//    #define _TOOSTR(x)     _TOOSTR_LOCALWIDE(x)
     // finally opt for a decision candidate
-    using string = stdbasicstring_chartype<char8_t>;
-    #define _TOOSTR(x)      _ENCODING_UTF8(x)
+    using string = string8;
+    #define _TOOSTR(x)      _TOOSTR_UTF8(x)
 #else
-    using string = stdbasicstring_chartype<char8_t>;
-    #define _TOOSTR(x)      _ENCODING_UTF8(x)
+    using string = string8;
+    #define _TOOSTR(x)      _TOOSTR_UTF8(x)
 #endif
+
+    //! This function's name promises a bit too much.
+    /** It is still a todo to switch string literal encoding (prefixes u8, u16, u32, L) without preprocessor defines
+        and then make a proper check here. But for practical purposes you probably start with UTF8 and want to make a
+        switch to UTF16 later. Then it is very likely, that you also switch from 8 Bits to 16 Bits representation,
+        in which case the assertion fires easily.*/
+    template <typename StringType, size_t BitsPerCharacter>
+    inline constexpr void static_assert_string_BitsPerChar_and_Encoding()
+    {
+        static_assert(sizeof(typename StringType::value_type) == BitsPerCharacter / 8,
+                  "Change this function if you change the byte count per character. You probably also want to have a look at your encoding (UTF-?).");
+    }
 
 
     //############################################################################################################

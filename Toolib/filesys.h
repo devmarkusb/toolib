@@ -40,6 +40,8 @@ namespace too
             virtual void CreateFolder(const too::string& FolderPath) = 0;
             virtual void DeleteFolder(const too::string& FolderPath) = 0;
             virtual void RenameFolder(const too::string& FolderPath) = 0;
+            virtual bool FolderExists(const too::string& FolderPath) = 0;
+            virtual bool FileExists(const too::string& FilePathNameExt) = 0;
 
             enum class ESysPathType
             {
