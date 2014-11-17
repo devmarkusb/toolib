@@ -82,27 +82,27 @@ namespace too
     inline constexpr void static_assert_string_BitsPerChar_and_Encoding()
     {
         static_assert(sizeof(typename StringType::value_type) == BitsPerCharacter / 8,
-                  "Change this function if you change the byte count per character. You probably also want to have a look at your encoding (UTF-?).");
+        "Change this function if you change the byte count per character in your string. You probably also want to have a look at your encoding (UTF-?).");
     }
 
 
     //############################################################################################################
 
-#if TOO_MS_VISUAL_STUDIO_CPP
-	typedef unsigned __int8		u8;
-	typedef __int8				s8;
-	typedef unsigned __int16	u16;
-	typedef __int16				s16;
-	typedef unsigned __int32	u32;
-	typedef __int32				s32;
-#else
-	typedef unsigned char		u8;
-	typedef signed char			s8;
-	typedef unsigned short		u16;
-	typedef signed short		s16;
-	typedef unsigned int		u32;
-	typedef signed int			s32;
-#endif
+//#if TOO_MS_VISUAL_STUDIO_CPP
+//	typedef unsigned __int8		u8;
+//	typedef __int8				s8;
+//	typedef unsigned __int16	u16;
+//	typedef __int16				s16;
+//	typedef unsigned __int32	u32;
+//	typedef __int32				s32;
+//#else
+    typedef uint8_t     u8;
+    typedef int8_t      s8;
+    typedef uint16_t    u16;
+    typedef int16_t     s16;
+    typedef uint32_t    u32;
+    typedef int32_t     s32;
+//#endif
 
 	typedef float				f32;
 	typedef double				f64;

@@ -32,24 +32,31 @@ namespace too
         public:
             static IFileSys* GetInstance();
 
-            virtual void SaveToTextFile(const too::string& FilePathNameExt, const too::string& Content) = 0;
-            virtual void LoadFromTextFile(const too::string& FilePathNameExt, too::string& Content) = 0;
-            virtual void CopyFile(const too::string& FilePathNameExt_From, const too::string& FilePathNameExt_To) = 0;
-            virtual void DeleteFile(const too::string& FilePathNameExt) = 0;
-            virtual void RenameFile(const too::string& FilePathNameExt) = 0;
-            virtual void CreateFolder(const too::string& FolderPath) = 0;
-            virtual void DeleteFolder(const too::string& FolderPath) = 0;
-            virtual void RenameFolder(const too::string& FolderPath) = 0;
+            static const char FOLDER_SEPERATOR_TO_USE_HERE = '/';
+
+            virtual bool SaveToTextFile(const too::string& FilePathNameExt, const too::string& Content) = 0;
+            virtual bool LoadFromTextFile(const too::string& FilePathNameExt, too::string& Content) = 0;
+            virtual bool CopyFile(const too::string& FilePathNameExt_From, const too::string& FilePathNameExt_To) = 0;
+            virtual bool DeleteFile(const too::string& FilePathNameExt) = 0;
+            virtual bool RenameFile(const too::string& FilePathNameExt_From, const too::string& FilePathNameExt_To) = 0;
+            virtual bool CreateFolder(const too::string& FolderPath) = 0;
+            virtual bool DeleteFolder(const too::string& FolderPath) = 0;
+            virtual bool RenameFolder(const too::string& FolderPath_From, const too::string& FolderPath_To) = 0;
             virtual bool FolderExists(const too::string& FolderPath) = 0;
             virtual bool FileExists(const too::string& FilePathNameExt) = 0;
+
+            virtual too::string toNativeSeparators(const too::string& Path) = 0;
 
             enum class ESysPathType
             {
                 PROGRAM,
                 USER,
                 PROGDATA,
+                TEMP,
+                CURRENT,
+                ROOT,
             };
-            virtual void GetSystemPath(ESysPathType Type, too::string& Path) = 0;
+            virtual bool GetSystemPath(ESysPathType Type, too::string& Path) = 0;
         };
 
 
@@ -60,8 +67,8 @@ namespace too
         public:
             virtual ~IFileData() = default;
 
-            virtual void SaveToFile(const too::string& FilePathNameExt) = 0;
-            virtual void LoadFromFile(const too::string& FilePathNameExt) = 0;
+            virtual bool SaveToFile(const too::string& FilePathNameExt) = 0;
+            virtual bool LoadFromFile(const too::string& FilePathNameExt) = 0;
         };
     } // file
 

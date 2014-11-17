@@ -3,7 +3,7 @@
 
 //!
 /** Implements a scope guard (ScopeGuard)
-according to the article by Andrei Alexandrescu and Petru Marginean, December 01, 2000.
+    according to the article by Andrei Alexandrescu and Petru Marginean, December 01, 2000.
 */
 //! \file
 

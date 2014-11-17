@@ -20,8 +20,8 @@ Basic coding guidelines :
   modular/interfacing, general, extensible/reducible/feature controlled,
   platform independent, C++1x standard conform, 'C++-clean' as possible,
   version controlled from start (also binary tagging), logging, performance counting,
-  strict separation of gui and logic, memory leak detection,
-  internationally localizable
+  strict separation of gui and logic, memory leak detection, exception handling,
+  internationally localizable (string type)
   
 Compiler/Linker settings:
   Custom SDKs source: cf. CustomSDKPath.props and SDKPath_[...].props
