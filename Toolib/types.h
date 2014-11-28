@@ -72,6 +72,7 @@ namespace too
     using string = string8;
     #define _TOOSTR(x)      _TOOSTR_UTF8(x)
 #endif
+    using charType = string::value_type;
 
     //! This function's name promises a bit too much.
     /** It is still a todo to switch string literal encoding (prefixes u8, u16, u32, L) without preprocessor defines

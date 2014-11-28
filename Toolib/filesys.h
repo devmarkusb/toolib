@@ -23,6 +23,11 @@ namespace too
 		bool RenameFile(const char* oldname, const char* newname);
 		std::string ExtractDirectory(const std::string& filenamepath);
 		std::string ExtractFilename(const std::string& filenamepath);
+        inline void EnsureTrailingSeperator(too::string& Path, too::charType Sep)
+        {
+            if (!Path.empty() && Path.back() != Sep)
+                Path+= Sep;
+        }
 
 
         //#############################################################################################################
@@ -32,7 +37,7 @@ namespace too
         public:
             static IFileSys* GetInstance();
 
-            static const char FOLDER_SEPERATOR_TO_USE_HERE = '/';
+            static const too::charType FOLDER_SEPERATOR_TO_USE_HERE = '/'; // _TOOSTR() i.e. u8 doesn't work for char-literal ' ' with mingw yet?!
 
             virtual bool SaveToTextFile(const too::string& FilePathNameExt, const too::string& Content) = 0;
             virtual bool LoadFromTextFile(const too::string& FilePathNameExt, too::string& Content) = 0;
@@ -56,7 +61,7 @@ namespace too
                 CURRENT,
                 ROOT,
             };
-            virtual bool GetSystemPath(ESysPathType Type, too::string& Path) = 0;
+            virtual bool GetSystemPath(ESysPathType Type, too::string& Path, bool WithTrailingSeperator) = 0;
         };
 
 

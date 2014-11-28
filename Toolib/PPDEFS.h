@@ -104,7 +104,10 @@
 
 //! Only for information. Since #error is plain standard you should just use it!
 /** Actually it doesn't seem to be technically possible to define sth. like this
-    #define TOO_COMPILER_ERROR(x)       #error x*/
+    \code
+    #define TOO_COMPILER_ERROR(x)       #error x
+    \endcode
+    Which is ok, but the same applies to sth. like \code #pragma warning \endcode.*/
 
 
 //##############################################################################################################
