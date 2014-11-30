@@ -27,9 +27,10 @@ namespace vector
       if (end > v.size())
           return;
       const size_t final_dst = dst > start ? dst - length : dst;
+      const size_t orig_size = v.size();
       std::vector<T> tmp(std::make_move_iterator(v.begin() + start), std::make_move_iterator(v.begin() + start + length));
       v.erase(v.begin() + start, v.begin() + start + length);
-      if (dst >= v.size())
+      if (dst >= orig_size)
           v.insert(v.end(), std::make_move_iterator(tmp.begin()), std::make_move_iterator(tmp.end()));
       else
           v.insert(v.begin() + final_dst, std::make_move_iterator(tmp.begin()), std::make_move_iterator(tmp.end()));
