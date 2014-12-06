@@ -35,6 +35,8 @@ namespace too
         class IFileSys : private too::non_copyable
         {
         public:
+            virtual ~IFileSys() = default;
+
             static IFileSys* GetInstance();
 
             static const too::charType FOLDER_SEPERATOR_TO_USE_HERE = '/'; // _TOOSTR() i.e. u8 doesn't work for char-literal ' ' with mingw yet?!
