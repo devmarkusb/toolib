@@ -9,7 +9,7 @@
 #include "Toolib/GUI/WCONS/window_WCONS.h"
 #include "Toolib/cons_w32/cons_w32.h"
 #include "Toolib/GUI/WCONS/color_conv_WCONS.h"
-#include "Toolib/str2wstr.h"
+#include "Toolib/string/str_convert.h"
 
 namespace too
 {

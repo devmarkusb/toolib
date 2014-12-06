@@ -11,7 +11,7 @@
 #define STRING_MISC_H_INCL_ciubhwduibgwi37
 
 #include <string>
-#include <ctype>
+#include <ctype.h>
 #include <algorithm>
 
 namespace too
