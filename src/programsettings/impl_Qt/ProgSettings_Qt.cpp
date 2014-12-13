@@ -13,6 +13,8 @@
 #include "Toolib/mem/make_unique.h"
 
 
+namespace too
+{
 namespace implQt
 {
 
@@ -199,4 +201,5 @@ void CProgSettings::SetValue(const too::string& SectionName, const too::string& 
     // here writing can occur asynchronously, so GetError() doesn't make sense before a call to Sync()
 }
 
+}
 }

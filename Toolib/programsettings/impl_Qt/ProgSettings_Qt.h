@@ -16,6 +16,8 @@
 #include "../../class/non_copyable.h"
 
 
+namespace too
+{
 namespace implQt
 {
 class CProgSettings : public QObject, public too::IProgSettings, private too::non_copyable
@@ -56,6 +58,8 @@ private:
 private:
     std::unique_ptr<QSettings>          m_settings_impl_doNotUseItDirectlyExceptOnInit{nullptr};
 };
+
+}
 }
 
 #endif // PROGSETTINGS_QT_H

@@ -13,6 +13,8 @@
 #include "../../types.h"
 
 
+namespace too
+{
 namespace implQt
 {
 
@@ -30,6 +32,7 @@ inline QString toos2qs(too::string s)
     return QString::fromUtf8(s.c_str());
 }
 
+}
 }
 
 #endif // STRINGCONVERT_QT_H
