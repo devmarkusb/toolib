@@ -14,30 +14,42 @@
 // Operating Systems
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__WIN32__) || defined(__WINDOWS__) || defined(__TOS_WIN__)
-#define TOO_WINDOWS		1
+#define TOO_OS_WINDOWS		1
 #if defined(_WIN64)
-#define TOO_WINDOWS_64	1
+#define TOO_OS_WINDOWS_64	1
 #endif
 #endif
 
 #if defined(unix) || defined(__unix__) || defined(__unix)
-#define TOO_UNIX		1
+#define TOO_OS_UNIX         1
 #endif
 
 #if defined(linux) || defined(__linux)
-#define TOO_LINUX		1
+#define TOO_OS_LINUX		1
 #endif
 
 #if defined(macintosh) || defined(Macintosh) || defined(__APPLE__) || defined(__MACH__)
-#define TOO_MAC			1
+#define TOO_OS_MAC			1
 #endif
 
 #if defined(MSDOS) || defined(__MSDOS__) || defined(_MSDOS) || defined(__DOS__)
-#define TOO_MSDOS		1
+#define TOO_OS_MSDOS		1
 #endif
 
 #if defined(_WIN32_WCE)
-#define TOO_WINDOWS_CE	1
+#define TOO_OS_WINDOWS_CE	1
+#endif
+
+#if defined(__FreeBSD__)
+#define TOO_OS_FREEBSD      1
+#endif
+
+#if ((TOO_OS_LINUX || TOO_OS_MAC || TOO_OS_FREEBSD) && (!TOO_OS_WINDOWS))
+#define TOO_OS_UNIX         1
+#endif
+
+#if defined(__ANDROID__)
+#define TOO_OS_ANDROID      1
 #endif
 
 
@@ -45,16 +57,32 @@
 // Compilers
 
 #if defined(_MSC_VER)
-#define TOO_MS_VISUAL_STUDIO_CPP	1
-#define TOO_MS_VS_VER				_MSC_VER
+#define TOO_COMP_MS_VISUAL_STUDIO_CPP   1
+#define TOO_COMP_MS_VS_VER				_MSC_VER
 #endif
 
 #if defined(__BORLANDC__) || defined(__CODEGEARC__)
-#define TOO_BORLAND_CPP				1
+#define TOO_COMP_BORLAND_CPP            1
 #endif
 
 #if defined(__GNUC__)
-#define TOO_GNU_CPP					1
+#define TOO_COMP_GNU_CPP                1
+#endif
+
+#if defined(__clang__) && (__clang__ == 1)
+#define TOO_COMP_CLANG                  1
+#endif
+
+#if defined(__MINGW32__) || defined(__MINGW64__)
+#define TOO_COMP_MINGW                  1
+#endif
+
+#if defined(__CYGWIN__) && (__CYGWIN__ == 1)
+#define TOO_COMP_CYGWIN                 1
+#endif
+
+#if defined(__INTEL_COMPILER)
+#define TOO_COMP_INTEL                  1
 #endif
 
 
@@ -62,25 +90,25 @@
 // Languages
 
 #ifdef __STDC__
-#define TOO_STANDARD_C			1
-#define TOO_STANDARD_C89		1
+#define TOO_LANG_STANDARD_C			1
+#define TOO_LANG_STANDARD_C89		1
 #if __STDC_VERSION__ >= 199901L
-#define TOO_STANDARD_C99		1
+#define TOO_LANG_STANDARD_C99		1
 #endif
 #endif
 
 #ifdef __cplusplus
-#define TOO_STANDARD_CPP		1
-#define TOO_STANDARD_CPP98		1
+#define TOO_LANG_STANDARD_CPP		1
+#define TOO_LANG_STANDARD_CPP98		1
 #endif
 
 #ifdef __cplusplus_cli
-#define TOO_STANDARD_CPP_CLI	1
-#define TOO_STANDARD_CPP_CLI04	1
+#define TOO_LANG_STANDARD_CPP_CLI	1
+#define TOO_LANG_STANDARD_CPP_CLI04	1
 #endif
 
 #ifdef __embedded_cplusplus
-#define TOO_STANDARD_EMBCPP		1
+#define TOO_LANG_STANDARD_EMBCPP    1
 #endif
 
 
