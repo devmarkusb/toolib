@@ -43,6 +43,7 @@ namespace too
 
             virtual bool SaveToTextFile(const too::string& FilePathNameExt, const too::string& Content) = 0;
             virtual bool LoadFromTextFile(const too::string& FilePathNameExt, too::string& Content) = 0;
+            //! Should not overwrite if exists, \returns false then. Call DeleteFile first.
             virtual bool CopyFile(const too::string& FilePathNameExt_From, const too::string& FilePathNameExt_To) = 0;
             virtual bool DeleteFile(const too::string& FilePathNameExt) = 0;
             virtual bool RenameFile(const too::string& FilePathNameExt_From, const too::string& FilePathNameExt_To) = 0;

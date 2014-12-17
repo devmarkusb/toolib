@@ -12,11 +12,11 @@
 
 namespace too
 {
-	namespace err
-	{
-		std::string getTypename(const std::exception& e)
-		{
-			return typeid(e).name();
-		}
-	} // err
+namespace err
+{
+std::string getTypename(const std::exception& e)
+{
+    return typeid(e).name();
+}
+} // err
 } // too

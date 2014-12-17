@@ -50,7 +50,7 @@ private:
     inline const std::unique_ptr<QSettings>& m_settings() const;
     mutable EError                      m_FirstOccurredError{EError::INIT_NOT_CALLED_OR_FAILED};
 
-    void SetError(EError e) const { if (m_FirstOccurredError == EError::NO_ERROR) m_FirstOccurredError = e; }
+    void SetError(EError e) const { if (m_FirstOccurredError == EError::E_NO_ERROR) m_FirstOccurredError = e; }
     QString CreateQtKeyName(const too::string& SectionName, const too::string& KeyName) const;
     QVariant var2qvar(const TVariant& v) const;
     TVariant qvar2var(const QVariant& v) const;

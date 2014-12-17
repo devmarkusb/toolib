@@ -14,11 +14,11 @@
 
 namespace too
 {
-	namespace err
-	{
-		//!
-		std::string getTypename(const std::exception& e);
-	} // err
+namespace err
+{
+//!
+std::string getTypename(const std::exception& e);
+} // err
 } // too
 
 #endif

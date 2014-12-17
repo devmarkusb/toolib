@@ -46,7 +46,7 @@ public:
 
     enum class EError
     {
-        NO_ERROR = 0,
+        E_NO_ERROR = 0, // scary: NO_ERROR seems to be defined somewhere in system headers!?
         INIT_NOT_CALLED_OR_FAILED,
         ERROR_WRITING_SETTINGS,
         ERROR_READING_SETTINGS,

@@ -38,13 +38,13 @@ void CProgSettings::Init(const too::string& OrganizationName, const too::string&
             = std::make_unique<QSettings>(
                 QSettings::IniFormat, QSettings::UserScope,
                 toos2qs(OrganizationName), toos2qs(ApplicationName));
-    m_FirstOccurredError = EError::NO_ERROR;
+    m_FirstOccurredError = EError::E_NO_ERROR;
     GetError();
 }
 
 CProgSettings::EError CProgSettings::GetError() const
 {
-    if (m_FirstOccurredError == EError::NO_ERROR)
+    if (m_FirstOccurredError == EError::E_NO_ERROR)
     {
         if (m_settings())
         {
