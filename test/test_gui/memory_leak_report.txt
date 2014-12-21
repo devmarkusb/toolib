@@ -1,4 +1,0 @@
-Visual Leak Detector Version 2.0b installed.
-    Outputting the report to the debugger and to c:\Dokumente und Einstellungen\Markus\Eigene Dateien\Visual Studio 2005\Projects\Toolib\test\test_gui\memory_leak_report.txt
-No memory leaks detected.
-Visual Leak Detector is now exiting.

@@ -138,5 +138,7 @@
     Which is ok, but the same applies to sth. like \code #pragma warning \endcode.*/
 
 
+#define TOO_NOOP (void)0
+
 //##############################################################################################################
 #endif
