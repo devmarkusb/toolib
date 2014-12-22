@@ -25,7 +25,7 @@ namespace too
 	would be appropriate.
 	*/
 	template <typename ExceptionType, typename AssertionExpression> inline void Assert_throw(AssertionExpression
-#if !TOO_DEBUG
+#ifdef NDEBUG
 		) {}
 #else
 		a)

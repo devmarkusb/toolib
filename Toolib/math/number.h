@@ -10,35 +10,35 @@
 #ifndef NUMBER_H_INCL_f29jh8hnf238hrxz23
 #define NUMBER_H_INCL_f29jh8hnf238hrxz23
 
-#include "types.h"
+#include "../types.h"
+#include "../enum_cast.h"
 
 namespace too
 {
-	namespace math
-	{
-		namespace NSB
-		{
-			enum : byte {
-				BIN	= 2,
-				OCT	= 8,
-				DEC	= 10,
-				HEX	= 16,
-			};
-		}
-		typedef byte numsys_base;
+namespace math
+{
+enum class ENumSys : byte
+{
+    BIN	= 2,
+    OCT	= 8,
+    DEC	= 10,
+    HEX	= 16,
+};
 
-		inline uint getDecDigitCount(uint iDecNumber, numsys_base tBase = NSB::DEC)
-		{
-			uint count = 0;
-			do
-			{
-				++count;
-				iDecNumber/= tBase;
-			}
-			while (iDecNumber != 0);
-			return count;
-		}
-	}
+template<typename T>
+inline byte getDecDigitCount(T Number, ENumSys Base = ENumSys::DEC)
+{
+    static_assert(std::is_integral<T>::value, "Only integral numbers are allowed as input");
+    byte count = 0;
+    do
+    {
+        ++count;
+        Number/= as_number(Base);
+    }
+    while (Number != 0);
+    return count;
+}
+}
 }
 
 #endif

@@ -12,26 +12,32 @@
 
 #include <cmath>
 #include <limits>
+#include <type_traits>
+
 
 namespace too
 {
-	namespace math
-	{
-		inline double round(double r)
-		{
-			return (r > 0.0) ? floor(r + 0.5) : ceil(r - 0.5);
-		}
-		template<typename T> inline T round2(double r)
-		{
-			using std::numeric_limits;
-			const double d = round(r);
-			if (d > numeric_limits<T>::max())
-				return numeric_limits<T>::max();
-			else if (d < numeric_limits<T>::min())
-				return numeric_limits<T>::min();
-			return static_cast<T>(d);
-		}
-	}
+namespace math
+{
+inline double round(double r, unsigned short decimal_places)
+{
+    double factor = decimal_places ? pow(10.0, static_cast<double>(decimal_places)) : 1.0;
+    return (r >= 0.0) ? floor(r * factor + 0.5) / factor : ceil(r * factor - 0.5) / factor;
+}
+
+template<typename T> inline T round_to(double r, unsigned short decimal_places = 0)
+{
+    if (std::is_integral<T>::value)
+        decimal_places = 0; // for integral target values decimal_places make no sense
+    using std::numeric_limits;
+    const double d = round(r, decimal_places);
+    if (d > numeric_limits<T>::max())
+        return numeric_limits<T>::max();
+    else if (d < numeric_limits<T>::min())
+        return numeric_limits<T>::min();
+    return static_cast<T>(d);
+}
+}
 }
 
 #endif

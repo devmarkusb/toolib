@@ -14,7 +14,7 @@
 
 namespace too
 {
-	//! Like std::auto_prt, just without any "gimmicks" and with implicit casting. Only functionality: auto deletion.
+    //! Like std::auto_ptr, just without any "gimmicks" and with implicit casting. Only functionality: auto deletion.
 	template<class I> class autoptr : public std::auto_ptr<I>
 	{
 	private:
