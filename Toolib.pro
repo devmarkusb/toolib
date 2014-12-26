@@ -15,7 +15,8 @@ DESTDIR = $$PWD/lib
 DEFINES += TOOLIB_LIBRARY
 
 SOURCES += \
-    src/err.cpp
+    src/ToolibDummy.cpp
 
 HEADERS += \
-    Toolib/err.h
+    Toolib/ToolibDummy.h \
+    ToolibDEF.h
