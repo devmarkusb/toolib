@@ -24,6 +24,5 @@ SOURCES += \
 include(deployment.pri)
 qtcAddDeployment()
 
-HEADERS += \
-    ../Toolib/performance.h
+HEADERS +=
 

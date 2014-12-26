@@ -2,6 +2,7 @@
 #include "Toolib/performance.h"
 #include <chrono>
 #include <thread>
+#include <iostream>
 #include "Toolib/argsused.h"
 
 
@@ -59,7 +60,7 @@ TEST(ToFormattedStringTest, Inf)
     EXPECT_EQ(">= 100 h", too::CPerformanceProfiler::ToFormattedString(360000));
 }
 
-TEST(DISABLED_DumpAllItemsTest, PracticalScenario)
+TEST(/*DISABLED_*/DumpAllItemsTest, PracticalScenario)
 {
     too::CPerformanceProfiler perfscope0("1. 500ms");
     EXPECT_NEAR(0.0, perfscope0.Elapsed_CurrentItem(), 0.02);
@@ -87,7 +88,7 @@ TEST(DISABLED_DumpAllItemsTest, PracticalScenario)
     perfscope0.StartNewItem("9. 100ms");
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     perfscope0.StopItem();
-    too::CPerformanceProfiler::DumpAllItems(true);
+    std::cout << too::CPerformanceProfiler::DumpAllItems(true);
     const std::vector<too::CPerformanceProfiler::SDumpDataset>& data = too::CPerformanceProfiler::DumpDataTest();
     ASSERT_EQ(9, data.size());
     EXPECT_EQ("1. 500ms", data[0].m_ItemName);
