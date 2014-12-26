@@ -44,7 +44,7 @@ namespace too
 
         inline std::string Utf16_wstring_To_Utf8_string(const std::wstring& wstr)
         {
-#if TOO_WINDOWS
+#if TOO_OS_WINDOWS
             std::string convertedString;
             int requiredSize = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, 0, 0, 0, 0);
             if (requiredSize > 0)
@@ -64,7 +64,7 @@ namespace too
 
         inline std::wstring Utf8_string_To_Utf16_wstring(const std::string& str)
         {
-#if TOO_WINDOWS
+#if TOO_OS_WINDOWS
             std::wstring convertedString;
             int requiredSize = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, 0, 0);
             if (requiredSize > 0)
@@ -117,7 +117,7 @@ namespace too
         //! DEPRECATED! Convert string to wstring implementations.
         namespace str_impl
 		{
-#if TOO_WINDOWS
+#if TOO_OS_WINDOWS
 			inline std::wstring s2ws_windows(const std::string& s)
 			{
 				int slength = static_cast<int>(s.length()) + 1;
@@ -157,7 +157,7 @@ namespace too
             Utf8_string_To_Utf8_wstring.*/
         inline std::wstring s2ws(const std::string& s)
         {
-#if TOO_WINDOWS
+#if TOO_OS_WINDOWS
             return str_impl::s2ws_windows(s);
 #else
             return str_impl::s2ws_std(s);

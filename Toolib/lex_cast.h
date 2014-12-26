@@ -15,12 +15,13 @@
 #include <sstream>
 #include <exception>
 #endif
+#include "PPDEFS.h"
 
 namespace too
 {
 	class ErrBadLexCast : public std::bad_cast {};
 
-	template<typename T, typename S> inline T lex_cast(const S& s)
+    template<typename T, typename S> inline T lex_cast_Throw(const S& s)
 	{
 #if TOO_USE_BOOST
 		try
@@ -44,6 +45,19 @@ namespace too
 			throw ErrBadLexCast();
 #endif
 	}
-} // too
+
+    template<typename T, typename S> inline T lex_cast(const S& s)
+    {
+        try
+        {
+            return lex_cast_Throw<T, S>(s);
+        }
+        catch (const ErrBadLexCast&)
+        {
+            TOO_NOOP;
+        }
+        return T{};
+    }
+}
 
 #endif

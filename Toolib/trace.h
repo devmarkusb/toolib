@@ -12,13 +12,13 @@
 
 #include "PPDEFS.h"
 #include <sstream>
-#ifdef TOO_WINDOWS
+#ifdef TOO_OS_WINDOWS
 #include <windows.h>
-#endif TOO_WINDOWS
+#endif TOO_OS_WINDOWS
 
 namespace too
 {
-#ifdef TOO_WINDOWS
+#ifdef TOO_OS_WINDOWS
 	//! Usage: trace(makestr() << "bla" << 2 << "blabla");
 	void trace(const std::ostringstream& os)
 	{
@@ -29,7 +29,7 @@ namespace too
 	{
 		OutputDebugStringW(os.str().c_str());
 	}
-#endif TOO_WINDOWS
+#endif TOO_OS_WINDOWS
 }
 
 #include "string/makestr.h"

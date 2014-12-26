@@ -51,7 +51,7 @@ namespace too
 	//! Compile time assert.
 	#define TOO_STATIC_ASSERTv1_CONCAT_(a, b) a##b
 	#define TOO_STATIC_ASSERTv1_CONCAT(a, b) TOO_STATIC_ASSERTv1_CONCAT_(a, b)
-	#if TOO_MS_VISUAL_STUDIO_CPP && __COUNTER__
+    #if TOO_COMP_MS_VISUAL_STUDIO_CPP && __COUNTER__
 		#define TOO_STATIC_ASSERTv1(t, msg) \
 		{ enum { TOO_STATIC_ASSERTv1_CONCAT(msg, __COUNTER__) = 1/static_cast<int>(!!(t)) }; }
 	#else

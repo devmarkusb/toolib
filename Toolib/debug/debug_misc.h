@@ -38,8 +38,8 @@
 	#include <assert.h>
 	#define TOO_ASSERT(_CONDITION_)					assert((_CONDITION_))
 	#define TOO_VERIFY(_CONDITION_)					assert((_CONDITION_))
-	#if TOO_WINDOWS && TOO_MS_VISUAL_STUDIO_CPP
-		#if TOO_WINDOWS_64 // using portable common solution for x64 configuration
+    #if TOO_OS_WINDOWS && TOO_MS_VISUAL_STUDIO_CPP
+        #if TOO_OS_WINDOWS_64 // using portable common solution for x64 configuration
 			#include <crtdbg.h>
 			#define TOO_DEBUG_BREAK_IF(_CONDITION_)	if ((_CONDITION_)) { _CrtDbgBreak(); }
 		#else
@@ -57,7 +57,7 @@
 #endif
 
 //! Function signature.
-#if TOO_MS_VISUAL_STUDIO_CPP
+#if TOO_COMP_MS_VISUAL_STUDIO_CPP
 	#define TOO_FUNCTIONSIGN __FUNCSIG__
 #else
 	#define TOO_FUNCTIONSIGN ""
@@ -70,7 +70,7 @@
 #define TOO_LOCATION __FILE__" ("TOO_AUXDEF_CONCATENATE_INDIRECT_WITH(__LINE__)") : "
 
 ////! User-defined compiler (warning) message.
-//#if TOO_MS_VISUAL_STUDIO_CPP
+//#if TOO_COMP_MS_VISUAL_STUDIO_CPP
 //#define TOO_COMPILER_MSG(x) #pragma message(x) // doesn't work; only formal parameter
 //#else
 //#define TOO_COMPILER_MSG(x)

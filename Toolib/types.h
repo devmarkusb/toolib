@@ -11,6 +11,7 @@
 #define TOOTYPES_H_INCL_com3iur982zxr920z427
 
 #include <string>
+#include <sstream>
 #include "PPDEFS.H"
 
 namespace too
@@ -47,6 +48,7 @@ namespace too
 #endif
 
     //! Number suffixes below denote bits.
+    /** One note on std::stringstream, here only the w and non-w (for string8) variants seem to be supported.*/
     using string8   = stdbasicstring_chartype<char8_t>;
     using string16  = stdbasicstring_chartype<char16_t>;
     using string32  = stdbasicstring_chartype<char32_t>;
@@ -59,7 +61,7 @@ namespace too
     #define _TOOSTR_UTF16(x)        _ENCODING_UTF16(x)
     #define _TOOSTR_UTF32(x)        _ENCODING_UTF32(x)
 
-#if TOO_WINDOWS
+#if TOO_OS_WINDOWS
 //    using string = string16;
 //    #define _TOOSTR(x)     _TOOSTR_UTF16(x)
     // try not using wstring anymore... but is u16string above a worthy alternative!?
@@ -67,9 +69,14 @@ namespace too
 //    #define _TOOSTR(x)     _TOOSTR_LOCALWIDE(x)
     // finally opt for a decision candidate
     using string = string8;
+    using stringstream = std::stringstream;
     #define _TOOSTR(x)      _TOOSTR_UTF8(x)
+    #if !defined(UNICODE) && !defined(_UNICODE)
+    #error "Under Windows your code has to be compiled with Unicode setting - according to a desired choice of encoding >= UTF8"
+    #endif
 #else
     using string = string8;
+    using stringstream = std::stringstream;
     #define _TOOSTR(x)      _TOOSTR_UTF8(x)
 #endif
     using charType = string::value_type;
@@ -89,25 +96,12 @@ namespace too
 
     //############################################################################################################
 
-//#if TOO_MS_VISUAL_STUDIO_CPP
-//	typedef unsigned __int8		u8;
-//	typedef __int8				s8;
-//	typedef unsigned __int16	u16;
-//	typedef __int16				s16;
-//	typedef unsigned __int32	u32;
-//	typedef __int32				s32;
-//#else
     typedef uint8_t     u8;
     typedef int8_t      s8;
     typedef uint16_t    u16;
     typedef int16_t     s16;
     typedef uint32_t    u32;
     typedef int32_t     s32;
-//#endif
-
-	typedef float				f32;
-	typedef double				f64;
-	typedef long double			f128;
 
 	typedef unsigned char		uchar;
 	typedef unsigned char		byte;

@@ -11,14 +11,19 @@
 
 #include <exception>
 #include <string>
+#include "ToolibDEF.h"
+
 
 namespace too
 {
 namespace err
 {
 //!
-std::string getTypename(const std::exception& e);
-} // err
-} // too
+TOO_EXTERN_C_DECLS_BEGIN
+TOOLIBSHARED_EXPORT std::string getTypename(const std::exception& e);
+TOO_EXTERN_C_DECLS_END
+}
+}
+
 
 #endif
