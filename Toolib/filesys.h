@@ -17,12 +17,6 @@ namespace too
 {
 	namespace file
 	{
-		//! Hopefully not larger than int.
-		int FileSize(const char* name);
-		bool DelFile(const char* name);
-		bool RenameFile(const char* oldname, const char* newname);
-		std::string ExtractDirectory(const std::string& filenamepath);
-		std::string ExtractFilename(const std::string& filenamepath);
         inline void EnsureTrailingSeperator(too::string& Path, too::charType Sep)
         {
             if (!Path.empty() && Path.back() != Sep)

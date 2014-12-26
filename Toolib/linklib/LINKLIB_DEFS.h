@@ -43,6 +43,8 @@
     DEFAULT or equally TOOLIB
     QT
     Note that the TOOLIB choice is Windows only so far.
+    (7) Add TOO_EXTERN_C_DECLS (next to YOURLIBSHARED_EXPORT) if you intend to allow your library users the
+    choice of late binding.
 
     Usage II: The following documentation is for application code which likes to call or link your library.
     - Just linking (statically or early binding).
@@ -58,6 +60,7 @@
         is provided.
         4. Note: use function pointers for symbol resolving. A redirection via std::function doesn't help much, since
         there is no equivalence std::function* <-> function pointer.
+    - Note: Never use late binding, if not absolutely necessary. There are just more pitfalls.
 */
 //! \file
 
