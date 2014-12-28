@@ -10,13 +10,15 @@
 #define FILESYS_QT_H_sidnfgzgxfw746rn67gfqxw3gxfb7gwx
 
 #include "../../filesys.h"
+#include "../../../Toolib_QtDEF.h"
+
 
 namespace too
 {
 namespace implQt
 {
 
-class CFileSys_Qt : public too::IFileSys
+class TOOLIBSHARED_EXPORT CFileSys_Qt : public too::IFileSys
 {
 public:
     virtual bool SaveToTextFile(const too::string& FilePathNameExt, const too::string& Content);

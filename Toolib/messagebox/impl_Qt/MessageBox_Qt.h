@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include "../../imessagebox.h"
 #include "../../class/non_copyable.h"
+#include "../../../Toolib_QtDEF.h"
 
 
 namespace too
@@ -19,7 +20,7 @@ namespace too
 namespace implQt
 {
 
-class CMessageBox_Qt : public too::gui::IMessageBox, private too::non_copyable
+class TOOLIBSHARED_EXPORT CMessageBox_Qt : public too::gui::IMessageBox, private too::non_copyable
 {
 public:
     virtual ~CMessageBox_Qt() = default;

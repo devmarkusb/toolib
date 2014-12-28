@@ -2,7 +2,7 @@
 // This file is part of my Toolib library. Open source.
 
 //!
-/**
+/** Please note: class CProgSettings is not suitable to be put in a lib; we get linker warnings due to moc content.
 */
 //! \file
 
@@ -20,6 +20,7 @@ namespace too
 {
 namespace implQt
 {
+// do not put in a library, see comment at file start
 class CProgSettings : public QObject, public too::IProgSettings, private too::non_copyable
 {
     Q_OBJECT
