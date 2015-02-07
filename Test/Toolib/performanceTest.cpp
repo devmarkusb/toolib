@@ -90,65 +90,65 @@ TEST(/*DISABLED_*/DumpAllItemsTest, PracticalScenario)
     perfscope0.StopItem();
     std::cout << too::CPerformanceProfiler::DumpAllItems(true);
     const std::vector<too::CPerformanceProfiler::SDumpDataset>& data = too::CPerformanceProfiler::DumpDataTest();
-    ASSERT_EQ(9, data.size());
+    ASSERT_EQ(9u, data.size());
     EXPECT_EQ("1. 500ms", data[0].m_ItemName);
-    EXPECT_EQ(1, data[0].m_Count);
+    EXPECT_EQ(1u, data[0].m_Count);
     EXPECT_NEAR(0.5, data[0].m_Total, 0.02);
     EXPECT_NEAR(0.5, data[0].m_Average, 0.02);
     EXPECT_NEAR(0.5, data[0].m_Mean, 0.02);
     EXPECT_NEAR(0.0, data[0].m_StdDev, 0.0);
 
     EXPECT_EQ("2. nest0", data[1].m_ItemName);
-    EXPECT_EQ(1, data[1].m_Count);
+    EXPECT_EQ(1u, data[1].m_Count);
     EXPECT_NEAR(2.8, data[1].m_Total, 0.1);
     EXPECT_NEAR(2.8, data[1].m_Average, 0.1);
     EXPECT_NEAR(2.8, data[1].m_Mean, 0.1);
     EXPECT_NEAR(0.0, data[1].m_StdDev, 0.0);
 
     EXPECT_EQ(" 3. 100ms", data[2].m_ItemName);
-    EXPECT_EQ(1, data[2].m_Count);
+    EXPECT_EQ(1u, data[2].m_Count);
     EXPECT_NEAR(0.1, data[2].m_Total, 0.02);
     EXPECT_NEAR(0.1, data[2].m_Average, 0.02);
     EXPECT_NEAR(0.1, data[2].m_Mean, 0.02);
     EXPECT_NEAR(0.0, data[2].m_StdDev, 0.0);
 
     EXPECT_EQ(" 4. nest1", data[3].m_ItemName);
-    EXPECT_EQ(1, data[3].m_Count);
+    EXPECT_EQ(1u, data[3].m_Count);
     EXPECT_NEAR(2.7, data[3].m_Total, 0.1);
     EXPECT_NEAR(2.7, data[3].m_Average, 0.1);
     EXPECT_NEAR(2.7, data[3].m_Mean, 0.1);
     EXPECT_NEAR(0.0, data[3].m_StdDev, 0.0);
 
     EXPECT_EQ("  5. for", data[4].m_ItemName);
-    EXPECT_EQ(1, data[4].m_Count);
+    EXPECT_EQ(1u, data[4].m_Count);
     EXPECT_NEAR(2.5, data[4].m_Total, 0.1);
     EXPECT_NEAR(2.5, data[4].m_Average, 0.1);
     EXPECT_NEAR(2.5, data[4].m_Mean, 0.1);
     EXPECT_NEAR(0.0, data[4].m_StdDev, 0.0);
 
     EXPECT_EQ("   6. 500ms", data[5].m_ItemName);
-    EXPECT_EQ(5, data[5].m_Count);
+    EXPECT_EQ(5u, data[5].m_Count);
     EXPECT_NEAR(2.5, data[5].m_Total, 0.1);
     EXPECT_NEAR(0.5, data[5].m_Average, 0.02);
     EXPECT_NEAR(0.5, data[5].m_Mean, 0.02);
     EXPECT_NEAR(0.0, data[5].m_StdDev, 0.02);
 
     EXPECT_EQ("  7. 200ms", data[6].m_ItemName);
-    EXPECT_EQ(1, data[6].m_Count);
+    EXPECT_EQ(1u, data[6].m_Count);
     EXPECT_NEAR(0.2, data[6].m_Total, 0.02);
     EXPECT_NEAR(0.2, data[6].m_Average, 0.02);
     EXPECT_NEAR(0.2, data[6].m_Mean, 0.02);
     EXPECT_NEAR(0.0, data[6].m_StdDev, 0.0);
 
     EXPECT_EQ("8. 300ms", data[7].m_ItemName);
-    EXPECT_EQ(1, data[7].m_Count);
+    EXPECT_EQ(1u, data[7].m_Count);
     EXPECT_NEAR(0.3, data[7].m_Total, 0.02);
     EXPECT_NEAR(0.3, data[7].m_Average, 0.02);
     EXPECT_NEAR(0.3, data[7].m_Mean, 0.02);
     EXPECT_NEAR(0.0, data[7].m_StdDev, 0.0);
 
     EXPECT_EQ("9. 100ms", data[8].m_ItemName);
-    EXPECT_EQ(1, data[8].m_Count);
+    EXPECT_EQ(1u, data[8].m_Count);
     EXPECT_NEAR(0.1, data[8].m_Total, 0.02);
     EXPECT_NEAR(0.1, data[8].m_Average, 0.02);
     EXPECT_NEAR(0.1, data[8].m_Mean, 0.02);
@@ -156,5 +156,5 @@ TEST(/*DISABLED_*/DumpAllItemsTest, PracticalScenario)
 
     too::CPerformanceProfiler::Reset();
     too::CPerformanceProfiler::DumpAllItems(true);
-    EXPECT_EQ(0, data.size());
+    EXPECT_EQ(0u, data.size());
 }

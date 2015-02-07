@@ -14,7 +14,7 @@ INCLUDEPATH += \
 LIBS += -L/projects/externlibs/gtest-1.7.0/ -lgtest
 
 SOURCES += \
-    ../../../../../externlibs/gtest-1.7.0/src/gtest_main.cc \
+    c:/projects/externlibs/gtest-1.7.0/src/gtest_main.cc \
     Toolib/performanceTest.cpp \
     Toolib/assertTest.cpp \
     Toolib/vector/vectorTest.cpp \
