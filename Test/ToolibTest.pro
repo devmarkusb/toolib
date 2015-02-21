@@ -19,10 +19,12 @@ SOURCES += \
     Toolib/assertTest.cpp \
     Toolib/vector/vectorTest.cpp \
     Toolib/math/numberTest.cpp \
-    Toolib/math/roundTest.cpp
+    Toolib/math/roundTest.cpp \
+    Toolib/class/IAbstractTest.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
 
-HEADERS +=
+HEADERS += \
+    ../Toolib/class/IAbstract.h
 
