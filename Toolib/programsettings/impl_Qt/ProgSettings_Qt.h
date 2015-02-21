@@ -9,7 +9,7 @@
 #ifndef PROGSETTINGS_QT_H
 #define PROGSETTINGS_QT_H
 
-#include "../../iprogramsettings.h"
+#include "../iprogramsettings.h"
 #include <QObject>
 #include <QSettings>
 #include <memory>

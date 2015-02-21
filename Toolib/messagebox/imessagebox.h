@@ -10,7 +10,7 @@
 #define IMESSAGEBOX_H_ydugfbxuzgnfv8eqgwgw23d3
 
 #include <memory>
-#include "types.h"
+#include "../types.h"
 
 
 namespace too

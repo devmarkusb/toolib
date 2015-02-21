@@ -27,6 +27,6 @@ HEADERS += \
     Toolib_QtDEF.h \
     Toolib/filesys/impl_Qt/FileSys_Qt.h \
     Toolib/messagebox/impl_Qt/MessageBox_Qt.h \
-    Toolib/filesys.h \
-    Toolib/imessagebox.h \
-    Toolib/iprogramsettings.h
+    Toolib/filesys/filesys.h \
+    Toolib/messagebox/imessagebox.h \
+    Toolib/programsettings/iprogramsettings.h

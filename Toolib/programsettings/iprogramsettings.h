@@ -11,7 +11,7 @@
 
 #include <boost/variant.hpp>
 #include <vector>
-#include "types.h"
+#include "../types.h"
 
 
 namespace too

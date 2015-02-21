@@ -10,7 +10,7 @@
 #define MESSAGEBOX_QT_H_sidxgezwgfw76rn3x16
 
 #include <QMessageBox>
-#include "../../imessagebox.h"
+#include "../imessagebox.h"
 #include "../../class/non_copyable.h"
 #include "../../../Toolib_QtDEF.h"
 

@@ -9,7 +9,7 @@
 #ifndef FILESYS_QT_H_sidnfgzgxfw746rn67gfqxw3gxfb7gwx
 #define FILESYS_QT_H_sidnfgzgxfw746rn67gfqxw3gxfb7gwx
 
-#include "../../filesys.h"
+#include "../filesys.h"
 #include "../../../Toolib_QtDEF.h"
 
 

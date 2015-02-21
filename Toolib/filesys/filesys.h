@@ -10,8 +10,8 @@
 #define FILESYS_H_INCL_xcsabgzduzbvfget32
 
 #include <string>
-#include "types.h"
-#include "class/non_copyable.h"
+#include "../types.h"
+#include "../class/non_copyable.h"
 
 namespace too
 {
