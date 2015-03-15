@@ -15,15 +15,8 @@
 
 namespace too
 {
-	namespace file
-	{
-        inline void EnsureTrailingSeperator(too::string& Path, too::charType Sep)
-        {
-            if (!Path.empty() && Path.back() != Sep)
-                Path+= Sep;
-        }
-
-
+    namespace file
+    {
         //#############################################################################################################
 
         class IFileSys : private too::non_copyable
@@ -33,7 +26,7 @@ namespace too
 
             static IFileSys* GetInstance();
 
-            static const too::charType FOLDER_SEPERATOR_TO_USE_HERE = '/'; // _TOOSTR() i.e. u8 doesn't work for char-literal ' ' with mingw yet?!
+            static const too::charType FOLDER_SEPARATOR_TO_USE_HERE = '/'; // _TOOSTR() i.e. u8 doesn't work for char-literal ' ' with mingw yet?!
 
             virtual bool SaveToTextFile(const too::string& FilePathNameExt, const too::string& Content) = 0;
             virtual bool LoadFromTextFile(const too::string& FilePathNameExt, too::string& Content) = 0;

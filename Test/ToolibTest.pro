@@ -20,7 +20,9 @@ SOURCES += \
     Toolib/vector/vectorTest.cpp \
     Toolib/math/numberTest.cpp \
     Toolib/math/roundTest.cpp \
-    Toolib/class/IAbstractTest.cpp
+    Toolib/class/IAbstractTest.cpp \
+    Toolib/filesys/pathTest.cpp \
+    ../src/filesys/path.cpp
 
 include(deployment.pri)
 qtcAddDeployment()

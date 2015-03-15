@@ -1,0 +1,2 @@
+But note that it is not worst practice to directly
+compile source cpp files into your project.
