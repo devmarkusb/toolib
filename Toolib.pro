@@ -15,8 +15,10 @@ DESTDIR = $$PWD/lib
 DEFINES += TOOLIB_LIBRARY
 
 SOURCES += \
-    src/ToolibDummy.cpp
+    src/ToolibDummy.cpp \
+    src/filesys/impl_too/FileSys_too.cpp
 
 HEADERS += \
     Toolib/ToolibDummy.h \
-    ToolibDEF.h
+    ToolibDEF.h \
+    Toolib/filesys/impl_too/FileSys_too.h

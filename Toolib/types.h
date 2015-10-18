@@ -16,8 +16,9 @@
 
 namespace too
 {
-    //! String type.
-    /** Two choices are to be considered
+    //! String type. Just use too::string and too::stringstream and _TOOSTR("bla") for literals and too::charType
+    /** Be prepared, that the string behaves exactly like a std::string.
+		Detailed explanation how the type evolved. Two choices were to be considered
         1. which type out of char==char8_t, wchar_t, char16_t, char32_t
             (Here you have to notice, that wchar_t is the worst choice, because it doesn't have platform independent
             fixed size, whereas char is always 8 Bit, and the other are 16, 32 Bit respectively.
@@ -103,16 +104,16 @@ namespace too
     typedef uint32_t    u32;
     typedef int32_t     s32;
 
-	typedef unsigned char		uchar;
-	typedef unsigned char		byte;
-	typedef signed char			schar;
-	typedef unsigned short		ushort;
-	typedef signed short		sshort;
-	typedef unsigned int		uint;
-	typedef signed int			sint;
+    typedef unsigned char   uchar;
+    typedef unsigned char   byte;
+    typedef signed char     schar;
+    typedef unsigned short  ushort;
+    typedef signed short    sshort;
+    typedef unsigned int    uint;
+    typedef signed int      sint;
 
-	typedef unsigned long		ulong;
-	typedef signed long			slong;
+    typedef unsigned long   ulong;
+    typedef signed long     slong;
 }
 
 #endif
