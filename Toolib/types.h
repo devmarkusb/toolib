@@ -28,7 +28,7 @@ namespace too
             (Here you should notice that UTF-8 seems to be to most common choice on the internet.)
 
         So, what's your choice for the time being?
-        Decision (to updated...):
+        Decision:
             char and UTF-8
         Downside (always inevitable, but looking for the lesser of two evils):
             i) Convert to UTF16/32 encoding and suitable type whenever appropriate for languages,

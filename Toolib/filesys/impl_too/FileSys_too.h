@@ -12,10 +12,12 @@
 #include "../filesys.h"
 #include "../../../ToolibDEF.h"
 
+
 #if TOO_OS_WINDOWS == 1
 #undef CopyFile
 #undef DeleteFile
 #endif
+
 
 namespace too
 {

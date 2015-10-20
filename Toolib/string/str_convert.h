@@ -36,7 +36,7 @@ namespace too
             return s;
         }
 
-        inline too::string Ut8_string_To_toos(const std::string& s)
+        inline too::string Utf8_string_to_toos(const std::string& s)
         {
             too::static_assert_string_BitsPerChar_and_Encoding<too::string, 8>();
             return s;

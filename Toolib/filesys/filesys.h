@@ -13,6 +13,13 @@
 #include "../types.h"
 #include "../class/non_copyable.h"
 
+
+#if TOO_OS_WINDOWS == 1
+#undef CopyFile
+#undef DeleteFile
+#endif
+
+
 namespace too
 {
     namespace file

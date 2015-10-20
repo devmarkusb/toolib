@@ -1,7 +1,7 @@
 #include "../../../Toolib/filesys/impl_too/FileSys_too.h"
-#include <memory>
+#include <fstream>
+#include <cstdio>
 #include "../../../Toolib/argsused.h"
-#include "../../../Toolib/scope/scopeguard.h"
 
 
 namespace too
@@ -18,22 +18,38 @@ bool CFileSys_too::SaveToTextFile(const too::string& FilePathNameExt, const too:
 
 bool CFileSys_too::LoadFromTextFile(const too::string& FilePathNameExt, too::string& Content)
 {
-    too::ignore_arg(FilePathNameExt);
-    too::ignore_arg(Content);
-    return false;
+    std::ifstream file(FilePathNameExt);
+    if (!file)
+        return false;
+    file.seekg(0, std::ios::end);
+    if (!file)
+        return false;
+    const int size = file.tellg();
+    if (!file || size == -1)
+        return false;
+    Content.reserve(size);
+    file.seekg(0);
+    if (!file)
+        return false;
+    file.read(&Content[0], size);
+    return file;
 }
 
 bool CFileSys_too::CopyFile(const too::string& FilePathNameExt_From, const too::string& FilePathNameExt_To)
 {
-    too::ignore_arg(FilePathNameExt_From);
-    too::ignore_arg(FilePathNameExt_To);
-    return false;
+    std::ifstream src(FilePathNameExt_From, std::ios::binary);
+    if (!src)
+        return false;
+    std::ofstream dst(FilePathNameExt_To, std::ios::binary);
+    if (!dst)
+        return false;
+    dst << src.rdbuf();
+    return dst;
 }
 
 bool CFileSys_too::DeleteFile(const too::string& FilePathNameExt)
-{
-    too::ignore_arg(FilePathNameExt);
-    return false;
+{    
+    return !std::remove(FilePathNameExt.c_str());
 }
 
 bool CFileSys_too::RenameFile(const too::string& FilePathNameExt_From, const too::string& FilePathNameExt_To)
@@ -70,8 +86,8 @@ bool CFileSys_too::FolderExists(const too::string& FolderPath)
 
 bool CFileSys_too::FileExists(const too::string& FilePathNameExt)
 {
-    too::ignore_arg(FilePathNameExt);
-    return false;
+    std::ifstream file(FilePathNameExt, std::ios_base::binary);
+    return file;
 }
 
 too::string CFileSys_too::toNativeSeparators(const too::string& Path)
