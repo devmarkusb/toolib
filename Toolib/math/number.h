@@ -38,7 +38,13 @@ inline byte getDecDigitCount(T Number, ENumSys Base = ENumSys::DEC)
     while (Number != 0);
     return count;
 }
+
+template <typename T> int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
 }
+
+}
+
 }
 
 #endif

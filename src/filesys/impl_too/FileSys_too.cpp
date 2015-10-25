@@ -11,9 +11,11 @@ namespace impl
 
 bool CFileSys_too::SaveToTextFile(const too::string& FilePathNameExt, const too::string& Content)
 {
-    too::ignore_arg(FilePathNameExt);
-    too::ignore_arg(Content);
-    return false;
+    std::ofstream file(FilePathNameExt);
+    if (!file)
+        return false;
+    file << Content;
+    return file;
 }
 
 bool CFileSys_too::LoadFromTextFile(const too::string& FilePathNameExt, too::string& Content)
@@ -27,7 +29,7 @@ bool CFileSys_too::LoadFromTextFile(const too::string& FilePathNameExt, too::str
     const int size = file.tellg();
     if (!file || size == -1)
         return false;
-    Content.reserve(size);
+    Content.resize(size);   // need the precise size for the string, I guess
     file.seekg(0);
     if (!file)
         return false;
