@@ -5,3 +5,5 @@ REM you also need to add a 'delete' for its debug version here.
 cd bin
 
 REM del ...
+
+cd ..
