@@ -40,6 +40,7 @@ public:
     virtual void Sync();
 
     virtual EError GetError() const;
+    virtual void ResetError() override;
 
     // ### QML access ###
     //! \param SecAndKey contains section and key like "sectionname/keyname" separated by "/"

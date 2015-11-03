@@ -57,6 +57,11 @@ CProgSettings::EError CProgSettings::GetError() const
     return m_FirstOccurredError;
 }
 
+void CProgSettings::ResetError()
+{
+    m_FirstOccurredError = EError::E_NO_ERROR;
+}
+
 void CProgSettings::setValue(const QString& SecAndKey, const QVariant& Value)
 {
     if (!m_settings())

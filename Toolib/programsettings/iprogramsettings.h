@@ -16,6 +16,8 @@
 
 namespace too
 {
+static const too::string& HIERARCHY_SEPARATOR = _TOOSTR(".");
+
 class IProgSettings
 {
 public:
@@ -53,6 +55,7 @@ public:
         INTERNAL_ERROR__VARIANT_CONVERSION,
     };
     virtual EError GetError() const = 0;
+    virtual void ResetError() = 0;
 };
 }
 
