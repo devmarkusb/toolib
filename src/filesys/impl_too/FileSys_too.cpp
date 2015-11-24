@@ -15,7 +15,7 @@ bool CFileSys_too::SaveToTextFile(const too::string& FilePathNameExt, const too:
     if (!file)
         return false;
     file << Content;
-    return file;
+    return true;
 }
 
 bool CFileSys_too::LoadFromTextFile(const too::string& FilePathNameExt, too::string& Content)
@@ -34,7 +34,7 @@ bool CFileSys_too::LoadFromTextFile(const too::string& FilePathNameExt, too::str
     if (!file)
         return false;
     file.read(&Content[0], size);
-    return file;
+    return true;
 }
 
 bool CFileSys_too::CopyFile(const too::string& FilePathNameExt_From, const too::string& FilePathNameExt_To)
@@ -46,7 +46,7 @@ bool CFileSys_too::CopyFile(const too::string& FilePathNameExt_From, const too::
     if (!dst)
         return false;
     dst << src.rdbuf();
-    return dst;
+    return true;
 }
 
 bool CFileSys_too::DeleteFile(const too::string& FilePathNameExt)

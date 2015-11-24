@@ -12,6 +12,7 @@
 
 #include <string>
 #include <sstream>
+#include <cstdint>
 #include "PPDEFS.H"
 
 namespace too
@@ -88,7 +89,11 @@ namespace too
         switch to UTF16 later. Then it is very likely, that you also switch from 8 Bits to 16 Bits representation,
         in which case the assertion fires easily.*/
     template <typename StringType, size_t BitsPerCharacter>
-    inline constexpr void static_assert_string_BitsPerChar_and_Encoding()
+    inline
+#ifdef constexpr
+		constexpr
+#endif
+		void static_assert_string_BitsPerChar_and_Encoding()
     {
         static_assert(sizeof(typename StringType::value_type) == BitsPerCharacter / 8,
         "Change this function if you change the byte count per character in your string. You probably also want to have a look at your encoding (UTF-?).");

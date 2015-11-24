@@ -18,6 +18,7 @@ namespace math
 {
 template <typename X, typename Y>
 using VectorOfPairs = std::vector<std::pair<X, Y>>;
+
 }
 }
 

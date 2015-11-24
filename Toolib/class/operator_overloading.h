@@ -1,0 +1,128 @@
+// Markus Borris, 2015
+// This file is part of my Toolib library. Open source.
+
+//!
+/**
+*/
+//! \file
+
+#ifndef OPERATOR_OVERLOADING_H_INCL_dsjfgnxe8iunhgx873xgnf387gfn4
+#define OPERATOR_OVERLOADING_H_INCL_dsjfgnxe8iunhgx873xgnf387gfn4
+
+#error Do not include this header file! The idea is to use it just as a source for copy&paste.
+
+#include <iostream>
+
+namespace too
+{
+
+struct T
+{
+    T() {}
+    T(const T&) {}
+    T(T&& other)
+    {
+        *this = std::move(other);
+    }
+    T& operator=(const T& other)
+    {
+        T tmp(other);
+        *this = std::move(tmp);
+        return *this;
+    }
+    T& operator=(T&&) { /*todo ...implement move from other...*/ return *this; }
+
+
+    T& operator++()
+    {
+        //todo ...
+        return *this;
+    }
+    T operator++(int)
+    {
+        T tmp(*this);
+        operator++();
+        return tmp;
+    }
+    T& operator--()
+    {
+        //todo ...
+        return *this;
+    }
+    T operator--(int)
+    {
+        T tmp(*this);
+        operator--();
+        return tmp;
+    }
+
+
+    T& operator+=(const T&)
+    {
+        //todo ...addition of rhs to *this...
+        return *this;
+    }
+    T& operator-=(const T&)
+    {
+        //todo ...subtraction of rhs from *this...
+        return *this;
+    }
+    T& operator*=(const T&)
+    {
+        //todo ...multiplication of rhs to *this...
+        return *this;
+    }
+    T& operator/=(const T&)
+    {
+        //todo ...division of *this by rhs...
+        return *this;
+    }
+};
+
+inline T operator+(T lhs, const T& rhs)
+{
+    lhs+= rhs;
+    return lhs;
+}
+inline T operator-(T lhs, const T& rhs)
+{
+    lhs-= rhs;
+    return lhs;
+}
+inline T operator*(T lhs, const T& rhs)
+{
+    lhs*= rhs;
+    return lhs;
+}
+inline T operator/(T lhs, const T& rhs)
+{
+    lhs/= rhs;
+    return lhs;
+}
+
+
+inline bool operator==(const T&, const T&) { return true/*todo ...comparison...*/; }
+inline bool operator!=(const T& lhs, const T& rhs) { return !operator==(lhs,rhs); }
+inline bool operator< (const T&, const T&) { return false/*todo ...comparison...*/; }
+inline bool operator> (const T& lhs, const T& rhs) { return  operator< (rhs,lhs); }
+inline bool operator<=(const T& lhs, const T& rhs) { return !operator> (lhs,rhs); }
+inline bool operator>=(const T& lhs, const T& rhs) { return !operator< (lhs,rhs); }
+
+
+inline std::ostream& operator<<(std::ostream& os, const T&)
+{
+    //todo ...write obj to stream...
+    return os;
+}
+
+inline std::istream& operator>>(std::istream& is, T&)
+{
+    //todo ...read obj from stream...
+    if (false/*todo no valid object of T found in stream*/)
+        is.setstate(std::ios::failbit);
+    return is;
+}
+
+}
+
+#endif

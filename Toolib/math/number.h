@@ -26,7 +26,7 @@ enum class ENumSys : byte
 };
 
 template<typename T>
-inline byte getDecDigitCount(T Number, ENumSys Base = ENumSys::DEC)
+inline byte getDigitCount(T Number, ENumSys Base = ENumSys::DEC)
 {
     static_assert(std::is_integral<T>::value, "Only integral numbers are allowed as input");
     byte count = 0;
