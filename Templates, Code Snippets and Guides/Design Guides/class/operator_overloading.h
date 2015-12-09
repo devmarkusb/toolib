@@ -18,19 +18,17 @@ namespace too
 
 struct T
 {
-    T() {}
-    T(const T&) {}
-    T(T&& other)
-    {
-        *this = std::move(other);
-    }
+    T() = default;
+	~T() noexcept = default;
+    T(const T&) = default;
+    T(T&& other) noexcept = default;
     T& operator=(const T& other)
     {
         T tmp(other);
         *this = std::move(tmp);
         return *this;
     }
-    T& operator=(T&&) { /*todo ...implement move from other...*/ return *this; }
+    T& operator=(T&&) noexcept = default;
 
 
     T& operator++()

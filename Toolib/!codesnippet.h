@@ -1,4 +1,5 @@
-// Markus Borris, 22.02.2015
+// Markus Borris, 2015
+// This file is part of my Toolib library. Open source.
 
 //!
 /**

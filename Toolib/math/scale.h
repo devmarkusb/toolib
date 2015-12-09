@@ -11,6 +11,10 @@
 
 #include <utility>
 #include <assert.h>
+#include <type_traits>
+#include <cmath>
+#include <boost/optional.hpp>
+#include "floating_point.h"
 
 
 namespace too
@@ -40,6 +44,30 @@ private:
     std::pair<FloatingPointType, FloatingPointType> m_FromInterval;
     std::pair<FloatingPointType, FloatingPointType> m_ToInterval;
 };
+
+//! Calculates a meaningful step width (tick) for a scale with at most \param MaxTickCount tick markers suitable for a
+//! data value range comprising \RangeMinToMax.
+template <typename T>
+//  requires T > 0
+inline boost::optional<double> calcNiceScaleTick(T RangeMinToMax, unsigned long MaxTickCount)
+{
+    if (!MaxTickCount)
+        return boost::none;
+    const double MaxTickCount_ = static_cast<double>(MaxTickCount);
+    const double MinimalTick = static_cast<double>(RangeMinToMax) / MaxTickCount_;
+    const double magnitude = std::pow(10.0, std::floor(std::log10(MinimalTick)));
+    if (too::math::almost_equal<T>(magnitude, 0.0))
+        return boost::none;
+    const double residual = MinimalTick / magnitude;
+    if (residual > 5.0)
+        return 10.0 * magnitude;
+    else if (residual > 2.0)
+        return 5.0 * magnitude;
+    else if (residual > 1.0)
+        return 2.0 * magnitude;
+    else
+        return magnitude;
+}
 
 }
 }

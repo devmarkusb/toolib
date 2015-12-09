@@ -60,7 +60,7 @@ TEST(ToFormattedStringTest, Inf)
     EXPECT_EQ(">= 100 h", too::CPerformanceProfiler::ToFormattedString(360000));
 }
 
-TEST(/*DISABLED_*/DumpAllItemsTest, PracticalScenario)
+TEST(DISABLED_DumpAllItemsTest, PracticalScenario)
 {
     too::CPerformanceProfiler perfscope0("1. 500ms");
     EXPECT_NEAR(0.0, perfscope0.Elapsed_CurrentItem(), 0.02);
