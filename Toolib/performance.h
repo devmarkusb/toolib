@@ -23,6 +23,7 @@
 #include "class/non_copyable.h"
 #include "math/number.h"
 #include "math/round.h"
+#include "std/std_extensions.h"
 
 
 namespace too
@@ -319,7 +320,7 @@ inline std::string CPerformanceProfiler::ToFormattedString(const TSecondsDbl& d)
     else if (d_ < 0.000000099995) // 0.0000001
         ret << std::setprecision(2) << std::fixed  << too::math::round(d_ * 1000000000.0, 2) << " ns";
     else if (d_ < 0.000099995) // 0.0001
-        ret << std::setprecision(2) << std::fixed  << too::math::round(d_ * 1000000.0, 2) << " " << u8"\xC2\xB5" << "s";
+        ret << std::setprecision(2) << std::fixed  << too::math::round(d_ * 1000000.0, 2) << " " << "\xC2\xB5" << "s";
     else if (d_ < 0.099995) // 0.1
         ret << std::setprecision(2) << std::fixed  << too::math::round(d_ * 1000.0, 2) << " ms";
     else if (d_ < 59.995) // 60.0

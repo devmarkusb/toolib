@@ -10,6 +10,8 @@
 #ifndef NON_COPYABLE_H_INCL_imcutoiu34o5
 #define NON_COPYABLE_H_INCL_imcutoiu34o5
 
+#include "../std/std_extensions.h"
+
 namespace too
 {
 //! Provides a shortcut ultility to declare classes that are supposed to forbid copying.
@@ -22,6 +24,8 @@ protected:
     ~non_copyable() = default;
     non_copyable(const non_copyable&) = delete;
     non_copyable& operator=(const non_copyable&) = delete;
+	//non_copyable(non_copyable&&) = default;
+	//non_copyable& operator=(non_copyable&&) = default;
 };
 }
 

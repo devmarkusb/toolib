@@ -9,6 +9,8 @@
 #ifndef ENUM_CAST_H_ydjgfrenxzuigfnewgyf8e3q2ygn4
 #define ENUM_CAST_H_ydjgfrenxzuigfnewgyf8e3q2ygn4
 
+#include "std/std_extensions.h"
+
 namespace too
 {
     template <typename Enumeration>

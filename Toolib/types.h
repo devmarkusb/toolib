@@ -40,7 +40,11 @@ namespace too
 
     #define _ENCODING_LOCAL(x)          x
     #define _ENCODING_LOCAL_WIDE(x)     L ## x
-    #define _ENCODING_UTF8(x)           u8 ## x
+#if TOO_COMP_MS_VISUAL_STUDIO_CPP && TOO_COMP_MS_VS_VER <= 1800
+	#define _ENCODING_UTF8(x)           _ENCODING_LOCAL(x)
+#else
+	#define _ENCODING_UTF8(x)           u8 ## x
+#endif
     #define _ENCODING_UTF16(x)          u ## x
     #define _ENCODING_UTF32(x)          U ## x
 
@@ -101,13 +105,6 @@ namespace too
 
 
     //############################################################################################################
-
-    typedef uint8_t     u8;
-    typedef int8_t      s8;
-    typedef uint16_t    u16;
-    typedef int16_t     s16;
-    typedef uint32_t    u32;
-    typedef int32_t     s32;
 
     typedef unsigned char   uchar;
     typedef unsigned char   byte;

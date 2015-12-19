@@ -12,8 +12,8 @@ TEST(ToFormattedStringTest, Rounding)
     EXPECT_EQ("99.98 ps", too::CPerformanceProfiler::ToFormattedString(0.000000000099984));
     EXPECT_EQ("99.99 ns", too::CPerformanceProfiler::ToFormattedString(0.000000099986));
     EXPECT_EQ("99.98 ns", too::CPerformanceProfiler::ToFormattedString(0.000000099983));
-    EXPECT_EQ("99.99 µs", too::CPerformanceProfiler::ToFormattedString(0.000099987));
-    EXPECT_EQ("99.98 µs", too::CPerformanceProfiler::ToFormattedString(0.000099982));
+    EXPECT_EQ("99.99 \xC2\xB5s", too::CPerformanceProfiler::ToFormattedString(0.000099987));
+    EXPECT_EQ("99.98 \xC2\xB5s", too::CPerformanceProfiler::ToFormattedString(0.000099982));
     EXPECT_EQ("99.99 ms", too::CPerformanceProfiler::ToFormattedString(0.099988));
     EXPECT_EQ("99.98 ms", too::CPerformanceProfiler::ToFormattedString(0.099981));
     EXPECT_EQ("59.99 s", too::CPerformanceProfiler::ToFormattedString(59.989));
@@ -26,7 +26,7 @@ TEST(ToFormattedStringTest, UnitStepping)
 {
     EXPECT_EQ("99.99 ps", too::CPerformanceProfiler::ToFormattedString(0.000000000099990));
     EXPECT_EQ("99.99 ns", too::CPerformanceProfiler::ToFormattedString(0.000000099990));
-    EXPECT_EQ("99.99 µs", too::CPerformanceProfiler::ToFormattedString(0.000099990));
+    EXPECT_EQ("99.99 \xC2\xB5s", too::CPerformanceProfiler::ToFormattedString(0.000099990));
     EXPECT_EQ("99.99 ms", too::CPerformanceProfiler::ToFormattedString(0.099990));
     EXPECT_EQ("0.10 s", too::CPerformanceProfiler::ToFormattedString(0.1));
     EXPECT_EQ("1.00 s", too::CPerformanceProfiler::ToFormattedString(1.0));

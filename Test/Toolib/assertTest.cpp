@@ -6,7 +6,7 @@
 TEST(AssertThrowTest, Test)
 {
 #ifdef NDEBUG
-    EXPECT_NO_THROW(too::Assert_throw<std::exception>(1 == 2), std::exception);
+    EXPECT_NO_THROW(too::Assert_throw<std::exception>(1 == 2));
 #else
     EXPECT_THROW(too::Assert_throw<std::exception>(1 == 2), std::exception);
     EXPECT_NO_THROW(too::Assert_throw<std::exception>(1 == 1));

@@ -27,7 +27,8 @@ inline double round(double r, unsigned short decimal_places)
 
 template<typename T> inline T round_to(double r, unsigned short decimal_places = 0)
 {
-    if (std::is_integral<T>::value)
+	const volatile bool is_T_integral = std::is_integral<T>::value;
+	if (is_T_integral)
         decimal_places = 0; // for integral target values decimal_places make no sense
     using std::numeric_limits;
     const double d = round(r, decimal_places);
