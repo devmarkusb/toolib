@@ -6,8 +6,8 @@
 */
 //! \file
 
-#include "../Toolib/ToolibDummy.h"
-#include "../Toolib/PPDEFS.h"
+#include "Toolib/ToolibDummy.h"
+#include "Toolib/PPDEFS.h"
 
 
 namespace too

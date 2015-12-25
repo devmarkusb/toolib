@@ -6,9 +6,9 @@
 */
 //! \file
 
-#include "../../Toolib/filesys/path.h"
-#include "../../Toolib/PPDEFS.h"
-#include "../../Toolib/string/string_delim.h"
+#include "Toolib/filesys/path.h"
+#include "Toolib/PPDEFS.h"
+#include "Toolib/string/string_delim.h"
 #include <assert.h>
 #include <algorithm>
 

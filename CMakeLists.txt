@@ -80,6 +80,7 @@ set(Boost_USE_STATIC_RUNTIME    OFF)
 find_package(Boost 1.56.0)
 
 target_include_directories(${TargetToolib} PUBLIC .)
+target_include_directories(${TargetToolib} PUBLIC include)
 target_include_directories(${TargetToolib} PUBLIC ${Boost_INCLUDE_DIRS})
 target_include_directories(${TargetToolib} PUBLIC sdks/GSL/include)
 
