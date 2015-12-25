@@ -13,7 +13,6 @@
 #include <assert.h>
 #include <type_traits>
 #include <cmath>
-#include <boost/optional.hpp>
 #include "floating_point.h"
 
 
@@ -49,15 +48,13 @@ private:
 //! data value range comprising \RangeMinToMax.
 template <typename T>
 //  requires T > 0
-inline boost::optional<double> calcNiceScaleTick(T RangeMinToMax, unsigned long MaxTickCount)
+inline double calcNiceScaleTick(T RangeMinToMax, unsigned long MaxTickCount)
 {
-    if (!MaxTickCount)
-        return boost::none;
+    assert(MaxTickCount);
     const double MaxTickCount_ = static_cast<double>(MaxTickCount);
     const double MinimalTick = static_cast<double>(RangeMinToMax) / MaxTickCount_;
     const double magnitude = std::pow(10.0, std::floor(std::log10(MinimalTick)));
-    if (too::math::almost_equal<T>(magnitude, 0.0))
-        return boost::none;
+    assert(!too::math::almost_equal<T>(magnitude, 0.0));
     const double residual = MinimalTick / magnitude;
     if (residual > 5.0)
         return 10.0 * magnitude;
