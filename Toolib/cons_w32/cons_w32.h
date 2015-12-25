@@ -2,7 +2,7 @@
 // This file is part of my Toolib library. Open source.
 
 //!
-/** Taken from Improved Console 4.0 (Rauch, Bäckmann)
+/** Taken from Improved Console 4.0 (Rauch, Baeckmann)
 
 Extensions: write(), double buffering (doesn't work yet), inlining a lot
 Removed: "shorties", macros
@@ -15,10 +15,18 @@ Removed: "shorties", macros
 #define _WIN32_WINNT 0x0500
 #include <string>
 #include <sstream>
+#include <algorithm>
+#include <stdexcept>
 #include <tchar.h>
 #include <windows.h>
-#include "../log.h"
-#include "../LOGDEF.h"
+#include "../../ToolibDEF.h"
+
+
+#pragma push_macro("min")
+#pragma push_macro("max")
+#undef min
+#undef max
+
 
 namespace too
 {
@@ -26,54 +34,51 @@ namespace too
 	{
 		typedef WORD CColor;
 
-		enum TextColor
+		enum TextColor : WORD
 		{
-			FG_BLACK		= 0,
-			FG_DARKRED		= FOREGROUND_RED,
-			FG_DARKGREEN	= FOREGROUND_GREEN,
-			FG_DARKBLUE		= FOREGROUND_BLUE,
-			FG_OCHER		= FOREGROUND_RED | FOREGROUND_GREEN,
-			FG_VIOLET		= FOREGROUND_RED | FOREGROUND_BLUE,
-			FG_TURQUOISE	= FOREGROUND_GREEN | FOREGROUND_BLUE,
-			FG_GREY			= FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE,
+			FG_BLACK = 0,
+			FG_DARKRED = FOREGROUND_RED,
+			FG_DARKGREEN = FOREGROUND_GREEN,
+			FG_DARKBLUE = FOREGROUND_BLUE,
+			FG_OCHER = FOREGROUND_RED | FOREGROUND_GREEN,
+			FG_VIOLET = FOREGROUND_RED | FOREGROUND_BLUE,
+			FG_TURQUOISE = FOREGROUND_GREEN | FOREGROUND_BLUE,
+			FG_GREY = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE,
 
-			FG_DARKGREY		= FOREGROUND_INTENSITY | FG_BLACK,
-			FG_RED			= FOREGROUND_INTENSITY | FG_DARKRED,
-			FG_GREEN		= FOREGROUND_INTENSITY | FG_DARKGREEN,
-			FG_BLUE			= FOREGROUND_INTENSITY | FG_DARKBLUE,
-			FG_YELLOW		= FOREGROUND_INTENSITY | FG_OCHER,
-			FG_PINK			= FOREGROUND_INTENSITY | FG_VIOLET,
-			FG_LIGHTBLUE	= FOREGROUND_INTENSITY | FG_TURQUOISE,
-			FG_WHITE		= FOREGROUND_INTENSITY | FG_GREY
+			FG_DARKGREY = FOREGROUND_INTENSITY | FG_BLACK,
+			FG_RED = FOREGROUND_INTENSITY | FG_DARKRED,
+			FG_GREEN = FOREGROUND_INTENSITY | FG_DARKGREEN,
+			FG_BLUE = FOREGROUND_INTENSITY | FG_DARKBLUE,
+			FG_YELLOW = FOREGROUND_INTENSITY | FG_OCHER,
+			FG_PINK = FOREGROUND_INTENSITY | FG_VIOLET,
+			FG_LIGHTBLUE = FOREGROUND_INTENSITY | FG_TURQUOISE,
+			FG_WHITE = FOREGROUND_INTENSITY | FG_GREY
 		};
 
-		enum BgColor
+		enum BgColor : WORD
 		{
-			BG_BLACK		= 0,
-			BG_DARKRED		= BACKGROUND_RED,
-			BG_DARKGREEN	= BACKGROUND_GREEN,
-			BG_DARKBLUE		= BACKGROUND_BLUE,
-			BG_OCHER		= BACKGROUND_RED | BACKGROUND_GREEN,
-			BG_VIOLET		= BACKGROUND_RED | BACKGROUND_BLUE,
-			BG_TURQUOISE	= BACKGROUND_GREEN | BACKGROUND_BLUE,
-			BG_GREY			= BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE,
+			BG_BLACK = 0,
+			BG_DARKRED = BACKGROUND_RED,
+			BG_DARKGREEN = BACKGROUND_GREEN,
+			BG_DARKBLUE = BACKGROUND_BLUE,
+			BG_OCHER = BACKGROUND_RED | BACKGROUND_GREEN,
+			BG_VIOLET = BACKGROUND_RED | BACKGROUND_BLUE,
+			BG_TURQUOISE = BACKGROUND_GREEN | BACKGROUND_BLUE,
+			BG_GREY = BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE,
 
-			BG_DARKGREY		= BACKGROUND_INTENSITY | BG_BLACK,
-			BG_RED			= BACKGROUND_INTENSITY | BG_DARKRED,
-			BG_GREEN		= BACKGROUND_INTENSITY | BG_DARKGREEN,
-			BG_BLUE			= BACKGROUND_INTENSITY | BG_DARKBLUE,
-			BG_YELLOW		= BACKGROUND_INTENSITY | BG_OCHER,
-			BG_PINK			= BACKGROUND_INTENSITY | BG_VIOLET,
-			BG_LIGHTBLUE	= BACKGROUND_INTENSITY | BG_TURQUOISE,
-			BG_WHITE		= BACKGROUND_INTENSITY | BG_GREY
+			BG_DARKGREY = BACKGROUND_INTENSITY | BG_BLACK,
+			BG_RED = BACKGROUND_INTENSITY | BG_DARKRED,
+			BG_GREEN = BACKGROUND_INTENSITY | BG_DARKGREEN,
+			BG_BLUE = BACKGROUND_INTENSITY | BG_DARKBLUE,
+			BG_YELLOW = BACKGROUND_INTENSITY | BG_OCHER,
+			BG_PINK = BACKGROUND_INTENSITY | BG_VIOLET,
+			BG_LIGHTBLUE = BACKGROUND_INTENSITY | BG_TURQUOISE,
+			BG_WHITE = BACKGROUND_INTENSITY | BG_GREY
 		};
 
-		class Console
+                class TOOLIBSHARED_EXPORT Console
 		{
 		private:
-			static const DWORD CONSOLE_FULLSCREEN_MODE;
-			static const DWORD CONSOLE_WINDOWED_MODE;
-
 			// Console window.
 			HWND hWnd;
 			static const COORD cLeftTop;
@@ -100,7 +105,7 @@ namespace too
 			MOUSE_EVENT_RECORD m_tMouseEvent; // undefined when m_bMouseEvent false
 
 			// Already implemented functions without declaration in <windows.h>
-			typedef BOOL (WINAPI *SETCONSOLEDISPLAYMODE) (HANDLE, DWORD, PCOORD);
+			typedef BOOL(WINAPI *SETCONSOLEDISPLAYMODE) (HANDLE, DWORD, PCOORD);
 			SETCONSOLEDISPLAYMODE SetConsoleDisplayMode;
 
 			Console();
@@ -118,19 +123,19 @@ namespace too
 			//todo activ, deactiv, actived
 
 			// Minimize/Maximize/Restore console
-			void minimize ();
-			void maximize ();
-			void restore ();
+			void minimize();
+			void maximize();
+			void restore();
 
 			//! Clear screen directly.
 			void clrscr(char character = ' ')
 			{
 				DWORD charsWritten;
 				FillConsoleOutputCharacterA(
-					hOutput,character,getWndBufSizeX()*getWndBufSizeY(),cLeftTop,&charsWritten);
+					hOutput, character, getWndBufSizeX()*getWndBufSizeY(), cLeftTop, &charsWritten);
 			}
 			//! Clear double buffer.
-			void clear (char character = ' ')
+			void clear(char character = ' ')
 			{
 				//clearColor(color);
 				//clearText(character);
@@ -143,80 +148,80 @@ namespace too
 			}
 
 			// Get/Set: Color
-			CColor getColor () const
+			CColor getColor() const
 			{
 				return col;
 				//return getCSBI().wAttributes;
 			}
 
-			void setColor (CColor color)
+			void setColor(CColor color)
 			{
 				col = color;
-				SetConsoleTextAttribute(hOutput,color);
+				SetConsoleTextAttribute(hOutput, color);
 			}
 
 			// Get/Set: Text color
-			TextColor getTextColor () const
+			TextColor getTextColor() const
 			{
 				return static_cast<TextColor>(colFG);
 				//return getTextColor(getCSBI().wAttributes);
 			}
-			void setTextColor (TextColor color)
+			void setTextColor(TextColor color)
 			{
 				colFG = color;
-				col = color|colBG;
-				SetConsoleTextAttribute(hOutput,color|colBG);
+				col = color | colBG;
+				SetConsoleTextAttribute(hOutput, color | colBG);
 			}
 
 			// Get/Set: Background color
-			BgColor getBgColor () const
+			BgColor getBgColor() const
 			{
 				return static_cast<BgColor>(colBG);
 				//return getBgColor(getCSBI().wAttributes);
 			}
 			//! If you want this for the full screen, you have to clear it afterwards.
-			void setBgColor (BgColor color)
+			void setBgColor(BgColor color)
 			{
 				colBG = color;
-				col = colFG|color;
-				SetConsoleTextAttribute(hOutput,colFG|color);
+				col = colFG | color;
+				SetConsoleTextAttribute(hOutput, colFG | color);
 			}
 
 			// Get/Set: Cursor position (on screen, not double buffer).
-			int getCurPosX () const
+			int getCurPosX() const
 			{
 				return getCSBI().dwCursorPosition.X;
 			}
 
-			int getCurPosY () const
+			int getCurPosY() const
 			{
 				return getCSBI().dwCursorPosition.Y;
 			}
 
-			void setCurPos (int x, int y)
+			void setCurPos(SHORT x, SHORT y)
 			{
 				COORD pos;
 				pos.X = x;
 				pos.Y = y;
-				SetConsoleCursorPosition(hOutput,pos);
+				SetConsoleCursorPosition(hOutput, pos);
 			}
 
 			// Get/Set: Cursor size
-			int getCurSize () const
+			int getCurSize() const
 			{
 				CONSOLE_CURSOR_INFO cci = getCCI();
 
-				if(!cci.bVisible)
+				if (!cci.bVisible)
 					return 0;
 
 				return cci.dwSize;
 			}
 
-			void setCurSize (int size)
+			void setCurSize(int size)
 			{
 				CONSOLE_CURSOR_INFO cci;
 
-				if(size > 0)
+				if (size > 0)
 				{
 					cci.bVisible = TRUE;
 					cci.dwSize = size;
@@ -227,46 +232,46 @@ namespace too
 					cci.dwSize = 100;
 				}
 
-				SetConsoleCursorInfo(hOutput,&cci);
+				SetConsoleCursorInfo(hOutput, &cci);
 			}
 
 			// Enable/Disable: Window buffered mode (do not mistake for double buffer).
-			bool isWndBufMode () const;
-			void enableWndBufMode ();
-			void disableWndBufMode ();
+			bool isWndBufMode() const;
+			void enableWndBufMode();
+			void disableWndBufMode();
 
 			// Enable/Disable: Window fullscreen mode
-			bool isWndFSMode () const;
-			void enableWndFSMode ();
-			void disableWndFSMode ();
+			bool isWndFSMode() const;
+			void enableWndFSMode();
+			void disableWndFSMode();
 
 			// Get/Set: Window position
-			int getWndPosX () const;
-			int getWndPosY () const;
-			void setWndPos (int x, int y);
+			int getWndPosX() const;
+			int getWndPosY() const;
+			void setWndPos(int x, int y);
 
 
 			//! Columns.
-			int getWndSizeX () const
+			SHORT getWndSizeX() const
 			{
 				//return getCSBI().srWindow.Right - getCSBI().srWindow.Left + 1;
 				return cWidthHeight.X;
 			}
 
 			//! Rows.
-			int getWndSizeY () const
+			SHORT getWndSizeY() const
 			{
 				//return getCSBI().srWindow.Bottom - getCSBI().srWindow.Top + 1;
 				return cWidthHeight.Y;
 			}
 
 			//! Columns, rows.
-			void setWndSize (int x, int y)
+			void setWndSize(SHORT x, SHORT y)
 			{
 				COORD bufSize;
-				bufSize.X = min(x, getMaxWndSizeX());
-				bufSize.Y = min(y, getMaxWndSizeY());
-				if(!wndBufMode)
+				bufSize.X = std::min(x, getMaxWndSizeX());
+				bufSize.Y = std::min(y, getMaxWndSizeY());
+				if (!wndBufMode)
 				{
 					zeroWndSize();
 
@@ -288,12 +293,12 @@ namespace too
 			}
 
 			//! Get: Maximal window size in columns, rows.
-			int getMaxWndSizeX () const;
-			int getMaxWndSizeY () const;
+			SHORT getMaxWndSizeX() const;
+			SHORT getMaxWndSizeY() const;
 
 			// Get/Set: Title
-			std::basic_string<TCHAR> getTitle () const;
-			void setTitle (const std::basic_string<TCHAR>& title);
+			std::basic_string<TCHAR> getTitle() const;
+			void setTitle(const std::basic_string<TCHAR>& title);
 
 			//! Without double buffer, directly to screen
 			void write(const std::string& s)
@@ -306,14 +311,14 @@ namespace too
 			{
 				if (x < cLeftTop.X || y < cLeftTop.Y)
 					return;
-				unsigned int pos = static_cast<unsigned int>(x+y*cWidthHeight.X);
+				unsigned int pos = static_cast<unsigned int>(x + y*cWidthHeight.X);
 				size_t len = s.length();
-				if (pos+len > getDblBufSize())
+				if (pos + len > getDblBufSize())
 					return;
 				for (size_t i = 0; i < s.length(); ++i)
 				{
-					dblbuf[pos+i].Attributes = col;
-					dblbuf[pos+i].Char.AsciiChar = s[i];
+					dblbuf[pos + i].Attributes = col;
+					dblbuf[pos + i].Char.AsciiChar = s[i];
 				}
 			}
 
@@ -327,7 +332,7 @@ namespace too
 				{
 					std::ostringstream os;
 					os << "WriteConsoleOutput failed! " << GetLastError();
-					TOOLOGe(os.str());
+					throw std::runtime_error(os.str());
 				}
 				sleep(pause);
 			}
@@ -341,14 +346,14 @@ namespace too
 				cNumRead = 0;
 				GetNumberOfConsoleInputEvents(hInput, &num);
 				INPUT_RECORD irInBuf[128];
-				if (num != 0) ReadConsoleInput(hInput,irInBuf,128,&cNumRead);
-				for (DWORD i=0; i<cNumRead; i++) {
-					if (!m_bKeyEvent && irInBuf[i].EventType==KEY_EVENT)
+				if (num != 0) ReadConsoleInput(hInput, irInBuf, 128, &cNumRead);
+				for (DWORD i = 0; i < cNumRead; i++) {
+					if (!m_bKeyEvent && irInBuf[i].EventType == KEY_EVENT)
 					{
 						m_tKeyEvent = irInBuf[i].Event.KeyEvent;
 						bRet = m_bKeyEvent = true;
 					}
-					if (!m_bMouseEvent && irInBuf[i].EventType==MOUSE_EVENT)
+					if (!m_bMouseEvent && irInBuf[i].EventType == MOUSE_EVENT)
 					{
 						if (irInBuf[i].Event.MouseEvent.dwButtonState != 0)
 						{
@@ -380,18 +385,18 @@ namespace too
 
 		private:
 			// Helper
-			CONSOLE_CURSOR_INFO getCCI () const
+			CONSOLE_CURSOR_INFO getCCI() const
 			{
 				CONSOLE_CURSOR_INFO cci;
-				GetConsoleCursorInfo(hOutput,&cci);
+				GetConsoleCursorInfo(hOutput, &cci);
 
 				return cci;
 			}
 
-			CONSOLE_SCREEN_BUFFER_INFO getCSBI () const
+			CONSOLE_SCREEN_BUFFER_INFO getCSBI() const
 			{
 				CONSOLE_SCREEN_BUFFER_INFO csbi;
-				GetConsoleScreenBufferInfo(hOutput,&csbi);
+				GetConsoleScreenBufferInfo(hOutput, &csbi);
 
 				return csbi;
 			}
@@ -401,28 +406,28 @@ namespace too
 			//TextColor getTextColor (CColor color) const { return static_cast<TextColor>(color & 0x0F); }
 
 			// Helper for setWndSize()
-			void zeroWndSize ();
+			void zeroWndSize();
 
 			// Get/Set: Window buffer size
-			int getWndBufSizeX () const
+			int getWndBufSizeX() const
 			{
 				return getCSBI().dwSize.X;
 			}
 
-			int getWndBufSizeY () const
+			int getWndBufSizeY() const
 			{
 				return getCSBI().dwSize.Y;
 			}
 
-			void setWndBufSize (int x, int y)
+			void setWndBufSize(SHORT x, SHORT y)
 			{
-				if(!wndBufMode)
+				if (!wndBufMode)
 					return;
 
 				COORD size;
 				size.X = x;
 				size.Y = y;
-				SetConsoleScreenBufferSize(hOutput,size);
+				SetConsoleScreenBufferSize(hOutput, size);
 			}
 			void sleep(long time) { Sleep(time); }
 			size_t getDblBufSize()
@@ -431,14 +436,16 @@ namespace too
 			}
 
 			// Forbidden
-			Console (const Console&);
+			Console(const Console&);
 			Console& operator= (const Console&);
 		};
-	extern Console& con;
 	} // con
 } // too
 
 //! This is almost always useful in connection with the general console stuff.
 #include "catch_exit.h"
+
+#pragma pop_macro("max")
+#pragma pop_macro("min")
 
 #endif

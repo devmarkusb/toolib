@@ -11,12 +11,13 @@
 #define CATCH_EXIT_H_INCL_34trcx83943g
 
 #include <windows.h>
+#include "../../ToolibDEF.h"
 
 namespace too
 {
 	namespace con
 	{
-		class ExitCatcher
+                class TOOLIBSHARED_EXPORT ExitCatcher
 		{
 		public:
 			//! Use global reference W32ConsExitCatcher instead.
@@ -42,7 +43,6 @@ namespace too
 			ExitCatcher();
 		};
 
-		extern ExitCatcher& W32ConsExitCatcher;
 	}
 }
 

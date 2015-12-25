@@ -7,9 +7,8 @@
 //! \file
 
 #include <sstream>
+#include <stdexcept>
 #include "Toolib/cons_w32/catch_exit.h"
-#include "Toolib/log.h"
-#include "Toolib/LOGDEF.h"
 
 namespace too
 {
@@ -22,26 +21,21 @@ namespace too
 			switch(fdwCtrlType) 
 			{ 
 			case CTRL_C_EVENT: 
-				TOOLOGi("Ctrl-C event.");
 				m_bRequestedExit = true;
 				return(TRUE);
 			case CTRL_CLOSE_EVENT: 
-				TOOLOGi("Ctrl-Close event.");
 				m_bRequestedExit = true;
 				return(TRUE); 
 			case CTRL_BREAK_EVENT: 
-				TOOLOGi("Ctrl-Break event.");
 				m_bRequestedExit = true;
 				return FALSE; 
 			case CTRL_LOGOFF_EVENT: 
-				TOOLOGi("Ctrl-Logoff event.");
 				m_bRequestedExit = true;
 				return FALSE; 
 			case CTRL_SHUTDOWN_EVENT: 
 				m_bRequestedExit = true;
 				return FALSE; 
 			default: 
-				TOOLOGi("Ctrl-? event.");
 				m_bRequestedExit = true;
 				return FALSE;
 			} 
@@ -53,7 +47,7 @@ namespace too
 			{
 				std::ostringstream os;
 				os << "W32ConsExitCatcher: SetConsoleCtrlHandler() error: " << GetLastError();
-				TOOLOGe(os.str());
+                throw std::runtime_error(os.str());
 			}
 		}
 
@@ -62,7 +56,5 @@ namespace too
 			static ExitCatcher ec;
 			return ec;
 		}
-
-		ExitCatcher& W32ConsExitCatcher = ExitCatcher::getInstance();
 	} // con
 } // too

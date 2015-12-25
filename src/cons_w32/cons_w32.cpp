@@ -2,7 +2,7 @@
 // This file is part of my Toolib library. Open source.
 
 //!
-/** Taken from Improved Console 4.0 (Rauch, Bäckmann)
+/** Taken from Improved Console 4.0 (Rauch, Baeckmann)
 */
 //! \file
 
@@ -12,7 +12,6 @@ namespace too
 {
 	namespace con
 	{
-
 		Console::Console ()
 			: hWnd(GetConsoleWindow()),
 			hOutput(GetStdHandle(STD_OUTPUT_HANDLE)),
@@ -28,11 +27,11 @@ namespace too
 			HMODULE kernel32 = GetModuleHandle(TEXT("kernel32.dll"));
 			SetConsoleDisplayMode = reinterpret_cast<SETCONSOLEDISPLAYMODE>(GetProcAddress(kernel32,"SetConsoleDisplayMode"));
 
-			hide();
-			disableWndBufMode();
-			setWndPos(10, 10);
-			setWndSize(80, 25); // initializes cWidthHeight, rLTRB, dblbuf
-			clear();
+            hide();
+            disableWndBufMode();
+            setWndPos(10, 10);
+            setWndSize(80, 25); // initializes cWidthHeight, rLTRB, dblbuf
+            clear();
 		}
 
 		Console::~Console ()
@@ -135,13 +134,13 @@ namespace too
 		}
 
 		//! Get max. number of columns.
-		int Console::getMaxWndSizeX () const
+		SHORT Console::getMaxWndSizeX() const
 		{
 			return GetLargestConsoleWindowSize(hOutput).X;
 		}
 
 		//! Get max. number of rows.
-		int Console::getMaxWndSizeY () const
+		SHORT Console::getMaxWndSizeY() const
 		{
 			return GetLargestConsoleWindowSize(hOutput).Y;
 		}
@@ -181,10 +180,6 @@ namespace too
 			rLTRB.Right = 0; rLTRB.Bottom = 0;*/
 		}
 
-		const DWORD Console::CONSOLE_FULLSCREEN_MODE = 1;
-		const DWORD Console::CONSOLE_WINDOWED_MODE = 2;
 		const COORD Console::cLeftTop = {0, 0};
-
-		Console& con = Console::getInstance();
 	} // con
 } // too
