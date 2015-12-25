@@ -4,13 +4,14 @@
 
 #include <vector>
 #include "../types.h"
+#include "../../ToolibDEF.h"
 
 namespace too
 {
 namespace file
 {
 //! String manipulation helper class only. No file system operations.
-class CPath
+class TOOLIBSHARED_EXPORT CPath
 {
 public:
     enum class EType
@@ -58,19 +59,21 @@ public:
     static const too::string& getSeparatorPlatformIndep();
 
 private:
-    //! platform independent variant used by this class
+#include "../PPDefs/SUPPRESS_WARNING_4251_MSVC_BEGIN"
+	//! platform independent variant used by this class
     static const too::string FOLDER_SEPARATOR_TO_USE_HERE;
 
     too::string     m_path_own_internal;
     too::string*    m_path = &m_path_own_internal;	//! contract: never nullptr
-    mutable EForm   m_form = EForm::PLATFORMINDEPENDENT;
+#include "../PPDefs/SUPPRESS_WARNING_4251_MSVC_END"
+	mutable EForm   m_form = EForm::PLATFORMINDEPENDENT;
     EType           m_type = EType::IS_UNKNOWN;
 
     void detectForm() const;
 };
 
 //todo check whether that works also within namespace
-CPath operator+(const CPath& p1, const CPath& p2);
+TOOLIBSHARED_EXPORT CPath operator+(const CPath& p1, const CPath& p2);
 
 }
 }
