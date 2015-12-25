@@ -87,7 +87,7 @@ protected:
         }
         void run() const
         {
-            std::cout << "CTest::run() called" << std::endl;
+            std::cout << "\nCTest::run() called\n";
         }
 
         struct SCalcSthParams
