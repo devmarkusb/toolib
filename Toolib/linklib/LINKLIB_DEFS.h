@@ -1,4 +1,4 @@
-// Markus Borris, 2014
+// Markus Borris, 2015
 // This file is part of my Toolib library. Open source.
 
 //!
@@ -30,36 +30,12 @@
     YOURLIBSHARED_EXPORT int i;
 	\endcode
     (5) Remark: Do not use a DllMain function. This is Windows-only.
-    (6) Important additional configuration of this LINKLIB_DEFS.h:
-    Right before including this header in your own YourlibDEF.h, put in a define assignment as follows
-    (as long as you don't want the default value)
-    \code
-    // ...don't forget include guard...
-    #define TOO_LINKLIB_IMPL_CHOICE         TOO_LINKLIB_IMPL_CHOICE_xxx
-    #include "Toolib/linklib/LINKLIB_DEFS.h"
-    // ...
-    \endcode
-    where xxx is one of
-    DEFAULT or equally TOOLIB
-    QT
-    Note that the TOOLIB choice is Windows only so far.
     (7) Add TOO_EXTERN_C_DECLS (next to YOURLIBSHARED_EXPORT) if you intend to allow your library users the
     choice of late binding.
 
     Usage II: The following documentation is for application code which likes to call or link your library.
     - Just linking (statically or early binding).
         Nothing to do. Just include your library headers with the exported symbols that you like to use.
-    - Late binding (loading a library on your own at an arbitrary point during run-time)
-        1. Include the wanted library headers like above also. Do not include this file LINKLIB_DEFS.h directly,
-        because you definitely want to use the same TOO_LINKLIB_IMPL_CHOICE for lib and user, trust me.
-        2. Make sure the library header exports its symbols with TOO_EXTERN_C_DECLS.
-        To some extend it seems to be even possible to export namespace content and STL stuff.
-        If there is no TOO_EXTERN_C_DECLS, the symbol cannot be binded late.
-        3. Use ILibrary from ilibrary.h (automatically included with this file, if specific implementation supported
-        at all) by starting with make() function call, which already tries to load the library if a file name
-        is provided.
-        4. Note: use function pointers for symbol resolving. A redirection via std::function doesn't help much, since
-        there is no equivalence std::function* <-> function pointer.
     - Note: Never use late binding, if not absolutely necessary. There are just more pitfalls.
 */
 //! \file
@@ -72,22 +48,40 @@
 
 //##############################################################################################################
 
-//! The pool of choices of implementations. Use it by defining TOO_LINKLIB_IMPL_CHOICE to be one of them.
-#define TOO_LINKLIB_IMPL_CHOICE_TOOLIB      1
-#define TOO_LINKLIB_IMPL_CHOICE_QT          2
-#define TOO_LINKLIB_IMPL_CHOICE_WX          3
-#define TOO_LINKLIB_IMPL_CHOICE_DEFAULT     TOO_LINKLIB_IMPL_CHOICE_TOOLIB
-
-
-//##############################################################################################################
-
-#if !defined(TOO_LINKLIB_IMPL_CHOICE) || (TOO_LINKLIB_IMPL_CHOICE == TOO_LINKLIB_IMPL_CHOICE_TOOLIB)
-#include "impl_too/LINKLIB_DEFS_too.h"
-#elif TOO_LINKLIB_IMPL_CHOICE == TOO_LINKLIB_IMPL_CHOICE_QT
-#include "impl_Qt/LINKLIB_DEFS_Qt.h"
-#elif TOO_LINKLIB_IMPL_CHOICE == TOO_LINKLIB_IMPL_CHOICE_WX
-//todo
+#if TOO_OS_WINDOWS == 1
+//! Perhaps TOO_LINKLIB_IMPL_CHOICE_OWN_CFG_STATICLIB has to be defined when you compile a library as static lib and also when you use it.
+#if !defined(TOO_LINKLIB_IMPL_CHOICE_OWN_CFG_STATICLIB)
+#define TOO_DECL_EXPORT     __declspec(dllexport)
+#define TOO_DECL_IMPORT     __declspec(dllimport)
+#elif TOO_LINKLIB_IMPL_CHOICE_OWN_CFG_STATICLIB == 1
+#define TOO_DECL_EXPORT
+#define TOO_DECL_IMPORT
 #endif
+#elif TOO_OS_LINUX == 1
+#define TOO_DECL_EXPORT
+#define TOO_DECL_IMPORT
+#else
+//todo, don't think this alone works for all remaining platforms ;)
+#define TOO_DECL_EXPORT
+#define TOO_DECL_IMPORT
+#endif
+
+
+//! Declare the general dll calling convention.
+#if defined(_STDCALL_SUPPORTED)
+#define TOO_CALLINGCONVENTION   __stdcall
+#else
+#define TOO_CALLINGCONVENTION   __cdecl
+#endif
+
+
+//! Declare the dll calling convention for DllMain, Windows.
+#if TOO_OS_WINDOWS == 1 && ((_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED))
+#define TOO_WINAPI_DLLMAIN      __stdcall
+#else
+#define TOO_WINAPI_DLLMAIN
+#endif
+#define TOO_APIENTRY            WINAPI_DLLMAIN
 
 
 //##############################################################################################################

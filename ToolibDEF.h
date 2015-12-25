@@ -9,7 +9,6 @@
 #ifndef TOOLIBDEF_H_INCL_aibuxsgfnz342975ty31
 #define TOOLIBDEF_H_INCL_aibuxsgfnz342975ty31
 
-#define TOO_LINKLIB_IMPL_CHOICE     TOO_LINKLIB_IMPL_CHOICE_TOOLIB
 #include "Toolib/linklib/LINKLIB_DEFS.h"
 
 #if defined(TOOLIB_LIBRARY)
