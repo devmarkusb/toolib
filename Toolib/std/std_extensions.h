@@ -13,18 +13,24 @@
 #include <type_traits>
 #include "../PPDEFS.h"
 
-//! Unfortunately vc12 doesn't support constexpr yet, so...
-#ifndef constexpr
+//! Unfortunately vc12 doesn't support constexpr and noexcept yet, so...
+#if TOO_COMP_MS_VISUAL_STUDIO_CPP && TOO_COMP_MS_VS_VER <= 1800
+#undef constexpr
 #define constexpr
+
+#undef noexcept
+#define noexcept
 #endif
 
 namespace std
 {
-//template <typename T, typename ...Args>
-//std::unique_ptr<T> make_unique(Args&& ...args)
-//{
-//    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
-//}
+#if TOO_COMP_MINGW && TOO_COMP_MINGW_VER <= 40901
+template <typename T, typename ...Args>
+std::unique_ptr<T> make_unique(Args&& ...args)
+{
+    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+}
+#endif
 
 #if !(TOO_COMP_MS_VISUAL_STUDIO_CPP && TOO_COMP_MS_VS_VER >= 1800)
 template <class T>

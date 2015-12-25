@@ -58,7 +58,7 @@
 
 #if defined(_MSC_VER)
 #define TOO_COMP_MS_VISUAL_STUDIO_CPP   1
-#define TOO_COMP_MS_VS_VER				_MSC_VER
+#define TOO_COMP_MS_VS_VER              _MSC_VER
 #endif
 
 #if defined(__BORLANDC__) || defined(__CODEGEARC__)
@@ -67,6 +67,8 @@
 
 #if defined(__GNUC__)
 #define TOO_COMP_GNU_CPP                1
+#define GCC_VERSION                     (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
+#define TOO_COMP_GNU_CPP_VER            GCC_VERSION
 #endif
 
 #if defined(__clang__) && (__clang__ == 1)
@@ -75,6 +77,7 @@
 
 #if defined(__MINGW32__) || defined(__MINGW64__)
 #define TOO_COMP_MINGW                  1
+#define TOO_COMP_MINGW_VER              GCC_VERSION
 #endif
 
 #if defined(__CYGWIN__) && (__CYGWIN__ == 1)
@@ -139,6 +142,7 @@
 
 
 #define TOO_NOOP (void)0
+
 
 //##############################################################################################################
 #endif
