@@ -1,4 +1,11 @@
-// Markus Borris, 17.02.2015
+// Markus Borris, 2015
+// This file is part of my Toolib library. Open source.
+
+//!
+/**
+*/
+//! \file
+
 #include "../../Toolib/filesys/path.h"
 #include "../../Toolib/PPDEFS.h"
 #include "../../Toolib/string/string_delim.h"

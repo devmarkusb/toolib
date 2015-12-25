@@ -1,7 +1,4 @@
 _build
-ToolibTest.pro.user
-Toolib.pro.user
-Toolib_Qt.pro.user
-lib/*.dll
-lib/*.a
-
+*.user
+bin
+lib
