@@ -1,5 +1,5 @@
 // Markus Borris, 2011
-// This file is part of my Toolib library. Open source.
+// This file is part of Toolib library. Open source.
 
 //!
 /** Note: I assume that the lack of keyword export (MS VS) made it necessary to put the definitions

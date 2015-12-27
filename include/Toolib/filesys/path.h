@@ -1,4 +1,11 @@
-// Markus Borris, 17.02.2015
+// Markus Borris, 2015
+// This file is part of Toolib library. Open source.
+
+//!
+/**
+*/
+//! \file
+
 #ifndef PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
 #define PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
 

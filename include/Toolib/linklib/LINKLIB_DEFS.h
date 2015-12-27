@@ -1,5 +1,5 @@
 // Markus Borris, 2015
-// This file is part of my Toolib library. Open source.
+// This file is part of Toolib library. Open source.
 
 //!
 /** Usage I: The following steps are for a library (shared or static) as intended target.

@@ -1,5 +1,5 @@
 // Markus Borris, 2011
-// This file is part of my Toolib library. Open source.
+// This file is part of Toolib library. Open source.
 
 //!
 /** Contains memory leak detection, wrapping just the standard procedure of Visual Studio.
