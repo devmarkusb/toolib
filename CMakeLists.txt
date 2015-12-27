@@ -55,13 +55,21 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     add_compile_options("-Wall")
 endif ()
 
+file(GLOB_RECURSE TargetToolib_INCS "include/*.h")
+file(GLOB_RECURSE TargetToolib_SRC_INCS "src/*.h")
 
-add_library(${TargetToolib} SHARED
+set(TargetToolib_SOURCES
     src/ToolibDummy.cpp
     src/dummy.cpp
     src/cons_w32/catch_exit.cpp
     src/cons_w32/cons_w32.cpp
     src/filesys/path.cpp
+)
+
+add_library(${TargetToolib} SHARED
+	${TargetToolib_SOURCES}
+	${TargetToolib_INCS}
+	${TargetToolib_SRC_INCS}
 )
 
 if (WIN32)
@@ -89,18 +97,25 @@ target_include_directories(${TargetToolib} PUBLIC sdks/GSL/include)
 
 set(TargetToolibTest "ToolibTest")
 
+file(GLOB_RECURSE TargetToolibTest_SRC_INCS "test/*.h")
+
+set(TargetToolibTest_SOURCES
+    test/src/assertTest.cpp
+    test/src/finally.test.cpp
+    test/src/narrow.test.cpp
+    test/src/class/IAbstractTest.cpp
+    test/src/math/numberTest.cpp
+    test/src/math/roundTest.cpp
+    test/src/math/scaleTest.cpp
+    test/src/math/floating_pointTest.cpp
+    test/src/filesys/pathTest.cpp
+    test/src/performanceTest.cpp
+    test/src/vector/vectorTest.cpp
+)
+
 add_executable(${TargetToolibTest}
-    Test/src/assertTest.cpp
-    Test/src/finally.test.cpp
-    Test/src/narrow.test.cpp
-    Test/src/class/IAbstractTest.cpp
-    Test/src/math/numberTest.cpp
-    Test/src/math/roundTest.cpp
-    Test/src/math/scaleTest.cpp
-    Test/src/math/floating_pointTest.cpp
-    Test/src/filesys/pathTest.cpp
-    Test/src/performanceTest.cpp
-    Test/src/vector/vectorTest.cpp
+	${TargetToolibTest_SOURCES}
+	${TargetToolibTest_SRC_INCS}
 )
 
 if (WIN32)
