@@ -91,6 +91,8 @@ set(TargetToolibTest "ToolibTest")
 
 add_executable(${TargetToolibTest}
     Test/src/assertTest.cpp
+    Test/src/finally.test.cpp
+    Test/src/narrow.test.cpp
     Test/src/class/IAbstractTest.cpp
     Test/src/math/numberTest.cpp
     Test/src/math/roundTest.cpp

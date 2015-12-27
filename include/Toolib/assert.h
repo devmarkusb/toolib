@@ -1,5 +1,5 @@
 // Markus Borris, 2011
-// This file is part of my Toolib library. Open source.
+// This file is part of Toolib library. Open source.
 
 //!
 /**
@@ -10,6 +10,66 @@
 #define ASSERT_H_INCL_onvdr589tz3758ct438tzcn
 
 #include "PPDEFS.h"
+#include <assert.h>
+#include <stdexcept>
+#include <thread>
+#include <chrono>
+
+
+namespace too
+{
+	struct fail_fast : public std::runtime_error 
+	{
+		explicit fail_fast(char const* const message) : std::runtime_error(message) {}
+		//~fail_fast() = default;
+		//fail_fast(const fail_fast&) = default;
+		//fail_fast& operator=(const fail_fast&) = default;
+		//fail_fast(fail_fast&&) = default;
+		//fail_fast& operator=(fail_fast&&) = default;
+	};
+}
+
+
+#define TOO_ASSERT_IMPL(cond)						assert(cond)
+
+#ifdef TOO_ASSERT_THROW_DISABLE
+#define TOO_ASSERT_THROW_IMPL(cond, textstart)		TOO_ASSERT_IMPL(cond)
+#else
+#define TOO_ASSERT_THROW_IMPL(cond, textstart) \
+	do { \
+	if (!(cond)) \
+		throw too::fail_fast(textstart " " __FILE__ ": " TOO_STRINGIFY(__LINE__)); \
+	} while (false)
+#endif
+
+#ifdef TOO_ASSERT_SLEEP_DISABLE
+#define TOO_ASSERT_SLEEP_IMPL(cond)					TOO_ASSERT_IMPL(cond)
+#else
+#define TOO_ASSERT_SLEEP_IMPL(cond)					do { for (;;) { std::this_thread::sleep_for(std::chrono::milliseconds(1)); } } while (false)
+#endif
+
+#ifdef TOO_ASSERT_TERMINATE_DISABLE
+#define TOO_ASSERT_TERMINATE_IMPL(cond)				TOO_ASSERT_IMPL(cond)
+#else
+#define TOO_ASSERT_TERMINATE_IMPL(cond)				do { if (!(cond)) std::terminate(); } while (false)
+#endif
+
+
+#define TOO_ASSERT(cond)							TOO_ASSERT_IMPL(cond)
+#define TOO_ASSERT_SLEEP(cond)						TOO_ASSERT_SLEEP_IMPL(cond)
+#define TOO_ASSERT_THROW(cond)						TOO_ASSERT_THROW_IMPL(cond, "assertion failed at")
+#define TOO_ASSERT_TERMINATE(cond)					TOO_ASSERT_TERMINATE_IMPL(cond)
+
+#define TOO_EXPECT(cond)							TOO_ASSERT_IMPL(cond)
+#define TOO_EXPECT_SLEEP(cond)						TOO_ASSERT_SLEEP_IMPL(cond)
+#define TOO_EXPECT_THROW(cond)						TOO_ASSERT_THROW_IMPL(cond, "precondition failed at")
+#define TOO_EXPECT_TERMINATE(cond)					TOO_ASSERT_TERMINATE_IMPL(cond)
+
+#define TOO_ENSURE(cond)							TOO_ASSERT_IMPL(cond)
+#define TOO_ENSURE_SLEEP(cond)						TOO_ASSERT_SLEEP_IMPL(cond)
+#define TOO_ENSURE_THROW(cond)						TOO_ASSERT_THROW_IMPL(cond, "postcondition failed at")
+#define TOO_ENSURE_TERMINATE(cond)					TOO_ASSERT_TERMINATE_IMPL(cond)
+
 
 namespace too
 {
@@ -33,6 +93,9 @@ namespace too
 		if (!a) throw ExceptionType();
 	}
 #endif
+
+
+	//################################################################################################################################################
 
 	//! Compile time assert.
 	/** Idea from October 1997 issue of C/C++ Users Journal.*/

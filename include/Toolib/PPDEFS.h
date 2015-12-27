@@ -1,5 +1,5 @@
 // Markus Borris, 2011
-// This file is part of my Toolib library. Open source.
+// This file is part of Toolib library. Open source.
 
 //!
 /** Most common and basic preprocessor defines.
@@ -131,7 +131,12 @@
 
 #define TOO_CONCATENATE_DIRECT(s1, s2)		s1##s2
 #define TOO_CONCATENATE_INDIRECT(s1, s2)	TOO_CONCATENATE_DIRECT(s1, s2)
-#define TOO_ANONYMOUS_VARIABLE(str)			TOO_CONCATENATE_INDIRECT(str, __LINE__)
+#define TOO_ANONYMOUS_VARIABLE_IMPL(str)	TOO_CONCATENATE_INDIRECT(str, __LINE__)
+#define TOO_ANONYMOUS_VARIABLE				TOO_ANONYMOUS_VARIABLE_IMPL(anonymous_variable_)
+
+#define TOO_STRINGIFY_IMPL(s)				#s
+#define TOO_STRINGIFY(s)					TOO_STRINGIFY_IMPL(s)
+
 
 //! Only for information. Since #error is plain standard you should just use it!
 /** Actually it doesn't seem to be technically possible to define sth. like this
