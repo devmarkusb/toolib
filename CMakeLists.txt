@@ -92,6 +92,9 @@ target_include_directories(${TargetToolib} PUBLIC include)
 target_include_directories(${TargetToolib} PUBLIC ${Boost_INCLUDE_DIRS})
 target_include_directories(${TargetToolib} PUBLIC sdks/GSL/include)
 
+set(Toolib_INCLUDE_DIRS include PARENT_SCOPE)
+set(Toolib_LIBRARY_DIRS lib PARENT_SCOPE)
+
 
 ################################################################################################
 
