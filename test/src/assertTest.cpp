@@ -20,7 +20,7 @@ TEST(AssertExpectEnsureTest, Assert)
 	EXPECT_DEBUG_DEATH(TOO_ENSURE(false), "");
 }
 
-#include "Toolib/PPDefs/SUPPRESS_WARNING_4127_BEGIN"
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_4127_BEGIN"
 
 TEST(AssertExpectEnsureTest, Throw)
 {
@@ -63,4 +63,4 @@ TEST(AssertExpectEnsureTest, Sleep)
 #endif
 }
 
-#include "Toolib/PPDefs/SUPPRESS_WARNING_4127_END"
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
