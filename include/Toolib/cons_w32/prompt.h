@@ -12,6 +12,8 @@
 
 #include <conio.h>
 #include <iostream>
+#include <thread>
+#include <chrono>
 
 namespace too
 {
@@ -19,8 +21,8 @@ namespace too
 	{
 		if (_kbhit())
 			_getch();
-		std::cout << std::endl << "Hit any key...";
-		while (!_kbhit());
+		std::cout << "\nHit any key...";
+		while (!_kbhit()) std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 } // too
 
