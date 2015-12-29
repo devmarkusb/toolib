@@ -11,7 +11,7 @@
 #define STRING_TRIM_H_INCL_cidusbfi243i7324
 
 #include <string>
-#if TOO_USE_BOOST
+#ifndef TOO_NO_DEPENDENCIES
 #include <boost/algorithm/string.hpp>
 #else
 //#include <locale>
@@ -38,7 +38,7 @@ namespace too
 		}
 		inline std::string& trim(std::string& s)
 		{
-#if TOO_USE_BOOST
+#ifndef TOO_NO_DEPENDENCIES
 			boost::trim(s);
 #else
 			ltrim(rtrim(s));

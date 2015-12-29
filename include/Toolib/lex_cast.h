@@ -9,7 +9,7 @@
 #ifndef LEX_CAST_H_INCL_sopaiem3p2oium32omo
 #define LEX_CAST_H_INCL_sopaiem3p2oium32omo
 
-#if TOO_USE_BOOST
+#ifndef TOO_NO_DEPENDENCIES
 #include <boost/lexical_cast.hpp>
 #else
 #include <sstream>
@@ -23,7 +23,7 @@ namespace too
 
     template<typename T, typename S> inline T lex_cast_Throw(const S& s)
 	{
-#if TOO_USE_BOOST
+#ifndef TOO_NO_DEPENDENCIES
 		try
 		{
 			T t;

@@ -117,12 +117,11 @@
 
 //##############################################################################################################
 // Just commenting definitions for switching on/off diverse library usages within the implementations of Toolib.
-// The idea is that almost everything in Toolib is implemented by standard methods but sometimes also
-// alternatively by the use of professional libraries.
 
 #if TOO_NOT_JUST_COMMENTING_LIBRARY_SWITCH_DEFINITIONS_BUT_ACTUALLY_USE_SOME_ARBITRARY_DEFAULTS // dummy
-//! Use this definition to switch on boost usage.
-#define TOO_USE_BOOST 1
+//! Use this definition to switch off any external lib dependencies.
+/** The idea is that a good deal of Toolib is implemented just by standard methods.*/
+#define TOO_NO_DEPENDENCIES
 #endif
 
 

@@ -12,7 +12,7 @@
 
 #include <string>
 #include <vector>
-#if TOO_USE_BOOST
+#ifndef TOO_NO_DEPENDENCIES
 #include <boost/algorithm/string.hpp>
 #endif
 
@@ -22,8 +22,10 @@ namespace too
 	{
 		inline void tokenizeString(const std::string& s, const std::string& delimiters, std::vector<std::string>& out)
 		{
-#if TOO_USE_BOOST
+#ifndef TOO_NO_DEPENDENCIES
+//#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_4996_BEGIN" <- doesn't work, why?!
 			boost::split(out, s, boost::is_any_of(delimiters));
+//#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
 #else
 			size_t pos_start = s.find_first_not_of(delimiters);
 			size_t pos_end   = s.find_first_of(delimiters, pos_start);
@@ -36,6 +38,6 @@ namespace too
 #endif
 		}
 	}
-} // too
+}
 
 #endif
