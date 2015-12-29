@@ -6,4 +6,4 @@ namespace globals
 {
 }
 
-#endif // GLOBALS_H
+#endif

@@ -6,4 +6,4 @@ namespace consts
 {
 }
 
-#endif // CONSTS_H
+#endif
