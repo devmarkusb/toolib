@@ -88,11 +88,11 @@ set(Boost_USE_STATIC_RUNTIME    OFF)
 find_package(Boost 1.56.0)
 
 target_include_directories(${TargetToolib} PUBLIC include)
-target_include_directories(${TargetToolib} PUBLIC ${Boost_INCLUDE_DIRS})
+target_include_directories(${TargetToolib} SYSTEM PUBLIC ${Boost_INCLUDE_DIRS})
 target_include_directories(${TargetToolib} PUBLIC sdks/GSL/include)
 
-set(Toolib_INCLUDE_DIRS include PARENT_SCOPE)
-set(Toolib_LIBRARY_DIRS lib PARENT_SCOPE)
+set(Toolib_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE)
+set(Toolib_LIBRARY_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib PARENT_SCOPE)
 
 
 ################################################################################################
