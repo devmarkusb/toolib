@@ -24,9 +24,9 @@ namespace too
 		{}
 
 		final_act(final_act&& other) noexcept
-			: f_(std::move(other.f_)), invoke_(other.invoke_)
+            : f(std::move(other.f)), invoke(other.invoke)
 		{
-			other.invoke_ = false;
+            other.invoke = false;
 		}
 
 		final_act(const final_act&) = delete;
