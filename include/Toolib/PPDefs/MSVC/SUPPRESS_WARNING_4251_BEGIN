@@ -1,3 +1,4 @@
+#include "../../PPDEFS.h"
 //! ... needs to have dll - interface to be used by clients ...
 #if TOO_COMP_MS_VISUAL_STUDIO_CPP
 #pragma warning(push)

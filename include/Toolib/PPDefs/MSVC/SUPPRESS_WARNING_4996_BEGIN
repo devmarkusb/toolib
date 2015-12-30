@@ -1,3 +1,4 @@
+#include "../../PPDEFS.h"
 //! function call with parameters that may be unsafe...
 #if TOO_COMP_MS_VISUAL_STUDIO_CPP
 #pragma warning(push)

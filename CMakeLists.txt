@@ -45,11 +45,13 @@ set_property(TARGET ${TargetToolib} APPEND PROPERTY COMPILE_DEFINITIONS TOOLIB_L
 
 set_target_properties(${TargetToolib} PROPERTIES DEBUG_POSTFIX "d")
 
+if (NOT Boost_INCLUDE_DIRS)
 set(BOOST_ROOT "c:/projects/externlibs/boost_1_56_0")
 set(Boost_USE_MULTITHREADED     ON)
 set(Boost_USE_STATIC_LIBS       OFF)
 set(Boost_USE_STATIC_RUNTIME    OFF)
 find_package(Boost 1.56.0)
+endif ()
 
 target_include_directories(${TargetToolib} PUBLIC include)
 target_include_directories(${TargetToolib} SYSTEM PUBLIC ${Boost_INCLUDE_DIRS})

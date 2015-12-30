@@ -10,11 +10,13 @@
 #ifndef STRING_DELIM_H_INCL_uwireiwubefeubf
 #define STRING_DELIM_H_INCL_uwireiwubefeubf
 
+#ifndef TOO_NO_DEPENDENCIES
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNINGS_EXTERNAL_BEGIN" // <- doesn't work, why?!
+#include <boost/algorithm/string.hpp>
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNINGS_EXTERNAL_END"
+#endif
 #include <string>
 #include <vector>
-#ifndef TOO_NO_DEPENDENCIES
-#include <boost/algorithm/string.hpp>
-#endif
 
 namespace too
 {
@@ -23,9 +25,7 @@ namespace too
 		inline void tokenizeString(const std::string& s, const std::string& delimiters, std::vector<std::string>& out)
 		{
 #ifndef TOO_NO_DEPENDENCIES
-//#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_4996_BEGIN" <- doesn't work, why?!
 			boost::split(out, s, boost::is_any_of(delimiters));
-//#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
 #else
 			size_t pos_start = s.find_first_not_of(delimiters);
 			size_t pos_end   = s.find_first_of(delimiters, pos_start);
