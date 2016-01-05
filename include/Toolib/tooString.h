@@ -102,20 +102,6 @@ namespace too
         static_assert(sizeof(typename StringType::value_type) == BitsPerCharacter / 8,
         "Change this function if you change the byte count per character in your string. You probably also want to have a look at your encoding (UTF-?).");
     }
-
-
-    //############################################################################################################
-
-    typedef unsigned char   uchar;
-    typedef unsigned char   byte;
-    typedef signed char     schar;
-    typedef unsigned short  ushort;
-    typedef signed short    sshort;
-    typedef unsigned int    uint;
-    typedef signed int      sint;
-
-    typedef unsigned long   ulong;
-    typedef signed long     slong;
 }
 
 #endif
