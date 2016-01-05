@@ -10,9 +10,9 @@
 #ifndef STR2WSTR_H_INCL_827rt82rtrxjr38t
 #define STR2WSTR_H_INCL_827rt82rtrxjr38t
 
-#include "../PPDEFS.h"
-#include "../argsused.h"
-#include "../types.h"
+#include "Toolib/PPDEFS.h"
+#include "Toolib/argsused.h"
+#include "Toolib/tooString.h"
 
 #include <string>
 #include <limits>
