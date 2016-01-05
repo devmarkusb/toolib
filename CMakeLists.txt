@@ -61,14 +61,19 @@ find_package(Boost 1.56.0)
 endif ()
 endif ()
 
-target_include_directories(${TargetToolib} PUBLIC include)
+target_include_directories(${TargetToolib} PRIVATE include)
 if (NOT Toolib_USE_NO_DEPENDENCIES)
-target_include_directories(${TargetToolib} SYSTEM PUBLIC ${Boost_INCLUDE_DIRS})
+target_include_directories(${TargetToolib} SYSTEM PRIVATE ${Boost_INCLUDE_DIRS})
 endif ()
-target_include_directories(${TargetToolib} PUBLIC sdks/GSL/include)
+target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooBuildEnv/include)
+target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooBasicCodeSupport/include)
+target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooLinklib/include)
 
+get_directory_property(hasParent PARENT_DIRECTORY)
+if(hasParent)
 set(Toolib_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE)
 set(Toolib_LIBRARY_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib PARENT_SCOPE)
+endif()
 
 
 ################################################################################################
@@ -78,9 +83,6 @@ set(TargetToolibTest "ToolibTest")
 file(GLOB_RECURSE TargetToolibTest_SRC_INCS "test/*.h")
 
 set(TargetToolibTest_SOURCES
-    test/src/assertTest.cpp
-    test/src/finally.test.cpp
-    test/src/narrow.test.cpp
     test/src/class/IAbstractTest.cpp
     test/src/math/numberTest.cpp
     test/src/math/roundTest.cpp
@@ -88,7 +90,6 @@ set(TargetToolibTest_SOURCES
     test/src/math/floating_pointTest.cpp
     test/src/filesys/pathTest.cpp
     test/src/performanceTest.cpp
-    test/src/vector/vectorTest.cpp
 )
 
 add_executable(${TargetToolibTest}
@@ -107,6 +108,10 @@ set(GTEST_MSVC_SEARCH   MD)
 find_package(GTest 1.7.0)
 
 target_include_directories(${TargetToolibTest} PRIVATE ${GTEST_INCLUDE_DIRS})
+target_include_directories(${TargetToolibTest} PRIVATE include)
+target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooBuildEnv/include)
+target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooBasicCodeSupport/include)
+target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooLinklib/include)
 
 target_link_libraries(${TargetToolibTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(${TargetToolibTest} PRIVATE ${TargetToolib})

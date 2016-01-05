@@ -53,6 +53,12 @@ target_include_directories(${TargetLibName} PRIVATE include)
 target_include_directories(${TargetLibName} PRIVATE src)
 target_include_directories(${TargetLibName} PRIVATE ${Boost_INCLUDE_DIRS})
 
+get_directory_property(hasParent PARENT_DIRECTORY)
+if(hasParent)
+set(LibName_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE)
+set(LibName_LIBRARY_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib PARENT_SCOPE)
+endif()
+
 
 ################################################################################################
 
@@ -81,6 +87,7 @@ set(GTEST_MSVC_SEARCH   MD)
 find_package(GTest 1.7.0)
 
 target_include_directories(${TargetLibNameTest} PRIVATE ${GTEST_INCLUDE_DIRS})
+target_include_directories(${TargetLibNameTest} PRIVATE include)
 
 target_link_libraries(${TargetLibNameTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(${TargetLibNameTest} PRIVATE ${TargetLibName})

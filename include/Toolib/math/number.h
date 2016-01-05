@@ -10,14 +10,14 @@
 #ifndef NUMBER_H_INCL_f29jh8hnf238hrxz23
 #define NUMBER_H_INCL_f29jh8hnf238hrxz23
 
-#include "../types.h"
-#include "../enum_cast.h"
+#include "Toolib/tooString.h"
+#include "Toolib/enum_cast.h"
 
 namespace too
 {
 namespace math
 {
-enum class ENumSys : byte
+enum class ENumSys : unsigned char
 {
     BIN	= 2,
     OCT	= 8,
@@ -26,10 +26,10 @@ enum class ENumSys : byte
 };
 
 template<typename T>
-inline byte getDigitCount(T Number, ENumSys Base = ENumSys::DEC)
+inline unsigned char getDigitCount(T Number, ENumSys Base = ENumSys::DEC)
 {
     static_assert(std::is_integral<T>::value, "Only integral numbers are allowed as input");
-    byte count = 0;
+	unsigned char count = 0;
     do
     {
         ++count;

@@ -20,10 +20,10 @@
 #include <cmath>
 #include <vector>
 #include <set>
-#include "class/non_copyable.h"
-#include "math/number.h"
-#include "math/round.h"
-#include "std/std_extensions.h"
+#include "Toolib/class/non_copyable.h"
+#include "Toolib/math/number.h"
+#include "Toolib/math/round.h"
+#include "Toolib/std/std_extensions.h"
 
 
 namespace too

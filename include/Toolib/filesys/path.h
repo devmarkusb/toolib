@@ -10,7 +10,7 @@
 #define PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
 
 #include <vector>
-#include "../types.h"
+#include "Toolib/tooString.h"
 #include "ToolibDEF.h"
 
 namespace too
@@ -66,13 +66,13 @@ public:
     static const too::string& getSeparatorPlatformIndep();
 
 private:
-#include "../PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
 	//! platform independent variant used by this class
     static const too::string FOLDER_SEPARATOR_TO_USE_HERE;
 
     too::string     m_path_own_internal;
     too::string*    m_path = &m_path_own_internal;	//! contract: never nullptr
-#include "../PPDefs/MSVC/SUPPRESS_WARNING_END"
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
 	mutable EForm   m_form = EForm::PLATFORMINDEPENDENT;
     EType           m_type = EType::IS_UNKNOWN;
 

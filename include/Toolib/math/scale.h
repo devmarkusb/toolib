@@ -14,8 +14,8 @@
 #include <type_traits>
 #include <cmath>
 #include "floating_point.h"
-#include "../narrow.h"
-#include "../assert.h"
+#include "Toolib/narrow.h"
+#include "Toolib/assert.h"
 
 
 namespace too
