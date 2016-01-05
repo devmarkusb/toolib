@@ -11,9 +11,9 @@
 #define RAII_P_H_INCL_on824f287xrz2387r
 
 #include <crtdbg.h>
-#include "Toolib/types.h"
 #include "Toolib/mem/checked_delete.h"
-#include "Toolib/debug/debug_misc.h"
+#include "Toolib/debug.h"
+
 
 namespace too
 {
@@ -86,7 +86,7 @@ namespace too
 	{
 	private:
 		T* m_ptr; // pointer to allocated memory for some objects
-		u32 m_count; // count of objects
+		uint32_t m_count; // count of objects
 
 		//! Releases the memory.
 		void flush() { if (m_ptr) { mem::checked_array_delete(m_ptr); m_ptr = 0; } }
@@ -98,13 +98,13 @@ namespace too
 		//! Allocates memory for an internally stored T[] and calls its default constructor for every element.
 		/** \param count number of objects of T.
 		Example: \code raii_ap<someclass> psomeobject(5); \endcode*/
-		explicit raii_ap(u32 count) : m_count(count), m_ptr(new T[count]) {}
+		explicit raii_ap(uint32_t count) : m_count(count), m_ptr(new T[count]) {}
 		//! Starts memory management (i.e. auto deletion) for an already properly Heap-allocated array pt[] resp. pt*.
 		/** Be careful that you never delete pt by yourself outside. The responsibility for that is shifted
 		to this class.
 		\param pt pointer to some Heap-allocated memory.
 		\count number of instances of T.*/
-		raii_ap(T* pt, u32 count) : m_count(count), m_ptr(pt) {
+		raii_ap(T* pt, uint32_t count) : m_count(count), m_ptr(pt) {
 			TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
 		}
 		//! Releases the internally managed memory for the object.
@@ -128,7 +128,7 @@ namespace too
 		//! Gives opportunity to use raii_ap<T> just like T* regarding []-indirection (index access).
 		/** Note: For performance critical applications one is
 		better off using the cast() and work via pointer opposed to this function call (think of loops).*/
-		T& operator[](u32 idx) const {
+		T& operator[](uint32_t idx) const {
 			TOO_DEBUG_BREAK_IF(!m_ptr);
 			return m_ptr[idx];
 		}
@@ -136,10 +136,10 @@ namespace too
 		/** \returns a usual T* pointer with user-responsibility and leaves the raii_p object in a clean state.*/
 		T* release() { T* ret = m_ptr; m_ptr = 0; return ret; }
 		//! \returns Number of objects.
-		u32 size() const { return m_count; }
+		uint32_t size() const { return m_count; }
 		//! Cleans the class content and inititialises again in a manner just like the corresponding constructor does.
 		/** Please take care of the same remarks as for \see raii_ap(T*, u32).*/
-		void reset(T* pt = 0, u32 count = 0) {
+		void reset(T* pt = 0, uint32_t count = 0) {
 			if (pt != m_ptr)
 			{
 				if (m_ptr)
@@ -160,8 +160,8 @@ namespace too
 	{
 	private:
 		T** m_ptr; // pointer to allocated memory for some objects
-		u32 m_count1; // count of objects in 1st dimension
-		u32 m_count2; // count of objects in 2nd dimension
+		uint32_t m_count1; // count of objects in 1st dimension
+		uint32_t m_count2; // count of objects in 2nd dimension
 
 		//! Releases the memory.
 		void flush()
@@ -181,7 +181,7 @@ namespace too
 		//! Allocates memory for an internally stored T[] and calls its default constructor for every element.
 		/** \param count number of objects of T.
 		Example: \code raii_aap<someclass> psomeobject(5); \endcode*/
-		raii_aap(u32 count1, u32 count2) : m_count1(count1), m_count2(count2), m_ptr(new T*[count1])
+		raii_aap(uint32_t count1, uint32_t count2) : m_count1(count1), m_count2(count2), m_ptr(new T*[count1])
 		{
 			for (u32 i = 0; i < count1; ++i)
 				m_ptr[i] = new T[count2];
@@ -197,16 +197,16 @@ namespace too
 		//! Gives opportunity to use raii_aap<T> just like T** regarding first []-indirection (index access).
 		/** For the second dimension a further [] has to follow up. Note: For performance critical applications one is
 		better off using the cast() and work via pointer opposed to this function call (think of loops).*/
-		T* operator[](u32 idx1) const {
+		T* operator[](uint32_t idx1) const {
 			TOO_DEBUG_BREAK_IF(!m_ptr);
 			return m_ptr[idx1];
 		}
 		//! \returns Number of objects in 1st dimension.
-		u32 size1() const { return m_count1; }
+		uint32_t size1() const { return m_count1; }
 		//! \returns Number of objects in 2nd dimension.
-		u32 size2() const { return m_count2; }
-	}; // raii_aap
+		uint32_t size2() const { return m_count2; }
+	};
 
-} // too
+}
 
 #endif

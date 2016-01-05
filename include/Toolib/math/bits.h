@@ -12,7 +12,6 @@
 
 #include <utility>
 
-#include "../types.h"
 
 namespace too
 {
@@ -57,12 +56,12 @@ namespace too
 				T m_bits;
 			};
 
-			typedef bits<u8> bits8;
-			typedef bits<u16> bits16;
-			typedef bits<u32> bits32;
-		} // bit
-	} // math
-} // too
+			typedef bits<uint8_t> bits8;
+			typedef bits<uint16_t> bits16;
+			typedef bits<uint32_t> bits32;
+		}
+	}
+}
 
 namespace toobit = too::math::bit;
 

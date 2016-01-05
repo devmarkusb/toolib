@@ -19,13 +19,16 @@ Removed: "shorties", macros
 #include <stdexcept>
 #include <tchar.h>
 #include <windows.h>
+#include "Toolib/PPDEFS.h"
 #include "../../ToolibDEF.h"
 
 
+#if TOO_COMP_MS_VISUAL_STUDIO_CPP
 #pragma push_macro("min")
 #pragma push_macro("max")
 #undef min
 #undef max
+#endif
 
 
 namespace too
@@ -445,7 +448,9 @@ namespace too
 //! This is almost always useful in connection with the general console stuff.
 #include "catch_exit.h"
 
+#if TOO_COMP_MS_VISUAL_STUDIO_CPP
 #pragma pop_macro("max")
 #pragma pop_macro("min")
+#endif
 
 #endif

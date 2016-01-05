@@ -83,6 +83,7 @@ set(TargetToolibTest "ToolibTest")
 file(GLOB_RECURSE TargetToolibTest_SRC_INCS "test/*.h")
 
 set(TargetToolibTest_SOURCES
+	test/src/_header_compile.test.cpp
     test/src/class/IAbstractTest.cpp
     test/src/math/numberTest.cpp
     test/src/math/roundTest.cpp
@@ -108,10 +109,14 @@ set(GTEST_MSVC_SEARCH   MD)
 find_package(GTest 1.7.0)
 
 target_include_directories(${TargetToolibTest} PRIVATE ${GTEST_INCLUDE_DIRS})
+if (NOT Toolib_USE_NO_DEPENDENCIES)
+target_include_directories(${TargetToolibTest} SYSTEM PRIVATE ${Boost_INCLUDE_DIRS})
+endif ()
 target_include_directories(${TargetToolibTest} PRIVATE include)
 target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooBuildEnv/include)
 target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooBasicCodeSupport/include)
 target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooLinklib/include)
+target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooMem/include)
 
 target_link_libraries(${TargetToolibTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(${TargetToolibTest} PRIVATE ${TargetToolib})

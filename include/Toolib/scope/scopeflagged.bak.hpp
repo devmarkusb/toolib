@@ -11,8 +11,8 @@
 #ifndef SCOPEFLAGGED_HPP_INCL_9283rz3nxznrzn3
 #define SCOPEFLAGGED_HPP_INCL_9283rz3nxznrzn3
 
-#include "../types.h"
-#include "../math/bits.h"
+#include "Toolib/math/bits.h"
+
 
 namespace too
 {
@@ -60,7 +60,7 @@ namespace too
 	and still get the expected results. Every class has its own flag playground. Sometimes it is convenient
 	to resolve (compile time) ambiguities by introducing using-statements in the class definitions.
 	*/
-	template<class user, class bit_container_type = u16> class scope_flagged
+	template<class user, class bit_container_type = uint16_t> class scope_flagged
 	{
 	public:
 		scope_flagged() {}
@@ -107,6 +107,6 @@ namespace too
 		m_auxLastflags
 		= scope_flagged<user, bit_container_type>::m_flags;
 
-} // too
+}
 
 #endif
