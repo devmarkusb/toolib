@@ -39,11 +39,11 @@ namespace too
 
 			//! Constructor allocating memory for a matrix with the given dimensions.
 			/** \param dim_rows Count of rows. \param dim_cols Count of columns.*/
-			matrix(unsigned int dim_rows, unsigned int dim_cols) : m_rep(new MRep(dim_rows, dim_cols, 0)){}
+			matrix(uint32_t dim_rows, uint32_t dim_cols) : m_rep(new MRep(dim_rows, dim_cols, 0)){}
 			//! Constructor allocating memory for a matrix with the given dimensions plus initialization.
 			/** \param dim_rows Count of rows. \param dim_cols Count of columns.
 			\param mtrx A usual 2-dimensional C array initializing the matrix entries.*/
-			matrix(unsigned int dim_rows, unsigned int dim_cols, T** mtrx) : m_rep(new MRep(dim_rows, dim_cols, mtrx)){}
+			matrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx) : m_rep(new MRep(dim_rows, dim_cols, mtrx)){}
 			//! Copies from another matrix, using the same internal representation to speed things up.
 			matrix(const matrix& mtrx)
 			{
@@ -82,13 +82,13 @@ namespace too
 			//! Cast this matrix<T> to a differently "typed" matrix<T2>. Works if conversion from T to T2 exists.
 			template <class T2> matrix<T2> matrix_cast() const
 			{
-				unsigned int rows = m_rep->dim_rows,
+				uint32_t rows = m_rep->dim_rows,
 					cols = m_rep->dim_cols;
 				T** pptm = m_rep->m;
 				matrix<T2> ret(rows, cols);
 				T2** ppt2m = ret;
-				for (unsigned int i = 0; i < rows; ++i)
-					for (unsigned int j = 0; j < cols; ++j)
+				for (uint32_t i = 0; i < rows; ++i)
+					for (uint32_t j = 0; j < cols; ++j)
 						ppt2m[i][j] = pptm[i][j];
 				return ret;
 			}
@@ -102,11 +102,11 @@ namespace too
 					return;
 				m_rep = m_rep->get_own_copy(false);
 				T** m = m_rep->m;
-				unsigned int rows = m_rep->dim_rows,
+				uint32_t rows = m_rep->dim_rows,
 					cols = m_rep->dim_cols;
-				for (unsigned int i = 0; i < rows; ++i)
+				for (uint32_t i = 0; i < rows; ++i)
 				{
-					for (unsigned int j = 0; j < cols; ++j)
+					for (uint32_t j = 0; j < cols; ++j)
 						m[i][j] = mtrx[i][j];
 				}
 				return *this;
@@ -116,36 +116,36 @@ namespace too
 			{
 				m_rep = m_rep->get_own_copy(false);
 				T** m = m_rep->m;
-				unsigned int rows = m_rep->dim_rows,
+				uint32_t rows = m_rep->dim_rows,
 					cols = m_rep->dim_cols;
 				T init = T();
-				for (unsigned int i = 0; i < rows; ++i)
-					for (unsigned int j = 0; j < cols; ++j)
+				for (uint32_t i = 0; i < rows; ++i)
+					for (uint32_t j = 0; j < cols; ++j)
 						m[i][j] = init;
 			}
 			//! Checks if this matrix is zero.
 			void isZero() const
 			{
 				T** m = m_rep->m;
-				unsigned int rows = m_rep->dim_rows,
+				uint32_t rows = m_rep->dim_rows,
 					cols = m_rep->dim_cols;
 				T init = T();
-				for (unsigned int i = 0; i < rows; ++i)
-					for (unsigned int j = 0; j < cols; ++j)
+				for (uint32_t i = 0; i < rows; ++i)
+					for (uint32_t j = 0; j < cols; ++j)
 						if (m[i][j] != 0)
 							return false;
 				return true;
 			}
 			//! Get row dimension.
-			unsigned int RowCount() const { return m_rep->dim_rows; }
+			uint32_t RowCount() const { return m_rep->dim_rows; }
 			//! Get column dimension.
-			unsigned int ColCount() const { return m_rep->dim_cols; }
+			uint32_t ColCount() const { return m_rep->dim_cols; }
 			// Smart equivalent of T&
 			class Tref;
 			//! Matrix entry access. Medium reading, slow writing - do not use it in loops.
-			Tref operator()(unsigned int row, unsigned int column) { return Tref(*this, row, column); }
+			Tref operator()(uint32_t row, uint32_t column) { return Tref(*this, row, column); }
 			//! Matrix entry access. Medium reading - do not use it in loops.
-			const T& operator()(unsigned int row, unsigned int column) const { return m_rep->m[row][column]; }
+			const T& operator()(uint32_t row, uint32_t column) const { return m_rep->m[row][column]; }
 			//! Matrix entry access by cast to T**. Fast version, for usage in loops.
 			/** Two drawbacks: First of all, this provides low-level access to the private matrix data.
 			And secondly, the cast assumes that the matrix content will be changed. Hence it starts
@@ -158,15 +158,15 @@ namespace too
 			//! Scalar multiplying a matrix.
 			friend const matrix<T> operator*(const matrix<T>& m, const T& t)
 			{
-				unsigned int
+				uint32_t
 					m1r = m.m_rep->dim_rows,
 					m1c = m.m_rep->dim_cols;
 				matrix<T> res(m1r, m1c);
 				T** m1elem  = m.m_rep->m;
 				T** reselem = res.m_rep->m;
-				for (unsigned int i = 0; i < m1r; ++i)
+				for (uint32_t i = 0; i < m1r; ++i)
 				{
-					for (unsigned int j = 0; j < m1c; ++j)
+					for (uint32_t j = 0; j < m1c; ++j)
 					{
 						reselem[i][j] = m1elem[i][j]*t;
 					}
@@ -176,15 +176,15 @@ namespace too
 			//! Scalar multiplying a matrix.
 			friend const matrix<T> operator*(const T& t, const matrix<T>& m)
 			{
-				unsigned int
+				uint32_t
 					m1r = m.m_rep->dim_rows,
 					m1c = m.m_rep->dim_cols;
 				matrix<T> res(m1r, m1c);
 				T** m1elem  = m.m_rep->m;
 				T** reselem = res.m_rep->m;
-				for (unsigned int i = 0; i < m1r; ++i)
+				for (uint32_t i = 0; i < m1r; ++i)
 				{
-					for (unsigned int j = 0; j < m1c; ++j)
+					for (uint32_t j = 0; j < m1c; ++j)
 					{
 						reselem[i][j] = t*m1elem[i][j];
 					}
@@ -195,16 +195,16 @@ namespace too
 			/** Throws error_division_by_zero, where m[.][.]==T() is taken as "zero".*/
 			friend const matrix<T> operator/(const T& t, const matrix<T>& m)
 			{
-				unsigned int
+				uint32_t
 					m1r = m.m_rep->dim_rows,
 					m1c = m.m_rep->dim_cols;
 				matrix<T> res(m1r, m1c);
 				T** m1elem  = m.m_rep->m;
 				T** reselem = res.m_rep->m;
 				T zero = T();
-				for (unsigned int i = 0; i < m1r; ++i)
+				for (uint32_t i = 0; i < m1r; ++i)
 				{
-					for (unsigned int j = 0; j < m1c; ++j)
+					for (uint32_t j = 0; j < m1c; ++j)
 					{
 						if (m1elem[i][j] == zero)
 							throw error_division_by_zero();
@@ -219,15 +219,15 @@ namespace too
 			{
 				if (t == T())
 					throw error_division_by_zero();
-				unsigned int
+				uint32_t
 					m1r = m.m_rep->dim_rows,
 					m1c = m.m_rep->dim_cols;
 				matrix<T> res(m1r, m1c);
 				T** m1elem  = m.m_rep->m;
 				T** reselem = res.m_rep->m;
-				for (unsigned int i = 0; i < m1r; ++i)
+				for (uint32_t i = 0; i < m1r; ++i)
 				{
-					for (unsigned int j = 0; j < m1c; ++j)
+					for (uint32_t j = 0; j < m1c; ++j)
 					{
 						reselem[i][j] = m1elem[i][j]/t;
 					}
@@ -245,7 +245,7 @@ namespace too
 			\return a mxn matrix.*/
 			matrix& operator*=(const matrix& m)
 			{
-				unsigned int
+				uint32_t
 					m1r = m_rep->dim_rows,
 					m2c = m.m_rep->dim_cols,
 					m1c = m_rep->dim_cols;
@@ -256,13 +256,13 @@ namespace too
 				T sum;
 				T* m1elemr;
 				T init = T(); // eliminating every single function call and address jumping from the loops
-				for (unsigned int i = 0; i < m1r; ++i)
+				for (uint32_t i = 0; i < m1r; ++i)
 				{
-					for (unsigned int j = 0; j < m2c; ++j)
+					for (uint32_t j = 0; j < m2c; ++j)
 					{
 						sum = init;
 						m1elemr = m1elem[i]; // speeds thing up tremendously
-						for (unsigned int k = 0; k < m1c; ++k)
+						for (uint32_t k = 0; k < m1c; ++k)
 						{
 							sum+= m1elemr[k]*m2elem[k][j];
 						}
@@ -275,13 +275,13 @@ namespace too
 			//! Scalar multiplying this matrix.
 			matrix& operator*=(const T& t)
 			{
-				unsigned int
+				uint32_t
 					m1r = m_rep->dim_rows,
 					m1c = m_rep->dim_cols;
 				T** m1elem  = m_rep->m;
-				for (unsigned int i = 0; i < m1r; ++i)
+				for (uint32_t i = 0; i < m1r; ++i)
 				{
-					for (unsigned int j = 0; j < m1c; ++j)
+					for (uint32_t j = 0; j < m1c; ++j)
 					{
 						m1elem[i][j]*= t;
 					}
@@ -294,13 +294,13 @@ namespace too
 			{
 				if (t == T())
 					throw error_division_by_zero();
-				unsigned int
+				uint32_t
 					m1r = m_rep->dim_rows,
 					m1c = m_rep->dim_cols;
 				T** m1elem  = m_rep->m;
-				for (unsigned int i = 0; i < m1r; ++i)
+				for (uint32_t i = 0; i < m1r; ++i)
 				{
-					for (unsigned int j = 0; j < m1c; ++j)
+					for (uint32_t j = 0; j < m1c; ++j)
 					{
 						m1elem[i][j]/= t;
 					}
@@ -310,14 +310,14 @@ namespace too
 			//! Another matrix is added this one. Both have to coincide dimensionally.
 			matrix& operator+=(const matrix& m)
 			{
-				unsigned int
+				uint32_t
 					m1r = m_rep->dim_rows,
 					m1c = m_rep->dim_cols;
 				T** m1elem  = m_rep->m;
 				T** m2elem  = m.m_rep->m;
-				for (unsigned int i = 0; i < m1r; ++i)
+				for (uint32_t i = 0; i < m1r; ++i)
 				{
-					for (unsigned int j = 0; j < m1c; ++j)
+					for (uint32_t j = 0; j < m1c; ++j)
 					{
 						m1elem[i][j]+= m2elem[i][j];
 					}
@@ -327,14 +327,14 @@ namespace too
 			//! Another matrix is substracted from this one. Both have to coincide dimensionally.
 			matrix& operator-=(const matrix& m)
 			{
-				unsigned int
+				uint32_t
 					m1r = m_rep->dim_rows,
 					m1c = m_rep->dim_cols;
 				T** m1elem  = m_rep->m;
 				T** m2elem  = m.m_rep->m;
-				for (unsigned int i = 0; i < m1r; ++i)
+				for (uint32_t i = 0; i < m1r; ++i)
 				{
-					for (unsigned int j = 0; j < m1c; ++j)
+					for (uint32_t j = 0; j < m1c; ++j)
 					{
 						m1elem[i][j]-= m2elem[i][j];
 					}
@@ -344,7 +344,7 @@ namespace too
 			//! Comparison of two matrices.
 			friend bool operator==(const matrix<T>& m1, const matrix<T>& m2)
 			{
-				unsigned int
+				uint32_t
 					m1r = m1.m_rep->dim_rows,
 					m1c = m1.m_rep->dim_cols,
 					m2r = m2.m_rep->dim_rows,
@@ -353,9 +353,9 @@ namespace too
 					return false;
 				T** m1elem  = m1.m_rep->m;
 				T** m2elem  = m2.m_rep->m;
-				for (unsigned int i = 0; i < m1r; ++i)
+				for (uint32_t i = 0; i < m1r; ++i)
 				{
-					for (unsigned int j = 0; j < m1c; ++j)
+					for (uint32_t j = 0; j < m1c; ++j)
 					{
 						if (m1elem[i][j] != m2elem[i][j])
 							return false;
@@ -369,14 +369,14 @@ namespace too
 				return !(m1 == m2);
 			}
 			//! Returns the row-"matrix" (1xn) of the specified row of this matrix.
-			matrix getrow(unsigned int row) const
+			matrix getrow(uint32_t row) const
 			{
-				unsigned int
+				uint32_t
 					c = m_rep->dim_cols;
 				matrix res(1, c);
 				T** melem   = m_rep->m;
 				T** reselem = res.m_rep->m;
-				for (unsigned int j = 0; j < c; ++j)
+				for (uint32_t j = 0; j < c; ++j)
 					reselem[0][j] = melem[row][j];
 				return res;
 			}
@@ -384,14 +384,14 @@ namespace too
 			/** Due to data storage, this is slower than getrow(). Maybe one can consider transposition
 			by transpose() first (if one needs to extract dozens of columns or those from the back of a huge
 			matrix).*/
-			matrix getcol(unsigned int col) const
+			matrix getcol(uint32_t col) const
 			{
-				unsigned int
+				uint32_t
 					r = m_rep->dim_rows;
 				matrix res(r, 1);
 				T** melem   = m_rep->m;
 				T** reselem = res.m_rep->m;
-				for (unsigned int i = 0; i < r; ++i)
+				for (uint32_t i = 0; i < r; ++i)
 					reselem[i][0] = melem[i][col];
 				return res;
 			}
@@ -404,7 +404,7 @@ namespace too
 			\param bMakeIt true changes this matrix into identity. False leaves it unchanged.*/
 			bool identity(bool bMakeIt = false)
 			{
-				unsigned int
+				uint32_t
 					r = m_rep->dim_rows;
 				T one = static_cast<T>(1.0);
 				T zero = T();
@@ -412,8 +412,8 @@ namespace too
 				{
 					m_rep = m_rep->get_own_copy(false);
 					T** elem = m_rep->m;
-					for (unsigned int i = 0; i < r; ++i)
-						for (unsigned int j = i; j < r; ++j)
+					for (uint32_t i = 0; i < r; ++i)
+						for (uint32_t j = i; j < r; ++j)
 						{
 							if (i == j)
 								elem[i][i] = one;
@@ -426,8 +426,8 @@ namespace too
 				else
 				{
 					T** elem = m_rep->m;
-					for (unsigned int i = 0; i < r; ++i)
-						for (unsigned int j = i; j < r; ++j)
+					for (uint32_t i = 0; i < r; ++i)
+						for (uint32_t j = i; j < r; ++j)
 						{
 							if (i == j)
 							{
@@ -448,12 +448,12 @@ namespace too
 			void transpose()
 			{
 				m_rep = m_rep->get_own_copy();
-				unsigned int
+				uint32_t
 					r = m_rep->dim_rows;
 				T** elem = m_rep->m;
 				//T aux;
-				for (unsigned int i = 0; i < r; ++i)
-					for (unsigned int j = i + 1; j < r; ++j)
+				for (uint32_t i = 0; i < r; ++i)
+					for (uint32_t j = i + 1; j < r; ++j)
 					{
 						std::swap(elem[i][j], elem[j][i]);
 						/*aux = elem[i][j];
@@ -503,8 +503,8 @@ namespace too
 			private:
 				friend class matrix;
 				matrix& m;
-				unsigned int r, c; // rows, cols
-				Tref(matrix& mtrx, unsigned int row, unsigned int col) : m(mtrx), r(row), c(col){}
+				uint32_t r, c; // rows, cols
+				Tref(matrix& mtrx, uint32_t row, uint32_t col) : m(mtrx), r(row), c(col){}
 			public:
 				// matrix element is just read from, appears as simple T
 				operator T() const { return m.m_rep->m[r][c]; }
@@ -522,21 +522,21 @@ namespace too
 			{
 			public:
 				// Row and column dimensions.
-				unsigned int dim_rows, dim_cols;
+				uint32_t dim_rows, dim_cols;
 				// The internal matrix data.
 				T** m;
 				// The reference counter.
 				mutable int32_t iRefCount;
 
 				// Allocating a brand new single representation.
-				MRep(unsigned int rows, unsigned int cols, T** mtrx)
+				MRep(uint32_t rows, uint32_t cols, T** mtrx)
 					: iRefCount(1), dim_rows(rows), dim_cols(cols), m(new T*[rows])
 				{
-					for (unsigned int i = 0; i < rows; ++i)
+					for (uint32_t i = 0; i < rows; ++i)
 					{
 						m[i] = new T[cols];
 						if (mtrx)
-							for (unsigned int j = 0; j < cols; ++j)
+							for (uint32_t j = 0; j < cols; ++j)
 								m[i][j] = mtrx[i][j];
 					}
 				}
@@ -567,7 +567,7 @@ namespace too
 				{
 					if (!m)
 						return;
-					for (unsigned int i = 0; i < dim_rows; ++i)
+					for (uint32_t i = 0; i < dim_rows; ++i)
 					{
 						if (!m[i])
 							continue;
@@ -600,7 +600,7 @@ namespace too
 			}
 			/* Changes a matrix entry. Of course the representation has to duplicate itself first, when more than
 			one matrices share the representations content.*/
-			void put(unsigned int row, unsigned int col, const T& t)
+			void put(uint32_t row, uint32_t col, const T& t)
 			{
 				m_rep = m_rep->get_own_copy();
 				m_rep->m[row][col] = t;
@@ -623,9 +623,9 @@ namespace too
 
 			// Constructors and assignment are transferred trivially.
 			//!
-			explicit cmatrix(unsigned int dim_rows, unsigned int dim_cols) : matrix(dim_rows, dim_cols){}
+			explicit cmatrix(uint32_t dim_rows, uint32_t dim_cols) : matrix(dim_rows, dim_cols){}
 			//!
-			cmatrix(unsigned int dim_rows, unsigned int dim_cols, T** mtrx) : matrix(dim_rows, dim_cols, mtrx){}
+			cmatrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx) : matrix(dim_rows, dim_cols, mtrx){}
 			//!
 			cmatrix(const cmatrix& mtrx) : matrix(mtrx){}
 			//!
@@ -643,12 +643,12 @@ namespace too
 			void conjugate()
 			{
 				get_own_rep_copy();
-				unsigned int
+				uint32_t
 					r = RowCount(),
 					c = ColCount();
 				T** elem = *this;
-				for (unsigned int i = 0; i < r; ++i)
-					for (unsigned int j = 0; j < c; ++j)
+				for (uint32_t i = 0; i < r; ++i)
+					for (uint32_t j = 0; j < c; ++j)
 					{
 						elem[i][j] = std::conj(elem[i][j]);
 					}
@@ -657,20 +657,20 @@ namespace too
 			void adjoin()
 			{
 				get_own_rep_copy();
-				unsigned int
+				uint32_t
 					r = RowCount();
 				T** elem = *this;
 				T aux;
-				for (unsigned int i = 0; i < r; ++i)
+				for (uint32_t i = 0; i < r; ++i)
 				{
-					for (unsigned int j = i + 1; j < r; ++j)
+					for (uint32_t j = i + 1; j < r; ++j)
 					{
 						aux = std::conj(elem[i][j]);
 						elem[i][j] = std::conj(elem[j][i]);
 						elem[j][i] = aux;
 					}
 				}
-				for (unsigned int i = 0; i < r; ++i)
+				for (uint32_t i = 0; i < r; ++i)
 					elem[i][i] = std::conj(elem[i][i]);
 			}
 			//! Is hermitean?
@@ -710,7 +710,7 @@ namespace too
 			return matrix<T>(t1)*= t2;
 		}
 
-	} // math
-} // too
+	}
+}
 
 #endif

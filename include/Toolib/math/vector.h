@@ -20,7 +20,7 @@ namespace too
 		//! Represents an n-dimensional vector. T should be a reasonable basic numerical type.
 		/** The index access starts at 0 for the first coordinate.
 		For very large (high DIM) vectors use matrix instead (danger of stack overflow).*/
-		template <typename T, unsigned int DIM> class vector
+		template <typename T, uint32_t DIM> class vector
 		{
 		private:
 			//! Allocates memory for the vector data.
@@ -47,7 +47,7 @@ namespace too
 				if (bZeroize)
 				{
 					T zero = T();
-					for (unsigned int i = 0; i < DIM; ++i)
+					for (uint32_t i = 0; i < DIM; ++i)
 						x[i] = zero;
 				}
 			}
@@ -55,14 +55,14 @@ namespace too
 			explicit vector(const T ax[DIM])
 			{
 				alloc();
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					x[i] = ax[i];
 			}
 			//! Copy, for the same type.
 			vector(const vector& v)
 			{
 				alloc();
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					x[i] = v.x[i];
 			}
 			//! Assignment, for the same type.
@@ -83,7 +83,7 @@ namespace too
 			template <class U> vector(const vector<U, DIM>& v)
 			{
 				alloc();
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					x[i] = v.x[i];
 			}
 			//! Assignment, for different type.
@@ -100,22 +100,22 @@ namespace too
 			template <class T2> vector<T2, DIM> vector_cast()
 			{
 				vector<T2, DIM> ret;
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					ret.x[i] = x[i];
 				return ret;
 			}*/
 
 			//! Index access operator. Simplifies access for vector v from v.x[i] to v[i].
 			/** Within loops it is probably faster to access directly via a pre-specified T* temp=&v.x[0].*/
-			T& operator[](unsigned int i) { return x[i]; }
+			T& operator[](uint32_t i) { return x[i]; }
 			//! For rare cases of confusion, get back the actual dimension of the type.
-			unsigned int getDIM() const { return DIM; }
+			uint32_t getDIM() const { return DIM; }
 
 			//! Dot product.
 			friend T dot_product(const vector& v1, const vector& v2)
 			{
 				T res = T();
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					res+= v1.x[i]*v2.x[i];
 				return res;
 			}
@@ -123,7 +123,7 @@ namespace too
 			friend vector operator*(const vector& v, const T& t)
 			{
 				vector res;
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					res.x[i] = v.x[i]*t;
 				return res;
 			}
@@ -131,7 +131,7 @@ namespace too
 			friend vector operator*(const T& t, const vector& v)
 			{
 				vector res;
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					res.x[i] = t*v.x[i];
 				return res;
 			}
@@ -142,7 +142,7 @@ namespace too
 				if (t == T())
 					throw error_division_by_zero();
 				vector res;
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					res[i] = v.x[i]/t;
 				return res;
 			}
@@ -151,7 +151,7 @@ namespace too
 			friend vector operator/(const T& t, const vector& v)
 			{
 				vector res;
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 				{
 					if (v.x[i] == T())
 						throw error_division_by_zero();
@@ -162,7 +162,7 @@ namespace too
 			//! Scalar multiplication.
 			vector& operator*=(const T& t)
 			{
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					x[i]*= t;
 				return *this;
 			}
@@ -172,28 +172,28 @@ namespace too
 			{
 				if (t == T())
 					throw error_division_by_zero();
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					x[i]/= t;
 				return *this;
 			}
 			//! Sum.
 			vector& operator+=(const vector& v)
 			{
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					x[i]+= v.x[i];
 				return *this;
 			}
 			//! Difference.
 			vector& operator-=(const vector& v)
 			{
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					x[i]-= v.x[i];
 				return *this;
 			}
 			//! Comparison.
 			friend bool operator==(const vector& v1, const vector& v2)
 			{
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 				{
 					if (v1.x[i] != v2.x[i])
 						return false;
@@ -209,14 +209,14 @@ namespace too
 			//! Get euclidean length.
 			T length() const {
 				T r = T();
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					r+= x[i]*x[i];
 				return sqrt(r);
 			}
 			//! Get euclidean length squared.
 			T lengthsq() const {
 				T r = T();
-				for (unsigned int i = 0; i < DIM; ++i)
+				for (uint32_t i = 0; i < DIM; ++i)
 					r+= x[i]*x[i];
 				return r;
 			}
@@ -322,13 +322,13 @@ namespace too
 		};
 		*/
 		//!
-		template <typename T, unsigned int DIM> const vector<T, DIM>
+		template <typename T, uint32_t DIM> const vector<T, DIM>
 		operator+(const vector<T, DIM>& t1, const vector<T, DIM>& t2)
 		{
 			return vector<T, DIM>(t1)+= t2;
 		}
 		//!
-		template <typename T, unsigned int DIM> const vector<T, DIM>
+		template <typename T, uint32_t DIM> const vector<T, DIM>
 		operator-(const vector<T, DIM>& t1, const vector<T, DIM>& t2)
 		{
 			return vector<T, DIM>(t1)-= t2;
