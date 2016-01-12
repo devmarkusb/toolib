@@ -19,9 +19,9 @@ namespace too
 //! Demonstrating constructors, destructor, assignments - all six, or none of them.
 struct SomeClass
 {
-	//! You should either list none of the following six methods, or all of them.
-	/** If you specify them, then you can do this by implementation, =default or =delete.*/
     SomeClass() = default;
+	//! You should either list none of the following five methods, or all of them.
+	/** If you specify them, then you can do this by implementation, =default or =delete.*/
 	~SomeClass() = default; // should be noexcept, if implemented
     SomeClass(const SomeClass&) = default;
     SomeClass(SomeClass&& other) = default; // should be noexcept, if implemented
@@ -51,6 +51,18 @@ struct AbstractInterface
 	//! note that using a smart pointer, inheriting classes cannot change the return type
 	virtual AbstractInterface* clone() = 0;
 };
+
+//! Note that in this case you need to provide an out-of-class implementation of the destructor.
+struct AbstractInterface_without_functions
+{
+	virtual inline ~AbstractInterface() = 0;
+	AbstractInterface() = default;
+    AbstractInterface(const AbstractInterface&) = delete;
+    AbstractInterface(AbstractInterface&& other) = delete;
+    AbstractInterface& operator=(const AbstractInterface&) = delete;
+    AbstractInterface& operator=(AbstractInterface&&) = delete;
+};
+inline AbstractInterface_without_functions::~AbstractInterface_without_functions() {}
 
 //! Factory function (alternatively being part of a factory class).
 template <class T, typename... ConstructorArgs>
