@@ -36,7 +36,7 @@ namespace too
 					intro_init();
 					mainloop();
 					outro_cleanup();
-					return PROG_EXIT_SUCCESS;
+					return prog_exit_success;
 				}
 				catch (std::exception& e)
 				{
