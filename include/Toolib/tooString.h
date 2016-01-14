@@ -40,7 +40,7 @@ namespace too
 
     #define _ENCODING_LOCAL(x)          x
     #define _ENCODING_LOCAL_WIDE(x)     L ## x
-#if TOO_COMP_MS_VISUAL_STUDIO_CPP && TOO_COMP_MS_VS_VER <= 1800
+#if TOO_HAS_NO_CPP11_U8
 	#define _ENCODING_UTF8(x)           _ENCODING_LOCAL(x)
 #else
 	#define _ENCODING_UTF8(x)           u8 ## x
