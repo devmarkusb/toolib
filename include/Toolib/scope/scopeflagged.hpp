@@ -73,7 +73,7 @@ namespace too
 		{
 			explicit SG_flags(bit_container_type flags = user::SF_DEF)// = m_flags.get())
 				: toobit::bits<bit_container_type>(flags)
-				{ m_auxLastflags.push(*m_flags); m_flags = getAddress(); }
+                                { m_auxLastflags.push(*m_flags); m_flags = toobit::bits<bit_container_type>::getAddress(); }
 			~SG_flags()
 			{
 				try { m_flags = &m_aux; *m_flags = m_auxLastflags.top(); m_auxLastflags.pop(); }

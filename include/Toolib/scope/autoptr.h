@@ -12,6 +12,7 @@
 
 #include <memory>
 
+
 namespace too
 {
     //! Like std::auto_ptr, just without any "gimmicks" and with implicit casting. Only functionality: auto deletion.
@@ -24,7 +25,7 @@ namespace too
 		template<class J> autoptr& operator=(const autoptr<J>& ap);
 	public:
 		autoptr(I* pi) : std::auto_ptr<I>(pi){}
-		operator I*() { return get(); }
+        operator I*() { return std::auto_ptr<I>::get(); }
 	};
 }
 

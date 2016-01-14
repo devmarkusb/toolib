@@ -13,6 +13,7 @@
 #include <cmath>
 #include <string>
 #include <complex>
+#include <cstdint>
 
 
 namespace too
@@ -475,22 +476,26 @@ namespace too
 			bool isInvertible() const
 			{
 				//todo
+                return false;
 			}
 			//! Is symmetric?
 			bool isSymmetric() const
 			{
 				//todo
-			}
+                return true;
+            }
 			//! Is orthogonal?
 			bool isOrthogonal() const
 			{
 				//todo
-			}
+                return false;
+            }
 			//! Is diagonal?
 			bool isDiagonal() const
 			{
 				//todo
-			}
+                return true;
+            }
 			//todo ... lots of operations
 
 
@@ -623,17 +628,17 @@ namespace too
 
 			// Constructors and assignment are transferred trivially.
 			//!
-			explicit cmatrix(uint32_t dim_rows, uint32_t dim_cols) : matrix(dim_rows, dim_cols){}
+            explicit cmatrix(uint32_t dim_rows, uint32_t dim_cols) : matrix<complex<t>>(dim_rows, dim_cols){}
 			//!
-			cmatrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx) : matrix(dim_rows, dim_cols, mtrx){}
+            cmatrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx) : matrix<complex<t>>(dim_rows, dim_cols, mtrx){}
 			//!
-			cmatrix(const cmatrix& mtrx) : matrix(mtrx){}
+            cmatrix(const cmatrix& mtrx) : matrix<complex<t>>(mtrx){}
 			//!
-			cmatrix(const matrix& mtrx) : matrix(mtrx){}
+            cmatrix(const matrix<complex<t>>& mtrx) : matrix<complex<t>>(mtrx){}
 			//!
 			cmatrix& operator=(const cmatrix& mtrx)
 			{
-				matrix::operator=(mtrx);
+                matrix<complex<t>>::operator=(mtrx);
 				return *this;
 			}
 			//!
@@ -642,10 +647,10 @@ namespace too
 			//! Conjugates this matrix.
 			void conjugate()
 			{
-				get_own_rep_copy();
+                matrix<complex<t>>::get_own_rep_copy();
 				uint32_t
-					r = RowCount(),
-					c = ColCount();
+                    r = matrix<complex<t>>::RowCount(),
+                    c = matrix<complex<t>>::ColCount();
 				T** elem = *this;
 				for (uint32_t i = 0; i < r; ++i)
 					for (uint32_t j = 0; j < c; ++j)
@@ -656,9 +661,9 @@ namespace too
 			//! Adjoins this matrix. This method supports only quadratic matrices!
 			void adjoin()
 			{
-				get_own_rep_copy();
+                matrix<complex<t>>::get_own_rep_copy();
 				uint32_t
-					r = RowCount();
+                    r = matrix<complex<t>>::RowCount();
 				T** elem = *this;
 				T aux;
 				for (uint32_t i = 0; i < r; ++i)
@@ -677,12 +682,14 @@ namespace too
 			bool isHermitean() const
 			{
 				//todo
+                return true;
 			}
 			//! Is unitary?
 			bool isUnitary() const
 			{
 				//todo
-			}
+                return false;
+            }
 			//todo lots of operations
 		};
 

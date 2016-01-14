@@ -12,6 +12,7 @@ Removed: "shorties", macros
 #ifndef CONS_W32_H_INCL_cni3nb8z145z12
 #define CONS_W32_H_INCL_cni3nb8z145z12
 
+#undef _WIN32_WINNT
 #define _WIN32_WINNT 0x0500
 #include <string>
 #include <sstream>

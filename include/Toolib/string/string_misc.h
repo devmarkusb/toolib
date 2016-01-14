@@ -21,11 +21,13 @@ namespace too
 		inline std::string& makeUpper(std::string &s)
 		{
 			std::transform(s.begin(), s.end(), s.begin(), toupper);
+            return s;
 		}
 
 		inline std::string& makeLower(std::string &s)
 		{
 			std::transform(s.begin(), s.end(), s.begin(), tolower);
+            return s;
 		}
 	}
 } // too

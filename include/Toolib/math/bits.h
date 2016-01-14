@@ -11,6 +11,7 @@
 #define BITS_H_INCL_inewhjr4382zrn83
 
 #include <utility>
+#include <cstdint>
 
 
 namespace too
@@ -21,7 +22,7 @@ namespace too
 		{
 			struct B
 			{
-				enum _ {
+                enum _ {
 					F = 0,
 					T = 1,
 					L = 0,
@@ -29,9 +30,9 @@ namespace too
 					O = 0,
 					I = 1
 				};
-				template<typename Ty> static _ i2B(Ty t = Ty()) { return static_cast<_>(t); }
-				template<> static _ i2B<int>(int i) { return static_cast<_>(i); }
 			};
+            template<typename Ty> B::_ i2B(Ty t = Ty()) { return static_cast<B::_>(t); }
+            template<> B::_ i2B<int>(int i) { return static_cast<B::_>(i); }
 
 			template<typename T> class bits
 			{
@@ -46,9 +47,9 @@ namespace too
 				T& remove(T mask) { m_bits&= ~mask; return m_bits; }
 				bool contains(T mask) const { return (m_bits|mask) == m_bits; }
 				T& fill(B::_ b) { if (b == B::O) m_bits = 0; else m_bits = ~0; return m_bits; }
-				T& fill(T b) { return fill(B::i2B<T>(b)); }
+                T& fill(T b) { return fill(i2B<T>(b)); }
 				T& clear() { return fill(B::O); }
-				T& flip() { m_bits~= m_bits; return m_bits; }
+                T& flip() { m_bits = ~m_bits; return m_bits; }
 				T& get() { return m_bits; }
 			protected:
 				T* getAddress() { return &m_bits; }

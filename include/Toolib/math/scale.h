@@ -10,7 +10,6 @@
 #define SCALE_H_INCL_enrhfu87n83464346ng
 
 #include <utility>
-#include <assert.h>
 #include <type_traits>
 #include <cmath>
 #include "floating_point.h"
@@ -32,8 +31,8 @@ public:
         : m_FromInterval(FromInterval)
         , m_ToInterval(ToInterval)
     {
-        assert(FromInterval.first < FromInterval.second);
-        assert(ToInterval.first < ToInterval.second);
+        TOO_EXPECT(FromInterval.first < FromInterval.second);
+		TOO_EXPECT(ToInterval.first < ToInterval.second);
     }
 
     double operator()(const double& x)

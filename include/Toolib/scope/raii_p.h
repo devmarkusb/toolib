@@ -11,6 +11,7 @@
 #define RAII_P_H_INCL_on824f287xrz2387r
 
 #include <crtdbg.h>
+#include <cstdint>
 #include "Toolib/mem/checked_delete.h"
 #include "Toolib/debug.h"
 
@@ -168,7 +169,7 @@ namespace too
 		{
 			if (!m_ptr)
 				return;
-			for (u32 i = 0; i < m_count1; ++i)
+            for (uint32_t i = 0; i < m_count1; ++i)
 				mem::checked_array_delete(m_ptr[i]);
 			mem::checked_array_delete(m_ptr);
 			m_ptr = 0;
@@ -183,7 +184,7 @@ namespace too
 		Example: \code raii_aap<someclass> psomeobject(5); \endcode*/
 		raii_aap(uint32_t count1, uint32_t count2) : m_count1(count1), m_count2(count2), m_ptr(new T*[count1])
 		{
-			for (u32 i = 0; i < count1; ++i)
+            for (uint32_t i = 0; i < count1; ++i)
 				m_ptr[i] = new T[count2];
 		}
 		//! Releases the internally managed memory for the object.

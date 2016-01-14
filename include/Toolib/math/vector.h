@@ -11,6 +11,7 @@
 #define VECTOR_H_INCL_c8x3u923z4zr87r2
 
 #include <cmath>
+#include <cstdint>
 
 
 namespace too
@@ -93,17 +94,6 @@ namespace too
 				vector<T, DIM>(v).swap(*this);
 				return *this;
 			}
-
-			/* No longer needed, implicit casting is now provided by constructor and assignment.
-			//! Casts this vector<T> to a differently "typed" vector<T2>.
-			/** Works if conversion from T to T2 exists. The dimensions have to be the same.
-			template <class T2> vector<T2, DIM> vector_cast()
-			{
-				vector<T2, DIM> ret;
-				for (uint32_t i = 0; i < DIM; ++i)
-					ret.x[i] = x[i];
-				return ret;
-			}*/
 
 			//! Index access operator. Simplifies access for vector v from v.x[i] to v[i].
 			/** Within loops it is probably faster to access directly via a pre-specified T* temp=&v.x[0].*/
@@ -230,41 +220,41 @@ namespace too
 		{
 		public:
 			//! Constructor initialising the coordinates.
-			explicit vector2d(const T& x0=T(), const T& x1=T()) : vector()
+            explicit vector2d(const T& x0=T(), const T& x1=T()) : vector<T, 2>()
 			{
-				x[0] = x0; x[1] = x1;
+                vector<T, 2>::x[0] = x0; vector<T, 2>::x[1] = x1;
 			}
 			//! Copy, for the same type.
-			vector2d(const vector2d& v) : vector(v){}
+            vector2d(const vector2d& v) : vector<T, 2>(v){}
 			//! Assigment, for the same type.
 			vector2d& operator=(const vector2d& v)
 			{
-				vector::operator=(v);
+                vector<T, 2>::operator=(v);
 				return *this;
 			}
 
 			//! Copy, for different type.
-			template <class U> vector2d(const vector2d<U>& v) : vector(v){}
+            template <class U> vector2d(const vector2d<U>& v) : vector<T, 2>(v){}
 			//! Assignment, for different type.
 			template <class U> vector2d& operator=(const vector2d<U>& v)
 			{
-				vector::operator=(v);
+                vector<T, 2>::operator=(v);
 				return *this;
 			}
 
 			//! For compatibility with base class.
-			vector2d(const vector& v) : vector(v){}
+            vector2d(const vector<T, 2>& v) : vector<T, 2>(v){}
 			//! For compatibility with base class.
-			vector2d& operator=(const vector& v)
+            vector2d& operator=(const vector<T, 2>& v)
 			{
-				vector::operator=(v);
+                vector<T, 2>::operator=(v);
 				return *this;
 			}
 
 			//! Set coordinates.
 			void set(const T& x0=T(), const T& x1=T())
 			{
-				x[0] = x0; x[1] = x1;
+                vector<T, 2>::x[0] = x0; vector<T, 2>::x[1] = x1;
 			}
 		};
 
@@ -273,41 +263,41 @@ namespace too
 		{
 		public:
 			//! Constructor initialising the coordinates.
-			explicit vector3d(const T& x0=T(), const T& x1=T(), const T& x2=T()) : vector()
+            explicit vector3d(const T& x0=T(), const T& x1=T(), const T& x2=T()) : vector<T, 3>()
 			{
-				x[0] = x0; x[1] = x1; x[2] = x2;
+                vector<T, 3>::x[0] = x0; vector<T, 3>::x[1] = x1; vector<T, 3>::x[2] = x2;
 			}
 			//! Copy, for the same type.
-			vector3d(const vector3d& v) : vector(v){}
+            vector3d(const vector3d& v) : vector<T, 3>(v){}
 			//! Assigment, for the same type.
 			vector3d& operator=(const vector3d& v)
 			{
-				vector::operator=(v);
+                vector<T, 3>::operator=(v);
 				return *this;
 			}
 
 			//! Copy, for different type.
-			template <class U> vector3d(const vector3d<U>& v) : vector(v){}
+            template <class U> vector3d(const vector3d<U>& v) : vector<T, 3>(v){}
 			//! Assignment, for different type.
 			template <class U> vector3d& operator=(const vector3d<U>& v)
 			{
-				vector::operator=(v);
+                vector<T, 3>::operator=(v);
 				return *this;
 			}
 
 			//! For compatibility with base class.
-			vector3d(const vector& v) : vector(v){}
+            vector3d(const vector<T, 3>& v) : vector<T, 3>(v){}
 			//! For compatibility with base class.
-			vector3d& operator=(const vector& v)
+            vector3d& operator=(const vector<T, 3>& v)
 			{
-				vector::operator=(v);
+                vector<T, 3>::operator=(v);
 				return *this;
 			}
 
 			//! Set coordinates.
 			void set(const T& x0=T(), const T& x1=T(), const T& x2=T())
 			{
-				x[0] = x0; x[1] = x1; x[2] = x2;
+                vector<T, 3>::x[0] = x0; vector<T, 3>::x[1] = x1; vector<T, 3>::x[2] = x2;
 			}
 		};
 

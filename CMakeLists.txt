@@ -83,7 +83,7 @@ set(TargetToolibTest "ToolibTest")
 file(GLOB_RECURSE TargetToolibTest_SRC_INCS "test/*.h")
 
 set(TargetToolibTest_SOURCES
-	test/src/_header_compile.test.cpp
+    test/src/_header_compile.test.cpp
     test/src/class/IAbstractTest.cpp
     test/src/math/numberTest.cpp
     test/src/math/roundTest.cpp
