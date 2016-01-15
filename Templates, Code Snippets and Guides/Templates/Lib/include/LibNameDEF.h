@@ -7,9 +7,9 @@
 #include "../../../../include/Toolib/linklib/LINKLIB_DEFS.h"
 
 #if defined(LIBNAME_LIBRARY)
-#define LIBNAMESHARED_EXPORT     TOO_DECL_EXPORT
+#define LIBNAMESHARED_EXPORT TOO_DECL_EXPORT
 #else
-#define LIBNAMESHARED_EXPORT     TOO_DECL_IMPORT
+#define LIBNAMESHARED_EXPORT TOO_DECL_IMPORT
 #endif
 
 #endif

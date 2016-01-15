@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 
-//TEST(Test, Test)
-//{
-//    EXPECT_TRUE(true);
-//}
+TEST(function_or_classTest, test)
+{
+    EXPECT_TRUE(true);
+}
