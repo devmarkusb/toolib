@@ -121,6 +121,24 @@ inline std::istream& operator>>(std::istream& is, T&)
     return is;
 }
 
+
+//#########################################################################################
+
+// For clearity, a separate struct for other kinds of overloads.
+struct U
+{
+    // With C++11 'implicit explicit casts' are possible for bool, so we no longer need the
+    // 'safe bool idiom'. But this doesn't work for enum (class)!?
+    explicit operator bool() const
+    {
+        return true; //todo
+    }
+    // this is actually no longer needed in the bool context
+    const bool operator!() const
+    {
+        return false; //todo
+    }
+};
 }
 
 #endif

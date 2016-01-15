@@ -10,7 +10,8 @@
 #define GAME_H_INCL_aubzstex3zubte632yet7
 
 #include <exception>
-#include "Toolib/consts.h"
+#include "Toolib/error.h"
+
 
 namespace too
 {
@@ -173,8 +174,8 @@ namespace too
 				return true;
 			}
 		};
-	} // game
-} // too
+    }
+}
 
 namespace toog = too::game;
 
