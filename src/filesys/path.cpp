@@ -26,16 +26,12 @@ using namespace too::file;
 
 const too::string CPath::FOLDER_SEPARATOR_TO_USE_HERE = _TOOSTR("/");
 
-CPath::CPath(const too::string& path, EForm form, EType type)
-    : m_form(form)
-    , m_type(type)
+CPath::CPath(const too::string& path, EForm form, EType type) : m_form(form), m_type(type)
 {
     *m_path = path;
 }
 
-CPath::CPath(too::string& path, bool useByReference, EForm form, EType type)
-    : m_form(form)
-    , m_type(type)
+CPath::CPath(too::string& path, bool useByReference, EForm form, EType type) : m_form(form), m_type(type)
 {
     if (useByReference)
         m_path = &path;
@@ -46,8 +42,8 @@ CPath::CPath(too::string& path, bool useByReference, EForm form, EType type)
 CPath::CPath(const CPath& other)
 {
     *m_path = *other.m_path;
-    m_form = other.m_form;
-    m_type = other.m_type;
+    m_form  = other.m_form;
+    m_type  = other.m_type;
 }
 
 CPath::CPath(CPath&& other)
@@ -58,8 +54,8 @@ CPath::CPath(CPath&& other)
 CPath& CPath::operator=(const CPath& other)
 {
     *m_path = *other.m_path;
-    m_form = other.m_form;
-    m_type = other.m_type;
+    m_form  = other.m_form;
+    m_type  = other.m_type;
     return *this;
 }
 
@@ -91,8 +87,8 @@ CPath& CPath::operator+=(const CPath& other)
     const too::string sep(getSeparatorUsedHere());
     for (const std::string& part : newparts)
     {
-        *m_path+= part;
-        *m_path+= sep;
+        *m_path += part;
+        *m_path += sep;
     }
     return *this;
 }
@@ -183,7 +179,7 @@ CPath& CPath::ensureTrailingSeparator(bool native)
         SepToUse = OS_FOLDER_SEPARATOR;
     assert(!SepToUse.empty());
     if (m_path->back() != SepToUse[0])
-        *m_path+= SepToUse;
+        *m_path += SepToUse;
     return *this;
 }
 

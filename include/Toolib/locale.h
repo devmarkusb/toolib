@@ -13,10 +13,10 @@
 
 namespace too
 {
-	void set_global_locale(const char* locname = "German_germany")
-	{
-		std::locale::global(std::locale(locname));
-	}
+void set_global_locale(const char* locname = "German_germany")
+{
+    std::locale::global(std::locale(locname));
+}
 } // too
 
 #endif

@@ -15,35 +15,35 @@
 
 namespace too
 {
-	namespace con
-	{
-                class TOOLIBSHARED_EXPORT ExitCatcher
-		{
-		public:
-			//! Use global reference W32ConsExitCatcher instead.
-			static ExitCatcher& getInstance();
+namespace con
+{
+class TOOLIBSHARED_EXPORT ExitCatcher
+{
+public:
+    //! Use global reference W32ConsExitCatcher instead.
+    static ExitCatcher& getInstance();
 
-			bool RequestedExit()
-			{
-				if (m_bRequestedExit)
-				{
-					m_bRequestedExit = false;
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-		private:
-			static bool m_bRequestedExit;
+    bool RequestedExit()
+    {
+        if (m_bRequestedExit)
+        {
+            m_bRequestedExit = false;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
-			static BOOL CtrlHandler(DWORD fdwCtrlType);
+private:
+    static bool m_bRequestedExit;
 
-			ExitCatcher();
-		};
+    static BOOL CtrlHandler(DWORD fdwCtrlType);
 
-	}
+    ExitCatcher();
+};
+}
 }
 
 #endif

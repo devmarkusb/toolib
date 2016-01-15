@@ -17,13 +17,14 @@
 
 namespace too
 {
-	inline void prompt()
-	{
-		if (_kbhit())
-			_getch();
-		std::cout << "\nHit any key...";
-		while (!_kbhit()) std::this_thread::sleep_for(std::chrono::milliseconds(1));
-	}
+inline void prompt()
+{
+    if (_kbhit())
+        _getch();
+    std::cout << "\nHit any key...";
+    while (!_kbhit())
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+}
 } // too
 
 #endif

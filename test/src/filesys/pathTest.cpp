@@ -6,14 +6,9 @@ using too::file::CPath;
 class CPathTest : public ::testing::Test
 {
 protected:
-    virtual void SetUp()
-    {
-    }
+    virtual void SetUp() {}
 
-    virtual void TearDown()
-    {
-    }
-
+    virtual void TearDown() {}
 };
 
 TEST_F(CPathTest, EmptyConstruction)
@@ -112,7 +107,7 @@ TEST_F(CPathTest, AppendTo)
 {
     CPath p1(_TOOSTR("a/b"));
     CPath p2(_TOOSTR("c\\d/e"));
-    p1+= p2;
+    p1 += p2;
     too::string s(p1);
     EXPECT_EQ(_TOOSTR("a/b/c/d/e/"), s);
 }

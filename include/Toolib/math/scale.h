@@ -27,17 +27,17 @@ class Map_LinearScale_Interval_to_Interval
 {
 public:
     Map_LinearScale_Interval_to_Interval(const std::pair<FloatingPointType, FloatingPointType>& FromInterval,
-                                         const std::pair<FloatingPointType, FloatingPointType>& ToInterval)
-        : m_FromInterval(FromInterval)
-        , m_ToInterval(ToInterval)
+        const std::pair<FloatingPointType, FloatingPointType>& ToInterval)
+        : m_FromInterval(FromInterval), m_ToInterval(ToInterval)
     {
         TOO_EXPECT(FromInterval.first < FromInterval.second);
-		TOO_EXPECT(ToInterval.first < ToInterval.second);
+        TOO_EXPECT(ToInterval.first < ToInterval.second);
     }
 
     double operator()(const double& x)
     {
-        return (x - m_FromInterval.first) * (m_ToInterval.second - m_ToInterval.first) / (m_FromInterval.second - m_FromInterval.first);
+        return (x - m_FromInterval.first) * (m_ToInterval.second - m_ToInterval.first) /
+            (m_FromInterval.second - m_FromInterval.first);
     }
 
 private:
@@ -51,9 +51,9 @@ template <typename T>
 //  requires T > 0
 inline double calcNiceScaleTick(T RangeMinToMax, unsigned long MaxTickCount)
 {
-	TOO_EXPECT(MaxTickCount);
-	const double MaxTickCount_ = narrow<double>(MaxTickCount);
-	const double MinimalTick = narrow<double>(RangeMinToMax) / MaxTickCount_;
+    TOO_EXPECT(MaxTickCount);
+    const double MaxTickCount_ = narrow<double>(MaxTickCount);
+    const double MinimalTick   = narrow<double>(RangeMinToMax) / MaxTickCount_;
     const double magnitude = std::pow(10.0, std::floor(std::log10(MinimalTick)));
     assert(!too::math::almost_equal<T>(magnitude, 0.0));
     const double residual = MinimalTick / magnitude;
@@ -67,21 +67,22 @@ inline double calcNiceScaleTick(T RangeMinToMax, unsigned long MaxTickCount)
         return magnitude;
 }
 
-//! Calculates a scale tick range, that contains \param minDataValue and \param maxDataValue at least, the individual ticks being
-//! \param scaleTick apart. \returns a pair of <min, max> tick values (min, max being a certain integer number of \param scaleTick's apart).
+//! Calculates a scale tick range, that contains \param minDataValue and \param maxDataValue at least, the individual
+//! ticks being
+//! \param scaleTick apart. \returns a pair of <min, max> tick values (min, max being a certain integer number of \param
+//! scaleTick's apart).
 template <typename T>
 //  requires T number
 inline std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, double scaleTick)
 {
-	TOO_EXPECT(!almost_equal(scaleTick, 0.0));
-	TOO_EXPECT(minDataValue <= maxDataValue);
-	const double minIn = narrow<double>(minDataValue);
-	const double maxIn = narrow<double>(maxDataValue);
-	const double minOut = std::floor(minIn / scaleTick) * scaleTick;
-	const double maxOut = std::ceil(maxIn / scaleTick) * scaleTick;
-	return std::make_pair(minOut, maxOut);
+    TOO_EXPECT(!almost_equal(scaleTick, 0.0));
+    TOO_EXPECT(minDataValue <= maxDataValue);
+    const double minIn  = narrow<double>(minDataValue);
+    const double maxIn  = narrow<double>(maxDataValue);
+    const double minOut = std::floor(minIn / scaleTick) * scaleTick;
+    const double maxOut = std::ceil(maxIn / scaleTick) * scaleTick;
+    return std::make_pair(minOut, maxOut);
 }
-
 }
 }
 

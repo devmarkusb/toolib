@@ -36,4 +36,3 @@ TEST(MathNumberGetDecDigitCountTest, Hex)
     EXPECT_EQ(1, too::math::getDigitCount(15, too::math::ENumSys::HEX));
     EXPECT_EQ(2, too::math::getDigitCount(16, too::math::ENumSys::HEX));
 }
-

@@ -27,13 +27,11 @@ namespace math
 {
 
 template <typename T>
-typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type
-    almost_equal(T x, T y, int ulp = 1)
+typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type almost_equal(T x, T y, int ulp = 1)
 {
-    return std::abs(x-y) < std::numeric_limits<T>::epsilon() * std::abs(x+y) * ulp
-           || std::abs(x-y) < std::numeric_limits<T>::min();
+    return std::abs(x - y) < std::numeric_limits<T>::epsilon() * std::abs(x + y) * ulp ||
+        std::abs(x - y) < std::numeric_limits<T>::min();
 }
-
 }
 }
 

@@ -20,24 +20,24 @@
 
 namespace too
 {
-	namespace str
-	{
-		inline void tokenizeString(const std::string& s, const std::string& delimiters, std::vector<std::string>& out)
-		{
+namespace str
+{
+inline void tokenizeString(const std::string& s, const std::string& delimiters, std::vector<std::string>& out)
+{
 #ifndef TOO_NO_DEPENDENCIES
-			boost::split(out, s, boost::is_any_of(delimiters));
+    boost::split(out, s, boost::is_any_of(delimiters));
 #else
-			size_t pos_start = s.find_first_not_of(delimiters);
-			size_t pos_end   = s.find_first_of(delimiters, pos_start);
-			while (pos_start != std::string::npos)
-			{
-				out.push_back(s.substr(pos_start, pos_end - pos_start));
-				pos_start = s.find_first_not_of(delimiters, pos_end);
-				pos_end   = s.find_first_of(delimiters, pos_start);
-			}
+    size_t pos_start = s.find_first_not_of(delimiters);
+    size_t pos_end = s.find_first_of(delimiters, pos_start);
+    while (pos_start != std::string::npos)
+    {
+        out.push_back(s.substr(pos_start, pos_end - pos_start));
+        pos_start = s.find_first_not_of(delimiters, pos_end);
+        pos_end   = s.find_first_of(delimiters, pos_start);
+    }
 #endif
-		}
-	}
+}
+}
 }
 
 #endif

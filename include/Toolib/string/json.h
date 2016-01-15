@@ -12,24 +12,24 @@
 
 namespace too
 {
-    template <typename JSON_strtype, typename JSON_value>
-    class IJSON
-    {
-    public:
-        virtual ~IJSON() = default;
+template <typename JSON_strtype, typename JSON_value>
+class IJSON
+{
+public:
+    virtual ~IJSON() = default;
 
-        typedef JSON_strtype JSONstr_type;
-        typedef JSON_value JSONval_type;
+    typedef JSON_strtype JSONstr_type;
+    typedef JSON_value JSONval_type;
 
-        //! Generate JSON string of object.
-        virtual JSONstr_type GetJsonStr() const = 0;
-        //! Generate JSON value of object.
-        virtual JSONval_type GetJsonValue() const = 0;
-        //! Load JSON string into this object.
-        virtual void SetFromJsonStr(const JSONstr_type& str) = 0;
-        //! Load Json::JsonValue into this object.
-        virtual void SetJsonValue(const JSONval_type& root) = 0;
-    };
+    //! Generate JSON string of object.
+    virtual JSONstr_type GetJsonStr() const = 0;
+    //! Generate JSON value of object.
+    virtual JSONval_type GetJsonValue() const = 0;
+    //! Load JSON string into this object.
+    virtual void SetFromJsonStr(const JSONstr_type& str) = 0;
+    //! Load Json::JsonValue into this object.
+    virtual void SetJsonValue(const JSONval_type& root) = 0;
+};
 }
 
 #endif

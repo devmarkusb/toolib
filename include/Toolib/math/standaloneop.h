@@ -4,8 +4,8 @@
 //!
 /** Implements stand-alone operations +,-,*,/ for two objects of the same arbitrary type T.
     This is done in terms of +=,-=,*=,/= that have to be supported by T, as well as
-	a copy constructor.
-	Be careful not to spoil the global namespace with a using directive of namespace stand_alone_ops.
+    a copy constructor.
+    Be careful not to spoil the global namespace with a using directive of namespace stand_alone_ops.
 */
 //! \file
 
@@ -15,32 +15,36 @@
 
 namespace too
 {
-	namespace math
-	{
-		namespace stand_alone_ops
-		{
-			//!
-			template <typename T> const T operator+(const T& t1, const T& t2)
-			{
-				return T(t1)+= t2;
-			}
-			//!
-			template <typename T> const T operator-(const T& t1, const T& t2)
-			{
-				return T(t1)-= t2;
-			}
-			//!
-			template <typename T> const T operator*(const T& t1, const T& t2)
-			{
-				return T(t1)*= t2;
-			}
-			//!
-			template <typename T> const T operator/(const T& t1, const T& t2)
-			{
-				return T(t1)/= t2;
-			}
-		}
-	}
+namespace math
+{
+namespace stand_alone_ops
+{
+//!
+template <typename T>
+const T operator+(const T& t1, const T& t2)
+{
+    return T(t1) += t2;
+}
+//!
+template <typename T>
+const T operator-(const T& t1, const T& t2)
+{
+    return T(t1) -= t2;
+}
+//!
+template <typename T>
+const T operator*(const T& t1, const T& t2)
+{
+    return T(t1) *= t2;
+}
+//!
+template <typename T>
+const T operator/(const T& t1, const T& t2)
+{
+    return T(t1) /= t2;
+}
+}
+}
 }
 
 #endif

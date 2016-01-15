@@ -19,32 +19,31 @@ namespace math
 {
 enum class ENumSys : unsigned char
 {
-    BIN	= 2,
-    OCT	= 8,
-    DEC	= 10,
-    HEX	= 16,
+    BIN = 2,
+    OCT = 8,
+    DEC = 10,
+    HEX = 16,
 };
 
-template<typename T>
+template <typename T>
 inline unsigned char getDigitCount(T Number, ENumSys Base = ENumSys::DEC)
 {
     static_assert(std::is_integral<T>::value, "Only integral numbers are allowed as input");
-	unsigned char count = 0;
+    unsigned char count = 0;
     do
     {
         ++count;
-        Number/= as_number(Base);
-    }
-    while (Number != 0);
+        Number /= as_number(Base);
+    } while (Number != 0);
     return count;
 }
 
-template <typename T> int sgn(T val) {
+template <typename T>
+int sgn(T val)
+{
     return (T(0) < val) - (val < T(0));
 }
-
 }
-
 }
 
 #endif

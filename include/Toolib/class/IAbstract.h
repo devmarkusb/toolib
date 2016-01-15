@@ -12,7 +12,7 @@
 namespace too
 {
 
-using TInBuffer = void*;
+using TInBuffer  = void*;
 using TOutBuffer = void*;
 
 struct IAbstract
@@ -23,7 +23,6 @@ struct IAbstract
     virtual bool SetParameter(const char* name, const TInBuffer value) = 0;
     virtual bool Execute(const char* command, const TInBuffer params[] = nullptr, TOutBuffer retvalue = nullptr) = 0;
 };
-
 }
 
 #endif

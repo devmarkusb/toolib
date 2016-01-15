@@ -8,13 +8,9 @@
 class IAbstractTest : public ::testing::Test
 {
 protected:
-    virtual void SetUp()
-    {
-    }
+    virtual void SetUp() {}
 
-    virtual void TearDown()
-    {
-    }
+    virtual void TearDown() {}
 
     class CTest : public too::IAbstract
     {
@@ -54,7 +50,8 @@ protected:
             return true;
         }
         //! In the real world don't forget to provide a detailed documentation like for GetParameter().
-        virtual bool Execute(const char* command, const too::TInBuffer params[] = nullptr, too::TOutBuffer retvalue = nullptr) override
+        virtual bool Execute(
+            const char* command, const too::TInBuffer params[] = nullptr, too::TOutBuffer retvalue = nullptr) override
         {
             if (!command)
                 return false;
@@ -76,23 +73,24 @@ protected:
         }
 
     private:
-        int m_i = 0;
+        int m_i    = 0;
         double m_d = 0.0;
-        //! Be careful: This is only an example of a more complex type. You shouldn't use std::string over binary boundaries.
+        //! Be careful: This is only an example of a more complex type. You shouldn't use std::string over binary
+        //! boundaries.
         std::string m_s;
 
         void reset()
         {
-            m_i = 0; m_d = 0.0; m_s.clear();
+            m_i = 0;
+            m_d = 0.0;
+            m_s.clear();
         }
-        void run() const
-        {
-            std::cout << "\nCTest::run() called\n";
-        }
+        void run() const { std::cout << "\nCTest::run() called\n"; }
 
         struct SCalcSthParams
         {
-            int i = 0; std::string s;
+            int i = 0;
+            std::string s;
         };
         bool ObtainParamsFromAbstract(const too::TInBuffer params[], SCalcSthParams& ret) const
         {
@@ -107,16 +105,16 @@ protected:
             std::string ret;
             std::stringstream sconv;
             sconv << m_i * p.i;
-            ret+= sconv.str();
-            ret+= ";";
-            ret+= "\"";
-            ret+= m_s + p.s;
-            ret+= "\"";
+            ret += sconv.str();
+            ret += ";";
+            ret += "\"";
+            ret += m_s + p.s;
+            ret += "\"";
             return ret;
         }
     };
 
-    CTest   m_TestObj;
+    CTest m_TestObj;
 };
 
 TEST_F(IAbstractTest, GetParameterInitially)
@@ -138,9 +136,9 @@ TEST_F(IAbstractTest, GetParameterWrong)
     EXPECT_FALSE(m_TestObj.GetParameter("xy", &i));
     EXPECT_EQ(5, i);
     // try crash
-//    EXPECT_DEATH(m_TestObj.GetParameter("s", &i), "");
+    //    EXPECT_DEATH(m_TestObj.GetParameter("s", &i), "");
     // ... or temporarily via
-//    m_TestObj.GetParameter("s", &i);
+    //    m_TestObj.GetParameter("s", &i);
 }
 
 TEST_F(IAbstractTest, SetGetParameter)
@@ -168,9 +166,9 @@ TEST_F(IAbstractTest, SetParameterWrong)
     EXPECT_FALSE(m_TestObj.SetParameter("xy", &i));
     EXPECT_EQ(5, i);
     // try crash
-//    EXPECT_DEATH(m_TestObj.SetParameter("s", &i), "");
+    //    EXPECT_DEATH(m_TestObj.SetParameter("s", &i), "");
     // ... or temporarily via
-//    m_TestObj.SetParameter("s", &i);
+    //    m_TestObj.SetParameter("s", &i);
 }
 
 TEST_F(IAbstractTest, ExecuteWithoutPara)
@@ -201,9 +199,9 @@ TEST_F(IAbstractTest, ExecuteWithParaAndRet)
     std::string s("Hello World!");
     m_TestObj.SetParameter("s", &s);
     std::string out;
-    int ip = 2;
+    int ip         = 2;
     std::string sp = " And once more: Hello World!";
-    void* param[] = { &ip, &sp };
+    void* param[] = {&ip, &sp};
     EXPECT_TRUE(m_TestObj.Execute("calcSth", param, &out));
     EXPECT_EQ("20;\"Hello World! And once more: Hello World!\"", out);
 }
