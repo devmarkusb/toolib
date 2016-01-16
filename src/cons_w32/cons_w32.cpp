@@ -7,6 +7,8 @@
 //! \file
 
 #include "Toolib/cons_w32/cons_w32.h"
+#include <stdexcept>
+
 
 namespace too
 {
@@ -25,6 +27,8 @@ Console::Console()
     , m_bMouseEvent(false)
 {
     HMODULE kernel32      = GetModuleHandle(TEXT("kernel32.dll"));
+	if (!kernel32)
+		throw std::runtime_error("no handle for kernel32.dll");
     SetConsoleDisplayMode = reinterpret_cast<SETCONSOLEDISPLAYMODE>(GetProcAddress(kernel32, "SetConsoleDisplayMode"));
 
     hide();
@@ -159,7 +163,7 @@ SHORT Console::getMaxWndSizeY() const
 
 std::basic_string<TCHAR> Console::getTitle() const
 {
-    const int MAX_TITLE_LEN = 64 * 1024;
+    const int MAX_TITLE_LEN = 512;
 
     TCHAR title[MAX_TITLE_LEN];
     GetConsoleTitle(title, MAX_TITLE_LEN);

@@ -14,13 +14,15 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include "Toolib/argsused.h"
+
 
 namespace too
 {
 inline void prompt()
 {
     if (_kbhit())
-        _getch();
+        too::ignore_arg(_getch());
     std::cout << "\nHit any key...";
     while (!_kbhit())
         std::this_thread::sleep_for(std::chrono::milliseconds(1));

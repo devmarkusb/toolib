@@ -22,7 +22,7 @@
 #if STR2WSTR_TRY_CODECVT_SUPPORT == 1
 #include <codecvt>
 #endif
-#if TOO_WINDOWS
+#if TOO_OS_WINDOWS
 #include <winnls.h>
 #endif
 
