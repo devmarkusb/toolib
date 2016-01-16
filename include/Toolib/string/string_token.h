@@ -7,8 +7,8 @@
 //! \file
 
 
-#ifndef STRING_DELIM_H_INCL_uwireiwubefeubf
-#define STRING_DELIM_H_INCL_uwireiwubefeubf
+#ifndef STRING_TOKEN_H_INCL_uwireiwubefeubf
+#define STRING_TOKEN_H_INCL_uwireiwubefeubf
 
 #ifndef TOO_NO_DEPENDENCIES
 #include "Toolib/PPDefs/MSVC/SUPPRESS_WARNINGS_EXTERNAL_BEGIN" // <- doesn't work, why?!

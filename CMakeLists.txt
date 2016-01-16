@@ -68,6 +68,7 @@ endif ()
 target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooBuildEnv/include)
 target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooBasicCodeSupport/include)
 target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooLinklib/include)
+target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooString/include)
 
 get_directory_property(hasParent PARENT_DIRECTORY)
 if(hasParent)
@@ -117,6 +118,7 @@ target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooBuildEnv/in
 target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooBasicCodeSupport/include)
 target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooLinklib/include)
 target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooMem/include)
+target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooString/include)
 
 target_link_libraries(${TargetToolibTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(${TargetToolibTest} PRIVATE ${TargetToolib})

@@ -1,9 +1,6 @@
 #include "ToolibDEF.h"
 
-#include "Toolib/lex_cast.h"
 #include "Toolib/performance.h"
-#include "Toolib/tooString.h"
-#include "Toolib/locale.h"
 #include "Toolib/ToolibDummy.h"
 
 #include "Toolib/class/non_copyable.h"
@@ -40,9 +37,6 @@
 #include "Toolib/scope/raii_p.h"
 #include "Toolib/scope/autoptr.h"
 
-#include "Toolib/string/str_convert.h"
-#include "Toolib/string/string_delim.h"
-#include "Toolib/string/string_misc.h"
+#include "Toolib/string/lex_cast.h"
+#include "Toolib/string/string_token.h"
 #include "Toolib/string/string_trim.h"
-#include "Toolib/string/makestr.h"
-#include "Toolib/string/json.h"

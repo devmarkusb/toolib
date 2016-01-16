@@ -10,7 +10,7 @@
 #define PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
 
 #include <vector>
-#include "Toolib/tooString.h"
+#include "Toolib/string/tooString.h"
 #include "ToolibDEF.h"
 
 namespace too

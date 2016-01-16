@@ -10,7 +10,7 @@
 #ifndef NUMBER_H_INCL_f29jh8hnf238hrxz23
 #define NUMBER_H_INCL_f29jh8hnf238hrxz23
 
-#include "Toolib/tooString.h"
+#include "Toolib/string/tooString.h"
 #include "Toolib/enum_cast.h"
 
 namespace too

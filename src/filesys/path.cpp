@@ -8,7 +8,7 @@
 
 #include "Toolib/filesys/path.h"
 #include "Toolib/PPDEFS.h"
-#include "Toolib/string/string_delim.h"
+#include "Toolib/string/string_token.h"
 #include <assert.h>
 #include <algorithm>
 
