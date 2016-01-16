@@ -14,24 +14,24 @@
 
 namespace
 {
-const too::string OS_POSSIBLE_SEPARATORS = _TOOSTR("/\\");
+const std::string OS_POSSIBLE_SEPARATORS = "/\\";
 #if TOO_OS_WINDOWS
-const too::string OS_FOLDER_SEPARATOR = _TOOSTR("\\");
+const std::string OS_FOLDER_SEPARATOR = "\\";
 #else
-const too::string OS_FOLDER_SEPARATOR = _TOOSTR("/");
+const std::string OS_FOLDER_SEPARATOR = "/";
 #endif
 }
 
 using namespace too::file;
 
-const too::string CPath::FOLDER_SEPARATOR_TO_USE_HERE = _TOOSTR("/");
+const std::string CPath::FOLDER_SEPARATOR_TO_USE_HERE = "/";
 
-CPath::CPath(const too::string& path, EForm form, EType type) : m_form(form), m_type(type)
+CPath::CPath(const std::string& path, EForm form, EType type) : m_form(form), m_type(type)
 {
     *m_path = path;
 }
 
-CPath::CPath(too::string& path, bool useByReference, EForm form, EType type) : m_form(form), m_type(type)
+CPath::CPath(std::string& path, bool useByReference, EForm form, EType type) : m_form(form), m_type(type)
 {
     if (useByReference)
         m_path = &path;
@@ -72,7 +72,7 @@ void CPath::swap(CPath& other)
     std::swap(m_type, other.m_type);
 }
 
-CPath::operator too::string() const
+CPath::operator std::string() const
 {
     return *m_path;
 }
@@ -84,7 +84,7 @@ CPath& CPath::operator+=(const CPath& other)
     ensureTrailingSeparator();
     std::vector<std::string> newparts;
     too::str::tokenizeString(*other.m_path, OS_POSSIBLE_SEPARATORS, newparts);
-    const too::string sep(getSeparatorUsedHere());
+    const std::string sep(getSeparatorUsedHere());
     for (const std::string& part : newparts)
     {
         *m_path += part;
@@ -93,38 +93,38 @@ CPath& CPath::operator+=(const CPath& other)
     return *this;
 }
 
-too::string CPath::getFolderPath() const
+std::string CPath::getFolderPath() const
 {
     if (m_type != EType::IS_FILE && m_type != EType::IS_UNKNOWN)
-        return too::string();
+        return std::string();
     if (isEmpty() || (*m_path)[m_path->size() - 1] == getSeparatorUsedHere()[0])
-        return too::string();
+        return std::string();
     size_t index = m_path->find_last_of(getSeparatorUsedHere());
-    if (index == too::string::npos)
-        return too::string();
+    if (index == std::string::npos)
+        return std::string();
     return m_path->substr(0, index + 1);
 }
 
-too::string CPath::getFileName() const
+std::string CPath::getFileName() const
 {
     if (m_type != EType::IS_FILE && m_type != EType::IS_UNKNOWN)
-        return too::string();
+        return std::string();
     if (isEmpty() || (*m_path)[m_path->size() - 1] == getSeparatorUsedHere()[0])
-        return too::string();
+        return std::string();
     size_t index = m_path->find_last_of(getSeparatorUsedHere());
-    if (index == too::string::npos)
-        return too::string();
+    if (index == std::string::npos)
+        return std::string();
     return m_path->substr(index + 1);
 }
 
-too::string CPath::getExtension() const
+std::string CPath::getExtension() const
 {
     if (m_type != EType::IS_FILE && m_type != EType::IS_UNKNOWN)
-        return too::string();
+        return std::string();
     size_t index = m_path->find_last_of('.');
     // no ext || hidden file (starts with dot) || filename ends with a dot
-    if (index == too::string::npos || index == 0 || index == m_path->size() - 1)
-        return too::string();
+    if (index == std::string::npos || index == 0 || index == m_path->size() - 1)
+        return std::string();
     return m_path->substr(index + 1);
 }
 
@@ -174,7 +174,7 @@ CPath& CPath::ensureTrailingSeparator(bool native)
 {
     if (m_path->empty() || m_type == EType::IS_FILE || m_type == EType::IS_LINK)
         return *this;
-    too::string SepToUse = FOLDER_SEPARATOR_TO_USE_HERE;
+    std::string SepToUse = FOLDER_SEPARATOR_TO_USE_HERE;
     if (native)
         SepToUse = OS_FOLDER_SEPARATOR;
     assert(!SepToUse.empty());
@@ -183,20 +183,20 @@ CPath& CPath::ensureTrailingSeparator(bool native)
     return *this;
 }
 
-const too::string& CPath::getSeparatorUsedHere() const
+const std::string& CPath::getSeparatorUsedHere() const
 {
     if (m_form == EForm::UNKNOWN)
         detectForm();
     return m_form == EForm::NATIVE ? getSeparatorNative() : getSeparatorPlatformIndep();
 }
 
-const too::string& CPath::getSeparatorNative()
+const std::string& CPath::getSeparatorNative()
 {
     assert(!OS_FOLDER_SEPARATOR.empty());
     return OS_FOLDER_SEPARATOR;
 }
 
-const too::string& CPath::getSeparatorPlatformIndep()
+const std::string& CPath::getSeparatorPlatformIndep()
 {
     assert(!FOLDER_SEPARATOR_TO_USE_HERE.empty());
     return FOLDER_SEPARATOR_TO_USE_HERE;
@@ -205,7 +205,7 @@ const too::string& CPath::getSeparatorPlatformIndep()
 void CPath::detectForm() const
 {
     size_t pos = m_path->find_first_of(OS_POSSIBLE_SEPARATORS);
-    if (pos != too::string::npos)
+    if (pos != std::string::npos)
     {
         if ((*m_path)[pos] == getSeparatorPlatformIndep()[0])
             m_form = EForm::PLATFORMINDEPENDENT;
