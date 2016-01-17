@@ -14,7 +14,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-#include "Toolib/argsused.h"
+#include "Toolib/ignore_arg.h"
 
 
 namespace too

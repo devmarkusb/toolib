@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
-#include "Toolib/argsused.h"
+#include "Toolib/ignore_arg.h"
 
 
 TEST(ToFormattedStringTest, Rounding)
