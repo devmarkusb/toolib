@@ -1,7 +1,31 @@
 #include "gtest/gtest.h"
 
-
-TEST(function_or_classTest, test)
+struct function_or_classTest : public ::testing::Test
 {
-    EXPECT_TRUE(true);
+    function_or_classTest()
+    {
+    }
+
+    void SetUp()
+    {
+    }
+	
+	void f()
+	{
+        EXPECT_TRUE(true);
+	}
+
+    void TearDown()
+    {
+    }
+
+    ~function_or_classTest()
+    {
+    }
+};
+
+
+TEST_F(function_or_classTest, test)
+{
+	f();
 }
