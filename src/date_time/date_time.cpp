@@ -72,47 +72,6 @@ void normalize::do_it(std::pair<Years, Months>& y_m)
     }
 }
 
-MonthYear_base<> operator-(MonthYear_base<> lhs, const MonthYear_base<>& rhs)
-{
-    lhs -= rhs;
-    return lhs;
-}
-
-MonthYear_base<> operator+(MonthYear_base<> lhs, const MonthYear_base<>& rhs)
-{
-    lhs += rhs;
-    return lhs;
-}
-
-bool operator==(const MonthYear_base<>& lhs, const MonthYear_base<>& rhs)
-{
-    return lhs.y_m == rhs.y_m;
-}
-
-bool operator!=(const MonthYear_base<>& lhs, const MonthYear_base<>& rhs)
-{
-    return !operator==(lhs, rhs);
-}
-
-bool operator<(const MonthYear_base<>& lhs, const MonthYear_base<>& rhs)
-{
-    return lhs.y_m < rhs.y_m;
-}
-
-bool operator>(const MonthYear_base<>& lhs, const MonthYear_base<>& rhs)
-{
-    return operator<(rhs, lhs);
-}
-
-bool operator<=(const MonthYear_base<>& lhs, const MonthYear_base<>& rhs)
-{
-    return !operator>(lhs, rhs);
-}
-
-bool operator>=(const MonthYear_base<>& lhs, const MonthYear_base<>& rhs)
-{
-    return !operator<(lhs, rhs);
-}
 
 }
 }

@@ -19,8 +19,8 @@ set(TargetToolib "Toolib")
 
 include(defaults.cmake)
 
-file(GLOB_RECURSE TargetToolib_INCS "include/*.h")
-file(GLOB_RECURSE TargetToolib_SRC_INCS "src/*.h")
+file(GLOB_RECURSE TargetToolib_INCS "include/*.h*")
+file(GLOB_RECURSE TargetToolib_SRC_INCS "src/*.h*")
 
 set(TargetToolib_SOURCES
     src/ToolibDummy.cpp
@@ -82,7 +82,7 @@ endif()
 
 set(TargetToolibTest "ToolibTest")
 
-file(GLOB_RECURSE TargetToolibTest_SRC_INCS "test/*.h")
+file(GLOB_RECURSE TargetToolibTest_SRC_INCS "test/*.h*")
 
 set(TargetToolibTest_SOURCES
     test/src/_header_compile.test.cpp
@@ -126,7 +126,7 @@ target_link_libraries(${TargetToolibTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(${TargetToolibTest} PRIVATE ${TargetToolib})
 
 
-set(do_auto_test	OFF)
+set(do_auto_test	ON)
 
 if (do_auto_test)
 add_custom_command(
