@@ -1,4 +1,4 @@
-// Markus Borris, 2011
+// Markus Borris, 2011-2016
 // This file is part of Toolib library. Open source.
 
 //!
@@ -16,6 +16,8 @@
 #include <exception>
 #endif
 #include "Toolib/PPDEFS.h"
+#include "Toolib/std/std_extensions.h"
+
 
 namespace too
 {
@@ -50,7 +52,7 @@ inline T lex_cast_Throw(const S& s)
 }
 
 template <typename T, typename S>
-inline T lex_cast(const S& s)
+inline T lex_cast(const S& s) noexcept
 {
     try
     {

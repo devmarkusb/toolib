@@ -28,6 +28,7 @@ set(TargetToolib_SOURCES
     src/cons_w32/catch_exit.cpp
     src/cons_w32/cons_w32.cpp
     src/filesys/path.cpp
+    src/date_time/date_time.cpp
 )
 
 add_library(${TargetToolib} SHARED
@@ -90,6 +91,7 @@ set(TargetToolibTest_SOURCES
     test/src/math/roundTest.cpp
     test/src/math/scaleTest.cpp
     test/src/math/floating_pointTest.cpp
+    test/src/date_time/date_time.test.cpp
     test/src/filesys/pathTest.cpp
     test/src/performanceTest.cpp
 )
@@ -124,7 +126,11 @@ target_link_libraries(${TargetToolibTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(${TargetToolibTest} PRIVATE ${TargetToolib})
 
 
+set(do_auto_test	OFF)
+
+if (do_auto_test)
 add_custom_command(
   TARGET ${TargetToolibTest} POST_BUILD
   COMMAND ${TargetToolibTest}
 )
+endif ()

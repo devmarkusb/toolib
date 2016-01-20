@@ -36,3 +36,21 @@ TEST(MathNumberGetDecDigitCountTest, Hex)
     EXPECT_EQ(1, too::math::getDigitCount(15, too::math::ENumSys::HEX));
     EXPECT_EQ(2, too::math::getDigitCount(16, too::math::ENumSys::HEX));
 }
+
+TEST(math_sgnTest, Hex)
+{
+    EXPECT_EQ(0, too::math::sgn(0));
+    EXPECT_EQ(+1, too::math::sgn(1));
+    EXPECT_EQ(-1, too::math::sgn(-1));
+    EXPECT_EQ(+1, too::math::sgn(5));
+    EXPECT_EQ(-1, too::math::sgn(-5));
+
+    EXPECT_EQ(0, too::math::sgn(0.0));
+    EXPECT_EQ(+1, too::math::sgn(1.0));
+    EXPECT_EQ(-1, too::math::sgn(-1.0));
+
+    EXPECT_EQ(0, too::math::sgn(0u));
+    EXPECT_EQ(+1, too::math::sgn(1u));
+
+    EXPECT_EQ(-1, too::math::sgn(-1L));
+}
