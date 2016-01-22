@@ -93,6 +93,7 @@ set(TargetToolibTest_SOURCES
     test/src/math/scaleTest.cpp
     test/src/math/floating_pointTest.cpp
     test/src/date_time/date_time.test.cpp
+    test/src/date_time/cal_event.test.cpp
     test/src/filesys/pathTest.cpp
     test/src/performanceTest.cpp
 )

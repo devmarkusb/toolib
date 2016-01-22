@@ -27,5 +27,5 @@ struct function_or_classTest : public ::testing::Test
 
 TEST_F(function_or_classTest, test)
 {
-	f();
+    f();
 }
