@@ -23,13 +23,19 @@ namespace date_time
 //! Months type, represents absolute as well as difference values.
 using Months = int;
 //! Years type, represents absolute as well as difference values.
-using Years  = int;
+using Years = int;
 
 //! Ensures month to be 1..12 and month and year having the same sign.
 //! Only exception: {0, 0} will be mapped to {0, 0}.
-struct TOOLIBSHARED_EXPORT normalize { static void do_it(std::pair<Years, Months>& y_m); };
+struct TOOLIBSHARED_EXPORT normalize
+{
+    static void do_it(std::pair<Years, Months>& y_m);
+};
 //! Doesn't \ref normalize.
-struct TOOLIBSHARED_EXPORT dont_normalize { static void do_it(std::pair<Years, Months>&) {} };
+struct TOOLIBSHARED_EXPORT dont_normalize
+{
+    static void do_it(std::pair<Years, Months>&) {}
+};
 
 //! Contract: class is always in that normalized state if \ref normalize policy is chosen.
 template <class NormalizePolicy = normalize>
@@ -89,9 +95,11 @@ private:
 };
 
 template <class NormalizePolicy>
-MonthYear_base<NormalizePolicy> operator-(MonthYear_base<NormalizePolicy> lhs, const MonthYear_base<NormalizePolicy>& rhs);
+MonthYear_base<NormalizePolicy> operator-(
+    MonthYear_base<NormalizePolicy> lhs, const MonthYear_base<NormalizePolicy>& rhs);
 template <class NormalizePolicy>
-MonthYear_base<NormalizePolicy> operator+(MonthYear_base<NormalizePolicy> lhs, const MonthYear_base<NormalizePolicy>& rhs);
+MonthYear_base<NormalizePolicy> operator+(
+    MonthYear_base<NormalizePolicy> lhs, const MonthYear_base<NormalizePolicy>& rhs);
 
 template <class NP>
 bool operator==(const MonthYear_base<NP>& lhs, const MonthYear_base<NP>& rhs);
@@ -112,7 +120,6 @@ static_assert(MonthYear_decl::twelve % 2 == 0, "");
 const MonthYear_base<dont_normalize> half_year(MonthYear_decl::twelve / 2, 0);
 const MonthYear_base<dont_normalize> quarter_year(MonthYear_decl::twelve / 4, 0);
 const MonthYear_base<dont_normalize> one_month(1, 0);
-
 }
 }
 

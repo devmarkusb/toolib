@@ -55,7 +55,6 @@ struct IType
 
     virtual too::owner<IType*> clone() = 0;
 };
-
 }
 
 #endif

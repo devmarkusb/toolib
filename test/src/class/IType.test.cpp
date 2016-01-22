@@ -29,10 +29,7 @@ struct SomeType_flexed : public too::IType
     SomeType_flexed(const SomeType& x) : rep(x) {}
     SomeType_flexed(SomeType&& x) : rep(std::move(x)) {}
 
-    virtual too::owner<SomeType_flexed*> clone() override
-    {
-        return new SomeType_flexed(*this);
-    }
+    virtual too::owner<SomeType_flexed*> clone() override { return new SomeType_flexed(*this); }
 
 private:
     SomeType rep;
@@ -47,11 +44,8 @@ struct UserA : public IUser
 {
     virtual void f(too::IType*) {}
 };
-
 }
 
 TEST(ITypeTest, test)
 {
-
 }
-

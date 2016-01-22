@@ -26,9 +26,9 @@ Console::Console()
     , m_bKeyEvent(false)
     , m_bMouseEvent(false)
 {
-    HMODULE kernel32      = GetModuleHandle(TEXT("kernel32.dll"));
-	if (!kernel32)
-		throw std::runtime_error("no handle for kernel32.dll");
+    HMODULE kernel32 = GetModuleHandle(TEXT("kernel32.dll"));
+    if (!kernel32)
+        throw std::runtime_error("no handle for kernel32.dll");
     SetConsoleDisplayMode = reinterpret_cast<SETCONSOLEDISPLAYMODE>(GetProcAddress(kernel32, "SetConsoleDisplayMode"));
 
     hide();

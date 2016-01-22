@@ -41,10 +41,7 @@ public:
     explicit SingleEvent(const TimeType& t) { setTimePoint(t); }
     virtual ~SingleEvent() = default;
 
-    virtual too::owner<SingleEvent<TimeType>*> clone() const override
-    {
-        return new SingleEvent<TimeType>(*this);
-    }
+    virtual too::owner<SingleEvent<TimeType>*> clone() const override { return new SingleEvent<TimeType>(*this); }
 
     virtual std::unique_ptr<TimeType> getFirstTimePoint() const override
     {
@@ -72,10 +69,7 @@ public:
     RecurringEvent(const RecurringEvent& other);
     RecurringEvent& operator=(const RecurringEvent& other);
 
-    virtual too::owner<RecurringEvent<TimeType>*> clone() const override
-    {
-        return new RecurringEvent<TimeType>(*this);
-    }
+    virtual too::owner<RecurringEvent<TimeType>*> clone() const override { return new RecurringEvent<TimeType>(*this); }
 
     virtual std::unique_ptr<TimeType> getFirstTimePoint() const override;
     virtual std::unique_ptr<TimeType> getNextTimePoint(const TimeType& RelativeTo) const override;
@@ -134,7 +128,6 @@ std::unique_ptr<TimeType> RecurringEvent<TimeType>::getNextTimePoint(const TimeT
     else
         return std::make_unique<TimeType>(next);
 }
-
 }
 }
 

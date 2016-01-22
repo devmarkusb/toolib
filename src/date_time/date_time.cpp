@@ -71,7 +71,5 @@ void normalize::do_it(std::pair<Years, Months>& y_m)
         return;
     }
 }
-
-
 }
 }

@@ -76,7 +76,7 @@ MonthYear_base<NormalizePolicy>::MonthYear_base(const std::string& fromString)
     TOO_ASSERT_THROW(parts.size() == 2);
 
     this->y_m.second = std::stoi(parts[0]);
-    this->y_m.first  = std::stoi(parts[1]);
+    this->y_m.first = std::stoi(parts[1]);
     NormalizePolicy::do_it(this->y_m);
 }
 
@@ -128,14 +128,16 @@ std::ostream& operator<<(std::ostream& out, const MonthYear_base<NormalizePolicy
 }
 
 template <class NormalizePolicy>
-MonthYear_base<NormalizePolicy> operator-(MonthYear_base<NormalizePolicy> lhs, const MonthYear_base<NormalizePolicy>& rhs)
+MonthYear_base<NormalizePolicy> operator-(
+    MonthYear_base<NormalizePolicy> lhs, const MonthYear_base<NormalizePolicy>& rhs)
 {
     lhs -= rhs;
     return lhs;
 }
 
 template <class NormalizePolicy>
-MonthYear_base<NormalizePolicy> operator+(MonthYear_base<NormalizePolicy> lhs, const MonthYear_base<NormalizePolicy>& rhs)
+MonthYear_base<NormalizePolicy> operator+(
+    MonthYear_base<NormalizePolicy> lhs, const MonthYear_base<NormalizePolicy>& rhs)
 {
     lhs += rhs;
     return lhs;
@@ -176,7 +178,6 @@ bool operator>=(const MonthYear_base<NormalizePolicy>& lhs, const MonthYear_base
 {
     return !operator<(lhs, rhs);
 }
-
 }
 }
 

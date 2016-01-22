@@ -2,30 +2,16 @@
 
 struct function_or_classTest : public ::testing::Test
 {
-    function_or_classTest()
-    {
-    }
+    function_or_classTest() {}
 
-    void SetUp()
-    {
-    }
-	
-	void f()
-	{
-        EXPECT_TRUE(true);
-	}
+    void SetUp() {}
 
-    void TearDown()
-    {
-    }
+    void f() { EXPECT_TRUE(true); }
 
-    ~function_or_classTest()
-    {
-    }
+    void TearDown() {}
+
+    ~function_or_classTest() {}
 };
 
 
-TEST_F(function_or_classTest, test)
-{
-	f();
-}
+TEST_F(function_or_classTest, test) { f(); }

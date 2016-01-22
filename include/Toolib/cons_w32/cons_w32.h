@@ -341,10 +341,10 @@ public:
         cNumRead = 0;
         GetNumberOfConsoleInputEvents(hInput, &num);
         INPUT_RECORD irInBuf[128];
-		if (num == 0)
-			return false;
-		if (!ReadConsoleInput(hInput, irInBuf, 128, &cNumRead))
-			return false;
+        if (num == 0)
+            return false;
+        if (!ReadConsoleInput(hInput, irInBuf, 128, &cNumRead))
+            return false;
         for (DWORD i = 0; i < cNumRead; i++)
         {
             if (!m_bKeyEvent && irInBuf[i].EventType == KEY_EVENT)

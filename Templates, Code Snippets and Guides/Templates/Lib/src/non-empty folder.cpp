@@ -1,5 +1,3 @@
 #include "non-empty folder.h"
 
-void f()
-{
-}
+void f() {}
