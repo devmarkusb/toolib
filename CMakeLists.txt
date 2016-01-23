@@ -29,6 +29,7 @@ set(TargetToolib_SOURCES
     src/cons_w32/cons_w32.cpp
     src/filesys/path.cpp
     src/date_time/date_time.cpp
+    src/financial/money.cpp
 )
 
 add_library(${TargetToolib} SHARED
@@ -96,6 +97,7 @@ set(TargetToolibTest_SOURCES
     test/src/date_time/cal_event.test.cpp
     test/src/filesys/pathTest.cpp
     test/src/performanceTest.cpp
+    test/src/financial/money.test.cpp
 )
 
 add_executable(${TargetToolibTest}

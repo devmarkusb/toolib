@@ -39,7 +39,7 @@ struct TOOLIBSHARED_EXPORT dont_normalize
 
 //! Contract: class is always in that normalized state if \ref normalize policy is chosen.
 template <class NormalizePolicy = normalize>
-class TOOLIBSHARED_EXPORT MonthYear_base;
+class MonthYear_base;
 
 //! Works as an absolute type as well as a difference type.
 using MonthYear = MonthYear_base<>;
@@ -52,7 +52,7 @@ struct TOOLIBSHARED_EXPORT MonthYear_decl
 
 //! Works as an absolute type as well as a difference type.
 template <class NormalizePolicy>
-class TOOLIBSHARED_EXPORT MonthYear_base : public MonthYear_decl
+class MonthYear_base : public MonthYear_decl
 {
 public:
     MonthYear_base() = default;
