@@ -90,6 +90,29 @@ TOOLIBSHARED_EXPORT bool operator<=(const Money& lhs, const Money& rhs);
 TOOLIBSHARED_EXPORT bool operator>=(const Money& lhs, const Money& rhs);
 
 
+//##########################################################################################################
+
+//! Should be understood in relation to Fraction as follows: 'Percent' == 'Fraction' * 100.
+using Percent = long double;
+//! Should be understood in relation to Percent as follows: 'Percent' == 'Fraction' * 100.
+using Fraction = long double;
+
+class TOOLIBSHARED_EXPORT Interest_pa
+{
+public:
+    explicit Interest_pa(Percent p = Percent()) : p(p) {}
+
+    void operator=(Percent p) { this->p = p; }
+
+    operator Percent() const { return this->p; }
+
+    Fraction dividedBy100() const { return this->p / 100.0; }
+
+    static Fraction YearlyEffective_to_MonthlyRelative(Fraction pa);
+
+private:
+    Percent p = Percent();
+};
 
 }
 }

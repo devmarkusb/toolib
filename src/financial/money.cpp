@@ -10,6 +10,7 @@
 #include <locale>
 #include "Toolib/assert.h"
 #include "Toolib/error.h"
+#include "Toolib/date_time/date_time.h"
 
 
 namespace too
@@ -147,6 +148,16 @@ bool operator>=(const Money& lhs, const Money& rhs)
 {
     return !operator<(lhs, rhs);
 }
+
+
+//##########################################################################################################
+
+
+Fraction Interest_pa::YearlyEffective_to_MonthlyRelative(Fraction pa)
+{
+    return std::pow(1.0 + pa, 1.0 / too::date_time::MonthYear_decl::twelve) - 1.0;
+}
+
 
 }
 }
