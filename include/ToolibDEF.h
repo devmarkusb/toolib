@@ -1,5 +1,5 @@
 // Markus Borris, 2014
-// This file is part of my Toolib library. Open source.
+// This file is part of my Toolib library.
 
 //! File serves to export symbols for Toolib as a library.
 /** Note that it uses itself a little bit to do that.

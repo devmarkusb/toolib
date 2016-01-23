@@ -1,5 +1,5 @@
 // Markus Borris, 2011
-// This file is part of Toolib library. Open source.
+// This file is part of Toolib library.
 
 //!
 /** Implements stand-alone operations +,-,*,/ for two objects of the same arbitrary type T.

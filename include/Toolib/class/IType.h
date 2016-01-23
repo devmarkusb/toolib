@@ -1,5 +1,5 @@
 // Markus Borris, 2016
-// This file is part of Toolib library. Open source.
+// This file is part of Toolib library.
 
 //!
 /** This is left for documentation or future thinking. Apparently there should be
