@@ -53,7 +53,7 @@ template <class NormalizePolicy>
 template <class NP>
 MonthYear_base<NormalizePolicy>::MonthYear_base(MonthYear_base<NP>&& other)
 {
-    this->y_m = std::move(other);
+    this->y_m = std::move(other.y_m);
     NormalizePolicy::do_it(this->y_m);
 }
 
@@ -61,8 +61,8 @@ template <class NormalizePolicy>
 template <class NP>
 MonthYear_base<NormalizePolicy>& MonthYear_base<NormalizePolicy>::operator=(MonthYear_base<NP>&& other)
 {
-    MonthYear_base<NormalizePolicy> tmp(std::forward(other));
-    *this = std::move(tmp);
+    this->y_m = std::move(other.y_m);
+    NormalizePolicy::do_it(this->y_m);
     return *this;
 }
 
