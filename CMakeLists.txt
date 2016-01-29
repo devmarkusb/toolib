@@ -89,6 +89,7 @@ set(TargetToolibTest_SOURCES
     test/src/_header_compile.test.cpp
     test/src/class/IAbstractTest.cpp
     test/src/class/IType.test.cpp
+    test/src/class/non_copyable.test.cpp
     test/src/math/numberTest.cpp
     test/src/math/roundTest.cpp
     test/src/math/scaleTest.cpp
