@@ -11,6 +11,7 @@
 #include "Toolib/assert.h"
 #include "Toolib/error.h"
 #include "Toolib/date_time/date_time.h"
+#include "Toolib/string/str_convert.h"
 
 
 namespace too
@@ -24,12 +25,16 @@ Currency::Currency(const std::locale& loc) : loc(loc) {}
 
 std::string Currency::getString() const
 {
-    return std::use_facet<std::moneypunct<char, true>>(this->loc).curr_symbol();
+	const std::string loc_enc = std::use_facet<std::moneypunct<char, true>>(this->loc).curr_symbol();
+	const std::wstring utf16ws = too::str::locenc_s2ws(loc_enc);
+	return too::str::utf16to8_ws2s_portable(utf16ws);
 }
 
 std::string Currency::getSymbol() const
 {
-    return std::use_facet<std::moneypunct<char>>(this->loc).curr_symbol();
+	const std::string loc_enc = std::use_facet<std::moneypunct<char>>(this->loc).curr_symbol();
+	const std::wstring utf16ws = too::str::locenc_s2ws(loc_enc);
+	return too::str::utf16to8_ws2s_portable(utf16ws);
 }
 
 std::string Currency::getLocaleConstrName() const
