@@ -1,4 +1,4 @@
-// Markus Borris, 2011
+// Markus Borris, 2011-16
 // This file is part of Toolib library.
 
 //!
@@ -11,6 +11,8 @@
 #define NON_COPYABLE_H_INCL_imcutoiu34o5
 
 #include "Toolib/std/std_extensions.h"
+#include "Toolib/PPDEFS.h"
+
 
 namespace too
 {
@@ -24,8 +26,10 @@ protected:
     ~non_copyable() = default;
     non_copyable(const non_copyable&) = delete;
     non_copyable& operator=(const non_copyable&) = delete;
-    // non_copyable(non_copyable&&) = default;
-    // non_copyable& operator=(non_copyable&&) = default;
+#if TOO_HAS_CPP11_DEFAULT_MOVES
+     non_copyable(non_copyable&&) = default;
+     non_copyable& operator=(non_copyable&&) = default;
+#endif
 };
 }
 

@@ -25,19 +25,27 @@ namespace math
 template <typename FloatingPointType>
 class Map_LinearScale_Interval_to_Interval
 {
+    static_assert(std::is_floating_point<FloatingPointType>::value, "floating point type expected");
+
 public:
     Map_LinearScale_Interval_to_Interval(const std::pair<FloatingPointType, FloatingPointType>& FromInterval,
-        const std::pair<FloatingPointType, FloatingPointType>& ToInterval)
+                                         const std::pair<FloatingPointType, FloatingPointType>& ToInterval)
         : m_FromInterval(FromInterval), m_ToInterval(ToInterval)
     {
         TOO_EXPECT(FromInterval.first < FromInterval.second);
         TOO_EXPECT(ToInterval.first < ToInterval.second);
     }
 
-    double operator()(const double& x)
+    FloatingPointType operator()(const FloatingPointType& from) const
     {
-        return (x - m_FromInterval.first) * (m_ToInterval.second - m_ToInterval.first) /
+        return (from - m_FromInterval.first) * (m_ToInterval.second - m_ToInterval.first) /
             (m_FromInterval.second - m_FromInterval.first);
+    }
+
+    FloatingPointType inverse(const FloatingPointType& to) const
+    {
+        return to * (m_FromInterval.second - m_FromInterval.first) /
+                (m_ToInterval.second - m_ToInterval.first) + m_FromInterval.first;
     }
 
 private:
@@ -45,11 +53,15 @@ private:
     std::pair<FloatingPointType, FloatingPointType> m_ToInterval;
 };
 
+
+//!
+using ScaleTickCount = unsigned long;
+
 //! Calculates a meaningful step width (tick) for a scale with at most \param MaxTickCount tick markers suitable for a
 //! data value range comprising \RangeMinToMax.
 template <typename T>
 //  requires T > 0
-inline double calcNiceScaleTick(T RangeMinToMax, unsigned long MaxTickCount)
+inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
 {
     TOO_EXPECT(MaxTickCount);
     const double MaxTickCount_ = narrow<double>(MaxTickCount);

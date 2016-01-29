@@ -44,11 +44,13 @@ class MonthYear_base;
 //! Works as an absolute type as well as a difference type.
 using MonthYear = MonthYear_base<>;
 
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
 struct TOOLIBSHARED_EXPORT MonthYear_decl
 {
     static const Months twelve = 12;
     static const std::string string_delim;
 };
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
 
 //! Works as an absolute type as well as a difference type.
 template <class NormalizePolicy>

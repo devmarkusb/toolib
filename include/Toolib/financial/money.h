@@ -22,6 +22,7 @@ namespace fin
 
 //##########################################################################################################
 
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
 //!
 class TOOLIBSHARED_EXPORT Currency
 {
@@ -40,6 +41,7 @@ public:
 private:
     std::locale loc;
 };
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
 
 bool operator==(const Currency& lhs, const Currency& rhs);
 bool operator!=(const Currency& lhs, const Currency& rhs);
@@ -67,12 +69,12 @@ public:
     Money& operator*=(BaseType rhs);
     Money& operator/=(BaseType rhs);
 
-    friend bool operator==(const Money& lhs, const Money& rhs);
-    friend bool operator!=(const Money& lhs, const Money& rhs);
-    friend bool operator<(const Money& lhs, const Money& rhs);
-    friend bool operator>(const Money& lhs, const Money& rhs);
-    friend bool operator<=(const Money& lhs, const Money& rhs);
-    friend bool operator>=(const Money& lhs, const Money& rhs);
+    friend TOOLIBSHARED_EXPORT bool operator==(const Money& lhs, const Money& rhs);
+    friend TOOLIBSHARED_EXPORT bool operator!=(const Money& lhs, const Money& rhs);
+    friend TOOLIBSHARED_EXPORT bool operator<(const Money& lhs, const Money& rhs);
+    friend TOOLIBSHARED_EXPORT bool operator>(const Money& lhs, const Money& rhs);
+    friend TOOLIBSHARED_EXPORT bool operator<=(const Money& lhs, const Money& rhs);
+    friend TOOLIBSHARED_EXPORT bool operator>=(const Money& lhs, const Money& rhs);
 
 private:
     BaseType amount = BaseType();
