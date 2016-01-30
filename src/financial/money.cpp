@@ -23,23 +23,33 @@ namespace fin
 
 Currency::Currency(const std::locale& loc) : loc(loc) {}
 
+Currency::Currency(None_t)
+{
+}
+
 std::string Currency::getString() const
 {
-	const std::string loc_enc = std::use_facet<std::moneypunct<char, true>>(this->loc).curr_symbol();
+    if (!(this->loc))
+        return std::string();
+    const std::string loc_enc = std::use_facet<std::moneypunct<char, true>>(*(this->loc)).curr_symbol();
 	const std::wstring utf16ws = too::str::locenc_s2ws(loc_enc);
 	return too::str::utf16to8_ws2s_portable(utf16ws);
 }
 
 std::string Currency::getSymbol() const
 {
-	const std::string loc_enc = std::use_facet<std::moneypunct<char>>(this->loc).curr_symbol();
+    if (!(this->loc))
+        return std::string();
+    const std::string loc_enc = std::use_facet<std::moneypunct<char>>(*(this->loc)).curr_symbol();
 	const std::wstring utf16ws = too::str::locenc_s2ws(loc_enc);
 	return too::str::utf16to8_ws2s_portable(utf16ws);
 }
 
 std::string Currency::getLocaleConstrName() const
 {
-    return this->loc.name();
+    if (!this->loc)
+       throw err_constructed_empty();
+    return (*this->loc).name();
 }
 
 bool operator==(const Currency& lhs, const Currency& rhs)
@@ -62,8 +72,20 @@ Money::Money(BaseType amount, const Currency& currency)
 
 void Money::set(BaseType amount, const Currency& currency)
 {
-    this->amount = amount;
+    set(amount);
     this->currency = currency;
+}
+
+void Money::set(BaseType amount)
+{
+    TOO_EXPECT(std::isfinite(amount));
+    this->amount = amount;
+}
+
+Money& Money::operator=(BaseType amount)
+{
+    this->set(amount);
+    return *this;
 }
 
 auto Money::get() const -> BaseType
@@ -92,6 +114,14 @@ Money& Money::operator+=(const Money& rhs)
     return *this;
 }
 
+Money& Money::operator/=(const Money& rhs)
+{
+    if (this->currency != rhs.currency) // otherwise not yet implemented
+        throw too::not_implemented("mixed currencies not yet implemented");
+    amount /= rhs.amount;
+    return *this;
+}
+
 Money& Money::operator*=(BaseType rhs)
 {
     amount *= rhs;
@@ -117,6 +147,12 @@ Money operator-(Money lhs, const Money& rhs)
 Money operator+(Money lhs, const Money& rhs)
 {
     lhs += rhs;
+    return lhs;
+}
+
+Money operator/(Money lhs, const Money& rhs)
+{
+    lhs /= rhs;
     return lhs;
 }
 

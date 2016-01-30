@@ -27,20 +27,28 @@ namespace fin
 class TOOLIBSHARED_EXPORT Currency
 {
 public:
+    struct None_t {};
+    struct err_constructed_empty : std::exception {};
+
     //! The default of \param currency means using the user preferred locale.
     /** On e.g. a German system this could be std::locale("de_DE.utf8") internally.*/
     explicit Currency(const std::locale& loc = std::locale(""));
+    //! Constructs a non-currency, in case you want to deal with currency less amounts of money for convenience.
+    //! Just pass too::fin::none as parameter.
+    Currency(None_t);
 
     std::string getString() const;
     std::string getSymbol() const;
+    //! Throws Currency::err_constructed_empty if no locale was used to construct.
     std::string getLocaleConstrName() const;
 
     friend bool operator==(const Currency& lhs, const Currency& rhs);
     friend bool operator!=(const Currency& lhs, const Currency& rhs);
 
 private:
-    std::locale loc;
+    too::opt<std::locale> loc;
 };
+const Currency::None_t none;
 #include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
 
 bool operator==(const Currency& lhs, const Currency& rhs);
@@ -55,17 +63,23 @@ class TOOLIBSHARED_EXPORT Money
 public:
     using BaseType = long double;
 
-    //! The default of \param currency means using the user preferred locale's currency.
+    //! The default of \param currency means no currency at all.
+    //! You can get the user preferred locale's currency by passing Currency().
     /** On e.g. a German system this could be EUR internally.*/
-    explicit Money(BaseType amount = BaseType(), const Currency& currency = Currency());
+    explicit Money(BaseType amount = BaseType(), const Currency& currency = Currency(none));
 
     void set(BaseType amount, const Currency& currency);
+    //! Doesn't change currency.
+    void set(BaseType amount);
+    //! Like set(BaseType).
+    Money& operator=(BaseType amount);
 
     BaseType get() const;
     Currency getCurrency() const;
 
     Money& operator-=(const Money& rhs);
     Money& operator+=(const Money& rhs);
+    Money& operator/=(const Money& rhs);
     Money& operator*=(BaseType rhs);
     Money& operator/=(BaseType rhs);
 
@@ -83,6 +97,7 @@ private:
 
 TOOLIBSHARED_EXPORT Money operator-(Money lhs, const Money& rhs);
 TOOLIBSHARED_EXPORT Money operator+(Money lhs, const Money& rhs);
+TOOLIBSHARED_EXPORT Money operator/(Money lhs, const Money& rhs);
 
 TOOLIBSHARED_EXPORT bool operator==(const Money& lhs, const Money& rhs);
 TOOLIBSHARED_EXPORT bool operator!=(const Money& lhs, const Money& rhs);
