@@ -19,7 +19,7 @@ set(TargetAppName "AppName")
 
 include(defaults.cmake)
 
-file(GLOB_RECURSE TargetAppNameAsLibForTest_SRC_INCS "src/*.h")
+file(GLOB_RECURSE TargetAppNameAsLibForTest_SRC_INCS "src/*.h*")
 
 set(TargetAppNameAsLibForTest_SOURCES
     src/globals.cpp
@@ -67,7 +67,7 @@ target_link_libraries(${TargetAppName} PRIVATE ${TargetAppNameAsLibForTest})
 
 set(TargetAppNameTest "AppNameTest")
 
-file(GLOB_RECURSE TargetAppNameTest_SRC_INCS "test/*.h")
+file(GLOB_RECURSE TargetAppNameTest_SRC_INCS "test/*.h*")
 
 set(TargetAppNameTest_SOURCES
 	"test/non-empty folder.test.cpp"
