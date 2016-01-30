@@ -19,17 +19,38 @@ set(TargetAppName "AppName")
 
 include(defaults.cmake)
 
-file(GLOB_RECURSE TargetAppName_SRC_INCS "src/*.h")
+file(GLOB_RECURSE TargetAppNameAsLibForTest_SRC_INCS "src/*.h")
 
-set(TargetAppName_SOURCES
+set(TargetAppNameAsLibForTest_SOURCES
     src/globals.cpp
-    src/_gui/src_WinCmdLine/main.cpp
     src/_gui/interface/globals_gui.cpp
 )
 
+set(TargetAppNameAsLibForTest "AppNameAsLibForTest")
+
+add_library(${TargetAppNameAsLibForTest} STATIC
+        ${TargetAppNameAsLibForTest_SOURCES}
+        ${TargetAppNameAsLibForTest_SRC_INCS}
+)
+
+if (WIN32)
+set_property(TARGET ${TargetAppNameAsLibForTest} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
+endif ()
+
+set_target_properties(${TargetAppNameAsLibForTest} PROPERTIES DEBUG_POSTFIX "d")
+
+set(BOOST_ROOT "c:/projects/externlibs/boost_1_56_0")
+set(Boost_USE_MULTITHREADED     ON)
+set(Boost_USE_STATIC_LIBS       OFF)
+set(Boost_USE_STATIC_RUNTIME    OFF)
+find_package(Boost 1.56.0)
+
+target_include_directories(${TargetAppNameAsLibForTest} PUBLIC .)
+target_include_directories(${TargetAppNameAsLibForTest} PUBLIC src)
+target_include_directories(${TargetAppNameAsLibForTest} PUBLIC SYSTEM ${Boost_INCLUDE_DIRS})
+
 add_executable(${TargetAppName}
-	${TargetAppName_SOURCES}
-	${TargetAppName_SRC_INCS}
+    src/_gui/src_WinCmdLine/main.cpp
 )
 
 if (WIN32)
@@ -38,37 +59,13 @@ endif ()
 
 set_target_properties(${TargetAppName} PROPERTIES DEBUG_POSTFIX "d")
 
-set(BOOST_ROOT "c:/projects/externlibs/boost_1_56_0")
-set(Boost_USE_MULTITHREADED     ON)
-set(Boost_USE_STATIC_LIBS       OFF)
-set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package(Boost 1.56.0)
+target_link_libraries(${TargetAppName} PRIVATE ${TargetAppNameAsLibForTest})
 
-
-target_include_directories(${TargetAppName} PRIVATE .)
-target_include_directories(${TargetAppName} PRIVATE src)
-target_include_directories(${TargetAppName} PRIVATE ${Boost_INCLUDE_DIRS})
 
 
 ################################################################################################
 
 set(TargetAppNameTest "AppNameTest")
-
-
-set(TargetAppNameAsLibForTest "AppNameAsLibForTest")
-
-add_library(${TargetAppNameAsLibForTest} STATIC
-	${TargetAppName_SOURCES}
-	${TargetAppName_SRC_INCS}
-)
-
-get_target_property(TargetAppNameIncludeDirs ${TargetAppName} INCLUDE_DIRECTORIES)
-target_include_directories(${TargetAppNameAsLibForTest} PUBLIC ${TargetAppNameIncludeDirs})
-get_target_property(TargetAppNameLinkLibs ${TargetAppName} INTERFACE_LINK_LIBRARIES)
-if (TargetAppNameLinkLibs)
-	target_link_libraries(${TargetAppNameAsLibForTest} PUBLIC ${TargetAppNameLinkLibs})
-endif ()
-
 
 file(GLOB_RECURSE TargetAppNameTest_SRC_INCS "test/*.h")
 
