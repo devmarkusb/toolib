@@ -82,6 +82,7 @@ public:
     Money& operator/=(const Money& rhs);
     Money& operator*=(BaseType rhs);
     Money& operator/=(BaseType rhs);
+    Money operator-() const;
 
     friend TOOLIBSHARED_EXPORT bool operator==(const Money& lhs, const Money& rhs);
     friend TOOLIBSHARED_EXPORT bool operator!=(const Money& lhs, const Money& rhs);
@@ -98,6 +99,9 @@ private:
 TOOLIBSHARED_EXPORT Money operator-(Money lhs, const Money& rhs);
 TOOLIBSHARED_EXPORT Money operator+(Money lhs, const Money& rhs);
 TOOLIBSHARED_EXPORT Money operator/(Money lhs, const Money& rhs);
+TOOLIBSHARED_EXPORT Money operator/(Money lhs, const Money::BaseType& rhs);
+TOOLIBSHARED_EXPORT Money operator*(Money lhs, const Money::BaseType& rhs);
+TOOLIBSHARED_EXPORT Money operator*(Money::BaseType lhs, const Money& rhs);
 
 TOOLIBSHARED_EXPORT bool operator==(const Money& lhs, const Money& rhs);
 TOOLIBSHARED_EXPORT bool operator!=(const Money& lhs, const Money& rhs);

@@ -75,6 +75,13 @@ struct T
         // todo ...division of *this by rhs...
         return *this;
     }
+    // unary minus
+    T operator-()
+    {
+        T tmp{};
+        // todo ...assign -members of *this to tmp's members...
+        return tmp;
+    }
 };
 
 inline T operator+(T lhs, const T& rhs)

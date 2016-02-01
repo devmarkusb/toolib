@@ -12,6 +12,7 @@
 #include "Toolib/error.h"
 #include "Toolib/date_time/date_time.h"
 #include "Toolib/string/str_convert.h"
+#include "Toolib/math/floating_point.h"
 
 
 namespace too
@@ -138,6 +139,13 @@ Money& Money::operator/=(BaseType rhs)
     return *this;
 }
 
+Money Money::operator-() const
+{
+    Money tmp{*this};
+    tmp.amount = -tmp.amount;
+    return tmp;
+}
+
 Money operator-(Money lhs, const Money& rhs)
 {
     lhs -= rhs;
@@ -156,11 +164,30 @@ Money operator/(Money lhs, const Money& rhs)
     return lhs;
 }
 
+Money operator/(Money lhs, const Money::BaseType& rhs)
+{
+    lhs /= rhs;
+    return lhs;
+}
+
+Money operator*(Money lhs, const Money::BaseType& rhs)
+{
+    lhs *= rhs;
+    return lhs;
+}
+
+Money operator*(Money::BaseType lhs, const Money& rhs)
+{
+    Money tmp(rhs);
+    tmp *= lhs;
+    return tmp;
+}
+
 bool operator==(const Money& lhs, const Money& rhs)
 {
     if (lhs.currency != rhs.currency) // otherwise not yet implemented
         throw too::not_implemented("mixed currencies not yet implemented");
-    return lhs.amount == rhs.amount;
+    return too::math::almost_equal(lhs.amount, rhs.amount);
 }
 
 bool operator<(const Money& lhs, const Money& rhs)
