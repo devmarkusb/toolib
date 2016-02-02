@@ -19,8 +19,8 @@ set(TargetLibName "LibName")
 
 include(defaults.cmake)
 
-file(GLOB_RECURSE TargetLibName_INCS "include/*.h")
-file(GLOB_RECURSE TargetLibName_SRC_INCS "src/*.h")
+file(GLOB_RECURSE TargetLibName_INCS "include/*.h*")
+file(GLOB_RECURSE TargetLibName_SRC_INCS "src/*.h*")
 
 set(TargetLibName_SOURCES
     "src/non-empty folder.cpp"
@@ -64,7 +64,7 @@ endif()
 
 set(TargetLibNameTest "LibNameTest")
 
-file(GLOB_RECURSE TargetLibNameTest_SRC_INCS "test/*.h")
+file(GLOB_RECURSE TargetLibNameTest_SRC_INCS "test/*.h*")
 
 set(TargetLibNameTest_SOURCES
 	"test/non-empty folder.test.cpp"
