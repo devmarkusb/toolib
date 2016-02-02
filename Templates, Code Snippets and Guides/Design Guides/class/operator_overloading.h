@@ -106,30 +106,12 @@ inline T operator/(T lhs, const T& rhs)
 }
 
 
-inline bool operator==(const T&, const T&)
-{
-    return true /*todo ...comparison...*/;
-}
-inline bool operator!=(const T& lhs, const T& rhs)
-{
-    return !operator==(lhs, rhs);
-}
-inline bool operator<(const T&, const T&)
-{
-    return false /*todo ...comparison...*/;
-}
-inline bool operator>(const T& lhs, const T& rhs)
-{
-    return operator<(rhs, lhs);
-}
-inline bool operator<=(const T& lhs, const T& rhs)
-{
-    return !operator>(lhs, rhs);
-}
-inline bool operator>=(const T& lhs, const T& rhs)
-{
-    return !operator<(lhs, rhs);
-}
+inline bool operator==(const T&, const T&) { return true /*todo ...comparison...*/; }
+inline bool operator!=(const T& lhs, const T& rhs) { return !operator==(lhs, rhs); }
+inline bool operator<(const T&, const T&) { return false /*todo ...comparison...*/; }
+inline bool operator>(const T& lhs, const T& rhs) { return operator<(rhs, lhs); }
+inline bool operator<=(const T& lhs, const T& rhs) { return !operator>(lhs, rhs); }
+inline bool operator>=(const T& lhs, const T& rhs) { return !operator<(lhs, rhs); }
 
 
 inline std::ostream& operator<<(std::ostream& os, const T&)

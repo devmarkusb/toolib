@@ -12,8 +12,5 @@
 
 namespace too
 {
-void ExportedFunctionSuchThatToolibIsNotEmpty()
-{
-    TOO_NOOP;
-}
+void ExportedFunctionSuchThatToolibIsNotEmpty() { TOO_NOOP; }
 }

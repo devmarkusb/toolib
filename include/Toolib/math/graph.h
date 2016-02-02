@@ -53,10 +53,9 @@ template <typename QuValueType>
 class ChartAxis
 {
 public:
-    ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity,
-              const std::vector<QuValueType>* qu_values);
-    ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity,
-              const QuValueType& min_qu_val, const QuValueType& max_qu_val);
+    ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity, const std::vector<QuValueType>* qu_values);
+    ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
+        const QuValueType& max_qu_val);
 
     ProjectionValue quvalue_to_projection(QuValueType x) const;
     QuValueType projection_to_quvalue(ProjectionValue p) const;
@@ -99,21 +98,20 @@ public:
     //! Be aware of providing \param qu_values with sufficient live-time around
     //! instances of this class. This is designed to save a copy step.
     Chart2D(const ChartAxis_setup& setupX, const ChartAxis_setup& setupY,
-            const std::pair<Quantity, Quantity>& quantitiesXY, const VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values);
+        const std::pair<Quantity, Quantity>& quantitiesXY, const VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values);
 
-    too::not_null<ChartAxis<QuValueTypeX>*> get_x_axis() const { return x_axis.get();}
-    too::not_null<ChartAxis<QuValueTypeX>*> get_y_axis() const { return y_axis.get();}
+    too::not_null<ChartAxis<QuValueTypeX>*> get_x_axis() const { return x_axis.get(); }
+    too::not_null<ChartAxis<QuValueTypeX>*> get_y_axis() const { return y_axis.get(); }
 
     const VectorOfPairs<QuValueTypeX, QuValueTypeY>* getValues() const { return this->values; }
 
-    void auto_optimize_scaling() { /*throw too::not_implemented("Chart2D::auto_optimize_scaling");*/ }
+    void auto_optimize_scaling() { /*throw too::not_implemented("Chart2D::auto_optimize_scaling");*/}
 
 private:
     const VectorOfPairs<QuValueTypeX, QuValueTypeY>* values;
     std::unique_ptr<ChartAxis<QuValueTypeX>> x_axis;
     std::unique_ptr<ChartAxis<QuValueTypeY>> y_axis;
 };
-
 }
 }
 
@@ -133,15 +131,13 @@ namespace math
 {
 
 template <typename QuValueType>
-ChartAxis<QuValueType>::ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity,
-                                  const std::vector<QuValueType>* qu_values)
-    : values(values)
-    , setup(setup)
-    , quantity(quantity)
+ChartAxis<QuValueType>::ChartAxis(
+    const ChartAxis_setup& setup, const Quantity& quantity, const std::vector<QuValueType>* qu_values)
+    : values(values), setup(setup), quantity(quantity)
 {
     auto minmax = std::make_pair(QuValueType(), QuValueType());
     if (qu_values && !qu_values->empty())
-        minmax = std::minmax_element(std::begin(*qu_values), std::end(*qu_values));
+        minmax   = std::minmax_element(std::begin(*qu_values), std::end(*qu_values));
     this->minVal = minmax.first;
     this->maxVal = minmax.second;
 
@@ -149,11 +145,9 @@ ChartAxis<QuValueType>::ChartAxis(const ChartAxis_setup& setup, const Quantity& 
 }
 
 template <typename QuValueType>
-ChartAxis<QuValueType>::ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val, const QuValueType& max_qu_val)
-    : minVal(min_qu_val)
-    , maxVal(max_qu_val)
-    , setup(setup)
-    , quantity(quantity)
+ChartAxis<QuValueType>::ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
+    const QuValueType& max_qu_val)
+    : minVal(min_qu_val), maxVal(max_qu_val), setup(setup), quantity(quantity)
 {
     calcScaling();
 }
@@ -163,16 +157,15 @@ void ChartAxis<QuValueType>::calcScaling()
 {
     this->tick_count = setup.max_tick_count ? *setup.max_tick_count : 11;
 
-    this->tick_step_qu_val = calcNiceScaleTick(maxVal - minVal, this->tick_count);
+    this->tick_step_qu_val  = calcNiceScaleTick(maxVal - minVal, this->tick_count);
     this->tick_start_qu_val = 0.0;
     this->tick_end_qu_val = 0.0;
-    std::tie(tick_start_qu_val, tick_end_qu_val) =
-            calcScaleTickFromTo(minVal, maxVal, tick_step_qu_val);
+    std::tie(tick_start_qu_val, tick_end_qu_val) = calcScaleTickFromTo(minVal, maxVal, tick_step_qu_val);
     this->tick_count = round_to<ScaleTickCount>((tick_end_qu_val - tick_start_qu_val) / tick_step_qu_val);
 
-    this->map_quvalue_to_projection = std::make_unique<QuValue_to_Projection>(
-                std::make_pair(tick_start_qu_val, tick_end_qu_val),
-                std::make_pair(setup.projection_range.first, setup.projection_range.second));
+    this->map_quvalue_to_projection =
+        std::make_unique<QuValue_to_Projection>(std::make_pair(tick_start_qu_val, tick_end_qu_val),
+            std::make_pair(setup.projection_range.first, setup.projection_range.second));
 }
 
 template <typename QuValueType>
@@ -195,36 +188,35 @@ QuValueType ChartAxis<QuValueType>::projection_to_quvalue(ProjectionValue p) con
 //##########################################################################################################################
 
 template <typename QuValueTypeX, typename QuValueTypeY>
-Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(
-        const ChartAxis_setup& setupX, const ChartAxis_setup& setupY,
-        const std::pair<Quantity, Quantity>& quantitiesXY,
-        const VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values)
+Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(const ChartAxis_setup& setupX, const ChartAxis_setup& setupY,
+    const std::pair<Quantity, Quantity>& quantitiesXY, const VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values)
     : values(qu_values)
 {
     using QuValueXY = std::pair<QuValueTypeX, QuValueTypeY>;
-    auto minmax_X = std::make_pair(QuValueTypeX(), QuValueTypeX());
+    auto minmax_X   = std::make_pair(QuValueTypeX(), QuValueTypeX());
     auto minmax_Y = std::make_pair(QuValueTypeY(), QuValueTypeY());
     if (qu_values && !qu_values->empty())
     {
-        const auto minmax_X_pair =
-                std::minmax_element(std::begin(*qu_values), std::end(*qu_values), [](const QuValueXY& lhs, const QuValueXY& rhs)
-        {
-            return lhs.first < rhs.first;
-        });
-        const auto minmax_Y_pair =
-                std::minmax_element(std::begin(*qu_values), std::end(*qu_values), [](const QuValueXY& lhs, const QuValueXY& rhs)
-        {
-            return lhs.second < rhs.second;
-        });
+        const auto minmax_X_pair = std::minmax_element(std::begin(*qu_values), std::end(*qu_values),
+            [](const QuValueXY& lhs, const QuValueXY& rhs)
+            {
+                return lhs.first < rhs.first;
+            });
+        const auto minmax_Y_pair = std::minmax_element(std::begin(*qu_values), std::end(*qu_values),
+            [](const QuValueXY& lhs, const QuValueXY& rhs)
+            {
+                return lhs.second < rhs.second;
+            });
 
         minmax_X = {(*minmax_X_pair.first).first, (*minmax_X_pair.second).first};
         minmax_Y = {(*minmax_Y_pair.first).second, (*minmax_Y_pair.second).second};
     }
 
-    this->x_axis = std::make_unique<ChartAxis<QuValueTypeX>>(setupX, quantitiesXY.first, minmax_X.first, minmax_X.second);
-    this->y_axis = std::make_unique<ChartAxis<QuValueTypeX>>(setupY, quantitiesXY.second, minmax_Y.first, minmax_Y.second);
+    this->x_axis =
+        std::make_unique<ChartAxis<QuValueTypeX>>(setupX, quantitiesXY.first, minmax_X.first, minmax_X.second);
+    this->y_axis =
+        std::make_unique<ChartAxis<QuValueTypeX>>(setupY, quantitiesXY.second, minmax_Y.first, minmax_Y.second);
 }
-
 }
 }
 

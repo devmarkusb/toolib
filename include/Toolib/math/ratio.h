@@ -24,8 +24,7 @@ namespace math
 
 //! Greatest common divisor.
 template <typename T>
-typename std::enable_if<std::is_integral<T>::value, T>::type
-gcd(T a, T b)
+typename std::enable_if<std::is_integral<T>::value, T>::type gcd(T a, T b)
 {
     TOO_EXPECT_THROW(a != T() || b != T());
     T c = 0;
@@ -40,8 +39,7 @@ gcd(T a, T b)
 
 //! Lowest common multiple.
 template <typename T>
-typename std::enable_if<std::is_integral<T>::value, T>::type
-lcm(T a, T b)
+typename std::enable_if<std::is_integral<T>::value, T>::type lcm(T a, T b)
 {
     return a * b / gcd(a, b);
 }
@@ -55,14 +53,14 @@ struct Rational
 {
     using ValueType = std::intmax_t;
 
-    ValueType num = 1;
+    ValueType num   = 1;
     ValueType denom = 1;
 
     // ugly; I need this to initialize conveniently because otherwise the default constructor seems to disturb
     Rational(std::initializer_list<ValueType> init)
     {
         auto it = init.begin();
-        num = *it;
+        num     = *it;
         ++it;
         denom = *it;
     }
@@ -70,8 +68,10 @@ struct Rational
     void inverse() { std::swap(this->num, this->denom); }
 
     template <typename T = long double>
-    typename std::enable_if<std::is_floating_point<T>::value, T>::type
-    asFloatingPoint() const { return T(this->num) / T(this->denom); }
+    typename std::enable_if<std::is_floating_point<T>::value, T>::type asFloatingPoint() const
+    {
+        return T(this->num) / T(this->denom);
+    }
 
     void reduce()
     {
@@ -115,9 +115,9 @@ struct Rational
 inline void make_common_denom(Rational& one, Rational& two)
 {
     const auto m = lcm(one.denom, two.denom);
-    one.num*= one.denom / m;
+    one.num *= one.denom / m;
     one.denom = m;
-    two.num*= two.denom / m;
+    two.num *= two.denom / m;
     two.denom = m;
 }
 
@@ -149,10 +149,7 @@ inline bool operator==(const Rational& lhs, const Rational& rhs)
     make_common_denom(l, r);
     return l.num == r.num && l.denom == r.denom;
 }
-inline bool operator!=(const Rational& lhs, const Rational& rhs)
-{
-    return !operator==(lhs, rhs);
-}
+inline bool operator!=(const Rational& lhs, const Rational& rhs) { return !operator==(lhs, rhs); }
 inline bool operator<(const Rational& lhs, const Rational& rhs)
 {
     Rational l = lhs;
@@ -160,18 +157,9 @@ inline bool operator<(const Rational& lhs, const Rational& rhs)
     make_common_denom(l, r);
     return l.num < r.num;
 }
-inline bool operator>(const Rational& lhs, const Rational& rhs)
-{
-    return operator<(rhs, lhs);
-}
-inline bool operator<=(const Rational& lhs, const Rational& rhs)
-{
-    return !operator>(lhs, rhs);
-}
-inline bool operator>=(const Rational& lhs, const Rational& rhs)
-{
-    return !operator<(lhs, rhs);
-}
+inline bool operator>(const Rational& lhs, const Rational& rhs) { return operator<(rhs, lhs); }
+inline bool operator<=(const Rational& lhs, const Rational& rhs) { return !operator>(lhs, rhs); }
+inline bool operator>=(const Rational& lhs, const Rational& rhs) { return !operator<(lhs, rhs); }
 
 
 // clang-format off
@@ -220,7 +208,6 @@ const Rational twentyfourtimes  {24, 1};
 const Rational seventimes       {7, 1};
 const Rational twelvetimes      {12, 1};
 // clang-format on
-
 }
 }
 

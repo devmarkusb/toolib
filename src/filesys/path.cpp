@@ -26,10 +26,7 @@ using namespace too::file;
 
 const std::string CPath::FOLDER_SEPARATOR_TO_USE_HERE = "/";
 
-CPath::CPath(const std::string& path, EForm form, EType type) : m_form(form), m_type(type)
-{
-    *m_path = path;
-}
+CPath::CPath(const std::string& path, EForm form, EType type) : m_form(form), m_type(type) { *m_path = path; }
 
 CPath::CPath(std::string& path, bool useByReference, EForm form, EType type) : m_form(form), m_type(type)
 {
@@ -46,10 +43,7 @@ CPath::CPath(const CPath& other)
     m_type  = other.m_type;
 }
 
-CPath::CPath(CPath&& other)
-{
-    CPath::swap(other);
-}
+CPath::CPath(CPath&& other) { CPath::swap(other); }
 
 CPath& CPath::operator=(const CPath& other)
 {
@@ -72,10 +66,7 @@ void CPath::swap(CPath& other)
     std::swap(m_type, other.m_type);
 }
 
-CPath::operator std::string() const
-{
-    return *m_path;
-}
+CPath::operator std::string() const { return *m_path; }
 
 CPath& CPath::operator+=(const CPath& other)
 {
@@ -142,10 +133,7 @@ bool CPath::isAbsolute() const
 #endif
 }
 
-bool CPath::isEmpty() const
-{
-    return m_path->empty();
-}
+bool CPath::isEmpty() const { return m_path->empty(); }
 
 CPath& CPath::cleanupNative()
 {
@@ -165,10 +153,7 @@ CPath& CPath::cleanupPlatformIndep()
     return *this;
 }
 
-CPath& CPath::ensureTrailingSeparator()
-{
-    return ensureTrailingSeparator(m_form == EForm::NATIVE);
-}
+CPath& CPath::ensureTrailingSeparator() { return ensureTrailingSeparator(m_form == EForm::NATIVE); }
 
 CPath& CPath::ensureTrailingSeparator(bool native)
 {

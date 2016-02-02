@@ -31,24 +31,24 @@ using DefaultValueType = double;
 using Dimension = int;
 
 template <typename T = DefaultValueType>
-using Coord_ = std::enable_if_t<std::is_arithmetic<T>::value, T>;
-using Coord = Coord_<>;
+using Coord_         = std::enable_if_t<std::is_arithmetic<T>::value, T>;
+using Coord          = Coord_<>;
 
 template <typename T = DefaultValueType>
 using RelativeCoord_ = std::enable_if_t<std::is_arithmetic<T>::value, T>;
-using RelativeCoord = RelativeCoord_<>;
+using RelativeCoord  = RelativeCoord_<>;
 
 template <typename T = DefaultValueType>
-using Length_ = std::enable_if_t<std::is_arithmetic<T>::value, T>;
-using Length = Length_<>;
+using Length_        = std::enable_if_t<std::is_arithmetic<T>::value, T>;
+using Length         = Length_<>;
 
 template <typename T = DefaultValueType>
-using Width_ = Length_<T>;
-using Width = Width_<>;
+using Width_         = Length_<T>;
+using Width          = Width_<>;
 
 template <typename T = DefaultValueType>
-using Height_ = Length_<T>;
-using Height = Height_<>;
+using Height_        = Length_<T>;
+using Height         = Height_<>;
 
 //! For easier understanding the choice of the coordinate system axes directions
 //! is described by visualizing screen corners (so everyone knows, that left_top
@@ -65,14 +65,9 @@ struct Point_
 {
     std::array<T, dim> x{};
 
-    Point_()
-        : x{}
-    {}
+    Point_() : x{} {}
 
-    Point_(std::initializer_list<T> init)
-    {
-        this->x = init;
-    }
+    Point_(std::initializer_list<T> init) { this->x = init; }
 
     Point_& operator=(std::initializer_list<T> init)
     {
@@ -92,9 +87,7 @@ struct Point_<T, 2>
     T x{};
     T y{};
 
-    Point_()
-        : x{}, y{}
-    {}
+    Point_() : x{}, y{} {}
 
     Point_(std::initializer_list<T> init)
     {
@@ -151,7 +144,7 @@ struct Rectangle_
 
     Rectangle_(std::initializer_list<Point_<T, 2>> init)
     {
-        auto it = init.begin();
+        auto it        = init.begin();
         this->top_left = *it;
         ++it;
         this->bottom_right = *it;
@@ -172,7 +165,6 @@ struct Rectangle_
 
 //! For convenience.
 using Rectangle = Rectangle_<>;
-
 }
 }
 

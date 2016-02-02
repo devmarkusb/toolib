@@ -62,35 +62,17 @@ Console& Console::getInstance()
     return instance;
 }
 
-void Console::hide()
-{
-    ShowWindow(hWnd, SW_HIDE);
-}
+void Console::hide() { ShowWindow(hWnd, SW_HIDE); }
 
-void Console::show()
-{
-    ShowWindow(hWnd, SW_SHOW);
-}
+void Console::show() { ShowWindow(hWnd, SW_SHOW); }
 
-void Console::minimize()
-{
-    ShowWindow(hWnd, SW_MINIMIZE);
-}
+void Console::minimize() { ShowWindow(hWnd, SW_MINIMIZE); }
 
-void Console::maximize()
-{
-    ShowWindow(hWnd, SW_MAXIMIZE);
-}
+void Console::maximize() { ShowWindow(hWnd, SW_MAXIMIZE); }
 
-void Console::restore()
-{
-    ShowWindow(hWnd, SW_NORMAL);
-}
+void Console::restore() { ShowWindow(hWnd, SW_NORMAL); }
 
-bool Console::isWndBufMode() const
-{
-    return wndBufMode;
-}
+bool Console::isWndBufMode() const { return wndBufMode; }
 
 void Console::enableWndBufMode()
 {
@@ -150,16 +132,10 @@ void Console::setWndPos(int x, int y)
 }
 
 //! Get max. number of columns.
-SHORT Console::getMaxWndSizeX() const
-{
-    return GetLargestConsoleWindowSize(hOutput).X;
-}
+SHORT Console::getMaxWndSizeX() const { return GetLargestConsoleWindowSize(hOutput).X; }
 
 //! Get max. number of rows.
-SHORT Console::getMaxWndSizeY() const
-{
-    return GetLargestConsoleWindowSize(hOutput).Y;
-}
+SHORT Console::getMaxWndSizeY() const { return GetLargestConsoleWindowSize(hOutput).Y; }
 
 std::basic_string<TCHAR> Console::getTitle() const
 {
@@ -171,10 +147,7 @@ std::basic_string<TCHAR> Console::getTitle() const
     return std::basic_string<TCHAR>(title);
 }
 
-void Console::setTitle(const std::basic_string<TCHAR>& title)
-{
-    SetConsoleTitle(title.c_str());
-}
+void Console::setTitle(const std::basic_string<TCHAR>& title) { SetConsoleTitle(title.c_str()); }
 
 // Helper.
 void Console::zeroWndSize()

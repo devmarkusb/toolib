@@ -29,7 +29,7 @@ class Map_LinearScale_Interval_to_Interval
 
 public:
     Map_LinearScale_Interval_to_Interval(const std::pair<FloatingPointType, FloatingPointType>& FromInterval,
-                                         const std::pair<FloatingPointType, FloatingPointType>& ToInterval)
+        const std::pair<FloatingPointType, FloatingPointType>& ToInterval)
         : m_FromInterval(FromInterval), m_ToInterval(ToInterval)
     {
         TOO_EXPECT(FromInterval.first < FromInterval.second);
@@ -44,8 +44,8 @@ public:
 
     FloatingPointType inverse(const FloatingPointType& to) const
     {
-        return to * (m_FromInterval.second - m_FromInterval.first) /
-                (m_ToInterval.second - m_ToInterval.first) + m_FromInterval.first;
+        return to * (m_FromInterval.second - m_FromInterval.first) / (m_ToInterval.second - m_ToInterval.first) +
+            m_FromInterval.first;
     }
 
 private:

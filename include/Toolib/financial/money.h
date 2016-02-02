@@ -27,8 +27,12 @@ namespace fin
 class TOOLIBSHARED_EXPORT Currency
 {
 public:
-    struct None_t {};
-    struct err_constructed_empty : std::exception {};
+    struct None_t
+    {
+    };
+    struct err_constructed_empty : std::exception
+    {
+    };
 
     //! The default of \param currency means using the user preferred locale.
     /** On e.g. a German system this could be std::locale("de_DE.utf8") internally.*/
@@ -134,7 +138,6 @@ public:
 private:
     Percent p = Percent();
 };
-
 }
 }
 

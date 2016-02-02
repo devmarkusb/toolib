@@ -32,25 +32,25 @@ inline std::map<too::math::Rational, std::string> create_map_ratio_SIprefixunitn
 {
     std::map<too::math::Rational, std::string> ret;
 
-    ret[too::math::atto] = too::math::atto_symb + base_unit_name;
+    ret[too::math::atto]  = too::math::atto_symb + base_unit_name;
     ret[too::math::femto] = too::math::femto_symb + base_unit_name;
-    ret[too::math::pico] = too::math::pico_symb + base_unit_name;
-    ret[too::math::nano] = too::math::nano_symb + base_unit_name;
+    ret[too::math::pico]  = too::math::pico_symb + base_unit_name;
+    ret[too::math::nano]  = too::math::nano_symb + base_unit_name;
     ret[too::math::micro] = too::math::micro_symb + base_unit_name;
     ret[too::math::milli] = too::math::milli_symb + base_unit_name;
     ret[too::math::centi] = too::math::centi_symb + base_unit_name;
-    ret[too::math::deci] = too::math::deci_symb + base_unit_name;
+    ret[too::math::deci]  = too::math::deci_symb + base_unit_name;
 
     ret[too::math::one] = too::math::one_symb + base_unit_name;
 
-    ret[too::math::deka] = too::math::deka_symb + base_unit_name;
+    ret[too::math::deka]  = too::math::deka_symb + base_unit_name;
     ret[too::math::hecto] = too::math::hecto_symb + base_unit_name;
-    ret[too::math::kilo] = too::math::kilo_symb + base_unit_name;
-    ret[too::math::mega] = too::math::mega_symb + base_unit_name;
-    ret[too::math::giga] = too::math::giga_symb + base_unit_name;
-    ret[too::math::tera] = too::math::tera_symb + base_unit_name;
-    ret[too::math::peta] = too::math::peta_symb + base_unit_name;
-    ret[too::math::exa] = too::math::exa_symb + base_unit_name;
+    ret[too::math::kilo]  = too::math::kilo_symb + base_unit_name;
+    ret[too::math::mega]  = too::math::mega_symb + base_unit_name;
+    ret[too::math::giga]  = too::math::giga_symb + base_unit_name;
+    ret[too::math::tera]  = too::math::tera_symb + base_unit_name;
+    ret[too::math::peta]  = too::math::peta_symb + base_unit_name;
+    ret[too::math::exa]   = too::math::exa_symb + base_unit_name;
 
     return ret;
 }
@@ -64,43 +64,36 @@ inline std::map<too::math::Rational, std::string> create_map_ratio_SIprefixunitn
 class Unit
 {
 public:
-    struct err_no_string_provided_for_ratio : public std::exception {};
+    struct err_no_string_provided_for_ratio : public std::exception
+    {
+    };
 
     //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the initial
     //! \param ratio in the map. That would make the class useless.
     Unit(const too::math::Rational& ratio, const std::map<too::math::Rational, std::string>& map_ratio_prefixunitname)
 #if !TOO_HAS_NO_CPP11_NOEXCEPT
-    noexcept(false)
+        noexcept(false)
 #endif
-        : ratio(ratio)
-        , ratio_prefixunitname(map_ratio_prefixunitname)
+        : ratio(ratio), ratio_prefixunitname(map_ratio_prefixunitname)
     {
         if (map_ratio_prefixunitname.find(ratio) == map_ratio_prefixunitname.end())
             throw err_no_string_provided_for_ratio();
     }
 
     ~Unit() = default;
-    Unit(const Unit& other)
-        : ratio(other.ratio)
-        , ratio_prefixunitname{other.ratio_prefixunitname}
-    {
-    }
+    Unit(const Unit& other) : ratio(other.ratio), ratio_prefixunitname{other.ratio_prefixunitname} {}
     Unit& operator=(const Unit& other)
     {
         Unit tmp{other};
         *this = std::move(tmp);
         return *this;
     }
-    Unit(Unit&& other)
-        : ratio(std::move(other.ratio))
-        , ratio_prefixunitname{other.ratio_prefixunitname}
-    {
-    }
+    Unit(Unit&& other) : ratio(std::move(other.ratio)), ratio_prefixunitname{other.ratio_prefixunitname} {}
     Unit& operator=(Unit&& other)
     {
-        this->ratio = std::move(other.ratio);
+        this->ratio                 = std::move(other.ratio);
         Map_Rational_String& helper = const_cast<Map_Rational_String&>(this->ratio_prefixunitname);
-        helper = other.ratio_prefixunitname;
+        helper                      = other.ratio_prefixunitname;
         return *this;
     }
 
@@ -111,15 +104,16 @@ public:
     template <typename ValueType>
     ValueType convertTo(ValueType src, const too::math::Rational& target_ratio)
 #if !TOO_HAS_NO_CPP11_NOEXCEPT
-    noexcept(false)
+        noexcept(false)
 #endif
     {
-        static_assert(std::is_arithmetic<ValueType>::value, "only arithmetic (integral or floating point) types allowed");
+        static_assert(
+            std::is_arithmetic<ValueType>::value, "only arithmetic (integral or floating point) types allowed");
         TOO_EXPECT(target_ratio.num);
         if (this->ratio_prefixunitname.find(target_ratio) == this->ratio_prefixunitname.end())
             throw err_no_string_provided_for_ratio();
         ValueType ret = src * (this->ratio / target_ratio);
-        this->ratio = target_ratio;
+        this->ratio   = target_ratio;
         return ret;
     }
 
@@ -134,10 +128,7 @@ private:
 class Quantity
 {
 public:
-    Quantity(const std::string& quantity_name, const Unit& unit)
-        : unit(unit)
-        , q_name(quantity_name)
-    {}
+    Quantity(const std::string& quantity_name, const Unit& unit) : unit(unit), q_name(quantity_name) {}
 
     std::string getName() const { return this->q_name; }
     Unit& getUnit() { return this->unit; }
@@ -149,13 +140,12 @@ private:
 
 
 //    requires WhatConcrete to be convertible to BaseType
-//template <class WhatConcrete, typename BaseType = double>
-//class QuantityValue
+// template <class WhatConcrete, typename BaseType = double>
+// class QuantityValue
 //{
-//public:
+// public:
 //    Quantity(WhatConcrete& val);
 //};
-
 }
 }
 

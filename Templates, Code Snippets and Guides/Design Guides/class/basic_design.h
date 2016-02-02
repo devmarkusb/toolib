@@ -66,9 +66,7 @@ struct AbstractInterface_without_functions
     AbstractInterface& operator=(const AbstractInterface&) = delete;
     AbstractInterface& operator=(AbstractInterface&&) = delete;
 };
-inline AbstractInterface_without_functions::~AbstractInterface_without_functions()
-{
-}
+inline AbstractInterface_without_functions::~AbstractInterface_without_functions() {}
 
 //! Factory function (alternatively being part of a factory class).
 template <class T, typename... ConstructorArgs>

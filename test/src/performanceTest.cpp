@@ -45,20 +45,11 @@ TEST(ToFormattedStringTest, NoRounding)
     EXPECT_EQ("99:59:58", too::CPerformanceProfiler::ToFormattedString(359998.4));
 }
 
-TEST(ToFormattedStringTest, Zero)
-{
-    EXPECT_EQ("0.00 ps", too::CPerformanceProfiler::ToFormattedString(0.0));
-}
+TEST(ToFormattedStringTest, Zero) { EXPECT_EQ("0.00 ps", too::CPerformanceProfiler::ToFormattedString(0.0)); }
 
-TEST(ToFormattedStringTest, Neg)
-{
-    EXPECT_EQ("-1.00 s", too::CPerformanceProfiler::ToFormattedString(-1.0));
-}
+TEST(ToFormattedStringTest, Neg) { EXPECT_EQ("-1.00 s", too::CPerformanceProfiler::ToFormattedString(-1.0)); }
 
-TEST(ToFormattedStringTest, Inf)
-{
-    EXPECT_EQ(">= 100 h", too::CPerformanceProfiler::ToFormattedString(360000));
-}
+TEST(ToFormattedStringTest, Inf) { EXPECT_EQ(">= 100 h", too::CPerformanceProfiler::ToFormattedString(360000)); }
 
 TEST(DISABLED_DumpAllItemsTest, PracticalScenario)
 {

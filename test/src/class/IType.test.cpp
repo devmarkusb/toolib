@@ -46,6 +46,4 @@ struct UserA : public IUser
 };
 }
 
-TEST(ITypeTest, test)
-{
-}
+TEST(ITypeTest, test) {}

@@ -11,14 +11,13 @@ class A : private too::non_copyable
 class B : public A
 {
 };
-
 }
 
 TEST(non_copyableTest, test)
 {
     // also B is non-copyable!
-//    A a;
-//    A acopy(a);
-//    B b;
-//    B bcopy(b);
+    //    A a;
+    //    A acopy(a);
+    //    B b;
+    //    B bcopy(b);
 }

@@ -173,10 +173,7 @@ inline CPerformanceProfiler::TSecondsDbl CPerformanceProfiler::Elapsed_CurrentIt
     return elapsed.count();
 }
 
-inline CPerformanceProfiler::~CPerformanceProfiler()
-{
-    StopCurrentItem();
-}
+inline CPerformanceProfiler::~CPerformanceProfiler() { StopCurrentItem(); }
 
 inline void CPerformanceProfiler::StartNewItem(const std::string& NewItemName)
 {
@@ -185,10 +182,7 @@ inline void CPerformanceProfiler::StartNewItem(const std::string& NewItemName)
     StartCurrentItem();
 }
 
-inline void CPerformanceProfiler::StopItem()
-{
-    StopCurrentItem();
-}
+inline void CPerformanceProfiler::StopItem() { StopCurrentItem(); }
 
 namespace implDumpAllItems
 {
