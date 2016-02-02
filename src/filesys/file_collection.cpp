@@ -1,0 +1,57 @@
+// Markus Borris, 2016
+// This file is part of Toolib library.
+
+//!
+/**
+*/
+//! \file
+
+#include "Toolib/filesys/file_collection.h"
+#include <fstream>
+#include "Toolib/math/number.h"
+
+
+namespace too
+{
+
+namespace file
+{
+
+FileCollection::FileCollection(const std::string& base_file_name, const std::string& file_ext)
+{
+    std::string fn{base_file_name + file_ext};
+    std::ifstream f(fn);
+    if (f.good())
+        this->file_list.push_back(fn);
+    else
+    {
+        f.close();
+        const unsigned char digits = obtain_number_of_digits_for_filenames_of_file_collection(base_file_name, file_ext);
+        std::string file_nr_str;
+        for (unsigned int file_nr = 0; file_nr_str = too::math::toLeadingZeros(file_nr, digits),
+                          fn = base_file_name + file_nr_str + file_ext, f.open(fn), f.good();
+             ++file_nr, f.close())
+        {
+            this->file_list.push_back(fn);
+        }
+    }
+}
+
+std::vector<std::string> FileCollection::get_list_of_existent_files() const { return this->file_list; }
+
+unsigned char FileCollection::obtain_number_of_digits_for_filenames_of_file_collection(
+    const std::string& base_file_name, const std::string& file_ext) const
+{
+    std::ifstream f;
+    for (unsigned char digits = 1; digits < max_digits; ++digits)
+    {
+        std::string zeros{too::math::toLeadingZeros(0, digits)};
+        std::string fn{base_file_name + zeros + file_ext};
+        f.open(fn);
+        if (f.good())
+            return digits;
+    }
+    return 0;
+}
+}
+}
