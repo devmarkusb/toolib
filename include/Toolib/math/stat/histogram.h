@@ -40,6 +40,9 @@ public:
         using too::math::zero_percent;
         using too::math::one_hundred_percent;
 
+        if (data.empty())
+            return;
+
         const auto minmax = std::minmax(std::begin(data), std::end(data));
 
         too::math::Map_LinearScale_Interval_to_Interval<Percent> mapData2Percent(
