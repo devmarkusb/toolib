@@ -49,6 +49,7 @@ public:
     operator std::string() const;
     CPath& operator+=(const CPath& other);
     std::string getFolderPath() const;
+    //! inclusive extension
     std::string getFileName() const;
     //! without dot
     std::string getExtension() const;
