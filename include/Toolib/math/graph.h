@@ -118,8 +118,6 @@ private:
 //##########################################################################################################################
 // template implementations
 
-//#include "detail/graph.hpp"
-
 #include "Toolib/math/scale.h"
 #include "Toolib/math/round.h"
 #include "Toolib/std/std_extensions.h"
