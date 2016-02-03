@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include "ToolibDEF.h"
 
 
 namespace too
@@ -19,7 +20,7 @@ namespace too
 namespace file
 {
 
-class FileCollection
+class TOOLIBSHARED_EXPORT FileCollection
 {
 public:
     static const unsigned char max_digits = 10;
