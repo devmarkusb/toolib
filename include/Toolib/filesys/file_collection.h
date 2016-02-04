@@ -13,6 +13,7 @@
 #include <vector>
 #include "ToolibDEF.h"
 
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
 
 namespace too
 {
@@ -41,5 +42,7 @@ private:
 };
 }
 }
+
+#include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
 
 #endif

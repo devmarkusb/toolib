@@ -15,6 +15,7 @@
 #include "Toolib/math/scale.h"
 #include "Toolib/math/percent.h"
 #include "Toolib/narrow.h"
+#include "Toolib/PPDEFS.h"
 
 
 namespace too
@@ -53,7 +54,7 @@ public:
 
         std::for_each(std::begin(data), std::end(data), [&](const T& d)
             {
-                percentual_data.push_back(mapData2Percent(d));
+                percentual_data.push_back(mapData2Percent(too::narrow_cast<Percent>(d)));
             });
 
         std::sort(std::begin(percentual_data), std::end(percentual_data));
@@ -84,7 +85,11 @@ public:
     const std::array<Percent, number_of_bars>& getBars() const { return this->bars; }
 
 private:
-    std::array<Percent, number_of_bars> bars{{}};
+    std::array<Percent, number_of_bars> bars
+#if TOO_HAS_BRACE_INIT_MEMBER_NON_STATIC
+    {{}}
+#endif
+    ;
 };
 
 }
