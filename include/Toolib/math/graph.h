@@ -46,6 +46,7 @@ struct ChartAxis_setup
     //! If not provided, the maximum count of scale ticks on the axis is chosen automatically.
     too::opt<ScaleTickCount> max_tick_count;
     std::pair<ProjectionValue, ProjectionValue> projection_range;
+    bool force_start_at_zero_quvalue = false;
 };
 
 //!
@@ -58,7 +59,9 @@ public:
         const QuValueType& max_qu_val);
 
     ProjectionValue quvalue_to_projection(QuValueType x) const;
+    ProjectionValue qurange_to_projectionrange(QuValueType width) const;
     QuValueType projection_to_quvalue(ProjectionValue p) const;
+    QuValueType projectionrange_to_qurange(ProjectionValue width) const;
 
     ProjectionValue getProjectionMinVal() const { return this->setup.projection_range.first; }
     ProjectionValue getProjectionMaxVal() const { return this->setup.projection_range.second; }
@@ -83,6 +86,7 @@ private:
     QuValueType tick_start_qu_val{};
     QuValueType tick_end_qu_val{};
 
+    void ensure_non_zero_range();
     void calcScaling();
 };
 
@@ -136,7 +140,7 @@ ChartAxis<QuValueType>::ChartAxis(
     auto minmax = std::make_pair(QuValueType(), QuValueType());
     if (qu_values && !qu_values->empty())
         minmax   = std::minmax_element(std::begin(*qu_values), std::end(*qu_values));
-    this->minVal = minmax.first;
+    this->minVal = setup.force_start_at_zero_quvalue ? QuValueType() : minmax.first;
     this->maxVal = minmax.second;
 
     calcScaling();
@@ -151,11 +155,33 @@ ChartAxis<QuValueType>::ChartAxis(const ChartAxis_setup& setup, const Quantity& 
 }
 
 template <typename QuValueType>
+void ChartAxis<QuValueType>::ensure_non_zero_range()
+{
+    if (this->minVal > this->maxVal)
+        std::swap(this->minVal, this->maxVal);
+    if (!too::math::almost_equal(this->minVal, this->maxVal))
+        return;
+    if (too::math::almost_equal(this->minVal, QuValueType()))
+    {
+        this->minVal = QuValueType();
+        this->maxVal = QuValueType(1);
+    }
+    else
+    {
+        this->minVal -= QuValueType(1);
+        this->maxVal += QuValueType(1);
+    }
+    TOO_ENSURE(!too::math::almost_equal(this->minVal, this->maxVal));
+}
+
+template <typename QuValueType>
 void ChartAxis<QuValueType>::calcScaling()
 {
     this->tick_count = setup.max_tick_count ? *setup.max_tick_count : 11;
 
-    this->tick_step_qu_val  = calcNiceScaleTick(maxVal - minVal, this->tick_count);
+    ensure_non_zero_range();
+
+    this->tick_step_qu_val  = calcNiceScaleTick(this->maxVal - this->minVal, this->tick_count);
     this->tick_start_qu_val = 0.0;
     this->tick_end_qu_val = 0.0;
     std::tie(tick_start_qu_val, tick_end_qu_val) = calcScaleTickFromTo(minVal, maxVal, tick_step_qu_val);
@@ -175,11 +201,27 @@ ProjectionValue ChartAxis<QuValueType>::quvalue_to_projection(QuValueType x) con
 }
 
 template <typename QuValueType>
+ProjectionValue ChartAxis<QuValueType>::qurange_to_projectionrange(QuValueType width) const
+{
+    TOO_EXPECT_THROW(this->map_quvalue_to_projection);
+    const QuValue_to_Projection& q2p = *this->map_quvalue_to_projection;
+    return std::abs(q2p(width) - q2p(QuValueType()));
+}
+
+template <typename QuValueType>
 QuValueType ChartAxis<QuValueType>::projection_to_quvalue(ProjectionValue p) const
 {
     TOO_EXPECT_THROW(this->map_quvalue_to_projection);
     const QuValue_to_Projection& q2p = *this->map_quvalue_to_projection;
     return q2p.inverse(p);
+}
+
+template <typename QuValueType>
+QuValueType ChartAxis<QuValueType>::projectionrange_to_qurange(ProjectionValue width) const
+{
+    TOO_EXPECT_THROW(this->map_quvalue_to_projection);
+    const QuValue_to_Projection& q2p = *this->map_quvalue_to_projection;
+    return std::abs(q2p.inverse(width) - q2p.inverse(ProjectionValue()));
 }
 
 
@@ -208,6 +250,11 @@ Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(const ChartAxis_setup& setupX, cons
 
         minmax_X = {(*minmax_X_pair.first).first, (*minmax_X_pair.second).first};
         minmax_Y = {(*minmax_Y_pair.first).second, (*minmax_Y_pair.second).second};
+        
+        if (setupX.force_start_at_zero_quvalue)
+            minmax_X.first = QuValueTypeX();
+        if (setupY.force_start_at_zero_quvalue)
+            minmax_Y.first = QuValueTypeY();
     }
 
     this->x_axis =
@@ -215,6 +262,7 @@ Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(const ChartAxis_setup& setupX, cons
     this->y_axis =
         std::make_unique<ChartAxis<QuValueTypeX>>(setupY, quantitiesXY.second, minmax_Y.first, minmax_Y.second);
 }
+
 }
 }
 
