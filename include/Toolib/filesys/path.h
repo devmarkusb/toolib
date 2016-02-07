@@ -17,6 +17,10 @@ namespace too
 {
 namespace file
 {
+
+TOOLIBSHARED_EXPORT void remove_extension(std::string& fn);
+TOOLIBSHARED_EXPORT bool file_exists(const std::string& fn);
+
 //! String manipulation helper class only. No file system operations.
 class TOOLIBSHARED_EXPORT CPath
 {
@@ -52,7 +56,7 @@ public:
     //! inclusive extension
     std::string getFileName() const;
     //! without dot
-    std::string getExtension() const;
+    std::string getExtension(bool with_dot = false) const;
     bool isAbsolute() const;
     bool isEmpty() const;
 

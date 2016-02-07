@@ -11,6 +11,7 @@
 #include "Toolib/string/string_token.h"
 #include <assert.h>
 #include <algorithm>
+#include <fstream>
 
 namespace
 {
@@ -22,7 +23,23 @@ const std::string OS_FOLDER_SEPARATOR = "/";
 #endif
 }
 
-using namespace too::file;
+namespace too
+{
+namespace file
+{
+
+void remove_extension(std::string& fn)
+{
+    size_t lastdot = fn.find_last_of(".");
+    if (lastdot == std::string::npos) return;
+    fn = fn.substr(0, lastdot);
+}
+
+bool file_exists(const std::string& fn)
+{
+    std::ifstream file(fn, std::ios_base::binary);
+    return file ? true : false;
+}
 
 const std::string CPath::FOLDER_SEPARATOR_TO_USE_HERE = "/";
 
@@ -108,7 +125,7 @@ std::string CPath::getFileName() const
     return m_path->substr(index + 1);
 }
 
-std::string CPath::getExtension() const
+std::string CPath::getExtension(bool with_dot) const
 {
     if (m_type != EType::IS_FILE && m_type != EType::IS_UNKNOWN)
         return std::string();
@@ -116,7 +133,10 @@ std::string CPath::getExtension() const
     // no ext || hidden file (starts with dot) || filename ends with a dot
     if (index == std::string::npos || index == 0 || index == m_path->size() - 1)
         return std::string();
-    return m_path->substr(index + 1);
+    if (with_dot)
+        return std::string(".") + m_path->substr(index + 1);
+    else
+        return m_path->substr(index + 1);
 }
 
 bool CPath::isAbsolute() const
@@ -199,4 +219,7 @@ void CPath::detectForm() const
     }
     else
         m_form = EForm::PLATFORMINDEPENDENT;
+}
+
+}
 }
