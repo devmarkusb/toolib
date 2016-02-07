@@ -12,6 +12,12 @@ TEST(MathCalcNiceScaleTickTest, Basics)
     EXPECT_DOUBLE_EQ(10.0, too::math::calcNiceScaleTick<double>(56.0, 10));
 }
 
+TEST(MathCalcNiceScaleTickTest, error)
+{
+    EXPECT_THROW(too::math::calcNiceScaleTick<double>(0.0, 10), too::fail_fast);
+    EXPECT_THROW(too::math::calcNiceScaleTick<int>(0, 10), too::fail_fast);
+}
+
 TEST(MathCalcScaleTickFromToTest, Basics)
 {
     double from = 0.0;
