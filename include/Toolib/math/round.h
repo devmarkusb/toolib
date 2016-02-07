@@ -19,25 +19,28 @@ namespace too
 {
 namespace math
 {
-inline double round(double r, unsigned short decimal_places)
+
+template <typename T>
+inline T round(T r, unsigned short decimal_places)
 {
-    double factor = decimal_places ? pow(10.0, static_cast<double>(decimal_places)) : 1.0;
+    static_assert(std::is_floating_point<T>::value, "");
+    T factor = decimal_places ? pow(10.0, static_cast<T>(decimal_places)) : 1.0;
     return (r >= 0.0) ? floor(r * factor + 0.5) / factor : ceil(r * factor - 0.5) / factor;
 }
 
-template <typename T>
-inline T round_to(double r, unsigned short decimal_places = 0)
+template <typename TR, typename TP>
+inline TR round_to(TP r, unsigned short decimal_places = 0)
 {
-    const volatile bool is_T_integral = std::is_integral<T>::value;
-    if (is_T_integral)
+    const volatile bool is_TR_integral = std::is_integral<TR>::value;
+    if (is_TR_integral)
         decimal_places = 0; // for integral target values decimal_places make no sense
     using std::numeric_limits;
-    const double d = round(r, decimal_places);
-    if (d > numeric_limits<T>::max())
-        return numeric_limits<T>::max();
-    else if (d < numeric_limits<T>::min())
-        return numeric_limits<T>::min();
-    return static_cast<T>(d);
+    const TP d = round(r, decimal_places);
+    if (d > numeric_limits<TR>::max())
+        return numeric_limits<TR>::max();
+    else if (d < numeric_limits<TR>::min())
+        return numeric_limits<TR>::min();
+    return static_cast<TR>(d);
 }
 }
 }
