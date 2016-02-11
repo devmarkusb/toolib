@@ -25,8 +25,7 @@ file(GLOB_RECURSE TargetToolib_SRC_INCS "src/*.h*")
 set(TargetToolib_SOURCES
     src/ToolibDummy.cpp
     src/dummy.cpp
-    src/cons_w32/catch_exit.cpp
-    src/cons_w32/cons_w32.cpp
+    src/console/win/catch_exit.cpp
     src/filesys/path.cpp
     src/filesys/file_collection.cpp
     src/date_time/date_time.cpp
