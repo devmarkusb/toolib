@@ -31,15 +31,15 @@ using DefaultValueType = double;
 using Dimension = int;
 
 template <typename T = DefaultValueType>
-using Coord_         = std::enable_if_t<std::is_arithmetic<T>::value, T>;
+using Coord_         = too::enable_if_t<std::is_arithmetic<T>::value, T>;
 using Coord          = Coord_<>;
 
 template <typename T = DefaultValueType>
-using RelativeCoord_ = std::enable_if_t<std::is_arithmetic<T>::value, T>;
+using RelativeCoord_ = too::enable_if_t<std::is_arithmetic<T>::value, T>;
 using RelativeCoord  = RelativeCoord_<>;
 
 template <typename T = DefaultValueType>
-using Length_        = std::enable_if_t<std::is_arithmetic<T>::value, T>;
+using Length_        = too::enable_if_t<std::is_arithmetic<T>::value, T>;
 using Length         = Length_<>;
 
 template <typename T = DefaultValueType>

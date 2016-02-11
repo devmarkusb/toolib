@@ -45,7 +45,7 @@ public:
 
     virtual std::unique_ptr<TimeType> getFirstTimePoint() const override
     {
-        return std::make_unique<TimeType>(m_TimePoint);
+        return too::make_unique<TimeType>(m_TimePoint);
     }
 
     virtual std::unique_ptr<TimeType> getNextTimePoint(const TimeType&) const override { return nullptr; }
@@ -75,11 +75,11 @@ public:
     virtual std::unique_ptr<TimeType> getNextTimePoint(const TimeType& RelativeTo) const override;
 
     //! nullptr means earliest possible start, which is the default construction
-    void setStart(const TimeType* t) { m_TimePointStart = t ? std::make_unique<TimeType>(*t) : nullptr; }
+    void setStart(const TimeType* t) { m_TimePointStart = t ? too::make_unique<TimeType>(*t) : nullptr; }
     const TimeType* getStart() const { return m_TimePointStart.get(); }
 
     //! nullptr means forever, which is default construction
-    void setEnd(const TimeType* t) { m_TimePointEnd = t ? std::make_unique<TimeType>(*t) : nullptr; }
+    void setEnd(const TimeType* t) { m_TimePointEnd = t ? too::make_unique<TimeType>(*t) : nullptr; }
     const TimeType* getEnd() const { return m_TimePointEnd.get(); }
 
     void setTimePeriod(const TimeType& period) { m_TimePeriod = period; }
@@ -99,9 +99,9 @@ template <typename TimeType>
 RecurringEvent<TimeType>::RecurringEvent(const RecurringEvent<TimeType>& other)
 {
     if (other.m_TimePointStart)
-        m_TimePointStart = std::make_unique<TimeType>(*other.m_TimePointStart);
+        m_TimePointStart = too::make_unique<TimeType>(*other.m_TimePointStart);
     if (other.m_TimePointEnd)
-        m_TimePointEnd = std::make_unique<TimeType>(*other.m_TimePointEnd);
+        m_TimePointEnd = too::make_unique<TimeType>(*other.m_TimePointEnd);
     m_TimePeriod       = other.m_TimePeriod;
 }
 
@@ -116,7 +116,7 @@ RecurringEvent<TimeType>& RecurringEvent<TimeType>::operator=(const RecurringEve
 template <typename TimeType>
 std::unique_ptr<TimeType> RecurringEvent<TimeType>::getFirstTimePoint() const
 {
-    return m_TimePointStart ? std::make_unique<TimeType>(*m_TimePointStart) : std::make_unique<TimeType>(TimeType());
+    return m_TimePointStart ? too::make_unique<TimeType>(*m_TimePointStart) : too::make_unique<TimeType>(TimeType());
 }
 
 template <typename TimeType>
@@ -126,7 +126,7 @@ std::unique_ptr<TimeType> RecurringEvent<TimeType>::getNextTimePoint(const TimeT
     if (m_TimePointEnd && next > *m_TimePointEnd)
         return nullptr;
     else
-        return std::make_unique<TimeType>(next);
+        return too::make_unique<TimeType>(next);
 }
 }
 }

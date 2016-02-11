@@ -188,7 +188,7 @@ void ChartAxis<QuValueType>::calcScaling()
     this->tick_count = round_to<ScaleTickCount>((tick_end_qu_val - tick_start_qu_val) / tick_step_qu_val);
 
     this->map_quvalue_to_projection =
-        std::make_unique<QuValue_to_Projection>(std::make_pair(tick_start_qu_val, tick_end_qu_val),
+        too::make_unique<QuValue_to_Projection>(std::make_pair(tick_start_qu_val, tick_end_qu_val),
             std::make_pair(setup.projection_range.first, setup.projection_range.second));
 }
 
@@ -258,9 +258,9 @@ Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(const ChartAxis_setup& setupX, cons
     }
 
     this->x_axis =
-        std::make_unique<ChartAxis<QuValueTypeX>>(setupX, quantitiesXY.first, minmax_X.first, minmax_X.second);
+        too::make_unique<ChartAxis<QuValueTypeX>>(setupX, quantitiesXY.first, minmax_X.first, minmax_X.second);
     this->y_axis =
-        std::make_unique<ChartAxis<QuValueTypeX>>(setupY, quantitiesXY.second, minmax_Y.first, minmax_Y.second);
+        too::make_unique<ChartAxis<QuValueTypeX>>(setupY, quantitiesXY.second, minmax_Y.first, minmax_Y.second);
 }
 
 }

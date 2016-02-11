@@ -242,7 +242,7 @@ inline std::string CPerformanceProfiler::DumpAllItems(bool test)
     for (const auto& key : keys)
     {
         TTimeValStorageRep totalT =
-            std::accumulate(Items().begin(), Items().end(), TTimeValStorageRep(), accum_key(key.first));
+            too::accumulate(Items().begin(), Items().end(), TTimeValStorageRep(), accum_key(key.first));
         size_t count            = std::count_if(Items().begin(), Items().end(), match_key(key.first));
         TTimeValStorageRep avgT = 0.0;
         if (count)
