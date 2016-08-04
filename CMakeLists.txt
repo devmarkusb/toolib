@@ -71,6 +71,7 @@ target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooBuildEnv/includ
 target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooBasicCodeSupport/include)
 target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooLinklib/include)
 target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooString/include)
+target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooMem/include)
 
 get_directory_property(hasParent PARENT_DIRECTORY)
 if(hasParent)

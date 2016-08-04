@@ -10,6 +10,8 @@
 #ifndef CATCH_EXIT_H_INCL_34trcx83943g
 #define CATCH_EXIT_H_INCL_34trcx83943g
 
+#include "Toolib/PPDEFS.h"
+#if TOO_OS_WINDOWS
 #include <windows.h>
 #include "../../../ToolibDEF.h"
 
@@ -45,5 +47,6 @@ private:
 };
 }
 }
+#endif //TOO_OS_WINDOWS
 
 #endif

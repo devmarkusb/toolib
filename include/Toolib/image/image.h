@@ -18,6 +18,7 @@ namespace img
 {
 
 using Pixels = long;
+
 }
 }
 
