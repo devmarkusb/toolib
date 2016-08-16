@@ -55,7 +55,7 @@ endif ()
 
 if (NOT Toolib_USE_NO_DEPENDENCIES)
 if (NOT Boost_INCLUDE_DIRS)
-set(BOOST_ROOT "c:/projects/externlibs/boost_1_56_0")
+set(BOOST_ROOT $ENV{dev_sdk_paths})
 set(Boost_USE_MULTITHREADED     ON)
 set(Boost_USE_STATIC_LIBS       ON)
 set(Boost_USE_STATIC_RUNTIME    OFF)
@@ -113,7 +113,7 @@ endif ()
 
 set_target_properties(${TargetToolibTest} PROPERTIES DEBUG_POSTFIX "d")
 
-set(GTEST_ROOT "c:/projects/externlibs/gtest-1.7.0")
+set(GTEST_ROOT $ENV{dev_sdk_paths})
 set(GTEST_MSVC_SEARCH   MD)
 find_package(GTest 1.7.0)
 
