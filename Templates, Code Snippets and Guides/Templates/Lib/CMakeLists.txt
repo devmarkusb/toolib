@@ -41,7 +41,7 @@ set_property(TARGET ${TargetLibName} APPEND PROPERTY COMPILE_DEFINITIONS LIBNAME
 
 set_target_properties(${TargetLibName} PROPERTIES DEBUG_POSTFIX "d")
 
-set(BOOST_ROOT "c:/projects/externlibs/boost_1_56_0")
+set(BOOST_ROOT $ENV{dev_sdk_paths})
 set(Boost_USE_MULTITHREADED     ON)
 set(Boost_USE_STATIC_LIBS       OFF)
 set(Boost_USE_STATIC_RUNTIME    OFF)
@@ -82,7 +82,7 @@ endif ()
 
 set_target_properties(${TargetLibNameTest} PROPERTIES DEBUG_POSTFIX "d")
 
-set(GTEST_ROOT "c:/projects/externlibs/gtest-1.7.0")
+set(GTEST_ROOT $ENV{dev_sdk_paths})
 set(GTEST_MSVC_SEARCH   MD)
 find_package(GTest 1.7.0)
 
