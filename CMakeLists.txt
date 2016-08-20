@@ -14,7 +14,9 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-project(Toolib VERSION 0.1.0.0)
+include(buildnr.cmake)
+project(Toolib VERSION 1.1.0.${BUILD_NR})
+message(STATUS "project version: " ${PROJECT_VERSION})
 set(TargetToolib "Toolib")
 
 include(defaults.cmake)
@@ -62,6 +64,9 @@ set(Boost_USE_STATIC_RUNTIME    OFF)
 find_package(Boost 1.56.0)
 endif ()
 endif ()
+
+configure_file(Toolib_build_config.h.in ${CMAKE_BINARY_DIR}/Toolib_build_config.h)
+target_include_directories(${TargetToolib} PRIVATE ${CMAKE_BINARY_DIR})
 
 target_include_directories(${TargetToolib} PRIVATE include)
 if (NOT Toolib_USE_NO_DEPENDENCIES)
