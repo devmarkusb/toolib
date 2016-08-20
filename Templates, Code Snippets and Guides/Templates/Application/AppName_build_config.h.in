@@ -10,13 +10,13 @@
         You can tailor this one to your needs.
         Note that you will need to re-run CMake.
 */
-#ifndef TOOLIB_BUILD_CONFIG_H_INCL_sjkdfhnxuingf872g4ny78fg2
-#define TOOLIB_BUILD_CONFIG_H_INCL_sjkdfhnxuingf872g4ny78fg2
+#ifndef APPNAME_BUILD_CONFIG_H_INCL
+#define APPNAME_BUILD_CONFIG_H_INCL
 
 #include <string>
 
 
-namespace too
+namespace appname
 {
 inline std::string get_version_of_module()
 {

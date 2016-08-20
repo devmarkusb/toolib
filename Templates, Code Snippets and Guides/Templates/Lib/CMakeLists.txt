@@ -14,7 +14,9 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-project(LibProjName VERSION 0.1.0.0)
+include(buildnr.cmake)
+project(LibProjName VERSION 0.1.0.${BUILD_NR})
+message(STATUS "project version: " ${PROJECT_VERSION})
 set(TargetLibName "LibName")
 
 include(defaults.cmake)
@@ -47,6 +49,8 @@ set(Boost_USE_STATIC_LIBS       OFF)
 set(Boost_USE_STATIC_RUNTIME    OFF)
 find_package(Boost 1.56.0)
 
+configure_file(${TargetLibName}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetLibName}_build_config.h)
+target_include_directories(${TargetLibName} PRIVATE ${CMAKE_BINARY_DIR})
 
 target_include_directories(${TargetLibName} PRIVATE .)
 target_include_directories(${TargetLibName} PRIVATE include)

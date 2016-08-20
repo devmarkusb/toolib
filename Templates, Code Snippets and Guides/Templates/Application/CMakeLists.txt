@@ -14,7 +14,9 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-project(AppProjName VERSION 0.1.0.0)
+include(buildnr.cmake)
+project(AppProjName VERSION 0.1.0.${BUILD_NR})
+message(STATUS "project version: " ${PROJECT_VERSION})
 set(TargetAppName "AppName")
 
 include(defaults.cmake)
@@ -44,6 +46,9 @@ set(Boost_USE_MULTITHREADED     ON)
 set(Boost_USE_STATIC_LIBS       OFF)
 set(Boost_USE_STATIC_RUNTIME    OFF)
 find_package(Boost 1.56.0)
+
+configure_file(${TargetAppName}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetAppName}_build_config.h)
+target_include_directories(${TargetAppName} PRIVATE ${CMAKE_BINARY_DIR})
 
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC .)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC src)
