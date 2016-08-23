@@ -27,19 +27,15 @@ namespace fin
 class TOOLIBSHARED_EXPORT Currency
 {
 public:
-    struct None_t
-    {
-    };
     struct err_constructed_empty : std::exception
     {
     };
 
-    //! The default of \param currency means using the user preferred locale.
+    //! Setting \param loc to std::locale("") means using the user preferred locale.
     /** On e.g. a German system this could be std::locale("de_DE.utf8") internally.*/
-    explicit Currency(const std::locale& loc = std::locale(""));
-    //! Constructs a non-currency, in case you want to deal with currency less amounts of money for convenience.
-    //! Just pass too::fin::none as parameter.
-    Currency(None_t);
+    explicit Currency(const std::locale& loc);
+    //! Per default constructs a non-currency, in case you want to deal with currency-less amounts of money for convenience.
+    Currency() = default;
 
     std::string getString() const;
     std::string getSymbol() const;
@@ -52,7 +48,6 @@ public:
 private:
     too::opt<std::locale> loc;
 };
-const Currency::None_t none;
 #include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
 
 bool operator==(const Currency& lhs, const Currency& rhs);
@@ -70,7 +65,7 @@ public:
     //! The default of \param currency means no currency at all.
     //! You can get the user preferred locale's currency by passing Currency().
     /** On e.g. a German system this could be EUR internally.*/
-    explicit Money(BaseType amount = BaseType(), const Currency& currency = Currency(none));
+    explicit Money(BaseType amount = {}, const Currency& currency = Currency{});
 
     void set(BaseType amount, const Currency& currency);
     //! Doesn't change currency.
@@ -96,7 +91,7 @@ public:
     friend TOOLIBSHARED_EXPORT bool operator>=(const Money& lhs, const Money& rhs);
 
 private:
-    BaseType amount = BaseType();
+    BaseType amount{};
     Currency currency;
 };
 

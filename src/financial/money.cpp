@@ -24,8 +24,6 @@ namespace fin
 
 Currency::Currency(const std::locale& loc) : loc(loc) {}
 
-Currency::Currency(None_t) {}
-
 std::string Currency::getString() const
 {
     if (!(this->loc))
