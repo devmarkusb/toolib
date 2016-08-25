@@ -36,7 +36,7 @@ add_library(${TargetAppNameAsLibForTest} STATIC
 )
 
 if (WIN32)
-set_property(TARGET ${TargetAppNameAsLibForTest} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
+    set_property(TARGET ${TargetAppNameAsLibForTest} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
 endif ()
 
 set_target_properties(${TargetAppNameAsLibForTest} PROPERTIES DEBUG_POSTFIX "d")
@@ -48,7 +48,7 @@ set(Boost_USE_STATIC_RUNTIME    OFF)
 find_package(Boost 1.56.0)
 
 configure_file(${TargetAppName}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetAppName}_build_config.h)
-target_include_directories(${TargetAppName} PRIVATE ${CMAKE_BINARY_DIR})
+target_include_directories(${TargetAppName} PUBLIC ${CMAKE_BINARY_DIR})
 
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC .)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC src)
@@ -59,7 +59,7 @@ add_executable(${TargetAppName}
 )
 
 if (WIN32)
-set_property(TARGET ${TargetAppName} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
+    set_property(TARGET ${TargetAppName} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
 endif ()
 
 set_target_properties(${TargetAppName} PROPERTIES DEBUG_POSTFIX "d")
@@ -84,7 +84,7 @@ add_executable(${TargetAppNameTest}
 )
 
 if (WIN32)
-set_property(TARGET ${TargetAppNameTest} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
+    set_property(TARGET ${TargetAppNameTest} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
 endif ()
 
 set_target_properties(${TargetAppNameTest} PROPERTIES DEBUG_POSTFIX "d")
