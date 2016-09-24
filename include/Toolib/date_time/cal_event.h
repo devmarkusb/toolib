@@ -122,6 +122,8 @@ std::unique_ptr<TimeType> RecurringEvent<TimeType>::getFirstTimePoint() const
 template <typename TimeType>
 std::unique_ptr<TimeType> RecurringEvent<TimeType>::getNextTimePoint(const TimeType& RelativeTo) const
 {
+    if (m_TimePeriod == TimeType{})
+        return nullptr;
     TimeType next = RelativeTo + m_TimePeriod;
     if (m_TimePointEnd && next > *m_TimePointEnd)
         return nullptr;
