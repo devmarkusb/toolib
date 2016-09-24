@@ -45,7 +45,7 @@ std::string Currency::getSymbol() const
 std::string Currency::getLocaleConstrName() const
 {
     if (!this->loc)
-        throw err_constructed_empty();
+        return {};
     return (*this->loc).name();
 }
 
@@ -79,6 +79,10 @@ Money& Money::operator=(BaseType amount)
 auto Money::get() const -> BaseType { return amount; }
 
 Currency Money::getCurrency() const { return this->currency; }
+
+// perhaps needs to be different for some exotic currencies?
+Money::BaseType Money::getSmallestUnit(const Currency&) { return 0.01L; }
+Money::BaseType Money::getTenthOfSmallestUnit(const Currency&) { return 0.001L; }
 
 Money& Money::operator-=(const Money& rhs)
 {
@@ -192,13 +196,21 @@ bool operator>=(const Money& lhs, const Money& rhs)
     return operator==(lhs, rhs) || !operator<(lhs, rhs);
 }
 
+bool equal_sufficiently(const Money& lhs, const Money& rhs)
+{
+    if (lhs.currency != rhs.currency) // otherwise not yet implemented
+        throw too::not_implemented("mixed currencies not yet implemented");
+    // tenth of smallest unit needed since this is the relevant digit for rounding
+    return too::math::approx_equal(lhs.amount, rhs.amount, Money::getTenthOfSmallestUnit());
+}
+
 
 //##########################################################################################################
 
 
 Fraction Interest_pa::YearlyEffective_to_MonthlyRelative(Fraction pa)
 {
-    return std::pow(1.0 + pa, 1.0 / too::date_time::MonthYear_decl::twelve) - 1.0;
+    return std::pow(1.0L + pa, 1.0L / too::date_time::MonthYear_decl::twelve) - 1.0L;
 }
 }
 }

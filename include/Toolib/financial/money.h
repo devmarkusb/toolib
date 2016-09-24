@@ -27,10 +27,6 @@ namespace fin
 class TOOLIBSHARED_EXPORT Currency
 {
 public:
-    struct err_constructed_empty : std::exception
-    {
-    };
-
     //! Setting \param loc to std::locale("") means using the user preferred locale.
     /** On e.g. a German system this could be std::locale("de_DE.utf8") internally.*/
     explicit Currency(const std::locale& loc);
@@ -39,7 +35,7 @@ public:
 
     std::string getString() const;
     std::string getSymbol() const;
-    //! Throws Currency::err_constructed_empty if no locale was used to construct.
+    //! \returns empty string if no locale was used to construct.
     std::string getLocaleConstrName() const;
 
     friend bool operator==(const Currency& lhs, const Currency& rhs);
@@ -76,6 +72,9 @@ public:
     BaseType get() const;
     Currency getCurrency() const;
 
+    static BaseType getSmallestUnit(const Currency& currency = Currency{});
+    static BaseType getTenthOfSmallestUnit(const Currency& currency = Currency{});
+
     Money& operator-=(const Money& rhs);
     Money& operator+=(const Money& rhs);
     Money& operator/=(const Money& rhs);
@@ -89,6 +88,7 @@ public:
     friend TOOLIBSHARED_EXPORT bool operator>(const Money& lhs, const Money& rhs);
     friend TOOLIBSHARED_EXPORT bool operator<=(const Money& lhs, const Money& rhs);
     friend TOOLIBSHARED_EXPORT bool operator>=(const Money& lhs, const Money& rhs);
+    friend TOOLIBSHARED_EXPORT bool equal_sufficiently(const Money& lhs, const Money& rhs);
 
 private:
     BaseType amount{};
@@ -108,6 +108,9 @@ TOOLIBSHARED_EXPORT bool operator<(const Money& lhs, const Money& rhs);
 TOOLIBSHARED_EXPORT bool operator>(const Money& lhs, const Money& rhs);
 TOOLIBSHARED_EXPORT bool operator<=(const Money& lhs, const Money& rhs);
 TOOLIBSHARED_EXPORT bool operator>=(const Money& lhs, const Money& rhs);
+
+//! 'equal to the cent'; to be used for end result checks, not so much within calculations
+TOOLIBSHARED_EXPORT bool equal_sufficiently(const Money& lhs, const Money& rhs);
 
 
 //##########################################################################################################
