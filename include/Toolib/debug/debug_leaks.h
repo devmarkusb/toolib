@@ -1,9 +1,11 @@
-// Markus Borris, 2011
+// Markus Borris, 2011-16
 // This file is part of Toolib library.
 
 //!
 /** Contains memory leak detection, wrapping just the standard procedure of Visual Studio.
 If you want to use vld.h instead, if available, just define TOO_USE_VLD in front of the header inclusion.
+But I would rather suggest to use VLD directly. With version 2.5 it's gotten extremely simple to use.
+You just need one include and one lib to link statically.
 */
 //! \file
 
@@ -15,8 +17,7 @@ If you want to use vld.h instead, if available, just define TOO_USE_VLD in front
 
 //! Memory leak detection. Include the header as the last one (!) in your main module and use TOO_DUMP_MEM_LEAKS.
 /** Detection goes either by standard Visual Studio style or by using vld.h, if available, whereas
-one would have to define TOO_USE_VLD to 1 in front of the header inclusion (also needs dbghelp.dll
-of a recent version to reside in the exe-folder).
+one would have to define TOO_USE_VLD to 1 in front of the header inclusion.
 In the standard case, one has to call TOO_DUMP_MEM_LEAKS; before the program exits in order
 to find leak informations in the Output window of the Visual Studio IDE.*/
 #if TOO_USE_VLD
