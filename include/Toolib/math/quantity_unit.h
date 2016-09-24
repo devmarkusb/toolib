@@ -56,7 +56,7 @@ inline std::map<too::math::Rational, std::string> create_map_ratio_SIprefixunitn
 }
 
 
-//! Passed object to \param map_ratio_prefixunitname needs to be alive for the whole live of Unit.
+//! Passed object to \param map_ratio_prefixunitname needs to be alive for the whole life time of Unit.
 //! To avoid heavy copying we just refer to that. If you need just SI prefixes, you can use
 //! create_map_ratio_SIprefixunitname().
 //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the initial or target
