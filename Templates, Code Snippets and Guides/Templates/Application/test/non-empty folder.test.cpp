@@ -4,11 +4,11 @@ struct function_or_classTest : public ::testing::Test
 {
     function_or_classTest() {}
 
-    void SetUp() {}
+    virtual void SetUp() override {}
 
     void f() { EXPECT_TRUE(true); }
 
-    void TearDown() {}
+    virtual void TearDown() override {}
 
     ~function_or_classTest() {}
 };

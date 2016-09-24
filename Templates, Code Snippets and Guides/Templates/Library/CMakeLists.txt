@@ -43,19 +43,12 @@ set_property(TARGET ${TargetLibName} APPEND PROPERTY COMPILE_DEFINITIONS LIBNAME
 
 set_target_properties(${TargetLibName} PROPERTIES DEBUG_POSTFIX "d")
 
-set(BOOST_ROOT $ENV{dev_sdk_paths})
-set(Boost_USE_MULTITHREADED     ON)
-set(Boost_USE_STATIC_LIBS       OFF)
-set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package(Boost 1.56.0)
-
 configure_file(${TargetLibName}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetLibName}_build_config.h)
 target_include_directories(${TargetLibName} PRIVATE ${CMAKE_BINARY_DIR})
 
 target_include_directories(${TargetLibName} PRIVATE .)
 target_include_directories(${TargetLibName} PRIVATE include)
 target_include_directories(${TargetLibName} PRIVATE src)
-target_include_directories(${TargetLibName} PRIVATE ${Boost_INCLUDE_DIRS})
 
 get_directory_property(hasParent PARENT_DIRECTORY)
 if(hasParent)

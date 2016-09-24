@@ -43,9 +43,9 @@ set_target_properties(${TargetAppNameAsLibForTest} PROPERTIES DEBUG_POSTFIX "d")
 
 set(BOOST_ROOT $ENV{dev_sdk_paths})
 set(Boost_USE_MULTITHREADED     ON)
-set(Boost_USE_STATIC_LIBS       OFF)
+set(Boost_USE_STATIC_LIBS       ON)
 set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package(Boost 1.56.0)
+find_package(Boost 1.56.0) # e.g. COMPONENTS date_time
 
 configure_file(${TargetAppName}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetAppName}_build_config.h)
 target_include_directories(${TargetAppName} PUBLIC ${CMAKE_BINARY_DIR})
@@ -53,6 +53,8 @@ target_include_directories(${TargetAppName} PUBLIC ${CMAKE_BINARY_DIR})
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC .)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC src)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC SYSTEM ${Boost_INCLUDE_DIRS})
+
+target_link_libraries(${TargetAppNameAsLibForTest} PRIVATE ${Boost_LIBRARIES})
 
 add_executable(${TargetAppName}
     src/_gui/src_WinCmdLine/main.cpp
