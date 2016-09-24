@@ -66,8 +66,8 @@ inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
 {
     TOO_EXPECT_THROW(MaxTickCount);
     TOO_EXPECT_THROW(RangeMinToMax > T());
-    const double MaxTickCount_ = narrow<double>(MaxTickCount);
-    const double MinimalTick   = narrow<double>(RangeMinToMax) / MaxTickCount_;
+    const double MaxTickCount_ = narrow_cast<double>(MaxTickCount);
+    const double MinimalTick   = narrow_cast<double>(RangeMinToMax) / MaxTickCount_;
     const double magnitude = std::pow(10.0, std::floor(std::log10(MinimalTick)));
     if (too::math::almost_equal(magnitude, 0.0))
         return 0.0;
@@ -91,8 +91,8 @@ template <typename T>
 inline std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, double scaleTick)
 {
     TOO_EXPECT(minDataValue <= maxDataValue);
-    const double minIn  = narrow<double>(minDataValue);
-    const double maxIn  = narrow<double>(maxDataValue);
+    const double minIn  = narrow_cast<double>(minDataValue);
+    const double maxIn  = narrow_cast<double>(maxDataValue);
     if (too::math::almost_equal(scaleTick, 0.0))
         return std::make_pair(minIn, maxIn);
     const double minOut = std::floor(minIn / scaleTick) * scaleTick;
