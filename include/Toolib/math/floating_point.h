@@ -32,6 +32,13 @@ typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type almost_
     return std::abs(x - y) < std::numeric_limits<T>::epsilon() * std::abs(x + y) * ulp ||
         std::abs(x - y) < std::numeric_limits<T>::min();
 }
+
+template <typename T>
+typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type approx_equal(T x, T y, T eps)
+{
+    return std::abs(x - y) < eps;
+}
+
 }
 }
 
