@@ -92,19 +92,19 @@ set(TargetToolibTest "ToolibTest")
 file(GLOB_RECURSE TargetToolibTest_SRC_INCS "test/*.h*")
 
 set(TargetToolibTest_SOURCES
-    test/src/_header_compile.test.cpp
-    test/src/class/IAbstractTest.cpp
-    test/src/class/IType.test.cpp
-    test/src/class/non_copyable.test.cpp
-    test/src/math/numberTest.cpp
-    test/src/math/roundTest.cpp
-    test/src/math/scaleTest.cpp
-    test/src/math/floating_pointTest.cpp
-    test/src/date_time/date_time.test.cpp
-    test/src/date_time/cal_event.test.cpp
-    test/src/filesys/pathTest.cpp
-    test/src/performanceTest.cpp
-    test/src/financial/money.test.cpp
+    test/_header_compile.test.cpp
+    test/class/IAbstractTest.cpp
+    test/class/IType.test.cpp
+    test/class/non_copyable.test.cpp
+    test/math/numberTest.cpp
+    test/math/roundTest.cpp
+    test/math/scaleTest.cpp
+    test/math/floating_pointTest.cpp
+    test/date_time/date_time.test.cpp
+    test/date_time/cal_event.test.cpp
+    test/filesys/pathTest.cpp
+    test/performanceTest.cpp
+    test/financial/money.test.cpp
 )
 
 add_executable(${TargetToolibTest}
