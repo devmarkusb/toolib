@@ -1,5 +1,5 @@
-#include "gtest/gtest.h"
 #include "Toolib/math/number.h"
+#include "gtest/gtest.h"
 
 
 TEST(MathNumberGetDecDigitCountTest, Dec)

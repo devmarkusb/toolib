@@ -1,4 +1,6 @@
+#include "LibName/non-empty folder.h"
 #include "gtest/gtest.h"
+
 
 struct function_or_classTest : public ::testing::Test
 {

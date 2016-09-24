@@ -1,9 +1,10 @@
+#include "Toolib/date_time/date_time.h"
 #include "gtest/gtest.h"
 #include <sstream>
 #include <type_traits>
-#include "Toolib/date_time/date_time.h"
 
 using namespace too::date_time;
+
 
 TEST(date_time__normalize_do_itTest, already_done)
 {

@@ -1,7 +1,8 @@
-#include "gtest/gtest.h"
 #include "Toolib/date_time/cal_event.h"
+#include "gtest/gtest.h"
 
 using namespace too::date_time;
+
 
 namespace
 {

@@ -32,13 +32,16 @@ struct B
         I = 1
     };
 };
+
 template <typename Ty>
 B::_ i2B(Ty t = Ty())
 {
     return static_cast<B::_>(t);
 }
+
+
 template <>
-B::_ i2B<int>(int i)
+inline B::_ i2B<int>(int i)
 {
     return static_cast<B::_>(i);
 }

@@ -77,7 +77,9 @@ set(TargetAppNameTest "AppNameTest")
 file(GLOB_RECURSE TargetAppNameTest_SRC_INCS "test/*.h*")
 
 set(TargetAppNameTest_SOURCES
-	"test/non-empty folder.test.cpp"
+    test/consts.test.cpp
+    test/feature_defines.test.cpp
+    test/_gui/interface/globals_gui.test.cpp
 )
 
 add_executable(${TargetAppNameTest}

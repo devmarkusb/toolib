@@ -1,4 +1,4 @@
-// Markus Borris, 2011
+// Markus Borris, 2011-16
 // This file is part of Toolib library.
 
 //!
@@ -8,9 +8,9 @@
 
 // Implementation taken from Meyers' book.
 
-
 #ifndef COUNTED_CLASS_OBJECTS_H_INCL_cirewhct34bctgu4372
 #define COUNTED_CLASS_OBJECTS_H_INCL_cirewhct34bctgu4372
+
 
 namespace too
 {
@@ -48,15 +48,15 @@ public:
     {
     };
     //!
-    static int objectCount() { return m_numObjects; }
+    static long objectCount() { return m_numObjects; }
 protected:
     Counted() { init(); }
     Counted(const Counted&) { init(); }
 
     ~Counted() { --m_numObjects; }
 private:
-    static int m_numObjects;
-    static const size_t maxObjects;
+    static long m_numObjects;
+    static const long maxObjects;
 
     void init()
     {
@@ -66,7 +66,7 @@ private:
     }
 };
 template <class BeingCounted>
-int Counted<BeingCounted>::m_numObjects; // defines and initializes to zero
+long Counted<BeingCounted>::m_numObjects; // defines and initializes to zero
 }
 
 #endif

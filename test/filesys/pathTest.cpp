@@ -1,7 +1,8 @@
-#include "gtest/gtest.h"
 #include "Toolib/filesys/path.h"
+#include "gtest/gtest.h"
 
 using too::file::CPath;
+
 
 class CPathTest : public ::testing::Test
 {

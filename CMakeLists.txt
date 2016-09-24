@@ -25,8 +25,6 @@ file(GLOB_RECURSE TargetToolib_INCS "include/*.h*")
 file(GLOB_RECURSE TargetToolib_SRC_INCS "src/*.h*")
 
 set(TargetToolib_SOURCES
-    src/ToolibDummy.cpp
-    src/dummy.cpp
     src/console/win/catch_exit.cpp
     src/filesys/path.cpp
     src/filesys/file_collection.cpp
@@ -92,17 +90,42 @@ set(TargetToolibTest "ToolibTest")
 file(GLOB_RECURSE TargetToolibTest_SRC_INCS "test/*.h*")
 
 set(TargetToolibTest_SOURCES
-    test/_header_compile.test.cpp
     test/class/IAbstractTest.cpp
     test/class/IType.test.cpp
-    test/class/non_copyable.test.cpp
+    test/class/counted_class_objects.test.cpp
+    test/console/prompt.test.cpp
+    test/console/win/catch_exit.test.cpp
+    test/CppCLI/mmtypeconv.test.cpp
+    test/debug/debug_leaks.test.cpp
+    test/game/game.test.cpp
+    test/image/image.test.cpp
+    test/scope/autoptr.test.cpp
+    test/scope/raii_p.test.cpp
+    test/scope/reftovalue.test.cpp
+    test/scope/scopeflagged.bak.test.cpp
+    test/scope/scopeflagged.test.cpp
+    test/scope/scopeguard.test.cpp
+    test/string/lex_cast.test.cpp
+    test/string/string_token.test.cpp
+    test/string/string_trim.test.cpp
+    test/math/stat/histogram.test.cpp
     test/math/numberTest.cpp
     test/math/roundTest.cpp
     test/math/scaleTest.cpp
     test/math/floating_pointTest.cpp
+    test/math/bits.test.cpp
+    test/math/geometry.test.cpp
+    test/math/graph.test.cpp
+    test/math/matrix.test.cpp
+    test/math/pair.test.cpp
+    test/math/percent.test.cpp
+    test/math/quantity_unit.test.cpp
+    test/math/ratio.test.cpp
+    test/math/standaloneop.test.cpp
     test/date_time/date_time.test.cpp
     test/date_time/cal_event.test.cpp
     test/filesys/pathTest.cpp
+    test/filesys/file_collection.test.cpp
     test/performanceTest.cpp
     test/financial/money.test.cpp
 )
