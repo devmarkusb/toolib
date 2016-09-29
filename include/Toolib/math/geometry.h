@@ -63,6 +63,9 @@ enum class CoordOrigin
 template <typename T = Coord, Dimension dim = 2>
 struct Point_
 {
+    static_assert(std::is_arithmetic<T>::value, "T has to be an arithmetic type");
+    static_assert(dim >= 1, "expects d >= 1");
+
     std::array<T, dim> x{};
 
     Point_() : x{} {}
@@ -84,6 +87,8 @@ using Point = Point_<>;
 template <typename T>
 struct Point_<T, 2>
 {
+    static_assert(std::is_arithmetic<T>::value, "T has to be an arithmetic type");
+
     T x{};
     T y{};
 
@@ -109,6 +114,9 @@ struct Point_<T, 2>
 template <typename T = Coord, Dimension dim = 2>
 struct Vector_ : public Point_<T, dim>
 {
+    static_assert(std::is_arithmetic<T>::value, "T has to be an arithmetic type");
+    static_assert(dim >= 1, "expects d >= 1");
+
     Vector_<T, dim>& operator+=(const Vector_<T, dim>&)
     {
         // todo ...addition of rhs to *this...
@@ -128,6 +136,9 @@ using Vector = Vector_<>;
 template <typename T = Coord, Dimension dim = 2>
 struct LineSegment_
 {
+    static_assert(std::is_arithmetic<T>::value, "T has to be an arithmetic type");
+    static_assert(dim >= 1, "expects d >= 1");
+
     Point_<T, dim> p1;
     Point_<T, dim> p2;
 };
@@ -139,6 +150,8 @@ using LineSegment = LineSegment_<>;
 template <typename T = Coord, CoordOrigin origin = CoordOrigin::left_top>
 struct Rectangle_
 {
+    static_assert(std::is_arithmetic<T>::value, "T has to be an arithmetic type");
+
     Point_<T, 2> top_left;
     Point_<T, 2> bottom_right;
 
@@ -165,7 +178,27 @@ struct Rectangle_
 
 //! For convenience.
 using Rectangle = Rectangle_<>;
+
+
+//!
+template <typename T = Width>
+struct Margins_
+{
+    static_assert(std::is_arithmetic<T>::value, "T has to be an arithmetic type");
+
+    T left{};
+    T right{};
+    T top{};
+    T bottom{};
+
+    Margins_(T left, T right, T top, T bottom) : left{left}, right{right}, top{top}, bottom{bottom} {}
+};
+
+//! For convenience.
+using Margins = Margins_<>;
+
 }
+
 }
 
 #endif

@@ -110,7 +110,7 @@ public:
 
     const VectorOfPairs<QuValueTypeX, QuValueTypeY>* getValues() const { return this->values; }
 
-    void auto_optimize_scaling() { /*throw too::not_implemented("Chart2D::auto_optimize_scaling");*/}
+    void auto_optimize_scaling() { throw too::not_implemented("Chart2D::auto_optimize_scaling"); }
 
 private:
     const VectorOfPairs<QuValueTypeX, QuValueTypeY>* values;

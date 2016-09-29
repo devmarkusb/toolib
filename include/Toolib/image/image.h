@@ -10,6 +10,8 @@
 #ifndef IMAGE_H_dhfgniv8h5oo87zu4587t546xt5
 #define IMAGE_H_dhfgniv8h5oo87zu4587t546xt5
 
+#include "../math/geometry.h"
+
 
 namespace too
 {
@@ -18,6 +20,7 @@ namespace img
 {
 
 using Pixels = long;
+using PixelsMargins = too::math::Margins_<Pixels>;
 
 }
 }
