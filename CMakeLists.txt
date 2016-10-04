@@ -122,6 +122,7 @@ set(TargetToolibTest_SOURCES
     test/math/quantity_unit.test.cpp
     test/math/ratio.test.cpp
     test/math/standaloneop.test.cpp
+    test/math/consts.test.cpp
     test/date_time/date_time.test.cpp
     test/date_time/cal_event.test.cpp
     test/filesys/pathTest.cpp
