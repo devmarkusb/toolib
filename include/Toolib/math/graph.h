@@ -9,16 +9,15 @@
 #ifndef GRAPH_H_INCL_lnkjgngkvfvutzhirthczrec5
 #define GRAPH_H_INCL_lnkjgngkvfvutzhirthczrec5
 
-#include <vector>
-#include <utility>
-#include <memory>
-#include "Toolib/math/quantity_unit.h"
-#include "Toolib/math/scale.h"
+#include "Toolib/error.h"
 #include "Toolib/optional.h"
 #include "Toolib/ptr.h"
-#include "Toolib/error.h"
-#include "ToolibDEF.h"
 #include "Toolib\class\non_copyable.h"
+#include "Toolib/math/quantity_unit.h"
+#include "Toolib/math/scale.h"
+#include <memory>
+#include <utility>
+#include <vector>
 
 
 namespace too
@@ -63,7 +62,7 @@ struct ChartAxisProj_setup : public ChartAxis_setup
 {
     virtual ~ChartAxisProj_setup() {}
 
-    virtual std::unique_ptr<ChartAxis_setup> clone() const
+    virtual std::unique_ptr<ChartAxis_setup> clone() const override
     {
         return too::make_unique<ChartAxisProj_setup>(*this);
     }
@@ -100,6 +99,7 @@ private:
     Quantity quantity;
     const std::vector<QuValueType>* values;
 protected:
+    static const int expected_ulp_difference_minmax{10};
     QuValueType minVal{};
     QuValueType maxVal{};
     std::unique_ptr<const ChartAxis_setup> setup;
@@ -108,7 +108,8 @@ protected:
     QuValueType tick_start_qu_val{};
     QuValueType tick_end_qu_val{};
 
-    void ensure_non_zero_range();
+private:
+    void expectProperSetup() const;
 };
 
 
@@ -135,9 +136,10 @@ public:
 private:
     using QuValue_to_Projection = Map_LinearScale_Interval_to_Interval<QuValueType>;
     std::unique_ptr<QuValue_to_Projection> map_quvalue_to_projection;
-    const too::math::ChartAxisProj_setup* setup{nullptr};
+    const too::math::ChartAxisProj_setup* setup{nullptr};   // dyn-casted aux. alias of original setup member variable
 
     void constrImpl();
+    void expectProperSetup() const;
     void calcScaling();
 };
 
@@ -193,11 +195,26 @@ ChartAxis<QuValueType>::ChartAxis(
     const ChartAxis_setup& setup, const Quantity& quantity, const std::vector<QuValueType>* qu_values)
     : quantity(quantity), values(values), setup(setup.clone())
 {
-    auto minmax = std::make_pair(QuValueType(), QuValueType());
-    if (qu_values && !qu_values->empty())
-        minmax   = std::minmax_element(std::begin(*qu_values), std::end(*qu_values));
-    this->minVal = minmax.first;
-    this->maxVal = minmax.second;
+    expectProperSetup();
+
+    if (!qu_values || qu_values->empty())
+    {
+        this->minVal = {};
+        this->maxVal = {};
+    }
+    if (qu_values)
+    {
+        const auto minmax = std::minmax_element(std::begin(*qu_values), std::end(*qu_values));
+        this->minVal = minmax.first;
+        this->maxVal = minmax.second;
+    }
+    if (too::math::almost_equal(this->minVal, this->maxVal))
+    {
+        this->minVal -= QuValueType(1);
+        this->maxVal += QuValueType(1);
+    }
+    TOO_ENSURE_THROW(this->minVal < this->maxVal);
+    TOO_ENSURE_THROW(!too::math::almost_equal_alltypes(this->minVal, this->maxVal, expected_ulp_difference_minmax));
 }
 
 template <typename QuValueType>
@@ -205,26 +222,15 @@ ChartAxis<QuValueType>::ChartAxis(const ChartAxis_setup& setup, const Quantity& 
     const QuValueType& max_qu_val)
     : quantity(quantity), minVal(min_qu_val), maxVal(max_qu_val), setup(setup.clone())
 {
+    TOO_EXPECT_THROW(min_qu_val < max_qu_val);
+    TOO_EXPECT_THROW(!too::math::almost_equal_alltypes(min_qu_val, max_qu_val, expected_ulp_difference_minmax));
+    expectProperSetup();
 }
 
 template <typename QuValueType>
-void ChartAxis<QuValueType>::ensure_non_zero_range()
+void ChartAxis<QuValueType>::expectProperSetup() const
 {
-    if (this->minVal > this->maxVal)
-        std::swap(this->minVal, this->maxVal);
-    if (!too::math::almost_equal(this->minVal, this->maxVal))
-        return;
-    if (too::math::almost_equal(this->minVal, QuValueType()))
-    {
-        this->minVal = QuValueType();
-        this->maxVal = QuValueType(1);
-    }
-    else
-    {
-        this->minVal -= QuValueType(1);
-        this->maxVal += QuValueType(1);
-    }
-    TOO_ENSURE(!too::math::almost_equal(this->minVal, this->maxVal));
+    TOO_EXPECT_THROW(this->setup->max_tick_count ? this->setup->max_tick_count > 0 : true);
 }
 
 
@@ -251,15 +257,22 @@ void ChartAxisProj<QuValueType>::constrImpl()
 {
     this->setup = dynamic_cast<const too::math::ChartAxisProj_setup*>(ChartAxis::setup.get());
     TOO_EXPECT_THROW(this->setup);
+    expectProperSetup();
+
     calcScaling();
+}
+
+template <typename QuValueType>
+void ChartAxisProj<QuValueType>::expectProperSetup() const
+{
+    TOO_EXPECT_THROW(this->setup->projection_range.first < this->setup->projection_range.second);
+    TOO_EXPECT_THROW(!too::math::almost_equal(this->setup->projection_range.first, this->setup->projection_range.second, expected_ulp_difference_minmax));
 }
 
 template <typename QuValueType>
 void ChartAxisProj<QuValueType>::calcScaling()
 {
     this->tick_count = this->setup->max_tick_count ? *this->setup->max_tick_count : 11;
-
-    ensure_non_zero_range();
 
     this->tick_step_qu_val  = calcNiceScaleTick(this->maxVal - this->minVal, this->tick_count);
     this->tick_start_qu_val = 0.0;
