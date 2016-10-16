@@ -10,11 +10,11 @@
 #ifndef RATIO_H_louiuzlik79hi965gi6
 #define RATIO_H_louiuzlik79hi965gi6
 
+#include "Toolib/assert.h"
 #include <cstdint>
+#include <initializer_list>
 #include <string>
 #include <type_traits>
-#include <initializer_list>
-#include "Toolib/assert.h"
 
 
 namespace too
@@ -22,11 +22,11 @@ namespace too
 namespace math
 {
 
-//! Greatest common divisor.
+//! Greatest common divisor. Expects at least on of \params a, b to be > 0.
 template <typename T>
 typename std::enable_if<std::is_integral<T>::value, T>::type gcd(T a, T b)
 {
-    TOO_EXPECT_THROW(a != T() || b != T());
+    TOO_EXPECT(a > T() || b > T());
     T c = 0;
     while (a != 0)
     {
@@ -41,33 +41,79 @@ typename std::enable_if<std::is_integral<T>::value, T>::type gcd(T a, T b)
 template <typename T>
 typename std::enable_if<std::is_integral<T>::value, T>::type lcm(T a, T b)
 {
-    return a * b / gcd(a, b);
+    TOO_EXPECT(a > T() || b > T());
+    return a * (b / gcd(a, b));
 }
 
+
 struct Rational;
+
+//! Obviously ensures common denom of \params one, two after the call.
 inline void make_common_denom(Rational& one, Rational& two);
 
 
-//!
+//! Value type for rational numbers.
+/** Since member denom is publicly accessible, the user is responsible
+        a) to keep denom != 0 always, and
+        b) to  represent negative numbers by setting num < 0 only,
+            so denom is even expected to be > 0 always.
+    Otherwise there is undefined behavior.*/
 struct Rational
 {
     using ValueType = std::intmax_t;
 
-    ValueType num   = 1;
-    ValueType denom = 1;
+    //! Numerator.
+    ValueType num{0};
+    //! Denominator.
+    ValueType denom{1}; // expected to be > 0 always
 
-    // ugly; I need this to initialize conveniently because otherwise the default constructor seems to disturb
+    //! Constructs a 0 (numerator 0, denominator 1).
+    Rational() = default;
+
+    //! Initialization expects either
+    //!     a) exactly one numerator value (denominator being implicitly 1), or
+    //!     b) two values, the first denoting the numerator and the second the denominator, or
+    //!     c) an empty list, corresponding to numerator 0 and denominator 1.
+    /** Otherwise behavior is undefined. As it is of course also, if denominator is passed as 0.
+        Note the ugly implementaion detail: I need this init-list constructor to initialize conveniently
+        because otherwise the default constructor seems to disturb.*/
     Rational(std::initializer_list<ValueType> init)
     {
+        TOO_EXPECT(init.size() <= 2);
         auto it = init.begin();
-        num     = *it;
+        if (it == init.end())
+        {
+            num = {};
+            return;
+        }
+        num = *it;
         ++it;
-        denom = *it;
+        if (it != init.end())
+        {
+            denom = *it;
+            TOO_EXPECT(denom > 0);
+        }
     }
 
-    void inverse() { std::swap(this->num, this->denom); }
+    ~Rational()
+    {
+        // documenting the important invariant
+        TOO_EXPECT(denom > 0);
+    }
 
-    template <typename T = long double>
+    //! Note that this ensures the invariant of having denom > 0 always
+    void inverse()
+    {
+        std::swap(this->num, this->denom);
+        if (this->denom < 0)
+        {
+            this->denom = -this->denom;
+            this->num   = -this->num;
+        }
+        TOO_ENSURE(denom > 0);
+    }
+
+    template <typename T>
     typename std::enable_if<std::is_floating_point<T>::value, T>::type asFloatingPoint() const
     {
         return T(this->num) / T(this->denom);
@@ -115,10 +161,12 @@ struct Rational
 inline void make_common_denom(Rational& one, Rational& two)
 {
     const auto m = lcm(one.denom, two.denom);
-    one.num *= one.denom / m;
+    one.num *= m / one.denom;
     one.denom = m;
-    two.num *= two.denom / m;
+    two.num *= m / two.denom;
     two.denom = m;
+
+    TOO_ENSURE(one.denom == two.denom);
 }
 
 inline Rational operator+(Rational lhs, const Rational& rhs)
@@ -144,14 +192,22 @@ inline Rational operator/(Rational lhs, const Rational& rhs)
 
 inline bool operator==(const Rational& lhs, const Rational& rhs)
 {
+    if (lhs.denom == rhs.denom)
+        return lhs.num == rhs.num;
+
     Rational l = lhs;
     Rational r = rhs;
     make_common_denom(l, r);
-    return l.num == r.num && l.denom == r.denom;
+    return l.num == r.num;
 }
 inline bool operator!=(const Rational& lhs, const Rational& rhs) { return !operator==(lhs, rhs); }
 inline bool operator<(const Rational& lhs, const Rational& rhs)
 {
+    if (lhs.denom == rhs.denom)
+        return lhs.num < rhs.num;
+    if (lhs.num == rhs.num)
+        return lhs.denom > rhs.denom;
+
     Rational l = lhs;
     Rational r = rhs;
     make_common_denom(l, r);
