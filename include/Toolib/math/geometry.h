@@ -9,13 +9,13 @@
 #ifndef GEOMETRY_H_dgiuntgh87xtg3487tg3tgfvscd
 #define GEOMETRY_H_dgiuntgh87xtg3487tg3tgfvscd
 
-#include <array>
-#include <cmath>
-#include <type_traits>
-#include <initializer_list>
 #include "Toolib/math/quantity_unit.h"
 #include "Toolib/math/scale.h"
 #include "Toolib/optional.h"
+#include <array>
+#include <cmath>
+#include <initializer_list>
+#include <type_traits>
 
 
 namespace too
@@ -191,6 +191,7 @@ struct Margins_
     T top{};
     T bottom{};
 
+    Margins_() = default;
     Margins_(T left, T right, T top, T bottom) : left{left}, right{right}, top{top}, bottom{bottom} {}
 };
 
