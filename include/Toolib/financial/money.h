@@ -20,7 +20,7 @@ namespace too
 namespace fin
 {
 
-//##########################################################################################################
+//####################################################################################################################
 
 #include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
 //!
@@ -50,7 +50,7 @@ bool operator==(const Currency& lhs, const Currency& rhs);
 bool operator!=(const Currency& lhs, const Currency& rhs);
 
 
-//##########################################################################################################
+//####################################################################################################################
 
 //!
 class TOOLIBSHARED_EXPORT Money
@@ -113,7 +113,7 @@ TOOLIBSHARED_EXPORT bool operator>=(const Money& lhs, const Money& rhs);
 TOOLIBSHARED_EXPORT bool equal_sufficiently(const Money& lhs, const Money& rhs);
 
 
-//##########################################################################################################
+//####################################################################################################################
 
 //! Should be understood in relation to Fraction as follows: 'Percent' == 'Fraction' * 100.
 using Percent = long double;

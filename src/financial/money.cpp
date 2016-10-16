@@ -20,7 +20,7 @@ namespace too
 namespace fin
 {
 
-//##########################################################################################################
+//####################################################################################################################
 
 Currency::Currency(const std::locale& loc) : loc(loc) {}
 
@@ -54,7 +54,7 @@ bool operator==(const Currency& lhs, const Currency& rhs) { return lhs.loc == rh
 bool operator!=(const Currency& lhs, const Currency& rhs) { return !operator==(lhs, rhs); }
 
 
-//##########################################################################################################
+//####################################################################################################################
 
 Money::Money(BaseType amount, const Currency& currency) { set(amount, currency); }
 
@@ -205,7 +205,7 @@ bool equal_sufficiently(const Money& lhs, const Money& rhs)
 }
 
 
-//##########################################################################################################
+//####################################################################################################################
 
 
 Fraction Interest_pa::YearlyEffective_to_MonthlyRelative(Fraction pa)
