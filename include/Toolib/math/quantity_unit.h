@@ -10,13 +10,13 @@
 #ifndef QUANTITY_UNIT_H_dfhgxungh38hgxt38gb
 #define QUANTITY_UNIT_H_dfhgxungh38hgxt38gb
 
-#include <string>
-#include <map>
-#include <ratio>
-#include <type_traits>
-#include <exception>
 #include "Toolib/math/ratio.h"
 #include "Toolib/std/std_extensions.h"
+#include <exception>
+#include <map>
+#include <ratio>
+#include <string>
+#include <type_traits>
 
 
 namespace too
@@ -24,13 +24,23 @@ namespace too
 namespace math
 {
 
+using Map_Rational_String = std::map<too::math::Rational, std::string>;
+
+//! To create a simple default for constructing a Unit in cases you don't want to think about details.
+inline Map_Rational_String create_map_ratio_simple(const std::string& base_unit_name = {})
+{
+    std::map<too::math::Rational, std::string> ret;
+    ret[too::math::one] = too::math::one_symb + base_unit_name;
+    return ret;
+}
+
 //! This is for all quantities that work with standard SI unit prefixes.
 //! Unfortunately you will have to build custom maps for some quantity types, e.g. time, money,
 //! even for masses you would like to write t instead of Mg; also internationalization plays a role
 //! so that it is better to keep strings under your control.
-inline std::map<too::math::Rational, std::string> create_map_ratio_SIprefixunitname(const std::string& base_unit_name)
+inline Map_Rational_String create_map_ratio_SIprefixunitname(const std::string& base_unit_name)
 {
-    std::map<too::math::Rational, std::string> ret;
+    Map_Rational_String ret;
 
     ret[too::math::atto]  = too::math::atto_symb + base_unit_name;
     ret[too::math::femto] = too::math::femto_symb + base_unit_name;
@@ -70,11 +80,13 @@ public:
 
     //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the initial
     //! \param ratio in the map. That would make the class useless.
-    Unit(const too::math::Rational& ratio, const std::map<too::math::Rational, std::string>& map_ratio_prefixunitname)
+    //! Proper Rational's are expected.
+    //! Constructing the class with default parameters is only reasonable for testing purposes or temporary quick starts to construct other things.
+    explicit Unit(const too::math::Rational& ratio = too::math::one, const Map_Rational_String& map_ratio_prefixunitname = {})
 #if !TOO_HAS_NO_CPP11_NOEXCEPT
         noexcept(false)
 #endif
-        : ratio(ratio), ratio_prefixunitname(map_ratio_prefixunitname)
+        : ratio(ratio), ratio_prefixunitname(map_ratio_prefixunitname.empty() ? simple_noop_default_ratio_map() : map_ratio_prefixunitname)
     {
         if (map_ratio_prefixunitname.find(ratio) == map_ratio_prefixunitname.end())
             throw err_no_string_provided_for_ratio();
@@ -119,7 +131,11 @@ public:
 
 private:
     too::math::Rational ratio;
-    using Map_Rational_String = std::map<too::math::Rational, std::string>;
+    static const Map_Rational_String& simple_noop_default_ratio_map()
+    {
+        static const Map_Rational_String instance{create_map_ratio_simple()};
+        return instance;
+    }
     const Map_Rational_String& ratio_prefixunitname;
 };
 
@@ -146,7 +162,8 @@ private:
 // public:
 //    Quantity(WhatConcrete& val);
 //};
-}
-}
+
+} // math
+} // too
 
 #endif
