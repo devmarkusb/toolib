@@ -99,7 +99,6 @@ set(TargetToolibTest_SOURCES
     test/debug/debug_leaks.test.cpp
     test/game/game.test.cpp
     test/image/image.test.cpp
-    test/scope/autoptr.test.cpp
     test/scope/raii_p.test.cpp
     test/scope/reftovalue.test.cpp
     test/scope/scopeflagged.bak.test.cpp
