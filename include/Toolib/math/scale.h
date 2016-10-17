@@ -9,12 +9,12 @@
 #ifndef SCALE_H_INCL_enrhfu87n83464346ng
 #define SCALE_H_INCL_enrhfu87n83464346ng
 
-#include <utility>
-#include <type_traits>
-#include <cmath>
 #include "floating_point.h"
-#include "Toolib/narrow.h"
 #include "Toolib/assert.h"
+#include "Toolib/narrow.h"
+#include <cmath>
+#include <type_traits>
+#include <utility>
 
 
 namespace too

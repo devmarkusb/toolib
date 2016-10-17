@@ -10,12 +10,12 @@
 #ifndef NUMBER_H_INCL_f29jh8hnf238hrxz23
 #define NUMBER_H_INCL_f29jh8hnf238hrxz23
 
-#include <string>
+#include "Toolib/assert.h"
+#include "Toolib/enum_cast.h"
 #include <iomanip>
 #include <sstream>
+#include <string>
 #include <type_traits>
-#include "Toolib/enum_cast.h"
-#include "Toolib/assert.h"
 
 
 namespace too

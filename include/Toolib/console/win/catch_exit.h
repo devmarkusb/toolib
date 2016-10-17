@@ -12,8 +12,8 @@
 
 #include "Toolib/PPDEFS.h"
 #if TOO_OS_WINDOWS
-#include <windows.h>
 #include "../../../ToolibDEF.h"
+#include <windows.h>
 
 namespace too
 {

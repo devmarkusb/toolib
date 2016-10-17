@@ -11,6 +11,7 @@
 
 #include "Toolib/linklib/LINKLIB_DEFS.h"
 
+
 #if defined(TOOLIB_LIBRARY)
 #define TOOLIBSHARED_EXPORT TOO_DECL_EXPORT
 #else

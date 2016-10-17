@@ -9,14 +9,14 @@
 #ifndef LEX_CAST_H_INCL_sopaiem3p2oium32omo
 #define LEX_CAST_H_INCL_sopaiem3p2oium32omo
 
+#include "Toolib/PPDEFS.h"
+#include "Toolib/std/std_extensions.h"
 #ifndef TOO_NO_DEPENDENCIES
 #include <boost/lexical_cast.hpp>
 #else
-#include <sstream>
 #include <exception>
+#include <sstream>
 #endif
-#include "Toolib/PPDEFS.h"
-#include "Toolib/std/std_extensions.h"
 
 
 namespace too

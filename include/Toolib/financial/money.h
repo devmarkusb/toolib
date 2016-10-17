@@ -9,10 +9,10 @@
 #ifndef MONEY_H_weztuiolkjhgf34567
 #define MONEY_H_weztuiolkjhgf34567
 
-#include <string>
-#include <locale>
-#include "Toolib/optional.h"
 #include "ToolibDEF.h"
+#include "Toolib/optional.h"
+#include <locale>
+#include <string>
 
 
 namespace too

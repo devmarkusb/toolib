@@ -1,9 +1,9 @@
 #include "Toolib/performance.h"
-#include "gtest/gtest.h"
-#include <chrono>
-#include <thread>
-#include <iostream>
 #include "Toolib/ignore_arg.h"
+#include <chrono>
+#include <iostream>
+#include <thread>
+#include "gtest/gtest.h"
 
 
 TEST(ToFormattedStringTest, Rounding)

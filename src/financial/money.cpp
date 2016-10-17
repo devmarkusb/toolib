@@ -7,12 +7,12 @@
 //! \file
 
 #include "Toolib/financial/money.h"
-#include <locale>
 #include "Toolib/assert.h"
 #include "Toolib/error.h"
 #include "Toolib/date_time/date_time.h"
-#include "Toolib/string/str_convert.h"
 #include "Toolib/math/floating_point.h"
+#include "Toolib/string/str_convert.h"
+#include <locale>
 
 
 namespace too

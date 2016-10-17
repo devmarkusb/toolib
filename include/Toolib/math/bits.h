@@ -10,8 +10,8 @@
 #ifndef BITS_H_INCL_inewhjr4382zrn83
 #define BITS_H_INCL_inewhjr4382zrn83
 
-#include <utility>
 #include <cstdint>
+#include <utility>
 
 
 namespace too

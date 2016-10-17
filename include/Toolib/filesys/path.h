@@ -9,9 +9,10 @@
 #ifndef PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
 #define PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
 
-#include <vector>
-#include <string>
 #include "ToolibDEF.h"
+#include <string>
+#include <vector>
+
 
 namespace too
 {

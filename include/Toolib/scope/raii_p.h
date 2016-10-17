@@ -10,10 +10,10 @@
 #ifndef RAII_P_H_INCL_on824f287xrz2387r
 #define RAII_P_H_INCL_on824f287xrz2387r
 
+#include "Toolib/debug.h"
+#include "Toolib/mem/checked_delete.h"
 #include <crtdbg.h>
 #include <cstdint>
-#include "Toolib/mem/checked_delete.h"
-#include "Toolib/debug.h"
 
 
 namespace too

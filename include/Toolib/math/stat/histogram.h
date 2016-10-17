@@ -9,14 +9,14 @@
 #ifndef HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
 #define HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
 
-#include <vector>
-#include <algorithm>
-#include <array>
-#include "Toolib/math/scale.h"
-#include "Toolib/math/percent.h"
 #include "Toolib/narrow.h"
 #include "Toolib/PPDEFS.h"
 #include "Toolib/math/floating_point.h"
+#include "Toolib/math/percent.h"
+#include "Toolib/math/scale.h"
+#include <algorithm>
+#include <array>
+#include <vector>
 
 
 namespace too

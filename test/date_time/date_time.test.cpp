@@ -1,7 +1,7 @@
 #include "Toolib/date_time/date_time.h"
-#include "gtest/gtest.h"
 #include <sstream>
 #include <type_traits>
+#include "gtest/gtest.h"
 
 using namespace too::date_time;
 

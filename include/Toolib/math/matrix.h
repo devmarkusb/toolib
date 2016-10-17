@@ -10,10 +10,10 @@
 #ifndef MATRIX_H_INCL_mx02983urx23
 #define MATRIX_H_INCL_mx02983urx23
 
-#include <cmath>
-#include <string>
-#include <complex>
 #include <cstdint>
+#include <cmath>
+#include <complex>
+#include <string>
 
 
 namespace too

@@ -1,6 +1,6 @@
 #include "Toolib/math/round.h"
-#include "gtest/gtest.h"
 #include <cstdint>
+#include "gtest/gtest.h"
 
 
 TEST(MathRoundTest, Dbl)

@@ -13,6 +13,7 @@
 #ifndef STANDALONEOP_H_INCL_98243rz823xr
 #define STANDALONEOP_H_INCL_98243rz823xr
 
+
 namespace too
 {
 namespace math
