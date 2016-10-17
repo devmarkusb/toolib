@@ -109,7 +109,11 @@ protected:
     QuValueType tick_end_qu_val{};
 
 private:
+    void constr_common_impl();
     void expectProperSetup() const;
+    void expectProperMinMax() const;
+    void ensureProperMinMax();
+    void calcScaling();
 };
 
 
@@ -138,9 +142,9 @@ private:
     std::unique_ptr<QuValue_to_Projection> map_quvalue_to_projection;
     const too::math::ChartAxisProj_setup* setup{nullptr};   // dyn-casted aux. alias of original setup member variable
 
-    void constrImpl();
+    void constr_impl();
     void expectProperSetup() const;
-    void calcScaling();
+    void initProjectionMap();
 };
 
 
@@ -195,8 +199,42 @@ ChartAxis<QuValueType>::ChartAxis(
     const ChartAxis_setup& setup, const Quantity& quantity, const std::vector<QuValueType>* qu_values)
     : quantity(quantity), values(values), setup(setup.clone())
 {
-    expectProperSetup();
+    ensureProperMinMax();
+    constr_common_impl();
+}
 
+template <typename QuValueType>
+ChartAxis<QuValueType>::ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
+    const QuValueType& max_qu_val)
+    : quantity(quantity), minVal(min_qu_val), maxVal(max_qu_val), setup(setup.clone())
+{
+    constr_common_impl();
+}
+
+template <typename QuValueType>
+void ChartAxis<QuValueType>::constr_common_impl()
+{
+    expectProperMinMax();
+    expectProperSetup();
+    calcScaling();
+}
+
+template <typename QuValueType>
+void ChartAxis<QuValueType>::expectProperSetup() const
+{
+    TOO_EXPECT_THROW(this->setup->max_tick_count ? this->setup->max_tick_count > 0 : true);
+}
+
+template <typename QuValueType>
+void ChartAxis<QuValueType>::expectProperMinMax() const
+{
+    TOO_EXPECT_THROW(this->minVal < this->maxVal);
+    TOO_EXPECT_THROW(!too::math::almost_equal_alltypes(this->minVal, this->maxVal, expected_ulp_difference_minmax));
+}
+
+template <typename QuValueType>
+void ChartAxis<QuValueType>::ensureProperMinMax()
+{
     if (!qu_values || qu_values->empty())
     {
         this->minVal = {};
@@ -205,32 +243,26 @@ ChartAxis<QuValueType>::ChartAxis(
     if (qu_values)
     {
         const auto minmax = std::minmax_element(std::begin(*qu_values), std::end(*qu_values));
-        this->minVal = minmax.first;
-        this->maxVal = minmax.second;
+        this->minVal      = minmax.first;
+        this->maxVal      = minmax.second;
     }
     if (too::math::almost_equal(this->minVal, this->maxVal))
     {
         this->minVal -= QuValueType(1);
         this->maxVal += QuValueType(1);
     }
-    TOO_ENSURE_THROW(this->minVal < this->maxVal);
-    TOO_ENSURE_THROW(!too::math::almost_equal_alltypes(this->minVal, this->maxVal, expected_ulp_difference_minmax));
 }
 
 template <typename QuValueType>
-ChartAxis<QuValueType>::ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
-    const QuValueType& max_qu_val)
-    : quantity(quantity), minVal(min_qu_val), maxVal(max_qu_val), setup(setup.clone())
+void ChartAxis<QuValueType>::calcScaling()
 {
-    TOO_EXPECT_THROW(min_qu_val < max_qu_val);
-    TOO_EXPECT_THROW(!too::math::almost_equal_alltypes(min_qu_val, max_qu_val, expected_ulp_difference_minmax));
-    expectProperSetup();
-}
+    this->tick_count = this->setup->max_tick_count ? *this->setup->max_tick_count : 11;
 
-template <typename QuValueType>
-void ChartAxis<QuValueType>::expectProperSetup() const
-{
-    TOO_EXPECT_THROW(this->setup->max_tick_count ? this->setup->max_tick_count > 0 : true);
+    this->tick_step_qu_val  = calcNiceScaleTick(this->maxVal - this->minVal, this->tick_count);
+    this->tick_start_qu_val = 0.0;
+    this->tick_end_qu_val = 0.0;
+    std::tie(tick_start_qu_val, tick_end_qu_val) = calcScaleTickFromTo(minVal, maxVal, tick_step_qu_val);
+    this->tick_count = round_to<ScaleTickCount>((tick_end_qu_val - tick_start_qu_val) / tick_step_qu_val);
 }
 
 
@@ -241,7 +273,7 @@ ChartAxisProj<QuValueType>::ChartAxisProj(
     const ChartAxisProj_setup& setup, const Quantity& quantity, const std::vector<QuValueType>* qu_values)
     : ChartAxis<QuValueType>(setup, quantity, qu_values)
 {
-    constrImpl();
+    constr_impl();
 }
 
 template <typename QuValueType>
@@ -249,17 +281,17 @@ ChartAxisProj<QuValueType>::ChartAxisProj(const ChartAxisProj_setup& setup, cons
     const QuValueType& max_qu_val)
     : ChartAxis<QuValueType>(setup, quantity, min_qu_val, max_qu_val)
 {
-    constrImpl();
+    constr_impl();
 }
 
 template <typename QuValueType>
-void ChartAxisProj<QuValueType>::constrImpl()
+void ChartAxisProj<QuValueType>::constr_impl()
 {
     this->setup = dynamic_cast<const too::math::ChartAxisProj_setup*>(ChartAxis::setup.get());
     TOO_EXPECT_THROW(this->setup);
     expectProperSetup();
 
-    calcScaling();
+    initProjectionMap();
 }
 
 template <typename QuValueType>
@@ -270,16 +302,8 @@ void ChartAxisProj<QuValueType>::expectProperSetup() const
 }
 
 template <typename QuValueType>
-void ChartAxisProj<QuValueType>::calcScaling()
+void ChartAxisProj<QuValueType>::initProjectionMap()
 {
-    this->tick_count = this->setup->max_tick_count ? *this->setup->max_tick_count : 11;
-
-    this->tick_step_qu_val  = calcNiceScaleTick(this->maxVal - this->minVal, this->tick_count);
-    this->tick_start_qu_val = 0.0;
-    this->tick_end_qu_val = 0.0;
-    std::tie(tick_start_qu_val, tick_end_qu_val) = calcScaleTickFromTo(minVal, maxVal, tick_step_qu_val);
-    this->tick_count = round_to<ScaleTickCount>((tick_end_qu_val - tick_start_qu_val) / tick_step_qu_val);
-
     this->map_quvalue_to_projection =
         too::make_unique<QuValue_to_Projection>(std::make_pair(tick_start_qu_val, tick_end_qu_val),
         std::make_pair(this->setup->projection_range.first, this->setup->projection_range.second));
