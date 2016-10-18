@@ -8,10 +8,11 @@
 
 #include "Toolib/filesys/path.h"
 #include "Toolib/PPDEFS.h"
+#include "Toolib/assert.h"
 #include "Toolib/string/string_token.h"
-#include <assert.h>
 #include <algorithm>
 #include <fstream>
+
 
 namespace
 {
@@ -182,7 +183,7 @@ CPath& CPath::ensureTrailingSeparator(bool native)
     std::string SepToUse = FOLDER_SEPARATOR_TO_USE_HERE;
     if (native)
         SepToUse = OS_FOLDER_SEPARATOR;
-    assert(!SepToUse.empty());
+    TOO_ASSERT(!SepToUse.empty());
     if (m_path->back() != SepToUse[0])
         *m_path += SepToUse;
     return *this;
@@ -197,13 +198,13 @@ const std::string& CPath::getSeparatorUsedHere() const
 
 const std::string& CPath::getSeparatorNative()
 {
-    assert(!OS_FOLDER_SEPARATOR.empty());
+    TOO_ASSERT(!OS_FOLDER_SEPARATOR.empty());
     return OS_FOLDER_SEPARATOR;
 }
 
 const std::string& CPath::getSeparatorPlatformIndep()
 {
-    assert(!FOLDER_SEPARATOR_TO_USE_HERE.empty());
+    TOO_ASSERT(!FOLDER_SEPARATOR_TO_USE_HERE.empty());
     return FOLDER_SEPARATOR_TO_USE_HERE;
 }
 

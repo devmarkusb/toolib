@@ -10,14 +10,15 @@
 #ifndef STRING_TRIM_H_INCL_cidusbfi243i7324
 #define STRING_TRIM_H_INCL_cidusbfi243i7324
 
-#include <string>
 #ifndef TOO_NO_DEPENDENCIES
 #include <boost/algorithm/string.hpp>
 #else
-//#include <locale>
 //#include <algorithm>
 //#include <functional>
+//#include <locale>
 #endif
+#include <string>
+
 
 namespace too
 {

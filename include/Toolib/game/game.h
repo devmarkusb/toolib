@@ -9,8 +9,8 @@
 #ifndef GAME_H_INCL_aubzstex3zubte632yet7
 #define GAME_H_INCL_aubzstex3zubte632yet7
 
-#include <exception>
 #include "Toolib/error.h"
+#include <exception>
 
 
 namespace too

@@ -10,8 +10,9 @@
 #ifndef MMTYPECONV_H_INCL_nbi4lnv5
 #define MMTYPECONV_H_INCL_nbi4lnv5
 
-#include <string>
 #include "Toolib/PPDEFS.h"
+#include <string>
+
 
 namespace too
 {

@@ -9,8 +9,8 @@
 #ifndef CAL_EVENT_H_nbvxmcbvxmcnbxcmbierutozreoi
 #define CAL_EVENT_H_nbvxmcbvxmcnbxcmbierutozreoi
 
-#include <memory>
 #include "Toolib/ptr.h"
+#include <memory>
 
 
 namespace too

@@ -11,8 +11,8 @@
 #ifndef SCOPEFLAGGED_HPP_INCL_inh27dzf237bxfd327
 #define SCOPEFLAGGED_HPP_INCL_inh27dzf237bxfd327
 
-#include <stack>
 #include "Toolib/math/bits.h"
+#include <stack>
 
 
 namespace too

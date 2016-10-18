@@ -1,6 +1,6 @@
 #include "Toolib/financial/money.h"
-#include "gtest/gtest.h"
 #include <iostream>
+#include "gtest/gtest.h"
 
 
 TEST(CurrencyTest, test)

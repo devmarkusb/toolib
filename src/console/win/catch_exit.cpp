@@ -6,9 +6,10 @@
 */
 //! \file
 
+#include "Toolib/console/win/catch_exit.h"
 #include <sstream>
 #include <stdexcept>
-#include "Toolib/console/win/catch_exit.h"
+
 
 namespace too
 {

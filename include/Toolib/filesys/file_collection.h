@@ -9,9 +9,9 @@
 #ifndef FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn
 #define FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn
 
+#include "ToolibDEF.h"
 #include <string>
 #include <vector>
-#include "ToolibDEF.h"
 
 #include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
 

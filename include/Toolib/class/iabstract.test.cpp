@@ -1,9 +1,10 @@
 /** This is more demonstration of how to use the IAbstract, less a test. But could still be a worthy playground.*/
-#include "gtest/gtest.h"
 #include "Toolib/class/IAbstract.h"
-#include <string>
-#include <sstream>
 #include <iostream>
+#include <sstream>
+#include <string>
+#include "gtest/gtest.h"
+
 
 class IAbstractTest : public ::testing::Test
 {

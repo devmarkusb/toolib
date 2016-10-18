@@ -9,9 +9,9 @@
 #ifndef CONSTS_H_INCL_sjkhnfxgiuexernhgf7834t4
 #define CONSTS_H_INCL_sjkhnfxgiuexernhgf7834t4
 
-#include <cmath>
 #include "Toolib/PPDEFS.h"
 #include "Toolib\std\std_extensions.h"
+#include <cmath>
 
 
 namespace too

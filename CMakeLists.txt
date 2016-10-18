@@ -26,9 +26,9 @@ file(GLOB_RECURSE TargetToolib_SRC_INCS "src/*.h*")
 
 set(TargetToolib_SOURCES
     src/console/win/catch_exit.cpp
+    src/date_time/date_time.cpp
     src/filesys/path.cpp
     src/filesys/file_collection.cpp
-    src/date_time/date_time.cpp
     src/financial/money.cpp
 )
 
@@ -90,44 +90,44 @@ set(TargetToolibTest "ToolibTest")
 file(GLOB_RECURSE TargetToolibTest_SRC_INCS "test/*.h*")
 
 set(TargetToolibTest_SOURCES
-    test/class/IAbstractTest.cpp
-    test/class/IType.test.cpp
-    test/class/counted_class_objects.test.cpp
-    test/console/prompt.test.cpp
-    test/console/win/catch_exit.test.cpp
-    test/CppCLI/mmtypeconv.test.cpp
-    test/debug/debug_leaks.test.cpp
-    test/game/game.test.cpp
-    test/image/image.test.cpp
-    test/scope/raii_p.test.cpp
-    test/scope/reftovalue.test.cpp
-    test/scope/scopeflagged.bak.test.cpp
-    test/scope/scopeflagged.test.cpp
-    test/scope/scopeguard.test.cpp
-    test/string/lex_cast.test.cpp
-    test/string/string_token.test.cpp
-    test/string/string_trim.test.cpp
-    test/math/stat/histogram.test.cpp
-    test/math/numberTest.cpp
-    test/math/roundTest.cpp
-    test/math/scaleTest.cpp
-    test/math/floating_pointTest.cpp
-    test/math/bits.test.cpp
-    test/math/geometry.test.cpp
-    test/math/graph.test.cpp
-    test/math/matrix.test.cpp
-    test/math/pair.test.cpp
-    test/math/percent.test.cpp
-    test/math/quantity_unit.test.cpp
-    test/math/ratio.test.cpp
-    test/math/standaloneop.test.cpp
-    test/math/consts.test.cpp
-    test/date_time/date_time.test.cpp
-    test/date_time/cal_event.test.cpp
-    test/filesys/pathTest.cpp
-    test/filesys/file_collection.test.cpp
-    test/performanceTest.cpp
-    test/financial/money.test.cpp
+    include/Toolib/class/counted_class_objects.test.cpp
+    include/Toolib/class/iabstract.test.cpp
+    include/Toolib/class/itype.test.cpp
+    include/Toolib/console/prompt.test.cpp
+    include/Toolib/console/win/catch_exit.test.cpp
+    include/Toolib/CppCLI/mmtypeconv.test.cpp
+    include/Toolib/date_time/cal_event.test.cpp
+    include/Toolib/date_time/date_time.test.cpp
+    include/Toolib/debug/debug_leaks.test.cpp
+    include/Toolib/filesys/file_collection.test.cpp
+    include/Toolib/filesys/path.test.cpp
+    include/Toolib/financial/money.test.cpp
+    include/Toolib/game/game.test.cpp
+    include/Toolib/image/image.test.cpp
+    include/Toolib/math/bits.test.cpp
+    include/Toolib/math/consts.test.cpp
+    include/Toolib/math/floating_point.test.cpp
+    include/Toolib/math/geometry.test.cpp
+    include/Toolib/math/graph.test.cpp
+    include/Toolib/math/matrix.test.cpp
+    include/Toolib/math/number.test.cpp
+    include/Toolib/math/pair.test.cpp
+    include/Toolib/math/percent.test.cpp
+    include/Toolib/math/quantity_unit.test.cpp
+    include/Toolib/math/ratio.test.cpp
+    include/Toolib/math/round.test.cpp
+    include/Toolib/math/scale.test.cpp
+    include/Toolib/math/standaloneop.test.cpp
+    include/Toolib/math/stat/histogram.test.cpp
+    include/Toolib/performance/performance.test.cpp
+    include/Toolib/scope/raii_p.test.cpp
+    include/Toolib/scope/reftovalue.test.cpp
+    include/Toolib/scope/scopeflagged.bak.test.cpp
+    include/Toolib/scope/scopeflagged.test.cpp
+    include/Toolib/scope/scopeguard.test.cpp
+    include/Toolib/string/lex_cast.test.cpp
+    include/Toolib/string/string_token.test.cpp
+    include/Toolib/string/string_trim.test.cpp
 )
 
 add_executable(${TargetToolibTest}

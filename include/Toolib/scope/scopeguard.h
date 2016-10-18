@@ -13,6 +13,7 @@
 
 #include <cstddef>
 
+
 namespace too
 {
 class ScopeGuardImplBase; // fwd. decl.
