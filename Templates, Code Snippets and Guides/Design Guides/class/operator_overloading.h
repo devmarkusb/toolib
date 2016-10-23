@@ -76,7 +76,7 @@ struct T
         return *this;
     }
     // unary minus
-    T operator-()
+    T operator-() const
     {
         T tmp{};
         // todo ...assign -members of *this to tmp's members...
