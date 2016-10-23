@@ -74,6 +74,16 @@ TEST(RationalTest, constr_zero)
     EXPECT_EQ(1, r3.denom);
 }
 
+TEST(RationalTest, assign)
+{
+    too::math::Rational r1{};
+    too::math::Rational r1_{24, 32};
+
+    r1 = r1_;
+    EXPECT_EQ(24, r1.num);
+    EXPECT_EQ(32, r1.denom);
+}
+
 TEST(RationalTest, inv)
 {
     too::math::Rational r1{1, 2};
@@ -238,4 +248,39 @@ TEST(RationalTest, lessthan_consts)
     EXPECT_TRUE(exa >= peta);
     EXPECT_FALSE(exa <= peta);
     EXPECT_FALSE(exa < peta);
+}
+
+TEST(RationalTest, booltest)
+{
+    too::math::Rational r1{0, 32};
+    if (!r1.is_null())
+        EXPECT_TRUE(false);
+    else
+        EXPECT_TRUE(true);
+    if (!r1)
+        EXPECT_TRUE(true);
+    else
+        EXPECT_TRUE(false);
+
+    too::math::Rational r2{1, 24};
+    if (!r2)
+        EXPECT_TRUE(false);
+    else
+        EXPECT_TRUE(true);
+    if (!r2.is_null())
+        EXPECT_TRUE(true);
+    else
+        EXPECT_TRUE(false);
+    if (!!r2)
+        EXPECT_TRUE(true);
+    else
+        EXPECT_TRUE(false);
+}
+
+TEST(RationalTest, unaryminus)
+{
+    too::math::Rational exp_mr1{-1, 24};
+    too::math::Rational r1{1, 24};
+    too::math::Rational mr1{-r1};
+    EXPECT_TRUE(exp_mr1 == mr1);
 }

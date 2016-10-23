@@ -11,6 +11,7 @@
 #define RATIO_H_louiuzlik79hi965gi6
 
 #include "Toolib/assert.h"
+#include "Toolib/math/floating_point.h"
 #include <cstdint>
 #include <initializer_list>
 #include <string>
@@ -126,6 +127,29 @@ struct Rational
         this->denom /= d;
     }
 
+    // as soon as explicit is soundly supported by the standard here...
+    //explicit operator bool() const
+    //{
+    //    return this->num != ValueType{};
+    //}
+
+    const bool operator!() const
+    {
+        return is_null();
+    }
+
+    bool is_null() const
+    {
+        return this->num == ValueType{};
+    }
+
+    Rational operator-() const
+    {
+        Rational tmp{*this};
+        tmp.num = -this->num;
+        return tmp;
+    }
+
     Rational& operator+=(const Rational& rhs)
     {
         Rational r = rhs;
@@ -194,11 +218,7 @@ inline bool operator==(const Rational& lhs, const Rational& rhs)
 {
     if (lhs.denom == rhs.denom)
         return lhs.num == rhs.num;
-
-    Rational l = lhs;
-    Rational r = rhs;
-    make_common_denom(l, r);
-    return l.num == r.num;
+    return too::math::almost_equal(lhs.asFloatingPoint<long double>(), rhs.asFloatingPoint<long double>());
 }
 inline bool operator!=(const Rational& lhs, const Rational& rhs) { return !operator==(lhs, rhs); }
 inline bool operator<(const Rational& lhs, const Rational& rhs)
@@ -207,11 +227,7 @@ inline bool operator<(const Rational& lhs, const Rational& rhs)
         return lhs.num < rhs.num;
     if (lhs.num == rhs.num)
         return lhs.denom > rhs.denom;
-
-    Rational l = lhs;
-    Rational r = rhs;
-    make_common_denom(l, r);
-    return l.num < r.num;
+    return lhs.asFloatingPoint<long double>() < rhs.asFloatingPoint<long double>();
 }
 inline bool operator>(const Rational& lhs, const Rational& rhs) { return operator<(rhs, lhs); }
 inline bool operator<=(const Rational& lhs, const Rational& rhs) { return !operator>(lhs, rhs); }
