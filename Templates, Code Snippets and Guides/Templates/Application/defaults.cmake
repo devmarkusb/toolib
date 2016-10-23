@@ -37,6 +37,8 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 endif ()
 
 if (MSVC)
-add_definitions(-D_SCL_SECURE_NO_WARNINGS)
-add_definitions(-DBOOST_ALL_NO_LIB)
+    add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+    add_definitions(-DBOOST_ALL_NO_LIB)
+    # this doesn't work disabling specific linker warnings, why not?
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ignore:4221")
 endif ()
