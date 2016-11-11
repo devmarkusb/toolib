@@ -61,7 +61,7 @@ inline Map_Rational_String create_map_ratio_SIprefixunitname(const std::string& 
 
     if (!only_factors_of_thousand)
     {
-        ret[too::math::deka]  = too::math::deka_symb + base_unit_name;
+        ret[too::math::deca]  = too::math::deka_symb + base_unit_name;
         ret[too::math::hecto] = too::math::hecto_symb + base_unit_name;
     }
     ret[too::math::kilo]  = too::math::kilo_symb + base_unit_name;

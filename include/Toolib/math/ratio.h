@@ -12,8 +12,10 @@
 
 #include "Toolib/assert.h"
 #include "Toolib/math/floating_point.h"
+#include "Toolib/std/std_extensions.h"
 #include <cstdint>
 #include <initializer_list>
+#include <ratio>
 #include <string>
 #include <type_traits>
 
@@ -76,7 +78,7 @@ struct Rational
     //!     b) two values, the first denoting the numerator and the second the denominator, or
     //!     c) an empty list, corresponding to numerator 0 and denominator 1.
     /** Otherwise behavior is undefined. As it is of course also, if denominator is passed as 0.
-        Note the ugly implementaion detail: I need this init-list constructor to initialize conveniently
+        Note the ugly implementation detail: I need this init-list constructor to initialize conveniently
         because otherwise the default constructor seems to disturb.*/
     Rational(std::initializer_list<ValueType> init)
     {
@@ -94,6 +96,12 @@ struct Rational
             denom = *it;
             TOO_EXPECT(denom > 0);
         }
+    }
+
+    template <intmax_t N, intmax_t D>
+    explicit constexpr Rational(std::ratio<N, D>) : num{N}, denom{D}
+    {
+        static_assert(D > 0, "denominator for Rational expected to be > 0");
     }
 
     ~Rational()
@@ -235,23 +243,23 @@ inline bool operator>=(const Rational& lhs, const Rational& rhs) { return !opera
 
 
 // clang-format off
-const Rational atto  {1, 1000000000000000000};
-const Rational femto {1, 1000000000000000};
-const Rational pico  {1, 1000000000000};
-const Rational nano  {1, 1000000000};
-const Rational micro {1, 1000000};
-const Rational milli {1, 1000};
-const Rational centi {1, 100};
-const Rational deci  {1, 10};
-const Rational one   {1, 1};
-const Rational deka  {10, 1};
-const Rational hecto {100, 1};
-const Rational kilo  {1000, 1};
-const Rational mega  {1000000, 1};
-const Rational giga  {1000000000, 1};
-const Rational tera  {1000000000000, 1};
-const Rational peta  {1000000000000000, 1};
-const Rational exa   {1000000000000000000, 1};
+constexpr const Rational atto  {std::atto{}};
+constexpr const Rational femto {std::femto{}};
+constexpr const Rational pico  {std::pico{}};
+constexpr const Rational nano  {std::nano{}};
+constexpr const Rational micro {std::micro{}};
+constexpr const Rational milli {std::milli{}};
+constexpr const Rational centi {std::centi{}};
+constexpr const Rational deci  {std::deci{}};
+constexpr const Rational one   {std::ratio<1, 1>{}};
+constexpr const Rational deca  {std::deca{}};
+constexpr const Rational hecto {std::hecto{}};
+constexpr const Rational kilo  {std::kilo{}};
+constexpr const Rational mega  {std::mega{}};
+constexpr const Rational giga  {std::giga{}};
+constexpr const Rational tera  {std::tera{}};
+constexpr const Rational peta  {std::peta{}};
+constexpr const Rational exa   {std::exa{}};
 
 const std::string  atto_symb = "a";
 const std::string femto_symb = "f";
@@ -271,14 +279,14 @@ const std::string  tera_symb = "T";
 const std::string  peta_symb = "P";
 const std::string   exa_symb = "E";
 
-const Rational one_twelveth     {1, 12};
-const Rational one_seventh      {1, 7};
-const Rational one_twentyfourth {1, 24};
-const Rational one_sixtyth      {1, 60};
-const Rational sixtytimes       {60, 1};
-const Rational twentyfourtimes  {24, 1};
-const Rational seventimes       {7, 1};
-const Rational twelvetimes      {12, 1};
+constexpr const Rational one_twelveth     {std::ratio<1, 12>{}};
+constexpr const Rational one_seventh      {std::ratio<1, 7>{}};
+constexpr const Rational one_twentyfourth {std::ratio<1, 24>{}};
+constexpr const Rational one_sixtyth      {std::ratio<1, 60>{}};
+constexpr const Rational sixtytimes       {std::ratio<60, 1>{}};
+constexpr const Rational twentyfourtimes  {std::ratio<24, 1>{}};
+constexpr const Rational seventimes       {std::ratio<7, 1>{}};
+constexpr const Rational twelvetimes      {std::ratio<12, 1>{}};
 // clang-format on
 }
 }

@@ -57,6 +57,16 @@ TEST(RationalTest, constr)
     too::math::Rational r4{-4};
     EXPECT_EQ(-4, r4.num);
     EXPECT_EQ(1, r4.denom);
+
+    const auto m = std::micro{};
+    too::math::Rational r5{m};
+    EXPECT_EQ(1, r5.num);
+    EXPECT_EQ(1000000, r5.denom);
+
+    const auto k = std::kilo{};
+    too::math::Rational r6{k};
+    EXPECT_EQ(1000, r6.num);
+    EXPECT_EQ(1, r6.denom);
 }
 
 TEST(RationalTest, constr_zero)
@@ -232,8 +242,8 @@ TEST(RationalTest, lessthan_consts)
     EXPECT_TRUE(milli < centi);
     EXPECT_TRUE(centi < deci);
     EXPECT_TRUE(deci < one);
-    EXPECT_TRUE(one < deka);
-    EXPECT_TRUE(deka < hecto);
+    EXPECT_TRUE(one < deca);
+    EXPECT_TRUE(deca < hecto);
     EXPECT_TRUE(hecto < kilo);
     EXPECT_TRUE(kilo < mega);
     EXPECT_TRUE(mega < giga);
