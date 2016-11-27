@@ -175,7 +175,7 @@ public:
         }
 
         const auto current_ratio_revit = std::reverse_iterator<std::vector<Rational>::iterator>{current_ratio_it};
-        const auto optim_ratio_revit = std::find_if(std::rbegin(ratios), current_ratio_revit, [val](const Rational& r) {
+        const auto optim_ratio_revit = std::find_if(ratios.rbegin(), current_ratio_revit, [val](const Rational& r) {
             return val >= r.asFloatingPoint<double>();
         });
 

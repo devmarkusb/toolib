@@ -5,6 +5,9 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+#ifndef M_PI // mingw53 doesn't have it
+#define M_PI 3.141592653589793
+#endif
 
 TEST(math_constsTest, test)
 {
@@ -17,7 +20,8 @@ TEST(math_constsTest, test)
     EXPECT_TRUE(too::math::almost_equal(pi_f, too::math::consts::pi<float>()));
 
     long double pi_ld = static_cast<long double>(M_PI);
-    EXPECT_TRUE(too::math::almost_equal(pi_ld, too::math::consts::pi<long double>()));
+    EXPECT_TRUE(too::math::approx_equal(pi_ld, too::math::consts::pi<long double>(), 1e-15L));
 }
 
 #undef _USE_MATH_DEFINES
+#undef M_PI // anyway

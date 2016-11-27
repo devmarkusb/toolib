@@ -141,7 +141,7 @@ struct Rational
     //    return this->num != ValueType{};
     //}
 
-    const bool operator!() const
+    bool operator!() const
     {
         return is_null();
     }
@@ -242,24 +242,29 @@ inline bool operator<=(const Rational& lhs, const Rational& rhs) { return !opera
 inline bool operator>=(const Rational& lhs, const Rational& rhs) { return !operator<(lhs, rhs); }
 
 
+#if TOO_HAS_NO_CONSTEXPR_STD_RATIO
+#define TOO_TEMPCONSTEXPR
+#else
+#define TOO_TEMPCONSTEXPR constexpr
+#endif
 // clang-format off
-constexpr const Rational atto  {std::atto{}};
-constexpr const Rational femto {std::femto{}};
-constexpr const Rational pico  {std::pico{}};
-constexpr const Rational nano  {std::nano{}};
-constexpr const Rational micro {std::micro{}};
-constexpr const Rational milli {std::milli{}};
-constexpr const Rational centi {std::centi{}};
-constexpr const Rational deci  {std::deci{}};
-constexpr const Rational one   {std::ratio<1, 1>{}};
-constexpr const Rational deca  {std::deca{}};
-constexpr const Rational hecto {std::hecto{}};
-constexpr const Rational kilo  {std::kilo{}};
-constexpr const Rational mega  {std::mega{}};
-constexpr const Rational giga  {std::giga{}};
-constexpr const Rational tera  {std::tera{}};
-constexpr const Rational peta  {std::peta{}};
-constexpr const Rational exa   {std::exa{}};
+TOO_TEMPCONSTEXPR const Rational atto  {std::atto{}};
+TOO_TEMPCONSTEXPR const Rational femto {std::femto{}};
+TOO_TEMPCONSTEXPR const Rational pico  {std::pico{}};
+TOO_TEMPCONSTEXPR const Rational nano  {std::nano{}};
+TOO_TEMPCONSTEXPR const Rational micro {std::micro{}};
+TOO_TEMPCONSTEXPR const Rational milli {std::milli{}};
+TOO_TEMPCONSTEXPR const Rational centi {std::centi{}};
+TOO_TEMPCONSTEXPR const Rational deci  {std::deci{}};
+TOO_TEMPCONSTEXPR const Rational one   {std::ratio<1, 1>{}};
+TOO_TEMPCONSTEXPR const Rational deca  {std::deca{}};
+TOO_TEMPCONSTEXPR const Rational hecto {std::hecto{}};
+TOO_TEMPCONSTEXPR const Rational kilo  {std::kilo{}};
+TOO_TEMPCONSTEXPR const Rational mega  {std::mega{}};
+TOO_TEMPCONSTEXPR const Rational giga  {std::giga{}};
+TOO_TEMPCONSTEXPR const Rational tera  {std::tera{}};
+TOO_TEMPCONSTEXPR const Rational peta  {std::peta{}};
+TOO_TEMPCONSTEXPR const Rational exa   {std::exa{}};
 
 const std::string  atto_symb = "a";
 const std::string femto_symb = "f";
@@ -279,15 +284,16 @@ const std::string  tera_symb = "T";
 const std::string  peta_symb = "P";
 const std::string   exa_symb = "E";
 
-constexpr const Rational one_twelveth     {std::ratio<1, 12>{}};
-constexpr const Rational one_seventh      {std::ratio<1, 7>{}};
-constexpr const Rational one_twentyfourth {std::ratio<1, 24>{}};
-constexpr const Rational one_sixtyth      {std::ratio<1, 60>{}};
-constexpr const Rational sixtytimes       {std::ratio<60, 1>{}};
-constexpr const Rational twentyfourtimes  {std::ratio<24, 1>{}};
-constexpr const Rational seventimes       {std::ratio<7, 1>{}};
-constexpr const Rational twelvetimes      {std::ratio<12, 1>{}};
+TOO_TEMPCONSTEXPR const Rational one_twelveth     {std::ratio<1, 12>{}};
+TOO_TEMPCONSTEXPR const Rational one_seventh      {std::ratio<1, 7>{}};
+TOO_TEMPCONSTEXPR const Rational one_twentyfourth {std::ratio<1, 24>{}};
+TOO_TEMPCONSTEXPR const Rational one_sixtyth      {std::ratio<1, 60>{}};
+TOO_TEMPCONSTEXPR const Rational sixtytimes       {std::ratio<60, 1>{}};
+TOO_TEMPCONSTEXPR const Rational twentyfourtimes  {std::ratio<24, 1>{}};
+TOO_TEMPCONSTEXPR const Rational seventimes       {std::ratio<7, 1>{}};
+TOO_TEMPCONSTEXPR const Rational twelvetimes      {std::ratio<12, 1>{}};
 // clang-format on
+#undef TOO_TEMPCONSTEXPR
 }
 }
 

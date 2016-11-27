@@ -339,7 +339,7 @@ ChartAxisProj<QuValueType>::ChartAxisProj(const ChartAxisProj_setup& setup, cons
 template <typename QuValueType>
 void ChartAxisProj<QuValueType>::constr_impl()
 {
-    this->setup = dynamic_cast<const too::math::ChartAxisProj_setup*>(ChartAxis::setup.get());
+    this->setup = dynamic_cast<const too::math::ChartAxisProj_setup*>(ChartAxis<QuValueType>::setup.get());
     TOO_EXPECT_THROW(this->setup);
     expectProperSetup();
 }
@@ -348,14 +348,14 @@ template <typename QuValueType>
 void ChartAxisProj<QuValueType>::expectProperSetup() const
 {
     TOO_EXPECT_THROW(this->setup->projection_range.first < this->setup->projection_range.second);
-    TOO_EXPECT_THROW(!too::math::almost_equal(this->setup->projection_range.first, this->setup->projection_range.second, expected_ulp_difference_minmax));
+    TOO_EXPECT_THROW(!too::math::almost_equal(this->setup->projection_range.first, this->setup->projection_range.second, ChartAxisProj<QuValueType>::expected_ulp_difference_minmax));
 }
 
 template <typename QuValueType>
 void ChartAxisProj<QuValueType>::initProjections()
 {
     this->map_quvalue_to_projection =
-        too::make_unique<QuValue_to_Projection>(std::make_pair(tick_start_qu_val, tick_end_qu_val),
+        too::make_unique<QuValue_to_Projection>(std::make_pair(ChartAxisProj<QuValueType>::tick_start_qu_val, ChartAxisProj<QuValueType>::tick_end_qu_val),
         std::make_pair(this->setup->projection_range.first, this->setup->projection_range.second));
 }
 
