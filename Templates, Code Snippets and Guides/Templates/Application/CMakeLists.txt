@@ -74,8 +74,6 @@ target_link_libraries(${TargetAppName} PRIVATE ${TargetAppNameAsLibForTest})
 
 set(TargetAppNameTest "AppNameTest")
 
-file(GLOB_RECURSE TargetAppNameTest_SRC_INCS "test/*.h*")
-
 set(TargetAppNameTest_SOURCES
     test/consts.test.cpp
     test/_gui/interface/globals_gui.test.cpp
@@ -83,7 +81,7 @@ set(TargetAppNameTest_SOURCES
 
 add_executable(${TargetAppNameTest}
 	${TargetAppNameTest_SOURCES}
-	${TargetAppNameTest_SRC_INCS}
+        ${TargetAppNameAsLibForTest_SRC_INCS}
 )
 
 if (WIN32)

@@ -35,7 +35,7 @@ add_library(${TargetLibName} SHARED
 )
 
 if (WIN32)
-set_property(TARGET ${TargetLibName} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
+    set_property(TARGET ${TargetLibName} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
 endif ()
 
 # dll export define
@@ -52,16 +52,14 @@ target_include_directories(${TargetLibName} PRIVATE src)
 
 get_directory_property(hasParent PARENT_DIRECTORY)
 if(hasParent)
-set(LibName_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE)
-set(LibName_LIBRARY_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib PARENT_SCOPE)
+    set(LibName_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE)
+    set(LibName_LIBRARY_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib PARENT_SCOPE)
 endif()
 
 
 ################################################################################################
 
 set(TargetLibNameTest "LibNameTest")
-
-file(GLOB_RECURSE TargetLibNameTest_SRC_INCS "test/*.h*")
 
 set(TargetLibNameTest_SOURCES
 	"test/non-empty folder.test.cpp"
@@ -70,7 +68,6 @@ set(TargetLibNameTest_SOURCES
 add_executable(${TargetLibNameTest}
 	${TargetLibNameTest_SOURCES}
 	${TargetLibName_INCS}
-	${TargetLibNameTest_SRC_INCS}
 )
 
 if (WIN32)
@@ -89,8 +86,11 @@ target_include_directories(${TargetLibNameTest} PRIVATE include)
 target_link_libraries(${TargetLibNameTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(${TargetLibNameTest} PRIVATE ${TargetLibName})
 
+set(do_auto_test	ON)
 
-add_custom_command(
-  TARGET ${TargetLibNameTest} POST_BUILD
-  COMMAND ${TargetLibNameTest}
-)
+if (do_auto_test)
+    add_custom_command(
+        TARGET ${TargetLibNameTest} POST_BUILD
+        COMMAND ${TargetLibNameTest}
+        )
+endif ()

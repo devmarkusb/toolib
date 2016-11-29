@@ -41,7 +41,7 @@ add_library(${TargetToolib} SHARED
 option(Toolib_USE_NO_DEPENDENCIES "No 3rd party dependencies" OFF)
 
 if (WIN32)
-set_property(TARGET ${TargetToolib} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
+    set_property(TARGET ${TargetToolib} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
 endif ()
 
 # dll export define
@@ -50,17 +50,17 @@ set_property(TARGET ${TargetToolib} APPEND PROPERTY COMPILE_DEFINITIONS TOOLIB_L
 set_target_properties(${TargetToolib} PROPERTIES DEBUG_POSTFIX "d")
 
 if (Toolib_USE_NO_DEPENDENCIES)
-set_property(TARGET ${TargetToolib} APPEND PROPERTY COMPILE_DEFINITIONS TOO_NO_DEPENDENCIES)
+    set_property(TARGET ${TargetToolib} APPEND PROPERTY COMPILE_DEFINITIONS TOO_NO_DEPENDENCIES)
 endif ()
 
 if (NOT Toolib_USE_NO_DEPENDENCIES)
-if (NOT Boost_INCLUDE_DIRS)
-set(BOOST_ROOT $ENV{dev_sdk_paths})
-set(Boost_USE_MULTITHREADED     ON)
-set(Boost_USE_STATIC_LIBS       ON)
-set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package(Boost 1.56.0)
-endif ()
+    if (NOT Boost_INCLUDE_DIRS)
+        set(BOOST_ROOT $ENV{dev_sdk_paths})
+        set(Boost_USE_MULTITHREADED     ON)
+        set(Boost_USE_STATIC_LIBS       ON)
+        set(Boost_USE_STATIC_RUNTIME    OFF)
+        find_package(Boost 1.56.0)
+    endif ()
 endif ()
 
 configure_file(${TargetToolib}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetToolib}_build_config.h)
@@ -68,7 +68,7 @@ target_include_directories(${TargetToolib} PRIVATE ${CMAKE_BINARY_DIR})
 
 target_include_directories(${TargetToolib} PRIVATE include)
 if (NOT Toolib_USE_NO_DEPENDENCIES)
-target_include_directories(${TargetToolib} SYSTEM PRIVATE ${Boost_INCLUDE_DIRS})
+    target_include_directories(${TargetToolib} SYSTEM PRIVATE ${Boost_INCLUDE_DIRS})
 endif ()
 target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooBuildEnv/include)
 target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooBasicCodeSupport/include)
@@ -78,16 +78,14 @@ target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooMem/include)
 
 get_directory_property(hasParent PARENT_DIRECTORY)
 if(hasParent)
-set(Toolib_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE)
-set(Toolib_LIBRARY_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib PARENT_SCOPE)
+    set(Toolib_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE)
+    set(Toolib_LIBRARY_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib PARENT_SCOPE)
 endif()
 
 
 ################################################################################################
 
 set(TargetToolibTest "ToolibTest")
-
-file(GLOB_RECURSE TargetToolibTest_SRC_INCS "test/*.h*")
 
 set(TargetToolibTest_SOURCES
     include/Toolib/class/counted_class_objects.test.cpp
@@ -132,7 +130,7 @@ set(TargetToolibTest_SOURCES
 
 add_executable(${TargetToolibTest}
 	${TargetToolibTest_SOURCES}
-	${TargetToolibTest_SRC_INCS}
+        ${TargetToolib_INCS}
 )
 
 if (WIN32)
@@ -147,7 +145,7 @@ find_package(GTest 1.7.0)
 
 target_include_directories(${TargetToolibTest} PRIVATE ${GTEST_INCLUDE_DIRS})
 if (NOT Toolib_USE_NO_DEPENDENCIES)
-target_include_directories(${TargetToolibTest} SYSTEM PRIVATE ${Boost_INCLUDE_DIRS})
+    target_include_directories(${TargetToolibTest} SYSTEM PRIVATE ${Boost_INCLUDE_DIRS})
 endif ()
 target_include_directories(${TargetToolibTest} PRIVATE include)
 target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooBuildEnv/include)
@@ -163,8 +161,8 @@ target_link_libraries(${TargetToolibTest} PRIVATE ${TargetToolib})
 set(do_auto_test	ON)
 
 if (do_auto_test)
-add_custom_command(
-  TARGET ${TargetToolibTest} POST_BUILD
-  COMMAND ${TargetToolibTest}
-)
+    add_custom_command(
+        TARGET ${TargetToolibTest} POST_BUILD
+        COMMAND ${TargetToolibTest}
+        )
 endif ()
