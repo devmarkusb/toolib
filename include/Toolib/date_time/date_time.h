@@ -44,6 +44,9 @@ class MonthYear_base;
 //! Works as an absolute type as well as a difference type.
 using MonthYear = MonthYear_base<>;
 
+//! Works as a difference type only.
+using MonthYear_dur = MonthYear_base<dont_normalize>;
+
 #include "Toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
 struct TOOLIBSHARED_EXPORT MonthYear_decl
 {
@@ -82,6 +85,9 @@ public:
     MonthYear_base<NormalizePolicy>& operator=(const std::string& rhs);
 
     void set(Months m, Years y);
+    void get(Months& m, Years& y) const;
+    Months getMonths() const;
+    Years getYears() const;
     Months asMonths() const;
 
     MonthYear_base<NormalizePolicy>& operator-=(const MonthYear_base<NormalizePolicy>& rhs);
@@ -117,11 +123,10 @@ template <class NP>
 bool operator>=(const MonthYear_base<NP>& lhs, const MonthYear_base<NP>& rhs);
 
 
-const MonthYear_base<dont_normalize> one_year(0, 1);
-static_assert(MonthYear_decl::twelve % 2 == 0, "");
-const MonthYear_base<dont_normalize> half_year(MonthYear_decl::twelve / 2, 0);
-const MonthYear_base<dont_normalize> quarter_year(MonthYear_decl::twelve / 4, 0);
-const MonthYear_base<dont_normalize> one_month(1, 0);
+const MonthYear_dur one_year(0, 1);
+const MonthYear_dur half_year(MonthYear_decl::twelve / 2, 0);
+const MonthYear_dur quarter_year(MonthYear_decl::twelve / 4, 0);
+const MonthYear_dur one_month(1, 0);
 }
 }
 

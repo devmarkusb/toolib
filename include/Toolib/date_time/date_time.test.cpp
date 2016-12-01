@@ -54,6 +54,10 @@ TEST(date_time__normalize_do_itTest, month_0_year_not)
     ym = {1, 0};
     normalize::do_it(ym);
     EXPECT_EQ(std::make_pair(0, 12), ym);
+
+    ym = {2, 0};
+    normalize::do_it(ym);
+    EXPECT_EQ(std::make_pair(1, 12), ym);
 }
 
 TEST(date_time__normalize_do_itTest, equal_signs)
