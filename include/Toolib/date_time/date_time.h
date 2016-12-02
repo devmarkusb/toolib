@@ -85,6 +85,8 @@ public:
     MonthYear_base<NormalizePolicy>& operator=(const std::string& rhs);
 
     void set(Months m, Years y);
+    void setMonths(Months m);
+    void setYears(Years y);
     void get(Months& m, Years& y) const;
     Months getMonths() const;
     Years getYears() const;

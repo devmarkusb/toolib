@@ -97,6 +97,20 @@ void MonthYear_base<NormalizePolicy>::set(Months m, Years y)
 }
 
 template <class NormalizePolicy>
+void MonthYear_base<NormalizePolicy>::setMonths(Months m)
+{
+    this->y_m.second = m;
+    NormalizePolicy::do_it(this->y_m);
+}
+
+template <class NormalizePolicy>
+void MonthYear_base<NormalizePolicy>::setYears(Years y)
+{
+    this->y_m.first  = y;
+    NormalizePolicy::do_it(this->y_m);
+}
+
+template <class NormalizePolicy>
 void MonthYear_base<NormalizePolicy>::get(Months& m, Years& y) const
 {
     m = this->y_m.second;

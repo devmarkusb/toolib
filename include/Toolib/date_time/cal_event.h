@@ -77,10 +77,12 @@ public:
     //! nullptr means earliest possible start, which is the default construction
     void setStart(const TimeType* t) { m_TimePointStart = t ? too::make_unique<TimeType>(*t) : nullptr; }
     const TimeType* getStart() const { return m_TimePointStart.get(); }
+    TimeType* getStart() { return m_TimePointStart.get(); }
 
     //! nullptr means forever, which is default construction
     void setEnd(const TimeType* t) { m_TimePointEnd = t ? too::make_unique<TimeType>(*t) : nullptr; }
     const TimeType* getEnd() const { return m_TimePointEnd.get(); }
+    TimeType* getEnd() { return m_TimePointEnd.get(); }
 
     void setTimePeriod(const TimeType& period) { m_TimePeriod = period; }
     TimeType getTimePeriod() const { return m_TimePeriod; }
