@@ -1,7 +1,7 @@
 
 # ...
 
-if (NOT Qt5Widgets_INCLUDE_DIRS)
+if (NOT Qt5Quick_INCLUDE_DIRS)
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
     set(CMAKE_AUTOMOC ON)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -10,8 +10,9 @@ if (NOT Qt5Widgets_INCLUDE_DIRS)
         set(QT_COMPILER_SUBDIR "msvc2013")
     endif ()
     list(APPEND CMAKE_PREFIX_PATH "$ENV{dev_qt_base}/5.7/${QT_COMPILER_SUBDIR}")
-    find_package(Qt5 COMPONENTS Quick LinguistTools) # Widgets contains a.o.t. Core and Gui
+    find_package(Qt5Quick) # Widgets contains a.o.t. Core and Gui
 endif ()
+find_package(Qt5LinguistTools)
 
 # ...
 
@@ -44,6 +45,7 @@ include(lang.cmake)
 
 add_executable(${TargetAppName}
 # ...
+    ${TargetAppName_RESOURCES}
     ${TargetAppName_TRANSLATIONS}
 )
 

@@ -62,7 +62,7 @@ endif()
 set(TargetLibNameTest "LibNameTest")
 
 set(TargetLibNameTest_SOURCES
-	"test/non-empty folder.test.cpp"
+	"src/non-empty folder.test.cpp"
 )
 
 add_executable(${TargetLibNameTest}

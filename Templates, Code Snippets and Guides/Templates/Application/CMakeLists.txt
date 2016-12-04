@@ -24,7 +24,6 @@ include(defaults.cmake)
 file(GLOB_RECURSE TargetAppNameAsLibForTest_SRC_INCS "src/*.h*")
 
 set(TargetAppNameAsLibForTest_SOURCES
-    src/globals.cpp
     src/_gui/interface/globals_gui.cpp
 )
 
@@ -48,7 +47,7 @@ set(Boost_USE_STATIC_RUNTIME    OFF)
 find_package(Boost 1.56.0) # e.g. COMPONENTS date_time
 
 configure_file(${TargetAppName}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetAppName}_build_config.h)
-target_include_directories(${TargetAppName} PUBLIC ${CMAKE_BINARY_DIR})
+target_include_directories(${TargetAppNameAsLibForTest} PUBLIC ${CMAKE_BINARY_DIR})
 
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC .)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC src)
@@ -75,8 +74,8 @@ target_link_libraries(${TargetAppName} PRIVATE ${TargetAppNameAsLibForTest})
 set(TargetAppNameTest "AppNameTest")
 
 set(TargetAppNameTest_SOURCES
-    test/consts.test.cpp
-    test/_gui/interface/globals_gui.test.cpp
+    src/consts.test.cpp
+    src/_gui/interface/globals_gui.test.cpp
 )
 
 add_executable(${TargetAppNameTest}
