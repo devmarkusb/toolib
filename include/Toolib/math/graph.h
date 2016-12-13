@@ -128,7 +128,7 @@ protected:
 private:
     void constr_common_impl(const QuValueType& min_qu_val, const QuValueType& max_qu_val);
     void expectProperSetup() const;
-    void expectProperMinMax(const QuValueType& min_qu_val, const QuValueType& max_qu_val) const;
+    void ensureProperMinMax(QuValueType& min_qu_val, QuValueType& max_qu_val) const;
     void calcScaling(const QuValueType& min_qu_val, const QuValueType& max_qu_val);
 };
 
@@ -225,9 +225,11 @@ ChartAxis<QuValueType>::ChartAxis(const ChartAxis_setup& setup, const Quantity& 
 template <typename QuValueType>
 void ChartAxis<QuValueType>::constr_common_impl(const QuValueType& min_qu_val, const QuValueType& max_qu_val)
 {
-    expectProperMinMax(min_qu_val, max_qu_val);
+    QuValueType minquval{min_qu_val};
+    QuValueType maxquval{max_qu_val};
+    ensureProperMinMax(minquval, maxquval);
     expectProperSetup();
-    calcScaling(min_qu_val, max_qu_val);
+    calcScaling(minquval, maxquval);
 }
 
 template <typename QuValueType>
@@ -237,10 +239,14 @@ void ChartAxis<QuValueType>::expectProperSetup() const
 }
 
 template <typename QuValueType>
-void ChartAxis<QuValueType>::expectProperMinMax(const QuValueType& min_qu_val, const QuValueType& max_qu_val) const
+void ChartAxis<QuValueType>::ensureProperMinMax(QuValueType& min_qu_val, QuValueType& max_qu_val) const
 {
-    TOO_EXPECT_THROW(min_qu_val < max_qu_val);
-    TOO_EXPECT_THROW(!too::math::almost_equal_alltypes(min_qu_val, max_qu_val, expected_ulp_difference_minmax));
+    TOO_EXPECT_THROW(min_qu_val <= max_qu_val);
+    if (too::math::almost_equal_alltypes(min_qu_val, max_qu_val, expected_ulp_difference_minmax))
+    {
+        min_qu_val-= 1;
+        max_qu_val+= 1;
+    }
 }
 
 template <typename QuValueType>
