@@ -54,7 +54,7 @@ public:
     operator std::string() const;
     CPath& operator+=(const CPath& other);
     std::string getFolderPath() const;
-    //! inclusive extension
+    //! Inclusive extension. Use function remove_extension if desired.
     std::string getFileName() const;
     //! without dot
     std::string getExtension(bool with_dot = false) const;

@@ -125,6 +125,16 @@ TEST_F(CPathTest, getFileName)
 {
     CPath p1("a/b");
     EXPECT_EQ("b", p1.getFileName());
+    CPath p2("a/b.exe");
+    EXPECT_EQ("b.exe", p2.getFileName());
+}
+
+TEST_F(CPathTest, remove_extension)
+{
+    CPath p1("a/b.exe");
+    std::string s1{p1};
+    too::file::remove_extension(s1);
+    EXPECT_EQ("a/b", s1);
 }
 
 TEST_F(CPathTest, getExtension)
