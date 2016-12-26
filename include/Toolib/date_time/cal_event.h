@@ -78,11 +78,17 @@ public:
     void setStart(const TimeType* t) { m_TimePointStart = t ? too::make_unique<TimeType>(*t) : nullptr; }
     const TimeType* getStart() const { return m_TimePointStart.get(); }
     TimeType* getStart() { return m_TimePointStart.get(); }
+    void backupStart_move() { m_backupStart = std::move(m_TimePointStart); }
+    bool hasStartBackup() const { return m_backupStart ? true : false; }
+    void restoreStart_move() { m_TimePointStart = std::move(m_backupStart); }
 
     //! nullptr means forever, which is default construction
     void setEnd(const TimeType* t) { m_TimePointEnd = t ? too::make_unique<TimeType>(*t) : nullptr; }
     const TimeType* getEnd() const { return m_TimePointEnd.get(); }
     TimeType* getEnd() { return m_TimePointEnd.get(); }
+    void backupEnd_move() { m_backupEnd = std::move(m_TimePointEnd); }
+    bool hasEndBackup() const { return m_backupEnd ? true : false; }
+    void restoreEnd_move() { m_TimePointEnd = std::move(m_backupEnd); }
 
     void setTimePeriod(const TimeType& period) { m_TimePeriod = period; }
     TimeType getTimePeriod() const { return m_TimePeriod; }
@@ -90,6 +96,8 @@ public:
 private:
     std::unique_ptr<TimeType> m_TimePointStart;
     std::unique_ptr<TimeType> m_TimePointEnd;
+    std::unique_ptr<TimeType> m_backupStart;
+    std::unique_ptr<TimeType> m_backupEnd;
     TimeType m_TimePeriod{};
 };
 
