@@ -94,7 +94,7 @@ public:
     //! Constructing the class with default parameters is only reasonable for testing purposes or temporary quick starts to construct other things.
     explicit Unit(const too::math::Rational& ratio = too::math::one, const Map_Rational_String& map_ratio_prefixunitname = {})
 #if !TOO_HAS_NO_CPP11_NOEXCEPT
-        noexcept_(false)
+        /*noexcept(false)*/
 #endif
         : ratio(ratio), ratio_prefixunitname(map_ratio_prefixunitname.empty() ? simple_noop_default_ratio_map() : map_ratio_prefixunitname)
     {
