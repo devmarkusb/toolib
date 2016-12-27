@@ -139,11 +139,11 @@ endif ()
 
 set_target_properties(${TargetToolibTest} PROPERTIES DEBUG_POSTFIX "d")
 
-set(GTEST_ROOT $ENV{dev_sdk_paths})
+set(GTEST_ROOT $ENV{dev_sdk_paths_gtest})
 set(GTEST_MSVC_SEARCH   MD)
 find_package(GTest 1.7.0)
 
-target_include_directories(${TargetToolibTest} PRIVATE ${GTEST_INCLUDE_DIRS})
+target_include_directories(${TargetToolibTest} PRIVATE ${GTEST_INCLUDE_DIR})
 if (NOT Toolib_USE_NO_DEPENDENCIES)
     target_include_directories(${TargetToolibTest} SYSTEM PRIVATE ${Boost_INCLUDE_DIRS})
 endif ()
