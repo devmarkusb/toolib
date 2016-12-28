@@ -186,8 +186,7 @@ public:
     too::not_null<const ChartAxis<QuValueTypeX>*> get_y_axis() const { return y_axis.get(); }
 
     const VectorOfPairs<QuValueTypeX, QuValueTypeY>* getValues() const { return this->values; }
-    void setAnnotations(std::unique_ptr<ChartAnnotations> a) { this->annotations = std::move(a); }
-    ChartAnnotations* getAnnotations() { return this->annotations.get(); }
+    void setAnnotations(std::unique_ptr<const ChartAnnotations> a) { this->annotations = std::move(a); }
     const ChartAnnotations* getAnnotations() const { return this->annotations.get(); }
 
 private:
@@ -196,7 +195,7 @@ private:
     VectorOfPairs<QuValueTypeX, QuValueTypeY>* values;
     std::unique_ptr<ChartAxis<QuValueTypeX>> x_axis;
     std::unique_ptr<ChartAxis<QuValueTypeY>> y_axis;
-    std::unique_ptr<ChartAnnotations> annotations;
+    std::unique_ptr<const ChartAnnotations> annotations;
 
     void pullout_common_factor_from_data();
 };
@@ -205,14 +204,14 @@ private:
 class ChartAnnotations
 {
 public:
-    const VectorOfPairs<size_t, std::string>& getAll() const { return this->annotations; }
+    const VectorOfPairs<const size_t, const std::string>& getAll() const { return this->annotations; }
     //! Add an optional annotation for a certain value index. The index is expected to be in a valid range.
     //! Also you might have to take care about not using the same index more than once. But that depends on your
     //! use-case - it is not forbidden.
-    void add(const std::pair<size_t, std::string>& a) { this->annotations.push_back(a); }
+    void add(const std::pair<const size_t, const std::string>& a) { this->annotations.push_back(a); }
 
 private:
-    VectorOfPairs<size_t, std::string> annotations;
+    VectorOfPairs<const size_t, const std::string> annotations;
 };
 
 } // math
