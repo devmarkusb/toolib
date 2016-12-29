@@ -97,6 +97,7 @@ set(TargetToolibTest_SOURCES
     include/Toolib/date_time/cal_event.test.cpp
     include/Toolib/date_time/date_time.test.cpp
     include/Toolib/debug/debug_leaks.test.cpp
+    include/Toolib/filesys/file.test.cpp
     include/Toolib/filesys/file_collection.test.cpp
     include/Toolib/filesys/path.test.cpp
     include/Toolib/financial/money.test.cpp
