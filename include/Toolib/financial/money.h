@@ -133,6 +133,12 @@ public:
 
     static Fraction YearlyEffective_to_MonthlyRelative(Fraction pa);
 
+    template <class Archive>
+    void serialize(Archive& archive)
+    {
+        archive(this->p);
+    }
+
 private:
     Percent p = Percent();
 };
