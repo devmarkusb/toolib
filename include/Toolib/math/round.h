@@ -1,4 +1,4 @@
-// Markus Borris, 2011
+// Markus Borris, 2011-16
 // This file is part of Toolib library.
 
 //!
@@ -10,6 +10,7 @@
 #ifndef ROUND_H_INCL_9mj238fz23nf8z
 #define ROUND_H_INCL_9mj238fz23nf8z
 
+#include "Toolib/PPDefs/MSVC/UNDEF_MIN_MAX"
 #include <cmath>
 #include <limits>
 #include <type_traits>
