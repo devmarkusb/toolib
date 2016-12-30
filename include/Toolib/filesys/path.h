@@ -1,4 +1,4 @@
-// Markus Borris, 2015
+// Markus Borris, 2015-16
 // This file is part of Toolib library.
 
 //!
@@ -18,7 +18,6 @@ namespace too
 {
 namespace file
 {
-
 TOOLIBSHARED_EXPORT void remove_extension(std::string& fn);
 TOOLIBSHARED_EXPORT bool file_exists(const std::string& fn);
 
@@ -87,10 +86,9 @@ private:
     void detectForm() const;
 };
 
-// todo check whether that works also within namespace
 TOOLIBSHARED_EXPORT CPath operator+(const CPath& p1, const CPath& p2);
-}
-}
+} // file
+} // too
 
 
 #endif

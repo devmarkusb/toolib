@@ -87,7 +87,7 @@ Money::BaseType Money::getTenthOfSmallestUnit(const Currency&) { return 0.001L; 
 Money& Money::operator-=(const Money& rhs)
 {
     if (this->currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented("mixed currencies not yet implemented");
+        throw too::not_implemented{"mixed currencies not yet implemented"};
     amount -= rhs.amount;
     return *this;
 }
@@ -95,7 +95,7 @@ Money& Money::operator-=(const Money& rhs)
 Money& Money::operator+=(const Money& rhs)
 {
     if (this->currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented("mixed currencies not yet implemented");
+        throw too::not_implemented{"mixed currencies not yet implemented"};
     amount += rhs.amount;
     return *this;
 }
@@ -103,7 +103,7 @@ Money& Money::operator+=(const Money& rhs)
 Money& Money::operator/=(const Money& rhs)
 {
     if (this->currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented("mixed currencies not yet implemented");
+        throw too::not_implemented{"mixed currencies not yet implemented"};
     amount /= rhs.amount;
     return *this;
 }
@@ -171,14 +171,14 @@ Money operator*(Money::BaseType lhs, const Money& rhs)
 bool operator==(const Money& lhs, const Money& rhs)
 {
     if (lhs.currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented("mixed currencies not yet implemented");
+        throw too::not_implemented{"mixed currencies not yet implemented"};
     return too::math::almost_equal(lhs.amount, rhs.amount);
 }
 
 bool operator<(const Money& lhs, const Money& rhs)
 {
     if (lhs.currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented("mixed currencies not yet implemented");
+        throw too::not_implemented{"mixed currencies not yet implemented"};
     return lhs.amount < rhs.amount;
 }
 
@@ -199,7 +199,7 @@ bool operator>=(const Money& lhs, const Money& rhs)
 bool equal_sufficiently(const Money& lhs, const Money& rhs)
 {
     if (lhs.currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented("mixed currencies not yet implemented");
+        throw too::not_implemented{"mixed currencies not yet implemented"};
     // tenth of smallest unit needed since this is the relevant digit for rounding
     return too::math::approx_equal(lhs.amount, rhs.amount, Money::getTenthOfSmallestUnit());
 }

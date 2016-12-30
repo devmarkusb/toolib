@@ -9,6 +9,7 @@
 #ifndef GEOMETRY_H_dgiuntgh87xtg3487tg3tgfvscd
 #define GEOMETRY_H_dgiuntgh87xtg3487tg3tgfvscd
 
+#include "Toolib/error.h"
 #include "Toolib/math/quantity_unit.h"
 #include "Toolib/math/scale.h"
 #include "Toolib/optional.h"
@@ -119,13 +120,13 @@ struct Vector_ : public Point_<T, dim>
 
     Vector_<T, dim>& operator+=(const Vector_<T, dim>&)
     {
-        // todo ...addition of rhs to *this...
-        return *this;
+		throw too::not_implemented{"Vector_ +="};
+        //return *this;
     }
     Vector_<T, dim>& operator-=(const Vector_<T, dim>&)
     {
-        // todo ...subtraction of rhs from *this...
-        return *this;
+		throw too::not_implemented{ "Vector_ -=" };
+        //return *this;
     }
 };
 

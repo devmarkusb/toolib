@@ -5,7 +5,7 @@
 
 TEST(CurrencyTest, test)
 {
-    // todo doesn't work yet :( Why?!
+    // doesn't work yet :( Why?!
     //    too::fin::Currency curr(std::locale(""));
     //    std::cout << "locale name: " << curr.getLocaleConstrName() << "\n";
     //    std::cout << "currency string: " << curr.getString() << "\n";

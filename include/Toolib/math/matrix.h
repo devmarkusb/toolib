@@ -1,4 +1,4 @@
-// Markus Borris, 2011
+// Markus Borris, 2011-16
 // This file is part of Toolib library.
 
 //!
@@ -10,9 +10,10 @@
 #ifndef MATRIX_H_INCL_mx02983urx23
 #define MATRIX_H_INCL_mx02983urx23
 
-#include <cstdint>
+#include "Toolib/error.h"
 #include <cmath>
 #include <complex>
+#include <cstdint>
 #include <string>
 
 
@@ -380,9 +381,9 @@ public:
         return res;
     }
 
-    //=========================================
-    // Operations for quadratic matrices only.
-    //=========================================
+
+    //### Operations for quadratic matrices only. ###
+
     //! Checks whether this matrix is the identity.
     /** Only applicable for quadratic matrices.
     \param bMakeIt true changes this matrix into identity. False leaves it unchanged.*/
@@ -446,43 +447,37 @@ public:
     //! Determinant.
     T det() const
     {
-        // todo
+		throw too::not_implemented{"det"};
     }
     //! Inverse. Throws error_division_by_zero_det exception if determinant is zero.
     void invert()
     {
-        // todo
+        throw too::not_implemented{"invert"};
     }
     //! Is invertible?
     bool isInvertible() const
     {
-        // todo
-        return false;
+        throw too::not_implemented{"isInvertible"};
     }
     //! Is symmetric?
     bool isSymmetric() const
     {
-        // todo
-        return true;
+        throw too::not_implemented{"isSymmetric"};
     }
     //! Is orthogonal?
     bool isOrthogonal() const
     {
-        // todo
-        return false;
+        throw too::not_implemented{"isOrthogonal"};
     }
     //! Is diagonal?
     bool isDiagonal() const
     {
-        // todo
-        return true;
+        throw too::not_implemented{"isDiagonal"};
     }
-    // todo ... lots of operations
 
 
-    //==========================
-    // Implementational details.
-    //==========================
+    //### Implementation details. ###
+
     //! Smart equivalent of T& (proxy class). Used to implement "index" access to the matrix entries.
     class Tref
     {
@@ -670,16 +665,13 @@ public:
     //! Is hermitean?
     bool isHermitean() const
     {
-        // todo
-        return true;
+        throw too::not_implemented{"isHermitean"};
     }
     //! Is unitary?
     bool isUnitary() const
     {
-        // todo
-        return false;
+        throw too::not_implemented{"isUnitary"};
     }
-    // todo lots of operations
 };
 
 //! Sum. Both matrices have to coincide dimensionally.

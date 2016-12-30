@@ -20,7 +20,6 @@ namespace too
 {
 //! The most simple smart pointer out there (just RAII).
 /** Encapsulates a pointer in a class that cares about deletion. (But prefer std::auto_ptr)*/
-// todo Perhaps introduce another version for C-arrays, maybe even multi-dimensional
 template <class T>
 class raii_p
 {
