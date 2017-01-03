@@ -124,6 +124,7 @@ set(TargetToolibTest_SOURCES
     include/Toolib/scope/scopeflagged.bak.test.cpp
     include/Toolib/scope/scopeflagged.test.cpp
     include/Toolib/scope/scopeguard.test.cpp
+    include/Toolib/string/languages.test.cpp
     include/Toolib/string/lex_cast.test.cpp
     include/Toolib/string/string_token.test.cpp
     include/Toolib/string/string_trim.test.cpp
