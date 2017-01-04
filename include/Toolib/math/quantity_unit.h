@@ -75,9 +75,7 @@ inline Map_Rational_String create_map_ratio_SIprefixunitname(const std::string& 
 }
 
 
-//! Passed object to \param map_ratio_prefixunitname needs to be alive for the whole life time of Unit.
-//! To avoid heavy copying we just refer to that. If you need just SI prefixes, you can use
-//! create_map_ratio_SIprefixunitname().
+//! If you need just SI prefixes, you can use create_map_ratio_SIprefixunitname() for \param map_ratio_prefixunitname.
 //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the initial or target
 //! ratio in the map. That would make the class useless.
 class Unit
@@ -91,7 +89,7 @@ public:
     //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the initial
     //! \param ratio in the map. That would make the class useless. Also throws std::invalid_argument if a less or equal to zero ratio is contained within the map.
     //! Proper Rational's are expected. Also \param ratio needs to be > 0.
-    //! Constructing the class with default parameters is only reasonable for testing purposes or temporary quick starts to construct other things.
+    //! Constructing the class with default parameters is only reasonable for testing purposes or temporary jump starts to construct other things.
     explicit Unit(const too::math::Rational& ratio = too::math::one, const Map_Rational_String& map_ratio_prefixunitname = {})
 #if !TOO_HAS_NO_CPP11_NOEXCEPT
         /*noexcept(false)*/
@@ -108,21 +106,6 @@ public:
     ~Unit()
     {
         TOO_EXPECT(expectValidRatio(this->ratio));
-    }
-    Unit(const Unit& other) : ratio(other.ratio), ratio_prefixunitname{other.ratio_prefixunitname} {}
-    Unit& operator=(const Unit& other)
-    {
-        Unit tmp{other};
-        *this = std::move(tmp);
-        return *this;
-    }
-    Unit(Unit&& other) : ratio(std::move(other.ratio)), ratio_prefixunitname{other.ratio_prefixunitname} {}
-    Unit& operator=(Unit&& other)
-    {
-        this->ratio                 = std::move(other.ratio);
-        Map_Rational_String& helper = const_cast<Map_Rational_String&>(this->ratio_prefixunitname);
-        helper                      = other.ratio_prefixunitname;
-        return *this;
     }
 
     std::string getString() const { return this->ratio_prefixunitname.at(this->ratio); }
@@ -193,7 +176,7 @@ public:
 
 private:
     too::math::Rational ratio;
-    const Map_Rational_String& ratio_prefixunitname;
+    Map_Rational_String ratio_prefixunitname;
 
     static const Map_Rational_String& simple_noop_default_ratio_map()
     {
