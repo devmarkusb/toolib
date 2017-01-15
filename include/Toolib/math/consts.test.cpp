@@ -1,5 +1,5 @@
-#include "Toolib\math\consts.h"
-#include "Toolib\math\floating_point.h"
+#include "Toolib/math/consts.h"
+#include "Toolib/math/floating_point.h"
 #include "gtest/gtest.h"
 
 #define _USE_MATH_DEFINES
