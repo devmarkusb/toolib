@@ -30,7 +30,7 @@ std::string Currency::getString() const
         return std::string();
     const std::string loc_enc  = std::use_facet<std::moneypunct<char, true>>(*(this->loc)).curr_symbol();
     const std::wstring utf16ws = too::str::locenc_s2ws(loc_enc);
-    return too::str::utf16to8_ws2s_portable(utf16ws);
+    return too::str::utf16or32to8_ws2s_portable(utf16ws);
 }
 
 std::string Currency::getSymbol() const
@@ -39,7 +39,7 @@ std::string Currency::getSymbol() const
         return std::string();
     const std::string loc_enc  = std::use_facet<std::moneypunct<char>>(*(this->loc)).curr_symbol();
     const std::wstring utf16ws = too::str::locenc_s2ws(loc_enc);
-    return too::str::utf16to8_ws2s_portable(utf16ws);
+    return too::str::utf16or32to8_ws2s_portable(utf16ws);
 }
 
 std::string Currency::getLocaleConstrName() const
