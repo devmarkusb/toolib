@@ -21,13 +21,22 @@ set(TargetAppName "AppName")
 
 include(defaults.cmake)
 
+add_subdirectory(sdks)
+
 file(GLOB_RECURSE TargetAppNameAsLibForTest_SRC_INCS "src/*.h*")
 
-set(TargetAppNameAsLibForTest_SOURCES
-    src/_gui/interface/globals_gui.cpp
+# Sources to be switched according to active GUI implementation.
+set(TargetAppNameAsLibForTest_IMPL_SOURCES
+    src/_gui/src_WinCmdLine/resource_string.cpp
 )
 
-set(TargetAppNameAsLibForTest "AppNameAsLibForTest")
+set(TargetAppNameAsLibForTest_SOURCES
+    src/_gui/interface/resource_string.cpp
+
+   ${TargetAppNameAsLibForTest_IMPL_SOURCES}
+)
+
+set(TargetAppNameAsLibForTest "${TargetAppName}AsLibForTest")
 
 add_library(${TargetAppNameAsLibForTest} STATIC
         ${TargetAppNameAsLibForTest_SOURCES}
@@ -51,6 +60,9 @@ target_include_directories(${TargetAppNameAsLibForTest} PUBLIC ${CMAKE_BINARY_DI
 
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC .)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC src)
+target_include_directories(${TargetAppNameAsLibForTest} PUBLIC sdks/ToolsFL/tooBuildEnv/include)
+target_include_directories(${TargetAppNameAsLibForTest} PUBLIC sdks/ToolsFL/tooBasicCodeSupport/include)
+target_include_directories(${TargetAppNameAsLibForTest} PUBLIC sdks/ToolsFL/tooString/include)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC SYSTEM ${Boost_INCLUDE_DIRS})
 
 target_link_libraries(${TargetAppNameAsLibForTest} PRIVATE ${Boost_LIBRARIES})
@@ -71,16 +83,22 @@ target_link_libraries(${TargetAppName} PRIVATE ${TargetAppNameAsLibForTest})
 
 ################################################################################################
 
-set(TargetAppNameTest "AppNameTest")
+set(TargetAppNameTest "${TargetAppName}Test")
+
+set(TargetAppNameTest_IMPL_SOURCES
+    src/_gui/src_WinCmdLine/resource_string.test.cpp
+)
 
 set(TargetAppNameTest_SOURCES
-    src/consts.test.cpp
-    src/_gui/interface/globals_gui.test.cpp
+    src/_gui/interface/resource_ids.test.cpp
+    src/_gui/interface/resource_string.test.cpp
+
+    ${TargetAppNameTest_IMPL_SOURCES}
 )
 
 add_executable(${TargetAppNameTest}
 	${TargetAppNameTest_SOURCES}
-        ${TargetAppNameAsLibForTest_SRC_INCS}
+    ${TargetAppNameAsLibForTest_SRC_INCS}
 )
 
 if (WIN32)
@@ -89,7 +107,7 @@ endif ()
 
 set_target_properties(${TargetAppNameTest} PROPERTIES DEBUG_POSTFIX "d")
 
-set(GTEST_ROOT $ENV{dev_sdk_paths})
+set(GTEST_ROOT $ENV{dev_sdk_paths_gtest})
 set(GTEST_MSVC_SEARCH   MD)
 find_package(GTest 1.7.0)
 
