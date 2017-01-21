@@ -32,7 +32,8 @@ endif ()
 
 # ...
 
-# only purpose of this so far: prevent msvc from showing an additional console window in Qt apps
+# Only purpose of this so far: prevent showing an additional console window in Qt apps (happens for msvc in way
+# impossible to overlook, but also for mingw builds when not starting from IDE).
 if (WIN32)
     set(WIN32_ON_OFF_SWITCH "WIN32")
 else ()

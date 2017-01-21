@@ -16,6 +16,14 @@
 #include <string>
 
 
+//! The indicator for the really serious release build.
+#cmakedefine DEPLOYMENT_BUILD
+#ifdef DEPLOYMENT_BUILD
+#define IS_DEPLOYMENT_BUILD    1
+#else
+#define IS_DEPLOYMENT_BUILD    0
+#endif
+
 namespace app
 {
 inline std::string get_version()

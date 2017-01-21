@@ -17,6 +17,7 @@ cmake_minimum_required(VERSION 3.4.1)
 include(buildnr.cmake)
 project(AppProjName VERSION 0.1.0.${BUILD_NR})
 message(STATUS "project version: " ${PROJECT_VERSION})
+option(DEPLOYMENT_BUILD "do a final release build for deployment" $ENV{DeployArtifacts})
 set(TargetAppName "AppName")
 
 include(defaults.cmake)
