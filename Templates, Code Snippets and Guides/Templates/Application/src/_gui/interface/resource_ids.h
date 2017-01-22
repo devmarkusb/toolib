@@ -2,6 +2,7 @@
 #define RESOURCE_IDS_H_nexfx783hgfy3zv180
 
 #include "Toolib/assert.h"
+#include "Toolib/trace.h"
 #include <map>
 #include <sstream>
 #include <stdexcept>
@@ -42,7 +43,7 @@ inline ContentID ResContentID_from_str(const ID_alnum& s)
     {
         std::stringstream ss;
         ss << "wrong content value, don't know id '" << s << "' (yet)";
-        //LOG(ERROR) << ss.str();
+        too::trace() << ss.str();
         TOO_ASSERT(false);
         throw std::out_of_range{ss.str()};
     }
