@@ -5,6 +5,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OutputDir_bin})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OutputDir_lib})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OutputDir_lib})
 
+file(TO_CMAKE_PATH "$ENV{dev_sdk_path}" dev_sdk_path_ENV_CMAKE_PATH)
+
 # workaround for msvc, which adds additional subdirs per config
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 foreach (OutputConfig ${CMAKE_CONFIGURATION_TYPES})
@@ -40,5 +42,8 @@ if (MSVC)
     add_definitions(-D_SCL_SECURE_NO_WARNINGS)
     add_definitions(-DBOOST_ALL_NO_LIB)
     # this doesn't work disabling specific linker warnings, why not?
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ignore:4221")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ignore:4075")
 endif ()
+
+# cotire needs this
+#add_definitions(-D__STRICT_ANSI__)
