@@ -47,9 +47,11 @@ inline void throwError(const std::string& filePathNameExt, operation op, const s
     switch (op)
     {
     case operation::save:
-        s += "saved"; break;
+        s += "saved";
+        break;
     case operation::load:
-        s += "loaded"; break;
+        s += "loaded";
+        break;
     default:
         TOO_ASSERT(false); // op not supported
     }

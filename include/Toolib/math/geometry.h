@@ -120,13 +120,13 @@ struct Vector_ : public Point_<T, dim>
 
     Vector_<T, dim>& operator+=(const Vector_<T, dim>&)
     {
-		throw too::not_implemented{"Vector_ +="};
-        //return *this;
+        throw too::not_implemented{"Vector_ +="};
+        // return *this;
     }
     Vector_<T, dim>& operator-=(const Vector_<T, dim>&)
     {
-		throw too::not_implemented{ "Vector_ -=" };
-        //return *this;
+        throw too::not_implemented{"Vector_ -="};
+        // return *this;
     }
 };
 
@@ -198,9 +198,7 @@ struct Margins_
 
 //! For convenience.
 using Margins = Margins_<>;
-
 }
-
 }
 
 #endif

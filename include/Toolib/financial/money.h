@@ -30,7 +30,8 @@ public:
     //! Setting \param loc to std::locale("") means using the user preferred locale.
     /** On e.g. a German system this could be std::locale("de_DE.utf8") internally.*/
     explicit Currency(const std::locale& loc);
-    //! Per default constructs a non-currency, in case you want to deal with currency-less amounts of money for convenience.
+    //! Per default constructs a non-currency, in case you want to deal with currency-less amounts of money for
+    //! convenience.
     Currency() = default;
 
     std::string getString() const;

@@ -14,7 +14,7 @@ enum class ID
 {
     invalid                 = -1,
     one_before_first_string = invalid, // just a marker, please sort strings lexicographically below
-    one_after_last_string, // just a marker
+    one_after_last_string,             // just a marker
 };
 
 

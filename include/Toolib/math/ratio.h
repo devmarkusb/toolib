@@ -99,7 +99,8 @@ struct Rational
     }
 
     template <intmax_t N, intmax_t D>
-    explicit constexpr Rational(std::ratio<N, D>) : num{N}, denom{D}
+    explicit constexpr Rational(std::ratio<N, D>)
+        : num{N}, denom{D}
     {
         static_assert(D > 0, "denominator for Rational expected to be > 0");
     }
@@ -136,20 +137,14 @@ struct Rational
     }
 
     // as soon as explicit is soundly supported by the standard here...
-    //explicit operator bool() const
+    // explicit operator bool() const
     //{
     //    return this->num != ValueType{};
     //}
 
-    bool operator!() const
-    {
-        return is_null();
-    }
+    bool operator!() const { return is_null(); }
 
-    bool is_null() const
-    {
-        return this->num == ValueType{};
-    }
+    bool is_null() const { return this->num == ValueType{}; }
 
     Rational operator-() const
     {

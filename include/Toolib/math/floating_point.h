@@ -32,7 +32,8 @@ namespace math
 
 //! \Returns true, if \params x and y are almost equal. Expects \param ulp >= 1.
 template <typename FloatType>
-typename std::enable_if<std::is_floating_point<FloatType>::value, bool>::type almost_equal(FloatType x, FloatType y, int ulp = 1)
+typename std::enable_if<std::is_floating_point<FloatType>::value, bool>::type almost_equal(
+    FloatType x, FloatType y, int ulp = 1)
 {
     TOO_EXPECT(ulp >= 1);
     return std::abs(x - y) < std::numeric_limits<FloatType>::epsilon() * std::abs(x + y) * ulp ||
@@ -42,23 +43,28 @@ typename std::enable_if<std::is_floating_point<FloatType>::value, bool>::type al
 //! Same as almost_equal, but also falls back to '==' if T is an integer type.
 /** Useful if T is already a more general template parameter in your context.*/
 template <typename FloatType>
-typename std::enable_if<std::is_floating_point<FloatType>::value, bool>::type almost_equal_alltypes(FloatType x, FloatType y, int ulp = 1)
+typename std::enable_if<std::is_floating_point<FloatType>::value, bool>::type almost_equal_alltypes(
+    FloatType x, FloatType y, int ulp = 1)
 {
     return almost_equal(x, y, ulp);
 }
 
 //! Cf. other declaration of almost_equal_alltypes.
 template <typename FloatType>
-typename std::enable_if<std::is_integral<FloatType>::value, bool>::type almost_equal_alltypes(FloatType x, FloatType y, int ulp = 1)
+typename std::enable_if<std::is_integral<FloatType>::value, bool>::type almost_equal_alltypes(
+    FloatType x, FloatType y, int ulp = 1)
 {
     too::ignore_arg(ulp);
     return x == y;
 }
 
-//! Rough version of almost_equal, where you can pass a user defined eps(ilon) within which \params x and y are understood approx. equal.
-/** HINT: a common mistake leading to compiler error is not providing \param eps with explicit type FloatType, as the other params.*/
+//! Rough version of almost_equal, where you can pass a user defined eps(ilon) within which \params x and y are
+//! understood approx. equal.
+/** HINT: a common mistake leading to compiler error is not providing \param eps with explicit type FloatType, as the
+ * other params.*/
 template <typename FloatType>
-typename std::enable_if<std::is_floating_point<FloatType>::value, bool>::type approx_equal(FloatType x, FloatType y, FloatType eps)
+typename std::enable_if<std::is_floating_point<FloatType>::value, bool>::type approx_equal(
+    FloatType x, FloatType y, FloatType eps)
 {
     return std::abs(x - y) < eps;
 }
@@ -85,7 +91,8 @@ struct ToStringConverter;
     If don't want to pass precision and use a default one (e.g. 6) and use FF default_, just use std::to_string.*/
 template <FloatFormat FF = FloatFormat::default_, typename FloatType = double>
 //  FloatType expected as floating point
-typename std::enable_if<std::is_floating_point<FloatType>::value, std::string>::type to_string(FloatType x, int precision)
+typename std::enable_if<std::is_floating_point<FloatType>::value, std::string>::type to_string(
+    FloatType x, int precision)
 {
     TOO_EXPECT(precision >= 0);
     return impl::ToStringConverter<FloatType, FF>::convert(x, precision);
@@ -111,10 +118,7 @@ struct ToStringConverter
 template <typename FloatType>
 struct ToStringConverter<FloatType, FloatFormat::default_>
 {
-    static std::string convert(FloatType x)
-    {
-        return std::to_string(x);
-    }
+    static std::string convert(FloatType x) { return std::to_string(x); }
     static std::string convert(FloatType x, int precision)
     {
         TOO_EXPECT(precision >= 0);

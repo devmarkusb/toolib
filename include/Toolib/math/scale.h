@@ -91,15 +91,14 @@ template <typename T>
 inline std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, double scaleTick)
 {
     TOO_EXPECT(minDataValue <= maxDataValue);
-    const double minIn  = narrow_cast<double>(minDataValue);
-    const double maxIn  = narrow_cast<double>(maxDataValue);
+    const double minIn = narrow_cast<double>(minDataValue);
+    const double maxIn = narrow_cast<double>(maxDataValue);
     if (too::math::almost_equal(scaleTick, 0.0))
         return std::make_pair(minIn, maxIn);
     const double minOut = std::floor(minIn / scaleTick) * scaleTick;
     const double maxOut = std::ceil(maxIn / scaleTick) * scaleTick;
     return std::make_pair(minOut, maxOut);
 }
-
 }
 }
 

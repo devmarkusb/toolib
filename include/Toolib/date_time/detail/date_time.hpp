@@ -106,7 +106,7 @@ void MonthYear_base<NormalizePolicy>::setMonths(Months m)
 template <class NormalizePolicy>
 void MonthYear_base<NormalizePolicy>::setYears(Years y)
 {
-    this->y_m.first  = y;
+    this->y_m.first = y;
     NormalizePolicy::do_it(this->y_m);
 }
 

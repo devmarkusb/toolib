@@ -48,7 +48,7 @@ FileCollection::FileCollection(const std::string& file_name)
     }
     std::string file_nr_str;
     for (unsigned int file_nr = 0; file_nr_str = too::math::toLeadingZeros(file_nr, digits),
-         fn = base_file_name + file_nr_str + file_ext, f.open(fn), f.good();
+                      fn = base_file_name + file_nr_str + file_ext, f.open(fn), f.good();
          ++file_nr, f.close())
     {
         this->file_list.push_back(fn);

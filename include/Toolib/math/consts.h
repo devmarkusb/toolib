@@ -26,7 +26,6 @@ constexpr T pi()
 {
     return std::acos(static_cast<T>(-1));
 }
-
 }
 }
 }

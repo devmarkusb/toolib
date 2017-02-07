@@ -18,8 +18,5 @@ std::string getString(res::ID id)
     }
 }
 
-std::string getContentString(const res::ID_alnum&)
-{
-    throw too::not_implemented{"getContentString"};
-}
+std::string getContentString(const res::ID_alnum&) { throw too::not_implemented{"getContentString"}; }
 } // res_CmdLine

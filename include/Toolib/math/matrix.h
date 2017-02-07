@@ -445,35 +445,17 @@ public:
             }
     }
     //! Determinant.
-    T det() const
-    {
-		throw too::not_implemented{"det"};
-    }
+    T det() const { throw too::not_implemented{"det"}; }
     //! Inverse. Throws error_division_by_zero_det exception if determinant is zero.
-    void invert()
-    {
-        throw too::not_implemented{"invert"};
-    }
+    void invert() { throw too::not_implemented{"invert"}; }
     //! Is invertible?
-    bool isInvertible() const
-    {
-        throw too::not_implemented{"isInvertible"};
-    }
+    bool isInvertible() const { throw too::not_implemented{"isInvertible"}; }
     //! Is symmetric?
-    bool isSymmetric() const
-    {
-        throw too::not_implemented{"isSymmetric"};
-    }
+    bool isSymmetric() const { throw too::not_implemented{"isSymmetric"}; }
     //! Is orthogonal?
-    bool isOrthogonal() const
-    {
-        throw too::not_implemented{"isOrthogonal"};
-    }
+    bool isOrthogonal() const { throw too::not_implemented{"isOrthogonal"}; }
     //! Is diagonal?
-    bool isDiagonal() const
-    {
-        throw too::not_implemented{"isDiagonal"};
-    }
+    bool isDiagonal() const { throw too::not_implemented{"isDiagonal"}; }
 
 
     //### Implementation details. ###
@@ -663,15 +645,9 @@ public:
             elem[i][i] = std::conj(elem[i][i]);
     }
     //! Is hermitean?
-    bool isHermitean() const
-    {
-        throw too::not_implemented{"isHermitean"};
-    }
+    bool isHermitean() const { throw too::not_implemented{"isHermitean"}; }
     //! Is unitary?
-    bool isUnitary() const
-    {
-        throw too::not_implemented{"isUnitary"};
-    }
+    bool isUnitary() const { throw too::not_implemented{"isUnitary"}; }
 };
 
 //! Sum. Both matrices have to coincide dimensionally.

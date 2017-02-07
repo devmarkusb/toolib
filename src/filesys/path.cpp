@@ -32,7 +32,8 @@ namespace file
 void remove_extension(std::string& fn)
 {
     size_t lastdot = fn.find_last_of(".");
-    if (lastdot == std::string::npos) return;
+    if (lastdot == std::string::npos)
+        return;
     fn = fn.substr(0, lastdot);
 }
 
@@ -221,6 +222,5 @@ void CPath::detectForm() const
     else
         m_form = EForm::PLATFORMINDEPENDENT;
 }
-
 }
 }

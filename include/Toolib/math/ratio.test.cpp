@@ -27,9 +27,9 @@ TEST(gcdTest, neg)
     EXPECT_EQ(2, too::math::gcd(24, -22));
 
     // these don't work (and need not)
-    //EXPECT_EQ(8, too::math::gcd(-24, -32));
-    //EXPECT_EQ(42, too::math::gcd(-42, 0));
-    //EXPECT_EQ(42, too::math::gcd(0, -42));
+    // EXPECT_EQ(8, too::math::gcd(-24, -32));
+    // EXPECT_EQ(42, too::math::gcd(-42, 0));
+    // EXPECT_EQ(42, too::math::gcd(0, -42));
 }
 
 TEST(lcmTest, test)

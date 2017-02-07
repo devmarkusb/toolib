@@ -186,15 +186,9 @@ bool operator!=(const Money& lhs, const Money& rhs) { return !operator==(lhs, rh
 
 bool operator>(const Money& lhs, const Money& rhs) { return operator<(rhs, lhs); }
 
-bool operator<=(const Money& lhs, const Money& rhs)
-{
-    return operator==(lhs, rhs) || !operator>(lhs, rhs);
-}
+bool operator<=(const Money& lhs, const Money& rhs) { return operator==(lhs, rhs) || !operator>(lhs, rhs); }
 
-bool operator>=(const Money& lhs, const Money& rhs)
-{
-    return operator==(lhs, rhs) || !operator<(lhs, rhs);
-}
+bool operator>=(const Money& lhs, const Money& rhs) { return operator==(lhs, rhs) || !operator<(lhs, rhs); }
 
 bool equal_sufficiently(const Money& lhs, const Money& rhs)
 {

@@ -41,7 +41,8 @@ inline Map_Rational_String create_map_ratio_simple(const std::string& base_unit_
 //! so that it is better to keep strings under your control.
 /** \param only_factors_of_thousand resticts output to the most popular steps of thousands, factors of 10^3.
     That misses e.g. cm, dm.*/
-inline Map_Rational_String create_map_ratio_SIprefixunitname(const std::string& base_unit_name, bool only_factors_of_thousand = true)
+inline Map_Rational_String create_map_ratio_SIprefixunitname(
+    const std::string& base_unit_name, bool only_factors_of_thousand = true)
 {
     Map_Rational_String ret;
 
@@ -64,12 +65,12 @@ inline Map_Rational_String create_map_ratio_SIprefixunitname(const std::string& 
         ret[too::math::deca]  = too::math::deka_symb + base_unit_name;
         ret[too::math::hecto] = too::math::hecto_symb + base_unit_name;
     }
-    ret[too::math::kilo]  = too::math::kilo_symb + base_unit_name;
-    ret[too::math::mega]  = too::math::mega_symb + base_unit_name;
-    ret[too::math::giga]  = too::math::giga_symb + base_unit_name;
-    ret[too::math::tera]  = too::math::tera_symb + base_unit_name;
-    ret[too::math::peta]  = too::math::peta_symb + base_unit_name;
-    ret[too::math::exa]   = too::math::exa_symb + base_unit_name;
+    ret[too::math::kilo] = too::math::kilo_symb + base_unit_name;
+    ret[too::math::mega] = too::math::mega_symb + base_unit_name;
+    ret[too::math::giga] = too::math::giga_symb + base_unit_name;
+    ret[too::math::tera] = too::math::tera_symb + base_unit_name;
+    ret[too::math::peta] = too::math::peta_symb + base_unit_name;
+    ret[too::math::exa]  = too::math::exa_symb + base_unit_name;
 
     return ret;
 }
@@ -83,30 +84,38 @@ class Unit
 public:
     struct err_no_string_provided_for_ratio : public std::invalid_argument
     {
-        err_no_string_provided_for_ratio(const Rational& r) : std::invalid_argument("no string provided for ratio " + std::to_string(r.asFloatingPoint<double>())) {}
+        err_no_string_provided_for_ratio(const Rational& r)
+            : std::invalid_argument("no string provided for ratio " + std::to_string(r.asFloatingPoint<double>()))
+        {
+        }
     };
 
     //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the initial
-    //! \param ratio in the map. That would make the class useless. Also throws std::invalid_argument if a less or equal to zero ratio is contained within the map.
+    //! \param ratio in the map. That would make the class useless. Also throws std::invalid_argument if a less or equal
+    //! to zero ratio is contained within the map.
     //! Proper Rational's are expected. Also \param ratio needs to be > 0.
-    //! Constructing the class with default parameters is only reasonable for testing purposes or temporary jump starts to construct other things.
-    explicit Unit(const too::math::Rational& ratio = too::math::one, const Map_Rational_String& map_ratio_prefixunitname = {})
+    //! Constructing the class with default parameters is only reasonable for testing purposes or temporary jump starts
+    //! to construct other things.
+    explicit Unit(
+        const too::math::Rational& ratio = too::math::one, const Map_Rational_String& map_ratio_prefixunitname = {})
 #if !TOO_HAS_NO_CPP11_NOEXCEPT
-        /*noexcept(false)*/
+/*noexcept(false)*/
 #endif
-        : ratio(ratio), ratio_prefixunitname(map_ratio_prefixunitname.empty() ? simple_noop_default_ratio_map() : map_ratio_prefixunitname)
+        : ratio(ratio)
+        , ratio_prefixunitname(
+              map_ratio_prefixunitname.empty() ? simple_noop_default_ratio_map() : map_ratio_prefixunitname)
     {
         expectValidRatio(ratio);
         const auto invalid_one_it = std::find_if(std::begin(this->ratio_prefixunitname),
-            std::end(this->ratio_prefixunitname), [](const std::pair<too::math::Rational, std::string>& rs) { return rs.first <= Rational{}; });
+            std::end(this->ratio_prefixunitname), [](const std::pair<too::math::Rational, std::string>& rs)
+            {
+                return rs.first <= Rational{};
+            });
         if (invalid_one_it != ratio_prefixunitname.end())
             throw std::invalid_argument("ratio <= zero found in passed map");
     }
 
-    ~Unit()
-    {
-        TOO_EXPECT(expectValidRatio(this->ratio));
-    }
+    ~Unit() { TOO_EXPECT(expectValidRatio(this->ratio)); }
 
     std::string getString() const { return this->ratio_prefixunitname.at(this->ratio); }
     Rational getRatio() const { return this->ratio; }
@@ -138,18 +147,21 @@ public:
             std::is_arithmetic<ValueType>::value, "only arithmetic (integral or floating point) types allowed");
 
         std::vector<Rational> ratios;
-        std::transform(std::begin(this->ratio_prefixunitname),
-            std::end(this->ratio_prefixunitname), std::back_inserter(ratios),
-            [](const std::pair<Rational, std::string>& elem) { return elem.first; });
+        std::transform(std::begin(this->ratio_prefixunitname), std::end(this->ratio_prefixunitname),
+            std::back_inserter(ratios), [](const std::pair<Rational, std::string>& elem)
+            {
+                return elem.first;
+            });
 
         std::sort(std::begin(ratios), std::end(ratios));
 
         const auto current_ratio_it = std::find(std::begin(ratios), std::end(ratios), this->ratio);
         TOO_ASSERT(current_ratio_it != std::end(ratios));
 
-        const auto optim_ratio_it = std::find_if(std::begin(ratios), current_ratio_it, [val](const Rational& r) {
-            return val <= r.asFloatingPoint<double>();
-        });
+        const auto optim_ratio_it = std::find_if(std::begin(ratios), current_ratio_it, [val](const Rational& r)
+            {
+                return val <= r.asFloatingPoint<double>();
+            });
 
         if (optim_ratio_it != current_ratio_it)
         {
@@ -158,9 +170,10 @@ public:
         }
 
         const auto current_ratio_revit = std::reverse_iterator<std::vector<Rational>::iterator>{current_ratio_it};
-        const auto optim_ratio_revit = std::find_if(ratios.rbegin(), current_ratio_revit, [val](const Rational& r) {
-            return val >= r.asFloatingPoint<double>();
-        });
+        const auto optim_ratio_revit   = std::find_if(ratios.rbegin(), current_ratio_revit, [val](const Rational& r)
+            {
+                return val >= r.asFloatingPoint<double>();
+            });
 
         if (optim_ratio_revit != current_ratio_revit)
         {

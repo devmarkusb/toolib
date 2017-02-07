@@ -10,7 +10,7 @@ TEST(math_almost_equal_Test, test)
 
 TEST(math_almost_equal_alltypes_Test, test)
 {
-    EXPECT_TRUE(too::math::almost_equal_alltypes(1, 1)); 
+    EXPECT_TRUE(too::math::almost_equal_alltypes(1, 1));
     EXPECT_FALSE(too::math::almost_equal_alltypes(1, 2));
 }
 

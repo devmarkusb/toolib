@@ -24,7 +24,7 @@ class AppTranslator : private too::non_copyable
 public:
     AppTranslator(QGuiApplication& app) : q_app{app}
     {
-        this->translator = too::make_unique<QTranslator>();
+        this->translator    = too::make_unique<QTranslator>();
         this->qt_translator = too::make_unique<QTranslator>();
     }
 
@@ -33,7 +33,7 @@ public:
         const QString path_to_transl{consts::EXE_TRANSLATIONS_DIR().c_str()};
 
         // ### app specific translations ###
-        //todo check whether we need to install English first, as fall-back
+        // todo check whether we need to install English first, as fall-back
         if (this->translator->load(QLocale(), AppTranslator::langfile_prefix, {}, path_to_transl))
         {
             const bool ok = this->q_app.installTranslator(this->translator.get());
@@ -47,7 +47,7 @@ public:
             LOG(WARNING) << "could not load language: " << uiw::implQt::qs2s(QLocale().name());
 
         // ### Qt common translations ###
-        //todo check whether we need to install English first, as fall-back
+        // todo check whether we need to install English first, as fall-back
         if (this->qt_translator->load(QLocale(), AppTranslator::qtlangfile_prefix, {}, path_to_transl))
         {
             const bool ok = this->q_app.installTranslator(this->qt_translator.get());

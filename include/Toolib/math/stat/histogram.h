@@ -49,7 +49,7 @@ public:
 
         too::math::Map_LinearScale_Interval_to_Interval<Percent> mapData2Percent(
             std::make_pair(Percent(), too::narrow_cast<Percent>(*minmax.second)),
-                    std::make_pair(zero_percent, one_hundred_percent));
+            std::make_pair(zero_percent, one_hundred_percent));
 
         std::vector<Percent> percentual_data;
 
@@ -75,7 +75,7 @@ public:
             }
             else
                 abs_rates[i] = 0;
-            prev_it = it;
+            prev_it          = it;
         }
         // 100% data entries aren't counted in the previous loop, only smaller ones;
         // already tried lower_bound and almost<=
@@ -108,9 +108,7 @@ private:
 #endif
     ;
 };
-
 }
-
 }
 
 #endif

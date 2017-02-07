@@ -26,10 +26,7 @@ inline std::string PROGRAM_EXE_DIR()
     return Dir;
 }
 
-inline std::string EXE_TRANSLATIONS_DIR()
-{
-    return PROGRAM_EXE_DIR() + TRANSLATIONS_SUBDIR;
-}
+inline std::string EXE_TRANSLATIONS_DIR() { return PROGRAM_EXE_DIR() + TRANSLATIONS_SUBDIR; }
 
 inline const std::string& PROGRAM_NAME_TECHNICAL()
 {
@@ -37,10 +34,7 @@ inline const std::string& PROGRAM_NAME_TECHNICAL()
     return ret;
 }
 
-inline const std::string& PROGRAM_SUBDIR()
-{
-    return PROGRAM_NAME_TECHNICAL();
-}
+inline const std::string& PROGRAM_SUBDIR() { return PROGRAM_NAME_TECHNICAL(); }
 
 inline bool ExtendBaseDirByProgSubdir_EnsureExistence(std::string& Dir, bool WithTrailingSeparator = true)
 {
@@ -48,9 +42,9 @@ inline bool ExtendBaseDirByProgSubdir_EnsureExistence(std::string& Dir, bool Wit
     CPath Dir_helper(Dir, CPath::EForm::PLATFORMINDEPENDENT, CPath::EType::IS_FOLDER);
     Dir_helper.ensureTrailingSeparator();
     Dir = Dir_helper;
-    Dir+= PROGRAM_SUBDIR();
+    Dir += PROGRAM_SUBDIR();
     if (WithTrailingSeparator)
-        Dir+= uiw::IFileSys::FOLDER_SEPARATOR_TO_USE_HERE;
+        Dir += uiw::IFileSys::FOLDER_SEPARATOR_TO_USE_HERE;
     if (!globals::filesys().FolderExists(Dir))
     {
         if (!globals::filesys().CreateFolder(Dir))
@@ -74,7 +68,6 @@ inline std::string PROGRAM_LOG_FILEPATHNAMEEXT()
     }
     return Dir + PROGRAM_NAME_TECHNICAL() + LOG_FILEEXT;
 }
-
 }
 
 #endif

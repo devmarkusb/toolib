@@ -47,6 +47,6 @@ private:
 };
 }
 }
-#endif //TOO_OS_WINDOWS
+#endif // TOO_OS_WINDOWS
 
 #endif
