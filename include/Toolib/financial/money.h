@@ -126,7 +126,7 @@ class TOOLIBSHARED_EXPORT Interest_pa
 public:
     explicit Interest_pa(Percent p = Percent()) : p(p) {}
 
-    void operator=(Percent p) { this->p = p; }
+    void operator=(Percent p_) { this->p = p_; }
 
     operator Percent() const { return this->p; }
 

@@ -58,21 +58,21 @@ bool operator!=(const Currency& lhs, const Currency& rhs) { return !operator==(l
 
 Money::Money(BaseType amount, const Currency& currency) { set(amount, currency); }
 
-void Money::set(BaseType amount, const Currency& currency)
+void Money::set(BaseType amount_, const Currency& currency_)
 {
-    set(amount);
-    this->currency = currency;
+    set(amount_);
+    this->currency = currency_;
 }
 
-void Money::set(BaseType amount)
+void Money::set(BaseType amount_)
 {
-    TOO_EXPECT(std::isfinite(amount));
-    this->amount = amount;
+    TOO_EXPECT(std::isfinite(amount_));
+    this->amount = amount_;
 }
 
-Money& Money::operator=(BaseType amount)
+Money& Money::operator=(BaseType amount_)
 {
-    this->set(amount);
+    this->set(amount_);
     return *this;
 }
 
