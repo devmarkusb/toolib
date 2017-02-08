@@ -25,8 +25,8 @@ TEST(math_to_string_Test, test)
     EXPECT_STREQ("4.556000", too::math::to_string<too::math::FloatFormat::fixed>(4.556).c_str());
     EXPECT_STREQ("4.56", too::math::to_string<too::math::FloatFormat::fixed>(4.556, 2).c_str());
 
-    const auto s1{too::math::to_string<too::math::FloatFormat::scientific>(4.556)};
+    const auto s1 = too::math::to_string<too::math::FloatFormat::scientific>(4.556);
     EXPECT_EQ(0u, s1.find("4.556000e+00"));
-    const auto s2{too::math::to_string<too::math::FloatFormat::scientific>(4.556, 2)};
+    const auto s2 = too::math::to_string<too::math::FloatFormat::scientific>(4.556, 2);
     EXPECT_EQ(0u, s2.find("4.56e+00"));
 }
