@@ -54,7 +54,7 @@ set(BOOST_ROOT $ENV{dev_sdk_paths})
 set(Boost_USE_MULTITHREADED     ON)
 set(Boost_USE_STATIC_LIBS       ON)
 set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package(Boost 1.56.0) # e.g. COMPONENTS date_time
+find_package(Boost 1.63.0) # e.g. COMPONENTS date_time
 
 configure_file(${TargetAppName}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetAppName}_build_config.h)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC ${CMAKE_BINARY_DIR})

@@ -59,7 +59,7 @@ if (NOT Toolib_USE_NO_DEPENDENCIES)
         set(Boost_USE_MULTITHREADED     ON)
         set(Boost_USE_STATIC_LIBS       ON)
         set(Boost_USE_STATIC_RUNTIME    OFF)
-        find_package(Boost 1.56.0)
+        find_package(Boost 1.63.0)
     endif ()
 endif ()
 
