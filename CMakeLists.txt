@@ -141,11 +141,6 @@ endif ()
 
 set_target_properties(${TargetToolibTest} PROPERTIES DEBUG_POSTFIX "d")
 
-set(GTEST_ROOT $ENV{dev_sdk_paths_gtest})
-set(GTEST_MSVC_SEARCH   MD)
-find_package(GTest 1.7.0)
-
-target_include_directories(${TargetToolibTest} PRIVATE ${GTEST_INCLUDE_DIR})
 if (NOT Toolib_USE_NO_DEPENDENCIES)
     target_include_directories(${TargetToolibTest} SYSTEM PRIVATE ${Boost_INCLUDE_DIRS})
 endif ()
@@ -156,7 +151,7 @@ target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooLinklib/inc
 target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooMem/include)
 target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooString/include)
 
-target_link_libraries(${TargetToolibTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
+target_link_libraries(${TargetToolibTest} PRIVATE gtest_main)
 target_link_libraries(${TargetToolibTest} PRIVATE ${TargetToolib})
 
 

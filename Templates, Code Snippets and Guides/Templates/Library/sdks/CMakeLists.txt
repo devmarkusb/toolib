@@ -3,7 +3,3 @@ if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
 endif()
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(googletest)
-
-add_subdirectory(ToolsFL/tooBuildEnv)
-add_subdirectory(ToolsFL/tooBasicCodeSupport)
-add_subdirectory(ToolsFL/tooString)

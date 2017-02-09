@@ -21,6 +21,8 @@ set(TargetLibName "LibName")
 
 include(defaults.cmake)
 
+add_subdirectory(sdks)
+
 file(GLOB_RECURSE TargetLibName_INCS "include/*.h*")
 file(GLOB_RECURSE TargetLibName_SRC_INCS "src/*.h*")
 
@@ -76,14 +78,9 @@ endif ()
 
 set_target_properties(${TargetLibNameTest} PROPERTIES DEBUG_POSTFIX "d")
 
-set(GTEST_ROOT $ENV{dev_sdk_paths})
-set(GTEST_MSVC_SEARCH   MD)
-find_package(GTest 1.7.0)
-
-target_include_directories(${TargetLibNameTest} PRIVATE ${GTEST_INCLUDE_DIRS})
 target_include_directories(${TargetLibNameTest} PRIVATE include)
 
-target_link_libraries(${TargetLibNameTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
+target_link_libraries(${TargetLibNameTest} PRIVATE gtest_main)
 target_link_libraries(${TargetLibNameTest} PRIVATE ${TargetLibName})
 
 set(do_auto_test	ON)

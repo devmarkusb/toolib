@@ -108,13 +108,7 @@ endif ()
 
 set_target_properties(${TargetAppNameTest} PROPERTIES DEBUG_POSTFIX "d")
 
-set(GTEST_ROOT $ENV{dev_sdk_paths_gtest})
-set(GTEST_MSVC_SEARCH   MD)
-find_package(GTest 1.7.0)
-
-target_include_directories(${TargetAppNameTest} PRIVATE ${GTEST_INCLUDE_DIRS})
-
-target_link_libraries(${TargetAppNameTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
+target_link_libraries(${TargetAppNameTest} PRIVATE gtest_main)
 target_link_libraries(${TargetAppNameTest} PRIVATE ${TargetAppNameAsLibForTest})
 
 
