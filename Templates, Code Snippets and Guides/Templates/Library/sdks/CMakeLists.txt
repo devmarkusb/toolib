@@ -1,5 +1,2 @@
-if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
-     set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
-endif()
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-add_subdirectory(googletest)
+include(googletest.cmake)
+

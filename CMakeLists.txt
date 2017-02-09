@@ -17,7 +17,7 @@ cmake_minimum_required(VERSION 3.4.1)
 include(buildnr.cmake)
 project(Toolib VERSION 0.1.0.${BUILD_NR})
 message(STATUS "project version: " ${PROJECT_VERSION})
-set(TargetToolib "Toolib")
+set(TargetToolib ${PROJECT_NAME})
 
 include(defaults.cmake)
 
@@ -76,63 +76,24 @@ target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooLinklib/include
 target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooString/include)
 target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooMem/include)
 
-get_directory_property(hasParent PARENT_DIRECTORY)
-if(hasParent)
-    set(Toolib_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE)
-    set(Toolib_LIBRARY_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib PARENT_SCOPE)
-endif()
+set_target_properties(${TargetToolib}
+                      PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
+target_link_libraries(${TargetToolib})
 
+set(${TargetToolib}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
+    CACHE INTERNAL "${TargetToolib}: include directories" FORCE)
+
+    
 ################################################################################################
 
-set(TargetToolibTest "ToolibTest")
+set(TargetToolibTest ${PROJECT_NAME}Test)
 
-set(TargetToolibTest_SOURCES
-    include/Toolib/class/counted_class_objects.test.cpp
-    include/Toolib/class/iabstract.test.cpp
-    include/Toolib/class/itype.test.cpp
-    include/Toolib/console/prompt.test.cpp
-    include/Toolib/console/win/catch_exit.test.cpp
-    include/Toolib/CppCLI/mmtypeconv.test.cpp
-    include/Toolib/date_time/cal_event.test.cpp
-    include/Toolib/date_time/date_time.test.cpp
-    include/Toolib/debug/debug_leaks.test.cpp
-    include/Toolib/filesys/file.test.cpp
-    include/Toolib/filesys/file_collection.test.cpp
-    include/Toolib/filesys/path.test.cpp
-    include/Toolib/financial/money.test.cpp
-    include/Toolib/game/game.test.cpp
-    include/Toolib/image/image.test.cpp
-    include/Toolib/math/bits.test.cpp
-    include/Toolib/math/consts.test.cpp
-    include/Toolib/math/floating_point.test.cpp
-    include/Toolib/math/geometry.test.cpp
-    include/Toolib/math/graph.test.cpp
-    include/Toolib/math/matrix.test.cpp
-    include/Toolib/math/number.test.cpp
-    include/Toolib/math/pair.test.cpp
-    include/Toolib/math/percent.test.cpp
-    include/Toolib/math/quantity_unit.test.cpp
-    include/Toolib/math/ratio.test.cpp
-    include/Toolib/math/round.test.cpp
-    include/Toolib/math/scale.test.cpp
-    include/Toolib/math/standaloneop.test.cpp
-    include/Toolib/math/stat/histogram.test.cpp
-    include/Toolib/performance/performance.test.cpp
-    include/Toolib/scope/raii_p.test.cpp
-    include/Toolib/scope/reftovalue.test.cpp
-    include/Toolib/scope/scopeflagged.bak.test.cpp
-    include/Toolib/scope/scopeflagged.test.cpp
-    include/Toolib/scope/scopeguard.test.cpp
-    include/Toolib/string/languages.test.cpp
-    include/Toolib/string/lex_cast.test.cpp
-    include/Toolib/string/string_token.test.cpp
-    include/Toolib/string/string_trim.test.cpp
-)
+file(GLOB_RECURSE TargetToolibTest_SOURCES "include/Toolib/*.test.cpp")
 
 add_executable(${TargetToolibTest}
-	${TargetToolibTest_SOURCES}
-        ${TargetToolib_INCS}
+    ${TargetToolibTest_SOURCES}
+    ${TargetToolib_INCS}
 )
 
 if (WIN32)
