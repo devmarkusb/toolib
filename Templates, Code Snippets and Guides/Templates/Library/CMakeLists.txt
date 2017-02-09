@@ -35,7 +35,8 @@ add_library(${TargetLibName} SHARED
 	${TargetLibName_INCS}
 	${TargetLibName_SRC_INCS}
 )
-# uncomment, if this will be a header-only lib, then also replace SHARED by STATIC above
+# Uncomment, if this will be a header-only lib, then also replace SHARED by STATIC above
+# *and* remove linkage to ${TargetLibName} for the test exe down below.
 #set_target_properties(${TargetLibName} PROPERTIES LINKER_LANGUAGE CXX)
 
 set_target_properties(${TargetLibName} PROPERTIES POSITION_INDEPENDENT_CODE ON)

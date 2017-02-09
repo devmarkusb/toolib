@@ -77,9 +77,14 @@ target_include_directories(${TargetToolib} PUBLIC ${tooLinklib_INCLUDE_DIRS})
 target_include_directories(${TargetToolib} PUBLIC ${tooString_INCLUDE_DIRS})
 target_include_directories(${TargetToolib} PUBLIC ${tooMem_INCLUDE_DIRS})
 
-target_link_libraries(${TargetToolib} tooBasicCodeSupport tooLinklib tooString tooMem)
+target_link_libraries(${TargetToolib}) #tooBasicCodeSupport tooLinklib tooString tooMem
 
-set(${TargetToolib}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
+set(${TargetToolib}_INCLUDE_DIRS
+    ${PROJECT_SOURCE_DIR}/include
+    ${tooBasicCodeSupport_INCLUDE_DIRS}
+    ${tooLinklib_INCLUDE_DIRS}
+    ${tooString_INCLUDE_DIRS}
+    ${tooMem_INCLUDE_DIRS}
     CACHE INTERNAL "${TargetToolib}: include directories" FORCE)
 
     
