@@ -26,7 +26,7 @@ set(BOOST_ROOT $ENV{dev_sdk_paths})
 set(Boost_USE_MULTITHREADED     ON)
 set(Boost_USE_STATIC_LIBS       ON)
 set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package(Boost 1.56.0) # e.g. COMPONENTS date_time
+find_package(Boost 1.63.0) # e.g. COMPONENTS date_time
 
 add_subdirectory(sdks)
 
