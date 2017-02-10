@@ -17,9 +17,21 @@ cmake_minimum_required(VERSION 3.4.1)
 include(buildnr.cmake)
 project(Toolib VERSION 0.1.0.${BUILD_NR})
 message(STATUS "project version: " ${PROJECT_VERSION})
-set(TargetToolib "Toolib")
+set(TargetToolib ${PROJECT_NAME})
 
 include(defaults.cmake)
+
+option(Toolib_USE_NO_DEPENDENCIES "No 3rd party dependencies" OFF)
+
+if (NOT Toolib_USE_NO_DEPENDENCIES)
+    if (NOT Boost_INCLUDE_DIRS)
+        set(BOOST_ROOT $ENV{dev_sdk_paths})
+        set(Boost_USE_MULTITHREADED     ON)
+        set(Boost_USE_STATIC_LIBS       ON)
+        set(Boost_USE_STATIC_RUNTIME    OFF)
+        find_package(Boost 1.63.0)
+    endif ()
+endif ()
 
 file(GLOB_RECURSE TargetToolib_INCS "include/*.h*")
 file(GLOB_RECURSE TargetToolib_SRC_INCS "src/*.h*")
@@ -33,12 +45,12 @@ set(TargetToolib_SOURCES
 )
 
 add_library(${TargetToolib} SHARED
-	${TargetToolib_SOURCES}
-	${TargetToolib_INCS}
-	${TargetToolib_SRC_INCS}
+    ${TargetToolib_SOURCES}
+    ${TargetToolib_INCS}
+    ${TargetToolib_SRC_INCS}
 )
 
-option(Toolib_USE_NO_DEPENDENCIES "No 3rd party dependencies" OFF)
+set_target_properties(${TargetToolib} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 if (WIN32)
     set_property(TARGET ${TargetToolib} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
@@ -53,86 +65,38 @@ if (Toolib_USE_NO_DEPENDENCIES)
     set_property(TARGET ${TargetToolib} APPEND PROPERTY COMPILE_DEFINITIONS TOO_NO_DEPENDENCIES)
 endif ()
 
-if (NOT Toolib_USE_NO_DEPENDENCIES)
-    if (NOT Boost_INCLUDE_DIRS)
-        set(BOOST_ROOT $ENV{dev_sdk_paths})
-        set(Boost_USE_MULTITHREADED     ON)
-        set(Boost_USE_STATIC_LIBS       ON)
-        set(Boost_USE_STATIC_RUNTIME    OFF)
-        find_package(Boost 1.63.0)
-    endif ()
-endif ()
-
 configure_file(${TargetToolib}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetToolib}_build_config.h)
 target_include_directories(${TargetToolib} PRIVATE ${CMAKE_BINARY_DIR})
 
-target_include_directories(${TargetToolib} PRIVATE include)
+target_include_directories(${TargetToolib} PUBLIC include)
 if (NOT Toolib_USE_NO_DEPENDENCIES)
-    target_include_directories(${TargetToolib} SYSTEM PRIVATE ${Boost_INCLUDE_DIRS})
+    target_include_directories(${TargetToolib} SYSTEM PUBLIC ${Boost_INCLUDE_DIRS})
 endif ()
-target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooBuildEnv/include)
-target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooBasicCodeSupport/include)
-target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooLinklib/include)
-target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooString/include)
-target_include_directories(${TargetToolib} PRIVATE ../ToolsFL/tooMem/include)
+target_include_directories(${TargetToolib} PUBLIC ${tooBasicCodeSupport_INCLUDE_DIRS})
+target_include_directories(${TargetToolib} PUBLIC ${tooLinklib_INCLUDE_DIRS})
+target_include_directories(${TargetToolib} PUBLIC ${tooString_INCLUDE_DIRS})
+target_include_directories(${TargetToolib} PUBLIC ${tooMem_INCLUDE_DIRS})
 
-get_directory_property(hasParent PARENT_DIRECTORY)
-if(hasParent)
-    set(Toolib_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE)
-    set(Toolib_LIBRARY_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib PARENT_SCOPE)
-endif()
+target_link_libraries(${TargetToolib}) #tooBasicCodeSupport tooLinklib tooString tooMem
 
+set(${TargetToolib}_INCLUDE_DIRS
+    ${PROJECT_SOURCE_DIR}/include
+    ${tooBasicCodeSupport_INCLUDE_DIRS}
+    ${tooLinklib_INCLUDE_DIRS}
+    ${tooString_INCLUDE_DIRS}
+    ${tooMem_INCLUDE_DIRS}
+    CACHE INTERNAL "${TargetToolib}: include directories" FORCE)
 
+    
 ################################################################################################
 
-set(TargetToolibTest "ToolibTest")
+set(TargetToolibTest ${PROJECT_NAME}Test)
 
-set(TargetToolibTest_SOURCES
-    include/Toolib/class/counted_class_objects.test.cpp
-    include/Toolib/class/iabstract.test.cpp
-    include/Toolib/class/itype.test.cpp
-    include/Toolib/console/prompt.test.cpp
-    include/Toolib/console/win/catch_exit.test.cpp
-    include/Toolib/CppCLI/mmtypeconv.test.cpp
-    include/Toolib/date_time/cal_event.test.cpp
-    include/Toolib/date_time/date_time.test.cpp
-    include/Toolib/debug/debug_leaks.test.cpp
-    include/Toolib/filesys/file.test.cpp
-    include/Toolib/filesys/file_collection.test.cpp
-    include/Toolib/filesys/path.test.cpp
-    include/Toolib/financial/money.test.cpp
-    include/Toolib/game/game.test.cpp
-    include/Toolib/image/image.test.cpp
-    include/Toolib/math/bits.test.cpp
-    include/Toolib/math/consts.test.cpp
-    include/Toolib/math/floating_point.test.cpp
-    include/Toolib/math/geometry.test.cpp
-    include/Toolib/math/graph.test.cpp
-    include/Toolib/math/matrix.test.cpp
-    include/Toolib/math/number.test.cpp
-    include/Toolib/math/pair.test.cpp
-    include/Toolib/math/percent.test.cpp
-    include/Toolib/math/quantity_unit.test.cpp
-    include/Toolib/math/ratio.test.cpp
-    include/Toolib/math/round.test.cpp
-    include/Toolib/math/scale.test.cpp
-    include/Toolib/math/standaloneop.test.cpp
-    include/Toolib/math/stat/histogram.test.cpp
-    include/Toolib/performance/performance.test.cpp
-    include/Toolib/scope/raii_p.test.cpp
-    include/Toolib/scope/reftovalue.test.cpp
-    include/Toolib/scope/scopeflagged.bak.test.cpp
-    include/Toolib/scope/scopeflagged.test.cpp
-    include/Toolib/scope/scopeguard.test.cpp
-    include/Toolib/string/languages.test.cpp
-    include/Toolib/string/lex_cast.test.cpp
-    include/Toolib/string/string_token.test.cpp
-    include/Toolib/string/string_trim.test.cpp
-)
+file(GLOB_RECURSE TargetToolibTest_SOURCES "include/Toolib/*.test.cpp")
 
 add_executable(${TargetToolibTest}
-	${TargetToolibTest_SOURCES}
-        ${TargetToolib_INCS}
+    ${TargetToolibTest_SOURCES}
+    ${TargetToolib_INCS}
 )
 
 if (WIN32)
@@ -141,26 +105,12 @@ endif ()
 
 set_target_properties(${TargetToolibTest} PROPERTIES DEBUG_POSTFIX "d")
 
-set(GTEST_ROOT $ENV{dev_sdk_paths_gtest})
-set(GTEST_MSVC_SEARCH   MD)
-find_package(GTest 1.7.0)
+target_include_directories(${TargetToolibTest} PRIVATE ${Toolib_INCLUDE_DIRS})
 
-target_include_directories(${TargetToolibTest} PRIVATE ${GTEST_INCLUDE_DIR})
-if (NOT Toolib_USE_NO_DEPENDENCIES)
-    target_include_directories(${TargetToolibTest} SYSTEM PRIVATE ${Boost_INCLUDE_DIRS})
-endif ()
-target_include_directories(${TargetToolibTest} PRIVATE include)
-target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooBuildEnv/include)
-target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooBasicCodeSupport/include)
-target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooLinklib/include)
-target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooMem/include)
-target_include_directories(${TargetToolibTest} PRIVATE ../ToolsFL/tooString/include)
-
-target_link_libraries(${TargetToolibTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
-target_link_libraries(${TargetToolibTest} PRIVATE ${TargetToolib})
+target_link_libraries(${TargetToolibTest} PRIVATE gtest_main ${TargetToolib})
 
 
-set(do_auto_test	ON)
+set(do_auto_test    ON)
 
 if (do_auto_test)
     add_custom_command(

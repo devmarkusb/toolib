@@ -18,9 +18,15 @@ include(buildnr.cmake)
 project(AppProjName VERSION 0.1.0.${BUILD_NR})
 message(STATUS "project version: " ${PROJECT_VERSION})
 option(DEPLOYMENT_BUILD "do a final release build for deployment" $ENV{DeployArtifacts})
-set(TargetAppName "AppName")
+set(TargetAppName ${PROJECT_NAME})
 
 include(defaults.cmake)
+
+set(BOOST_ROOT $ENV{dev_sdk_paths})
+set(Boost_USE_MULTITHREADED     ON)
+set(Boost_USE_STATIC_LIBS       ON)
+set(Boost_USE_STATIC_RUNTIME    OFF)
+find_package(Boost 1.63.0) # e.g. COMPONENTS date_time
 
 add_subdirectory(sdks)
 
@@ -37,12 +43,14 @@ set(TargetAppNameAsLibForTest_SOURCES
    ${TargetAppNameAsLibForTest_IMPL_SOURCES}
 )
 
-set(TargetAppNameAsLibForTest "${TargetAppName}AsLibForTest")
+set(TargetAppNameAsLibForTest ${PROJECT_NAME}AsLibForTest)
 
 add_library(${TargetAppNameAsLibForTest} STATIC
-        ${TargetAppNameAsLibForTest_SOURCES}
-        ${TargetAppNameAsLibForTest_SRC_INCS}
+    ${TargetAppNameAsLibForTest_SOURCES}
+    ${TargetAppNameAsLibForTest_SRC_INCS}
 )
+
+set_target_properties(${TargetAppNameAsLibForTest} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 if (WIN32)
     set_property(TARGET ${TargetAppNameAsLibForTest} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
@@ -50,23 +58,21 @@ endif ()
 
 set_target_properties(${TargetAppNameAsLibForTest} PROPERTIES DEBUG_POSTFIX "d")
 
-set(BOOST_ROOT $ENV{dev_sdk_paths})
-set(Boost_USE_MULTITHREADED     ON)
-set(Boost_USE_STATIC_LIBS       ON)
-set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package(Boost 1.63.0) # e.g. COMPONENTS date_time
-
 configure_file(${TargetAppName}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetAppName}_build_config.h)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC ${CMAKE_BINARY_DIR})
 
-target_include_directories(${TargetAppNameAsLibForTest} PUBLIC .)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC src)
-target_include_directories(${TargetAppNameAsLibForTest} PUBLIC sdks/ToolsFL/tooBuildEnv/include)
-target_include_directories(${TargetAppNameAsLibForTest} PUBLIC sdks/ToolsFL/tooBasicCodeSupport/include)
-target_include_directories(${TargetAppNameAsLibForTest} PUBLIC sdks/ToolsFL/tooString/include)
+target_include_directories(${TargetAppNameAsLibForTest} PUBLIC ${tooBasicCodeSupport_INCLUDE_DIRS})
+target_include_directories(${TargetAppNameAsLibForTest} PUBLIC ${tooString_INCLUDE_DIRS})
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC SYSTEM ${Boost_INCLUDE_DIRS})
 
-target_link_libraries(${TargetAppNameAsLibForTest} PRIVATE ${Boost_LIBRARIES})
+target_link_libraries(${TargetAppNameAsLibForTest} PRIVATE ${Boost_LIBRARIES} tooBasicCodeSupport tooString)
+
+set(${TargetAppNameAsLibForTest}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/src
+    CACHE INTERNAL "${TargetAppNameAsLibForTest}: include directories" FORCE)
+
+
+###############################################################################################
 
 add_executable(${TargetAppName}
     src/_gui/src_WinCmdLine/main.cpp
@@ -81,10 +87,9 @@ set_target_properties(${TargetAppName} PROPERTIES DEBUG_POSTFIX "d")
 target_link_libraries(${TargetAppName} PRIVATE ${TargetAppNameAsLibForTest})
 
 
-
 ################################################################################################
 
-set(TargetAppNameTest "${TargetAppName}Test")
+set(TargetAppNameTest ${PROJECT_NAME}Test)
 
 set(TargetAppNameTest_IMPL_SOURCES
     src/_gui/src_WinCmdLine/resource_string.test.cpp
@@ -108,14 +113,7 @@ endif ()
 
 set_target_properties(${TargetAppNameTest} PROPERTIES DEBUG_POSTFIX "d")
 
-set(GTEST_ROOT $ENV{dev_sdk_paths_gtest})
-set(GTEST_MSVC_SEARCH   MD)
-find_package(GTest 1.7.0)
-
-target_include_directories(${TargetAppNameTest} PRIVATE ${GTEST_INCLUDE_DIRS})
-
-target_link_libraries(${TargetAppNameTest} PRIVATE ${GTEST_BOTH_LIBRARIES})
-target_link_libraries(${TargetAppNameTest} PRIVATE ${TargetAppNameAsLibForTest})
+target_link_libraries(${TargetAppNameTest} PRIVATE gtest_main ${TargetAppName})
 
 
 add_custom_command(
