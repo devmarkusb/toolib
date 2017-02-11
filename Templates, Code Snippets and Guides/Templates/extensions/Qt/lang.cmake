@@ -22,6 +22,7 @@
 #
 # For recap an easy step-by-step:
 #   (1) Run a lang_ts_update.bat containing the lupdate calls described above.
+#       *But* first check, whether the ts's already got updated automatically after the last build.
 #   (2) Translate ts files using Qt Linguist. IMPORTANT: give green checkmarks to every entry!
 #   (3) Run CMake and enforce a tiny build of your exe.
 

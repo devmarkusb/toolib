@@ -49,8 +49,23 @@ foreach(translation_file ${TargetAppName_TRANSLATIONS})
     )
 endforeach()
 
-# postbuild step before running the program or its test (here we use the program exe to determine needed
-# binaries for both the program and the test exe - that was sufficient so far)
+# Note that this has no impact on the current build. It just helps further development
+# in indicating that there is translation work to do. The current cmake+build run processes the
+# ts's states right before this update.
+add_custom_command(
+    TARGET ${TargetAppName} POST_BUILD
+    COMMAND lang_ts_update.bat "${Qt_ver_comp_path}\\bin"
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+
+
+######################################################################################################################
+# app test code
+
+# Postbuild step before running the test or the program. Here we use the program exe to determine the needed
+# binaries for both the program and the test exe - that was sufficient so far. The action needs to be coupled
+# to the postbuild of the test - and not the app - because that's what is getting called immediately automatically.
+# But it also always *must* be done, securing a properly complete deployment build for the app exe.
 if (WIN32)
     add_custom_command(
         TARGET ${TargetAppNameTest} POST_BUILD
