@@ -6,6 +6,8 @@
 # or
 # -DCMAKE_BUILD_TYPE=Release
 # Other options are: MinSizeRel, RelWithDebInfo
+# *Important notice* CMAKE_BUILD_TYPE cannot properly be used to query the current build type,
+# at least not in a naive way, at least not for multiple build config. environments such as msvc.
 #
 # 2 Dynamic vs Static C/C++ runtime lib
 # There is no support for static runtime libs! You could achieve this
