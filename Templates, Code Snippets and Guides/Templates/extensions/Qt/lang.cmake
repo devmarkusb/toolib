@@ -1,6 +1,6 @@
 # In order to update ts files, you need to run cmd next to your ts files and call
-#   %dev_qt_ver_bin%\lupdate source gui -ts lang_en.ts
-#   %dev_qt_ver_bin%\lupdate source gui -ts lang_de.ts
+#   ...\lupdate source gui -ts lang_en.ts
+#   ...\lupdate source gui -ts lang_de.ts
 # where 'source gui' are examples for subdirs that you want to search for strings in.
 # A "pre-CMake.bat" would be a nice place for such work.
 # Note:

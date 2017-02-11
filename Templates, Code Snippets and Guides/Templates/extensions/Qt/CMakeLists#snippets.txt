@@ -54,7 +54,7 @@ endforeach()
 if (WIN32)
     add_custom_command(
         TARGET ${TargetAppNameTest} POST_BUILD
-        COMMAND qtdeploy_autodepends_win.bat "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" "${Qt_ver_comp_path}"
+        COMMAND qtdeploy_autodepends_win.bat "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" "${Qt_ver_comp_path}\\bin"
             --qmldir ..\\gui\\Qt $<TARGET_FILE_NAME:${TargetAppName}>
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
