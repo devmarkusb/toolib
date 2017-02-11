@@ -48,3 +48,14 @@ foreach(translation_file ${TargetAppName_TRANSLATIONS})
         COMMAND ${CMAKE_COMMAND} -E copy ${translation_file} ${OutputDir_bin}/translations
     )
 endforeach()
+
+# postbuild step before running the program or its test (here we use the program exe to determine needed
+# binaries for both the program and the test exe - that was sufficient so far)
+if (WIN32)
+    add_custom_command(
+        TARGET ${TargetAppNameTest} POST_BUILD
+        COMMAND qtdeploy_autodepends_win.bat "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" "$ENV{dev_qt_ver_bin}"
+            --qmldir ..\\gui\\Qt $<TARGET_FILE_NAME:${TargetAppName}>
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        )
+endif ()

@@ -1,5 +1,21 @@
-set(OutputDir_bin ${CMAKE_SOURCE_DIR}/bin)
-set(OutputDir_lib ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+# BITS will be 32, 64, ...
+math(EXPR BITS "8 * ${CMAKE_SIZEOF_VOID_P}")
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    if (WIN32)
+        set(COMPILER_SUBDIR "mingw")
+    else ()
+        set(COMPILER_SUBDIR "gcc")
+    endif ()
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    if (BITS EQUAL 64)
+        set(COMPILER_SUBDIR "msvc64")
+    else ()
+        set(COMPILER_SUBDIR "msvc")
+    endif ()
+endif ()
+set(OutputDir_bin ${CMAKE_SOURCE_DIR}/bin_${COMPILER_SUBDIR})
+set(OutputDir_lib ${CMAKE_CURRENT_SOURCE_DIR}/lib_${COMPILER_SUBDIR})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OutputDir_bin})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OutputDir_lib})
@@ -20,9 +36,6 @@ endif ()
 # this disturbs linking to gtest, expects d there as well...
 # so better handle this via set_target_properties
 #set(CMAKE_DEBUG_POSTFIX "d")
-
-# BITS will be 32, 64, ...
-math(EXPR BITS "8 * ${CMAKE_SIZEOF_VOID_P}")
 
 # following 2 lines don't work as expected, why?
 #set_property(GLOBAL PROPERTY CXX_STANDARD 11)
