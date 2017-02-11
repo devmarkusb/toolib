@@ -1,0 +1,15 @@
+# ...
+
+include(boost.cmake)
+find_package(Boost 1.63.0) # e.g. COMPONENTS date_time
+
+# ...
+
+target_include_directories(${TargetAppNameAsLibForTest} PUBLIC SYSTEM ${Boost_INCLUDE_DIRS})
+
+# ...
+
+target_link_libraries(${TargetAppNameAsLibForTest} PRIVATE ${Boost_LIBRARIES})
+
+# ...
+

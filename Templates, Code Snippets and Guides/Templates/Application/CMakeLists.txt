@@ -24,12 +24,6 @@ set(TargetAppName ${PROJECT_NAME})
 
 include(defaults.cmake)
 
-set(BOOST_ROOT $ENV{dev_sdk_paths})
-set(Boost_USE_MULTITHREADED     ON)
-set(Boost_USE_STATIC_LIBS       ON)
-set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package(Boost 1.63.0) # e.g. COMPONENTS date_time
-
 add_subdirectory(sdks)
 
 file(GLOB_RECURSE TargetAppNameAsLibForTest_SRC_INCS "src/*.h*")
@@ -66,9 +60,8 @@ target_include_directories(${TargetAppNameAsLibForTest} PUBLIC ${CMAKE_BINARY_DI
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC src)
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC ${tooBasicCodeSupport_INCLUDE_DIRS})
 target_include_directories(${TargetAppNameAsLibForTest} PUBLIC ${tooString_INCLUDE_DIRS})
-target_include_directories(${TargetAppNameAsLibForTest} PUBLIC SYSTEM ${Boost_INCLUDE_DIRS})
 
-target_link_libraries(${TargetAppNameAsLibForTest} PRIVATE ${Boost_LIBRARIES} tooBasicCodeSupport tooString)
+target_link_libraries(${TargetAppNameAsLibForTest}) # don't link header-only libs
 
 set(${TargetAppNameAsLibForTest}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/src
     CACHE INTERNAL "${TargetAppNameAsLibForTest}: include directories" FORCE)
