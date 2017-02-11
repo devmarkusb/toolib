@@ -7,7 +7,7 @@ find_package(Qt5LinguistTools)
 
 # ...
 
-set(uiwrap_USE_IMPLEMENTATION       "qt" CACHE STRING "")
+set(uiwrap_USE_IMPLEMENTATION       "qt" CACHE STRING "Choose the desired UI implementation out of: qt (default), wx, ... or own")
 
 # ...
 
@@ -54,7 +54,7 @@ endforeach()
 if (WIN32)
     add_custom_command(
         TARGET ${TargetAppNameTest} POST_BUILD
-        COMMAND qtdeploy_autodepends_win.bat "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" "$ENV{dev_qt_ver_bin}"
+        COMMAND qtdeploy_autodepends_win.bat "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" "${Qt_ver_comp_path}"
             --qmldir ..\\gui\\Qt $<TARGET_FILE_NAME:${TargetAppName}>
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
