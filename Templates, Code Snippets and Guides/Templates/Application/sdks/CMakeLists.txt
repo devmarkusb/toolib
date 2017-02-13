@@ -1,5 +1,5 @@
-include(googletest.cmake)
+include(${TOO_CMAKE_INC_GOOGLETEST_AS_SUBDIR})
 
-add_subdirectory(ToolsFL/tooBuildEnv)
+# no ToolsFL/tooBuildEnv here (little part of it is needed much earlier for the build number mechanism)
 add_subdirectory(ToolsFL/tooBasicCodeSupport)
 add_subdirectory(ToolsFL/tooString)

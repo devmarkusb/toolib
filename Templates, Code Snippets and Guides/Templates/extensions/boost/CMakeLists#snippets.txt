@@ -1,6 +1,6 @@
 # ...
 
-include(boost.cmake)
+include(${TOO_CMAKE_INC_BOOST}) # comes with tooBuildEnv
 find_package(Boost 1.63.0) # e.g. COMPONENTS date_time
 
 # ...

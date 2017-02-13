@@ -14,17 +14,17 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-include(buildnr.cmake)
+include(${TOO_CMAKE_INC_BUILDNR})
 project(Toolib VERSION 0.1.0.${BUILD_NR})
 message(STATUS "project version: " ${PROJECT_VERSION})
 set(TargetToolib ${PROJECT_NAME})
 
-include(defaults.cmake)
+include(${TOO_CMAKE_INC_DEFAULTS})
 
 option(Toolib_USE_NO_DEPENDENCIES "No 3rd party dependencies" OFF)
 
 if (NOT Toolib_USE_NO_DEPENDENCIES)
-    include(boost.cmake)
+    include(${TOO_CMAKE_INC_BOOST})
     find_package(Boost 1.63.0)
 endif ()
 
@@ -72,7 +72,7 @@ target_include_directories(${TargetToolib} PUBLIC ${tooLinklib_INCLUDE_DIRS})
 target_include_directories(${TargetToolib} PUBLIC ${tooString_INCLUDE_DIRS})
 target_include_directories(${TargetToolib} PUBLIC ${tooMem_INCLUDE_DIRS})
 
-target_link_libraries(${TargetToolib}) #tooBasicCodeSupport tooLinklib tooString tooMem
+target_link_libraries(${TargetToolib}) # tooBasicCodeSupport tooLinklib tooString tooMem
 
 set(${TargetToolib}_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/include

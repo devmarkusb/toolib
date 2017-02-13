@@ -1,7 +1,7 @@
 
 # ...
 
-include (qt.cmake)
+include (${TOO_CMAKE_INC_QT})
 find_package(Qt5Quick) # Widgets contains a.o.t. Core and Gui
 find_package(Qt5LinguistTools)
 
@@ -21,6 +21,9 @@ if (uiwrap_USE_IMPLEMENTATION STREQUAL "qt")
     target_link_libraries(${TargetAppNameAsLibForTest} PUBLIC Qt5::Quick)
 endif ()
 
+
+######################################################################################################################
+
 # ...
 
 # Only purpose of this so far: prevent showing an additional console window in Qt apps (happens for msvc in way
@@ -33,7 +36,7 @@ endif ()
 
 qt5_add_resources(TargetAppName_RESOURCES gui/Qt/qml.qrc)
 
-include(lang.cmake)
+include (${TOO_CMAKE_INC_QT_LANG})
 
 add_executable(${TargetAppName}
 # ...
