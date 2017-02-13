@@ -1,3 +1,4 @@
 REM Updating translation ts files from sources (cpp+qml)
-%dev_qt_base%\5.8\mingw53_32\lupdate source gui -ts lang_en.ts
-%dev_qt_base%\5.8\mingw53_32\lupdate source gui -ts lang_de.ts
+REM Expects path to lupdate from Qt install dir as first and only param.
+%1\lupdate source gui -ts lang_en.ts
+%1\lupdate source gui -ts lang_de.ts
