@@ -1,4 +1,4 @@
-// Markus Borris, 2016
+// Markus Borris, 2016-17
 // This file is part of Toolib library.
 
 //!
@@ -105,11 +105,11 @@ struct Rational
         static_assert(D > 0, "denominator for Rational expected to be > 0");
     }
 
-    ~Rational()
-    {
-        // documenting the important invariant
-        TOO_EXPECT(denom > 0);
-    }
+    ~Rational() = default; // gcc needs this to be trivial for the use of Rational in constexpr's
+//     {
+//         // documenting the important invariant
+//         TOO_EXPECT(denom > 0);
+//     }
 
     //! Note that this ensures the invariant of having denom > 0 always
     void inverse()

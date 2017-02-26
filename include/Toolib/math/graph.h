@@ -1,4 +1,4 @@
-// Markus Borris, 2015-16
+// Markus Borris, 2015-17
 // This file is part of Toolib library.
 
 //!
@@ -17,7 +17,7 @@
 #include "Toolib/error.h"
 #include "Toolib/optional.h"
 #include "Toolib/ptr.h"
-#include "Toolib\class\non_copyable.h"
+#include "Toolib/class/non_copyable.h"
 #include <algorithm>
 #include <memory>
 #include <utility>

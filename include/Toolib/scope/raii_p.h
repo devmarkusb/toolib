@@ -1,4 +1,4 @@
-// Markus Borris, 2011
+// Markus Borris, 2011-17
 // This file is part of Toolib library.
 
 //!
@@ -12,7 +12,10 @@
 
 #include "Toolib/debug.h"
 #include "Toolib/mem/checked_delete.h"
+#include "Toolib/PPDEFS.h"
+#if TOO_OS_WINDOWS
 #include <crtdbg.h>
+#endif
 #include <cstdint>
 
 
@@ -50,7 +53,12 @@ public:
     Be careful that you never delete pt by yourself outside. The responsibility for that is shifted
     to this class.
     \param pt pointer to some Heap-allocated memory.*/
-    explicit raii_p(T* pt) : m_ptr(pt) { TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt)); }
+    explicit raii_p(T* pt) : m_ptr(pt)
+    {
+#if TOO_OS_WINDOWS
+        TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
+#endif
+    }
     //! Releases the internally managed memory for the object.
     ~raii_p() { flush(); }
 
@@ -79,7 +87,9 @@ public:
             if (m_ptr)
                 mem::checked_delete(m_ptr);
             m_ptr = pt;
+#if TOO_OS_WINDOWS
             TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
+#endif
         }
     }
 }; // raii_p
@@ -120,7 +130,12 @@ public:
     to this class.
     \param pt pointer to some Heap-allocated memory.
     \count number of instances of T.*/
-    raii_ap(T* pt, uint32_t count) : m_count(count), m_ptr(pt) { TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt)); }
+    raii_ap(T* pt, uint32_t count) : m_count(count), m_ptr(pt)
+    {
+#if TOO_OS_WINDOWS
+        TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
+#endif
+    }
     //! Releases the internally managed memory for the object.
     ~raii_ap() { flush(); }
 
@@ -170,7 +185,9 @@ public:
                 checked_array_delete(m_ptr);
             m_ptr   = pt;
             m_count = count;
+#if TOO_OS_WINDOWS
             TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
+#endif
         }
     }
 }; // raii_ap

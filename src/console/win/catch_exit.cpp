@@ -1,4 +1,4 @@
-// Markus Borris, 2011
+// Markus Borris, 2011-17
 // This file is part of Toolib library.
 
 //!
@@ -7,6 +7,7 @@
 //! \file
 
 #include "Toolib/console/win/catch_exit.h"
+#if TOO_OS_WINDOWS
 #include <sstream>
 #include <stdexcept>
 
@@ -59,3 +60,4 @@ ExitCatcher& ExitCatcher::getInstance()
 }
 } // con
 } // too
+#endif // TOO_OS_WINDOWS

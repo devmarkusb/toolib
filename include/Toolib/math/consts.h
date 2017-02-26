@@ -1,4 +1,4 @@
-// Markus Borris, 2016
+// Markus Borris, 2016-17
 // This file is part of Toolib library.
 
 //!
@@ -10,7 +10,7 @@
 #define CONSTS_H_INCL_sjkhnfxgiuexernhgf7834t4
 
 #include "Toolib/PPDEFS.h"
-#include "Toolib\std\std_extensions.h"
+#include "Toolib/std/std_extensions.h"
 #include <cmath>
 
 
@@ -26,8 +26,8 @@ constexpr T pi()
 {
     return std::acos(static_cast<T>(-1));
 }
-}
-}
-}
+} // consts
+} // math
+} // too
 
 #endif

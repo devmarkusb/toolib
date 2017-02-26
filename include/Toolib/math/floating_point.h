@@ -1,4 +1,4 @@
-// Markus Borris, 2015-16
+// Markus Borris, 2015-17
 // This file is part of Toolib library.
 
 //!
@@ -10,7 +10,7 @@
 #define FLOATING_POINT_H_INCL_09458t87t5twd2874t57rbn6
 
 #include "Toolib/assert.h"
-#include "Toolib\ignore_arg.h"
+#include "Toolib/ignore_arg.h"
 #include "Toolib/PPDEFS.h"
 #include <algorithm>
 #include <cmath>

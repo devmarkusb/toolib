@@ -115,7 +115,7 @@ public:
     matrix& assign(T** mtrx)
     {
         if (!mtrx)
-            return;
+            return *this;
         m_rep         = m_rep->get_own_copy(false);
         T** m         = m_rep->m;
         uint32_t rows = m_rep->dim_rows, cols = m_rep->dim_cols;
@@ -138,7 +138,7 @@ public:
                 m[i][j] = init;
     }
     //! Checks if this matrix is zero.
-    void isZero() const
+    bool isZero() const
     {
         T** m         = m_rep->m;
         uint32_t rows = m_rep->dim_rows, cols = m_rep->dim_cols;

@@ -41,7 +41,7 @@ TEST_F(CPathTest, Statics)
 #if TOO_OS_WINDOWS
     EXPECT_EQ("\\", CPath::getSeparatorNative());
 #else
-    EXPECT_EQ("/"), CPath::getSeparatorNative());
+    EXPECT_EQ("/", CPath::getSeparatorNative());
 #endif
     CPath p("/");
     std::string s(p.cleanupPlatformIndep());
@@ -100,7 +100,7 @@ TEST_F(CPathTest, ensureTrailingSeparator)
 #if TOO_OS_WINDOWS
     EXPECT_EQ("a\\", s);
 #else
-    EXPECT_EQ("a/"), s);
+    EXPECT_EQ("a/", s);
 #endif
 }
 
@@ -117,8 +117,13 @@ TEST_F(CPathTest, getFolderPath)
 {
     CPath p1("a/b");
     EXPECT_EQ("a/", p1.getFolderPath());
+#if TOO_OS_WINDOWS
     CPath p2("a\\b", CPath::EForm::NATIVE);
     EXPECT_EQ("a\\", p2.getFolderPath());
+#else
+    CPath p2("a/b", CPath::EForm::NATIVE);
+    EXPECT_EQ("a/", p2.getFolderPath());
+#endif
 }
 
 TEST_F(CPathTest, getFileName)
@@ -151,7 +156,7 @@ TEST_F(CPathTest, isAbsolute)
     CPath p2("c:\\a\\b");
     EXPECT_TRUE(p2.isAbsolute());
 #else
-    CPath p2("/a/b"));
+    CPath p2("/a/b");
     EXPECT_TRUE(p2.isAbsolute());
 #endif
 }
@@ -165,7 +170,7 @@ TEST_F(CPathTest, cleanupX)
 #if TOO_OS_WINDOWS
     EXPECT_EQ("a\\b\\c", s);
 #else
-    EXPECT_EQ("a/b/c"), s);
+    EXPECT_EQ("a/b/c", s);
 #endif
 }
 
@@ -173,8 +178,18 @@ TEST_F(CPathTest, getSeparatorUsedHere)
 {
     CPath p1("a/b");
     EXPECT_EQ("/", p1.getSeparatorUsedHere());
+#if TOO_OS_WINDOWS
     CPath p2("a\\b", CPath::EForm::UNKNOWN);
     EXPECT_EQ("\\", p2.getSeparatorUsedHere());
+#else
+    CPath p2("a/b", CPath::EForm::UNKNOWN);
+    EXPECT_EQ("/", p2.getSeparatorUsedHere());
+#endif
+#if TOO_OS_WINDOWS
     CPath p3("a\\b", CPath::EForm::NATIVE);
     EXPECT_EQ("\\", p3.getSeparatorUsedHere());
+#else
+    CPath p3("a/b", CPath::EForm::NATIVE);
+    EXPECT_EQ("/", p3.getSeparatorUsedHere());
+#endif
 }
