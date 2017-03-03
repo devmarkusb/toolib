@@ -19,8 +19,7 @@ struct SomeType_flexed : public too::IType
     SomeType_flexed(const SomeType_flexed& other) : too::IType(), rep(other.rep) {}
     SomeType_flexed& operator=(const SomeType_flexed& other)
     {
-        SomeType_flexed tmp(other);
-        *this = std::move(tmp);
+        this->rep = other.rep;
         return *this;
     }
 #if TOO_HAS_CPP11_DEFAULT_MOVES

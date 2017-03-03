@@ -42,7 +42,7 @@ TEST_F(CalEventTest, test)
     std::unique_ptr<int> tps = ces_clone->getFirstTimePoint();
     EXPECT_EQ(4, *tps);
     int val = 6;
-    while (tps = ces_clone->getNextTimePoint(*tps))
+    while ((tps = ces_clone->getNextTimePoint(*tps)))
     {
         EXPECT_EQ(val, *tps);
         val += 2;
