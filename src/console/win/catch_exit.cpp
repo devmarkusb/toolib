@@ -7,7 +7,7 @@
 //! \file
 
 #include "Toolib/console/win/catch_exit.h"
-#if TOO_OS_WINDOWS
+#if TOO_OS_WINDOWS && TOO_OS_WINDOWS_DESKTOP
 #include <sstream>
 #include <stdexcept>
 

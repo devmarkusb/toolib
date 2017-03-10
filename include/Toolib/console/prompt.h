@@ -24,7 +24,7 @@ namespace too
 {
 inline void prompt()
 {
-#if TOO_OS_WINDOWS
+#if TOO_OS_WINDOWS && !TOO_OS_WINDOWS_UWP_APP
     if (_kbhit())
         too::ignore_arg(_getch());
     std::cout << "\nPress any key to continue...";

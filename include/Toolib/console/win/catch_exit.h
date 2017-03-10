@@ -11,7 +11,7 @@
 #define CATCH_EXIT_H_INCL_34trcx83943g
 
 #include "Toolib/PPDEFS.h"
-#if TOO_OS_WINDOWS
+#if TOO_OS_WINDOWS && TOO_OS_WINDOWS_DESKTOP
 #include "../../../ToolibDEF.h"
 #include <windows.h>
 
