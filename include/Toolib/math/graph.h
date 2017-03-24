@@ -19,6 +19,7 @@
 #include "Toolib/ptr.h"
 #include "Toolib/class/non_copyable.h"
 #include <algorithm>
+#include <map>
 #include <memory>
 #include <utility>
 #include <vector>
@@ -204,14 +205,25 @@ private:
 class ChartAnnotations
 {
 public:
-    const VectorOfPairs<const size_t, const std::string>& getAll() const { return this->annotations; }
+    //! Same index can occur multiple times.
+    const VectorOfPairs<size_t, std::string>& getAll() const { return this->annotations; }
+    //! Indices occur uniquely together with vector of associated annotations.
+    std::map<size_t, std::vector<std::string>> obtainAllPerIndex() const
+    {
+        std::map<size_t, std::vector<std::string>> ret;
+        for (const auto& an : this->annotations)
+        {
+            ret[an.first].push_back(an.second);
+        }
+        return ret;
+    }
     //! Add an optional annotation for a certain value index. The index is expected to be in a valid range.
     //! Also you might have to take care about not using the same index more than once. But that depends on your
     //! use-case - it is not forbidden.
     void add(const std::pair<const size_t, const std::string>& a) { this->annotations.push_back(a); }
 
 private:
-    VectorOfPairs<const size_t, const std::string> annotations;
+    VectorOfPairs<size_t, std::string> annotations;
 };
 
 } // math
