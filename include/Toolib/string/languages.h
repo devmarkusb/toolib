@@ -1,4 +1,4 @@
-// Markus Borris, 2016
+// Markus Borris, 2016-17
 // This file is part of Toolib library.
 
 //!
@@ -26,6 +26,7 @@ using LangID_iso639_1 = std::string;
 const LangID_iso639_1 auto_systems_language{"auto"};
 
 
+//! Note: if you add to this, don't forget about the other functions in this file.
 inline const std::vector<LangID_iso639_1>& getAllTheoreticallyPossibleLangIDs()
 {
     static const std::vector<LangID_iso639_1> cachedval{
@@ -36,6 +37,7 @@ inline const std::vector<LangID_iso639_1>& getAllTheoreticallyPossibleLangIDs()
         "es", // Spanish
         "fr", // French
         "hi", // Hindi
+        "it", // Italian
         "jp", // Japanese
         "ko", // Korean
         "pt", // Portuguese
@@ -72,6 +74,8 @@ inline std::string getEnglishLanguageName(const LangID_iso639_1& id)
         return "French";
     else if (id == "hi")
         return "Hindi";
+    else if (id == "it")
+        return "Italian";
     else if (id == "jp")
         return "Japanese";
     else if (id == "ko")
