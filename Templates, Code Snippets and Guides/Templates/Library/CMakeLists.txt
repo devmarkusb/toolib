@@ -23,8 +23,6 @@ set(TargetLibName ${PROJECT_NAME})
 
 include(${TOO_CMAKE_INC_DEFAULTS})
 
-add_subdirectory(sdks)
-
 file(GLOB_RECURSE TargetLibName_INCS "include/*.h*")
 file(GLOB_RECURSE TargetLibName_SRC_INCS "src/*.h*")
 
@@ -57,6 +55,7 @@ target_include_directories(${TargetLibName} PRIVATE ${CMAKE_BINARY_DIR})
 
 target_include_directories(${TargetLibName} PUBLIC include)
 target_include_directories(${TargetLibName} PRIVATE src)
+target_include_directories(${TargetLibName} PUBLIC ${tooLinklib_INCLUDE_DIRS})
 
 target_link_libraries(${TargetLibName})
 
@@ -68,7 +67,7 @@ set(${TargetLibName}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
 
 set(TargetLibNameTest ${PROJECT_NAME}Test)
 
-file(GLOB_RECURSE TargetLibNameTest_SOURCES "src/*.test.cpp")
+file(GLOB_RECURSE TargetLibNameTest_SOURCES "include/LibName/*.test.cpp")
 
 add_executable(${TargetLibNameTest}
 	${TargetLibNameTest_SOURCES}
