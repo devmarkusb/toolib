@@ -68,10 +68,12 @@ set(${TargetLibName}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
 set(TargetLibNameTest ${PROJECT_NAME}Test)
 
 file(GLOB_RECURSE TargetLibNameTest_SOURCES "include/LibName/*.test.cpp")
+file(GLOB_RECURSE TargetLibNameTest_SOURCES2 "src/*.test.cpp")
 
 add_executable(${TargetLibNameTest}
-	${TargetLibNameTest_SOURCES}
-	${TargetLibName_INCS}
+    ${TargetLibNameTest_SOURCES}
+    ${TargetLibNameTest_SOURCES2}
+    ${TargetLibName_INCS}
 )
 
 if (WIN32)
@@ -84,7 +86,7 @@ target_include_directories(${TargetLibNameTest} PRIVATE include)
 
 target_link_libraries(${TargetLibNameTest} PRIVATE gtest_main ${TargetLibName})
 
-set(do_auto_test	ON)
+set(do_auto_test    ON)
 
 if (do_auto_test)
     add_custom_command(
