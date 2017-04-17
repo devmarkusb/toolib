@@ -1,19 +1,16 @@
 #ifndef APP_LANG_H_hjgc62478t5hguoitbnxv
 #define APP_LANG_H_hjgc62478t5hguoitbnxv
+#ifdef UIW_CHOICE_QT
 
-#include "_common/consts.h"
-#include "_common/logging.h"
-#include "Toolib/assert.h"
 #include "Toolib/class/non_copyable.h"
-#include "Toolib/std/std_extensions.h"
+#include "Toolib/string/languages.h"
 #include "Toolib/PPDefs/MSVC/SUPPRESS_WARNINGS_EXTERNAL_BEGIN"
-#include "uiwrap/string/impl_Qt/StringConvert_Qt.h"
 #include <QGuiApplication>
-#include <QLocale>
 #include <QString>
 #include <QTranslator>
 #include "Toolib/PPDefs/MSVC/SUPPRESS_WARNINGS_EXTERNAL_END"
 #include <memory>
+#include <vector>
 
 
 namespace app_lang
@@ -22,52 +19,63 @@ namespace app_lang
 class AppTranslator : private too::non_copyable
 {
 public:
-    AppTranslator(QGuiApplication& app) : q_app{app}
+    //! Language id type per ISO 639-1.
+    using lang_id          = too::str::LangID_iso639_1;
+    using lang_id_and_text = std::pair<lang_id, std::string>;
+    struct invalid_id : public std::runtime_error
     {
-        this->translator    = too::make_unique<QTranslator>();
-        this->qt_translator = too::make_unique<QTranslator>();
-    }
+        explicit invalid_id(const std::string& s) : std::runtime_error(s) {}
+    };
 
-    void init()
-    {
-        const QString path_to_transl{consts::EXE_TRANSLATIONS_DIR().c_str()};
+    static const lang_id defaultLanguageChoice;
 
-        // ### app specific translations ###
-        // todo check whether we need to install English first, as fall-back
-        if (this->translator->load(QLocale(), AppTranslator::langfile_prefix, {}, path_to_transl))
-        {
-            const bool ok = this->q_app.installTranslator(this->translator.get());
-            TOO_ASSERT(ok);
-            if (ok)
-                LOG(INFO) << "language loaded: " << uiw::implQt::qs2s(QLocale().name());
-            else
-                LOG(WARNING) << "could not install language: " << uiw::implQt::qs2s(QLocale().name());
-        }
-        else
-            LOG(WARNING) << "could not load language: " << uiw::implQt::qs2s(QLocale().name());
 
-        // ### Qt common translations ###
-        // todo check whether we need to install English first, as fall-back
-        if (this->qt_translator->load(QLocale(), AppTranslator::qtlangfile_prefix, {}, path_to_transl))
-        {
-            const bool ok = this->q_app.installTranslator(this->qt_translator.get());
-            TOO_ASSERT(ok);
-            if (ok)
-                LOG(INFO) << "qt language loaded: " << uiw::implQt::qs2s(QLocale().name());
-            else
-                LOG(WARNING) << "could not install qt language: " << uiw::implQt::qs2s(QLocale().name());
-        }
-        else
-            LOG(WARNING) << "could not load qt language: " << uiw::implQt::qs2s(QLocale().name());
-    }
+    explicit AppTranslator(QGuiApplication& app);
+
+    size_t getSupportedLanguageCount() const { return this->supportedLangs.size(); }
+    //! Expects \param idx 0..getSupportedLanguageCount.
+    lang_id_and_text getSupportedLang(size_t idx) const;
+    //! Throws invalid_id if there is no index found.
+    size_t findIdx(const lang_id& id) const;
+
+    void translate(const lang_id& id);
 
 private:
-    QGuiApplication& q_app;
-    std::unique_ptr<QTranslator> translator;
-    std::unique_ptr<QTranslator> qt_translator;
     static const QString langfile_prefix;
     static const QString qtlangfile_prefix;
+    static const QString transl_file_ext;
+
+    QGuiApplication& q_app;
+    const QString path_to_transl_without_trailing_sep;
+    std::unique_ptr<QTranslator> translator;
+    std::unique_ptr<QTranslator> qt_translator;
+
+    std::vector<lang_id_and_text> supportedLangs;
+
+
+    void init();
+    //! Doesn't need to be called at program start or when 'en' is active.
+    //! It does nothing in these cases, but its purpose is to prepare a call
+    //! of selectLanguage when someone was selected before.
+    void unselectLanguage();
+    void selectLanguage(const lang_id& id);
+    void selectLanguage(const QLocale& locale);
+
+    struct InNative
+    {
+        static void sort(std::vector<lang_id_and_text>& langs);
+    };
+    struct InEnglish
+    {
+        static void sort(std::vector<lang_id_and_text>& langs);
+    };
+
+    template <class LanguageNamesLanguage>
+    // LanguageNamesLanguage expected to be either InNative or InEnglish
+    void obtainAllSupportedLangs();
+    void addAutoLanguageChoice();
 };
 } // app_lang
 
+#endif // UIW_CHOICE_QT
 #endif
