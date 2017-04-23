@@ -17,7 +17,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 
 include(${TOO_CMAKE_INC_BUILDNR})
-project(LibName VERSION 0.1.0.${BUILD_NR})
+project(LibName VERSION 0.1.${BUILD_NR}.0)
 message(STATUS "project version: " ${PROJECT_VERSION})
 set(TargetLibName ${PROJECT_NAME})
 

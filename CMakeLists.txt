@@ -15,7 +15,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 
 include(${TOO_CMAKE_INC_BUILDNR})
-project(Toolib VERSION 0.1.0.${BUILD_NR})
+project(Toolib VERSION 0.1.${BUILD_NR}.0)
 message(STATUS "project version: " ${PROJECT_VERSION})
 set(TargetToolib ${PROJECT_NAME})
 

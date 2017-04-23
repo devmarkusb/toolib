@@ -18,7 +18,7 @@ cmake_minimum_required(VERSION 3.4.1)
 
 add_subdirectory(sdks/ToolsFL/tooBuildEnv)
 include(${TOO_CMAKE_INC_BUILDNR})
-project(AppName VERSION 0.1.0.${BUILD_NR})
+project(AppName VERSION 0.1.${BUILD_NR}.0)
 message(STATUS "project version: " ${PROJECT_VERSION})
 option(DEPLOYMENT_BUILD "do a final release build for deployment" $ENV{DeployArtifacts})
 set(TargetAppName ${PROJECT_NAME})
