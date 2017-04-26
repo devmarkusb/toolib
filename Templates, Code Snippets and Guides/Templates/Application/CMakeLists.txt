@@ -20,7 +20,7 @@ add_subdirectory(sdks/ToolsFL/tooBuildEnv)
 include(${TOO_CMAKE_INC_BUILDNR})
 project(AppName VERSION 0.1.${BUILD_NR}.0)
 message(STATUS "project version: " ${PROJECT_VERSION})
-option(DEPLOYMENT_BUILD "do a final release build for deployment" $ENV{DeployArtifacts})
+include(${TOO_CMAKE_INC_DEPLOYMENT_BUILD})
 set(TargetAppName ${PROJECT_NAME})
 
 include(${TOO_CMAKE_INC_DEFAULTS})
@@ -109,7 +109,7 @@ endif ()
 
 set_target_properties(${TargetAppNameTest} PROPERTIES DEBUG_POSTFIX "d")
 
-target_link_libraries(${TargetAppNameTest} PRIVATE gtest_main ${TargetAppName})
+target_link_libraries(${TargetAppNameTest} PRIVATE gtest_main ${TargetAppNameAsLibForTest})
 
 
 add_custom_command(
