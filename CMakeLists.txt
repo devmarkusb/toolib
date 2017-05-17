@@ -85,6 +85,10 @@ set(${TargetToolib}_INCLUDE_DIRS
     
 ################################################################################################
 
+if (NOT TOO_BUILD_UNITTESTS)
+    return ()
+endif ()
+
 set(TargetToolibTest ${PROJECT_NAME}Test)
 
 file(GLOB_RECURSE TargetToolibTest_SOURCES "include/Toolib/*.test.cpp")
