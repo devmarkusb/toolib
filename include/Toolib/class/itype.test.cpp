@@ -26,8 +26,8 @@ struct SomeType_flexed : public too::IType
     SomeType_flexed(SomeType_flexed&&) = default;
     SomeType_flexed& operator=(SomeType_flexed&&) = default;
 #endif
-    SomeType_flexed(const SomeType& x) : rep(x) {}
-    SomeType_flexed(SomeType&& x) : rep(std::move(x)) {}
+    explicit SomeType_flexed(const SomeType& x) : rep(x) {}
+    explicit SomeType_flexed(SomeType&& x) : rep(std::move(x)) {}
 
     virtual too::owner<SomeType_flexed*> clone() override { return new SomeType_flexed(*this); }
 
