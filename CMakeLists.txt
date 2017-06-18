@@ -12,7 +12,7 @@
 # for MSVC, but this is not recommended. You or other will end up in
 # conflicts soon.
 
-cmake_minimum_required(VERSION 3.4.1)
+cmake_minimum_required(VERSION 3.8.2)
 
 include(${TOO_CMAKE_INC_BUILDNR})
 project(Toolib VERSION 0.1.${BUILD_NR}.0)
