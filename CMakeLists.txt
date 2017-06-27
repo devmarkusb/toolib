@@ -25,7 +25,7 @@ option(Toolib_USE_NO_DEPENDENCIES "No 3rd party dependencies" OFF)
 
 if (NOT Toolib_USE_NO_DEPENDENCIES)
     include(${TOO_CMAKE_INC_BOOST})
-    find_package(Boost 1.63.0)
+    find_package(Boost 1.63.0 EXACT)
 endif ()
 
 file(GLOB_RECURSE TargetToolib_INCS "include/*.h*")
