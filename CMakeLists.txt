@@ -12,7 +12,7 @@
 # for MSVC, but this is not recommended. You or other will end up in
 # conflicts soon.
 
-cmake_minimum_required(VERSION 3.4.1)
+cmake_minimum_required(VERSION 3.8.2)
 
 include(${TOO_CMAKE_INC_BUILDNR})
 project(Toolib VERSION 0.1.${BUILD_NR}.0)
@@ -25,7 +25,7 @@ option(Toolib_USE_NO_DEPENDENCIES "No 3rd party dependencies" OFF)
 
 if (NOT Toolib_USE_NO_DEPENDENCIES)
     include(${TOO_CMAKE_INC_BOOST})
-    too_find_boost(1 63 0 "")
+    too_find_boost(1 64 0 "")
 endif ()
 
 file(GLOB_RECURSE TargetToolib_INCS "include/*.h*")
