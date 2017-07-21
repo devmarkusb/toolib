@@ -22,10 +22,13 @@ set(TargetToolib ${PROJECT_NAME})
 include(${TOO_CMAKE_INC_DEFAULTS})
 
 option(Toolib_USE_NO_DEPENDENCIES "No 3rd party dependencies" OFF)
+set(Toolib_USE_BOOST_ver1 "1" CACHE STRING "If 3rd party dependencies are used, use boost version ver1.ver2.ver3")
+set(Toolib_USE_BOOST_ver2 "64" CACHE STRING "Cf. Toolib_USE_BOOST_ver1")
+set(Toolib_USE_BOOST_ver3 "0" CACHE STRING "Cf. Toolib_USE_BOOST_ver1")
 
 if (NOT Toolib_USE_NO_DEPENDENCIES)
     include(${TOO_CMAKE_INC_BOOST})
-    too_find_boost(1 64 0 "")
+    too_find_boost(${Toolib_USE_BOOST_ver1} ${Toolib_USE_BOOST_ver2} ${Toolib_USE_BOOST_ver3} "")
 endif ()
 
 file(GLOB_RECURSE TargetToolib_INCS "include/*.h*")
