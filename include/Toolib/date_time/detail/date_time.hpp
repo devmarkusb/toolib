@@ -10,6 +10,7 @@
 #define DATE_TIME_HPP_kjgfdhnxui3gfy34z8ry27
 
 #include "Toolib/assert.h"
+#include "Toolib/comp_bwds.h"
 #include "Toolib/string/string_token.h"
 #include <ostream>
 #include <string>
@@ -75,8 +76,8 @@ MonthYear_base<NormalizePolicy>::MonthYear_base(const std::string& fromString)
     // don't throw the user an invalid_arg or sth., since bug could also have happened within tokenizeString
     TOO_ASSERT_THROW(parts.size() == 2);
 
-    this->y_m.second = std::stoi(parts[0]);
-    this->y_m.first = std::stoi(parts[1]);
+    this->y_m.second = too::stoi(parts[0]);
+    this->y_m.first = too::stoi(parts[1]);
     NormalizePolicy::do_it(this->y_m);
 }
 

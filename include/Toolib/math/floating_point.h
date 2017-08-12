@@ -10,6 +10,7 @@
 #define FLOATING_POINT_H_INCL_09458t87t5twd2874t57rbn6
 
 #include "Toolib/assert.h"
+#include "Toolib/comp_bwds.h"
 #include "Toolib/ignore_arg.h"
 #include "Toolib/PPDEFS.h"
 #include <algorithm>
@@ -118,7 +119,7 @@ struct ToStringConverter
 template <typename FloatType>
 struct ToStringConverter<FloatType, FloatFormat::default_>
 {
-    static std::string convert(FloatType x) { return std::to_string(x); }
+    static std::string convert(FloatType x) { return too::to_string(x); }
     static std::string convert(FloatType x, int precision)
     {
         TOO_EXPECT(precision >= 0);

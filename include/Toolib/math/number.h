@@ -1,4 +1,4 @@
-// Markus Borris, 2011-16
+// Markus Borris, 2011-17
 // This file is part of Toolib library.
 
 //!
@@ -10,8 +10,9 @@
 #ifndef NUMBER_H_INCL_f29jh8hnf238hrxz23
 #define NUMBER_H_INCL_f29jh8hnf238hrxz23
 
-#include "floating_point.h"
 #include "Toolib/assert.h"
+#include "Toolib/comp_bwds.h"
+#include "Toolib/math/floating_point.h"
 #include "Toolib/narrow.h"
 #include "Toolib/enum_cast.h"
 #include "Toolib/optional.h"
@@ -85,7 +86,7 @@ too::opt<ArithType> is_power_of(ArithType x, ArithType base)
             Though one could improve the hard-coded 1e-12 (std::numeric_limits<long double>::min() is
             much too small).*/
     const long double exp         = std::log(x) / std::log(base);
-    const long long intpart       = std::llround(exp);
+    const long long intpart       = too::llround(exp);
     const long double intpart_dbl = too::narrow_cast<long double>(intpart);
 
     if (!too::math::approx_equal(intpart_dbl, exp, 1e-12L))
