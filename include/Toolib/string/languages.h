@@ -38,7 +38,7 @@ inline const std::vector<LangID_iso639_1>& getAllTheoreticallyPossibleLangIDs()
         "fr", // French
         "hi", // Hindi
         "it", // Italian
-        "jp", // Japanese
+        "ja", // Japanese
         "ko", // Korean
         "pt", // Portuguese
         "ru", // Russian
@@ -71,7 +71,7 @@ inline std::string getNativeLanguageName(const LangID_iso639_1& id)
         return "\xE0\xA4\xB9\xE0\xA4\xBF\xE0\xA4\xA8\xE0\xA5\x8D\xE0\xA4\xA6\xE0\xA5\x80";
     else if (id == "it")
         return "Italiano";
-    else if (id == "jp")
+    else if (id == "ja")
         return "\xE6\x97\xA5\xE6\x9C\xAC\xE8\xAA\x9E";
     else if (id == "ko")
         return "\xED\x95\x9C\xEA\xB5\xAD\xEC\x96\xB4";
@@ -109,7 +109,7 @@ inline std::string getEnglishLanguageName(const LangID_iso639_1& id)
         return "Hindi";
     else if (id == "it")
         return "Italian";
-    else if (id == "jp")
+    else if (id == "ja")
         return "Japanese";
     else if (id == "ko")
         return "Korean";
