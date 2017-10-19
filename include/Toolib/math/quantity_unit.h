@@ -1,4 +1,4 @@
-// Markus Borris, 2016
+// Markus Borris, 2016-17
 // This file is part of Toolib library.
 
 //!
@@ -11,6 +11,7 @@
 #define QUANTITY_UNIT_H_dfhgxungh38hgxt38gb
 
 #include "ratio.h"
+#include "Toolib/comp_bwds.h"
 #include "Toolib/std/std_extensions.h"
 #include <exception>
 #include <map>
@@ -85,7 +86,7 @@ public:
     struct err_no_string_provided_for_ratio : public std::invalid_argument
     {
         err_no_string_provided_for_ratio(const Rational& r)
-            : std::invalid_argument("no string provided for ratio " + std::to_string(r.asFloatingPoint<double>()))
+            : std::invalid_argument("no string provided for ratio " + too::to_string(r.asFloatingPoint<double>()))
         {
         }
     };
