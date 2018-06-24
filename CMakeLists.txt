@@ -88,7 +88,7 @@ add_executable(${TargetToolibTest}
 )
 
 if (WIN32)
-set_property(TARGET ${TargetToolibTest} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
+    set_property(TARGET ${TargetToolibTest} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
 endif ()
 
 set_target_properties(${TargetToolibTest} PROPERTIES DEBUG_POSTFIX "d")
