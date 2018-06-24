@@ -1,4 +1,4 @@
-// Markus Borris, 2011
+// Markus Borris, 2011-18
 // This file is part of Toolib library.
 
 //!
@@ -10,13 +10,6 @@
 #ifndef STRING_TRIM_H_INCL_cidusbfi243i7324
 #define STRING_TRIM_H_INCL_cidusbfi243i7324
 
-#ifndef TOO_NO_DEPENDENCIES
-#include <boost/algorithm/string.hpp>
-#else
-//#include <algorithm>
-//#include <functional>
-//#include <locale>
-#endif
 #include <string>
 
 
@@ -39,14 +32,10 @@ inline std::string& rtrim(std::string& s, const std::string& trimchars = " \t\n"
 }
 inline std::string& trim(std::string& s)
 {
-#ifndef TOO_NO_DEPENDENCIES
-    boost::trim(s);
-#else
     ltrim(rtrim(s));
-#endif
     return s;
 }
-}
+} // str
 } // too
 
 #endif

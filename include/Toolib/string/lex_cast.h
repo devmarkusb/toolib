@@ -1,4 +1,4 @@
-// Markus Borris, 2011-2016
+// Markus Borris, 2011-2018
 // This file is part of Toolib library.
 
 //!
@@ -11,12 +11,8 @@
 
 #include "Toolib/PPDEFS.h"
 #include "Toolib/std/std_extensions.h"
-#ifndef TOO_NO_DEPENDENCIES
-#include <boost/lexical_cast.hpp>
-#else
 #include <exception>
 #include <sstream>
-#endif
 
 
 namespace too
@@ -34,18 +30,6 @@ class ErrBadLexCast : public std::bad_cast
 template <typename T, typename S>
 inline T lex_cast_Throw(const S& s)
 {
-#ifndef TOO_NO_DEPENDENCIES
-    try
-    {
-        T t;
-        t = boost::lexical_cast<T>(s);
-        return t;
-    }
-    catch (boost::bad_lexical_cast)
-    {
-        throw ErrBadLexCast();
-    }
-#else
     std::stringstream strs;
     strs << s;
     T t;
@@ -54,7 +38,6 @@ inline T lex_cast_Throw(const S& s)
         return t;
     else
         throw ErrBadLexCast();
-#endif
 }
 
 template <typename T, typename S>
@@ -70,6 +53,6 @@ inline T lex_cast(const S& s) noexcept
     }
     return T{};
 }
-}
+} // too
 
 #endif

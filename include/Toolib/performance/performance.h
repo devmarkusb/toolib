@@ -1,4 +1,4 @@
-// Markus Borris, 2014
+// Markus Borris, 2014-18
 // This file is part of Toolib library.
 
 //!
@@ -111,7 +111,7 @@ private:
 
     static TItems& Items();
 
-    struct match_key : public std::unary_function<TItems::value_type, bool>
+    struct match_key
     {
         match_key(const TItemNameAsKey& key) : m_key(key) {}
         bool operator()(TItems::value_type const& rhs) const { return m_key == rhs.first; }
@@ -125,7 +125,7 @@ private:
         TItemNameAsKey m_key;
     };
 
-    struct accum_key : public std::binary_function<TTimeValStorageRep, TItems::value_type, TTimeValStorageRep>
+    struct accum_key
     {
         accum_key(const TItemNameAsKey& key) : m_key(key) {}
         TTimeValStorageRep operator()(const TTimeValStorageRep& v, const TItems::value_type& rhs) const
