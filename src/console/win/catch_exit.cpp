@@ -1,12 +1,12 @@
 // Markus Borris, 2011-17
-// This file is part of Toolib library.
+// This file is part of toolib library.
 
 //!
 /**
 */
 //! \file
 
-#include "Toolib/console/win/catch_exit.h"
+#include "toolib/console/win/catch_exit.h"
 #if TOO_OS_WINDOWS && TOO_OS_WINDOWS_DESKTOP
 #include <sstream>
 #include <stdexcept>

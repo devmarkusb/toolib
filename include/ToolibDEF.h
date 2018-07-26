@@ -1,5 +1,5 @@
 // Markus Borris, 2014
-// This file is part of my Toolib library.
+// This file is part of my toolib library.
 
 //! File serves to export symbols for Toolib as a library.
 /** Note that it uses itself a little bit to do that.
@@ -9,7 +9,7 @@
 #ifndef TOOLIBDEF_H_INCL_aibuxsgfnz342975ty31
 #define TOOLIBDEF_H_INCL_aibuxsgfnz342975ty31
 
-#include "Toolib/linklib/LINKLIB_DEFS.h"
+#include "toolib/linklib/LINKLIB_DEFS.h"
 
 
 #if defined(TOOLIB_LIBRARY)

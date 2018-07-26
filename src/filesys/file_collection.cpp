@@ -1,14 +1,14 @@
 // Markus Borris, 2016
-// This file is part of Toolib library.
+// This file is part of toolib library.
 
 //!
 /**
 */
 //! \file
 
-#include "Toolib/filesys/file_collection.h"
-#include "Toolib/filesys/path.h"
-#include "Toolib/math/number.h"
+#include "toolib/filesys/file_collection.h"
+#include "toolib/filesys/path.h"
+#include "toolib/math/number.h"
 #include <fstream>
 
 

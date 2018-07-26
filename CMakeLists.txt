@@ -56,7 +56,7 @@ endif ()
 
 set(TargetToolibTest ${PROJECT_NAME}Test)
 
-file(GLOB_RECURSE TargetToolibTest_SOURCES "include/Toolib/*.test.cpp")
+file(GLOB_RECURSE TargetToolibTest_SOURCES "include/toolib/*.test.cpp")
 
 add_executable(${TargetToolibTest}
     ${TargetToolibTest_SOURCES}

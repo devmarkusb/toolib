@@ -1,13 +1,13 @@
 // Markus Borris, 2016
-// This file is part of Toolib library.
+// This file is part of toolib library.
 
 //!
 /**
 */
 //! \file
 
-#include "Toolib/date_time/date_time.h"
-#include "Toolib/math/number.h"
+#include "toolib/date_time/date_time.h"
+#include "toolib/math/number.h"
 
 
 namespace too
