@@ -39,19 +39,12 @@ configure_file(${TargetToolib}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetToo
 target_include_directories(${TargetToolib} PRIVATE ${CMAKE_BINARY_DIR})
 
 target_include_directories(${TargetToolib} PUBLIC include)
-target_include_directories(${TargetToolib} PUBLIC ${tooBasicCodeSupport_INCLUDE_DIRS})
-target_include_directories(${TargetToolib} PUBLIC ${tooLinklib_INCLUDE_DIRS})
-target_include_directories(${TargetToolib} PUBLIC ${tooString_INCLUDE_DIRS})
-target_include_directories(${TargetToolib} PUBLIC ${tooMem_INCLUDE_DIRS})
+target_include_directories(${TargetToolib} PUBLIC ${tfl_INCLUDE_DIRS})
 
 target_link_libraries(${TargetToolib}) # tooBasicCodeSupport tooLinklib tooString tooMem
 
 set(${TargetToolib}_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/include
-    ${tooBasicCodeSupport_INCLUDE_DIRS}
-    ${tooLinklib_INCLUDE_DIRS}
-    ${tooString_INCLUDE_DIRS}
-    ${tooMem_INCLUDE_DIRS}
     CACHE INTERNAL "${TargetToolib}: include directories" FORCE)
 
     
