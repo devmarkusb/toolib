@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.8.2)
 
 include(${TOO_CMAKE_INC_BUILDNR})
-project(Toolib VERSION 0.1.${BUILD_NR}.0)
+project(toolib VERSION 0.1.${BUILD_NR}.0)
 message(STATUS "project version: " ${PROJECT_VERSION})
 set(TargetToolib ${PROJECT_NAME})
 
@@ -41,7 +41,7 @@ target_include_directories(${TargetToolib} PRIVATE ${CMAKE_BINARY_DIR})
 target_include_directories(${TargetToolib} PUBLIC include)
 target_include_directories(${TargetToolib} PUBLIC ${tfl_INCLUDE_DIRS})
 
-target_link_libraries(${TargetToolib}) # tooBasicCodeSupport tooLinklib tooString tooMem
+target_link_libraries(${TargetToolib})
 
 set(${TargetToolib}_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/include
@@ -69,7 +69,7 @@ endif ()
 
 set_target_properties(${TargetToolibTest} PROPERTIES DEBUG_POSTFIX "d")
 
-target_include_directories(${TargetToolibTest} PRIVATE ${Toolib_INCLUDE_DIRS})
+target_include_directories(${TargetToolibTest} PRIVATE ${TargetToolib}_INCLUDE_DIRS)
 
 target_link_libraries(${TargetToolibTest} PRIVATE gtest_main ${TargetToolib})
 
