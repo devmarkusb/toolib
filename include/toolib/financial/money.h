@@ -9,7 +9,7 @@
 #ifndef MONEY_H_weztuiolkjhgf34567
 #define MONEY_H_weztuiolkjhgf34567
 
-#include "ToolibDEF.h"
+#include "toolibDEF.h"
 #include "toolib/optional.h"
 #include <locale>
 #include <string>

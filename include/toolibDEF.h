@@ -1,7 +1,7 @@
 // Markus Borris, 2014
 // This file is part of my toolib library.
 
-//! File serves to export symbols for Toolib as a library.
+//! File serves to export symbols for toolib as a library.
 /** Note that it uses itself a little bit to do that.
 */
 //! \file

@@ -9,7 +9,7 @@
 #ifndef FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn
 #define FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn
 
-#include "ToolibDEF.h"
+#include "toolibDEF.h"
 #include <string>
 #include <vector>
 

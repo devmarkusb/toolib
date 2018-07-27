@@ -1,5 +1,5 @@
 ==========================================================================
-Toolib version 0.0.0
+toolib version 0.0.0
 ==========================================================================
 
    Content of this file:
@@ -19,7 +19,7 @@ Toolib version 0.0.0
 2. How to start
 ==========================================================================
 
-In most cases you just need to include header files from subdir Toolib.
+In most cases you just need to include header files from subdir toolib.
 
 Sometimes you need to build the lib according to CMakeLists.txt in the root.
 

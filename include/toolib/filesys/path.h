@@ -9,7 +9,7 @@
 #ifndef PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
 #define PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
 
-#include "ToolibDEF.h"
+#include "toolibDEF.h"
 #include <string>
 #include <vector>
 
