@@ -8,79 +8,79 @@
 
 TEST(ToFormattedStringTest, Rounding)
 {
-    EXPECT_EQ("99.99 ps", too::CPerformanceProfiler::ToFormattedString(0.000000000099985));
-    EXPECT_EQ("99.98 ps", too::CPerformanceProfiler::ToFormattedString(0.000000000099984));
-    EXPECT_EQ("99.99 ns", too::CPerformanceProfiler::ToFormattedString(0.000000099986));
-    EXPECT_EQ("99.98 ns", too::CPerformanceProfiler::ToFormattedString(0.000000099983));
-    EXPECT_EQ("99.99 \xC2\xB5s", too::CPerformanceProfiler::ToFormattedString(0.000099987));
-    EXPECT_EQ("99.98 \xC2\xB5s", too::CPerformanceProfiler::ToFormattedString(0.000099982));
-    EXPECT_EQ("99.99 ms", too::CPerformanceProfiler::ToFormattedString(0.099988));
-    EXPECT_EQ("99.98 ms", too::CPerformanceProfiler::ToFormattedString(0.099981));
-    EXPECT_EQ("59.99 s", too::CPerformanceProfiler::ToFormattedString(59.989));
-    EXPECT_EQ("59.98 s", too::CPerformanceProfiler::ToFormattedString(59.980));
-    EXPECT_EQ("59:59.99", too::CPerformanceProfiler::ToFormattedString(3599.985));
-    EXPECT_EQ("59:59.98", too::CPerformanceProfiler::ToFormattedString(3599.984));
+    EXPECT_EQ("99.99 ps", too::PerformanceProfiler::toFormattedString(0.000000000099985));
+    EXPECT_EQ("99.98 ps", too::PerformanceProfiler::toFormattedString(0.000000000099984));
+    EXPECT_EQ("99.99 ns", too::PerformanceProfiler::toFormattedString(0.000000099986));
+    EXPECT_EQ("99.98 ns", too::PerformanceProfiler::toFormattedString(0.000000099983));
+    EXPECT_EQ("99.99 \xC2\xB5s", too::PerformanceProfiler::toFormattedString(0.000099987));
+    EXPECT_EQ("99.98 \xC2\xB5s", too::PerformanceProfiler::toFormattedString(0.000099982));
+    EXPECT_EQ("99.99 ms", too::PerformanceProfiler::toFormattedString(0.099988));
+    EXPECT_EQ("99.98 ms", too::PerformanceProfiler::toFormattedString(0.099981));
+    EXPECT_EQ("59.99 s", too::PerformanceProfiler::toFormattedString(59.989));
+    EXPECT_EQ("59.98 s", too::PerformanceProfiler::toFormattedString(59.980));
+    EXPECT_EQ("59:59.99", too::PerformanceProfiler::toFormattedString(3599.985));
+    EXPECT_EQ("59:59.98", too::PerformanceProfiler::toFormattedString(3599.984));
 }
 
 TEST(ToFormattedStringTest, UnitStepping)
 {
-    EXPECT_EQ("99.99 ps", too::CPerformanceProfiler::ToFormattedString(0.000000000099990));
-    EXPECT_EQ("99.99 ns", too::CPerformanceProfiler::ToFormattedString(0.000000099990));
-    EXPECT_EQ("99.99 \xC2\xB5s", too::CPerformanceProfiler::ToFormattedString(0.000099990));
-    EXPECT_EQ("99.99 ms", too::CPerformanceProfiler::ToFormattedString(0.099990));
-    EXPECT_EQ("0.10 s", too::CPerformanceProfiler::ToFormattedString(0.1));
-    EXPECT_EQ("1.00 s", too::CPerformanceProfiler::ToFormattedString(1.0));
-    EXPECT_EQ("01:00.00", too::CPerformanceProfiler::ToFormattedString(60.0));
-    EXPECT_EQ("01:00:00", too::CPerformanceProfiler::ToFormattedString(3600.0));
+    EXPECT_EQ("99.99 ps", too::PerformanceProfiler::toFormattedString(0.000000000099990));
+    EXPECT_EQ("99.99 ns", too::PerformanceProfiler::toFormattedString(0.000000099990));
+    EXPECT_EQ("99.99 \xC2\xB5s", too::PerformanceProfiler::toFormattedString(0.000099990));
+    EXPECT_EQ("99.99 ms", too::PerformanceProfiler::toFormattedString(0.099990));
+    EXPECT_EQ("0.10 s", too::PerformanceProfiler::toFormattedString(0.1));
+    EXPECT_EQ("1.00 s", too::PerformanceProfiler::toFormattedString(1.0));
+    EXPECT_EQ("01:00.00", too::PerformanceProfiler::toFormattedString(60.0));
+    EXPECT_EQ("01:00:00", too::PerformanceProfiler::toFormattedString(3600.0));
 }
 
 TEST(ToFormattedStringTest, RoundingCausingUnitStepping)
 {
-    EXPECT_EQ("0.10 s", too::CPerformanceProfiler::ToFormattedString(0.099999));
+    EXPECT_EQ("0.10 s", too::PerformanceProfiler::toFormattedString(0.099999));
 }
 
 TEST(ToFormattedStringTest, NoRounding)
 {
-    EXPECT_EQ("99:59:58", too::CPerformanceProfiler::ToFormattedString(359998.5));
-    EXPECT_EQ("99:59:58", too::CPerformanceProfiler::ToFormattedString(359998.4));
+    EXPECT_EQ("99:59:58", too::PerformanceProfiler::toFormattedString(359998.5));
+    EXPECT_EQ("99:59:58", too::PerformanceProfiler::toFormattedString(359998.4));
 }
 
-TEST(ToFormattedStringTest, Zero) { EXPECT_EQ("0.00 ps", too::CPerformanceProfiler::ToFormattedString(0.0)); }
+TEST(ToFormattedStringTest, Zero) { EXPECT_EQ("0.00 ps", too::PerformanceProfiler::toFormattedString(0.0)); }
 
-TEST(ToFormattedStringTest, Neg) { EXPECT_EQ("-1.00 s", too::CPerformanceProfiler::ToFormattedString(-1.0)); }
+TEST(ToFormattedStringTest, Neg) { EXPECT_EQ("-1.00 s", too::PerformanceProfiler::toFormattedString(-1.0)); }
 
-TEST(ToFormattedStringTest, Inf) { EXPECT_EQ(">= 100 h", too::CPerformanceProfiler::ToFormattedString(360000)); }
+TEST(ToFormattedStringTest, Inf) { EXPECT_EQ(">= 100 h", too::PerformanceProfiler::toFormattedString(360000)); }
 
 TEST(DISABLED_DumpAllItemsTest, PracticalScenario)
 {
-    too::CPerformanceProfiler perfscope0("1. 500ms");
-    EXPECT_NEAR(0.0, perfscope0.Elapsed_CurrentItem(), 0.02);
+    too::PerformanceProfiler perfscope0("1. 500ms");
+    EXPECT_NEAR(0.0, perfscope0.elapsed_currentItem(), 0.02);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    EXPECT_NEAR(0.5, perfscope0.Elapsed_CurrentItem(), 0.02);
-    perfscope0.StartNewItem("2. nest0");
+    EXPECT_NEAR(0.5, perfscope0.elapsed_currentItem(), 0.02);
+    perfscope0.startNewItem("2. nest0");
     {
-        too::CPerformanceProfiler perfscope1("3. 100ms", 1);
+        too::PerformanceProfiler perfscope1("3. 100ms", 1);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        perfscope1.StartNewItem("4. nest1");
+        perfscope1.startNewItem("4. nest1");
         {
-            too::CPerformanceProfiler perfscope2("5. for", 2);
+            too::PerformanceProfiler perfscope2("5. for", 2);
             for (size_t i = 1; i <= 5; ++i)
             {
-                too::CPerformanceProfiler perfscope3("6. 500ms", 3);
+                too::PerformanceProfiler perfscope3("6. 500ms", 3);
                 too::ignore_arg(perfscope3);
                 std::this_thread::sleep_for(std::chrono::milliseconds(500));
             }
-            perfscope2.StartNewItem("7. 200ms");
+            perfscope2.startNewItem("7. 200ms");
             std::this_thread::sleep_for(std::chrono::milliseconds(200));
         }
     }
-    perfscope0.StartNewItem("8. 300ms");
+    perfscope0.startNewItem("8. 300ms");
     std::this_thread::sleep_for(std::chrono::milliseconds(300));
-    perfscope0.StartNewItem("9. 100ms");
+    perfscope0.startNewItem("9. 100ms");
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    perfscope0.StopItem();
-    std::cout << too::CPerformanceProfiler::DumpAllItems(true);
-    const std::vector<too::CPerformanceProfiler::SDumpDataset>& data = too::CPerformanceProfiler::DumpDataTest();
+    perfscope0.stopItem();
+    std::cout << too::PerformanceProfiler::dumpAllItems<too::PerformanceProfiler::DumpFormat::stringAndStructure>();
+    const std::vector<too::PerformanceProfiler::DumpDataset>& data = too::PerformanceProfiler::dumpedData();
     ASSERT_EQ(9u, data.size());
     EXPECT_EQ("1. 500ms", data[0].m_ItemName);
     EXPECT_EQ(1u, data[0].m_Count);
@@ -145,7 +145,9 @@ TEST(DISABLED_DumpAllItemsTest, PracticalScenario)
     EXPECT_NEAR(0.1, data[8].m_Mean, 0.02);
     EXPECT_NEAR(0.0, data[8].m_StdDev, 0.0);
 
-    too::CPerformanceProfiler::Reset();
-    too::CPerformanceProfiler::DumpAllItems(true);
+    too::PerformanceProfiler::reset();
+    EXPECT_STREQ(
+            too::PerformanceProfiler::dumpAllItems<too::PerformanceProfiler::DumpFormat::stringAndStructure>().c_str(),
+            "No performance measurement data.\n");
     EXPECT_EQ(0u, data.size());
 }
