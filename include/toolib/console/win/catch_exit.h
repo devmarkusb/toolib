@@ -12,7 +12,7 @@
 
 #include "toolib/PPDEFS.h"
 #if TOO_OS_WINDOWS && TOO_OS_WINDOWS_DESKTOP
-#include "../../../ToolibDEF.h"
+#include "../../../toolibDEF.h"
 #include <windows.h>
 
 namespace too
