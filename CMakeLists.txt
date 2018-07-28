@@ -24,24 +24,17 @@ add_library(${TargetToolib} SHARED
     ${TargetToolib_SRC_INCS}
 )
 
-set_target_properties(${TargetToolib} PROPERTIES POSITION_INDEPENDENT_CODE ON)
-
-if (WIN32)
-    set_property(TARGET ${TargetToolib} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
-endif ()
-
-# dll export define
-set_property(TARGET ${TargetToolib} APPEND PROPERTY COMPILE_DEFINITIONS TOOLIB_LIBRARY)
-
-set_target_properties(${TargetToolib} PROPERTIES DEBUG_POSTFIX "d")
+too_set_target_lib_export_def(${TargetToolib} TOOLIB_LIBRARY)
 
 configure_file(${TargetToolib}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetToolib}_build_config.h)
-target_include_directories(${TargetToolib} PRIVATE ${CMAKE_BINARY_DIR})
 
+target_include_directories(${TargetToolib} PRIVATE ${CMAKE_BINARY_DIR})
 target_include_directories(${TargetToolib} PUBLIC include)
 target_include_directories(${TargetToolib} PUBLIC ${tfl_INCLUDE_DIRS})
 
 target_link_libraries(${TargetToolib})
+
+too_set_target_defaults(${TargetToolib})
 
 set(${TargetToolib}_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/include
@@ -63,22 +56,10 @@ add_executable(${TargetToolibTest}
     ${TargetToolib_INCS}
 )
 
-if (WIN32)
-    set_property(TARGET ${TargetToolibTest} APPEND PROPERTY COMPILE_DEFINITIONS UNICODE _UNICODE)
-endif ()
-
-set_target_properties(${TargetToolibTest} PROPERTIES DEBUG_POSTFIX "d")
-
 target_include_directories(${TargetToolibTest} PRIVATE ${TargetToolib}_INCLUDE_DIRS)
 
 target_link_libraries(${TargetToolibTest} PRIVATE gtest_main ${TargetToolib})
 
+too_set_target_defaults(${TargetToolibTest})
 
-set(do_auto_test    ON)
-
-if (do_auto_test)
-    add_custom_command(
-        TARGET ${TargetToolibTest} POST_BUILD
-        COMMAND ${TargetToolibTest}
-        )
-endif ()
+too_run_target_postbuild(${TargetToolibTest})
