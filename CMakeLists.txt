@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.8.2)
 
-include(${TOO_CMAKE_INC_BUILDNR})
+too_include(buildnr.cmake)
 project(toolib VERSION 0.1.${BUILD_NR}.0)
 message(STATUS "project version: " ${PROJECT_VERSION})
 set(TargetToolib ${PROJECT_NAME})
 
-include(${TOO_CMAKE_INC_DEFAULTS})
+too_include(defaults.cmake)
 
 file(GLOB_RECURSE TargetToolib_INCS "include/*.h*")
 file(GLOB_RECURSE TargetToolib_SRC_INCS "src/*.h*")
