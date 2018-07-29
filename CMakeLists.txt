@@ -54,6 +54,8 @@ add_executable(${TargetToolibTest}
     ${TargetToolib_INCS}
 )
 
+too_add_test(${TargetToolibTest})
+
 target_include_directories(${TargetToolibTest} PRIVATE ${TargetToolib}_INCLUDE_DIRS)
 
 target_link_libraries(${TargetToolibTest} PRIVATE gtest_main ${TargetToolib})
