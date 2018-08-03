@@ -215,7 +215,7 @@ struct KeyData
 };
 }
 
-template<PerformanceProfiler::DumpFormat fmt = PerformanceProfiler::DumpFormat::stringOnly>
+template<PerformanceProfiler::DumpFormat fmt>
 inline std::string PerformanceProfiler::dumpAllItems()
 {
     if constexpr (fmt != DumpFormat::stringOnly)
