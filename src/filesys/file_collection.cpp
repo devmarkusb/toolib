@@ -7,8 +7,8 @@
 //! \file
 
 #include "toolib/filesys/file_collection.h"
-#include "toolib/filesys/path.h"
 #include "toolib/math/number.h"
+#include "toolib/std/std_ext_filesystem.h"
 #include <fstream>
 
 
@@ -20,8 +20,9 @@ namespace file
 
 std::string FileCollection::get_base_name(const std::string& fn)
 {
-    std::string ret = fn;
-    too::file::remove_extension(ret);
+    too::std_fs::path p{fn};
+    p.replace_extension();
+    std::string ret = p.string();
     size_t pos = ret.find_last_not_of("0123456789");
     if (pos == std::string::npos)
         return ret;
@@ -31,8 +32,8 @@ std::string FileCollection::get_base_name(const std::string& fn)
 
 FileCollection::FileCollection(const std::string& file_name)
 {
-    CPath p(file_name, CPath::EForm::NATIVE);
-    std::string file_ext{p.getExtension(true)};
+    too::std_fs::path p{file_name};
+    std::string file_ext{p.extension().string()};
     std::string base_file_name{get_base_name(file_name)};
     std::string fn{base_file_name + file_ext};
     std::ifstream f(fn);

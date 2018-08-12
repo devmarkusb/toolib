@@ -22,7 +22,8 @@ TOOLIBSHARED_EXPORT void remove_extension(std::string& fn);
 TOOLIBSHARED_EXPORT bool file_exists(const std::string& fn);
 
 //! String manipulation helper class only. No file system operations.
-class TOOLIBSHARED_EXPORT CPath
+/** DEPRECATED, use too::std_fs::path instead.*/
+class TOOLIBSHARED_EXPORT Path
 {
 public:
     enum class EType
@@ -39,19 +40,19 @@ public:
         NATIVE,
     };
 
-    explicit CPath(const std::string& path = std::string(), EForm form = EForm::PLATFORMINDEPENDENT,
+    explicit Path(const std::string& path = std::string(), EForm form = EForm::PLATFORMINDEPENDENT,
         EType type = EType::IS_UNKNOWN);
     //! no copy, use input by reference
-    explicit CPath(std::string& path, bool useByReference = false, EForm form = EForm::PLATFORMINDEPENDENT,
+    explicit Path(std::string& path, bool useByReference = false, EForm form = EForm::PLATFORMINDEPENDENT,
         EType type = EType::IS_UNKNOWN);
-    CPath(const CPath& other);
-    CPath(CPath&& other);
-    CPath& operator=(const CPath& other);
-    CPath& operator=(CPath&& other);
-    void swap(CPath& other);
+    Path(const Path& other);
+    Path(Path&& other);
+    Path& operator=(const Path& other);
+    Path& operator=(Path&& other);
+    void swap(Path& other);
 
     operator std::string() const;
-    CPath& operator+=(const CPath& other);
+    Path& operator+=(const Path& other);
     std::string getFolderPath() const;
     //! Inclusive extension. Use function remove_extension if desired.
     std::string getFileName() const;
@@ -61,11 +62,11 @@ public:
     bool isEmpty() const;
 
     //! not yet capable of removing subsequent duplicate separators; just converts them to the native form
-    CPath& cleanupNative();
+    Path& cleanupNative();
     //! not yet capable of removing subsequent duplicate separators; just converts them to the platform independent form
-    CPath& cleanupPlatformIndep();
-    CPath& ensureTrailingSeparator();
-    CPath& ensureTrailingSeparator(bool native);
+    Path& cleanupPlatformIndep();
+    Path& ensureTrailingSeparator();
+    Path& ensureTrailingSeparator(bool native);
     const std::string& getSeparatorUsedHere() const;
 
     static const std::string& getSeparatorNative();
@@ -86,7 +87,7 @@ private:
     void detectForm() const;
 };
 
-TOOLIBSHARED_EXPORT CPath operator+(const CPath& p1, const CPath& p2);
+TOOLIBSHARED_EXPORT Path operator+(const Path& p1, const Path& p2);
 } // file
 } // too
 

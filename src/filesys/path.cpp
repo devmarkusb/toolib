@@ -43,11 +43,11 @@ bool file_exists(const std::string& fn)
     return file ? true : false;
 }
 
-const std::string CPath::FOLDER_SEPARATOR_TO_USE_HERE = "/";
+const std::string Path::FOLDER_SEPARATOR_TO_USE_HERE = "/";
 
-CPath::CPath(const std::string& path, EForm form, EType type) : m_form(form), m_type(type) { *m_path = path; }
+Path::Path(const std::string& path, EForm form, EType type) : m_form(form), m_type(type) { *m_path = path; }
 
-CPath::CPath(std::string& path, bool useByReference, EForm form, EType type) : m_form(form), m_type(type)
+Path::Path(std::string& path, bool useByReference, EForm form, EType type) : m_form(form), m_type(type)
 {
     if (useByReference)
         m_path = &path;
@@ -55,16 +55,16 @@ CPath::CPath(std::string& path, bool useByReference, EForm form, EType type) : m
         *m_path = path;
 }
 
-CPath::CPath(const CPath& other)
+Path::Path(const Path& other)
 {
     *m_path = *other.m_path;
     m_form  = other.m_form;
     m_type  = other.m_type;
 }
 
-CPath::CPath(CPath&& other) { CPath::swap(other); }
+Path::Path(Path&& other) { Path::swap(other); }
 
-CPath& CPath::operator=(const CPath& other)
+Path& Path::operator=(const Path& other)
 {
     *m_path = *other.m_path;
     m_form  = other.m_form;
@@ -72,22 +72,22 @@ CPath& CPath::operator=(const CPath& other)
     return *this;
 }
 
-CPath& CPath::operator=(CPath&& other)
+Path& Path::operator=(Path&& other)
 {
-    CPath::swap(other);
+    Path::swap(other);
     return *this;
 }
 
-void CPath::swap(CPath& other)
+void Path::swap(Path& other)
 {
     std::swap(*m_path, *other.m_path);
     std::swap(m_form, other.m_form);
     std::swap(m_type, other.m_type);
 }
 
-CPath::operator std::string() const { return *m_path; }
+Path::operator std::string() const { return *m_path; }
 
-CPath& CPath::operator+=(const CPath& other)
+Path& Path::operator+=(const Path& other)
 {
     if (m_form == EForm::UNKNOWN)
         detectForm();
@@ -103,7 +103,7 @@ CPath& CPath::operator+=(const CPath& other)
     return *this;
 }
 
-std::string CPath::getFolderPath() const
+std::string Path::getFolderPath() const
 {
     if (m_type != EType::IS_FILE && m_type != EType::IS_UNKNOWN)
         return std::string();
@@ -115,7 +115,7 @@ std::string CPath::getFolderPath() const
     return m_path->substr(0, index + 1);
 }
 
-std::string CPath::getFileName() const
+std::string Path::getFileName() const
 {
     if (m_type != EType::IS_FILE && m_type != EType::IS_UNKNOWN)
         return std::string();
@@ -127,7 +127,7 @@ std::string CPath::getFileName() const
     return m_path->substr(index + 1);
 }
 
-std::string CPath::getExtension(bool with_dot) const
+std::string Path::getExtension(bool with_dot) const
 {
     if (m_type != EType::IS_FILE && m_type != EType::IS_UNKNOWN)
         return std::string();
@@ -141,7 +141,7 @@ std::string CPath::getExtension(bool with_dot) const
         return m_path->substr(index + 1);
 }
 
-bool CPath::isAbsolute() const
+bool Path::isAbsolute() const
 {
     if (isEmpty())
         return false;
@@ -155,9 +155,9 @@ bool CPath::isAbsolute() const
 #endif
 }
 
-bool CPath::isEmpty() const { return m_path->empty(); }
+bool Path::isEmpty() const { return m_path->empty(); }
 
-CPath& CPath::cleanupNative()
+Path& Path::cleanupNative()
 {
 #if TOO_OS_WINDOWS
     std::replace(m_path->begin(), m_path->end(), '/', '\\');
@@ -168,16 +168,16 @@ CPath& CPath::cleanupNative()
     return *this;
 }
 
-CPath& CPath::cleanupPlatformIndep()
+Path& Path::cleanupPlatformIndep()
 {
     std::replace(m_path->begin(), m_path->end(), '\\', FOLDER_SEPARATOR_TO_USE_HERE[0]);
     m_form = EForm::PLATFORMINDEPENDENT;
     return *this;
 }
 
-CPath& CPath::ensureTrailingSeparator() { return ensureTrailingSeparator(m_form == EForm::NATIVE); }
+Path& Path::ensureTrailingSeparator() { return ensureTrailingSeparator(m_form == EForm::NATIVE); }
 
-CPath& CPath::ensureTrailingSeparator(bool native)
+Path& Path::ensureTrailingSeparator(bool native)
 {
     if (m_path->empty() || m_type == EType::IS_FILE || m_type == EType::IS_LINK)
         return *this;
@@ -190,26 +190,26 @@ CPath& CPath::ensureTrailingSeparator(bool native)
     return *this;
 }
 
-const std::string& CPath::getSeparatorUsedHere() const
+const std::string& Path::getSeparatorUsedHere() const
 {
     if (m_form == EForm::UNKNOWN)
         detectForm();
     return m_form == EForm::NATIVE ? getSeparatorNative() : getSeparatorPlatformIndep();
 }
 
-const std::string& CPath::getSeparatorNative()
+const std::string& Path::getSeparatorNative()
 {
     TOO_ASSERT(!OS_FOLDER_SEPARATOR.empty());
     return OS_FOLDER_SEPARATOR;
 }
 
-const std::string& CPath::getSeparatorPlatformIndep()
+const std::string& Path::getSeparatorPlatformIndep()
 {
     TOO_ASSERT(!FOLDER_SEPARATOR_TO_USE_HERE.empty());
     return FOLDER_SEPARATOR_TO_USE_HERE;
 }
 
-void CPath::detectForm() const
+void Path::detectForm() const
 {
     size_t pos = m_path->find_first_of(OS_POSSIBLE_SEPARATORS);
     if (pos != std::string::npos)
