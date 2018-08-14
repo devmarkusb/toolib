@@ -32,6 +32,8 @@ target_include_directories(${TargetToolib} PUBLIC ${tfl_INCLUDE_DIRS})
 
 target_link_libraries(${TargetToolib})
 
+too_set_target_filesystem(${TargetToolib})
+
 too_set_target_defaults(${TargetToolib})
 
 set(${TargetToolib}_INCLUDE_DIRS
