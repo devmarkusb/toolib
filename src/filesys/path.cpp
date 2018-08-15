@@ -28,21 +28,6 @@ namespace too
 {
 namespace file
 {
-
-void remove_extension(std::string& fn)
-{
-    size_t lastdot = fn.find_last_of(".");
-    if (lastdot == std::string::npos)
-        return;
-    fn = fn.substr(0, lastdot);
-}
-
-bool file_exists(const std::string& fn)
-{
-    std::ifstream file(fn, std::ios_base::binary);
-    return file ? true : false;
-}
-
 const std::string Path::FOLDER_SEPARATOR_TO_USE_HERE = "/";
 
 Path::Path(const std::string& path, EForm form, EType type) : m_form(form), m_type(type) { *m_path = path; }

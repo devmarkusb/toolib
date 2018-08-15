@@ -18,9 +18,6 @@ namespace too
 {
 namespace file
 {
-TOOLIBSHARED_EXPORT void remove_extension(std::string& fn);
-TOOLIBSHARED_EXPORT bool file_exists(const std::string& fn);
-
 //! String manipulation helper class only. No file system operations.
 /** DEPRECATED, use too::std_fs::path instead.*/
 class TOOLIBSHARED_EXPORT Path

@@ -4,7 +4,7 @@
 using too::file::Path;
 
 
-class CPathTest : public ::testing::Test
+class PathTest : public ::testing::Test
 {
 protected:
     virtual void SetUp() {}
@@ -12,7 +12,7 @@ protected:
     virtual void TearDown() {}
 };
 
-TEST_F(CPathTest, EmptyConstruction)
+TEST_F(PathTest, EmptyConstruction)
 {
     Path p;
     std::string s(p);
@@ -36,7 +36,7 @@ TEST_F(CPathTest, EmptyConstruction)
     EXPECT_TRUE(p.isEmpty());
 }
 
-TEST_F(CPathTest, Statics)
+TEST_F(PathTest, Statics)
 {
 #if TOO_OS_WINDOWS
     EXPECT_EQ("\\", Path::getSeparatorNative());
@@ -50,7 +50,7 @@ TEST_F(CPathTest, Statics)
     EXPECT_EQ(s, Path::getSeparatorNative());
 }
 
-TEST_F(CPathTest, Constructions)
+TEST_F(PathTest, Constructions)
 {
     std::string pstr("test");
     Path p(pstr);
@@ -75,7 +75,7 @@ TEST_F(CPathTest, Constructions)
     EXPECT_EQ("test/", pstr);
 }
 
-TEST_F(CPathTest, Swapping)
+TEST_F(PathTest, Swapping)
 {
     Path p1("p1", Path::EForm::PLATFORMINDEPENDENT, Path::EType::IS_FOLDER);
     std::string s2("p2");
@@ -87,7 +87,7 @@ TEST_F(CPathTest, Swapping)
     EXPECT_EQ("p2", str);
 }
 
-TEST_F(CPathTest, ensureTrailingSeparator)
+TEST_F(PathTest, ensureTrailingSeparator)
 {
     Path p("");
     std::string s(p.ensureTrailingSeparator());
@@ -104,7 +104,7 @@ TEST_F(CPathTest, ensureTrailingSeparator)
 #endif
 }
 
-TEST_F(CPathTest, AppendTo)
+TEST_F(PathTest, AppendTo)
 {
     Path p1("a/b");
     Path p2("c\\d/e");
@@ -113,7 +113,7 @@ TEST_F(CPathTest, AppendTo)
     EXPECT_EQ("a/b/c/d/e/", s);
 }
 
-TEST_F(CPathTest, getFolderPath)
+TEST_F(PathTest, getFolderPath)
 {
     Path p1("a/b");
     EXPECT_EQ("a/", p1.getFolderPath());
@@ -126,7 +126,7 @@ TEST_F(CPathTest, getFolderPath)
 #endif
 }
 
-TEST_F(CPathTest, getFileName)
+TEST_F(PathTest, getFileName)
 {
     Path p1("a/b");
     EXPECT_EQ("b", p1.getFileName());
@@ -134,21 +134,13 @@ TEST_F(CPathTest, getFileName)
     EXPECT_EQ("b.exe", p2.getFileName());
 }
 
-TEST_F(CPathTest, remove_extension)
-{
-    Path p1("a/b.exe");
-    std::string s1{p1};
-    too::file::remove_extension(s1);
-    EXPECT_EQ("a/b", s1);
-}
-
-TEST_F(CPathTest, getExtension)
+TEST_F(PathTest, getExtension)
 {
     Path p1("a/b.ext");
     EXPECT_EQ("ext", p1.getExtension());
 }
 
-TEST_F(CPathTest, isAbsolute)
+TEST_F(PathTest, isAbsolute)
 {
     Path p1("a/b");
     EXPECT_FALSE(p1.isAbsolute());
@@ -161,7 +153,7 @@ TEST_F(CPathTest, isAbsolute)
 #endif
 }
 
-TEST_F(CPathTest, cleanupX)
+TEST_F(PathTest, cleanupX)
 {
     Path p1("a/b/c");
     std::string s(p1.cleanupPlatformIndep());
@@ -174,7 +166,7 @@ TEST_F(CPathTest, cleanupX)
 #endif
 }
 
-TEST_F(CPathTest, getSeparatorUsedHere)
+TEST_F(PathTest, getSeparatorUsedHere)
 {
     Path p1("a/b");
     EXPECT_EQ("/", p1.getSeparatorUsedHere());
