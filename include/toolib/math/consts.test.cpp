@@ -1,5 +1,6 @@
 #define _USE_MATH_DEFINES
 #include <cmath> // needs to be the first include for the upper macro to work
+#undef _USE_MATH_DEFINES
 #include "toolib/almost_equal.h"
 #include "toolib/math/consts.h"
 #include "toolib/math/floating_point.h"
@@ -23,5 +24,4 @@ TEST(math_constsTest, test)
     EXPECT_TRUE(too::math::approx_equal(pi_ld, too::math::consts::pi<long double>(), 1e-15L));
 }
 
-#undef _USE_MATH_DEFINES
 #undef M_PI // anyway

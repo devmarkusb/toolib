@@ -265,7 +265,7 @@ void ChartAxis<QuValueType>::constr_common_impl(const QuValueType& min_qu_val, c
 template <typename QuValueType>
 void ChartAxis<QuValueType>::expectProperSetup() const
 {
-    TOO_EXPECT_THROW(this->setup->max_tick_count ? this->setup->max_tick_count > 0 : true);
+    TOO_EXPECT_THROW(this->setup->max_tick_count ? *(this->setup->max_tick_count) > 0 : true);
 }
 
 template <typename QuValueType>
