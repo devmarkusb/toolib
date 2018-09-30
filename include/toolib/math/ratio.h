@@ -10,8 +10,8 @@
 #ifndef RATIO_H_louiuzlik79hi965gi6
 #define RATIO_H_louiuzlik79hi965gi6
 
+#include "toolib/almost_equal.h"
 #include "toolib/assert.h"
-#include "toolib/math/floating_point.h"
 #include "toolib/std/std_extensions.h"
 #include <cstdint>
 #include <initializer_list>
@@ -221,7 +221,7 @@ inline bool operator==(const Rational& lhs, const Rational& rhs)
 {
     if (lhs.denom == rhs.denom)
         return lhs.num == rhs.num;
-    return too::math::almost_equal(lhs.asFloatingPoint<long double>(), rhs.asFloatingPoint<long double>());
+    return too::almost_equal(lhs.asFloatingPoint<long double>(), rhs.asFloatingPoint<long double>());
 }
 inline bool operator!=(const Rational& lhs, const Rational& rhs) { return !operator==(lhs, rhs); }
 inline bool operator<(const Rational& lhs, const Rational& rhs)

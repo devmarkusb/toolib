@@ -16,10 +16,10 @@ protected:
     class CTest : public too::IAbstract
     {
     public:
-        virtual ~CTest() = default;
+        ~CTest() override = default;
         //! Parameter documentation, also for SetParameter().
         /** ... (in the real world it is extremely to provide a thorough documention of allowed name-type pairs)*/
-        virtual bool GetParameter(const char* name, too::TOutBuffer value) const override
+        bool GetParameter(const char* name, too::TOutBuffer value) const override
         {
             if (!name || !value)
                 return false;
@@ -35,7 +35,7 @@ protected:
             return true;
         }
         //! Cf. GetParameter()
-        virtual bool SetParameter(const char* name, const too::TInBuffer value) override
+        bool SetParameter(const char* name, const too::TInBuffer value) override
         {
             if (!name || !value)
                 return false;
@@ -51,7 +51,7 @@ protected:
             return true;
         }
         //! In the real world don't forget to provide a detailed documentation like for GetParameter().
-        virtual bool Execute(
+        bool Execute(
             const char* command, const too::TInBuffer params[] = nullptr, too::TOutBuffer retvalue = nullptr) override
         {
             if (!command)

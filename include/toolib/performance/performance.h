@@ -260,7 +260,8 @@ inline std::string PerformanceProfiler::dumpAllItems()
     {
         TimeValStorageRep totalT =
             too::accumulate(items().begin(), items().end(), TimeValStorageRep(), accum_key(key.first));
-        size_t count            = std::count_if(items().begin(), items().end(), match_key(key.first));
+        const auto count = std::count_if(items().begin(), items().end(), match_key(key.first));
+        TOO_ASSERT(count >= 0);
         TimeValStorageRep avgT = 0.0;
         if (count)
             avgT = totalT / static_cast<TimeValStorageRep>(count);
@@ -274,8 +275,8 @@ inline std::string PerformanceProfiler::dumpAllItems()
                 sortedItems.push_back(item.second.m_TimeVal);
         }
         std::sort(sortedItems.begin(), sortedItems.end());
-        size_t mid   = static_cast<size_t>(floor(static_cast<double>(count) / 2.0));
-        double meanT = (count > 1 && count % 2) ? (sortedItems[mid] + sortedItems[mid + 1]) / 2.0 : sortedItems[mid];
+        const auto mid   = static_cast<size_t>(floor(static_cast<double>(count) / 2.0));
+        const double meanT = (count > 1 && count % 2) ? (sortedItems[mid] + sortedItems[mid + 1]) / 2.0 : sortedItems[mid];
 
         double variance = 0.0;
         if (count > 1)
@@ -302,7 +303,7 @@ inline std::string PerformanceProfiler::dumpAllItems()
             << std::setw(COLUMN_WIDTH) << std::setprecision(COLUMN_WIDTH) << toFormattedString(meanT)
             << std::setw(COLUMN_WIDTH) << std::setprecision(COLUMN_WIDTH) << toFormattedString(stddev) << std::endl;
         if constexpr (fmt != DumpFormat::stringOnly)
-            dumpedData().push_back({ItemNameWithSymbolizedNestingLevel, count, totalT, avgT, meanT, stddev});
+            dumpedData().push_back({ItemNameWithSymbolizedNestingLevel, static_cast<size_t>(count), totalT, avgT, meanT, stddev});
     }
     ret << std::setfill('-') << std::setw(COLUMN_WIDTH_HUGE + COLUMN_WIDTH * 5) << '-' << std::endl;
     ret << std::setfill(' ');

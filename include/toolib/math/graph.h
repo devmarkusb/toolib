@@ -9,11 +9,11 @@
 #ifndef GRAPH_H_INCL_lnkjgngkvfvutzhirthczrec5
 #define GRAPH_H_INCL_lnkjgngkvfvutzhirthczrec5
 
-#include "floating_point.h"
 #include "number.h"
 #include "quantity_unit.h"
 #include "ratio.h"
 #include "scale.h"
+#include "toolib/almost_equal.h"
 #include "toolib/error.h"
 #include "toolib/optional.h"
 #include "toolib/ptr.h"
@@ -73,9 +73,9 @@ struct ChartAxis_setup
 //!
 struct ChartAxisProj_setup : public ChartAxis_setup
 {
-    virtual ~ChartAxisProj_setup() {}
+    ~ChartAxisProj_setup() override {}
 
-    virtual std::unique_ptr<ChartAxis_setup> clone() const override
+    std::unique_ptr<ChartAxis_setup> clone() const override
     {
         return too::make_unique<ChartAxisProj_setup>(*this);
     }
@@ -272,7 +272,7 @@ template <typename QuValueType>
 void ChartAxis<QuValueType>::ensureProperMinMax(QuValueType& min_qu_val, QuValueType& max_qu_val) const
 {
     TOO_EXPECT_THROW(min_qu_val <= max_qu_val);
-    if (too::math::almost_equal_alltypes(min_qu_val, max_qu_val, expected_ulp_difference_minmax))
+    if (too::almost_equal_alltypes(min_qu_val, max_qu_val, expected_ulp_difference_minmax))
     {
         min_qu_val -= 1;
         max_qu_val += 1;
@@ -384,7 +384,7 @@ template <typename QuValueType>
 void ChartAxisProj<QuValueType>::expectProperSetup() const
 {
     TOO_EXPECT_THROW(this->setup->projection_range.first < this->setup->projection_range.second);
-    TOO_EXPECT_THROW(!too::math::almost_equal(this->setup->projection_range.first, this->setup->projection_range.second,
+    TOO_EXPECT_THROW(!too::almost_equal(this->setup->projection_range.first, this->setup->projection_range.second,
         ChartAxisProj<QuValueType>::expected_ulp_difference_minmax));
 }
 

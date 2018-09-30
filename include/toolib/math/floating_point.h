@@ -21,44 +21,12 @@
 #include <type_traits>
 
 
-// I don't f***ing care restoring original defs for these...
-#undef min
-#undef max
-
+#include "toolib/PPDefs/MSVC/UNDEF_MIN_MAX"
 
 namespace too
 {
 namespace math
 {
-
-//! \Returns true, if \params x and y are almost equal. Expects \param ulp >= 1.
-template <typename FloatType>
-typename std::enable_if<std::is_floating_point<FloatType>::value, bool>::type almost_equal(
-    FloatType x, FloatType y, int ulp = 1)
-{
-    TOO_EXPECT(ulp >= 1);
-    return std::abs(x - y) < std::numeric_limits<FloatType>::epsilon() * std::abs(x + y) * ulp ||
-        std::abs(x - y) < std::numeric_limits<FloatType>::min();
-}
-
-//! Same as almost_equal, but also falls back to '==' if T is an integer type.
-/** Useful if ArithmeticType is already a more general template parameter in your context.*/
-template <typename ArithmeticType>
-typename std::enable_if<std::is_floating_point<ArithmeticType>::value, bool>::type almost_equal_alltypes(
-        ArithmeticType x, ArithmeticType y, int ulp = 1)
-{
-    return almost_equal(x, y, ulp);
-}
-
-//! Cf. other declaration of almost_equal_alltypes.
-template <typename ArithmeticType>
-typename std::enable_if<std::is_integral<ArithmeticType>::value, bool>::type almost_equal_alltypes(
-        ArithmeticType x, ArithmeticType y, int ulp = 1)
-{
-    too::ignore_arg(ulp);
-    return x == y;
-}
-
 //! Rough version of almost_equal, where you can pass a user defined eps(ilon) within which \params x and y are
 //! understood approx. equal.
 /** HINT: a common mistake leading to compiler error is not providing \param eps with explicit type FloatType, as the

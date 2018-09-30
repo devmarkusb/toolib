@@ -2,18 +2,6 @@
 #include "gtest/gtest.h"
 
 
-TEST(math_almost_equal_Test, test)
-{
-    EXPECT_TRUE(too::math::almost_equal(1.0, 1.0));
-    EXPECT_FALSE(too::math::almost_equal(1.0, 1.0000001));
-}
-
-TEST(math_almost_equal_alltypes_Test, test)
-{
-    EXPECT_TRUE(too::math::almost_equal_alltypes(1, 1));
-    EXPECT_FALSE(too::math::almost_equal_alltypes(1, 2));
-}
-
 TEST(math_approx_equal_Test, test)
 {
     EXPECT_TRUE(too::math::approx_equal(1.0, 1.001, 0.001));

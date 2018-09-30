@@ -15,7 +15,7 @@ using SomeOtherType = int;
 struct SomeType_flexed : public too::IType
 {
     SomeType_flexed() = default;
-    virtual ~SomeType_flexed() = default;
+    ~SomeType_flexed() override = default;
     SomeType_flexed(const SomeType_flexed& other) : too::IType(), rep(other.rep) {}
     SomeType_flexed& operator=(const SomeType_flexed& other)
     {
@@ -37,11 +37,13 @@ private:
 
 struct IUser
 {
+    virtual ~IUser() = default;
     virtual void f(too::IType*) = 0;
 };
 
 struct UserA : public IUser
 {
+    virtual ~UserA() = default;
     virtual void f(too::IType*) {}
 };
 }

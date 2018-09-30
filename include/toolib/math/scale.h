@@ -9,7 +9,7 @@
 #ifndef SCALE_H_INCL_enrhfu87n83464346ng
 #define SCALE_H_INCL_enrhfu87n83464346ng
 
-#include "floating_point.h"
+#include "toolib/almost_equal.h"
 #include "toolib/assert.h"
 #include "toolib/narrow.h"
 #include <cmath>
@@ -69,7 +69,7 @@ inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
     const double MaxTickCount_ = narrow_cast<double>(MaxTickCount);
     const double MinimalTick   = narrow_cast<double>(RangeMinToMax) / MaxTickCount_;
     const double magnitude = std::pow(10.0, std::floor(std::log10(MinimalTick)));
-    if (too::math::almost_equal(magnitude, 0.0))
+    if (too::almost_equal(magnitude, 0.0))
         return 0.0;
     const double residual = MinimalTick / magnitude;
     if (residual > 5.0)
@@ -93,7 +93,7 @@ inline std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataVa
     TOO_EXPECT(minDataValue <= maxDataValue);
     const double minIn = narrow_cast<double>(minDataValue);
     const double maxIn = narrow_cast<double>(maxDataValue);
-    if (too::math::almost_equal(scaleTick, 0.0))
+    if (too::almost_equal(scaleTick, 0.0))
         return std::make_pair(minIn, maxIn);
     const double minOut = std::floor(minIn / scaleTick) * scaleTick;
     const double maxOut = std::ceil(maxIn / scaleTick) * scaleTick;

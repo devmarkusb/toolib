@@ -22,7 +22,6 @@ namespace too
 {
 namespace date_time
 {
-
 //####################################################################################################################
 // template implementation
 
@@ -212,7 +211,7 @@ bool operator>=(const MonthYear_base<NormalizePolicy>& lhs, const MonthYear_base
 {
     return !operator<(lhs, rhs);
 }
-}
-}
+} // date_time
+} // too
 
 #endif

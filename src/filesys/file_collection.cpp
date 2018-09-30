@@ -48,9 +48,12 @@ FileCollection::FileCollection(const std::string& file_name)
         return;
     }
     std::string file_nr_str;
+#include "toolib/PPDefs/CLANG/WARNINGS_PUSH"
+#include "toolib/PPDefs/CLANG/SUPPRESS_WARNING_comma"
     for (unsigned int file_nr = 0; file_nr_str = too::math::toLeadingZeros(file_nr, digits),
                       fn = base_file_name + file_nr_str + file_ext, f.open(fn), f.good();
          ++file_nr, f.close())
+#include "toolib/PPDefs/CLANG/WARNINGS_POP"
     {
         this->file_list.push_back(fn);
     }

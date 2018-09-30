@@ -43,16 +43,16 @@ class SingleEvent : public virtual CalEvent<TimeType>
 {
 public:
     explicit SingleEvent(const TimeType& t) { setTimePoint(t); }
-    virtual ~SingleEvent() = default;
+    ~SingleEvent() override = default;
 
-    virtual too::owner<SingleEvent<TimeType>*> clone() const override { return new SingleEvent<TimeType>(*this); }
+    too::owner<SingleEvent<TimeType>*> clone() const override { return new SingleEvent<TimeType>(*this); }
 
-    virtual std::unique_ptr<TimeType> getFirstTimePoint() const override
+    std::unique_ptr<TimeType> getFirstTimePoint() const override
     {
         return too::make_unique<TimeType>(m_TimePoint);
     }
 
-    virtual std::unique_ptr<TimeType> getNextTimePoint(const TimeType&) const override { return nullptr; }
+    std::unique_ptr<TimeType> getNextTimePoint(const TimeType&) const override { return nullptr; }
 
     void setTimePoint(const TimeType& t) { m_TimePoint = t; }
     TimeType getTimePoint() const { return m_TimePoint; }
@@ -69,14 +69,14 @@ class RecurringEvent : public virtual CalEvent<TimeType>
 {
 public:
     explicit RecurringEvent(const TimeType& period) { setTimePeriod(period); }
-    virtual ~RecurringEvent() = default;
+    ~RecurringEvent() override = default;
     RecurringEvent(const RecurringEvent& other);
     RecurringEvent& operator=(const RecurringEvent& other);
 
-    virtual too::owner<RecurringEvent<TimeType>*> clone() const override { return new RecurringEvent<TimeType>(*this); }
+    too::owner<RecurringEvent<TimeType>*> clone() const override { return new RecurringEvent<TimeType>(*this); }
 
-    virtual std::unique_ptr<TimeType> getFirstTimePoint() const override;
-    virtual std::unique_ptr<TimeType> getNextTimePoint(const TimeType& RelativeTo) const override;
+    std::unique_ptr<TimeType> getFirstTimePoint() const override;
+    std::unique_ptr<TimeType> getNextTimePoint(const TimeType& RelativeTo) const override;
 
     //! nullptr means earliest possible start, which is the default construction
     void setStart(const TimeType* t) { m_TimePointStart = t ? too::make_unique<TimeType>(*t) : nullptr; }

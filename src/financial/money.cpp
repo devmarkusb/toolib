@@ -7,6 +7,7 @@
 //! \file
 
 #include "toolib/financial/money.h"
+#include "toolib/almost_equal.h"
 #include "toolib/assert.h"
 #include "toolib/error.h"
 #include "toolib/date_time/date_time.h"
@@ -172,7 +173,7 @@ bool operator==(const Money& lhs, const Money& rhs)
 {
     if (lhs.currency != rhs.currency) // otherwise not yet implemented
         throw too::not_implemented{"mixed currencies not yet implemented"};
-    return too::math::almost_equal(lhs.amount, rhs.amount);
+    return too::almost_equal(lhs.amount, rhs.amount);
 }
 
 bool operator<(const Money& lhs, const Money& rhs)

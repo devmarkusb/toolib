@@ -130,7 +130,7 @@ public:
 
     operator Percent() const { return this->p; }
 
-    Fraction dividedBy100() const { return this->p / 100.0; }
+    Fraction dividedBy100() const { return this->p / 100.0l; }
 
     static Fraction YearlyEffective_to_MonthlyRelative(Fraction pa);
 

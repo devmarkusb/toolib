@@ -10,6 +10,7 @@
 #ifndef NUMBER_H_INCL_f29jh8hnf238hrxz23
 #define NUMBER_H_INCL_f29jh8hnf238hrxz23
 
+#include "toolib/almost_equal.h"
 #include "toolib/assert.h"
 #include "toolib/comp_bwds.h"
 #include "toolib/math/floating_point.h"
@@ -76,7 +77,7 @@ too::opt<ArithType> is_power_of(ArithType x, ArithType base)
     static_assert(std::is_arithmetic<ArithType>::value, "only arithmetic numbers are allowed as input");
     TOO_EXPECT(x > ArithType{});
     TOO_EXPECT(base > ArithType{});
-    TOO_EXPECT(base != static_cast<ArithType>(1));
+    TOO_EXPECT(!too::almost_equal_alltypes(base, static_cast<ArithType>(1)));
 
     /** Impl. notes:
             If you wonder, whether this could be implemented using std::modf instead of the rounding check,

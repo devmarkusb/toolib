@@ -9,9 +9,9 @@
 #ifndef HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
 #define HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
 
+#include "toolib/almost_equal.h"
 #include "toolib/narrow.h"
 #include "toolib/PPDEFS.h"
-#include "toolib/math/floating_point.h"
 #include "toolib/math/percent.h"
 #include "toolib/math/scale.h"
 #include <algorithm>
@@ -63,25 +63,28 @@ public:
         std::array<size_t, number_of_bars> abs_rates;
         size_t sum_of_rates = 0;
 
-        auto prev_it = std::begin(percentual_data);
-        auto it = prev_it;
-        for (BarCount i = BarCount{}; i < number_of_bars; ++i)
         {
-            it = std::upper_bound(prev_it, std::end(percentual_data), (i + 1) * 10.0);
-            if (it != std::end(percentual_data) && it != prev_it)
+            auto prev_it = std::begin(percentual_data);
+            auto it = prev_it;
+            for (auto i = BarCount{}; i < number_of_bars; ++i)
             {
-                abs_rates[i] = std::distance(prev_it, it);
-                sum_of_rates += abs_rates[i];
+                it = std::upper_bound(prev_it, std::end(percentual_data), (i + 1) * 10.0);
+                if (it != std::end(percentual_data) && it != prev_it)
+                {
+                    abs_rates[i] = std::distance(prev_it, it);
+                    sum_of_rates += abs_rates[i];
+                }
+                else
+                    abs_rates[i] = 0;
+                prev_it          = it;
             }
-            else
-                abs_rates[i] = 0;
-            prev_it          = it;
         }
+
         // 100% data entries aren't counted in the previous loop, only smaller ones;
         // already tried lower_bound and almost<=
         for (auto it = percentual_data.rbegin(); it != percentual_data.rend(); ++it)
         {
-            if (too::math::almost_equal(*it, too::math::one_hundred_percent))
+            if (too::almost_equal(*it, too::math::one_hundred_percent))
             {
                 ++abs_rates[abs_rates.size() - 1];
                 ++sum_of_rates;
