@@ -21,7 +21,7 @@
 #include <type_traits>
 
 
-#include "toolib/PPDefs/MSVC/UNDEF_MIN_MAX"
+#include "toolib/PPDefs/UNDEF_MIN_MAX"
 
 namespace too
 {

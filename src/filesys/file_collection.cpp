@@ -9,6 +9,7 @@
 #include "toolib/filesys/file_collection.h"
 #include "toolib/math/number.h"
 #include "toolib/std/std_ext_filesystem.h"
+#include "toolib/warnings.h"
 #include <fstream>
 
 
@@ -48,12 +49,12 @@ FileCollection::FileCollection(const std::string& file_name)
         return;
     }
     std::string file_nr_str;
-#include "toolib/PPDefs/CLANG/WARNINGS_PUSH"
-#include "toolib/PPDefs/CLANG/SUPPRESS_WARNING_comma"
+TOO_PRAGMA_WARNINGS_PUSH
+TOO_PRAGMA_WARNING_NO_comma
     for (unsigned int file_nr = 0; file_nr_str = too::math::toLeadingZeros(file_nr, digits),
                       fn = base_file_name + file_nr_str + file_ext, f.open(fn), f.good();
          ++file_nr, f.close())
-#include "toolib/PPDefs/CLANG/WARNINGS_POP"
+TOO_PRAGMA_WARNINGS_POP
     {
         this->file_list.push_back(fn);
     }

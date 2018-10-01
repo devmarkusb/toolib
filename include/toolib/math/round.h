@@ -10,11 +10,11 @@
 #ifndef ROUND_H_INCL_9mj238fz23nf8z
 #define ROUND_H_INCL_9mj238fz23nf8z
 
-#include "toolib/PPDefs/MSVC/UNDEF_MIN_MAX"
 #include <cmath>
 #include <limits>
 #include <type_traits>
 
+#include "toolib/PPDefs/UNDEF_MIN_MAX"
 
 namespace too
 {
