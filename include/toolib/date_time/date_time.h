@@ -10,6 +10,7 @@
 #define DATE_TIME_H_sdhnfxeuhgf783nx4f2z3t487f
 
 #include "toolibDEF.h"
+#include "toolib/warnings.h"
 #include <ostream>
 #include <string>
 #include <utility>
@@ -47,13 +48,14 @@ using MonthYear = MonthYear_base<>;
 //! Works as a difference type only.
 using MonthYear_dur = MonthYear_base<dont_normalize>;
 
-#include "toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
+TOO_PRAGMA_WARNINGS_PUSH
+TOO_PRAGMA_WARNING_NO_dll_interface_needed
 struct TOOLIBSHARED_EXPORT MonthYear_decl
 {
     static const Months twelve = 12;
     static const std::string string_delim;
 };
-#include "toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
+TOO_PRAGMA_WARNINGS_POP
 
 //! Works as an absolute type as well as a difference type.
 template <class NormalizePolicy>

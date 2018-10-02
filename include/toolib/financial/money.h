@@ -11,6 +11,7 @@
 
 #include "toolibDEF.h"
 #include "toolib/optional.h"
+#include "toolib/warnings.h"
 #include <locale>
 #include <string>
 
@@ -22,7 +23,8 @@ namespace fin
 
 //####################################################################################################################
 
-#include "toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
+TOO_PRAGMA_WARNINGS_PUSH
+TOO_PRAGMA_WARNING_NO_dll_interface_needed
 //!
 class TOOLIBSHARED_EXPORT Currency
 {
@@ -45,7 +47,7 @@ public:
 private:
     too::opt<std::locale> loc;
 };
-#include "toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
+TOO_PRAGMA_WARNINGS_POP
 
 bool operator==(const Currency& lhs, const Currency& rhs);
 bool operator!=(const Currency& lhs, const Currency& rhs);

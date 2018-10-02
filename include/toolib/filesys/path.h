@@ -10,6 +10,7 @@
 #define PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
 
 #include "toolibDEF.h"
+#include "toolib/warnings.h"
 #include <string>
 #include <vector>
 
@@ -71,13 +72,14 @@ public:
     static const std::string& getSeparatorPlatformIndep();
 
 private:
-#include "toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
+TOO_PRAGMA_WARNINGS_PUSH
+TOO_PRAGMA_WARNING_NO_dll_interface_needed
     //! platform independent variant used by this class
     static const std::string FOLDER_SEPARATOR_TO_USE_HERE;
 
     std::string m_path_own_internal;
     std::string* m_path = &m_path_own_internal; //! contract: never nullptr
-#include "toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
+TOO_PRAGMA_WARNINGS_POP
     mutable EForm m_form = EForm::PLATFORMINDEPENDENT;
     EType m_type         = EType::IS_UNKNOWN;
 

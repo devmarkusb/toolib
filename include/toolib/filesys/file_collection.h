@@ -10,10 +10,12 @@
 #define FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn
 
 #include "toolibDEF.h"
+#include "toolib/warnings.h"
 #include <string>
 #include <vector>
 
-#include "toolib/PPDefs/MSVC/SUPPRESS_WARNING_4251_BEGIN"
+TOO_PRAGMA_WARNINGS_PUSH
+TOO_PRAGMA_WARNING_NO_dll_interface_needed
 
 namespace too
 {
@@ -48,6 +50,6 @@ private:
 }
 }
 
-#include "toolib/PPDefs/MSVC/SUPPRESS_WARNING_END"
+TOO_PRAGMA_WARNINGS_POP
 
 #endif
