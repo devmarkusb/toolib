@@ -49,7 +49,7 @@ using MonthYear = MonthYear_base<>;
 using MonthYear_dur = MonthYear_base<dont_normalize>;
 
 TOO_PRAGMA_WARNINGS_PUSH
-TOO_PRAGMA_WARNING_NO_dll_interface_needed
+TOO_WARNING_DISABLE_MSVC(4251)
 struct TOOLIBSHARED_EXPORT MonthYear_decl
 {
     static const Months twelve = 12;

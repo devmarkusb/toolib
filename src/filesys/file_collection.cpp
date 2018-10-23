@@ -50,7 +50,7 @@ FileCollection::FileCollection(const std::string& file_name)
     }
     std::string file_nr_str;
 TOO_PRAGMA_WARNINGS_PUSH
-TOO_PRAGMA_WARNING_NO_comma
+TOO_WARNING_DISABLE_CLANG(comma)
     for (unsigned int file_nr = 0; file_nr_str = too::math::toLeadingZeros(file_nr, digits),
                       fn = base_file_name + file_nr_str + file_ext, f.open(fn), f.good();
          ++file_nr, f.close())

@@ -73,7 +73,7 @@ public:
 
 private:
 TOO_PRAGMA_WARNINGS_PUSH
-TOO_PRAGMA_WARNING_NO_dll_interface_needed
+TOO_WARNING_DISABLE_MSVC(4251)
     //! platform independent variant used by this class
     static const std::string FOLDER_SEPARATOR_TO_USE_HERE;
 

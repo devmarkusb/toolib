@@ -24,7 +24,7 @@ namespace fin
 //####################################################################################################################
 
 TOO_PRAGMA_WARNINGS_PUSH
-TOO_PRAGMA_WARNING_NO_dll_interface_needed
+TOO_WARNING_DISABLE_MSVC(4251)
 //!
 class TOOLIBSHARED_EXPORT Currency
 {
