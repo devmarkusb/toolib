@@ -10,7 +10,10 @@
 #define FILE_H_sduifhg3gfy324n178fsffe4f
 
 #include "toolib/assert.h"
+#include <cerrno>
+#include <cstring>
 #include <fstream>
+#include <sstream>
 #include <string>
 
 
@@ -42,22 +45,24 @@ enum class operation
 };
 inline void throwError(const std::string& filePathNameExt, operation op, const std::string& retErrDetail)
 {
-    std::string s{filePathNameExt};
-    s += " could not be ";
+    const auto errno_ = errno;
+    std::stringstream ss;
+    ss << filePathNameExt;
+    ss << " could not be ";
     switch (op)
     {
     case operation::save:
-        s += "saved";
+        ss << "saved";
         break;
     case operation::load:
-        s += "loaded";
+        ss << "loaded";
         break;
     default:
         TOO_ASSERT(false); // op not supported
     }
-    s += ", details: ";
-    s += retErrDetail;
-    throw std::runtime_error{s};
+    ss << ", details: " << retErrDetail;
+    ss << ", errno: " << errno_ << ", strerror(errno): " << std::strerror(errno_);
+    throw std::runtime_error{ss.str()};
 }
 } // file
 } // too
