@@ -61,7 +61,7 @@ inline void throwError(const std::string& filePathNameExt, operation op, const s
         TOO_ASSERT(false); // op not supported
     }
     ss << ", details: " << retErrDetail;
-    ss << ", errno: " << errno_ << ", strerror(errno): " << std::strerror(errno_);
+    ss << ", ec: " << errno_ << ", " << std::strerror(errno_);
     throw std::runtime_error{ss.str()};
 }
 } // file
