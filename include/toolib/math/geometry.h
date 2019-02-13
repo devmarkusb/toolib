@@ -24,30 +24,30 @@ namespace too
 namespace math
 {
 
-namespace
+namespace detail
 {
 using DefaultValueType = double;
-}
+} // detail
 
 using Dimension = int;
 
-template <typename T = DefaultValueType>
+template <typename T = detail::DefaultValueType>
 using Coord_         = too::enable_if_t<std::is_arithmetic<T>::value, T>;
 using Coord          = Coord_<>;
 
-template <typename T = DefaultValueType>
+template <typename T = detail::DefaultValueType>
 using RelativeCoord_ = too::enable_if_t<std::is_arithmetic<T>::value, T>;
 using RelativeCoord  = RelativeCoord_<>;
 
-template <typename T = DefaultValueType>
+template <typename T = detail::DefaultValueType>
 using Length_        = too::enable_if_t<std::is_arithmetic<T>::value, T>;
 using Length         = Length_<>;
 
-template <typename T = DefaultValueType>
+template <typename T = detail::DefaultValueType>
 using Width_         = Length_<T>;
 using Width          = Width_<>;
 
-template <typename T = DefaultValueType>
+template <typename T = detail::DefaultValueType>
 using Height_        = Length_<T>;
 using Height         = Height_<>;
 
