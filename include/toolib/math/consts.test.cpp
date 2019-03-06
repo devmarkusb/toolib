@@ -17,15 +17,15 @@ TOO_PRAGMA_WARNINGS_POP
 
 TEST(math_constsTest, test)
 {
-    double pi = static_cast<double>(M_PI);
+    const auto pi = static_cast<double>(M_PI);
     EXPECT_DOUBLE_EQ(pi, too::math::consts::pi<double>());
     EXPECT_TRUE(too::almost_equal(pi, too::math::consts::pi<double>()));
 
-    float pi_f = static_cast<float>(M_PI);
-    EXPECT_DOUBLE_EQ(pi_f, too::math::consts::pi<float>());
+    const auto pi_f = static_cast<float>(M_PI);
+    EXPECT_FLOAT_EQ(pi_f, too::math::consts::pi<float>());
     EXPECT_TRUE(too::almost_equal(pi_f, too::math::consts::pi<float>()));
 
-    long double pi_ld = static_cast<long double>(M_PI);
+    const auto pi_ld = static_cast<long double>(M_PI);
     EXPECT_TRUE(too::math::approx_equal(pi_ld, too::math::consts::pi<long double>(), 1e-15L));
 }
 
