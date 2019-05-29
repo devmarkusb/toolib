@@ -41,7 +41,7 @@ inline ProfilerTimePoint profiler_now()
 //! Minimalist measurement. \Returns difference of two points of time in seconds.
 inline double profiler_diff_s(ProfilerTimePoint start, ProfilerTimePoint end)
 {
-    return (end - start) / 1e9;
+    return static_cast<double>(end - start) / 1e9;
 }
 
 namespace implDumpAllItems
