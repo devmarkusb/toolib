@@ -8,8 +8,8 @@
 //! \file
 
 
-#ifndef ITYPE_H_INCL_39653425hgjdhgxhrgbubeir43
-#define ITYPE_H_INCL_39653425hgjdhgxhrgbubeir43
+#ifndef ITYPE_H_39653425hgjdhgxhrgbubeir43
+#define ITYPE_H_39653425hgjdhgxhrgbubeir43
 
 #include "toolib/ptr.h"
 

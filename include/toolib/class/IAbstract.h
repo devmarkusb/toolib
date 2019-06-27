@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef IABSTRACT_H_INCL_ajkshuihnr82374r72ff23rny8fdnbwye
-#define IABSTRACT_H_INCL_ajkshuihnr82374r72ff23rny8fdnbwye
+#ifndef IABSTRACT_H_ajkshuihnr82374r72ff23rny8fdnbwye
+#define IABSTRACT_H_ajkshuihnr82374r72ff23rny8fdnbwye
 
 namespace too
 {

@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef GRAPH_H_INCL_lnkjgngkvfvutzhirthczrec5
-#define GRAPH_H_INCL_lnkjgngkvfvutzhirthczrec5
+#ifndef GRAPH_H_lnkjgngkvfvutzhirthczrec5
+#define GRAPH_H_lnkjgngkvfvutzhirthczrec5
 
 #include "number.h"
 #include "quantity_unit.h"

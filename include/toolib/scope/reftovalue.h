@@ -7,8 +7,8 @@
 //! \file
 
 
-#ifndef REFTOVALUE_H_INCL_o4nv5ht84n82ch
-#define REFTOVALUE_H_INCL_o4nv5ht84n82ch
+#ifndef REFTOVALUE_H_o4nv5ht84n82ch
+#define REFTOVALUE_H_o4nv5ht84n82ch
 
 
 namespace too

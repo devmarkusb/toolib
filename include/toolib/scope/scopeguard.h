@@ -8,8 +8,8 @@
 //! \file
 
 
-#ifndef SCOPEGUARD_H_INCL_n2zxr732rmyrz3n2ur
-#define SCOPEGUARD_H_INCL_n2zxr732rmyrz3n2ur
+#ifndef SCOPEGUARD_H_n2zxr732rmyrz3n2ur
+#define SCOPEGUARD_H_n2zxr732rmyrz3n2ur
 
 #include <cstddef>
 

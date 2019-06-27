@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef CONSTS_H_INCL_sjkhnfxgiuexernhgf7834t4
-#define CONSTS_H_INCL_sjkhnfxgiuexernhgf7834t4
+#ifndef CONSTS_H_sjkhnfxgiuexernhgf7834t4
+#define CONSTS_H_sjkhnfxgiuexernhgf7834t4
 
 #include "toolib/PPDEFS.h"
 #include "toolib/std/std_extensions.h"

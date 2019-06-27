@@ -7,8 +7,8 @@
 //! \file
 
 
-#ifndef RAII_P_H_INCL_on824f287xrz2387r
-#define RAII_P_H_INCL_on824f287xrz2387r
+#ifndef RAII_P_H_on824f287xrz2387r
+#define RAII_P_H_on824f287xrz2387r
 
 #include "toolib/debug.h"
 #include "toolib/mem/checked_delete.h"

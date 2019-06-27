@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef FLOATING_POINT_H_INCL_09458t87t5twd2874t57rbn6
-#define FLOATING_POINT_H_INCL_09458t87t5twd2874t57rbn6
+#ifndef FLOATING_POINT_H_09458t87t5twd2874t57rbn6
+#define FLOATING_POINT_H_09458t87t5twd2874t57rbn6
 
 #include "toolib/assert.h"
 #include "toolib/comp_bwds.h"

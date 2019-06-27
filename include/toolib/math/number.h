@@ -7,8 +7,8 @@
 //! \file
 
 
-#ifndef NUMBER_H_INCL_f29jh8hnf238hrxz23
-#define NUMBER_H_INCL_f29jh8hnf238hrxz23
+#ifndef NUMBER_H_f29jh8hnf238hrxz23
+#define NUMBER_H_f29jh8hnf238hrxz23
 
 #include "toolib/almost_equal.h"
 #include "toolib/assert.h"

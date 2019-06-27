@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef SCALE_H_INCL_enrhfu87n83464346ng
-#define SCALE_H_INCL_enrhfu87n83464346ng
+#ifndef SCALE_H_enrhfu87n83464346ng
+#define SCALE_H_enrhfu87n83464346ng
 
 #include "toolib/almost_equal.h"
 #include "toolib/assert.h"

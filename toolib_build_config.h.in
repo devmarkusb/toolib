@@ -10,8 +10,8 @@
         You can tailor this one to your needs.
         Note that you will need to re-run CMake.
 */
-#ifndef TOOLIB_BUILD_CONFIG_H_INCL_sjkdfhnxuingf872g4ny78fg2
-#define TOOLIB_BUILD_CONFIG_H_INCL_sjkdfhnxuingf872g4ny78fg2
+#ifndef TOOLIB_BUILD_CONFIG_H_sjkdfhnxuingf872g4ny78fg2
+#define TOOLIB_BUILD_CONFIG_H_sjkdfhnxuingf872g4ny78fg2
 
 #include <string>
 

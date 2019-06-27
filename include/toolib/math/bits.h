@@ -6,9 +6,8 @@
 */
 //! \file
 
-
-#ifndef BITS_H_INCL_inewhjr4382zrn83
-#define BITS_H_INCL_inewhjr4382zrn83
+#ifndef BITS_H_inewhjr4382zrn83
+#define BITS_H_inewhjr4382zrn83
 
 #include <cstdint>
 #include <utility>

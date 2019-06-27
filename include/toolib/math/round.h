@@ -7,8 +7,8 @@
 //! \file
 
 
-#ifndef ROUND_H_INCL_9mj238fz23nf8z
-#define ROUND_H_INCL_9mj238fz23nf8z
+#ifndef ROUND_H_9mj238fz23nf8z
+#define ROUND_H_9mj238fz23nf8z
 
 #include <cmath>
 #include <limits>

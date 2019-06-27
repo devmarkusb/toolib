@@ -7,8 +7,8 @@
 //! \file
 
 
-#ifndef MMTYPECONV_H_INCL_nbi4lnv5
-#define MMTYPECONV_H_INCL_nbi4lnv5
+#ifndef MMTYPECONV_H_nbi4lnv5
+#define MMTYPECONV_H_nbi4lnv5
 
 #include "toolib/PPDEFS.h"
 #include <string>

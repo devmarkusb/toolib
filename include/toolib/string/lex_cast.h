@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef LEX_CAST_H_INCL_sopaiem3p2oium32omo
-#define LEX_CAST_H_INCL_sopaiem3p2oium32omo
+#ifndef LEX_CAST_H_sopaiem3p2oium32omo
+#define LEX_CAST_H_sopaiem3p2oium32omo
 
 #include "toolib/PPDEFS.h"
 #include "toolib/std/std_extensions.h"

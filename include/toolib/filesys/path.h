@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
-#define PATH_H_INCL_isdgfx67g42319gyr6r8gfeuiwgfc
+#ifndef PATH_H_isdgfx67g42319gyr6r8gfeuiwgfc
+#define PATH_H_isdgfx67g42319gyr6r8gfeuiwgfc
 
 #include "toolibDEF.h"
 #include "toolib/warnings.h"

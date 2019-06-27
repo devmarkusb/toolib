@@ -10,8 +10,8 @@ You just need one include and one lib to link statically.
 //! \file
 
 
-#ifndef DEBUG_LEAKS_H_INCL_dj823xfz23xzfn
-#define DEBUG_LEAKS_H_INCL_dj823xfz23xzfn
+#ifndef DEBUG_LEAKS_H_dj823xfz23xzfn
+#define DEBUG_LEAKS_H_dj823xfz23xzfn
 
 #include "toolib/PPDEFS.h"
 

@@ -6,9 +6,8 @@
 */
 //! \file
 
-
-#ifndef MATRIX_H_INCL_mx02983urx23
-#define MATRIX_H_INCL_mx02983urx23
+#ifndef MATRIX_H_mx02983urx23
+#define MATRIX_H_mx02983urx23
 
 #include "toolib/error.h"
 #include <cmath>

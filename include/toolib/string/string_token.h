@@ -7,8 +7,8 @@
 //! \file
 
 
-#ifndef STRING_TOKEN_H_INCL_uwireiwubefeubf
-#define STRING_TOKEN_H_INCL_uwireiwubefeubf
+#ifndef STRING_TOKEN_H_uwireiwubefeubf
+#define STRING_TOKEN_H_uwireiwubefeubf
 
 #include <string>
 #include <vector>

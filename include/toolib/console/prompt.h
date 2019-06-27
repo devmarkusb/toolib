@@ -7,8 +7,8 @@
 //! \file
 
 
-#ifndef PROMPT_H_INCL_8jr82ctrz2tn
-#define PROMPT_H_INCL_8jr82ctrz2tn
+#ifndef PROMPT_H_8jr82ctrz2tn
+#define PROMPT_H_8jr82ctrz2tn
 
 #include "toolib/ignore_arg.h"
 #include "toolib/PPDEFS.h"

@@ -7,8 +7,8 @@
 //! \file
 
 
-#ifndef CATCH_EXIT_H_INCL_34trcx83943g
-#define CATCH_EXIT_H_INCL_34trcx83943g
+#ifndef CATCH_EXIT_H_34trcx83943g
+#define CATCH_EXIT_H_34trcx83943g
 
 #include "toolib/PPDEFS.h"
 #if TOO_OS_WINDOWS && TOO_OS_WINDOWS_DESKTOP

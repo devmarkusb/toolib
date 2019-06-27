@@ -8,8 +8,8 @@
 */
 //! \file
 
-#ifndef SCOPEFLAGGED_HPP_INCL_inh27dzf237bxfd327
-#define SCOPEFLAGGED_HPP_INCL_inh27dzf237bxfd327
+#ifndef SCOPEFLAGGED_HPP_inh27dzf237bxfd327
+#define SCOPEFLAGGED_HPP_inh27dzf237bxfd327
 
 #include "toolib/math/bits.h"
 #include <stack>

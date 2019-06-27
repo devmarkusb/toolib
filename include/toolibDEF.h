@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef TOOLIBDEF_H_INCL_aibuxsgfnz342975ty31
-#define TOOLIBDEF_H_INCL_aibuxsgfnz342975ty31
+#ifndef TOOLIBDEF_H_aibuxsgfnz342975ty31
+#define TOOLIBDEF_H_aibuxsgfnz342975ty31
 
 #include "toolib/linklib/LINKLIB_DEFS.h"
 

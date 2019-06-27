@@ -8,8 +8,8 @@
 
 // Implementation taken from Meyers' book.
 
-#ifndef COUNTED_CLASS_OBJECTS_H_INCL_cirewhct34bctgu4372
-#define COUNTED_CLASS_OBJECTS_H_INCL_cirewhct34bctgu4372
+#ifndef COUNTED_CLASS_OBJECTS_H_cirewhct34bctgu4372
+#define COUNTED_CLASS_OBJECTS_H_cirewhct34bctgu4372
 
 
 namespace too

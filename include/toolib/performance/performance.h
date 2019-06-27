@@ -6,8 +6,8 @@
 */
 //! \file
 
-#ifndef PERFORMANCE_H_INCL_sdkfgnxzuwegnf93746ryng342grf
-#define PERFORMANCE_H_INCL_sdkfgnxzuwegnf93746ryng342grf
+#ifndef PERFORMANCE_H_sdkfgnxzuwegnf93746ryng342grf
+#define PERFORMANCE_H_sdkfgnxzuwegnf93746ryng342grf
 
 #include "toolib/class/non_copyable.h"
 #include "toolib/math/number.h"
