@@ -29,21 +29,6 @@
 
 namespace too
 {
-using ProfilerTimePoint = int64_t;
-
-//! Minimalist measurement. \Returns current point of time.
-inline ProfilerTimePoint profiler_now()
-{
-    const auto now = std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now());
-    return now.time_since_epoch().count();
-}
-
-//! Minimalist measurement. \Returns difference of two points of time in seconds.
-inline double profiler_diff_s(ProfilerTimePoint start, ProfilerTimePoint end)
-{
-    return static_cast<double>(end - start) / 1e9;
-}
-
 namespace implDumpAllItems
 {
 struct KeyData;
