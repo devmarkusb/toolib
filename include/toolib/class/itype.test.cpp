@@ -22,10 +22,8 @@ struct SomeType_flexed : public too::IType
         this->rep = other.rep;
         return *this;
     }
-#if TOO_HAS_CPP11_DEFAULT_MOVES
-    SomeType_flexed(SomeType_flexed&&) = default;
-    SomeType_flexed& operator=(SomeType_flexed&&) = default;
-#endif
+    SomeType_flexed(SomeType_flexed&&) = delete;
+    SomeType_flexed& operator=(SomeType_flexed&&) = delete;
     explicit SomeType_flexed(const SomeType& x) : rep(x) {}
     explicit SomeType_flexed(SomeType&& x) : rep(std::move(x)) {}
 

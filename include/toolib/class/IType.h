@@ -44,14 +44,12 @@ namespace too
 */
 struct IType
 {
-    virtual ~IType() {}
+    virtual ~IType() = default;
     IType() = default;
     IType(const IType&) = delete;
     IType& operator=(const IType&) = delete;
-#if TOO_HAS_CPP11_DEFAULT_MOVES
     IType(IType&&) = delete;
     IType& operator=(IType&&) = delete;
-#endif
 
     virtual too::owner<IType*> clone() = 0;
 };
