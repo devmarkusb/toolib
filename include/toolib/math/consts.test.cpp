@@ -1,7 +1,9 @@
 #include "toolib/warnings.h"
 TOO_PRAGMA_WARNINGS_PUSH
+// clang-format off
 TOO_WARNING_DISABLE_CLANG(reserved-id-macro)
 TOO_WARNING_DISABLE_CLANG(unused-macros)
+// clang-format on
 #define _USE_MATH_DEFINES
 #include <cmath> // needs to be the first include for the upper macro to work
 #undef _USE_MATH_DEFINES

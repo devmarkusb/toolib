@@ -166,7 +166,7 @@ TEST(date_time__MonthYear_baseTest, dont_normalize)
     tmp = "13";
     tmp += MonthYear_decl::string_delim + "1";
     my = tmp;
-    s  = "13";
+    s = "13";
     s += MonthYear_decl::string_delim;
     s += "1";
     std::stringstream ss3;
@@ -240,7 +240,7 @@ TEST(date_time__MonthYear_baseTest, normalize)
     tmp = "13";
     tmp += MonthYear_decl::string_delim + "1";
     my = tmp;
-    s  = "1";
+    s = "1";
     s += MonthYear_decl::string_delim;
     s += "2";
     std::stringstream ss3;

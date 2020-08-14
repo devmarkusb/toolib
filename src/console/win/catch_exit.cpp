@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #include "toolib/console/win/catch_exit.h"
@@ -22,24 +22,24 @@ BOOL ExitCatcher::CtrlHandler(DWORD fdwCtrlType)
 {
     switch (fdwCtrlType)
     {
-    case CTRL_C_EVENT:
-        m_bRequestedExit = true;
-        return (TRUE);
-    case CTRL_CLOSE_EVENT:
-        m_bRequestedExit = true;
-        return (TRUE);
-    case CTRL_BREAK_EVENT:
-        m_bRequestedExit = true;
-        return FALSE;
-    case CTRL_LOGOFF_EVENT:
-        m_bRequestedExit = true;
-        return FALSE;
-    case CTRL_SHUTDOWN_EVENT:
-        m_bRequestedExit = true;
-        return FALSE;
-    default:
-        m_bRequestedExit = true;
-        return FALSE;
+        case CTRL_C_EVENT:
+            m_bRequestedExit = true;
+            return (TRUE);
+        case CTRL_CLOSE_EVENT:
+            m_bRequestedExit = true;
+            return (TRUE);
+        case CTRL_BREAK_EVENT:
+            m_bRequestedExit = true;
+            return FALSE;
+        case CTRL_LOGOFF_EVENT:
+            m_bRequestedExit = true;
+            return FALSE;
+        case CTRL_SHUTDOWN_EVENT:
+            m_bRequestedExit = true;
+            return FALSE;
+        default:
+            m_bRequestedExit = true;
+            return FALSE;
     }
 }
 
@@ -58,6 +58,6 @@ ExitCatcher& ExitCatcher::getInstance()
     static ExitCatcher ec;
     return ec;
 }
-} // con
-} // too
+} // namespace con
+} // namespace too
 #endif // TOO_OS_WINDOWS

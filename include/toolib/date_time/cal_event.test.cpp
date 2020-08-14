@@ -10,7 +10,9 @@ namespace
 
 struct CalEventTest : public ::testing::Test
 {
-    CalEventTest() {}
+    CalEventTest()
+    {
+    }
 
     void SetUp()
     {
@@ -19,9 +21,13 @@ struct CalEventTest : public ::testing::Test
         recurr.setEnd(&end);
     }
 
-    void TearDown() {}
+    void TearDown()
+    {
+    }
 
-    ~CalEventTest() {}
+    ~CalEventTest()
+    {
+    }
 
     SingleEvent<int> seven{7};
     RecurringEvent<int> recurr{2};

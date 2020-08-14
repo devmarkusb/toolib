@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #include "toolib/date_time/date_time.h"
@@ -19,7 +19,7 @@ const std::string MonthYear_decl::string_delim = "/";
 
 void normalize::do_it(std::pair<Years, Months>& y_m)
 {
-    const int MonthSgn    = too::math::sgn(y_m.second);
+    const int MonthSgn = too::math::sgn(y_m.second);
     const Months MonthAbs = std::abs(y_m.second);
     if (MonthAbs > MonthYear_decl::twelve)
     {
@@ -71,5 +71,5 @@ void normalize::do_it(std::pair<Years, Months>& y_m)
         return;
     }
 }
-}
-}
+} // namespace date_time
+} // namespace too

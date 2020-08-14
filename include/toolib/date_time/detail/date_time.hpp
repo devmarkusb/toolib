@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef DATE_TIME_HPP_kjgfdhnxui3gfy34z8ry27
@@ -91,7 +91,7 @@ MonthYear_base<NormalizePolicy>& MonthYear_base<NormalizePolicy>::operator=(cons
 template <class NormalizePolicy>
 void MonthYear_base<NormalizePolicy>::set(Months m, Years y)
 {
-    this->y_m.first  = y;
+    this->y_m.first = y;
     this->y_m.second = m;
     NormalizePolicy::do_it(this->y_m);
 }
@@ -211,7 +211,7 @@ bool operator>=(const MonthYear_base<NormalizePolicy>& lhs, const MonthYear_base
 {
     return !operator<(lhs, rhs);
 }
-} // date_time
-} // too
+} // namespace date_time
+} // namespace too
 
 #endif
