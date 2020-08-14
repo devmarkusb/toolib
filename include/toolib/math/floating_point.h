@@ -9,7 +9,6 @@
 #ifndef FLOATING_POINT_H_09458t87t5twd2874t57rbn6
 #define FLOATING_POINT_H_09458t87t5twd2874t57rbn6
 
-#include "toolib/PPDEFS.h"
 #include "toolib/assert.h"
 #include "toolib/comp_bwds.h"
 #include "toolib/ignore_arg.h"
@@ -20,8 +19,8 @@
 #include <sstream>
 #include <type_traits>
 
-
-#include "toolib/PPDEFS/UNDEF_MIN_MAX"
+#include "toolib/macros.h"
+#include "toolib/macros/UNDEF_MIN_MAX.h"
 
 namespace too
 {
@@ -136,5 +135,7 @@ struct ToStringConverter<FloatType, FloatFormat::scientific>
 } // namespace impl
 } // namespace math
 } // namespace too
+
+#include "toolib/macros_end.h"
 
 #endif

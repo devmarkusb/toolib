@@ -10,8 +10,9 @@
 #ifndef MMTYPECONV_H_nbi4lnv5
 #define MMTYPECONV_H_nbi4lnv5
 
-#include "toolib/PPDEFS.h"
 #include <string>
+
+#include "toolib/macros.h"
 
 
 namespace too
@@ -76,5 +77,7 @@ template <typename T>
 #endif
 } // namespace CLI
 } // namespace too
+
+#include "toolib/macros_end.h"
 
 #endif

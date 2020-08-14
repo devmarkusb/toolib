@@ -10,7 +10,6 @@
 #ifndef PROMPT_H_8jr82ctrz2tn
 #define PROMPT_H_8jr82ctrz2tn
 
-#include "toolib/PPDEFS.h"
 #include "toolib/ignore_arg.h"
 #include <chrono>
 #if TOO_OS_WINDOWS
@@ -18,6 +17,8 @@
 #endif
 #include <iostream>
 #include <thread>
+
+#include "toolib/macros.h"
 
 
 namespace too
@@ -37,5 +38,7 @@ inline void prompt()
 #endif
 }
 } // namespace too
+
+#include "toolib/macros_end.h"
 
 #endif

@@ -7,11 +7,12 @@
 //! \file
 
 #include "toolib/filesys/path.h"
-#include "toolib/PPDEFS.h"
 #include "toolib/assert.h"
 #include "toolib/string/string_token.h"
 #include <algorithm>
 #include <fstream>
+
+#include "toolib/macros.h"
 
 
 namespace

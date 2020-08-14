@@ -10,13 +10,14 @@
 #ifndef RAII_P_H_on824f287xrz2387r
 #define RAII_P_H_on824f287xrz2387r
 
-#include "toolib/PPDEFS.h"
 #include "toolib/debug.h"
 #include "toolib/mem/checked_delete.h"
 #if TOO_OS_WINDOWS
 #include <crtdbg.h>
 #endif
 #include <cstdint>
+
+#include "toolib/macros.h"
 
 
 namespace too
@@ -292,5 +293,7 @@ public:
     }
 };
 } // namespace too
+
+#include "toolib/macros_end.h"
 
 #endif

@@ -13,7 +13,7 @@ You just need one include and one lib to link statically.
 #ifndef DEBUG_LEAKS_H_dj823xfz23xzfn
 #define DEBUG_LEAKS_H_dj823xfz23xzfn
 
-#include "toolib/PPDEFS.h"
+#include "toolib/macros.h"
 
 //! Memory leak detection. Include the header as the last one (!) in your main module and use TOO_DUMP_MEM_LEAKS.
 /** Detection goes either by standard Visual Studio style or by using vld.h, if available, whereas
@@ -36,5 +36,7 @@ to find leak informations in the Output window of the Visual Studio IDE.*/
 #define TOO_DUMP_MEM_LEAKS 0
 #endif
 #endif // TOO_USE_VLD
+
+#include "toolib/macros_end.h"
 
 #endif

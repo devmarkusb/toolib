@@ -9,10 +9,11 @@
 #ifndef LEX_CAST_H_sopaiem3p2oium32omo
 #define LEX_CAST_H_sopaiem3p2oium32omo
 
-#include "toolib/PPDEFS.h"
 #include "toolib/std/std_extensions.h"
 #include <exception>
 #include <sstream>
+
+#include "toolib/macros.h"
 
 
 namespace too
@@ -54,5 +55,7 @@ inline T lex_cast(const S& s) noexcept
     return T{};
 }
 } // namespace too
+
+#include "toolib/macros_end.h"
 
 #endif

@@ -9,9 +9,10 @@
 #ifndef CONSTS_H_sjkhnfxgiuexernhgf7834t4
 #define CONSTS_H_sjkhnfxgiuexernhgf7834t4
 
-#include "toolib/PPDEFS.h"
 #include "toolib/std/std_extensions.h"
 #include <cmath>
+
+#include "toolib/macros.h"
 
 
 namespace too
@@ -29,5 +30,7 @@ constexpr T pi()
 } // namespace consts
 } // namespace math
 } // namespace too
+
+#include "toolib/macros_end.h"
 
 #endif

@@ -9,7 +9,6 @@
 #ifndef HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
 #define HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
 
-#include "toolib/PPDEFS.h"
 #include "toolib/almost_equal.h"
 #include "toolib/math/percent.h"
 #include "toolib/math/scale.h"
@@ -17,6 +16,8 @@
 #include <algorithm>
 #include <array>
 #include <vector>
+
+#include "toolib/macros.h"
 
 
 namespace too
@@ -117,5 +118,7 @@ private:
 };
 } // namespace stat
 } // namespace too
+
+#include "toolib/macros_end.h"
 
 #endif

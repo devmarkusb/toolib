@@ -10,7 +10,7 @@
 #ifndef CATCH_EXIT_H_34trcx83943g
 #define CATCH_EXIT_H_34trcx83943g
 
-#include "toolib/PPDEFS.h"
+#include "toolib/macros.h"
 #if TOO_OS_WINDOWS && TOO_OS_WINDOWS_DESKTOP
 #include "../../../toolibDEF.h"
 #include <windows.h>
@@ -48,5 +48,7 @@ private:
 } // namespace con
 } // namespace too
 #endif // TOO_OS_WINDOWS
+
+#include "toolib/macros_end.h"
 
 #endif
