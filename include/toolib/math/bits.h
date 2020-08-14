@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef BITS_H_inewhjr4382zrn83
@@ -49,7 +49,10 @@ template <typename T>
 class bits
 {
 public:
-    explicit bits(T bits = T()) : m_bits(bits) {}
+    explicit bits(T bits = T())
+        : m_bits(bits)
+    {
+    }
     // bits(const bits& b) { m_bits = b.m_bits; }
     // bits& operator=(const bits& b) { bits<T> temp(b); temp.swap(*this); return *this; }
     // void swap(bits& b) { std::swap(m_bits, b.m_bits); }
@@ -69,7 +72,10 @@ public:
         m_bits &= ~mask;
         return m_bits;
     }
-    bool contains(T mask) const { return (m_bits | mask) == m_bits; }
+    bool contains(T mask) const
+    {
+        return (m_bits | mask) == m_bits;
+    }
     T& fill(B::_ b)
     {
         if (b == B::O)
@@ -78,16 +84,30 @@ public:
             m_bits = ~0;
         return m_bits;
     }
-    T& fill(T b) { return fill(i2B<T>(b)); }
-    T& clear() { return fill(B::O); }
+    T& fill(T b)
+    {
+        return fill(i2B<T>(b));
+    }
+    T& clear()
+    {
+        return fill(B::O);
+    }
     T& flip()
     {
         m_bits = ~m_bits;
         return m_bits;
     }
-    T& get() { return m_bits; }
+    T& get()
+    {
+        return m_bits;
+    }
+
 protected:
-    T* getAddress() { return &m_bits; }
+    T* getAddress()
+    {
+        return &m_bits;
+    }
+
 private:
     T m_bits;
 };
@@ -95,9 +115,9 @@ private:
 typedef bits<uint8_t> bits8;
 typedef bits<uint16_t> bits16;
 typedef bits<uint32_t> bits32;
-}
-}
-}
+} // namespace bit
+} // namespace math
+} // namespace too
 
 namespace toobit = too::math::bit;
 

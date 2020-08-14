@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 
@@ -86,8 +86,8 @@ too::opt<ArithType> is_power_of(ArithType x, ArithType base)
             value. Under mingw I got a test-case where 4.9999... did not yield 5 as integral part.
             Though one could improve the hard-coded 1e-12 (std::numeric_limits<long double>::min() is
             much too small).*/
-    const long double exp         = std::log(x) / std::log(base);
-    const long long intpart       = too::llround(exp);
+    const long double exp = std::log(x) / std::log(base);
+    const long long intpart = too::llround(exp);
     const long double intpart_dbl = too::narrow_cast<long double>(intpart);
 
     if (!too::math::approx_equal(intpart_dbl, exp, 1e-12L))
@@ -95,7 +95,7 @@ too::opt<ArithType> is_power_of(ArithType x, ArithType base)
     return too::narrow_cast<ArithType>(intpart);
 }
 
-} // math
-} // too
+} // namespace math
+} // namespace too
 
 #endif

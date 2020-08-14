@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef PATH_H_isdgfx67g42319gyr6r8gfeuiwgfc
@@ -72,23 +72,23 @@ public:
     static const std::string& getSeparatorPlatformIndep();
 
 private:
-TOO_PRAGMA_WARNINGS_PUSH
-TOO_WARNING_DISABLE_MSVC(4251)
+    TOO_PRAGMA_WARNINGS_PUSH
+    TOO_WARNING_DISABLE_MSVC(4251)
     //! platform independent variant used by this class
     static const std::string FOLDER_SEPARATOR_TO_USE_HERE;
 
     std::string m_path_own_internal;
     std::string* m_path = &m_path_own_internal; //! contract: never nullptr
-TOO_PRAGMA_WARNINGS_POP
+    TOO_PRAGMA_WARNINGS_POP
     mutable EForm m_form = EForm::PLATFORMINDEPENDENT;
-    EType m_type         = EType::IS_UNKNOWN;
+    EType m_type = EType::IS_UNKNOWN;
 
     void detectForm() const;
 };
 
 TOOLIBSHARED_EXPORT Path operator+(const Path& p1, const Path& p2);
-} // file
-} // too
+} // namespace file
+} // namespace too
 
 
 #endif

@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 
@@ -36,6 +36,6 @@ inline void prompt()
     std::cin >> c;
 #endif
 }
-} // too
+} // namespace too
 
 #endif

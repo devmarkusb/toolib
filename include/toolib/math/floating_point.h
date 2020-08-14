@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef FLOATING_POINT_H_09458t87t5twd2874t57rbn6
@@ -87,7 +87,10 @@ struct ToStringConverter
 template <typename FloatType>
 struct ToStringConverter<FloatType, FloatFormat::default_>
 {
-    static std::string convert(FloatType x) { return too::to_string(x); }
+    static std::string convert(FloatType x)
+    {
+        return too::to_string(x);
+    }
     static std::string convert(FloatType x, int precision)
     {
         TOO_EXPECT(precision >= 0);
@@ -130,8 +133,8 @@ struct ToStringConverter<FloatType, FloatFormat::scientific>
         return ret.str();
     }
 };
-} // impl
-} // math
-} // too
+} // namespace impl
+} // namespace math
+} // namespace too
 
 #endif

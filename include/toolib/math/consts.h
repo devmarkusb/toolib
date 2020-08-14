@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef CONSTS_H_sjkhnfxgiuexernhgf7834t4
@@ -26,8 +26,8 @@ constexpr T pi()
 {
     return std::acos(static_cast<T>(-1));
 }
-} // consts
-} // math
-} // too
+} // namespace consts
+} // namespace math
+} // namespace too
 
 #endif

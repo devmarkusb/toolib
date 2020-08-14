@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef SCALE_H_enrhfu87n83464346ng
@@ -30,7 +30,8 @@ class Map_LinearScale_Interval_to_Interval
 public:
     Map_LinearScale_Interval_to_Interval(const std::pair<FloatingPointType, FloatingPointType>& FromInterval,
         const std::pair<FloatingPointType, FloatingPointType>& ToInterval)
-        : m_FromInterval(FromInterval), m_ToInterval(ToInterval)
+        : m_FromInterval(FromInterval)
+        , m_ToInterval(ToInterval)
     {
         TOO_EXPECT_THROW(FromInterval.first < FromInterval.second);
         TOO_EXPECT_THROW(ToInterval.first < ToInterval.second);
@@ -39,13 +40,13 @@ public:
     FloatingPointType operator()(const FloatingPointType& from) const
     {
         return (from - m_FromInterval.first) * (m_ToInterval.second - m_ToInterval.first) /
-            (m_FromInterval.second - m_FromInterval.first);
+               (m_FromInterval.second - m_FromInterval.first);
     }
 
     FloatingPointType inverse(const FloatingPointType& to) const
     {
         return to * (m_FromInterval.second - m_FromInterval.first) / (m_ToInterval.second - m_ToInterval.first) +
-            m_FromInterval.first;
+               m_FromInterval.first;
     }
 
 private:
@@ -67,7 +68,7 @@ inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
     TOO_EXPECT_THROW(MaxTickCount);
     TOO_EXPECT_THROW(RangeMinToMax > T());
     const double MaxTickCount_ = narrow_cast<double>(MaxTickCount);
-    const double MinimalTick   = narrow_cast<double>(RangeMinToMax) / MaxTickCount_;
+    const double MinimalTick = narrow_cast<double>(RangeMinToMax) / MaxTickCount_;
     const double magnitude = std::pow(10.0, std::floor(std::log10(MinimalTick)));
     if (too::almost_equal(magnitude, 0.0))
         return 0.0;
@@ -99,7 +100,7 @@ inline std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataVa
     const double maxOut = std::ceil(maxIn / scaleTick) * scaleTick;
     return std::make_pair(minOut, maxOut);
 }
-}
-}
+} // namespace math
+} // namespace too
 
 #endif

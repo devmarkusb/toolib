@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef DATE_TIME_H_sdhnfxeuhgf783nx4f2z3t487f
@@ -35,7 +35,9 @@ struct TOOLIBSHARED_EXPORT normalize
 //! Doesn't \ref normalize.
 struct TOOLIBSHARED_EXPORT dont_normalize
 {
-    static void do_it(std::pair<Years, Months>&) {}
+    static void do_it(std::pair<Years, Months>&)
+    {
+    }
 };
 
 //! Contract: class is always in that normalized state if \ref normalize policy is chosen.
@@ -131,8 +133,8 @@ const MonthYear_dur one_year(0, 1);
 const MonthYear_dur half_year(MonthYear_decl::twelve / 2, 0);
 const MonthYear_dur quarter_year(MonthYear_decl::twelve / 4, 0);
 const MonthYear_dur one_month(1, 0);
-}
-}
+} // namespace date_time
+} // namespace too
 
 //####################################################################################################################
 // template implementation

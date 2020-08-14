@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 
@@ -47,23 +47,23 @@ inline Map_Rational_String create_map_ratio_SIprefixunitname(
 {
     Map_Rational_String ret;
 
-    ret[too::math::atto]  = too::math::atto_symb + base_unit_name;
+    ret[too::math::atto] = too::math::atto_symb + base_unit_name;
     ret[too::math::femto] = too::math::femto_symb + base_unit_name;
-    ret[too::math::pico]  = too::math::pico_symb + base_unit_name;
-    ret[too::math::nano]  = too::math::nano_symb + base_unit_name;
+    ret[too::math::pico] = too::math::pico_symb + base_unit_name;
+    ret[too::math::nano] = too::math::nano_symb + base_unit_name;
     ret[too::math::micro] = too::math::micro_symb + base_unit_name;
     ret[too::math::milli] = too::math::milli_symb + base_unit_name;
     if (!only_factors_of_thousand)
     {
         ret[too::math::centi] = too::math::centi_symb + base_unit_name;
-        ret[too::math::deci]  = too::math::deci_symb + base_unit_name;
+        ret[too::math::deci] = too::math::deci_symb + base_unit_name;
     }
 
     ret[too::math::one] = too::math::one_symb + base_unit_name;
 
     if (!only_factors_of_thousand)
     {
-        ret[too::math::deca]  = too::math::deka_symb + base_unit_name;
+        ret[too::math::deca] = too::math::deka_symb + base_unit_name;
         ret[too::math::hecto] = too::math::hecto_symb + base_unit_name;
     }
     ret[too::math::kilo] = too::math::kilo_symb + base_unit_name;
@@ -71,7 +71,7 @@ inline Map_Rational_String create_map_ratio_SIprefixunitname(
     ret[too::math::giga] = too::math::giga_symb + base_unit_name;
     ret[too::math::tera] = too::math::tera_symb + base_unit_name;
     ret[too::math::peta] = too::math::peta_symb + base_unit_name;
-    ret[too::math::exa]  = too::math::exa_symb + base_unit_name;
+    ret[too::math::exa] = too::math::exa_symb + base_unit_name;
 
     return ret;
 }
@@ -108,18 +108,26 @@ public:
     {
         expectValidRatio(ratio);
         const auto invalid_one_it = std::find_if(std::begin(this->ratio_prefixunitname),
-            std::end(this->ratio_prefixunitname), [](const std::pair<too::math::Rational, std::string>& rs)
-            {
+            std::end(this->ratio_prefixunitname), [](const std::pair<too::math::Rational, std::string>& rs) {
                 return rs.first <= Rational{};
             });
         if (invalid_one_it != ratio_prefixunitname.end())
             throw std::invalid_argument("ratio <= zero found in passed map");
     }
 
-    ~Unit() { TOO_EXPECT(expectValidRatio(this->ratio)); }
+    ~Unit()
+    {
+        TOO_EXPECT(expectValidRatio(this->ratio));
+    }
 
-    std::string getString() const { return this->ratio_prefixunitname.at(this->ratio); }
-    Rational getRatio() const { return this->ratio; }
+    std::string getString() const
+    {
+        return this->ratio_prefixunitname.at(this->ratio);
+    }
+    Rational getRatio() const
+    {
+        return this->ratio;
+    }
 
     //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the \param target_ratio
     //! in the map. That would make the class useless.
@@ -149,8 +157,7 @@ public:
 
         std::vector<Rational> ratios;
         std::transform(std::begin(this->ratio_prefixunitname), std::end(this->ratio_prefixunitname),
-            std::back_inserter(ratios), [](const std::pair<Rational, std::string>& elem)
-            {
+            std::back_inserter(ratios), [](const std::pair<Rational, std::string>& elem) {
                 return elem.first;
             });
 
@@ -159,10 +166,9 @@ public:
         const auto current_ratio_it = std::find(std::begin(ratios), std::end(ratios), this->ratio);
         TOO_ASSERT(current_ratio_it != std::end(ratios));
 
-        const auto optim_ratio_it = std::find_if(std::begin(ratios), current_ratio_it, [val](const Rational& r)
-            {
-                return val <= r.asFloatingPoint<double>();
-            });
+        const auto optim_ratio_it = std::find_if(std::begin(ratios), current_ratio_it, [val](const Rational& r) {
+            return val <= r.asFloatingPoint<double>();
+        });
 
         if (optim_ratio_it != current_ratio_it)
         {
@@ -171,10 +177,9 @@ public:
         }
 
         const auto current_ratio_revit = std::reverse_iterator<std::vector<Rational>::iterator>{current_ratio_it};
-        const auto optim_ratio_revit   = std::find_if(ratios.rbegin(), current_ratio_revit, [val](const Rational& r)
-            {
-                return val >= r.asFloatingPoint<double>();
-            });
+        const auto optim_ratio_revit = std::find_if(ratios.rbegin(), current_ratio_revit, [val](const Rational& r) {
+            return val >= r.asFloatingPoint<double>();
+        });
 
         if (optim_ratio_revit != current_ratio_revit)
         {
@@ -214,11 +219,24 @@ private:
 class Quantity
 {
 public:
-    Quantity(const std::string& quantity_name, const Unit& unit) : unit(unit), q_name(quantity_name) {}
+    Quantity(const std::string& quantity_name, const Unit& unit)
+        : unit(unit)
+        , q_name(quantity_name)
+    {
+    }
 
-    std::string getName() const { return this->q_name; }
-    Unit& getUnit() { return this->unit; }
-    const Unit& getUnit() const { return const_cast<Quantity*>(this)->getUnit(); }
+    std::string getName() const
+    {
+        return this->q_name;
+    }
+    Unit& getUnit()
+    {
+        return this->unit;
+    }
+    const Unit& getUnit() const
+    {
+        return const_cast<Quantity*>(this)->getUnit();
+    }
 
 private:
     Unit unit;
@@ -234,7 +252,7 @@ private:
 //    Quantity(WhatConcrete& val);
 //};
 
-} // math
-} // too
+} // namespace math
+} // namespace too
 
 #endif

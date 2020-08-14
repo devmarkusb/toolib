@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef LEX_CAST_H_sopaiem3p2oium32omo
@@ -53,6 +53,6 @@ inline T lex_cast(const S& s) noexcept
     }
     return T{};
 }
-} // too
+} // namespace too
 
 #endif

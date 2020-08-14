@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 
@@ -43,7 +43,7 @@ inline TR round_to(TP r, unsigned short decimal_places = 0)
         return numeric_limits<TR>::min();
     return static_cast<TR>(d);
 }
-}
-}
+} // namespace math
+} // namespace too
 
 #endif

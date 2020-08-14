@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef LANGUAGES_H_sjdkghfnxz34gf7328f7gfr
@@ -64,9 +64,11 @@ inline std::string getNativeLanguageName(const LangID_iso639_1& id)
     else if (id == "en")
         return "English";
     else if (id == "es")
-        return "Espa\xC3\xB1""ol";
+        return "Espa\xC3\xB1"
+               "ol";
     else if (id == "fr")
-        return "Fran\xc3\xa7""ais";
+        return "Fran\xc3\xa7"
+               "ais";
     else if (id == "hi")
         return "\xE0\xA4\xB9\xE0\xA4\xBF\xE0\xA4\xA8\xE0\xA5\x8D\xE0\xA4\xA6\xE0\xA5\x80";
     else if (id == "it")
@@ -76,7 +78,8 @@ inline std::string getNativeLanguageName(const LangID_iso639_1& id)
     else if (id == "ko")
         return "\xED\x95\x9C\xEA\xB5\xAD\xEC\x96\xB4";
     else if (id == "pt")
-        return "Portugu\xC3\xAA""s";
+        return "Portugu\xC3\xAA"
+               "s";
     else if (id == "ru")
         return "\xD0\xA0\xD1\x83\xD1\x81\xD1\x81\xD0\xBA\xD0\xB8\xD0\xB9";
     else if (id == "zh")
@@ -122,7 +125,7 @@ inline std::string getEnglishLanguageName(const LangID_iso639_1& id)
     else
         throw too::not_implemented{"unsupported or unknonwn ISO 639-1 language code"};
 }
-} // str
-} // too
+} // namespace str
+} // namespace too
 
 #endif

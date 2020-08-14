@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef GEOMETRY_H_dgiuntgh87xtg3487tg3tgfvscd
@@ -27,29 +27,29 @@ namespace math
 namespace detail
 {
 using DefaultValueType = double;
-} // detail
+} // namespace detail
 
 using Dimension = int;
 
 template <typename T = detail::DefaultValueType>
-using Coord_         = too::enable_if_t<std::is_arithmetic<T>::value, T>;
-using Coord          = Coord_<>;
+using Coord_ = too::enable_if_t<std::is_arithmetic<T>::value, T>;
+using Coord = Coord_<>;
 
 template <typename T = detail::DefaultValueType>
 using RelativeCoord_ = too::enable_if_t<std::is_arithmetic<T>::value, T>;
-using RelativeCoord  = RelativeCoord_<>;
+using RelativeCoord = RelativeCoord_<>;
 
 template <typename T = detail::DefaultValueType>
-using Length_        = too::enable_if_t<std::is_arithmetic<T>::value, T>;
-using Length         = Length_<>;
+using Length_ = too::enable_if_t<std::is_arithmetic<T>::value, T>;
+using Length = Length_<>;
 
 template <typename T = detail::DefaultValueType>
-using Width_         = Length_<T>;
-using Width          = Width_<>;
+using Width_ = Length_<T>;
+using Width = Width_<>;
 
 template <typename T = detail::DefaultValueType>
-using Height_        = Length_<T>;
-using Height         = Height_<>;
+using Height_ = Length_<T>;
+using Height = Height_<>;
 
 //! For easier understanding the choice of the coordinate system axes directions
 //! is described by visualizing screen corners (so everyone knows, that left_top
@@ -69,9 +69,15 @@ struct Point_
 
     std::array<T, dim> x{};
 
-    Point_() : x{} {}
+    Point_()
+        : x{}
+    {
+    }
 
-    Point_(std::initializer_list<T> init) { this->x = init; }
+    Point_(std::initializer_list<T> init)
+    {
+        this->x = init;
+    }
 
     Point_& operator=(std::initializer_list<T> init)
     {
@@ -93,7 +99,11 @@ struct Point_<T, 2>
     T x{};
     T y{};
 
-    Point_() : x{}, y{} {}
+    Point_()
+        : x{}
+        , y{}
+    {
+    }
 
     Point_(std::initializer_list<T> init)
     {
@@ -158,7 +168,7 @@ struct Rectangle_
 
     Rectangle_(std::initializer_list<Point_<T, 2>> init)
     {
-        auto it        = init.begin();
+        auto it = init.begin();
         this->top_left = *it;
         ++it;
         this->bottom_right = *it;
@@ -173,8 +183,14 @@ struct Rectangle_
 
     static const CoordOrigin coord_origin = origin;
 
-    Width_<T> width() const { return std::abs(bottom_right.x - top_left.x); }
-    Height_<T> height() const { return std::abs(bottom_right.y - top_left.y); }
+    Width_<T> width() const
+    {
+        return std::abs(bottom_right.x - top_left.x);
+    }
+    Height_<T> height() const
+    {
+        return std::abs(bottom_right.y - top_left.y);
+    }
 };
 
 //! For convenience.
@@ -193,12 +209,18 @@ struct Margins_
     T bottom{};
 
     Margins_() = default;
-    Margins_(T left, T right, T top, T bottom) : left{left}, right{right}, top{top}, bottom{bottom} {}
+    Margins_(T left, T right, T top, T bottom)
+        : left{left}
+        , right{right}
+        , top{top}
+        , bottom{bottom}
+    {
+    }
 };
 
 //! For convenience.
 using Margins = Margins_<>;
-}
-}
+} // namespace math
+} // namespace too
 
 #endif

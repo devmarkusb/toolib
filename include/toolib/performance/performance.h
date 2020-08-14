@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef PERFORMANCE_H_sdkfgnxzuwegnf93746ryng342grf
@@ -32,7 +32,7 @@ namespace too
 namespace implDumpAllItems
 {
 struct KeyData;
-} // fwd
+} // namespace implDumpAllItems
 
 //! Can only be used within one thread at the same time.
 /** Usage: Cf. unit tests.*/
@@ -40,8 +40,8 @@ class PerformanceProfiler : private non_copyable
 {
 public:
     using TimeValStorageRep = double;
-    using SecondsDbl        = TimeValStorageRep;
-    using NestingLevel      = unsigned int;
+    using SecondsDbl = TimeValStorageRep;
+    using NestingLevel = unsigned int;
 
     //! \param NestingLevel is just for dump visualization
     inline explicit PerformanceProfiler(std::string NewItemName, NestingLevel NestingLevel = 0);
@@ -49,7 +49,7 @@ public:
     SecondsDbl elapsed_currentItem() const;
 
     //! New item on same hierarchy/nesting level.
-    inline void startNewItem(const std::string &NewItemName);
+    inline void startNewItem(const std::string& NewItemName);
     inline void stopItem();
 
     enum class DumpFormat
@@ -58,10 +58,10 @@ public:
         stringAndStructure,
     };
     //! Also fills dumpedData() if \param fmt is DumpFormat::stringAndStructure.
-    template<DumpFormat fmt = DumpFormat::stringOnly>
+    template <DumpFormat fmt = DumpFormat::stringOnly>
     static std::string dumpAllItems();
     static void reset();
-    static std::string toFormattedString(const SecondsDbl &d);
+    static std::string toFormattedString(const SecondsDbl& d);
     //! Only for testing.
     struct DumpDataset
     {
@@ -89,12 +89,14 @@ private:
         UniqueItemStartNr m_StartNr{};
 
         ItemData(const TimeValStorageRep& t, NestingLevel nl, UniqueItemStartNr n)
-            : m_TimeVal(t), m_NestingLevel(nl), m_StartNr(n)
+            : m_TimeVal(t)
+            , m_NestingLevel(nl)
+            , m_StartNr(n)
         {
         }
     };
     using ItemNameAsKey = std::string;
-    using Items         = std::multimap<ItemNameAsKey, ItemData>;
+    using Items = std::multimap<ItemNameAsKey, ItemData>;
     using chrono_clock = std::chrono::high_resolution_clock;
     using chrono_duration =
         std::chrono::duration<TimeValStorageRep, std::ratio<1, 1>>; // means seconds stored with type TimeValStorage
@@ -103,7 +105,7 @@ private:
     chrono_timepoint m_StartTime;
     chrono_timepoint m_StopTime;
     std::string m_ItemName;
-    NestingLevel m_NestingLevel     = NestingLevel{};
+    NestingLevel m_NestingLevel = NestingLevel{};
     UniqueItemStartNr m_ItemStartNr = UniqueItemStartNr{};
 
     inline void startCurrentItem();
@@ -118,8 +120,14 @@ private:
 
     struct match_key
     {
-        explicit match_key(ItemNameAsKey key) : m_key(std::move(key)) {}
-        bool operator()(const Items::value_type& rhs) const { return m_key == rhs.first; }
+        explicit match_key(ItemNameAsKey key)
+            : m_key(std::move(key))
+        {
+        }
+        bool operator()(const Items::value_type& rhs) const
+        {
+            return m_key == rhs.first;
+        }
 
     private:
         ItemNameAsKey m_key;
@@ -127,7 +135,10 @@ private:
 
     struct accum_key
     {
-        explicit accum_key(ItemNameAsKey key) : m_key(std::move(key)) {}
+        explicit accum_key(ItemNameAsKey key)
+            : m_key(std::move(key))
+        {
+        }
         TimeValStorageRep operator()(const TimeValStorageRep& v, const Items::value_type& rhs) const
         {
             if (m_key == rhs.first)
@@ -143,7 +154,7 @@ private:
 inline void PerformanceProfiler::startCurrentItem()
 {
     m_ItemStartNr = uniqueItemStartNr()++;
-    m_StartTime   = chrono_clock::now();
+    m_StartTime = chrono_clock::now();
 }
 
 inline void PerformanceProfiler::stopCurrentItem()
@@ -162,45 +173,56 @@ inline void PerformanceProfiler::stopCurrentItem()
 }
 
 inline PerformanceProfiler::PerformanceProfiler(std::string NewItemName, NestingLevel NestingLevel)
-    : m_ItemName(std::move(NewItemName)), m_NestingLevel(NestingLevel)
+    : m_ItemName(std::move(NewItemName))
+    , m_NestingLevel(NestingLevel)
 {
     startCurrentItem();
 }
 
 inline PerformanceProfiler::SecondsDbl PerformanceProfiler::elapsed_currentItem() const
 {
-    chrono_timepoint now    = chrono_clock::now();
+    chrono_timepoint now = chrono_clock::now();
     chrono_duration elapsed = now - m_StartTime;
     return elapsed.count();
 }
 
-inline PerformanceProfiler::~PerformanceProfiler() { stopCurrentItem(); }
+inline PerformanceProfiler::~PerformanceProfiler()
+{
+    stopCurrentItem();
+}
 
-inline void PerformanceProfiler::startNewItem(const std::string &NewItemName)
+inline void PerformanceProfiler::startNewItem(const std::string& NewItemName)
 {
     stopCurrentItem();
     m_ItemName = NewItemName;
     startCurrentItem();
 }
 
-inline void PerformanceProfiler::stopItem() { stopCurrentItem(); }
+inline void PerformanceProfiler::stopItem()
+{
+    stopCurrentItem();
+}
 
 namespace implDumpAllItems
 {
 struct KeyData
 {
-    using NestingLevel      = PerformanceProfiler::NestingLevel;
+    using NestingLevel = PerformanceProfiler::NestingLevel;
     using UniqueItemStartNr = PerformanceProfiler::UniqueItemStartNr;
-    using ItemData          = PerformanceProfiler::ItemData;
+    using ItemData = PerformanceProfiler::ItemData;
 
     NestingLevel m_NestingLevel{};
     UniqueItemStartNr m_StartNr{};
 
-    explicit KeyData(const ItemData& d) : m_NestingLevel(d.m_NestingLevel), m_StartNr(d.m_StartNr) {}
+    explicit KeyData(const ItemData& d)
+        : m_NestingLevel(d.m_NestingLevel)
+        , m_StartNr(d.m_StartNr)
+    {
+    }
 };
-}
+} // namespace implDumpAllItems
 
-template<PerformanceProfiler::DumpFormat fmt>
+template <PerformanceProfiler::DumpFormat fmt>
 inline std::string PerformanceProfiler::dumpAllItems()
 {
     if constexpr (fmt != DumpFormat::stringOnly)
@@ -215,19 +237,17 @@ inline std::string PerformanceProfiler::dumpAllItems()
     using TKeySet_unsorted = std::map<ItemNameAsKey, implDumpAllItems::KeyData>;
     TKeySet_unsorted keys_unsorted;
     std::transform(items().begin(), items().end(), std::inserter(keys_unsorted, keys_unsorted.begin()),
-        [](decltype(*items().begin())& i)
-        {
+        [](decltype(*items().begin())& i) {
             return std::make_pair(i.first, implDumpAllItems::KeyData(i.second));
         });
     using TKeyNameAndData = std::pair<ItemNameAsKey, implDumpAllItems::KeyData>;
     using TKeySet = std::vector<TKeyNameAndData>;
     TKeySet keys(keys_unsorted.begin(), keys_unsorted.end());
-    std::sort(keys.begin(), keys.end(), [](const TKeySet::value_type& k1, const TKeySet::value_type& k2) -> bool
-        {
-            return k1.second.m_StartNr < k2.second.m_StartNr;
-        });
+    std::sort(keys.begin(), keys.end(), [](const TKeySet::value_type& k1, const TKeySet::value_type& k2) -> bool {
+        return k1.second.m_StartNr < k2.second.m_StartNr;
+    });
 
-    static const size_t COLUMN_WIDTH      = 10;
+    static const size_t COLUMN_WIDTH = 10;
     static const size_t COLUMN_WIDTH_HUGE = 29;
 
     ret << std::left;
@@ -260,8 +280,9 @@ inline std::string PerformanceProfiler::dumpAllItems()
                 sortedItems.push_back(item.second.m_TimeVal);
         }
         std::sort(sortedItems.begin(), sortedItems.end());
-        const auto mid   = static_cast<size_t>(floor(static_cast<double>(count) / 2.0));
-        const double meanT = (count > 1 && count % 2) ? (sortedItems[mid] + sortedItems[mid + 1]) / 2.0 : sortedItems[mid];
+        const auto mid = static_cast<size_t>(floor(static_cast<double>(count) / 2.0));
+        const double meanT =
+            (count > 1 && count % 2) ? (sortedItems[mid] + sortedItems[mid + 1]) / 2.0 : sortedItems[mid];
 
         double variance = 0.0;
         if (count > 1)
@@ -288,14 +309,15 @@ inline std::string PerformanceProfiler::dumpAllItems()
             << std::setw(COLUMN_WIDTH) << std::setprecision(COLUMN_WIDTH) << toFormattedString(meanT)
             << std::setw(COLUMN_WIDTH) << std::setprecision(COLUMN_WIDTH) << toFormattedString(stddev) << std::endl;
         if constexpr (fmt != DumpFormat::stringOnly)
-            dumpedData().push_back({ItemNameWithSymbolizedNestingLevel, static_cast<size_t>(count), totalT, avgT, meanT, stddev});
+            dumpedData().push_back(
+                {ItemNameWithSymbolizedNestingLevel, static_cast<size_t>(count), totalT, avgT, meanT, stddev});
     }
     ret << std::setfill('-') << std::setw(COLUMN_WIDTH_HUGE + COLUMN_WIDTH * 5) << '-' << std::endl;
     ret << std::setfill(' ');
     return ret.str();
 }
 
-inline std::string PerformanceProfiler::toFormattedString(const SecondsDbl &d)
+inline std::string PerformanceProfiler::toFormattedString(const SecondsDbl& d)
 {
     std::stringstream ret;
     SecondsDbl d_(d);
@@ -339,6 +361,6 @@ inline PerformanceProfiler::Items& PerformanceProfiler::items()
     static Items instance;
     return instance;
 }
-} // too
+} // namespace too
 
 #endif

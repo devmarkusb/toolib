@@ -3,7 +3,7 @@
 
 //!
 /** Not yet tested.
-*/
+ */
 //! \file
 
 // Implementation taken from Meyers' book.
@@ -48,12 +48,26 @@ public:
     {
     };
     //!
-    static long objectCount() { return m_numObjects; }
-protected:
-    Counted() { init(); }
-    Counted(const Counted&) { init(); }
+    static long objectCount()
+    {
+        return m_numObjects;
+    }
 
-    ~Counted() { --m_numObjects; }
+protected:
+    Counted()
+    {
+        init();
+    }
+    Counted(const Counted&)
+    {
+        init();
+    }
+
+    ~Counted()
+    {
+        --m_numObjects;
+    }
+
 private:
     static long m_numObjects;
     static const long maxObjects;
@@ -67,6 +81,6 @@ private:
 };
 template <class BeingCounted>
 long Counted<BeingCounted>::m_numObjects; // defines and initializes to zero
-}
+} // namespace too
 
 #endif

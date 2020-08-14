@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef GAME_H_aubzstex3zubte632yet7
@@ -28,7 +28,9 @@ namespace game
 class IMain
 {
 public:
-    virtual ~IMain() {}
+    virtual ~IMain()
+    {
+    }
     //! The only function to be called. \returns main exit code of the program.
     int main()
     {
@@ -88,14 +90,16 @@ private:
 class IGame
 {
 public:
-    virtual ~IGame() {}
+    virtual ~IGame()
+    {
+    }
 
     enum EEndType
     {
-        ET_ERROR     = -1,
+        ET_ERROR = -1,
         ET_USER_EXIT = 0,
         ET_GAME_OVER = 1,
-        ET_GAME_WON  = 2,
+        ET_GAME_WON = 2,
     };
 
     //! The only function to be called. Starts gameplay.
@@ -108,19 +112,19 @@ public:
             ;
         switch (et)
         {
-        case ET_USER_EXIT:
-            gameTerminationByUserExit();
-            return false;
-        case ET_GAME_OVER:
-            gameTerminationByGameOver();
-            break;
-        case ET_GAME_WON:
-            gameTerminationByGameWon();
-            break;
-        case ET_ERROR:
-        default:
-            if (!gameTerminationByError())
+            case ET_USER_EXIT:
+                gameTerminationByUserExit();
                 return false;
+            case ET_GAME_OVER:
+                gameTerminationByGameOver();
+                break;
+            case ET_GAME_WON:
+                gameTerminationByGameWon();
+                break;
+            case ET_ERROR:
+            default:
+                if (!gameTerminationByError())
+                    return false;
         }
         return true;
     }
@@ -180,8 +184,8 @@ private:
         return true;
     }
 };
-}
-}
+} // namespace game
+} // namespace too
 
 namespace toog = too::game;
 

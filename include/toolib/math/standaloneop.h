@@ -44,8 +44,8 @@ const T operator/(const T& t1, const T& t2)
 {
     return T(t1) /= t2;
 }
-}
-}
-}
+} // namespace stand_alone_ops
+} // namespace math
+} // namespace too
 
 #endif

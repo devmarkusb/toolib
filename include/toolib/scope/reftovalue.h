@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 
@@ -19,9 +19,19 @@ template <typename T>
 class RefToValue
 {
 public:
-    RefToValue(T& ref) : m_ref(ref) {}
-    RefToValue(const RefToValue& rhs) : m_ref(rhs.m_ref) {}
-    operator T&() const { return m_ref; }
+    RefToValue(T& ref)
+        : m_ref(ref)
+    {
+    }
+    RefToValue(const RefToValue& rhs)
+        : m_ref(rhs.m_ref)
+    {
+    }
+    operator T&() const
+    {
+        return m_ref;
+    }
+
 private:
     RefToValue();
     RefToValue& operator=(const RefToValue&);
@@ -34,6 +44,6 @@ inline RefToValue<T> ByRef(T& t)
 {
     return RefToValue<T>(t);
 }
-}
+} // namespace too
 
 #endif

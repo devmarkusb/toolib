@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 
@@ -45,8 +45,8 @@ private:
 
     ExitCatcher();
 };
-}
-}
+} // namespace con
+} // namespace too
 #endif // TOO_OS_WINDOWS
 
 #endif

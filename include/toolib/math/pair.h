@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 
@@ -20,11 +20,23 @@ namespace math
 template <typename T1, typename T2>
 struct pair
 {
-    pair() : m_p(), left(getleft()), right(getright()) {}
-    pair(const T1& l, const T2& r) : m_p(l, r), left(getleft()), right(getright()) {}
+    pair()
+        : m_p()
+        , left(getleft())
+        , right(getright())
+    {
+    }
+    pair(const T1& l, const T2& r)
+        : m_p(l, r)
+        , left(getleft())
+        , right(getright())
+    {
+    }
     template <typename OT1, typename OT2>
     pair(const pair<OT1, OT2>& p)
-        : m_p(p), left(getleft()), right(getright())
+        : m_p(p)
+        , left(getleft())
+        , right(getright())
     {
     }
     template <typename OT1, typename OT2>
@@ -45,7 +57,9 @@ struct pair
 
     template <typename OT1, typename OT2>
     pair(const std::pair<OT1, OT2>& p)
-        : m_p(p), left(getleft()), right(getright())
+        : m_p(p)
+        , left(getleft())
+        , right(getright())
     {
     }
 
@@ -71,19 +85,31 @@ struct pair
         return *this;
     }
 
-    void swap(pair<T1, T2>& p) { m_p.swap(p); }
+    void swap(pair<T1, T2>& p)
+    {
+        m_p.swap(p);
+    }
 
-    pair<T1, T2> flip() { return pair<T1, T2>(m_p.second, m_p.first); }
+    pair<T1, T2> flip()
+    {
+        return pair<T1, T2>(m_p.second, m_p.first);
+    }
 
     T1& left;
     T2& right;
 
 private:
     std::pair<T1, T2> m_p;
-    T1& getleft() { return m_p.first; }
-    T2& getright() { return m_p.second; }
+    T1& getleft()
+    {
+        return m_p.first;
+    }
+    T2& getright()
+    {
+        return m_p.second;
+    }
 };
-} // math
-} // too
+} // namespace math
+} // namespace too
 
 #endif

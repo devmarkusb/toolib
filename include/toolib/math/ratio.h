@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 
@@ -100,16 +100,17 @@ struct Rational
 
     template <intmax_t N, intmax_t D>
     explicit constexpr Rational(std::ratio<N, D>)
-        : num{N}, denom{D}
+        : num{N}
+        , denom{D}
     {
         static_assert(D > 0, "denominator for Rational expected to be > 0");
     }
 
     ~Rational() = default; // gcc needs this to be trivial for the use of Rational in constexpr's
-//     {
-//         // documenting the important invariant
-//         TOO_EXPECT(denom > 0);
-//     }
+    //     {
+    //         // documenting the important invariant
+    //         TOO_EXPECT(denom > 0);
+    //     }
 
     //! Note that this ensures the invariant of having denom > 0 always
     void inverse()
@@ -118,7 +119,7 @@ struct Rational
         if (this->denom < 0)
         {
             this->denom = -this->denom;
-            this->num   = -this->num;
+            this->num = -this->num;
         }
         TOO_ENSURE(denom > 0);
     }
@@ -142,9 +143,15 @@ struct Rational
     //    return this->num != ValueType{};
     //}
 
-    bool operator!() const { return is_null(); }
+    bool operator!() const
+    {
+        return is_null();
+    }
 
-    bool is_null() const { return this->num == ValueType{}; }
+    bool is_null() const
+    {
+        return this->num == ValueType{};
+    }
 
     Rational operator-() const
     {
@@ -223,7 +230,10 @@ inline bool operator==(const Rational& lhs, const Rational& rhs)
         return lhs.num == rhs.num;
     return too::almost_equal(lhs.asFloatingPoint<long double>(), rhs.asFloatingPoint<long double>());
 }
-inline bool operator!=(const Rational& lhs, const Rational& rhs) { return !operator==(lhs, rhs); }
+inline bool operator!=(const Rational& lhs, const Rational& rhs)
+{
+    return !operator==(lhs, rhs);
+}
 inline bool operator<(const Rational& lhs, const Rational& rhs)
 {
     if (lhs.denom == rhs.denom)
@@ -232,9 +242,18 @@ inline bool operator<(const Rational& lhs, const Rational& rhs)
         return lhs.denom > rhs.denom;
     return lhs.asFloatingPoint<long double>() < rhs.asFloatingPoint<long double>();
 }
-inline bool operator>(const Rational& lhs, const Rational& rhs) { return operator<(rhs, lhs); }
-inline bool operator<=(const Rational& lhs, const Rational& rhs) { return !operator>(lhs, rhs); }
-inline bool operator>=(const Rational& lhs, const Rational& rhs) { return !operator<(lhs, rhs); }
+inline bool operator>(const Rational& lhs, const Rational& rhs)
+{
+    return operator<(rhs, lhs);
+}
+inline bool operator<=(const Rational& lhs, const Rational& rhs)
+{
+    return !operator>(lhs, rhs);
+}
+inline bool operator>=(const Rational& lhs, const Rational& rhs)
+{
+    return !operator<(lhs, rhs);
+}
 
 
 #if TOO_HAS_NO_CONSTEXPR_STD_RATIO
@@ -289,7 +308,7 @@ TOO_TEMPCONSTEXPR const Rational seventimes       {std::ratio<7, 1>{}};
 TOO_TEMPCONSTEXPR const Rational twelvetimes      {std::ratio<12, 1>{}};
 // clang-format on
 #undef TOO_TEMPCONSTEXPR
-}
-}
+} // namespace math
+} // namespace too
 
 #endif

@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef FILE_H_sduifhg3gfy324n178fsffe4f
@@ -51,20 +51,20 @@ inline void throwError(const std::string& filePathNameExt, operation op, const s
     ss << " could not be ";
     switch (op)
     {
-    case operation::save:
-        ss << "saved";
-        break;
-    case operation::load:
-        ss << "loaded";
-        break;
-    default:
-        TOO_ASSERT(false); // op not supported
+        case operation::save:
+            ss << "saved";
+            break;
+        case operation::load:
+            ss << "loaded";
+            break;
+        default:
+            TOO_ASSERT(false); // op not supported
     }
     ss << ", details: " << retErrDetail;
     ss << ", ec: " << errno_ << ", " << std::strerror(errno_);
     throw std::runtime_error{ss.str()};
 }
-} // file
-} // too
+} // namespace file
+} // namespace too
 
 #endif

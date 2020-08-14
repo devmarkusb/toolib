@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 
@@ -35,7 +35,7 @@ inline std::string& trim(std::string& s)
     ltrim(rtrim(s));
     return s;
 }
-} // str
-} // too
+} // namespace str
+} // namespace too
 
 #endif

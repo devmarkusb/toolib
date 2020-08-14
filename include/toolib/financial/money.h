@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef MONEY_H_weztuiolkjhgf34567
@@ -126,13 +126,25 @@ using Fraction = long double;
 class TOOLIBSHARED_EXPORT Interest_pa
 {
 public:
-    explicit Interest_pa(Percent p = Percent()) : p(p) {}
+    explicit Interest_pa(Percent p = Percent())
+        : p(p)
+    {
+    }
 
-    void operator=(Percent p_) { this->p = p_; }
+    void operator=(Percent p_)
+    {
+        this->p = p_;
+    }
 
-    operator Percent() const { return this->p; }
+    operator Percent() const
+    {
+        return this->p;
+    }
 
-    Fraction dividedBy100() const { return this->p / 100.0l; }
+    Fraction dividedBy100() const
+    {
+        return this->p / 100.0l;
+    }
 
     static Fraction YearlyEffective_to_MonthlyRelative(Fraction pa);
 
@@ -145,8 +157,8 @@ public:
 private:
     Percent p = Percent();
 };
-}
-}
+} // namespace fin
+} // namespace too
 
 
 #endif

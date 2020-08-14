@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 
@@ -26,10 +26,10 @@ inline void tokenizeString(const std::string& s, const std::string& delimiters, 
     {
         out.push_back(s.substr(pos_start, pos_end - pos_start));
         pos_start = s.find_first_not_of(delimiters, pos_end);
-        pos_end   = s.find_first_of(delimiters, pos_start);
+        pos_end = s.find_first_of(delimiters, pos_start);
     }
 }
-} // str
-} // too
+} // namespace str
+} // namespace too
 
 #endif

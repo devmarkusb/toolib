@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #ifndef MINMAX_VALUES_H_iuwenyg34gnyt487t
@@ -16,13 +16,13 @@
 
 namespace too::math
 {
-template<typename ValueType>
+template <typename ValueType>
 struct MinValue final
 {
     using value_type = ValueType;
 
     explicit MinValue(ValueType min)
-            : min_{std::move(min)}
+        : min_{std::move(min)}
     {
     }
 
@@ -37,19 +37,18 @@ struct MinValue final
     }
 
     //! Requires TransformFct to be a ValueType(const ValueType&) callable.
-    template<typename TransformFct>
+    template <typename TransformFct>
     void transform(TransformFct&& t)
     {
         min_ = t(min_);
     }
 
     //! Requires Fct to be a void(const ValueType&) callable.
-    template<typename Fct>
-    void forEachInOverlappingRange(
-            const ValueType& begin, const ValueType& end,
-            Fct&& f) const
+    template <typename Fct>
+    void forEachInOverlappingRange(const ValueType& begin, const ValueType& end, Fct&& f) const
     {
-        for (ValueType v = std::max(min_, begin); v <= end; ++v) {
+        for (ValueType v = std::max(min_, begin); v <= end; ++v)
+        {
             f(v);
         }
     }
@@ -64,20 +63,20 @@ private:
 };
 
 //! Requires TransformFct to be a ValueTypeDst(const ValueTypeSrc&) callable.
-template<typename ValueTypeSrc, typename TransformFct>
+template <typename ValueTypeSrc, typename TransformFct>
 auto transform(const MinValue<ValueTypeSrc>& src, TransformFct&& t)
 {
     using ValueTypeDst = std::invoke_result_t<TransformFct, const ValueTypeSrc&>;
     return MinValue<ValueTypeDst>{t(src.min())};
 }
 
-template<typename ValueType>
+template <typename ValueType>
 struct MaxValue final
 {
     using value_type = ValueType;
 
     explicit MaxValue(ValueType max)
-            : max_{std::move(max)}
+        : max_{std::move(max)}
     {
     }
 
@@ -92,19 +91,18 @@ struct MaxValue final
     }
 
     //! Requires TransformFct to be a ValueType(const ValueType&) callable.
-    template<typename TransformFct>
+    template <typename TransformFct>
     void transform(TransformFct&& t)
     {
         max_ = t(max_);
     }
 
     //! Requires Fct to be a void(const ValueType&) callable.
-    template<typename Fct>
-    void forEachInOverlappingRange(
-            const ValueType& begin, const ValueType& end,
-            Fct&& f) const
+    template <typename Fct>
+    void forEachInOverlappingRange(const ValueType& begin, const ValueType& end, Fct&& f) const
     {
-        for (ValueType v = begin; v <= std::min(max_, end); ++v) {
+        for (ValueType v = begin; v <= std::min(max_, end); ++v)
+        {
             f(v);
         }
     }
@@ -119,7 +117,7 @@ private:
 };
 
 //! Requires TransformFct to be a ValueTypeDst(const ValueTypeSrc&) callable.
-template<typename ValueTypeSrc, typename TransformFct>
+template <typename ValueTypeSrc, typename TransformFct>
 auto transform(const MaxValue<ValueTypeSrc>& src, TransformFct&& t)
 {
     using ValueTypeDst = std::invoke_result_t<TransformFct, const ValueTypeSrc&>;
@@ -128,13 +126,14 @@ auto transform(const MaxValue<ValueTypeSrc>& src, TransformFct&& t)
 
 /** Represents a min, max value pair as a closed interval.
     Note that the (pathological) case of min > max correctly represents an empty interval, without any overhead.*/
-template<typename ValueType>
+template <typename ValueType>
 struct MinMaxValue final
 {
     using value_type = ValueType;
 
     MinMaxValue(ValueType min, ValueType max)
-            : min_{std::move(min)}, max_{std::move(max)}
+        : min_{std::move(min)}
+        , max_{std::move(max)}
     {
     }
 
@@ -149,7 +148,7 @@ struct MinMaxValue final
     }
 
     /** \tparam TransformFct required to be a ValueType(const ValueType&) callable.*/
-    template<typename TransformFct>
+    template <typename TransformFct>
     void transform(TransformFct&& t)
     {
         min_ = t(min_);
@@ -157,12 +156,11 @@ struct MinMaxValue final
     }
 
     /** \tparam Fct required to be a void(const ValueType&) callable.*/
-    template<typename Fct>
-    void forEachInOverlappingRange(
-            const ValueType& begin, const ValueType& end,
-            Fct&& f) const
+    template <typename Fct>
+    void forEachInOverlappingRange(const ValueType& begin, const ValueType& end, Fct&& f) const
     {
-        for (ValueType v = std::max(min_, begin); v <= std::min(max_, end); ++v) {
+        for (ValueType v = std::max(min_, begin); v <= std::min(max_, end); ++v)
+        {
             f(v);
         }
     }
@@ -183,12 +181,12 @@ private:
 };
 
 /** \tparam TransformFct required to be a ValueTypeDst(const ValueTypeSrc&) callable.*/
-template<typename ValueTypeSrc, typename TransformFct>
+template <typename ValueTypeSrc, typename TransformFct>
 auto transform(const MinMaxValue<ValueTypeSrc>& src, TransformFct&& t)
 {
     using ValueTypeDst = std::invoke_result_t<TransformFct, const ValueTypeSrc&>;
     return MinMaxValue<ValueTypeDst>{t(src.min()), t(src.max())};
 }
-} // too::math
+} // namespace too::math
 
 #endif
