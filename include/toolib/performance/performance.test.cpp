@@ -1,9 +1,9 @@
-#include "toolib/performance/performance.h"
 #include "toolib/ignore_arg.h"
+#include "toolib/performance/performance.h"
+#include "gtest/gtest.h"
 #include <chrono>
 #include <iostream>
 #include <thread>
-#include "gtest/gtest.h"
 
 
 TEST(ToFormattedStringTest, Rounding)

@@ -13,9 +13,9 @@
 #include "toolib/almost_equal.h"
 #include "toolib/assert.h"
 #include "toolib/comp_bwds.h"
+#include "toolib/enum_cast.h"
 #include "toolib/math/floating_point.h"
 #include "toolib/narrow.h"
-#include "toolib/enum_cast.h"
 #include "toolib/optional.h"
 #include <cmath>
 #include <iomanip>

@@ -14,10 +14,10 @@
 #include "ratio.h"
 #include "scale.h"
 #include "toolib/almost_equal.h"
+#include "toolib/class/non_copyable.h"
 #include "toolib/error.h"
 #include "toolib/optional.h"
 #include "toolib/ptr.h"
-#include "toolib/class/non_copyable.h"
 #include <algorithm>
 #include <map>
 #include <memory>
@@ -282,8 +282,8 @@ private:
 // template implementations
 //####################################################################################################################
 
-#include "toolib/math/scale.h"
 #include "toolib/math/round.h"
+#include "toolib/math/scale.h"
 #include "toolib/std/std_extensions.h"
 
 

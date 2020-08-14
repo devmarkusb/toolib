@@ -1,6 +1,6 @@
 #include "toolib/financial/money.h"
-#include <iostream>
 #include "gtest/gtest.h"
+#include <iostream>
 
 
 TEST(CurrencyTest, test)

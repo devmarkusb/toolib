@@ -10,9 +10,9 @@
 #ifndef RAII_P_H_on824f287xrz2387r
 #define RAII_P_H_on824f287xrz2387r
 
+#include "toolib/PPDEFS.h"
 #include "toolib/debug.h"
 #include "toolib/mem/checked_delete.h"
-#include "toolib/PPDEFS.h"
 #if TOO_OS_WINDOWS
 #include <crtdbg.h>
 #endif

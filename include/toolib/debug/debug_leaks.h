@@ -28,8 +28,8 @@ to find leak informations in the Output window of the Visual Studio IDE.*/
 #define CRTDBG_MAP_ALLOC
 #define _CRTDBG_MAP_ALLOC
 #define DEBUG_CLIENTBLOCK new (_CLIENT_BLOCK, __FILE__, __LINE__)
-#include <stdlib.h>
 #include <crtdbg.h>
+#include <stdlib.h>
 #define new DEBUG_CLIENTBLOCK
 #define TOO_DUMP_MEM_LEAKS _CrtDumpMemoryLeaks()
 #else
