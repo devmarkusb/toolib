@@ -31,4 +31,6 @@ constexpr T pi()
 } // namespace math
 } // namespace too
 
+#include "toolib/macros_end.h"
+
 #endif

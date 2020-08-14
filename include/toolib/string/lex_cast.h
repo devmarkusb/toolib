@@ -56,4 +56,6 @@ inline T lex_cast(const S& s) noexcept
 }
 } // namespace too
 
+#include "toolib/macros_end.h"
+
 #endif
