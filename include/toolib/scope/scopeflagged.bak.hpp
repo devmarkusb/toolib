@@ -64,7 +64,9 @@ template <class user, class bit_container_type = uint16_t>
 class scope_flagged
 {
 public:
-    scope_flagged() {}
+    scope_flagged()
+    {
+    }
     //! Default copy and assignment are ok. Doesn't make much sense, but shouln't be forbidden to not not spoil
     //! derivates.
     // scope_flagged(const scope_flagged&);
@@ -72,23 +74,37 @@ public:
 
     struct SG_flags : public toobit::bits<bit_container_type>
     {
-        explicit SG_flags(bit_container_type flags = m_flags->get()) : toobit::bits<bit_container_type>(flags)
+        explicit SG_flags(bit_container_type flags = m_flags->get())
+            : toobit::bits<bit_container_type>(flags)
         {
             m_auxLastflags = m_flags;
-            m_flags        = this;
+            m_flags = this;
         }
-        ~SG_flags() { m_flags = m_auxLastflags; }
+        ~SG_flags()
+        {
+            m_flags = m_auxLastflags;
+        }
 
         //! Default copy and assignment are ok. Doesn't make much sense, but shouln't be forbidden to not spoil
         //! derivates.
         // SG_flags(const SG_flags&);
         // SG_flags& operator=(const SG_flags&);
     };
-    bool sflags_contains(bit_container_type flags) const { return m_flags->contains(flags); }
+    bool sflags_contains(bit_container_type flags) const
+    {
+        return m_flags->contains(flags);
+    }
     //! This could be useful, if you install a global scope guard.
-    void sflags_reset_to_def() { m_auxLastflags = m_flags = &m_init; }
+    void sflags_reset_to_def()
+    {
+        m_auxLastflags = m_flags = &m_init;
+    }
     //! Useful for a class to modify its internal defaults (that originally started with SF_DEF).
-    SG_flags& mod_def_flags() { return m_init; }
+    SG_flags& mod_def_flags()
+    {
+        return m_init;
+    }
+
 private:
     static SG_flags m_init;
     static SG_flags* m_flags;
@@ -105,6 +121,6 @@ typename scope_flagged<user, bit_container_type>::SG_flags* scope_flagged<user, 
 template <class user, class bit_container_type>
 typename scope_flagged<user, bit_container_type>::SG_flags* scope_flagged<user, bit_container_type>::m_auxLastflags =
     scope_flagged<user, bit_container_type>::m_flags;
-}
+} // namespace too
 
 #endif

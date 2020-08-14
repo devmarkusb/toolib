@@ -9,9 +9,13 @@
 class IAbstractTest : public ::testing::Test
 {
 protected:
-    virtual void SetUp() {}
+    virtual void SetUp()
+    {
+    }
 
-    virtual void TearDown() {}
+    virtual void TearDown()
+    {
+    }
 
     class CTest : public too::IAbstract
     {
@@ -74,7 +78,7 @@ protected:
         }
 
     private:
-        int m_i    = 0;
+        int m_i = 0;
         double m_d = 0.0;
         //! Be careful: This is only an example of a more complex type. You shouldn't use std::string over binary
         //! boundaries.
@@ -86,7 +90,10 @@ protected:
             m_d = 0.0;
             m_s.clear();
         }
-        void run() const { std::cout << "\nCTest::run() called\n"; }
+        void run() const
+        {
+            std::cout << "\nCTest::run() called\n";
+        }
 
         struct SCalcSthParams
         {
@@ -200,7 +207,7 @@ TEST_F(IAbstractTest, ExecuteWithParaAndRet)
     std::string s("Hello World!");
     m_TestObj.SetParameter("s", &s);
     std::string out;
-    int ip         = 2;
+    int ip = 2;
     std::string sp = " And once more: Hello World!";
     void* param[] = {&ip, &sp};
     EXPECT_TRUE(m_TestObj.Execute("calcSth", param, &out));

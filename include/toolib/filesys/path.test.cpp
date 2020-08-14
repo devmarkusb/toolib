@@ -7,9 +7,13 @@ using too::file::Path;
 class PathTest : public ::testing::Test
 {
 protected:
-    virtual void SetUp() {}
+    virtual void SetUp()
+    {
+    }
 
-    virtual void TearDown() {}
+    virtual void TearDown()
+    {
+    }
 };
 
 TEST_F(PathTest, EmptyConstruction)

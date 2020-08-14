@@ -16,7 +16,11 @@ struct SomeType_flexed : public too::IType
 {
     SomeType_flexed() = default;
     ~SomeType_flexed() override = default;
-    SomeType_flexed(const SomeType_flexed& other) : too::IType(), rep(other.rep) {}
+    SomeType_flexed(const SomeType_flexed& other)
+        : too::IType()
+        , rep(other.rep)
+    {
+    }
     SomeType_flexed& operator=(const SomeType_flexed& other)
     {
         this->rep = other.rep;
@@ -24,10 +28,19 @@ struct SomeType_flexed : public too::IType
     }
     SomeType_flexed(SomeType_flexed&&) = delete;
     SomeType_flexed& operator=(SomeType_flexed&&) = delete;
-    explicit SomeType_flexed(const SomeType& x) : rep(x) {}
-    explicit SomeType_flexed(SomeType&& x) : rep(std::move(x)) {}
+    explicit SomeType_flexed(const SomeType& x)
+        : rep(x)
+    {
+    }
+    explicit SomeType_flexed(SomeType&& x)
+        : rep(std::move(x))
+    {
+    }
 
-    virtual too::owner<SomeType_flexed*> clone() override { return new SomeType_flexed(*this); }
+    virtual too::owner<SomeType_flexed*> clone() override
+    {
+        return new SomeType_flexed(*this);
+    }
 
 private:
     SomeType rep;
@@ -42,8 +55,12 @@ struct IUser
 struct UserA : public IUser
 {
     virtual ~UserA() = default;
-    virtual void f(too::IType*) {}
+    virtual void f(too::IType*)
+    {
+    }
 };
-}
+} // namespace
 
-TEST(ITypeTest, test) {}
+TEST(ITypeTest, test)
+{
+}

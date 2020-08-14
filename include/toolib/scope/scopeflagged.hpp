@@ -65,7 +65,9 @@ template <class user, class bit_container_type = uint16_t>
 class scope_flagged
 {
 public:
-    scope_flagged() {}
+    scope_flagged()
+    {
+    }
     //! Default copy and assignment are ok. Doesn't make much sense, but shouln't be forbidden to not not spoil
     //! derivates.
     // scope_flagged(const scope_flagged&);
@@ -83,7 +85,7 @@ public:
         {
             try
             {
-                m_flags  = &m_aux;
+                m_flags = &m_aux;
                 *m_flags = m_auxLastflags.top();
                 m_auxLastflags.pop();
             }
@@ -98,7 +100,10 @@ public:
         // SG_flags& operator=(const SG_flags&);
         static std::stack<bit_container_type> m_auxLastflags;
     };
-    bool sflags_contains(bit_container_type flags) const { return (*m_flags | flags) == *m_flags; }
+    bool sflags_contains(bit_container_type flags) const
+    {
+        return (*m_flags | flags) == *m_flags;
+    }
     //{ return toobit::bits<bit_container_type>(*m_flags).contains(flags); }
 private:
     static bit_container_type m_init;
@@ -116,6 +121,6 @@ bit_container_type* scope_flagged<user, bit_container_type>::m_flags = &scope_fl
 template <class user, class bit_container_type>
 std::stack<bit_container_type> scope_flagged<user, bit_container_type>::SG_flags::m_auxLastflags;
 
-} // too
+} // namespace too
 
 #endif

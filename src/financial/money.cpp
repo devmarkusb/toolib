@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #include "toolib/financial/money.h"
@@ -23,13 +23,16 @@ namespace fin
 
 //####################################################################################################################
 
-Currency::Currency(const std::locale& loc) : loc(loc) {}
+Currency::Currency(const std::locale& loc)
+    : loc(loc)
+{
+}
 
 std::string Currency::getString() const
 {
     if (!(this->loc))
         return std::string();
-    const std::string loc_enc  = std::use_facet<std::moneypunct<char, true>>(*(this->loc)).curr_symbol();
+    const std::string loc_enc = std::use_facet<std::moneypunct<char, true>>(*(this->loc)).curr_symbol();
     const std::wstring utf16ws = too::str::locenc_s2ws(loc_enc);
     return too::str::utf16or32to8_ws2s_portable(utf16ws);
 }
@@ -38,7 +41,7 @@ std::string Currency::getSymbol() const
 {
     if (!(this->loc))
         return std::string();
-    const std::string loc_enc  = std::use_facet<std::moneypunct<char>>(*(this->loc)).curr_symbol();
+    const std::string loc_enc = std::use_facet<std::moneypunct<char>>(*(this->loc)).curr_symbol();
     const std::wstring utf16ws = too::str::locenc_s2ws(loc_enc);
     return too::str::utf16or32to8_ws2s_portable(utf16ws);
 }
@@ -50,14 +53,23 @@ std::string Currency::getLocaleConstrName() const
     return (*this->loc).name();
 }
 
-bool operator==(const Currency& lhs, const Currency& rhs) { return lhs.loc == rhs.loc; }
+bool operator==(const Currency& lhs, const Currency& rhs)
+{
+    return lhs.loc == rhs.loc;
+}
 
-bool operator!=(const Currency& lhs, const Currency& rhs) { return !operator==(lhs, rhs); }
+bool operator!=(const Currency& lhs, const Currency& rhs)
+{
+    return !operator==(lhs, rhs);
+}
 
 
 //####################################################################################################################
 
-Money::Money(BaseType amount, const Currency& currency) { set(amount, currency); }
+Money::Money(BaseType amount, const Currency& currency)
+{
+    set(amount, currency);
+}
 
 void Money::set(BaseType amount_, const Currency& currency_)
 {
@@ -77,13 +89,25 @@ Money& Money::operator=(BaseType amount_)
     return *this;
 }
 
-auto Money::get() const -> BaseType { return amount; }
+auto Money::get() const -> BaseType
+{
+    return amount;
+}
 
-Currency Money::getCurrency() const { return this->currency; }
+Currency Money::getCurrency() const
+{
+    return this->currency;
+}
 
 // perhaps needs to be different for some exotic currencies?
-Money::BaseType Money::getSmallestUnit(const Currency&) { return 0.01L; }
-Money::BaseType Money::getTenthOfSmallestUnit(const Currency&) { return 0.001L; }
+Money::BaseType Money::getSmallestUnit(const Currency&)
+{
+    return 0.01L;
+}
+Money::BaseType Money::getTenthOfSmallestUnit(const Currency&)
+{
+    return 0.001L;
+}
 
 Money& Money::operator-=(const Money& rhs)
 {
@@ -183,13 +207,25 @@ bool operator<(const Money& lhs, const Money& rhs)
     return lhs.amount < rhs.amount;
 }
 
-bool operator!=(const Money& lhs, const Money& rhs) { return !operator==(lhs, rhs); }
+bool operator!=(const Money& lhs, const Money& rhs)
+{
+    return !operator==(lhs, rhs);
+}
 
-bool operator>(const Money& lhs, const Money& rhs) { return operator<(rhs, lhs); }
+bool operator>(const Money& lhs, const Money& rhs)
+{
+    return operator<(rhs, lhs);
+}
 
-bool operator<=(const Money& lhs, const Money& rhs) { return operator==(lhs, rhs) || !operator>(lhs, rhs); }
+bool operator<=(const Money& lhs, const Money& rhs)
+{
+    return operator==(lhs, rhs) || !operator>(lhs, rhs);
+}
 
-bool operator>=(const Money& lhs, const Money& rhs) { return operator==(lhs, rhs) || !operator<(lhs, rhs); }
+bool operator>=(const Money& lhs, const Money& rhs)
+{
+    return operator==(lhs, rhs) || !operator<(lhs, rhs);
+}
 
 bool equal_sufficiently(const Money& lhs, const Money& rhs)
 {
@@ -207,5 +243,5 @@ Fraction Interest_pa::YearlyEffective_to_MonthlyRelative(Fraction pa)
 {
     return std::pow(1.0L + pa, 1.0L / too::date_time::MonthYear_decl::twelve) - 1.0L;
 }
-}
-}
+} // namespace fin
+} // namespace too

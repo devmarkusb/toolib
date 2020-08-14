@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #include "toolib/filesys/file_collection.h"
@@ -49,18 +49,21 @@ FileCollection::FileCollection(const std::string& file_name)
         return;
     }
     std::string file_nr_str;
-TOO_PRAGMA_WARNINGS_PUSH
-TOO_WARNING_DISABLE_CLANG(comma)
+    TOO_PRAGMA_WARNINGS_PUSH
+    TOO_WARNING_DISABLE_CLANG(comma)
     for (unsigned int file_nr = 0; file_nr_str = too::math::toLeadingZeros(file_nr, digits),
                       fn = base_file_name + file_nr_str + file_ext, f.open(fn), f.good();
          ++file_nr, f.close())
-TOO_PRAGMA_WARNINGS_POP
-    {
-        this->file_list.push_back(fn);
-    }
+        TOO_PRAGMA_WARNINGS_POP
+        {
+            this->file_list.push_back(fn);
+        }
 }
 
-std::vector<std::string> FileCollection::get_list_of_existent_files() const { return this->file_list; }
+std::vector<std::string> FileCollection::get_list_of_existent_files() const
+{
+    return this->file_list;
+}
 
 unsigned char FileCollection::obtain_number_of_digits_for_filenames_of_file_collection(
     const std::string& base_file_name, const std::string& file_ext) const
@@ -76,5 +79,5 @@ unsigned char FileCollection::obtain_number_of_digits_for_filenames_of_file_coll
     }
     return 0;
 }
-}
-}
+} // namespace file
+} // namespace too

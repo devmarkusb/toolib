@@ -3,7 +3,7 @@
 
 //!
 /**
-*/
+ */
 //! \file
 
 #include "toolib/filesys/path.h"
@@ -22,7 +22,7 @@ const std::string OS_FOLDER_SEPARATOR = "\\";
 #else
 const std::string OS_FOLDER_SEPARATOR = "/";
 #endif
-}
+} // namespace
 
 namespace too
 {
@@ -30,9 +30,16 @@ namespace file
 {
 const std::string Path::FOLDER_SEPARATOR_TO_USE_HERE = "/";
 
-Path::Path(const std::string& path, EForm form, EType type) : m_form(form), m_type(type) { *m_path = path; }
+Path::Path(const std::string& path, EForm form, EType type)
+    : m_form(form)
+    , m_type(type)
+{
+    *m_path = path;
+}
 
-Path::Path(std::string& path, bool useByReference, EForm form, EType type) : m_form(form), m_type(type)
+Path::Path(std::string& path, bool useByReference, EForm form, EType type)
+    : m_form(form)
+    , m_type(type)
 {
     if (useByReference)
         m_path = &path;
@@ -43,17 +50,20 @@ Path::Path(std::string& path, bool useByReference, EForm form, EType type) : m_f
 Path::Path(const Path& other)
 {
     *m_path = *other.m_path;
-    m_form  = other.m_form;
-    m_type  = other.m_type;
+    m_form = other.m_form;
+    m_type = other.m_type;
 }
 
-Path::Path(Path&& other) { Path::swap(other); }
+Path::Path(Path&& other)
+{
+    Path::swap(other);
+}
 
 Path& Path::operator=(const Path& other)
 {
     *m_path = *other.m_path;
-    m_form  = other.m_form;
-    m_type  = other.m_type;
+    m_form = other.m_form;
+    m_type = other.m_type;
     return *this;
 }
 
@@ -70,7 +80,10 @@ void Path::swap(Path& other)
     std::swap(m_type, other.m_type);
 }
 
-Path::operator std::string() const { return *m_path; }
+Path::operator std::string() const
+{
+    return *m_path;
+}
 
 Path& Path::operator+=(const Path& other)
 {
@@ -140,7 +153,10 @@ bool Path::isAbsolute() const
 #endif
 }
 
-bool Path::isEmpty() const { return m_path->empty(); }
+bool Path::isEmpty() const
+{
+    return m_path->empty();
+}
 
 Path& Path::cleanupNative()
 {
@@ -160,7 +176,10 @@ Path& Path::cleanupPlatformIndep()
     return *this;
 }
 
-Path& Path::ensureTrailingSeparator() { return ensureTrailingSeparator(m_form == EForm::NATIVE); }
+Path& Path::ensureTrailingSeparator()
+{
+    return ensureTrailingSeparator(m_form == EForm::NATIVE);
+}
 
 Path& Path::ensureTrailingSeparator(bool native)
 {
@@ -207,5 +226,5 @@ void Path::detectForm() const
     else
         m_form = EForm::PLATFORMINDEPENDENT;
 }
-}
-}
+} // namespace file
+} // namespace too

@@ -45,11 +45,20 @@ TEST(ToFormattedStringTest, NoRounding)
     EXPECT_EQ("99:59:58", too::PerformanceProfiler::toFormattedString(359998.4));
 }
 
-TEST(ToFormattedStringTest, Zero) { EXPECT_EQ("0.00 ps", too::PerformanceProfiler::toFormattedString(0.0)); }
+TEST(ToFormattedStringTest, Zero)
+{
+    EXPECT_EQ("0.00 ps", too::PerformanceProfiler::toFormattedString(0.0));
+}
 
-TEST(ToFormattedStringTest, Neg) { EXPECT_EQ("-1.00 s", too::PerformanceProfiler::toFormattedString(-1.0)); }
+TEST(ToFormattedStringTest, Neg)
+{
+    EXPECT_EQ("-1.00 s", too::PerformanceProfiler::toFormattedString(-1.0));
+}
 
-TEST(ToFormattedStringTest, Inf) { EXPECT_EQ(">= 100 h", too::PerformanceProfiler::toFormattedString(360000)); }
+TEST(ToFormattedStringTest, Inf)
+{
+    EXPECT_EQ(">= 100 h", too::PerformanceProfiler::toFormattedString(360000));
+}
 
 TEST(DISABLED_DumpAllItemsTest, PracticalScenario)
 {
@@ -147,7 +156,7 @@ TEST(DISABLED_DumpAllItemsTest, PracticalScenario)
 
     too::PerformanceProfiler::reset();
     EXPECT_STREQ(
-            too::PerformanceProfiler::dumpAllItems<too::PerformanceProfiler::DumpFormat::stringAndStructure>().c_str(),
-            "No performance measurement data.\n");
+        too::PerformanceProfiler::dumpAllItems<too::PerformanceProfiler::DumpFormat::stringAndStructure>().c_str(),
+        "No performance measurement data.\n");
     EXPECT_EQ(0u, data.size());
 }
