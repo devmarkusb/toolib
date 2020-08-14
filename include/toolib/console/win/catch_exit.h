@@ -49,6 +49,4 @@ private:
 } // namespace too
 #endif // TOO_OS_WINDOWS
 
-#include "toolib/macros_end.h"
-
 #endif

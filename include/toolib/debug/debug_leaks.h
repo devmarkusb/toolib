@@ -37,6 +37,4 @@ to find leak informations in the Output window of the Visual Studio IDE.*/
 #endif
 #endif // TOO_USE_VLD
 
-#include "toolib/macros_end.h"
-
 #endif

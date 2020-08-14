@@ -136,6 +136,4 @@ struct ToStringConverter<FloatType, FloatFormat::scientific>
 } // namespace math
 } // namespace too
 
-#include "toolib/macros_end.h"
-
 #endif
