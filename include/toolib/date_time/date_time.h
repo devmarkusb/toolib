@@ -67,9 +67,9 @@ public:
     MonthYear_base() = default;
     //! Params can have at least full int range.
     explicit MonthYear_base(Months m, Years y = Years());
-    //! \param fromString must have form "<months><string_delim><years>",
-    //! e.g. "2/2016", or "-387/235", full int range allowed. Please use
-    //! MonthYear_decl::string_delim as delimiter (in the above examples defined as "/").
+    /** \param fromString must have form "<months><string_delim><years>",
+        e.g. "2/2016", or "-387/235", full int range allowed. Please use
+        MonthYear_decl::string_delim as delimiter (in the above examples defined as "/").*/
     explicit MonthYear_base(const std::string& fromString);
 
     //! Capable to copy from template class with different policy.

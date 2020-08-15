@@ -77,7 +77,7 @@ inline Map_Rational_String create_map_ratio_SIprefixunitname(
 }
 
 
-//! If you need just SI prefixes, you can use create_map_ratio_SIprefixunitname() for \param map_ratio_prefixunitname.
+//! If you need just SI prefixes, you can use create_map_ratio_SIprefixunitname() for map_ratio_prefixunitname.
 //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the initial or target
 //! ratio in the map. That would make the class useless.
 class Unit
@@ -91,12 +91,12 @@ public:
         }
     };
 
-    //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the initial
-    //! \param ratio in the map. That would make the class useless. Also throws std::invalid_argument if a less or equal
-    //! to zero ratio is contained within the map.
-    //! Proper Rational's are expected. Also \param ratio needs to be > 0.
-    //! Constructing the class with default parameters is only reasonable for testing purposes or temporary jump starts
-    //! to construct other things.
+    /** Throws Unit::err_no_string_provided_for_ratio if there is no string for the initial
+        ratio in the map. That would make the class useless. Also throws std::invalid_argument if a less or equal
+        to zero ratio is contained within the map.
+        Proper Rational's are expected. Also ratio needs to be > 0.
+        Constructing the class with default parameters is only reasonable for testing purposes or temporary jump starts
+        to construct other things.*/
     explicit Unit(
         const too::math::Rational& ratio = too::math::one, const Map_Rational_String& map_ratio_prefixunitname = {})
 #if !TOO_HAS_NO_CPP11_NOEXCEPT
@@ -129,8 +129,8 @@ public:
         return this->ratio;
     }
 
-    //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the \param target_ratio
-    //! in the map. That would make the class useless.
+    /** Throws Unit::err_no_string_provided_for_ratio if there is no string for the target_ratio
+        in the map. That would make the class useless.
     template <typename ValueType>
     //  ValueType expected to be arithmetic
     ValueType convertToDifferentRatio(ValueType src, const too::math::Rational& target_ratio) const

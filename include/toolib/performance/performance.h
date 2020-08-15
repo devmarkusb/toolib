@@ -57,7 +57,7 @@ public:
         stringOnly,
         stringAndStructure,
     };
-    //! Also fills dumpedData() if \param fmt is DumpFormat::stringAndStructure.
+    //! Also fills dumpedData() if fmt is DumpFormat::stringAndStructure.
     template <DumpFormat fmt = DumpFormat::stringOnly>
     static std::string dumpAllItems();
     static void reset();

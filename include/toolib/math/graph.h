@@ -203,9 +203,9 @@ public:
     using QuValueTypeX_ = QuValueTypeX;
     using QuValueTypeY_ = QuValueTypeY;
 
-    //! Be aware of providing \param qu_values with sufficient live-time around
+    //! Be aware of providing qu_values with sufficient live-time around
     //! instances of this class. This is designed to save a copy step. Furthermore the class will automatically
-    //! take a common factor out of your data, if this makes aesthetic sense according to what \param quantitiesXY
+    //! take a common factor out of your data, if this makes aesthetic sense according to what quantitiesXY
     //! setup you provided for the quantities. (Cf. Unit inside Quantity.)
     Chart2D(const ChartAxis_setup& setupX, const ChartAxis_setup& setupY,
         const std::pair<Quantity, Quantity>& quantitiesXY, VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values);

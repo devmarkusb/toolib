@@ -134,7 +134,7 @@ protected:
     virtual bool GetEvents() = 0;
     virtual void RunAI() = 0;
     virtual void MoveEnemies() = 0;
-    //! \return false if game ends. In that case \param et contains either ET_GAME_OVER or ET_GAME_WON.
+    //! \return false if game ends. In that case et contains either ET_GAME_OVER or ET_GAME_WON.
     virtual bool ResolveCollisions(EEndType& et) = 0;
     virtual void DrawGraphics() = 0;
     virtual void PlaySounds() = 0;

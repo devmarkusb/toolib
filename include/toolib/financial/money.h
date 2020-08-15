@@ -29,7 +29,7 @@ TOO_WARNING_DISABLE_MSVC(4251)
 class TOOLIBSHARED_EXPORT Currency
 {
 public:
-    //! Setting \param loc to std::locale("") means using the user preferred locale.
+    //! Setting loc to std::locale("") means using the user preferred locale.
     /** On e.g. a German system this could be std::locale("de_DE.utf8") internally.*/
     explicit Currency(const std::locale& loc);
     //! Per default constructs a non-currency, in case you want to deal with currency-less amounts of money for
@@ -61,7 +61,7 @@ class TOOLIBSHARED_EXPORT Money
 public:
     using BaseType = long double;
 
-    //! The default of \param currency means no currency at all.
+    //! The default of currency means no currency at all.
     //! You can get the user preferred locale's currency by passing Currency().
     /** On e.g. a German system this could be EUR internally.*/
     explicit Money(BaseType amount = {}, const Currency& currency = Currency{});

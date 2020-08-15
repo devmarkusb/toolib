@@ -59,8 +59,8 @@ private:
 using ScaleTickCount = unsigned long;
 
 
-//! Calculates a meaningful step width (tick) for a scale with at most \param MaxTickCount tick markers suitable for a
-//! data value range comprising \RangeMinToMax.
+/** Calculates a meaningful step width (tick) for a scale with at most MaxTickCount tick markers suitable for a
+    data value range comprising RangeMinToMax.
 template <typename T>
 //  requires T > 0
 inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
@@ -83,7 +83,7 @@ inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
         return magnitude;
 }
 
-/** Calculates a scale tick range, that contains \param minDataValue and \param maxDataValue at least, the individual
+/** Calculates a scale tick range, that contains minDataValue and maxDataValue at least, the individual
     ticks being scaleTick apart. returns a pair of <min, max> tick values (min, max being a certain integer number of
     scaleTick's apart).*/
 template <typename T>

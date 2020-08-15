@@ -44,14 +44,16 @@ public:
     };
 
     //! Constructor allocating memory for a matrix with the given dimensions.
-    /** \param dim_rows Count of rows. \param dim_cols Count of columns.*/
+    /** \param dim_rows Count of rows.
+        \param dim_cols Count of columns.*/
     matrix(uint32_t dim_rows, uint32_t dim_cols)
         : m_rep(new MRep(dim_rows, dim_cols, 0))
     {
     }
     //! Constructor allocating memory for a matrix with the given dimensions plus initialization.
-    /** \param dim_rows Count of rows. \param dim_cols Count of columns.
-    \param mtrx A usual 2-dimensional C array initializing the matrix entries.*/
+    /** \param dim_rows Count of rows.
+        \param dim_cols Count of columns.
+        \param mtrx A usual 2-dimensional C array initializing the matrix entries.*/
     matrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx)
         : m_rep(new MRep(dim_rows, dim_cols, mtrx))
     {

@@ -51,7 +51,7 @@ typename std::enable_if<std::is_integral<T>::value, T>::type lcm(T a, T b)
 
 struct Rational;
 
-//! Obviously ensures common denom of \params one, two after the call.
+//! Obviously ensures common denom ofs one, two after the call.
 inline void make_common_denom(Rational& one, Rational& two);
 
 

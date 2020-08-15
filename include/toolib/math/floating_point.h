@@ -28,7 +28,7 @@ namespace math
 {
 /** Rough version of almost_equal, where you can pass a user defined eps(ilon) within which x and y are
     understood approx. equal.
-    HINT: a common mistake leading to compiler error is not providing \param eps with explicit type FloatType, as the
+    HINT: a common mistake leading to compiler error is not providing eps with explicit type FloatType, as the
     other params.*/
 template <typename FloatType>
 typename std::enable_if<std::is_floating_point<FloatType>::value, bool>::type approx_equal(
