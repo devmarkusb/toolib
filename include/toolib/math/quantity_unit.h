@@ -130,7 +130,7 @@ public:
     }
 
     /** Throws Unit::err_no_string_provided_for_ratio if there is no string for the target_ratio
-        in the map. That would make the class useless.
+        in the map. That would make the class useless.*/
     template <typename ValueType>
     //  ValueType expected to be arithmetic
     ValueType convertToDifferentRatio(ValueType src, const too::math::Rational& target_ratio) const

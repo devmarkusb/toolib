@@ -60,7 +60,7 @@ using ScaleTickCount = unsigned long;
 
 
 /** Calculates a meaningful step width (tick) for a scale with at most MaxTickCount tick markers suitable for a
-    data value range comprising RangeMinToMax.
+    data value range comprising RangeMinToMax.*/
 template <typename T>
 //  requires T > 0
 inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
