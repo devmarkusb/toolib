@@ -31,7 +31,7 @@ public:
     virtual ~IMain()
     {
     }
-    //! The only function to be called. \returns main exit code of the program.
+    //! The only function to be called. returns main exit code of the program.
     int main()
     {
         try
@@ -55,9 +55,9 @@ protected:
     virtual void intro_init() = 0;
     virtual void outro_cleanup() = 0;
 
-    //! \returns false on user exit and true to start game().
+    //! \return false on user exit and true to start game().
     virtual bool menu() = 0;
-    //! \returns false on user exit (so gameplay provides a direct exit skipping the menu).
+    //! \return false on user exit (so gameplay provides a direct exit skipping the menu).
     /** Usual implementation: \code
         SomeGameImplementingIGame g;
         if (!g.game())
@@ -66,9 +66,9 @@ protected:
         \endcode */
     virtual bool game() = 0;
 
-    //! Should \return the main exit code.
+    //! Should return the main exit code.
     virtual int HandleMainExceptions(std::exception&) throw() = 0;
-    //! Should \return the main exit code.
+    //! Should return the main exit code.
     virtual int mainTerminationByError() throw() = 0;
 
 private:
@@ -103,7 +103,7 @@ public:
     };
 
     //! The only function to be called. Starts gameplay.
-    /** \returns false on user exit (so gameplay provides a direct exit skipping e.g. a framework menu).
+    /** \return false on user exit (so gameplay provides a direct exit skipping e.g. a framework menu).
         or error treated like user exit.*/
     bool game()
     {
@@ -130,28 +130,28 @@ public:
     }
 
 protected:
-    //! \returns false if game ends. This can only happen by user exit.
+    //! \return false if game ends. This can only happen by user exit.
     virtual bool GetEvents() = 0;
     virtual void RunAI() = 0;
     virtual void MoveEnemies() = 0;
-    //! \returns false if game ends. In that case \param et contains either ET_GAME_OVER or ET_GAME_WON.
+    //! \return false if game ends. In that case \param et contains either ET_GAME_OVER or ET_GAME_WON.
     virtual bool ResolveCollisions(EEndType& et) = 0;
     virtual void DrawGraphics() = 0;
     virtual void PlaySounds() = 0;
-    //! \returns true if game can be resumed, or otherwise has to be terminated.
+    //! \return true if game can be resumed, or otherwise has to be terminated.
     virtual bool HandleGameExceptions(std::exception&) = 0;
     //! This function should somehow get access to detailed error information and decide whether:
     /** 1) the game can resume from the menu stage
         2) the program has to exit as though the user would have opted for
         3) it even throws again.
-        It \returns true for 1), false for 2), or throws.*/
+        \return true for 1), false for 2), or throws.*/
     virtual bool gameTerminationByError() = 0;
     virtual void gameTerminationByUserExit() = 0;
     virtual void gameTerminationByGameOver() = 0;
     virtual void gameTerminationByGameWon() = 0;
 
 private:
-    //! \returns false if game ends. Afterwards \param et contains reason for ending.
+    //! \return false if game ends. Afterwards et contains reason for ending.
     bool gameloop(EEndType& et)
     {
         try

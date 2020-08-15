@@ -25,7 +25,7 @@ namespace too
 namespace math
 {
 
-//! Greatest common divisor. Expects at least on of \params a, b to be > 0.
+//! Greatest common divisor. Expects at least on of a, b to be > 0.
 template <typename T>
 typename std::enable_if<std::is_integral<T>::value, T>::type gcd(T a, T b)
 {

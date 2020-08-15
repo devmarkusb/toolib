@@ -83,10 +83,9 @@ inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
         return magnitude;
 }
 
-//! Calculates a scale tick range, that contains \param minDataValue and \param maxDataValue at least, the individual
-//! ticks being
-//! \param scaleTick apart. \returns a pair of <min, max> tick values (min, max being a certain integer number of \param
-//! scaleTick's apart).
+/** Calculates a scale tick range, that contains \param minDataValue and \param maxDataValue at least, the individual
+    ticks being scaleTick apart. returns a pair of <min, max> tick values (min, max being a certain integer number of
+    scaleTick's apart).*/
 template <typename T>
 //  requires T number
 inline std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, double scaleTick)

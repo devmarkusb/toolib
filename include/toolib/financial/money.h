@@ -38,7 +38,7 @@ public:
 
     std::string getString() const;
     std::string getSymbol() const;
-    //! \returns empty string if no locale was used to construct.
+    //! \return empty string if no locale was used to construct.
     std::string getLocaleConstrName() const;
 
     friend bool operator==(const Currency& lhs, const Currency& rhs);

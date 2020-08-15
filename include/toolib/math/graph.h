@@ -127,8 +127,8 @@ public:
         return this->tick_step_qu_val;
     }
 
-    //! \Returns a new ratio for the Quantity Unit, if there is a better choice, i.e. a common ratio of the tick values
-    //! can be obtained.
+    /** \return a new ratio for the Quantity Unit, if there is a better choice, i.e. a common ratio of the tick values
+        can be obtained.*/
     too::opt<Rational> obtain_suitable_common_ratio_of_tickvals() const;
     void apply_ratio_to_tickvals(const Rational& r);
     void apply_ratio_to_quantity_unit(const Rational& r);

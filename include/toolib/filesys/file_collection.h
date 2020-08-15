@@ -38,7 +38,7 @@ public:
     //! are automatically checked for existence and can be retrieved via get_list_of_existent_files().
     FileCollection(const std::string& file_name);
 
-    //! \returns all files found to be in the collection, or just a single file.
+    //! \return all files found to be in the collection, or just a single file.
     std::vector<std::string> get_list_of_existent_files() const;
 
 private:

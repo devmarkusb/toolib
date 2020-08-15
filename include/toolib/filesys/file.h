@@ -21,8 +21,8 @@ namespace too
 {
 namespace file
 {
-//! \param retErrDetail returns error detail string or is empty on success.
-//! Function \returns false on success.
+/** \param retErrDetail returns error detail string or is empty on success.
+    \return false on success.*/
 template <class FStream>
 bool fstream_failed(std::string& retErrDetail, const FStream& fs)
 {

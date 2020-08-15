@@ -30,9 +30,9 @@ public:
 
     virtual too::owner<CalEvent<TimeType>*> clone() const = 0;
 
-    //! Has to ensure to never \return nullptr.
+    //! Has to ensure to never return nullptr.
     virtual std::unique_ptr<TimeType> getFirstTimePoint() const = 0;
-    //! If there is no further one, it \returns nullptr.
+    //! If there is no further one, it returns nullptr.
     virtual std::unique_ptr<TimeType> getNextTimePoint(const TimeType& RelativeTo) const = 0;
 
     //! Convenience function.

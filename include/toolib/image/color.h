@@ -21,7 +21,7 @@ class Color_dbl
 {
 public:
     Color_dbl() = default;
-    //! \params expected to range between 0.0 and 1.0 (inclusive).
+    //! Params expected to range between 0.0 and 1.0 (inclusive).
     Color_dbl(double r, double g, double b, double a = 1.0)
         : r_{r}
         , g_{g}
@@ -58,7 +58,7 @@ class Color
 {
 public:
     Color() = default;
-    //! \params expected in range 0..255.
+    //! Params expected in range 0..255.
     Color(int r, int g, int b, int a = 1.0)
         : r_{r}
         , g_{g}

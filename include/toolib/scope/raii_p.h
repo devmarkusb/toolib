@@ -88,7 +88,7 @@ public:
         return *m_ptr;
     }
     //! Gives away memory control of the internally stored object.
-    /** \returns a usual T* pointer with user-responsibility and leaves the raii_p object in a clean state.*/
+    /** \return a usual T* pointer with user-responsibility and leaves the raii_p object in a clean state.*/
     T* release()
     {
         T* ret = m_ptr;
@@ -192,14 +192,14 @@ public:
         return m_ptr[idx];
     }
     //! Gives away memory control of the internally stored object.
-    /** \returns a usual T* pointer with user-responsibility and leaves the raii_p object in a clean state.*/
+    /** \return a usual T* pointer with user-responsibility and leaves the raii_p object in a clean state.*/
     T* release()
     {
         T* ret = m_ptr;
         m_ptr = 0;
         return ret;
     }
-    //! \returns Number of objects.
+    //! \return Number of objects.
     uint32_t size() const
     {
         return m_count;
@@ -281,12 +281,12 @@ public:
         TOO_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr[idx1];
     }
-    //! \returns Number of objects in 1st dimension.
+    //! \return Number of objects in 1st dimension.
     uint32_t size1() const
     {
         return m_count1;
     }
-    //! \returns Number of objects in 2nd dimension.
+    //! \return Number of objects in 2nd dimension.
     uint32_t size2() const
     {
         return m_count2;

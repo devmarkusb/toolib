@@ -67,7 +67,7 @@ std::string toLeadingZeros(T x, int digits)
     return ss.str();
 }
 
-//! \Returns the exponent with whom \param x is a power of \param base, if it is an integer one.
+//! \return the exponent with whom x is a power of base, if it is an integer one.
 /** Expects parameters to be > 0 and base != 1.
     Note that the return value can be < 0, e.g. 0.5 is the -1 power of base 2.*/
 template <typename ArithType>

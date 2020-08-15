@@ -147,7 +147,7 @@ public:
         this->ratio = r;
     }
 
-    //! Ensures a \return ratio valid to be set again via switchRatio.
+    //! Ensures a return ratio valid to be set again via switchRatio.
     template <typename ValueType>
     //  ValueType expected to be arithmetic
     Rational findOptimizedRatio(ValueType val) const
@@ -203,8 +203,8 @@ private:
         return instance;
     }
 
-    //! \Return value only needed for calls within assertions. It doesn't need to indicate failure.
-    //! The function itself does.
+    /** \return value only needed for calls within assertions. It doesn't need to indicate failure.
+        The function itself does.*/
     bool expectValidRatio(const too::math::Rational& r) const
     {
         if (ratio_prefixunitname.find(r) == ratio_prefixunitname.end())
