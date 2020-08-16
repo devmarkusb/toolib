@@ -93,11 +93,11 @@ public:
                 break;
         }
 
-        too::math::Map_LinearScale_Interval_to_Interval<Percent> mapAbsRates2Rel(
-            std::make_pair(Percent(), sum_of_rates), std::make_pair(zero_percent, one_hundred_percent));
+        too::math::Map_LinearScale_Interval_to_Interval<Percent> mapAbsRates2Rel{
+            std::make_pair(Percent(), sum_of_rates), std::make_pair(zero_percent, one_hundred_percent)};
 
         std::transform(std::begin(abs_rates), std::end(abs_rates), std::begin(this->bars), [&](size_t ar) {
-            return mapAbsRates2Rel(ar);
+            return mapAbsRates2Rel(too::narrow_cast<Percent>(ar));
         });
     }
 
