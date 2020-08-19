@@ -13,11 +13,8 @@
 #include <memory>
 
 
-namespace too
+namespace too::date_time
 {
-namespace date_time
-{
-
 //! Base for SingleEvent and RecurringEvent. Provides getFirst/getNext mechanism to
 //! browse through events.
 template <typename TimeType>
@@ -212,7 +209,6 @@ std::unique_ptr<TimeType> RecurringEvent<TimeType>::getNextTimePoint(const TimeT
     else
         return too::make_unique<TimeType>(next);
 }
-} // namespace date_time
 } // namespace too
 
 

@@ -17,15 +17,12 @@
 #include "toolib/macros/UNDEF_MIN_MAX.h"
 
 
-namespace too
+namespace too::math
 {
-namespace math
-{
-
 template <typename T>
 inline T round(T r, unsigned short decimal_places)
 {
-    static_assert(std::is_floating_point<T>::value, "");
+    static_assert(std::is_floating_point<T>::value);
     T factor = decimal_places ? pow(10.0, static_cast<T>(decimal_places)) : 1.0;
     return (r >= 0.0) ? floor(r * factor + 0.5) / factor : ceil(r * factor - 0.5) / factor;
 }
@@ -44,7 +41,6 @@ inline TR round_to(TP r, unsigned short decimal_places = 0)
         return numeric_limits<TR>::min();
     return static_cast<TR>(d);
 }
-} // namespace math
 } // namespace too
 
 #endif

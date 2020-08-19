@@ -38,10 +38,12 @@ public:
         NATIVE,
     };
 
-    explicit Path(const std::string& path = std::string(), EForm form = EForm::PLATFORMINDEPENDENT,
+    explicit Path(
+        const std::string& path = std::string(), EForm form = EForm::PLATFORMINDEPENDENT,
         EType type = EType::IS_UNKNOWN);
     //! no copy, use input by reference
-    explicit Path(std::string& path, bool useByReference = false, EForm form = EForm::PLATFORMINDEPENDENT,
+    explicit Path(
+        std::string& path, bool useByReference = false, EForm form = EForm::PLATFORMINDEPENDENT,
         EType type = EType::IS_UNKNOWN);
     Path(const Path& other);
     Path(Path&& other);

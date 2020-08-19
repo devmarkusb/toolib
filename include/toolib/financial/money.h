@@ -16,11 +16,8 @@
 #include <string>
 
 
-namespace too
+namespace too::fin
 {
-namespace fin
-{
-
 //####################################################################################################################
 
 TOO_PRAGMA_WARNINGS_PUSH
@@ -131,17 +128,18 @@ public:
     {
     }
 
-    void operator=(Percent p_)
+    Interest_pa& operator=(Percent p_)
     {
         this->p = p_;
+        return *this;
     }
 
-    operator Percent() const
+    /* implicit */ operator Percent() const
     {
         return this->p;
     }
 
-    Fraction dividedBy100() const
+    [[nodiscard]] Fraction dividedBy100() const
     {
         return this->p / 100.0l;
     }
@@ -157,7 +155,6 @@ public:
 private:
     Percent p = Percent();
 };
-} // namespace fin
 } // namespace too
 
 

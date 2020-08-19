@@ -16,11 +16,8 @@
 #include <locale>
 
 
-namespace too
+namespace too::fin
 {
-namespace fin
-{
-
 //####################################################################################################################
 
 Currency::Currency(const std::locale& loc)
@@ -243,5 +240,4 @@ Fraction Interest_pa::YearlyEffective_to_MonthlyRelative(Fraction pa)
 {
     return std::pow(1.0L + pa, 1.0L / too::date_time::MonthYear_decl::twelve) - 1.0L;
 }
-} // namespace fin
 } // namespace too

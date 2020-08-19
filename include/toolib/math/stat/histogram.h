@@ -20,12 +20,8 @@
 #include "toolib/macros.h"
 
 
-namespace too
+namespace too::stat
 {
-
-namespace stat
-{
-
 using too::math::Percent;
 
 //! Assume you have some arbitrary 1D data set. This class helps transforming that into
@@ -116,7 +112,6 @@ private:
 #endif
     ;
 };
-} // namespace stat
 } // namespace too
 
 #include "toolib/macros_end.h"

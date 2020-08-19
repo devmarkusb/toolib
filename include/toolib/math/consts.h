@@ -15,20 +15,13 @@
 #include "toolib/macros.h"
 
 
-namespace too
+namespace too::math::consts
 {
-namespace math
-{
-namespace consts
-{
-
 template <typename T>
 constexpr T pi()
 {
     return std::acos(static_cast<T>(-1));
 }
-} // namespace consts
-} // namespace math
 } // namespace too
 
 #include "toolib/macros_end.h"

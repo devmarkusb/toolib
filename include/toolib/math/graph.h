@@ -25,11 +25,8 @@
 #include <vector>
 
 
-namespace too
+namespace too::math
 {
-namespace math
-{
-
 //!
 template <typename X, typename Y>
 using VectorOfPairs = std::vector<std::pair<X, Y>>;
@@ -98,7 +95,8 @@ template <typename QuValueType>
 class ChartAxis : private too::non_copyable
 {
 public:
-    ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
+    ChartAxis(
+        const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
         const QuValueType& max_qu_val);
     virtual ~ChartAxis()
     {
@@ -165,7 +163,8 @@ template <typename QuValueType>
 class ChartAxisProj : public ChartAxis<QuValueType>
 {
 public:
-    ChartAxisProj(const ChartAxisProj_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
+    ChartAxisProj(
+        const ChartAxisProj_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
         const QuValueType& max_qu_val);
     virtual ~ChartAxisProj()
     {
@@ -207,8 +206,9 @@ public:
     //! instances of this class. This is designed to save a copy step. Furthermore the class will automatically
     //! take a common factor out of your data, if this makes aesthetic sense according to what quantitiesXY
     //! setup you provided for the quantities. (Cf. Unit inside Quantity.)
-    Chart2D(const ChartAxis_setup& setupX, const ChartAxis_setup& setupY,
-        const std::pair<Quantity, Quantity>& quantitiesXY, VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values);
+    Chart2D(
+        const ChartAxis_setup& setupX, const ChartAxis_setup& setupY, const std::pair<Quantity, Quantity>& quantitiesXY,
+        VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values);
 
     too::not_null<const ChartAxis<QuValueTypeX>*> get_x_axis() const
     {
@@ -274,7 +274,6 @@ private:
     VectorOfPairs<size_t, std::string> annotations;
 };
 
-} // namespace math
 } // namespace too
 
 
@@ -287,13 +286,11 @@ private:
 #include "toolib/std/std_extensions.h"
 
 
-namespace too
+namespace too::math
 {
-namespace math
-{
-
 template <typename QuValueType>
-ChartAxis<QuValueType>::ChartAxis(const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
+ChartAxis<QuValueType>::ChartAxis(
+    const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
     const QuValueType& max_qu_val)
     : quantity(quantity)
     , setup(setup.clone())
@@ -413,8 +410,9 @@ std::string ChartAxis<QuValueType>::tickValueAsReadableString(const QuValueType&
 //####################################################################################################################
 
 template <typename QuValueType>
-ChartAxisProj<QuValueType>::ChartAxisProj(const ChartAxisProj_setup& setup, const Quantity& quantity,
-    const QuValueType& min_qu_val, const QuValueType& max_qu_val)
+ChartAxisProj<QuValueType>::ChartAxisProj(
+    const ChartAxisProj_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
+    const QuValueType& max_qu_val)
     : ChartAxis<QuValueType>(setup, quantity, min_qu_val, max_qu_val)
 {
     constr_impl();
@@ -432,7 +430,8 @@ template <typename QuValueType>
 void ChartAxisProj<QuValueType>::expectProperSetup() const
 {
     TOO_EXPECT_THROW(this->setup->projection_range.first < this->setup->projection_range.second);
-    TOO_EXPECT_THROW(!too::almost_equal(this->setup->projection_range.first, this->setup->projection_range.second,
+    TOO_EXPECT_THROW(!too::almost_equal(
+        this->setup->projection_range.first, this->setup->projection_range.second,
         ChartAxisProj<QuValueType>::expected_ulp_difference_minmax));
 }
 
@@ -492,8 +491,9 @@ ProjectionValue ChartAxisProj<QuValueType>::getProjectionMaxVal() const
 //####################################################################################################################
 
 template <typename QuValueTypeX, typename QuValueTypeY>
-Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(const ChartAxis_setup& setupX, const ChartAxis_setup& setupY,
-    const std::pair<Quantity, Quantity>& quantitiesXY, VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values)
+Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(
+    const ChartAxis_setup& setupX, const ChartAxis_setup& setupY, const std::pair<Quantity, Quantity>& quantitiesXY,
+    VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values)
     : values(qu_values)
 {
     auto minmax_X = std::make_pair(QuValueTypeX(), QuValueTypeX());
@@ -574,7 +574,6 @@ void Chart2D<QuValueTypeX, QuValueTypeY>::pullout_common_factor_from_data()
     }
 }
 
-} // namespace math
 } // namespace too
 
 #endif

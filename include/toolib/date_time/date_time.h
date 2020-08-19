@@ -16,11 +16,8 @@
 #include <utility>
 
 
-namespace too
+namespace too::date_time
 {
-namespace date_time
-{
-
 //! Months type, represents absolute as well as difference values.
 using Months = int;
 //! Years type, represents absolute as well as difference values.
@@ -133,7 +130,6 @@ const MonthYear_dur one_year(0, 1);
 const MonthYear_dur half_year(MonthYear_decl::twelve / 2, 0);
 const MonthYear_dur quarter_year(MonthYear_decl::twelve / 4, 0);
 const MonthYear_dur one_month(1, 0);
-} // namespace date_time
 } // namespace too
 
 //####################################################################################################################

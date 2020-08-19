@@ -13,12 +13,8 @@
 #include <fstream>
 
 
-namespace too
+namespace too::file
 {
-
-namespace file
-{
-
 std::string FileCollection::get_base_name(const std::string& fn)
 {
     too::std_fs::path p{fn};
@@ -79,5 +75,4 @@ unsigned char FileCollection::obtain_number_of_digits_for_filenames_of_file_coll
     }
     return 0;
 }
-} // namespace file
 } // namespace too

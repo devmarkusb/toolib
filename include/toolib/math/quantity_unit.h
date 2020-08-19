@@ -21,11 +21,8 @@
 #include <vector>
 
 
-namespace too
+namespace too::math
 {
-namespace math
-{
-
 using Map_Rational_String = std::map<too::math::Rational, std::string>;
 
 //! To create a simple default for constructing a Unit in cases you don't want to think about details.
@@ -107,8 +104,9 @@ public:
               map_ratio_prefixunitname.empty() ? simple_noop_default_ratio_map() : map_ratio_prefixunitname)
     {
         expectValidRatio(ratio);
-        const auto invalid_one_it = std::find_if(std::begin(this->ratio_prefixunitname),
-            std::end(this->ratio_prefixunitname), [](const std::pair<too::math::Rational, std::string>& rs) {
+        const auto invalid_one_it = std::find_if(
+            std::begin(this->ratio_prefixunitname), std::end(this->ratio_prefixunitname),
+            [](const std::pair<too::math::Rational, std::string>& rs) {
                 return rs.first <= Rational{};
             });
         if (invalid_one_it != ratio_prefixunitname.end())
@@ -156,8 +154,9 @@ public:
             std::is_arithmetic<ValueType>::value, "only arithmetic (integral or floating point) types allowed");
 
         std::vector<Rational> ratios;
-        std::transform(std::begin(this->ratio_prefixunitname), std::end(this->ratio_prefixunitname),
-            std::back_inserter(ratios), [](const std::pair<Rational, std::string>& elem) {
+        std::transform(
+            std::begin(this->ratio_prefixunitname), std::end(this->ratio_prefixunitname), std::back_inserter(ratios),
+            [](const std::pair<Rational, std::string>& elem) {
                 return elem.first;
             });
 
@@ -205,7 +204,7 @@ private:
 
     /** \return value only needed for calls within assertions. It doesn't need to indicate failure.
         The function itself does.*/
-    bool expectValidRatio(const too::math::Rational& r) const
+    [[nodiscard]] bool expectValidRatio(const too::math::Rational& r) const
     {
         if (ratio_prefixunitname.find(r) == ratio_prefixunitname.end())
             throw err_no_string_provided_for_ratio(r);
@@ -219,13 +218,13 @@ private:
 class Quantity
 {
 public:
-    Quantity(const std::string& quantity_name, const Unit& unit)
-        : unit(unit)
-        , q_name(quantity_name)
+    Quantity(std::string quantity_name, const Unit& unit)
+        : unit{unit}
+        , q_name{std::move(quantity_name)}
     {
     }
 
-    std::string getName() const
+    [[nodiscard]] std::string getName() const
     {
         return this->q_name;
     }
@@ -233,7 +232,7 @@ public:
     {
         return this->unit;
     }
-    const Unit& getUnit() const
+    [[nodiscard]] const Unit& getUnit() const
     {
         return const_cast<Quantity*>(this)->getUnit();
     }
@@ -252,7 +251,6 @@ private:
 //    Quantity(WhatConcrete& val);
 //};
 
-} // namespace math
 } // namespace too
 
 #endif

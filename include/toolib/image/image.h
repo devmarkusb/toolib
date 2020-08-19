@@ -14,12 +14,8 @@
 #include <string>
 
 
-namespace too
+namespace too::img
 {
-
-namespace img
-{
-
 using Pixels = long;
 using PixelsMargins = too::math::Margins_<Pixels>;
 
@@ -27,7 +23,6 @@ const std::string fileext_bmp{".bmp"};
 const std::string fileext_jpg{".jpg"};
 const std::string fileext_png{".png"};
 const std::string fileext_svg{".svg"};
-} // namespace img
 } // namespace too
 
 #endif

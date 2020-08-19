@@ -19,11 +19,8 @@
 #include <type_traits>
 
 
-namespace too
+namespace too::math
 {
-namespace math
-{
-
 namespace detail
 {
 using DefaultValueType = double;
@@ -220,7 +217,6 @@ struct Margins_
 
 //! For convenience.
 using Margins = Margins_<>;
-} // namespace math
 } // namespace too
 
 #endif

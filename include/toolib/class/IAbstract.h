@@ -11,7 +11,6 @@
 
 namespace too
 {
-
 using TInBuffer = void*;
 using TOutBuffer = void*;
 

@@ -21,14 +21,14 @@ namespace too
 {
 namespace math
 {
-
 template <typename FloatingPointType>
 class Map_LinearScale_Interval_to_Interval
 {
     static_assert(std::is_floating_point<FloatingPointType>::value, "floating point type expected");
 
 public:
-    Map_LinearScale_Interval_to_Interval(const std::pair<FloatingPointType, FloatingPointType>& FromInterval,
+    Map_LinearScale_Interval_to_Interval(
+        const std::pair<FloatingPointType, FloatingPointType>& FromInterval,
         const std::pair<FloatingPointType, FloatingPointType>& ToInterval)
         : m_FromInterval(FromInterval)
         , m_ToInterval(ToInterval)
@@ -39,14 +39,14 @@ public:
 
     FloatingPointType operator()(const FloatingPointType& from) const
     {
-        return (from - m_FromInterval.first) * (m_ToInterval.second - m_ToInterval.first) /
-               (m_FromInterval.second - m_FromInterval.first);
+        return (from - m_FromInterval.first) * (m_ToInterval.second - m_ToInterval.first)
+               / (m_FromInterval.second - m_FromInterval.first);
     }
 
     FloatingPointType inverse(const FloatingPointType& to) const
     {
-        return to * (m_FromInterval.second - m_FromInterval.first) / (m_ToInterval.second - m_ToInterval.first) +
-               m_FromInterval.first;
+        return to * (m_FromInterval.second - m_FromInterval.first) / (m_ToInterval.second - m_ToInterval.first)
+               + m_FromInterval.first;
     }
 
 private:
@@ -67,7 +67,7 @@ inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
 {
     TOO_EXPECT_THROW(MaxTickCount);
     TOO_EXPECT_THROW(RangeMinToMax > T());
-    const double MaxTickCount_ = narrow_cast<double>(MaxTickCount);
+    const auto MaxTickCount_ = narrow_cast<double>(MaxTickCount);
     const double MinimalTick = narrow_cast<double>(RangeMinToMax) / MaxTickCount_;
     const double magnitude = std::pow(10.0, std::floor(std::log10(MinimalTick)));
     if (too::almost_equal(magnitude, 0.0))

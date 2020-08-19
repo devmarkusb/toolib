@@ -20,11 +20,8 @@
 #include <type_traits>
 
 
-namespace too
+namespace too::math
 {
-namespace math
-{
-
 //! Greatest common divisor. Expects at least on of a, b to be > 0.
 template <typename T>
 typename std::enable_if<std::is_integral<T>::value, T>::type gcd(T a, T b)
@@ -308,7 +305,6 @@ TOO_TEMPCONSTEXPR const Rational seventimes       {std::ratio<7, 1>{}};
 TOO_TEMPCONSTEXPR const Rational twelvetimes      {std::ratio<12, 1>{}};
 // clang-format on
 #undef TOO_TEMPCONSTEXPR
-} // namespace math
 } // namespace too
 
 #endif

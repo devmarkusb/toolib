@@ -17,11 +17,8 @@
 TOO_PRAGMA_WARNINGS_PUSH
 TOO_WARNING_DISABLE_MSVC(4251)
 
-namespace too
+namespace too::file
 {
-namespace file
-{
-
 class TOOLIBSHARED_EXPORT FileCollection
 {
 public:
@@ -47,7 +44,6 @@ private:
     unsigned char obtain_number_of_digits_for_filenames_of_file_collection(
         const std::string& base_file_name, const std::string& file_ext) const;
 };
-} // namespace file
 } // namespace too
 
 TOO_PRAGMA_WARNINGS_POP

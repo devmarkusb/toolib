@@ -10,11 +10,8 @@
 #include "toolib/math/number.h"
 
 
-namespace too
+namespace too::date_time
 {
-namespace date_time
-{
-
 const std::string MonthYear_decl::string_delim = "/";
 
 void normalize::do_it(std::pair<Years, Months>& y_m)
@@ -71,5 +68,4 @@ void normalize::do_it(std::pair<Years, Months>& y_m)
         return;
     }
 }
-} // namespace date_time
 } // namespace too
