@@ -155,7 +155,7 @@ public:
 private:
     Percent p = Percent();
 };
-} // namespace too
+} // namespace too::fin
 
 
 #endif

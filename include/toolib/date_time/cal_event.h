@@ -209,7 +209,7 @@ std::unique_ptr<TimeType> RecurringEvent<TimeType>::getNextTimePoint(const TimeT
     else
         return too::make_unique<TimeType>(next);
 }
-} // namespace too
+} // namespace too::date_time
 
 
 #endif

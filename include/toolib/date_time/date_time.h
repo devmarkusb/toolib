@@ -130,7 +130,7 @@ const MonthYear_dur one_year(0, 1);
 const MonthYear_dur half_year(MonthYear_decl::twelve / 2, 0);
 const MonthYear_dur quarter_year(MonthYear_decl::twelve / 4, 0);
 const MonthYear_dur one_month(1, 0);
-} // namespace too
+} // namespace too::date_time
 
 //####################################################################################################################
 // template implementation

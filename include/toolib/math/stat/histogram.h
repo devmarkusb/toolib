@@ -112,7 +112,7 @@ private:
 #endif
     ;
 };
-} // namespace too
+} // namespace too::stat
 
 #include "toolib/macros_end.h"
 

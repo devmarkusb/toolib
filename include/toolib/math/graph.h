@@ -274,7 +274,7 @@ private:
     VectorOfPairs<size_t, std::string> annotations;
 };
 
-} // namespace too
+} // namespace too::math
 
 
 //####################################################################################################################
@@ -574,6 +574,6 @@ void Chart2D<QuValueTypeX, QuValueTypeY>::pullout_common_factor_from_data()
     }
 }
 
-} // namespace too
+} // namespace too::math
 
 #endif

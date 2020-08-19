@@ -75,4 +75,4 @@ unsigned char FileCollection::obtain_number_of_digits_for_filenames_of_file_coll
     }
     return 0;
 }
-} // namespace too
+} // namespace too::file

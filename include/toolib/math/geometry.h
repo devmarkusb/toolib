@@ -217,6 +217,6 @@ struct Margins_
 
 //! For convenience.
 using Margins = Margins_<>;
-} // namespace too
+} // namespace too::math
 
 #endif

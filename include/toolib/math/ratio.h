@@ -305,6 +305,6 @@ TOO_TEMPCONSTEXPR const Rational seventimes       {std::ratio<7, 1>{}};
 TOO_TEMPCONSTEXPR const Rational twelvetimes      {std::ratio<12, 1>{}};
 // clang-format on
 #undef TOO_TEMPCONSTEXPR
-} // namespace too
+} // namespace too::math
 
 #endif

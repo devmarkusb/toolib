@@ -23,6 +23,6 @@ const std::string fileext_bmp{".bmp"};
 const std::string fileext_jpg{".jpg"};
 const std::string fileext_png{".png"};
 const std::string fileext_svg{".svg"};
-} // namespace too
+} // namespace too::img
 
 #endif

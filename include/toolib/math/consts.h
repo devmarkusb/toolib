@@ -22,7 +22,7 @@ constexpr T pi()
 {
     return std::acos(static_cast<T>(-1));
 }
-} // namespace too
+} // namespace too::math::consts
 
 #include "toolib/macros_end.h"
 

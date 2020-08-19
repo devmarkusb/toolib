@@ -44,7 +44,7 @@ private:
     unsigned char obtain_number_of_digits_for_filenames_of_file_collection(
         const std::string& base_file_name, const std::string& file_ext) const;
 };
-} // namespace too
+} // namespace too::file
 
 TOO_PRAGMA_WARNINGS_POP
 

@@ -251,6 +251,6 @@ private:
 //    Quantity(WhatConcrete& val);
 //};
 
-} // namespace too
+} // namespace too::math
 
 #endif
