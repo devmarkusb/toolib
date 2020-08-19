@@ -115,14 +115,15 @@ public:
 
     ~Unit()
     {
-        TOO_EXPECT(expectValidRatio(this->ratio));
+        expectValidRatio(this->ratio);
     }
 
-    std::string getString() const
+    [[nodiscard]] std::string getString() const
     {
         return this->ratio_prefixunitname.at(this->ratio);
     }
-    Rational getRatio() const
+
+    [[nodiscard]] Rational getRatio() const
     {
         return this->ratio;
     }
@@ -171,7 +172,7 @@ public:
 
         if (optim_ratio_it != current_ratio_it)
         {
-            TOO_ENSURE(expectValidRatio(*optim_ratio_it));
+            expectValidRatio(*optim_ratio_it);
             return *optim_ratio_it;
         }
 
@@ -182,12 +183,12 @@ public:
 
         if (optim_ratio_revit != current_ratio_revit)
         {
-            TOO_ENSURE(expectValidRatio(*optim_ratio_it));
+            expectValidRatio(*optim_ratio_it);
             return *optim_ratio_revit;
         }
         else
         {
-            TOO_ENSURE(expectValidRatio(*current_ratio_it));
+            expectValidRatio(*current_ratio_it);
             return *current_ratio_it;
         }
     }
@@ -204,12 +205,11 @@ private:
 
     /** \return value only needed for calls within assertions. It doesn't need to indicate failure.
         The function itself does.*/
-    [[nodiscard]] bool expectValidRatio(const too::math::Rational& r) const
+    void expectValidRatio(const too::math::Rational& r) const
     {
         if (ratio_prefixunitname.find(r) == ratio_prefixunitname.end())
             throw err_no_string_provided_for_ratio(r);
         TOO_EXPECT(r > Rational{});
-        return true;
     }
 };
 
