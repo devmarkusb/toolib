@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -14,7 +13,7 @@
 #include <string>
 
 
-namespace too::img
+namespace mb::too::img
 {
 using Pixels = long;
 using PixelsMargins = too::math::Margins_<Pixels>;
@@ -23,6 +22,6 @@ const std::string fileext_bmp{".bmp"};
 const std::string fileext_jpg{".jpg"};
 const std::string fileext_png{".png"};
 const std::string fileext_svg{".svg"};
-} // namespace too::img
+} // namespace mb::too::img
 
 #endif

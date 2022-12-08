@@ -1,5 +1,4 @@
-// Markus Borris, 2011
-// This file is part of toolib library.
+// 2011
 
 //!
 /**
@@ -13,7 +12,7 @@
 #include <utility>
 
 
-namespace too
+namespace mb::too
 {
 namespace math
 {
@@ -117,8 +116,11 @@ typedef bits<uint16_t> bits16;
 typedef bits<uint32_t> bits32;
 } // namespace bit
 } // namespace math
-} // namespace too
+} // namespace mb::too
 
+namespace mb
+{
 namespace toobit = too::math::bit;
+} // namespace mb
 
 #endif

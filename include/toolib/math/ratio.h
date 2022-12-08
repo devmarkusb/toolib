@@ -1,5 +1,4 @@
-// Markus Borris, 2016-17
-// This file is part of toolib library.
+// 2016-17
 
 //!
 /**
@@ -10,9 +9,7 @@
 #ifndef RATIO_H_louiuzlik79hi965gi6
 #define RATIO_H_louiuzlik79hi965gi6
 
-#include "toolib/almost_equal.h"
-#include "toolib/assert.h"
-#include "toolib/std/std_extensions.h"
+#include "ul/ul.h"
 #include <cstdint>
 #include <initializer_list>
 #include <ratio>
@@ -20,13 +17,13 @@
 #include <type_traits>
 
 
-namespace too::math
+namespace mb::too::math
 {
 //! Greatest common divisor. Expects at least on of a, b to be > 0.
 template <typename T>
 typename std::enable_if<std::is_integral<T>::value, T>::type gcd(T a, T b)
 {
-    TOO_EXPECT(a > T() || b > T());
+    UL_EXPECT(a > T() || b > T());
     T c = 0;
     while (a != 0)
     {
@@ -41,7 +38,7 @@ typename std::enable_if<std::is_integral<T>::value, T>::type gcd(T a, T b)
 template <typename T>
 typename std::enable_if<std::is_integral<T>::value, T>::type lcm(T a, T b)
 {
-    TOO_EXPECT(a > T() || b > T());
+    UL_EXPECT(a > T() || b > T());
     return a * (b / gcd(a, b));
 }
 
@@ -79,7 +76,7 @@ struct Rational
         because otherwise the default constructor seems to disturb.*/
     Rational(std::initializer_list<ValueType> init)
     {
-        TOO_EXPECT(init.size() <= 2);
+        UL_EXPECT(init.size() <= 2);
         auto it = init.begin();
         if (it == init.end())
         {
@@ -91,7 +88,7 @@ struct Rational
         if (it != init.end())
         {
             denom = *it;
-            TOO_EXPECT(denom > 0);
+            UL_EXPECT(denom > 0);
         }
     }
 
@@ -106,7 +103,7 @@ struct Rational
     ~Rational() = default; // gcc needs this to be trivial for the use of Rational in constexpr's
     //     {
     //         // documenting the important invariant
-    //         TOO_EXPECT(denom > 0);
+    //         UL_EXPECT(denom > 0);
     //     }
 
     //! Note that this ensures the invariant of having denom > 0 always
@@ -118,7 +115,7 @@ struct Rational
             this->denom = -this->denom;
             this->num = -this->num;
         }
-        TOO_ENSURE(denom > 0);
+        UL_ENSURE(denom > 0);
     }
 
     template <typename T>
@@ -197,7 +194,7 @@ inline void make_common_denom(Rational& one, Rational& two)
     two.num *= m / two.denom;
     two.denom = m;
 
-    TOO_ENSURE(one.denom == two.denom);
+    UL_ENSURE(one.denom == two.denom);
 }
 
 inline Rational operator+(Rational lhs, const Rational& rhs)
@@ -225,7 +222,7 @@ inline bool operator==(const Rational& lhs, const Rational& rhs)
 {
     if (lhs.denom == rhs.denom)
         return lhs.num == rhs.num;
-    return too::almost_equal(lhs.asFloatingPoint<long double>(), rhs.asFloatingPoint<long double>());
+    return ul::almost_equal(lhs.asFloatingPoint<long double>(), rhs.asFloatingPoint<long double>());
 }
 inline bool operator!=(const Rational& lhs, const Rational& rhs)
 {
@@ -253,29 +250,29 @@ inline bool operator>=(const Rational& lhs, const Rational& rhs)
 }
 
 
-#if TOO_HAS_NO_CONSTEXPR_STD_RATIO
-#define TOO_TEMPCONSTEXPR
+#if UL_HAS_NO_CONSTEXPR_STD_RATIO
+#define UL_TEMPCONSTEXPR
 #else
-#define TOO_TEMPCONSTEXPR constexpr
+#define UL_TEMPCONSTEXPR constexpr
 #endif
 // clang-format off
-TOO_TEMPCONSTEXPR const Rational atto  {std::atto{}};
-TOO_TEMPCONSTEXPR const Rational femto {std::femto{}};
-TOO_TEMPCONSTEXPR const Rational pico  {std::pico{}};
-TOO_TEMPCONSTEXPR const Rational nano  {std::nano{}};
-TOO_TEMPCONSTEXPR const Rational micro {std::micro{}};
-TOO_TEMPCONSTEXPR const Rational milli {std::milli{}};
-TOO_TEMPCONSTEXPR const Rational centi {std::centi{}};
-TOO_TEMPCONSTEXPR const Rational deci  {std::deci{}};
-TOO_TEMPCONSTEXPR const Rational one   {std::ratio<1, 1>{}};
-TOO_TEMPCONSTEXPR const Rational deca  {std::deca{}};
-TOO_TEMPCONSTEXPR const Rational hecto {std::hecto{}};
-TOO_TEMPCONSTEXPR const Rational kilo  {std::kilo{}};
-TOO_TEMPCONSTEXPR const Rational mega  {std::mega{}};
-TOO_TEMPCONSTEXPR const Rational giga  {std::giga{}};
-TOO_TEMPCONSTEXPR const Rational tera  {std::tera{}};
-TOO_TEMPCONSTEXPR const Rational peta  {std::peta{}};
-TOO_TEMPCONSTEXPR const Rational exa   {std::exa{}};
+UL_TEMPCONSTEXPR const Rational atto  {std::atto{}};
+UL_TEMPCONSTEXPR const Rational femto {std::femto{}};
+UL_TEMPCONSTEXPR const Rational pico  {std::pico{}};
+UL_TEMPCONSTEXPR const Rational nano  {std::nano{}};
+UL_TEMPCONSTEXPR const Rational micro {std::micro{}};
+UL_TEMPCONSTEXPR const Rational milli {std::milli{}};
+UL_TEMPCONSTEXPR const Rational centi {std::centi{}};
+UL_TEMPCONSTEXPR const Rational deci  {std::deci{}};
+UL_TEMPCONSTEXPR const Rational one   {std::ratio<1, 1>{}};
+UL_TEMPCONSTEXPR const Rational deca  {std::deca{}};
+UL_TEMPCONSTEXPR const Rational hecto {std::hecto{}};
+UL_TEMPCONSTEXPR const Rational kilo  {std::kilo{}};
+UL_TEMPCONSTEXPR const Rational mega  {std::mega{}};
+UL_TEMPCONSTEXPR const Rational giga  {std::giga{}};
+UL_TEMPCONSTEXPR const Rational tera  {std::tera{}};
+UL_TEMPCONSTEXPR const Rational peta  {std::peta{}};
+UL_TEMPCONSTEXPR const Rational exa   {std::exa{}};
 
 const std::string  atto_symb = "a";
 const std::string femto_symb = "f";
@@ -295,16 +292,16 @@ const std::string  tera_symb = "T";
 const std::string  peta_symb = "P";
 const std::string   exa_symb = "E";
 
-TOO_TEMPCONSTEXPR const Rational one_twelveth     {std::ratio<1, 12>{}};
-TOO_TEMPCONSTEXPR const Rational one_seventh      {std::ratio<1, 7>{}};
-TOO_TEMPCONSTEXPR const Rational one_twentyfourth {std::ratio<1, 24>{}};
-TOO_TEMPCONSTEXPR const Rational one_sixtyth      {std::ratio<1, 60>{}};
-TOO_TEMPCONSTEXPR const Rational sixtytimes       {std::ratio<60, 1>{}};
-TOO_TEMPCONSTEXPR const Rational twentyfourtimes  {std::ratio<24, 1>{}};
-TOO_TEMPCONSTEXPR const Rational seventimes       {std::ratio<7, 1>{}};
-TOO_TEMPCONSTEXPR const Rational twelvetimes      {std::ratio<12, 1>{}};
+UL_TEMPCONSTEXPR const Rational one_twelveth     {std::ratio<1, 12>{}};
+UL_TEMPCONSTEXPR const Rational one_seventh      {std::ratio<1, 7>{}};
+UL_TEMPCONSTEXPR const Rational one_twentyfourth {std::ratio<1, 24>{}};
+UL_TEMPCONSTEXPR const Rational one_sixtyth      {std::ratio<1, 60>{}};
+UL_TEMPCONSTEXPR const Rational sixtytimes       {std::ratio<60, 1>{}};
+UL_TEMPCONSTEXPR const Rational twentyfourtimes  {std::ratio<24, 1>{}};
+UL_TEMPCONSTEXPR const Rational seventimes       {std::ratio<7, 1>{}};
+UL_TEMPCONSTEXPR const Rational twelvetimes      {std::ratio<12, 1>{}};
 // clang-format on
-#undef TOO_TEMPCONSTEXPR
-} // namespace too::math
+#undef UL_TEMPCONSTEXPR
+} // namespace mb::too::math
 
 #endif

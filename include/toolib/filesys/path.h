@@ -1,5 +1,4 @@
-// Markus Borris, 2015-16
-// This file is part of toolib library.
+// 2015-16
 
 //!
 /**
@@ -10,12 +9,12 @@
 #define PATH_H_isdgfx67g42319gyr6r8gfeuiwgfc
 
 #include "toolibDEF.h"
-#include "toolib/warnings.h"
+#include "ul/warnings.h"
 #include <string>
 #include <vector>
 
 
-namespace too
+namespace mb::too
 {
 namespace file
 {
@@ -74,14 +73,14 @@ public:
     static const std::string& getSeparatorPlatformIndep();
 
 private:
-    TOO_PRAGMA_WARNINGS_PUSH
-    TOO_WARNING_DISABLE_MSVC(4251)
+    UL_PRAGMA_WARNINGS_PUSH
+    UL_WARNING_DISABLE_MSVC(4251)
     //! platform independent variant used by this class
     static const std::string FOLDER_SEPARATOR_TO_USE_HERE;
 
     std::string m_path_own_internal;
     std::string* m_path = &m_path_own_internal; //! contract: never nullptr
-    TOO_PRAGMA_WARNINGS_POP
+    UL_PRAGMA_WARNINGS_POP
     mutable EForm m_form = EForm::PLATFORMINDEPENDENT;
     EType m_type = EType::IS_UNKNOWN;
 
@@ -90,7 +89,7 @@ private:
 
 TOOLIBSHARED_EXPORT Path operator+(const Path& p1, const Path& p2);
 } // namespace file
-} // namespace too
+} // namespace mb::too
 
 
 #endif

@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /** This is left for documentation or future thinking. Apparently there should be
@@ -11,10 +10,10 @@
 #ifndef ITYPE_H_39653425hgjdhgxhrgbubeir43
 #define ITYPE_H_39653425hgjdhgxhrgbubeir43
 
-#include "toolib/ptr.h"
+#include "ul/ptr.h"
 
 
-namespace too
+namespace mb::too
 {
 //! Sometimes you are in the situation of declaring abstract interfaces and
 //! wanting to use a flexible type just as if you would rather like to write
@@ -51,8 +50,8 @@ struct IType
     IType(IType&&) = delete;
     IType& operator=(IType&&) = delete;
 
-    virtual too::owner<IType*> clone() = 0;
+    virtual ul::owner<IType*> clone() = 0;
 };
-} // namespace too
+} // namespace mb::too
 
 #endif

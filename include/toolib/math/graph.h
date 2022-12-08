@@ -1,5 +1,4 @@
-// Markus Borris, 2015-17
-// This file is part of toolib library.
+// 2015-17
 
 //!
 /**
@@ -13,11 +12,7 @@
 #include "quantity_unit.h"
 #include "ratio.h"
 #include "scale.h"
-#include "toolib/almost_equal.h"
-#include "toolib/class/non_copyable.h"
-#include "toolib/error.h"
-#include "toolib/optional.h"
-#include "toolib/ptr.h"
+#include "ul/ul.h"
 #include <algorithm>
 #include <map>
 #include <memory>
@@ -25,7 +20,7 @@
 #include <vector>
 
 
-namespace too::math
+namespace mb::too::math
 {
 //!
 template <typename X, typename Y>
@@ -52,7 +47,7 @@ struct TickStringRepr_setup
     //! Cf. to_string functions.
     FloatFormat tick_float_format{FloatFormat::default_};
     //! Cf. to_string functions.
-    too::opt<int> tick_float_precision{};
+    ul::opt<int> tick_float_precision{};
 };
 
 //!
@@ -64,11 +59,11 @@ struct ChartAxis_setup
 
     virtual std::unique_ptr<ChartAxis_setup> clone() const
     {
-        return too::make_unique<ChartAxis_setup>(*this);
+        return std::make_unique<ChartAxis_setup>(*this);
     }
 
     //! If not provided, the maximum count of scale ticks on the axis is chosen automatically.
-    too::opt<ScaleTickCount> max_tick_count;
+    ul::opt<ScaleTickCount> max_tick_count;
     TickStringRepr_setup tick_string_repr;
 };
 
@@ -81,7 +76,7 @@ struct ChartAxisProj_setup : public ChartAxis_setup
 
     std::unique_ptr<ChartAxis_setup> clone() const override
     {
-        return too::make_unique<ChartAxisProj_setup>(*this);
+        return std::make_unique<ChartAxisProj_setup>(*this);
     }
 
     std::pair<ProjectionValue, ProjectionValue> projection_range;
@@ -92,7 +87,7 @@ struct ChartAxisProj_setup : public ChartAxis_setup
 
 //!
 template <typename QuValueType>
-class ChartAxis : private too::non_copyable
+class ChartAxis : private ul::non_copyable
 {
 public:
     ChartAxis(
@@ -100,7 +95,7 @@ public:
         const QuValueType& max_qu_val);
     virtual ~ChartAxis()
     {
-        TOO_EXPECT(this->setup);
+        UL_EXPECT(this->setup);
     }
 
     ScaleTickCount getTickCount() const
@@ -127,7 +122,7 @@ public:
 
     /** \return a new ratio for the Quantity Unit, if there is a better choice, i.e. a common ratio of the tick values
         can be obtained.*/
-    too::opt<Rational> obtain_suitable_common_ratio_of_tickvals() const;
+    ul::opt<Rational> obtain_suitable_common_ratio_of_tickvals() const;
     void apply_ratio_to_tickvals(const Rational& r);
     void apply_ratio_to_quantity_unit(const Rational& r);
 
@@ -210,11 +205,11 @@ public:
         const ChartAxis_setup& setupX, const ChartAxis_setup& setupY, const std::pair<Quantity, Quantity>& quantitiesXY,
         VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values);
 
-    too::not_null<const ChartAxis<QuValueTypeX>*> get_x_axis() const
+    ul::not_null<const ChartAxis<QuValueTypeX>*> get_x_axis() const
     {
         return x_axis.get();
     }
-    too::not_null<const ChartAxis<QuValueTypeX>*> get_y_axis() const
+    ul::not_null<const ChartAxis<QuValueTypeX>*> get_y_axis() const
     {
         return y_axis.get();
     }
@@ -274,7 +269,7 @@ private:
     VectorOfPairs<size_t, std::string> annotations;
 };
 
-} // namespace too::math
+} // namespace mb::too::math
 
 
 //####################################################################################################################
@@ -283,10 +278,10 @@ private:
 
 #include "toolib/math/round.h"
 #include "toolib/math/scale.h"
-#include "toolib/std/std_extensions.h"
+#include "ul/ul.h"
 
 
-namespace too::math
+namespace mb::too::math
 {
 template <typename QuValueType>
 ChartAxis<QuValueType>::ChartAxis(
@@ -311,14 +306,14 @@ void ChartAxis<QuValueType>::constr_common_impl(const QuValueType& min_qu_val, c
 template <typename QuValueType>
 void ChartAxis<QuValueType>::expectProperSetup() const
 {
-    TOO_EXPECT_THROW(this->setup->max_tick_count ? *(this->setup->max_tick_count) > 0 : true);
+    UL_EXPECT_THROW(this->setup->max_tick_count ? *(this->setup->max_tick_count) > 0 : true);
 }
 
 template <typename QuValueType>
 void ChartAxis<QuValueType>::ensureProperMinMax(QuValueType& min_qu_val, QuValueType& max_qu_val) const
 {
-    TOO_EXPECT_THROW(min_qu_val <= max_qu_val);
-    if (too::almost_equal_alltypes(min_qu_val, max_qu_val, expected_ulp_difference_minmax))
+    UL_EXPECT_THROW(min_qu_val <= max_qu_val);
+    if (ul::almost_equal_alltypes(min_qu_val, max_qu_val, expected_ulp_difference_minmax))
     {
         min_qu_val -= 1;
         max_qu_val += 1;
@@ -339,7 +334,7 @@ void ChartAxis<QuValueType>::calcScaling(const QuValueType& min_qu_val, const Qu
 }
 
 template <typename QuValueType>
-too::opt<Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio_of_tickvals() const
+ul::opt<Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio_of_tickvals() const
 {
     const auto unit = this->quantity.getUnit();
     const auto max_abs = std::max(std::abs(this->tick_start_qu_val), std::abs(this->tick_end_qu_val));
@@ -381,7 +376,7 @@ void ChartAxis<QuValueType>::apply_ratio_to_quantity_unit(const Rational& r)
 template <typename QuValueType>
 std::string ChartAxis<QuValueType>::tickValueAsReadableString(const QuValueType& qu_val) const
 {
-    using namespace too::math;
+    using namespace mb::too::math;
     const auto isPrecDefined = setup->tick_string_repr.tick_float_precision;
     const int prec = isPrecDefined ? *setup->tick_string_repr.tick_float_precision : 0;
     switch (setup->tick_string_repr.tick_float_format)
@@ -402,7 +397,7 @@ std::string ChartAxis<QuValueType>::tickValueAsReadableString(const QuValueType&
             else
                 return to_string<FloatFormat::scientific>(qu_val);
         default:
-            TOO_ASSERT_THROW(false);
+            UL_ASSERT_THROW(false);
     }
 }
 
@@ -422,15 +417,15 @@ template <typename QuValueType>
 void ChartAxisProj<QuValueType>::constr_impl()
 {
     this->setup = dynamic_cast<const too::math::ChartAxisProj_setup*>(ChartAxis<QuValueType>::setup.get());
-    TOO_EXPECT_THROW(this->setup);
+    UL_EXPECT_THROW(this->setup);
     expectProperSetup();
 }
 
 template <typename QuValueType>
 void ChartAxisProj<QuValueType>::expectProperSetup() const
 {
-    TOO_EXPECT_THROW(this->setup->projection_range.first < this->setup->projection_range.second);
-    TOO_EXPECT_THROW(!too::almost_equal(
+    UL_EXPECT_THROW(this->setup->projection_range.first < this->setup->projection_range.second);
+    UL_EXPECT_THROW(!ul::almost_equal(
         this->setup->projection_range.first, this->setup->projection_range.second,
         ChartAxisProj<QuValueType>::expected_ulp_difference_minmax));
 }
@@ -438,7 +433,7 @@ void ChartAxisProj<QuValueType>::expectProperSetup() const
 template <typename QuValueType>
 void ChartAxisProj<QuValueType>::initProjections()
 {
-    this->map_quvalue_to_projection = too::make_unique<QuValue_to_Projection>(
+    this->map_quvalue_to_projection = std::make_unique<QuValue_to_Projection>(
         std::make_pair(ChartAxisProj<QuValueType>::tick_start_qu_val, ChartAxisProj<QuValueType>::tick_end_qu_val),
         std::make_pair(this->setup->projection_range.first, this->setup->projection_range.second));
 }
@@ -446,7 +441,7 @@ void ChartAxisProj<QuValueType>::initProjections()
 template <typename QuValueType>
 ProjectionValue ChartAxisProj<QuValueType>::quvalue_to_projection(QuValueType x) const
 {
-    TOO_EXPECT_THROW(this->map_quvalue_to_projection);
+    UL_EXPECT_THROW(this->map_quvalue_to_projection);
     const QuValue_to_Projection& q2p = *this->map_quvalue_to_projection;
     return q2p(x);
 }
@@ -454,7 +449,7 @@ ProjectionValue ChartAxisProj<QuValueType>::quvalue_to_projection(QuValueType x)
 template <typename QuValueType>
 ProjectionValue ChartAxisProj<QuValueType>::qurange_to_projectionrange(QuValueType width) const
 {
-    TOO_EXPECT_THROW(this->map_quvalue_to_projection);
+    UL_EXPECT_THROW(this->map_quvalue_to_projection);
     const QuValue_to_Projection& q2p = *this->map_quvalue_to_projection;
     return std::abs(q2p(width) - q2p(QuValueType()));
 }
@@ -462,7 +457,7 @@ ProjectionValue ChartAxisProj<QuValueType>::qurange_to_projectionrange(QuValueTy
 template <typename QuValueType>
 QuValueType ChartAxisProj<QuValueType>::projection_to_quvalue(ProjectionValue p) const
 {
-    TOO_EXPECT_THROW(this->map_quvalue_to_projection);
+    UL_EXPECT_THROW(this->map_quvalue_to_projection);
     const QuValue_to_Projection& q2p = *this->map_quvalue_to_projection;
     return q2p.inverse(p);
 }
@@ -470,7 +465,7 @@ QuValueType ChartAxisProj<QuValueType>::projection_to_quvalue(ProjectionValue p)
 template <typename QuValueType>
 QuValueType ChartAxisProj<QuValueType>::projectionrange_to_qurange(ProjectionValue width) const
 {
-    TOO_EXPECT_THROW(this->map_quvalue_to_projection);
+    UL_EXPECT_THROW(this->map_quvalue_to_projection);
     const QuValue_to_Projection& q2p = *this->map_quvalue_to_projection;
     return std::abs(q2p.inverse(width) - q2p.inverse(ProjectionValue()));
 }
@@ -515,23 +510,23 @@ Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(
 
     const auto x_is_as_proj_axis_setup = dynamic_cast<const too::math::ChartAxisProj_setup*>(&setupX);
     if (x_is_as_proj_axis_setup)
-        this->x_axis = too::make_unique<ChartAxisProj<QuValueTypeX>>(
+        this->x_axis = std::make_unique<ChartAxisProj<QuValueTypeX>>(
             *x_is_as_proj_axis_setup, quantitiesXY.first, minmax_X.first, minmax_X.second);
     else
         this->x_axis =
-            too::make_unique<ChartAxis<QuValueTypeX>>(setupX, quantitiesXY.first, minmax_X.first, minmax_X.second);
+            std::make_unique<ChartAxis<QuValueTypeX>>(setupX, quantitiesXY.first, minmax_X.first, minmax_X.second);
     auto x_is_as_proj_axis = dynamic_cast<ChartAxisProj<QuValueTypeX>*>(this->x_axis.get());
 
     const auto y_is_as_proj_axis_setup = dynamic_cast<const too::math::ChartAxisProj_setup*>(&setupY);
     if (y_is_as_proj_axis_setup)
-        this->y_axis = too::make_unique<ChartAxisProj<QuValueTypeY>>(
+        this->y_axis = std::make_unique<ChartAxisProj<QuValueTypeY>>(
             *y_is_as_proj_axis_setup, quantitiesXY.second, minmax_Y.first, minmax_Y.second);
     else
         this->y_axis =
-            too::make_unique<ChartAxis<QuValueTypeY>>(setupY, quantitiesXY.second, minmax_Y.first, minmax_Y.second);
+            std::make_unique<ChartAxis<QuValueTypeY>>(setupY, quantitiesXY.second, minmax_Y.first, minmax_Y.second);
     auto y_is_as_proj_axis = dynamic_cast<ChartAxisProj<QuValueTypeY>*>(this->y_axis.get());
 
-    TOO_ASSERT(this->x_axis && this->y_axis);
+    UL_ASSERT(this->x_axis && this->y_axis);
     pullout_common_factor_from_data();
 
     if (x_is_as_proj_axis)
@@ -539,7 +534,7 @@ Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(
     if (y_is_as_proj_axis)
         y_is_as_proj_axis->initProjections();
 
-    TOO_ENSURE(this->x_axis && this->y_axis);
+    UL_ENSURE(this->x_axis && this->y_axis);
 }
 
 template <typename QuValueTypeX, typename QuValueTypeY>
@@ -574,6 +569,6 @@ void Chart2D<QuValueTypeX, QuValueTypeY>::pullout_common_factor_from_data()
     }
 }
 
-} // namespace too::math
+} // namespace mb::too::math
 
 #endif

@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -10,14 +9,14 @@
 #define FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn
 
 #include "toolibDEF.h"
-#include "toolib/warnings.h"
+#include "ul/warnings.h"
 #include <string>
 #include <vector>
 
-TOO_PRAGMA_WARNINGS_PUSH
-TOO_WARNING_DISABLE_MSVC(4251)
+UL_PRAGMA_WARNINGS_PUSH
+UL_WARNING_DISABLE_MSVC(4251)
 
-namespace too::file
+namespace mb::too::file
 {
 class TOOLIBSHARED_EXPORT FileCollection
 {
@@ -44,8 +43,8 @@ private:
     unsigned char obtain_number_of_digits_for_filenames_of_file_collection(
         const std::string& base_file_name, const std::string& file_ext) const;
 };
-} // namespace too::file
+} // namespace mb::too::file
 
-TOO_PRAGMA_WARNINGS_POP
+UL_PRAGMA_WARNINGS_POP
 
 #endif

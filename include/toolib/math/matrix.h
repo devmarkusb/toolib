@@ -1,5 +1,4 @@
-// Markus Borris, 2011-16
-// This file is part of toolib library.
+// 2011-16
 
 //!
 /**
@@ -9,14 +8,14 @@
 #ifndef MATRIX_H_mx02983urx23
 #define MATRIX_H_mx02983urx23
 
-#include "toolib/error.h"
+#include "ul/ul.h"
 #include <cmath>
 #include <complex>
 #include <cstdint>
 #include <string>
 
 
-namespace too
+namespace mb::too
 {
 namespace math
 {
@@ -469,32 +468,32 @@ public:
     //! Determinant.
     T det() const
     {
-        throw too::not_implemented{"det"};
+        throw ul::not_implemented{"det"};
     }
     //! Inverse. Throws error_division_by_zero_det exception if determinant is zero.
     void invert()
     {
-        throw too::not_implemented{"invert"};
+        throw ul::not_implemented{"invert"};
     }
     //! Is invertible?
     bool isInvertible() const
     {
-        throw too::not_implemented{"isInvertible"};
+        throw ul::not_implemented{"isInvertible"};
     }
     //! Is symmetric?
     bool isSymmetric() const
     {
-        throw too::not_implemented{"isSymmetric"};
+        throw ul::not_implemented{"isSymmetric"};
     }
     //! Is orthogonal?
     bool isOrthogonal() const
     {
-        throw too::not_implemented{"isOrthogonal"};
+        throw ul::not_implemented{"isOrthogonal"};
     }
     //! Is diagonal?
     bool isDiagonal() const
     {
-        throw too::not_implemented{"isDiagonal"};
+        throw ul::not_implemented{"isDiagonal"};
     }
 
 
@@ -721,12 +720,12 @@ public:
     //! Is hermitean?
     bool isHermitean() const
     {
-        throw too::not_implemented{"isHermitean"};
+        throw ul::not_implemented{"isHermitean"};
     }
     //! Is unitary?
     bool isUnitary() const
     {
-        throw too::not_implemented{"isUnitary"};
+        throw ul::not_implemented{"isUnitary"};
     }
 };
 
@@ -757,6 +756,6 @@ const matrix<T> operator*(const matrix<T>& t1, const matrix<T>& t2)
     return matrix<T>(t1) *= t2;
 }
 } // namespace math
-} // namespace too
+} // namespace mb::too
 
 #endif

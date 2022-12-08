@@ -16,7 +16,7 @@
 #include <string>
 
 
-namespace too
+namespace mb::too
 {
 inline std::string get_version_of_module()
 {

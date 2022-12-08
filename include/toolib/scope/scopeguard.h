@@ -1,5 +1,4 @@
-// Markus Borris, 2011
-// This file is part of toolib library.
+// 2011
 
 //!
 /** Implements a scope guard (ScopeGuard)
@@ -14,7 +13,7 @@
 #include <cstddef>
 
 
-namespace too
+namespace mb::too
 {
 class ScopeGuardImplBase; // fwd. decl.
 
@@ -330,7 +329,7 @@ inline ObjScopeGuardImpl2<Obj, MemFct, Para1, Para2> MakeObjGuard(Obj& obj, MemF
     return ObjScopeGuardImpl2<Obj, MemFct, Para1, Para2>(obj, memFct, para1, para2);
 }
 
-} // namespace too
+} // namespace mb::too
 
 // always useful together with scopeguard
 #include "reftovalue.h"

@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -9,7 +8,7 @@
 #ifndef FILE_H_sduifhg3gfy324n178fsffe4f
 #define FILE_H_sduifhg3gfy324n178fsffe4f
 
-#include "toolib/assert.h"
+#include "ul/ul.h"
 #include <cerrno>
 #include <cstring>
 #include <fstream>
@@ -17,7 +16,7 @@
 #include <string>
 
 
-namespace too
+namespace mb::too
 {
 namespace file
 {
@@ -58,13 +57,13 @@ inline void throwError(const std::string& filePathNameExt, operation op, const s
             ss << "loaded";
             break;
         default:
-            TOO_ASSERT(false); // op not supported
+            UL_ASSERT(false); // op not supported
     }
     ss << ", details: " << retErrDetail;
     ss << ", ec: " << errno_ << ", " << std::strerror(errno_);
     throw std::runtime_error{ss.str()};
 }
 } // namespace file
-} // namespace too
+} // namespace mb::too
 
 #endif

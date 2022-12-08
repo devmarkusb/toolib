@@ -1,7 +1,7 @@
 #include "toolib/filesys/path.h"
 #include "gtest/gtest.h"
 
-using too::file::Path;
+using mb::too::file::Path;
 
 
 class PathTest : public ::testing::Test
@@ -42,7 +42,7 @@ TEST_F(PathTest, EmptyConstruction)
 
 TEST_F(PathTest, Statics)
 {
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
     EXPECT_EQ("\\", Path::getSeparatorNative());
 #else
     EXPECT_EQ("/", Path::getSeparatorNative());
@@ -101,7 +101,7 @@ TEST_F(PathTest, ensureTrailingSeparator)
     EXPECT_EQ("a/", s);
     Path p2("a", Path::EForm::NATIVE);
     s = p2.ensureTrailingSeparator();
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
     EXPECT_EQ("a\\", s);
 #else
     EXPECT_EQ("a/", s);
@@ -121,7 +121,7 @@ TEST_F(PathTest, getFolderPath)
 {
     Path p1("a/b");
     EXPECT_EQ("a/", p1.getFolderPath());
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
     Path p2("a\\b", Path::EForm::NATIVE);
     EXPECT_EQ("a\\", p2.getFolderPath());
 #else
@@ -148,7 +148,7 @@ TEST_F(PathTest, isAbsolute)
 {
     Path p1("a/b");
     EXPECT_FALSE(p1.isAbsolute());
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
     Path p2("c:\\a\\b");
     EXPECT_TRUE(p2.isAbsolute());
 #else
@@ -163,7 +163,7 @@ TEST_F(PathTest, cleanupX)
     std::string s(p1.cleanupPlatformIndep());
     EXPECT_EQ("a/b/c", s);
     s = p1.cleanupNative();
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
     EXPECT_EQ("a\\b\\c", s);
 #else
     EXPECT_EQ("a/b/c", s);
@@ -174,14 +174,14 @@ TEST_F(PathTest, getSeparatorUsedHere)
 {
     Path p1("a/b");
     EXPECT_EQ("/", p1.getSeparatorUsedHere());
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
     Path p2("a\\b", Path::EForm::UNKNOWN);
     EXPECT_EQ("\\", p2.getSeparatorUsedHere());
 #else
     Path p2("a/b", Path::EForm::UNKNOWN);
     EXPECT_EQ("/", p2.getSeparatorUsedHere());
 #endif
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
     Path p3("a\\b", Path::EForm::NATIVE);
     EXPECT_EQ("\\", p3.getSeparatorUsedHere());
 #else

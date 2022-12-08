@@ -1,5 +1,4 @@
-// Markus Borris, 2011
-// This file is part of toolib library.
+// 2011
 
 //!
 /** Implements stand-alone operations +,-,*,/ for two objects of the same arbitrary type T.
@@ -14,7 +13,7 @@
 #define STANDALONEOP_H_98243rz823xr
 
 
-namespace too
+namespace mb::too
 {
 namespace math
 {
@@ -46,6 +45,6 @@ const T operator/(const T& t1, const T& t2)
 }
 } // namespace stand_alone_ops
 } // namespace math
-} // namespace too
+} // namespace mb::too
 
 #endif

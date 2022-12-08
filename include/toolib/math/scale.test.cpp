@@ -1,6 +1,8 @@
 #include "toolib/math/scale.h"
 #include "gtest/gtest.h"
 
+namespace too = mb::too;
+namespace ul = mb::ul;
 
 TEST(MathCalcNiceScaleTickTest, Basics)
 {
@@ -14,8 +16,8 @@ TEST(MathCalcNiceScaleTickTest, Basics)
 
 TEST(MathCalcNiceScaleTickTest, error)
 {
-    EXPECT_THROW(too::math::calcNiceScaleTick<double>(0.0, 10), too::fail_fast);
-    EXPECT_THROW(too::math::calcNiceScaleTick<int>(0, 10), too::fail_fast);
+    EXPECT_THROW(too::math::calcNiceScaleTick<double>(0.0, 10), ul::fail_fast);
+    EXPECT_THROW(too::math::calcNiceScaleTick<int>(0, 10), ul::fail_fast);
 }
 
 TEST(MathCalcScaleTickFromToTest, Basics)

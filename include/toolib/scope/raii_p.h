@@ -1,5 +1,4 @@
-// Markus Borris, 2011-17
-// This file is part of toolib library.
+// 2011-17
 
 //!
 /**
@@ -10,17 +9,16 @@
 #ifndef RAII_P_H_on824f287xrz2387r
 #define RAII_P_H_on824f287xrz2387r
 
-#include "toolib/debug.h"
-#include "toolib/mem/checked_delete.h"
-#if TOO_OS_WINDOWS
+#include "ul/ul.h"
+#if UL_OS_WINDOWS
 #include <crtdbg.h>
 #endif
 #include <cstdint>
 
-#include "toolib/macros.h"
+#include "ul/macros.h"
 
 
-namespace too
+namespace mb::too
 {
 //! The most simple smart pointer out there (just RAII).
 /** Encapsulates a pointer in a class that cares about deletion. (But prefer std::auto_ptr)*/
@@ -35,7 +33,7 @@ private:
     {
         if (m_ptr)
         {
-            mem::checked_delete(m_ptr);
+            ul::mem::checked_delete(m_ptr);
             m_ptr = 0;
         }
     }
@@ -60,8 +58,8 @@ public:
     explicit raii_p(T* pt)
         : m_ptr(pt)
     {
-#if TOO_OS_WINDOWS
-        TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
+#if UL_OS_WINDOWS
+        UL_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
 #endif
     }
     //! Releases the internally managed memory for the object.
@@ -102,10 +100,10 @@ public:
         if (pt != m_ptr)
         {
             if (m_ptr)
-                mem::checked_delete(m_ptr);
+                ul::mem::checked_delete(m_ptr);
             m_ptr = pt;
-#if TOO_OS_WINDOWS
-            TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
+#if UL_OS_WINDOWS
+            UL_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
 #endif
         }
     }
@@ -128,7 +126,7 @@ private:
     {
         if (m_ptr)
         {
-            mem::checked_array_delete(m_ptr);
+            ul::mem::checked_array_delete(m_ptr);
             m_ptr = 0;
         }
     }
@@ -155,8 +153,8 @@ public:
         : m_count(count)
         , m_ptr(pt)
     {
-#if TOO_OS_WINDOWS
-        TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
+#if UL_OS_WINDOWS
+        UL_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
 #endif
     }
     //! Releases the internally managed memory for the object.
@@ -168,19 +166,19 @@ public:
     //! Gives opportunity to use raii_ap<T> just like T*. Do not delete the return value!
     T* cast() const
     {
-        TOO_DEBUG_BREAK_IF(!m_ptr);
+        UL_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr;
     }
     //! Gives opportunity to use raii_ap<T> just like T* regarding "->"-access.
     T* operator->() const
     {
-        TOO_DEBUG_BREAK_IF(!m_ptr);
+        UL_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr;
     }
     //! Gives opportunity to use raii_ap<T> just like T* regarding *-indirection (dereferencing).
     T& operator*() const
     {
-        TOO_DEBUG_BREAK_IF(!m_ptr);
+        UL_DEBUG_BREAK_IF(!m_ptr);
         return *m_ptr;
     }
     //! Gives opportunity to use raii_ap<T> just like T* regarding []-indirection (index access).
@@ -188,7 +186,7 @@ public:
     better off using the cast() and work via pointer opposed to this function call (think of loops).*/
     T& operator[](uint32_t idx) const
     {
-        TOO_DEBUG_BREAK_IF(!m_ptr);
+        UL_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr[idx];
     }
     //! Gives away memory control of the internally stored object.
@@ -214,8 +212,8 @@ public:
                 checked_array_delete(m_ptr);
             m_ptr = pt;
             m_count = count;
-#if TOO_OS_WINDOWS
-            TOO_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
+#if UL_OS_WINDOWS
+            UL_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
 #endif
         }
     }
@@ -240,8 +238,8 @@ private:
         if (!m_ptr)
             return;
         for (uint32_t i = 0; i < m_count1; ++i)
-            mem::checked_array_delete(m_ptr[i]);
-        mem::checked_array_delete(m_ptr);
+            ul::mem::checked_array_delete(m_ptr[i]);
+        ul::mem::checked_array_delete(m_ptr);
         m_ptr = 0;
     }
     //! Copy is forbidden.
@@ -270,7 +268,7 @@ public:
     //! Gives opportunity to use raii_aap<T> just like T**. Do not delete the return value!
     T** cast() const
     {
-        TOO_DEBUG_BREAK_IF(!m_ptr);
+        UL_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr;
     }
     //! Gives opportunity to use raii_aap<T> just like T** regarding first []-indirection (index access).
@@ -278,7 +276,7 @@ public:
     better off using the cast() and work via pointer opposed to this function call (think of loops).*/
     T* operator[](uint32_t idx1) const
     {
-        TOO_DEBUG_BREAK_IF(!m_ptr);
+        UL_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr[idx1];
     }
     //! \return Number of objects in 1st dimension.
@@ -292,8 +290,8 @@ public:
         return m_count2;
     }
 };
-} // namespace too
+} // namespace mb::too
 
-#include "toolib/macros_end.h"
+#include "ul/macros_end.h"
 
 #endif

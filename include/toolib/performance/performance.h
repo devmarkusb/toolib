@@ -1,5 +1,4 @@
-// Markus Borris, 2014-18
-// This file is part of toolib library.
+// 2014-18
 
 //!
 /**
@@ -9,10 +8,9 @@
 #ifndef PERFORMANCE_H_sdkfgnxzuwegnf93746ryng342grf
 #define PERFORMANCE_H_sdkfgnxzuwegnf93746ryng342grf
 
-#include "toolib/class/non_copyable.h"
 #include "toolib/math/number.h"
 #include "toolib/math/round.h"
-#include "toolib/std/std_extensions.h"
+#include "ul/ul.h"
 #include <algorithm>
 #include <chrono>
 #include <cmath>
@@ -27,7 +25,7 @@
 #include <vector>
 
 
-namespace too
+namespace mb::too
 {
 namespace implDumpAllItems
 {
@@ -36,7 +34,7 @@ struct KeyData;
 
 //! Can only be used within one thread at the same time.
 /** Usage: Cf. unit tests.*/
-class PerformanceProfiler : private non_copyable
+class PerformanceProfiler : private ul::non_copyable
 {
 public:
     using TimeValStorageRep = double;
@@ -265,9 +263,9 @@ inline std::string PerformanceProfiler::dumpAllItems()
     for (const auto& key : keys)
     {
         TimeValStorageRep totalT =
-            too::accumulate(items().begin(), items().end(), TimeValStorageRep(), accum_key(key.first));
+            ul::accumulate(items().begin(), items().end(), TimeValStorageRep(), accum_key(key.first));
         const auto count = std::count_if(items().begin(), items().end(), match_key(key.first));
-        TOO_ASSERT(count >= 0);
+        UL_ASSERT(count >= 0);
         TimeValStorageRep avgT = 0.0;
         if (count)
             avgT = totalT / static_cast<TimeValStorageRep>(count);
@@ -362,6 +360,6 @@ inline PerformanceProfiler::Items& PerformanceProfiler::items()
     static Items instance;
     return instance;
 }
-} // namespace too
+} // namespace mb::too
 
 #endif

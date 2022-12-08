@@ -1,5 +1,4 @@
-// Markus Borris, 2015-18
-// This file is part of toolib library.
+// 2015-18
 
 //!
 /**
@@ -9,9 +8,8 @@
 #ifndef FLOATING_POINT_H_09458t87t5twd2874t57rbn6
 #define FLOATING_POINT_H_09458t87t5twd2874t57rbn6
 
-#include "toolib/assert.h"
-#include "toolib/comp_bwds.h"
-#include "toolib/ignore_arg.h"
+#include "ul/comp_bwds.h"
+#include "ul/ul.h"
 #include <algorithm>
 #include <cmath>
 #include <iomanip>
@@ -19,10 +17,10 @@
 #include <sstream>
 #include <type_traits>
 
-#include "toolib/macros.h"
-#include "toolib/macros/UNDEF_MIN_MAX.h"
+#include "ul/macros.h"
+#include "ul/macros/UNDEF_MIN_MAX.h"
 
-namespace too
+namespace mb::too
 {
 namespace math
 {
@@ -62,7 +60,7 @@ template <FloatFormat FF = FloatFormat::default_, typename FloatType = double>
 typename std::enable_if<std::is_floating_point<FloatType>::value, std::string>::type to_string(
     FloatType x, int precision)
 {
-    TOO_EXPECT(precision >= 0);
+    UL_EXPECT(precision >= 0);
     return impl::ToStringConverter<FloatType, FF>::convert(x, precision);
 }
 
@@ -88,11 +86,11 @@ struct ToStringConverter<FloatType, FloatFormat::default_>
 {
     static std::string convert(FloatType x)
     {
-        return too::to_string(x);
+        return ul::to_string(x);
     }
     static std::string convert(FloatType x, int precision)
     {
-        TOO_EXPECT(precision >= 0);
+        UL_EXPECT(precision >= 0);
         std::ostringstream ret;
         ret << std::setprecision(precision) << x;
         return ret.str();
@@ -109,7 +107,7 @@ struct ToStringConverter<FloatType, FloatFormat::fixed>
     }
     static std::string convert(FloatType x, int precision)
     {
-        TOO_EXPECT(precision >= 0);
+        UL_EXPECT(precision >= 0);
         std::ostringstream ret;
         ret << std::fixed << std::setprecision(precision) << x;
         return ret.str();
@@ -126,7 +124,7 @@ struct ToStringConverter<FloatType, FloatFormat::scientific>
     }
     static std::string convert(FloatType x, int precision)
     {
-        TOO_EXPECT(precision >= 0);
+        UL_EXPECT(precision >= 0);
         std::ostringstream ret;
         ret << std::scientific << std::setprecision(precision) << x;
         return ret.str();
@@ -134,8 +132,8 @@ struct ToStringConverter<FloatType, FloatFormat::scientific>
 };
 } // namespace impl
 } // namespace math
-} // namespace too
+} // namespace mb::too
 
-#include "toolib/macros_end.h"
+#include "ul/macros_end.h"
 
 #endif

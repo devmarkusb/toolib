@@ -1,6 +1,7 @@
 #include "toolib/math/floating_point.h"
 #include "gtest/gtest.h"
 
+namespace too = mb::too;
 
 TEST(math_approx_equal_Test, test)
 {

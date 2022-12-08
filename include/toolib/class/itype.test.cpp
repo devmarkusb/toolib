@@ -1,6 +1,8 @@
 #include "toolib/class/IType.h"
 #include "gtest/gtest.h"
 
+namespace too = mb::too;
+namespace ul = mb::ul;
 
 namespace
 {
@@ -37,7 +39,7 @@ struct SomeType_flexed : public too::IType
     {
     }
 
-    virtual too::owner<SomeType_flexed*> clone() override
+    virtual ul::owner<SomeType_flexed*> clone() override
     {
         return new SomeType_flexed(*this);
     }

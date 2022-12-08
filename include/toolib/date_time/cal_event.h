@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -9,11 +8,11 @@
 #ifndef CAL_EVENT_H_nbvxmcbvxmcnbxcmbierutozreoi
 #define CAL_EVENT_H_nbvxmcbvxmcnbxcmbierutozreoi
 
-#include "toolib/ptr.h"
+#include "ul/ptr.h"
 #include <memory>
 
 
-namespace too::date_time
+namespace mb::too::date_time
 {
 //! Base for SingleEvent and RecurringEvent. Provides getFirst/getNext mechanism to
 //! browse through events.
@@ -25,7 +24,7 @@ public:
     {
     }
 
-    virtual too::owner<CalEvent<TimeType>*> clone() const = 0;
+    virtual ul::owner<CalEvent<TimeType>*> clone() const = 0;
 
     //! Has to ensure to never return nullptr.
     virtual std::unique_ptr<TimeType> getFirstTimePoint() const = 0;
@@ -50,14 +49,14 @@ public:
     }
     ~SingleEvent() override = default;
 
-    too::owner<SingleEvent<TimeType>*> clone() const override
+    ul::owner<SingleEvent<TimeType>*> clone() const override
     {
         return new SingleEvent<TimeType>(*this);
     }
 
     std::unique_ptr<TimeType> getFirstTimePoint() const override
     {
-        return too::make_unique<TimeType>(m_TimePoint);
+        return std::make_unique<TimeType>(m_TimePoint);
     }
 
     std::unique_ptr<TimeType> getNextTimePoint(const TimeType&) const override
@@ -93,7 +92,7 @@ public:
     RecurringEvent(const RecurringEvent& other);
     RecurringEvent& operator=(const RecurringEvent& other);
 
-    too::owner<RecurringEvent<TimeType>*> clone() const override
+    ul::owner<RecurringEvent<TimeType>*> clone() const override
     {
         return new RecurringEvent<TimeType>(*this);
     }
@@ -104,7 +103,7 @@ public:
     //! nullptr means earliest possible start, which is the default construction
     void setStart(const TimeType* t)
     {
-        m_TimePointStart = t ? too::make_unique<TimeType>(*t) : nullptr;
+        m_TimePointStart = t ? std::make_unique<TimeType>(*t) : nullptr;
     }
     const TimeType* getStart() const
     {
@@ -130,7 +129,7 @@ public:
     //! nullptr means forever, which is default construction
     void setEnd(const TimeType* t)
     {
-        m_TimePointEnd = t ? too::make_unique<TimeType>(*t) : nullptr;
+        m_TimePointEnd = t ? std::make_unique<TimeType>(*t) : nullptr;
     }
     const TimeType* getEnd() const
     {
@@ -178,9 +177,9 @@ template <typename TimeType>
 RecurringEvent<TimeType>::RecurringEvent(const RecurringEvent<TimeType>& other)
 {
     if (other.m_TimePointStart)
-        m_TimePointStart = too::make_unique<TimeType>(*other.m_TimePointStart);
+        m_TimePointStart = std::make_unique<TimeType>(*other.m_TimePointStart);
     if (other.m_TimePointEnd)
-        m_TimePointEnd = too::make_unique<TimeType>(*other.m_TimePointEnd);
+        m_TimePointEnd = std::make_unique<TimeType>(*other.m_TimePointEnd);
     m_TimePeriod = other.m_TimePeriod;
 }
 
@@ -195,7 +194,7 @@ RecurringEvent<TimeType>& RecurringEvent<TimeType>::operator=(const RecurringEve
 template <typename TimeType>
 std::unique_ptr<TimeType> RecurringEvent<TimeType>::getFirstTimePoint() const
 {
-    return m_TimePointStart ? too::make_unique<TimeType>(*m_TimePointStart) : too::make_unique<TimeType>(TimeType());
+    return m_TimePointStart ? std::make_unique<TimeType>(*m_TimePointStart) : std::make_unique<TimeType>(TimeType());
 }
 
 template <typename TimeType>
@@ -207,9 +206,9 @@ std::unique_ptr<TimeType> RecurringEvent<TimeType>::getNextTimePoint(const TimeT
     if (m_TimePointEnd && next > *m_TimePointEnd)
         return nullptr;
     else
-        return too::make_unique<TimeType>(next);
+        return std::make_unique<TimeType>(next);
 }
-} // namespace too::date_time
+} // namespace mb::too::date_time
 
 
 #endif

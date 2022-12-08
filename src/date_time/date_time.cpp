@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -10,7 +9,7 @@
 #include "toolib/math/number.h"
 
 
-namespace too::date_time
+namespace mb::too::date_time
 {
 const std::string MonthYear_decl::string_delim = "/";
 
@@ -20,7 +19,7 @@ void normalize::do_it(std::pair<Years, Months>& y_m)
     const Months MonthAbs = std::abs(y_m.second);
     if (MonthAbs > MonthYear_decl::twelve)
     {
-        TOO_ASSERT(MonthSgn);
+        UL_ASSERT(MonthSgn);
         const Years YearsCorrection = MonthSgn * (MonthAbs / MonthYear_decl::twelve);
         y_m.first += YearsCorrection;
         Months rem_months = MonthAbs % MonthYear_decl::twelve;
@@ -41,7 +40,7 @@ void normalize::do_it(std::pair<Years, Months>& y_m)
     const int YearSgn = too::math::sgn(y_m.first);
     if (y_m.second == 0 && y_m.first != 0)
     {
-        TOO_ASSERT(YearSgn);
+        UL_ASSERT(YearSgn);
         if (YearSgn < 0)
         {
             y_m.second = -MonthYear_decl::twelve;
@@ -68,4 +67,4 @@ void normalize::do_it(std::pair<Years, Months>& y_m)
         return;
     }
 }
-} // namespace too::date_time
+} // namespace mb::too::date_time

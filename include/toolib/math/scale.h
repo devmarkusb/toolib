@@ -1,5 +1,4 @@
-// Markus Borris, 2015-16
-// This file is part of toolib library.
+// 2015-16
 
 //!
 /**
@@ -9,15 +8,13 @@
 #ifndef SCALE_H_enrhfu87n83464346ng
 #define SCALE_H_enrhfu87n83464346ng
 
-#include "toolib/almost_equal.h"
-#include "toolib/assert.h"
-#include "toolib/narrow.h"
+#include "ul/ul.h"
 #include <cmath>
 #include <type_traits>
 #include <utility>
 
 
-namespace too
+namespace mb::too
 {
 namespace math
 {
@@ -33,8 +30,8 @@ public:
         : m_FromInterval(FromInterval)
         , m_ToInterval(ToInterval)
     {
-        TOO_EXPECT_THROW(FromInterval.first < FromInterval.second);
-        TOO_EXPECT_THROW(ToInterval.first < ToInterval.second);
+        UL_EXPECT_THROW(FromInterval.first < FromInterval.second);
+        UL_EXPECT_THROW(ToInterval.first < ToInterval.second);
     }
 
     FloatingPointType operator()(const FloatingPointType& from) const
@@ -65,12 +62,12 @@ template <typename T>
 //  requires T > 0
 inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
 {
-    TOO_EXPECT_THROW(MaxTickCount);
-    TOO_EXPECT_THROW(RangeMinToMax > T());
-    const auto MaxTickCount_ = narrow_cast<double>(MaxTickCount);
-    const double MinimalTick = narrow_cast<double>(RangeMinToMax) / MaxTickCount_;
+    UL_EXPECT_THROW(MaxTickCount);
+    UL_EXPECT_THROW(RangeMinToMax > T());
+    const auto MaxTickCount_ = ul::narrow_cast<double>(MaxTickCount);
+    const double MinimalTick = ul::narrow_cast<double>(RangeMinToMax) / MaxTickCount_;
     const double magnitude = std::pow(10.0, std::floor(std::log10(MinimalTick)));
-    if (too::almost_equal(magnitude, 0.0))
+    if (ul::almost_equal(magnitude, 0.0))
         return 0.0;
     const double residual = MinimalTick / magnitude;
     if (residual > 5.0)
@@ -90,16 +87,16 @@ template <typename T>
 //  requires T number
 inline std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, double scaleTick)
 {
-    TOO_EXPECT(minDataValue <= maxDataValue);
-    const double minIn = narrow_cast<double>(minDataValue);
-    const double maxIn = narrow_cast<double>(maxDataValue);
-    if (too::almost_equal(scaleTick, 0.0))
+    UL_EXPECT(minDataValue <= maxDataValue);
+    const double minIn = ul::narrow_cast<double>(minDataValue);
+    const double maxIn = ul::narrow_cast<double>(maxDataValue);
+    if (ul::almost_equal(scaleTick, 0.0))
         return std::make_pair(minIn, maxIn);
     const double minOut = std::floor(minIn / scaleTick) * scaleTick;
     const double maxOut = std::ceil(maxIn / scaleTick) * scaleTick;
     return std::make_pair(minOut, maxOut);
 }
 } // namespace math
-} // namespace too
+} // namespace mb::too
 
 #endif

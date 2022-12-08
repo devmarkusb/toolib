@@ -1,5 +1,4 @@
-// Markus Borris, 2011-18
-// This file is part of toolib library.
+// 2011-18
 
 //!
 /**
@@ -14,7 +13,7 @@
 #include <vector>
 
 
-namespace too
+namespace mb::too
 {
 namespace str
 {
@@ -30,6 +29,6 @@ inline void tokenizeString(const std::string& s, const std::string& delimiters, 
     }
 }
 } // namespace str
-} // namespace too
+} // namespace mb::too
 
 #endif

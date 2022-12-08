@@ -1,5 +1,4 @@
-// Markus Borris, 2011
-// This file is part of toolib library.
+// 2011
 
 //!
 /** Note: I assume that the lack of keyword export (MS VS) made it necessary to put the definitions
@@ -15,7 +14,7 @@
 #include <stack>
 
 
-namespace too
+namespace mb::too
 {
 //! Extends any class "user" by the functionality of describing arbitrary options by a set of bit flags.
 /** These flags work in a scope guarded manner. An example helps best: \code
@@ -121,6 +120,6 @@ bit_container_type* scope_flagged<user, bit_container_type>::m_flags = &scope_fl
 template <class user, class bit_container_type>
 std::stack<bit_container_type> scope_flagged<user, bit_container_type>::SG_flags::m_auxLastflags;
 
-} // namespace too
+} // namespace mb::too
 
 #endif

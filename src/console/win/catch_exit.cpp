@@ -1,5 +1,4 @@
-// Markus Borris, 2011-17
-// This file is part of toolib library.
+// 2011-17
 
 //!
 /**
@@ -7,12 +6,12 @@
 //! \file
 
 #include "toolib/console/win/catch_exit.h"
-#if TOO_OS_WINDOWS && TOO_OS_WINDOWS_DESKTOP
+#if UL_OS_WINDOWS && UL_OS_WINDOWS_DESKTOP
 #include <sstream>
 #include <stdexcept>
 
 
-namespace too
+namespace mb::too
 {
 namespace con
 {
@@ -59,5 +58,5 @@ ExitCatcher& ExitCatcher::getInstance()
     return ec;
 }
 } // namespace con
-} // namespace too
-#endif // TOO_OS_WINDOWS
+} // namespace mb::too
+#endif // UL_OS_WINDOWS

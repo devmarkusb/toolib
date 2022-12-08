@@ -1,5 +1,4 @@
-// Markus Borris, 2011-16
-// This file is part of toolib library.
+// 2011-16
 
 //!
 /**
@@ -14,10 +13,10 @@
 #include <limits>
 #include <type_traits>
 
-#include "toolib/macros/UNDEF_MIN_MAX.h"
+#include "ul/macros/UNDEF_MIN_MAX.h"
 
 
-namespace too::math
+namespace mb::too::math
 {
 template <typename T>
 inline T round(T r, unsigned short decimal_places)
@@ -41,6 +40,6 @@ inline TR round_to(TP r, unsigned short decimal_places = 0)
         return numeric_limits<TR>::min();
     return static_cast<TR>(d);
 }
-} // namespace too::math
+} // namespace mb::too::math
 
 #endif

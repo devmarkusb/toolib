@@ -1,6 +1,7 @@
 #include "toolib/math/number.h"
 #include "gtest/gtest.h"
 
+namespace too = mb::too;
 
 TEST(MathNumberGetDecDigitCountTest, Dec)
 {

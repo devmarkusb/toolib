@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -7,16 +6,13 @@
 //! \file
 
 #include "toolib/financial/money.h"
-#include "toolib/almost_equal.h"
-#include "toolib/assert.h"
 #include "toolib/date_time/date_time.h"
-#include "toolib/error.h"
 #include "toolib/math/floating_point.h"
-#include "toolib/string/str_convert.h"
+#include "ul/ul.h"
 #include <locale>
 
 
-namespace too::fin
+namespace mb::too::fin
 {
 //####################################################################################################################
 
@@ -30,8 +26,8 @@ std::string Currency::getString() const
     if (!(this->loc))
         return std::string();
     const std::string loc_enc = std::use_facet<std::moneypunct<char, true>>(*(this->loc)).curr_symbol();
-    const std::wstring utf16ws = too::str::locenc_s2ws(loc_enc);
-    return too::str::utf16or32to8_ws2s_portable(utf16ws);
+    const std::wstring utf16ws = ul::str::locenc_s2ws(loc_enc);
+    return ul::str::utf16or32to8_ws2s_portable(utf16ws);
 }
 
 std::string Currency::getSymbol() const
@@ -39,8 +35,8 @@ std::string Currency::getSymbol() const
     if (!(this->loc))
         return std::string();
     const std::string loc_enc = std::use_facet<std::moneypunct<char>>(*(this->loc)).curr_symbol();
-    const std::wstring utf16ws = too::str::locenc_s2ws(loc_enc);
-    return too::str::utf16or32to8_ws2s_portable(utf16ws);
+    const std::wstring utf16ws = ul::str::locenc_s2ws(loc_enc);
+    return ul::str::utf16or32to8_ws2s_portable(utf16ws);
 }
 
 std::string Currency::getLocaleConstrName() const
@@ -76,7 +72,7 @@ void Money::set(BaseType amount_, const Currency& currency_)
 
 void Money::set(BaseType amount_)
 {
-    TOO_EXPECT(std::isfinite(amount_));
+    UL_EXPECT(std::isfinite(amount_));
     this->amount = amount_;
 }
 
@@ -109,7 +105,7 @@ Money::BaseType Money::getTenthOfSmallestUnit(const Currency&)
 Money& Money::operator-=(const Money& rhs)
 {
     if (this->currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented{"mixed currencies not yet implemented"};
+        throw ul::not_implemented{"mixed currencies not yet implemented"};
     amount -= rhs.amount;
     return *this;
 }
@@ -117,7 +113,7 @@ Money& Money::operator-=(const Money& rhs)
 Money& Money::operator+=(const Money& rhs)
 {
     if (this->currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented{"mixed currencies not yet implemented"};
+        throw ul::not_implemented{"mixed currencies not yet implemented"};
     amount += rhs.amount;
     return *this;
 }
@@ -125,7 +121,7 @@ Money& Money::operator+=(const Money& rhs)
 Money& Money::operator/=(const Money& rhs)
 {
     if (this->currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented{"mixed currencies not yet implemented"};
+        throw ul::not_implemented{"mixed currencies not yet implemented"};
     amount /= rhs.amount;
     return *this;
 }
@@ -193,14 +189,14 @@ Money operator*(Money::BaseType lhs, const Money& rhs)
 bool operator==(const Money& lhs, const Money& rhs)
 {
     if (lhs.currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented{"mixed currencies not yet implemented"};
-    return too::almost_equal(lhs.amount, rhs.amount);
+        throw ul::not_implemented{"mixed currencies not yet implemented"};
+    return ul::almost_equal(lhs.amount, rhs.amount);
 }
 
 bool operator<(const Money& lhs, const Money& rhs)
 {
     if (lhs.currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented{"mixed currencies not yet implemented"};
+        throw ul::not_implemented{"mixed currencies not yet implemented"};
     return lhs.amount < rhs.amount;
 }
 
@@ -227,7 +223,7 @@ bool operator>=(const Money& lhs, const Money& rhs)
 bool equal_sufficiently(const Money& lhs, const Money& rhs)
 {
     if (lhs.currency != rhs.currency) // otherwise not yet implemented
-        throw too::not_implemented{"mixed currencies not yet implemented"};
+        throw ul::not_implemented{"mixed currencies not yet implemented"};
     // tenth of smallest unit needed since this is the relevant digit for rounding
     return too::math::approx_equal(lhs.amount, rhs.amount, Money::getTenthOfSmallestUnit());
 }
@@ -240,4 +236,4 @@ Fraction Interest_pa::YearlyEffective_to_MonthlyRelative(Fraction pa)
 {
     return std::pow(1.0L + pa, 1.0L / too::date_time::MonthYear_decl::twelve) - 1.0L;
 }
-} // namespace too::fin
+} // namespace mb::too::fin

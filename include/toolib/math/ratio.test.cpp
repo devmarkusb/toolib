@@ -1,6 +1,7 @@
 #include "toolib/math/ratio.h"
 #include "gtest/gtest.h"
 
+namespace too = mb::too;
 
 TEST(gcdTest, test)
 {
@@ -232,7 +233,7 @@ TEST(RationalTest, lessthan)
 
 TEST(RationalTest, lessthan_consts)
 {
-    using namespace too::math;
+    using namespace mb::too::math;
 
     EXPECT_TRUE(atto < femto);
     EXPECT_TRUE(femto < pico);

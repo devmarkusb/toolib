@@ -1,5 +1,4 @@
-// Markus Borris, 2011
-// This file is part of toolib library.
+// 2011
 
 //!
 /**
@@ -11,7 +10,7 @@
 #define REFTOVALUE_H_o4nv5ht84n82ch
 
 
-namespace too
+namespace mb::too
 {
 //! Transports a reference as a value.
 /** Taken from Loki. Serves to implement the Colvin/Gibbons trick for SmartPtr/ScopeGuard*/
@@ -44,6 +43,6 @@ inline RefToValue<T> ByRef(T& t)
 {
     return RefToValue<T>(t);
 }
-} // namespace too
+} // namespace mb::too
 
 #endif

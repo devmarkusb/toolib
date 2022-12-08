@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -9,17 +8,16 @@
 #ifndef GEOMETRY_H_dgiuntgh87xtg3487tg3tgfvscd
 #define GEOMETRY_H_dgiuntgh87xtg3487tg3tgfvscd
 
-#include "toolib/error.h"
 #include "toolib/math/quantity_unit.h"
 #include "toolib/math/scale.h"
-#include "toolib/optional.h"
+#include "ul/ul.h"
 #include <array>
 #include <cmath>
 #include <initializer_list>
 #include <type_traits>
 
 
-namespace too::math
+namespace mb::too::math
 {
 namespace detail
 {
@@ -29,15 +27,15 @@ using DefaultValueType = double;
 using Dimension = int;
 
 template <typename T = detail::DefaultValueType>
-using Coord_ = too::enable_if_t<std::is_arithmetic<T>::value, T>;
+using Coord_ = ul::enable_if_t<std::is_arithmetic<T>::value, T>;
 using Coord = Coord_<>;
 
 template <typename T = detail::DefaultValueType>
-using RelativeCoord_ = too::enable_if_t<std::is_arithmetic<T>::value, T>;
+using RelativeCoord_ = ul::enable_if_t<std::is_arithmetic<T>::value, T>;
 using RelativeCoord = RelativeCoord_<>;
 
 template <typename T = detail::DefaultValueType>
-using Length_ = too::enable_if_t<std::is_arithmetic<T>::value, T>;
+using Length_ = ul::enable_if_t<std::is_arithmetic<T>::value, T>;
 using Length = Length_<>;
 
 template <typename T = detail::DefaultValueType>
@@ -127,12 +125,12 @@ struct Vector_ : public Point_<T, dim>
 
     Vector_<T, dim>& operator+=(const Vector_<T, dim>&)
     {
-        throw too::not_implemented{"Vector_ +="};
+        throw ul::not_implemented{"Vector_ +="};
         // return *this;
     }
     Vector_<T, dim>& operator-=(const Vector_<T, dim>&)
     {
-        throw too::not_implemented{"Vector_ -="};
+        throw ul::not_implemented{"Vector_ -="};
         // return *this;
     }
 };
@@ -217,6 +215,6 @@ struct Margins_
 
 //! For convenience.
 using Margins = Margins_<>;
-} // namespace too::math
+} // namespace mb::too::math
 
 #endif

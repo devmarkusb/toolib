@@ -1,5 +1,4 @@
-// Markus Borris, 2016-17
-// This file is part of toolib library.
+// 2016-17
 
 //!
 /**
@@ -9,21 +8,21 @@
 #ifndef CONSTS_H_sjkhnfxgiuexernhgf7834t4
 #define CONSTS_H_sjkhnfxgiuexernhgf7834t4
 
-#include "toolib/std/std_extensions.h"
+#include "ul/ul.h"
 #include <cmath>
 
-#include "toolib/macros.h"
+#include "ul/macros.h"
 
 
-namespace too::math::consts
+namespace mb::too::math::consts
 {
 template <typename T>
 constexpr T pi()
 {
     return std::acos(static_cast<T>(-1));
 }
-} // namespace too::math::consts
+} // namespace mb::too::math::consts
 
-#include "toolib/macros_end.h"
+#include "ul/macros_end.h"
 
 #endif

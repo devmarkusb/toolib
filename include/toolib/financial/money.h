@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -10,18 +9,17 @@
 #define MONEY_H_weztuiolkjhgf34567
 
 #include "toolibDEF.h"
-#include "toolib/optional.h"
-#include "toolib/warnings.h"
+#include "ul/ul.h"
 #include <locale>
 #include <string>
 
 
-namespace too::fin
+namespace mb::too::fin
 {
 //####################################################################################################################
 
-TOO_PRAGMA_WARNINGS_PUSH
-TOO_WARNING_DISABLE_MSVC(4251)
+UL_PRAGMA_WARNINGS_PUSH
+UL_WARNING_DISABLE_MSVC(4251)
 //!
 class TOOLIBSHARED_EXPORT Currency
 {
@@ -42,9 +40,9 @@ public:
     friend bool operator!=(const Currency& lhs, const Currency& rhs);
 
 private:
-    too::opt<std::locale> loc;
+    ul::opt<std::locale> loc;
 };
-TOO_PRAGMA_WARNINGS_POP
+UL_PRAGMA_WARNINGS_POP
 
 bool operator==(const Currency& lhs, const Currency& rhs);
 bool operator!=(const Currency& lhs, const Currency& rhs);
@@ -155,7 +153,7 @@ public:
 private:
     Percent p = Percent();
 };
-} // namespace too::fin
+} // namespace mb::too::fin
 
 
 #endif

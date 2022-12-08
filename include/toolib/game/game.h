@@ -1,5 +1,4 @@
-// Markus Borris, 2011
-// This file is part of toolib library.
+// 2011
 
 //!
 /**
@@ -9,11 +8,11 @@
 #ifndef GAME_H_aubzstex3zubte632yet7
 #define GAME_H_aubzstex3zubte632yet7
 
-#include "toolib/error.h"
+#include "ul/ul.h"
 #include <exception>
 
 
-namespace too
+namespace mb::too
 {
 //! Alias toog::.
 namespace game
@@ -38,7 +37,7 @@ public:
             intro_init();
             mainloop();
             outro_cleanup();
-            return prog_exit_success;
+            return ul::prog_exit_success;
         }
         catch (std::exception& e)
         {
@@ -184,8 +183,11 @@ private:
     }
 };
 } // namespace game
-} // namespace too
+} // namespace mb::too
 
+namespace mb
+{
 namespace toog = too::game;
+} // namespace mb
 
 #endif

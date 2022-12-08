@@ -1,5 +1,4 @@
-// Markus Borris, 2011
-// This file is part of toolib library.
+// 2011
 
 //!
 /**
@@ -10,12 +9,12 @@
 #ifndef CATCH_EXIT_H_34trcx83943g
 #define CATCH_EXIT_H_34trcx83943g
 
-#include "toolib/macros.h"
-#if TOO_OS_WINDOWS && TOO_OS_WINDOWS_DESKTOP
+#include "ul/macros.h"
+#if UL_OS_WINDOWS && UL_OS_WINDOWS_DESKTOP
 #include "../../../toolibDEF.h"
 #include <windows.h>
 
-namespace too
+namespace mb::too
 {
 namespace con
 {
@@ -46,9 +45,9 @@ private:
     ExitCatcher();
 };
 } // namespace con
-} // namespace too
-#endif // TOO_OS_WINDOWS
+} // namespace mb::too
+#endif // UL_OS_WINDOWS
 
-#include "toolib/macros_end.h"
+#include "ul/macros_end.h"
 
 #endif

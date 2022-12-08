@@ -2,6 +2,7 @@
 #include "gtest/gtest.h"
 #include <cstdint>
 
+namespace too = mb::too;
 
 TEST(MathRoundTest, Dbl)
 {

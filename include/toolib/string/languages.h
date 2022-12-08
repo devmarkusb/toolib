@@ -1,5 +1,4 @@
-// Markus Borris, 2016-17
-// This file is part of toolib library.
+// 2016-17
 
 //!
 /**
@@ -9,14 +8,12 @@
 #ifndef LANGUAGES_H_sjdkghfnxz34gf7328f7gfr
 #define LANGUAGES_H_sjdkghfnxz34gf7328f7gfr
 
-#include "toolib/assert.h"
-#include "toolib/error.h"
-#include "toolib/std/std_extensions.h"
+#include "ul/ul.h"
 #include <string>
 #include <vector>
 
 
-namespace too
+namespace mb::too
 {
 namespace str
 {
@@ -53,7 +50,7 @@ inline std::string getNativeLanguageName(const LangID_iso639_1& id)
     {
         // that's not what you might want; please handle the translation for that word yourself
         // (on library level I can't decide, whether you want 'auto' or 'systems default' or whatever)
-        TOO_ASSERT_THROW(false);
+        UL_ASSERT_THROW(false);
     }
     else if (id == "ar")
         return "\xD8\xA7\xD9\x84\xD8\xB9\xD8\xB1\xD8\xA8\xD9\x8A\xD8\xA9";
@@ -85,7 +82,7 @@ inline std::string getNativeLanguageName(const LangID_iso639_1& id)
     else if (id == "zh")
         return "\xE4\xB8\xAD\xE6\x96\x87";
     else
-        throw too::not_implemented{"unsupported or unknonwn ISO 639-1 language code"};
+        throw ul::not_implemented{"unsupported or unknonwn ISO 639-1 language code"};
 }
 
 inline std::string getEnglishLanguageName(const LangID_iso639_1& id)
@@ -94,7 +91,7 @@ inline std::string getEnglishLanguageName(const LangID_iso639_1& id)
     {
         // that's not what you might want; please handle the translation for that word yourself
         // (on library level I can't decide, whether you want 'auto' or 'systems default' or whatever)
-        TOO_ASSERT_THROW(false);
+        UL_ASSERT_THROW(false);
     }
     else if (id == "ar")
         return "Arabic";
@@ -123,9 +120,9 @@ inline std::string getEnglishLanguageName(const LangID_iso639_1& id)
     else if (id == "zh")
         return "Chinese";
     else
-        throw too::not_implemented{"unsupported or unknonwn ISO 639-1 language code"};
+        throw ul::not_implemented{"unsupported or unknonwn ISO 639-1 language code"};
 }
 } // namespace str
-} // namespace too
+} // namespace mb::too
 
 #endif

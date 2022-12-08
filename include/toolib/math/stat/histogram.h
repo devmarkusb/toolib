@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -9,18 +8,17 @@
 #ifndef HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
 #define HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
 
-#include "toolib/almost_equal.h"
 #include "toolib/math/percent.h"
 #include "toolib/math/scale.h"
-#include "toolib/narrow.h"
+#include "ul/ul.h"
 #include <algorithm>
 #include <array>
 #include <vector>
 
-#include "toolib/macros.h"
+#include "ul/macros.h"
 
 
-namespace too::stat
+namespace mb::too::stat
 {
 using too::math::Percent;
 
@@ -45,13 +43,13 @@ public:
         const auto minmax = std::minmax_element(std::begin(data), std::end(data));
 
         too::math::Map_LinearScale_Interval_to_Interval<Percent> mapData2Percent(
-            std::make_pair(Percent(), too::narrow_cast<Percent>(*minmax.second)),
+            std::make_pair(Percent(), ul::narrow_cast<Percent>(*minmax.second)),
             std::make_pair(zero_percent, one_hundred_percent));
 
         std::vector<Percent> percentual_data;
 
         std::for_each(std::begin(data), std::end(data), [&](const T& d) {
-            percentual_data.push_back(mapData2Percent(too::narrow_cast<Percent>(d)));
+            percentual_data.push_back(mapData2Percent(ul::narrow_cast<Percent>(d)));
         });
 
         std::sort(std::begin(percentual_data), std::end(percentual_data));
@@ -80,7 +78,7 @@ public:
         // already tried lower_bound and almost<=
         for (auto it = percentual_data.rbegin(); it != percentual_data.rend(); ++it)
         {
-            if (too::almost_equal(*it, too::math::one_hundred_percent))
+            if (ul::almost_equal(*it, too::math::one_hundred_percent))
             {
                 ++abs_rates[abs_rates.size() - 1];
                 ++sum_of_rates;
@@ -93,7 +91,7 @@ public:
             std::make_pair(Percent(), sum_of_rates), std::make_pair(zero_percent, one_hundred_percent)};
 
         std::transform(std::begin(abs_rates), std::end(abs_rates), std::begin(this->bars), [&](size_t ar) {
-            return mapAbsRates2Rel(too::narrow_cast<Percent>(ar));
+            return mapAbsRates2Rel(ul::narrow_cast<Percent>(ar));
         });
     }
 
@@ -104,7 +102,7 @@ public:
 
 private:
     std::array<Percent, number_of_bars> bars
-#if TOO_HAS_BRACE_INIT_MEMBER_NON_STATIC
+#if UL_HAS_BRACE_INIT_MEMBER_NON_STATIC
     {
         {
         }
@@ -112,8 +110,8 @@ private:
 #endif
     ;
 };
-} // namespace too::stat
+} // namespace mb::too::stat
 
-#include "toolib/macros_end.h"
+#include "ul/macros_end.h"
 
 #endif

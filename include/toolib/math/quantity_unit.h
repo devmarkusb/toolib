@@ -1,5 +1,4 @@
-// Markus Borris, 2016-17
-// This file is part of toolib library.
+// 2016-17
 
 //!
 /**
@@ -11,8 +10,7 @@
 #define QUANTITY_UNIT_H_dfhgxungh38hgxt38gb
 
 #include "ratio.h"
-#include "toolib/comp_bwds.h"
-#include "toolib/std/std_extensions.h"
+#include "ul/ul.h"
 #include <exception>
 #include <map>
 #include <ratio>
@@ -21,7 +19,7 @@
 #include <vector>
 
 
-namespace too::math
+namespace mb::too::math
 {
 using Map_Rational_String = std::map<too::math::Rational, std::string>;
 
@@ -83,7 +81,7 @@ public:
     struct err_no_string_provided_for_ratio : public std::invalid_argument
     {
         err_no_string_provided_for_ratio(const Rational& r)
-            : std::invalid_argument("no string provided for ratio " + too::to_string(r.asFloatingPoint<double>()))
+            : std::invalid_argument("no string provided for ratio " + ul::to_string(r.asFloatingPoint<double>()))
         {
         }
     };
@@ -96,7 +94,7 @@ public:
         to construct other things.*/
     explicit Unit(
         const too::math::Rational& ratio = too::math::one, const Map_Rational_String& map_ratio_prefixunitname = {})
-#if !TOO_HAS_NO_CPP11_NOEXCEPT
+#if !UL_HAS_NO_CPP11_NOEXCEPT
 /*noexcept(false)*/
 #endif
         : ratio(ratio)
@@ -164,7 +162,7 @@ public:
         std::sort(std::begin(ratios), std::end(ratios));
 
         const auto current_ratio_it = std::find(std::begin(ratios), std::end(ratios), this->ratio);
-        TOO_ASSERT(current_ratio_it != std::end(ratios));
+        UL_ASSERT(current_ratio_it != std::end(ratios));
 
         const auto optim_ratio_it = std::find_if(std::begin(ratios), current_ratio_it, [val](const Rational& r) {
             return val <= r.asFloatingPoint<double>();
@@ -209,7 +207,7 @@ private:
     {
         if (ratio_prefixunitname.find(r) == ratio_prefixunitname.end())
             throw err_no_string_provided_for_ratio(r);
-        TOO_EXPECT(r > Rational{});
+        UL_EXPECT(r > Rational{});
     }
 };
 
@@ -251,6 +249,6 @@ private:
 //    Quantity(WhatConcrete& val);
 //};
 
-} // namespace too::math
+} // namespace mb::too::math
 
 #endif

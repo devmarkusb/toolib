@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -13,7 +12,7 @@
 #include <string>
 
 
-namespace too
+namespace mb::too
 {
 namespace img
 {
@@ -91,6 +90,6 @@ private:
     int a_{};
 };
 } // namespace img
-} // namespace too
+} // namespace mb::too
 
 #endif

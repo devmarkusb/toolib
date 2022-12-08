@@ -1,5 +1,4 @@
-// Markus Borris, 2011-18
-// This file is part of toolib library.
+// 2011-18
 
 //!
 /**
@@ -13,7 +12,7 @@
 #include <string>
 
 
-namespace too
+namespace mb::too
 {
 namespace str
 {
@@ -36,6 +35,6 @@ inline std::string& trim(std::string& s)
     return s;
 }
 } // namespace str
-} // namespace too
+} // namespace mb::too
 
 #endif

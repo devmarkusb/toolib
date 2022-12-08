@@ -1,5 +1,4 @@
-// Markus Borris, 2019
-// This file is part of toolib library.
+// 2019
 
 //!
 /**
@@ -14,7 +13,7 @@
 #include <type_traits>
 #include <utility>
 
-namespace too::math
+namespace mb::too::math
 {
 template <typename ValueType>
 struct MinValue final
@@ -187,6 +186,6 @@ auto transform(const MinMaxValue<ValueTypeSrc>& src, TransformFct&& t)
     using ValueTypeDst = std::invoke_result_t<TransformFct, const ValueTypeSrc&>;
     return MinMaxValue<ValueTypeDst>{t(src.min()), t(src.max())};
 }
-} // namespace too::math
+} // namespace mb::too::math
 
 #endif

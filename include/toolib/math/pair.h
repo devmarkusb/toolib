@@ -1,5 +1,4 @@
-// Markus Borris, 2011
-// This file is part of toolib library.
+// 2011
 
 //!
 /**
@@ -13,7 +12,7 @@
 #include <utility>
 
 
-namespace too
+namespace mb::too
 {
 namespace math
 {
@@ -110,6 +109,6 @@ private:
     }
 };
 } // namespace math
-} // namespace too
+} // namespace mb::too
 
 #endif

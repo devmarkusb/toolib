@@ -1,5 +1,4 @@
-// Markus Borris, 2011
-// This file is part of toolib library.
+// 2011
 
 //!
 /** Filename stands for "mixed-mode type conversions".
@@ -12,14 +11,14 @@
 
 #include <string>
 
-#include "toolib/macros.h"
+#include "ul/macros.h"
 
 
-namespace too
+namespace mb::too
 {
 namespace CLI
 {
-#if TOO_STANDARD_CPP_CLI
+#if UL_STANDARD_CPP_CLI
 using System::IntPtr;
 using System::String;
 using System::Runtime::InteropServices::Marshal;
@@ -76,8 +75,8 @@ template <typename T>
     }
 #endif
 } // namespace CLI
-} // namespace too
+} // namespace mb::too
 
-#include "toolib/macros_end.h"
+#include "ul/macros_end.h"
 
 #endif

@@ -1,6 +1,7 @@
 #include "toolib/string/lex_cast.h"
 #include "gtest/gtest.h"
 
+namespace too = mb::too;
 
 TEST(lex_cast, int2str)
 {

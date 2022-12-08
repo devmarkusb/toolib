@@ -1,5 +1,4 @@
-// Markus Borris, 2011-17
-// This file is part of toolib library.
+// 2011-17
 
 //!
 /**
@@ -10,13 +9,9 @@
 #ifndef NUMBER_H_f29jh8hnf238hrxz23
 #define NUMBER_H_f29jh8hnf238hrxz23
 
-#include "toolib/almost_equal.h"
-#include "toolib/assert.h"
-#include "toolib/comp_bwds.h"
-#include "toolib/enum_cast.h"
+#include "ul/comp_bwds.h"
+#include "ul/ul.h"
 #include "toolib/math/floating_point.h"
-#include "toolib/narrow.h"
-#include "toolib/optional.h"
 #include <cmath>
 #include <iomanip>
 #include <sstream>
@@ -24,7 +19,7 @@
 #include <type_traits>
 
 
-namespace too
+namespace mb::too
 {
 namespace math
 {
@@ -44,7 +39,7 @@ inline unsigned char getDigitCount(T Number, ENumSys Base = ENumSys::DEC)
     do
     {
         ++count;
-        Number /= as_number(Base);
+        Number /= ul::as_number(Base);
     } while (Number != 0);
     return count;
 }
@@ -59,8 +54,8 @@ template <typename T>
 std::string toLeadingZeros(T x, int digits)
 {
     static_assert(std::is_integral<T>::value, "");
-    TOO_EXPECT_THROW(x >= T());
-    TOO_EXPECT_THROW(digits >= 0);
+    UL_EXPECT_THROW(x >= T());
+    UL_EXPECT_THROW(digits >= 0);
 
     std::stringstream ss;
     ss << std::setw(digits) << std::setfill('0') << x;
@@ -72,12 +67,12 @@ std::string toLeadingZeros(T x, int digits)
     Note that the return value can be < 0, e.g. 0.5 is the -1 power of base 2.*/
 template <typename ArithType>
 //  ArithType expected to be is_arithmetic
-too::opt<ArithType> is_power_of(ArithType x, ArithType base)
+ul::opt<ArithType> is_power_of(ArithType x, ArithType base)
 {
     static_assert(std::is_arithmetic<ArithType>::value, "only arithmetic numbers are allowed as input");
-    TOO_EXPECT(x > ArithType{});
-    TOO_EXPECT(base > ArithType{});
-    TOO_EXPECT(!too::almost_equal_alltypes(base, static_cast<ArithType>(1)));
+    UL_EXPECT(x > ArithType{});
+    UL_EXPECT(base > ArithType{});
+    UL_EXPECT(!ul::almost_equal_alltypes(base, static_cast<ArithType>(1)));
 
     /** Impl. notes:
             If you wonder, whether this could be implemented using std::modf instead of the rounding check,
@@ -87,15 +82,15 @@ too::opt<ArithType> is_power_of(ArithType x, ArithType base)
             Though one could improve the hard-coded 1e-12 (std::numeric_limits<long double>::min() is
             much too small).*/
     const long double exp = std::log(x) / std::log(base);
-    const long long intpart = too::llround(exp);
-    const long double intpart_dbl = too::narrow_cast<long double>(intpart);
+    const long long intpart = ul::llround(exp);
+    const long double intpart_dbl = ul::narrow_cast<long double>(intpart);
 
     if (!too::math::approx_equal(intpart_dbl, exp, 1e-12L))
         return {};
-    return too::narrow_cast<ArithType>(intpart);
+    return ul::narrow_cast<ArithType>(intpart);
 }
 
 } // namespace math
-} // namespace too
+} // namespace mb::too
 
 #endif

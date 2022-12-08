@@ -1,5 +1,4 @@
-// Markus Borris, 2011-2018
-// This file is part of toolib library.
+// 2011-2018
 
 //!
 /**
@@ -9,14 +8,14 @@
 #ifndef LEX_CAST_H_sopaiem3p2oium32omo
 #define LEX_CAST_H_sopaiem3p2oium32omo
 
-#include "toolib/std/std_extensions.h"
+#include "ul/ul.h"
 #include <exception>
 #include <sstream>
 
-#include "toolib/macros.h"
+#include "ul/macros.h"
 
 
-namespace too
+namespace mb::too
 {
 class ErrBadLexCast : public std::bad_cast
 {
@@ -50,12 +49,12 @@ inline T lex_cast(const S& s) noexcept
     }
     catch (const ErrBadLexCast&)
     {
-        TOO_NOOP;
+        UL_NOOP;
     }
     return T{};
 }
-} // namespace too
+} // namespace mb::too
 
-#include "toolib/macros_end.h"
+#include "ul/macros_end.h"
 
 #endif

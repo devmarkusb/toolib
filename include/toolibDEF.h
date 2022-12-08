@@ -9,7 +9,7 @@
 #ifndef TOOLIBDEF_H_aibuxsgfnz342975ty31
 #define TOOLIBDEF_H_aibuxsgfnz342975ty31
 
-#include "toolib/linklib/LINKLIB_DEFS.h"
+#include "ul/linklib/LINKLIB_DEFS.h"
 
 
 #if defined(TOOLIB_LIBRARY)

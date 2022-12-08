@@ -1,5 +1,4 @@
-// Markus Borris, 2011-16
-// This file is part of toolib library.
+// 2011-16
 
 //!
 /** Not yet tested.
@@ -12,7 +11,7 @@
 #define COUNTED_CLASS_OBJECTS_H_cirewhct34bctgu4372
 
 
-namespace too
+namespace mb::too
 {
 //! Base class for classes that want to restrict their instantiations to a certain number.
 /** Usage: \code
@@ -81,6 +80,6 @@ private:
 };
 template <class BeingCounted>
 long Counted<BeingCounted>::m_numObjects; // defines and initializes to zero
-} // namespace too
+} // namespace mb::too
 
 #endif

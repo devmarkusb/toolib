@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -8,16 +7,15 @@
 
 #include "toolib/filesys/file_collection.h"
 #include "toolib/math/number.h"
-#include "toolib/std/std_ext_filesystem.h"
-#include "toolib/warnings.h"
+#include "ul/ul.h"
 #include <fstream>
 
 
-namespace too::file
+namespace mb::too::file
 {
 std::string FileCollection::get_base_name(const std::string& fn)
 {
-    too::std_fs::path p{fn};
+    ul::std_fs::path p{fn};
     p.replace_extension();
     std::string ret = p.string();
     size_t pos = ret.find_last_not_of("0123456789");
@@ -29,7 +27,7 @@ std::string FileCollection::get_base_name(const std::string& fn)
 
 FileCollection::FileCollection(const std::string& file_name)
 {
-    too::std_fs::path p{file_name};
+    ul::std_fs::path p{file_name};
     std::string file_ext{p.extension().string()};
     std::string base_file_name{get_base_name(file_name)};
     std::string fn{base_file_name + file_ext};
@@ -45,12 +43,12 @@ FileCollection::FileCollection(const std::string& file_name)
         return;
     }
     std::string file_nr_str;
-    TOO_PRAGMA_WARNINGS_PUSH
-    TOO_WARNING_DISABLE_CLANG(comma)
+    UL_PRAGMA_WARNINGS_PUSH
+    UL_WARNING_DISABLE_CLANG(comma)
     for (unsigned int file_nr = 0; file_nr_str = too::math::toLeadingZeros(file_nr, digits),
                       fn = base_file_name + file_nr_str + file_ext, f.open(fn), f.good();
          ++file_nr, f.close())
-        TOO_PRAGMA_WARNINGS_POP
+        UL_PRAGMA_WARNINGS_POP
         {
             this->file_list.push_back(fn);
         }
@@ -75,4 +73,4 @@ unsigned char FileCollection::obtain_number_of_digits_for_filenames_of_file_coll
     }
     return 0;
 }
-} // namespace too::file
+} // namespace mb::too::file

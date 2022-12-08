@@ -1,5 +1,4 @@
-// Markus Borris, 2011-17
-// This file is part of toolib library.
+// 2011-17
 
 //!
 /**
@@ -10,24 +9,24 @@
 #ifndef PROMPT_H_8jr82ctrz2tn
 #define PROMPT_H_8jr82ctrz2tn
 
-#include "toolib/ignore_arg.h"
+#include "ul/ul.h"
 #include <chrono>
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
 #include <conio.h>
 #endif
 #include <iostream>
 #include <thread>
 
-#include "toolib/macros.h"
+#include "ul/macros.h"
 
 
-namespace too
+namespace mb::too
 {
 inline void prompt()
 {
-#if TOO_OS_WINDOWS && !TOO_OS_WINDOWS_UWP_APP
+#if UL_OS_WINDOWS && !UL_OS_WINDOWS_UWP_APP
     if (_kbhit())
-        too::ignore_arg(_getch());
+        ul::ignore_arg(_getch());
     std::cout << "\nPress any key to continue...";
     while (!_kbhit())
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
@@ -37,8 +36,8 @@ inline void prompt()
     std::cin >> c;
 #endif
 }
-} // namespace too
+} // namespace mb::too
 
-#include "toolib/macros_end.h"
+#include "ul/macros_end.h"
 
 #endif

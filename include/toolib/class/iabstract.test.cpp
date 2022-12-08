@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 
+namespace too = mb::too;
 
 class IAbstractTest : public ::testing::Test
 {

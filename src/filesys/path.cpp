@@ -1,5 +1,4 @@
-// Markus Borris, 2015
-// This file is part of toolib library.
+// 2015
 
 //!
 /**
@@ -7,25 +6,25 @@
 //! \file
 
 #include "toolib/filesys/path.h"
-#include "toolib/assert.h"
 #include "toolib/string/string_token.h"
+#include "ul/ul.h"
 #include <algorithm>
 #include <fstream>
 
-#include "toolib/macros.h"
+#include "ul/macros.h"
 
 
 namespace
 {
 const std::string OS_POSSIBLE_SEPARATORS = "/\\";
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
 const std::string OS_FOLDER_SEPARATOR = "\\";
 #else
 const std::string OS_FOLDER_SEPARATOR = "/";
 #endif
 } // namespace
 
-namespace too
+namespace mb::too
 {
 namespace file
 {
@@ -144,7 +143,7 @@ bool Path::isAbsolute() const
 {
     if (isEmpty())
         return false;
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
     if (m_path->size() < 2)
         return false;
     else
@@ -161,7 +160,7 @@ bool Path::isEmpty() const
 
 Path& Path::cleanupNative()
 {
-#if TOO_OS_WINDOWS
+#if UL_OS_WINDOWS
     std::replace(m_path->begin(), m_path->end(), '/', '\\');
 #else
     std::replace(m_path->begin(), m_path->end(), '\\', '/');
@@ -189,7 +188,7 @@ Path& Path::ensureTrailingSeparator(bool native)
     std::string SepToUse = FOLDER_SEPARATOR_TO_USE_HERE;
     if (native)
         SepToUse = OS_FOLDER_SEPARATOR;
-    TOO_ASSERT(!SepToUse.empty());
+    UL_ASSERT(!SepToUse.empty());
     if (m_path->back() != SepToUse[0])
         *m_path += SepToUse;
     return *this;
@@ -204,13 +203,13 @@ const std::string& Path::getSeparatorUsedHere() const
 
 const std::string& Path::getSeparatorNative()
 {
-    TOO_ASSERT(!OS_FOLDER_SEPARATOR.empty());
+    UL_ASSERT(!OS_FOLDER_SEPARATOR.empty());
     return OS_FOLDER_SEPARATOR;
 }
 
 const std::string& Path::getSeparatorPlatformIndep()
 {
-    TOO_ASSERT(!FOLDER_SEPARATOR_TO_USE_HERE.empty());
+    UL_ASSERT(!FOLDER_SEPARATOR_TO_USE_HERE.empty());
     return FOLDER_SEPARATOR_TO_USE_HERE;
 }
 
@@ -228,4 +227,4 @@ void Path::detectForm() const
         m_form = EForm::PLATFORMINDEPENDENT;
 }
 } // namespace file
-} // namespace too
+} // namespace mb::too

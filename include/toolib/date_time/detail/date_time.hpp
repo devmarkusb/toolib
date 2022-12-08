@@ -1,5 +1,4 @@
-// Markus Borris, 2016
-// This file is part of toolib library.
+// 2016
 
 //!
 /**
@@ -9,16 +8,16 @@
 #ifndef DATE_TIME_HPP_kjgfdhnxui3gfy34z8ry27
 #define DATE_TIME_HPP_kjgfdhnxui3gfy34z8ry27
 
-#include "toolib/assert.h"
-#include "toolib/comp_bwds.h"
 #include "toolib/string/string_token.h"
+#include "ul/ul.h"
+#include "ul/comp_bwds.h"
 #include <ostream>
 #include <string>
 #include <utility>
 #include <vector>
 
 
-namespace too
+namespace mb::too
 {
 namespace date_time
 {
@@ -73,10 +72,10 @@ MonthYear_base<NormalizePolicy>::MonthYear_base(const std::string& fromString)
     too::str::tokenizeString(fromString, string_delim, parts);
 
     // don't throw the user an invalid_arg or sth., since bug could also have happened within tokenizeString
-    TOO_ASSERT_THROW(parts.size() == 2);
+    UL_ASSERT_THROW(parts.size() == 2);
 
-    this->y_m.second = too::stoi(parts[0]);
-    this->y_m.first = too::stoi(parts[1]);
+    this->y_m.second = ul::stoi(parts[0]);
+    this->y_m.first = ul::stoi(parts[1]);
     NormalizePolicy::do_it(this->y_m);
 }
 
@@ -212,6 +211,6 @@ bool operator>=(const MonthYear_base<NormalizePolicy>& lhs, const MonthYear_base
     return !operator<(lhs, rhs);
 }
 } // namespace date_time
-} // namespace too
+} // namespace mb::too
 
 #endif

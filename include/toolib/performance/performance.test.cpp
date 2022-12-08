@@ -1,10 +1,12 @@
 #include "toolib/performance/performance.h"
-#include "toolib/ignore_arg.h"
+#include "ul/ul.h"
 #include "gtest/gtest.h"
 #include <chrono>
 #include <iostream>
 #include <thread>
 
+namespace too = mb::too;
+namespace ul = mb::ul;
 
 TEST(ToFormattedStringTest, Rounding)
 {
@@ -76,7 +78,7 @@ TEST(DISABLED_DumpAllItemsTest, PracticalScenario)
             for (size_t i = 1; i <= 5; ++i)
             {
                 too::PerformanceProfiler perfscope3("6. 500ms", 3);
-                too::ignore_arg(perfscope3);
+                ul::ignore_arg(perfscope3);
                 std::this_thread::sleep_for(std::chrono::milliseconds(500));
             }
             perfscope2.startNewItem("7. 200ms");
