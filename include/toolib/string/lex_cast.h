@@ -1,8 +1,5 @@
 // 2011-2018
 
-//!
-/**
- */
 //! \file
 
 #ifndef LEX_CAST_H_sopaiem3p2oium32omo

@@ -1,8 +1,5 @@
 // 2011
 
-//!
-/**
- */
 //! \file
 
 #ifndef BITS_H_inewhjr4382zrn83

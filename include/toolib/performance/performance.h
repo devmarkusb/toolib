@@ -1,8 +1,5 @@
 // 2014-18
 
-//!
-/**
- */
 //! \file
 
 #ifndef PERFORMANCE_H_sdkfgnxzuwegnf93746ryng342grf
@@ -34,7 +31,7 @@ struct KeyData;
 
 //! Can only be used within one thread at the same time.
 /** Usage: Cf. unit tests.*/
-class PerformanceProfiler : private ul::non_copyable
+class PerformanceProfiler : private ul::NonCopyable
 {
 public:
     using TimeValStorageRep = double;

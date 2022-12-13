@@ -1,10 +1,7 @@
-// Markus Borris, 2014
-// This file is part of my toolib library.
+// 2014
 
-//! File serves to export symbols for toolib as a library.
-/** Note that it uses itself a little bit to do that.
- */
-//! \file
+/** \file File serves to export symbols for toolib as a library.
+    Note that it uses itself a little bit to do that.*/
 
 #ifndef TOOLIBDEF_H_aibuxsgfnz342975ty31
 #define TOOLIBDEF_H_aibuxsgfnz342975ty31

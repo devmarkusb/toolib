@@ -1,8 +1,5 @@
 // 2015-17
 
-//!
-/**
- */
 //! \file
 
 #ifndef GRAPH_H_lnkjgngkvfvutzhirthczrec5
@@ -87,7 +84,7 @@ struct ChartAxisProj_setup : public ChartAxis_setup
 
 //!
 template <typename QuValueType>
-class ChartAxis : private ul::non_copyable
+class ChartAxis : private ul::NonCopyable
 {
 public:
     ChartAxis(

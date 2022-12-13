@@ -1,8 +1,5 @@
 // 2016
 
-//!
-/**
- */
 //! \file
 
 #include "toolib/financial/money.h"

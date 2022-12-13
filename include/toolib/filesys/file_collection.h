@@ -1,8 +1,5 @@
 // 2016
 
-//!
-/**
- */
 //! \file
 
 #ifndef FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn

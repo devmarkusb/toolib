@@ -1,8 +1,5 @@
 // 2016
 
-//!
-/**
- */
 //! \file
 
 #ifndef GEOMETRY_H_dgiuntgh87xtg3487tg3tgfvscd

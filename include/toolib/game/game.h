@@ -1,8 +1,5 @@
 // 2011
 
-//!
-/**
- */
 //! \file
 
 #ifndef GAME_H_aubzstex3zubte632yet7

@@ -1,8 +1,5 @@
 // 2015-16
 
-//!
-/**
- */
 //! \file
 
 #ifndef PATH_H_isdgfx67g42319gyr6r8gfeuiwgfc

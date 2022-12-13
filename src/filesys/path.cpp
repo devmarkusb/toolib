@@ -1,8 +1,5 @@
 // 2015
 
-//!
-/**
- */
 //! \file
 
 #include "toolib/filesys/path.h"

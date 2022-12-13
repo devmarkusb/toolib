@@ -1,8 +1,5 @@
 // 2016
 
-//!
-/**
- */
 //! \file
 
 #ifndef DATE_TIME_H_sdhnfxeuhgf783nx4f2z3t487f

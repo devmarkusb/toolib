@@ -1,8 +1,5 @@
 // 2015-18
 
-//!
-/**
- */
 //! \file
 
 #ifndef FLOATING_POINT_H_09458t87t5twd2874t57rbn6

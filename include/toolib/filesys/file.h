@@ -1,8 +1,5 @@
 // 2016
 
-//!
-/**
- */
 //! \file
 
 #ifndef FILE_H_sduifhg3gfy324n178fsffe4f

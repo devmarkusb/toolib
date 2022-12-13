@@ -1,8 +1,5 @@
 // 2019
 
-//!
-/**
- */
 //! \file
 
 #ifndef MINMAX_VALUES_H_iuwenyg34gnyt487t

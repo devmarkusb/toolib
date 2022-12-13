@@ -1,9 +1,7 @@
 // 2011-16
 
-//!
-/** Not yet tested.
- */
-//! \file
+//! \file Not yet tested.
+
 
 // Implementation taken from Meyers' book.
 

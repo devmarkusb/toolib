@@ -1,11 +1,7 @@
 // 2016
 
-//!
-/** This is left for documentation or future thinking. Apparently there should be
-    no application for such a general interface.
-*/
-//! \file
-
+/** \file This is left for documentation or future thinking. Apparently there should be
+    no application for such a general interface.*/
 
 #ifndef ITYPE_H_39653425hgjdhgxhrgbubeir43
 #define ITYPE_H_39653425hgjdhgxhrgbubeir43
@@ -41,16 +37,16 @@ namespace mb::too
     for an arbitrary type that you really wanted to use as IType, in the test code,
     IType.test.cpp.
 */
-struct IType
+struct itype
 {
-    virtual ~IType() = default;
-    IType() = default;
-    IType(const IType&) = delete;
-    IType& operator=(const IType&) = delete;
-    IType(IType&&) = delete;
-    IType& operator=(IType&&) = delete;
+    virtual ~itype() = default;
+    itype() = default;
+    itype(const itype&) = delete;
+    itype& operator=(const itype&) = delete;
+    itype(itype&&) = delete;
+    itype& operator=(itype&&) = delete;
 
-    virtual ul::owner<IType*> clone() = 0;
+    virtual ul::owner<itype*> clone() = 0;
 };
 } // namespace mb::too
 

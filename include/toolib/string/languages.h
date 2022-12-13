@@ -1,8 +1,5 @@
 // 2016-17
 
-//!
-/**
- */
 //! \file
 
 #ifndef LANGUAGES_H_sjdkghfnxz34gf7328f7gfr

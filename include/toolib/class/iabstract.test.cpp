@@ -1,5 +1,5 @@
 /** This is more demonstration of how to use the IAbstract, less a test. But could still be a worthy playground.*/
-#include "toolib/class/IAbstract.h"
+#include "toolib/class/iabstract.h"
 #include "gtest/gtest.h"
 #include <iostream>
 #include <sstream>
@@ -18,13 +18,13 @@ protected:
     {
     }
 
-    class CTest : public too::IAbstract
+    class CTest : public too::iabstract
     {
     public:
         ~CTest() override = default;
-        //! Parameter documentation, also for SetParameter().
+        //! Parameter documentation, also for setParameter().
         /** ... (in the real world it is extremely to provide a thorough documention of allowed name-type pairs)*/
-        bool GetParameter(const char* name, too::TOutBuffer value) const override
+        bool getParameter(const char* name, too::TOutBuffer value) const override
         {
             if (!name || !value)
                 return false;
@@ -39,8 +39,8 @@ protected:
                 return false;
             return true;
         }
-        //! Cf. GetParameter()
-        bool SetParameter(const char* name, const too::TInBuffer value) override
+        //! Cf. getParameter()
+        bool setParameter(const char* name, const too::TInBuffer value) override
         {
             if (!name || !value)
                 return false;
@@ -55,8 +55,8 @@ protected:
                 return false;
             return true;
         }
-        //! In the real world don't forget to provide a detailed documentation like for GetParameter().
-        bool Execute(
+        //! In the real world don't forget to provide a detailed documentation like for getParameter().
+        bool execute(
             const char* command, const too::TInBuffer params[] = nullptr, too::TOutBuffer retvalue = nullptr) override
         {
             if (!command)
@@ -129,20 +129,20 @@ protected:
 TEST_F(IAbstractTest, GetParameterInitially)
 {
     int i = 5;
-    EXPECT_TRUE(m_TestObj.GetParameter("i", &i));
+    EXPECT_TRUE(m_TestObj.getParameter("i", &i));
     EXPECT_EQ(0, i);
     double d = 5.0;
-    EXPECT_TRUE(m_TestObj.GetParameter("d", &d));
+    EXPECT_TRUE(m_TestObj.getParameter("d", &d));
     EXPECT_EQ(0.0, d);
     std::string s("non-empty");
-    EXPECT_TRUE(m_TestObj.GetParameter("s", &s));
+    EXPECT_TRUE(m_TestObj.getParameter("s", &s));
     EXPECT_EQ("", s);
 }
 
 TEST_F(IAbstractTest, GetParameterWrong)
 {
     int i = 5;
-    EXPECT_FALSE(m_TestObj.GetParameter("xy", &i));
+    EXPECT_FALSE(m_TestObj.getParameter("xy", &i));
     EXPECT_EQ(5, i);
     // try crash
     //    EXPECT_DEATH(m_TestObj.GetParameter("s", &i), "");
@@ -153,26 +153,26 @@ TEST_F(IAbstractTest, GetParameterWrong)
 TEST_F(IAbstractTest, SetGetParameter)
 {
     int i = 10;
-    EXPECT_TRUE(m_TestObj.SetParameter("i", &i));
+    EXPECT_TRUE(m_TestObj.setParameter("i", &i));
     double d = 10.5;
-    EXPECT_TRUE(m_TestObj.SetParameter("d", &d));
+    EXPECT_TRUE(m_TestObj.setParameter("d", &d));
     std::string s("Hello World!");
-    EXPECT_TRUE(m_TestObj.SetParameter("s", &s));
+    EXPECT_TRUE(m_TestObj.setParameter("s", &s));
     i = 5;
-    EXPECT_TRUE(m_TestObj.GetParameter("i", &i));
+    EXPECT_TRUE(m_TestObj.getParameter("i", &i));
     EXPECT_EQ(10, i);
     d = 5.0;
-    EXPECT_TRUE(m_TestObj.GetParameter("d", &d));
+    EXPECT_TRUE(m_TestObj.getParameter("d", &d));
     EXPECT_EQ(10.5, d);
     s = "non-empty";
-    EXPECT_TRUE(m_TestObj.GetParameter("s", &s));
+    EXPECT_TRUE(m_TestObj.getParameter("s", &s));
     EXPECT_EQ("Hello World!", s);
 }
 
 TEST_F(IAbstractTest, SetParameterWrong)
 {
     int i = 5;
-    EXPECT_FALSE(m_TestObj.SetParameter("xy", &i));
+    EXPECT_FALSE(m_TestObj.setParameter("xy", &i));
     EXPECT_EQ(5, i);
     // try crash
     //    EXPECT_DEATH(m_TestObj.SetParameter("s", &i), "");
@@ -183,34 +183,34 @@ TEST_F(IAbstractTest, SetParameterWrong)
 TEST_F(IAbstractTest, ExecuteWithoutPara)
 {
     int i = 10;
-    m_TestObj.SetParameter("i", &i);
+    m_TestObj.setParameter("i", &i);
     double d = 10.5;
-    m_TestObj.SetParameter("d", &d);
+    m_TestObj.setParameter("d", &d);
     std::string s("Hello World!");
-    m_TestObj.SetParameter("s", &s);
-    EXPECT_TRUE(m_TestObj.Execute("reset"));
+    m_TestObj.setParameter("s", &s);
+    EXPECT_TRUE(m_TestObj.execute("reset"));
     i = 5;
-    EXPECT_TRUE(m_TestObj.GetParameter("i", &i));
+    EXPECT_TRUE(m_TestObj.getParameter("i", &i));
     EXPECT_EQ(0, i);
     d = 5.0;
-    EXPECT_TRUE(m_TestObj.GetParameter("d", &d));
+    EXPECT_TRUE(m_TestObj.getParameter("d", &d));
     EXPECT_EQ(0.0, d);
     s = "non-empty";
-    EXPECT_TRUE(m_TestObj.GetParameter("s", &s));
+    EXPECT_TRUE(m_TestObj.getParameter("s", &s));
     EXPECT_EQ("", s);
-    EXPECT_TRUE(m_TestObj.Execute("run"));
+    EXPECT_TRUE(m_TestObj.execute("run"));
 }
 
 TEST_F(IAbstractTest, ExecuteWithParaAndRet)
 {
     int i = 10;
-    m_TestObj.SetParameter("i", &i);
+    m_TestObj.setParameter("i", &i);
     std::string s("Hello World!");
-    m_TestObj.SetParameter("s", &s);
+    m_TestObj.setParameter("s", &s);
     std::string out;
     int ip = 2;
     std::string sp = " And once more: Hello World!";
     void* param[] = {&ip, &sp};
-    EXPECT_TRUE(m_TestObj.Execute("calcSth", param, &out));
+    EXPECT_TRUE(m_TestObj.execute("calcSth", param, &out));
     EXPECT_EQ("20;\"Hello World! And once more: Hello World!\"", out);
 }

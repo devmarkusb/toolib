@@ -1,4 +1,4 @@
-#include "toolib/class/IType.h"
+#include "toolib/class/itype.h"
 #include "gtest/gtest.h"
 
 namespace too = mb::too;
@@ -14,12 +14,12 @@ struct SomeType
 using SomeOtherType = int;
 
 // solution: some kind of wrapper/adapter
-struct SomeType_flexed : public too::IType
+struct SomeType_flexed : public too::itype
 {
     SomeType_flexed() = default;
     ~SomeType_flexed() override = default;
     SomeType_flexed(const SomeType_flexed& other)
-        : too::IType()
+        : too::itype()
         , rep(other.rep)
     {
     }
@@ -51,13 +51,13 @@ private:
 struct IUser
 {
     virtual ~IUser() = default;
-    virtual void f(too::IType*) = 0;
+    virtual void f(too::itype*) = 0;
 };
 
 struct UserA : public IUser
 {
     virtual ~UserA() = default;
-    virtual void f(too::IType*)
+    virtual void f(too::itype*)
     {
     }
 };

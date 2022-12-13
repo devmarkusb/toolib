@@ -1,8 +1,5 @@
 // 2011-16
 
-//!
-/**
- */
 //! \file
 
 #ifndef MATRIX_H_mx02983urx23

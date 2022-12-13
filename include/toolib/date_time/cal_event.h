@@ -1,8 +1,5 @@
 // 2016
 
-//!
-/**
- */
 //! \file
 
 #ifndef CAL_EVENT_H_nbvxmcbvxmcnbxcmbierutozreoi
