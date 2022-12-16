@@ -126,7 +126,7 @@ struct ToStringConverter<FloatType, FloatFormat::scientific>
     }
 };
 } // namespace impl
-} // namespace mb::too
+} // namespace mb::too::math
 
 #include "ul/macros_end.h"
 

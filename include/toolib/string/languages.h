@@ -117,6 +117,6 @@ inline std::string getEnglishLanguageName(const LangID_iso639_1& id)
     else
         throw ul::not_implemented{"unsupported or unknonwn ISO 639-1 language code"};
 }
-} // namespace mb::too
+} // namespace mb::too::str
 
 #endif

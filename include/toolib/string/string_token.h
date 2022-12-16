@@ -23,6 +23,6 @@ inline void tokenizeString(const std::string& s, const std::string& delimiters, 
         pos_end = s.find_first_of(delimiters, pos_start);
     }
 }
-} // namespace mb::too
+} // namespace mb::too::str
 
 #endif

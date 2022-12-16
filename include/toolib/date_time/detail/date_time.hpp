@@ -6,8 +6,8 @@
 #define DATE_TIME_HPP_kjgfdhnxui3gfy34z8ry27
 
 #include "toolib/string/string_token.h"
-#include "ul/ul.h"
 #include "ul/comp_bwds.h"
+#include "ul/ul.h"
 #include <ostream>
 #include <string>
 #include <utility>
@@ -205,6 +205,6 @@ bool operator>=(const MonthYear_base<NormalizePolicy>& lhs, const MonthYear_base
 {
     return !operator<(lhs, rhs);
 }
-} // namespace mb::too
+} // namespace mb::too::date_time
 
 #endif

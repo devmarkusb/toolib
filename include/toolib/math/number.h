@@ -6,9 +6,9 @@
 #ifndef NUMBER_H_f29jh8hnf238hrxz23
 #define NUMBER_H_f29jh8hnf238hrxz23
 
+#include "toolib/math/floating_point.h"
 #include "ul/comp_bwds.h"
 #include "ul/ul.h"
-#include "toolib/math/floating_point.h"
 #include <cmath>
 #include <iomanip>
 #include <sstream>
@@ -85,6 +85,6 @@ ul::opt<ArithType> isPowerOf(ArithType x, ArithType base)
     return ul::narrow_cast<ArithType>(intpart);
 }
 
-} // namespace mb::too
+} // namespace mb::too::math
 
 #endif

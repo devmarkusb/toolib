@@ -107,7 +107,7 @@ private:
 typedef Bits<uint8_t> bits8;
 typedef Bits<uint16_t> bits16;
 typedef Bits<uint32_t> bits32;
-} // namespace mb::too
+} // namespace mb::too::math::bit
 
 namespace mb
 {

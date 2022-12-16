@@ -58,6 +58,6 @@ inline void throwError(const std::string& filePathNameExt, operation op, const s
     ss << ", ec: " << errno_ << ", " << std::strerror(errno_);
     throw std::runtime_error{ss.str()};
 }
-} // namespace mb::too
+} // namespace mb::too::file
 
 #endif

@@ -84,6 +84,6 @@ private:
     int b_{};
     int a_{};
 };
-} // namespace mb::too
+} // namespace mb::too::img
 
 #endif

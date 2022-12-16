@@ -29,6 +29,6 @@ inline std::string& trim(std::string& s)
     ltrim(rtrim(s));
     return s;
 }
-} // namespace mb::too
+} // namespace mb::too::str
 
 #endif

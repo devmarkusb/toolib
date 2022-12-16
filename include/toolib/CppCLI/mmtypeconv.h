@@ -68,7 +68,7 @@ template <typename T>
         return converted_a;
     }
 #endif
-} // namespace mb::too
+} // namespace mb::too::CLI
 
 #include "ul/macros_end.h"
 

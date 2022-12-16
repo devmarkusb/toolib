@@ -11,6 +11,10 @@ set(TargetToolib ${PROJECT_NAME})
 
 ul_include(defaults.cmake)
 
+ul_include(fetch-clangformat-repo.cmake)
+ul_include(clang-format.cmake)
+ul_include(githooks.cmake)
+
 file(GLOB_RECURSE TargetToolib_INCS "include/*.h*")
 file(GLOB_RECURSE TargetToolib_SRC_INCS "src/*.h*")
 

@@ -91,6 +91,6 @@ std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, do
     const double maxOut = std::ceil(maxIn / scaleTick) * scaleTick;
     return std::make_pair(minOut, maxOut);
 }
-} // namespace mb::too
+} // namespace mb::too::math
 
 #endif

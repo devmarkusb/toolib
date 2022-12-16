@@ -83,7 +83,7 @@ private:
 };
 
 TOOLIBSHARED_EXPORT Path operator+(const Path& p1, const Path& p2);
-} // namespace mb::too
+} // namespace mb::too::file
 
 
 #endif

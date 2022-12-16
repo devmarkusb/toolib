@@ -84,8 +84,7 @@ class ChartAxis : private ul::NonCopyable
 {
 public:
     ChartAxis(
-        const ChartAxis_setup& setup, Quantity  quantity, const QuValueType& min_qu_val,
-        const QuValueType& max_qu_val);
+        const ChartAxis_setup& setup, Quantity quantity, const QuValueType& min_qu_val, const QuValueType& max_qu_val);
     virtual ~ChartAxis()
     {
         UL_EXPECT(this->setup);
@@ -276,8 +275,7 @@ namespace mb::too::math
 {
 template <typename QuValueType>
 ChartAxis<QuValueType>::ChartAxis(
-    const ChartAxis_setup& setup, Quantity quantity, const QuValueType& min_qu_val,
-    const QuValueType& max_qu_val)
+    const ChartAxis_setup& setup, Quantity quantity, const QuValueType& min_qu_val, const QuValueType& max_qu_val)
     : quantity(std::move(quantity))
     , setup(setup.clone())
 {

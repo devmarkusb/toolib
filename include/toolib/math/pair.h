@@ -103,6 +103,6 @@ private:
         return m_p.second;
     }
 };
-} // namespace mb::too
+} // namespace mb::too::math
 
 #endif

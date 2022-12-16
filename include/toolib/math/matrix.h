@@ -737,6 +737,6 @@ matrix<T> operator*(const matrix<T>& t1, const matrix<T>& t2)
 {
     return matrix<T>(t1) *= t2;
 }
-} // namespace mb::too
+} // namespace mb::too::math
 
 #endif
