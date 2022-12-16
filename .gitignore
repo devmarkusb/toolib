@@ -1,8 +1,10 @@
-_build*
 *.user
+.DS_Store
+.clang-format
+.idea
+_build*
 bin
 bin_*
+cmake-build-*
 lib
 lib_*
-.DS_Store
-
