@@ -7,7 +7,7 @@ include(${ul_CMAKE_DIRS}/cmake_util.cmake)
 ul_include(buildnr.cmake)
 project(toolib VERSION 0.1.${BUILD_NR}.0)
 message(STATUS "toolib project version: " ${PROJECT_VERSION})
-set(TargetToolib ${PROJECT_NAME})
+set(target ${PROJECT_NAME})
 
 ul_include(defaults.cmake)
 
@@ -15,10 +15,10 @@ ul_include(fetch-clangformat-repo.cmake)
 ul_include(clang-format.cmake)
 ul_include(githooks.cmake)
 
-file(GLOB_RECURSE TargetToolib_INCS "include/*.h*")
-file(GLOB_RECURSE TargetToolib_SRC_INCS "src/*.h*")
+file(GLOB_RECURSE target_INCS "include/*.h*")
+file(GLOB_RECURSE target_SRC_INCS "src/*.h*")
 
-set(TargetToolib_SOURCES
+set(target_SOURCES
     src/console/win/catch_exit.cpp
     src/date_time/date_time.cpp
     src/filesys/path.cpp
@@ -26,29 +26,29 @@ set(TargetToolib_SOURCES
     src/financial/money.cpp
 )
 
-add_library(${TargetToolib} SHARED
-    ${TargetToolib_SOURCES}
-    ${TargetToolib_INCS}
-    ${TargetToolib_SRC_INCS}
+add_library(${target} SHARED
+    ${target_SOURCES}
+    ${target_INCS}
+    ${target_SRC_INCS}
 )
 
-ul_set_target_lib_export_def(${TargetToolib} TOOLIB_LIBRARY)
+ul_set_target_lib_export_def(${target} TOOLIB_LIBRARY)
 
-configure_file(${TargetToolib}_build_config.h.in ${CMAKE_BINARY_DIR}/${TargetToolib}_build_config.h)
+configure_file(${target}_build_config.h.in ${CMAKE_BINARY_DIR}/${target}_build_config.h)
 
-target_include_directories(${TargetToolib} PRIVATE ${CMAKE_BINARY_DIR})
-target_include_directories(${TargetToolib} PUBLIC include)
-target_include_directories(${TargetToolib} PUBLIC ${ul_INCLUDE_DIRS})
+target_include_directories(${target} PRIVATE ${CMAKE_BINARY_DIR})
+target_include_directories(${target} PUBLIC include)
+target_include_directories(${target} PUBLIC ${ul_INCLUDE_DIRS})
 
-target_link_libraries(${TargetToolib})
+target_link_libraries(${target})
 
-ul_set_target_filesystem(${TargetToolib})
+ul_set_target_filesystem(${target})
 
-ul_set_target_defaults(${TargetToolib})
+ul_set_target_defaults(${target})
 
-set(${TargetToolib}_INCLUDE_DIRS
+set(${target}_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/include
-    CACHE INTERNAL "${TargetToolib}: include directories" FORCE)
+    CACHE INTERNAL "${target}: include directories" FORCE)
 
     
 ################################################################################################
@@ -57,21 +57,21 @@ if (NOT UL_BUILD_UNITTESTS)
     return ()
 endif ()
 
-set(TargetToolibTest ${PROJECT_NAME}Test)
+set(targetTest ${PROJECT_NAME}Test)
 
-file(GLOB_RECURSE TargetToolibTest_SOURCES "include/toolib/*.test.cpp")
+file(GLOB_RECURSE targetTest_SOURCES "include/toolib/*.test.cpp")
 
-add_executable(${TargetToolibTest}
-    ${TargetToolibTest_SOURCES}
-    ${TargetToolib_INCS}
+add_executable(${targetTest}
+    ${targetTest_SOURCES}
+    ${target_INCS}
 )
 
-ul_add_test(${TargetToolibTest})
+ul_add_test(${targetTest})
 
-target_include_directories(${TargetToolibTest} PRIVATE ${TargetToolib}_INCLUDE_DIRS)
+target_include_directories(${targetTest} PRIVATE ${target}_INCLUDE_DIRS)
 
-target_link_libraries(${TargetToolibTest} PRIVATE gtest_main ${TargetToolib})
+target_link_libraries(${targetTest} PRIVATE gtest_main ${target})
 
-ul_set_target_defaults(${TargetToolibTest})
+ul_set_target_defaults(${targetTest})
 
-ul_run_target_postbuild(${TargetToolibTest})
+ul_run_target_postbuild(${targetTest})

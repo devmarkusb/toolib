@@ -1,4 +1,4 @@
-# Toolib
+# toolib library
 
 A lib containing a wild collection of minimalistic tools to be shared
 among apps. Criteria of what goes in:
