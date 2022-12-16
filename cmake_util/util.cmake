@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-if (NOT TARGET ulBuildEnv)
+if (TARGET ulBuildEnv)
     return ()
 endif ()
 
