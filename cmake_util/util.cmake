@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.14)
 
+if (NOT TARGET ulBuildEnv)
+    return ()
+endif ()
+
 include(FetchContent)
 
 FetchContent_Declare(mb-util
