@@ -116,7 +116,7 @@ struct Rational
     }
 
     template <typename T>
-    typename std::enable_if<std::is_floating_point<T>::value, T>::type asFloatingPoint() const
+    [[nodiscard]] typename std::enable_if<std::is_floating_point<T>::value, T>::type asFloatingPoint() const
     {
         return T(this->num) / T(this->denom);
     }
@@ -139,7 +139,7 @@ struct Rational
         return is_null();
     }
 
-    bool is_null() const
+    [[nodiscard]] bool is_null() const
     {
         return this->num == ValueType{};
     }
@@ -279,7 +279,7 @@ const std::string micro_symb = "\xC2\xB5";
 const std::string milli_symb = "m";
 const std::string centi_symb = "c";
 const std::string  deci_symb = "d";
-const std::string   one_symb = "";
+const std::string   one_symb/* = ""*/;
 const std::string  deka_symb = "da";
 const std::string hecto_symb = "h";
 const std::string  kilo_symb = "k";

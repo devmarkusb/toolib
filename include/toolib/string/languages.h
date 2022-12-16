@@ -10,9 +10,7 @@
 #include <vector>
 
 
-namespace mb::too
-{
-namespace str
+namespace mb::too::str
 {
 //! Language id type per ISO 639-1 plus an auto/systems choice.
 using LangID_iso639_1 = std::string;
@@ -119,7 +117,6 @@ inline std::string getEnglishLanguageName(const LangID_iso639_1& id)
     else
         throw ul::not_implemented{"unsupported or unknonwn ISO 639-1 language code"};
 }
-} // namespace str
 } // namespace mb::too
 
 #endif

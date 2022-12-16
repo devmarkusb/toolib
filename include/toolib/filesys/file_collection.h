@@ -29,15 +29,15 @@ public:
         or 000, ... and so on. Otherwise only the given file can be retrieved via get_list_of_existent_files().
         These kind of variations of a base file name (e.g. base00, base01, base02, base03)
         are automatically checked for existence and can be retrieved via get_list_of_existent_files().*/
-    FileCollection(const std::string& file_name);
+    explicit FileCollection(const std::string& file_name);
 
     //! \return all files found to be in the collection, or just a single file.
-    std::vector<std::string> get_list_of_existent_files() const;
+    [[nodiscard]] std::vector<std::string> get_list_of_existent_files() const;
 
 private:
     std::vector<std::string> file_list;
 
-    unsigned char obtain_number_of_digits_for_filenames_of_file_collection(
+    [[nodiscard]] unsigned char obtain_number_of_digits_for_filenames_of_file_collection(
         const std::string& base_file_name, const std::string& file_ext) const;
 };
 } // namespace mb::too::file

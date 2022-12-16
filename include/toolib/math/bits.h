@@ -9,11 +9,7 @@
 #include <utility>
 
 
-namespace mb::too
-{
-namespace math
-{
-namespace bit
+namespace mb::too::math::bit
 {
 struct B
 {
@@ -36,16 +32,16 @@ B::_ i2B(Ty t = Ty())
 
 
 template <>
-inline B::_ i2B<int>(int i)
+[[maybe_unused]] inline B::_ i2B<int>(int i)
 {
     return static_cast<B::_>(i);
 }
 
 template <typename T>
-class bits
+class Bits
 {
 public:
-    explicit bits(T bits = T())
+    explicit Bits(T bits = T())
         : m_bits(bits)
     {
     }
@@ -108,11 +104,9 @@ private:
     T m_bits;
 };
 
-typedef bits<uint8_t> bits8;
-typedef bits<uint16_t> bits16;
-typedef bits<uint32_t> bits32;
-} // namespace bit
-} // namespace math
+typedef Bits<uint8_t> bits8;
+typedef Bits<uint16_t> bits16;
+typedef Bits<uint32_t> bits32;
 } // namespace mb::too
 
 namespace mb

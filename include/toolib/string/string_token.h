@@ -10,9 +10,7 @@
 #include <vector>
 
 
-namespace mb::too
-{
-namespace str
+namespace mb::too::str
 {
 inline void tokenizeString(const std::string& s, const std::string& delimiters, std::vector<std::string>& out)
 {
@@ -25,7 +23,6 @@ inline void tokenizeString(const std::string& s, const std::string& delimiters, 
         pos_end = s.find_first_of(delimiters, pos_start);
     }
 }
-} // namespace str
 } // namespace mb::too
 
 #endif

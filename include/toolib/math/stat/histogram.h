@@ -29,7 +29,7 @@ public:
 
     template <typename T>
     // requires T castable to Percent type
-    Histogram_percentual(const std::vector<T>& data)
+    explicit Histogram_percentual(const std::vector<T>& data)
     {
         using too::math::one_hundred_percent;
         using too::math::zero_percent;
@@ -51,7 +51,7 @@ public:
 
         std::sort(std::begin(percentual_data), std::end(percentual_data));
 
-        std::array<size_t, number_of_bars> abs_rates;
+        std::array<size_t, number_of_bars> abs_rates{};
         size_t sum_of_rates = 0;
 
         {
@@ -92,7 +92,7 @@ public:
         });
     }
 
-    const std::array<Percent, number_of_bars>& getBars() const
+    [[nodiscard]] const std::array<Percent, number_of_bars>& getBars() const
     {
         return this->bars;
     }

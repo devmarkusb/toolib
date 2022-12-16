@@ -11,11 +11,11 @@
 
 namespace mb::too
 {
-//! Sometimes you are in the situation of declaring abstract interfaces and
-//! wanting to use a flexible type just as if you would rather like to write
-//! a template (which is not outright recommended for base classes and not
-//! possible for virtual functions).
-/** So IType is your 'type template parameter' so to say. And it is an alternate
+/** Sometimes you are in the situation of declaring abstract interfaces and
+    wanting to use a flexible type just as if you would rather like to write
+    a template (which is not outright recommended for base classes and not
+    possible for virtual functions).
+    So IType is your 'type template parameter' so to say. And it is an alternate
     choice next to any or variant tyes. Of course here the approach is inheritence
     and dynamic typing.
     Usage:

@@ -9,9 +9,7 @@
 #include <string>
 
 
-namespace mb::too
-{
-namespace img
+namespace mb::too::img
 {
 class Color_dbl
 {
@@ -26,19 +24,19 @@ public:
     {
     }
 
-    double r() const
+    [[nodiscard]] double r() const
     {
         return r_;
     }
-    double g() const
+    [[nodiscard]] double g() const
     {
         return g_;
     }
-    double b() const
+    [[nodiscard]] double b() const
     {
         return b_;
     }
-    double a() const
+    [[nodiscard]] double a() const
     {
         return a_;
     }
@@ -63,19 +61,19 @@ public:
     {
     }
 
-    int r() const
+    [[nodiscard]] int r() const
     {
         return r_;
     }
-    int g() const
+    [[nodiscard]] int g() const
     {
         return g_;
     }
-    int b() const
+    [[nodiscard]] int b() const
     {
         return b_;
     }
-    int a() const
+    [[nodiscard]] int a() const
     {
         return a_;
     }
@@ -86,7 +84,6 @@ private:
     int b_{};
     int a_{};
 };
-} // namespace img
 } // namespace mb::too
 
 #endif

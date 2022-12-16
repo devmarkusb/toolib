@@ -28,10 +28,10 @@ public:
     //! convenience.
     Currency() = default;
 
-    std::string getString() const;
-    std::string getSymbol() const;
+    [[nodiscard]] std::string getString() const;
+    [[nodiscard]] std::string getSymbol() const;
     //! \return empty string if no locale was used to construct.
-    std::string getLocaleConstrName() const;
+    [[nodiscard]] std::string getLocaleConstrName() const;
 
     friend bool operator==(const Currency& lhs, const Currency& rhs);
     friend bool operator!=(const Currency& lhs, const Currency& rhs);
@@ -64,8 +64,8 @@ public:
     //! Like set(BaseType).
     Money& operator=(BaseType amount);
 
-    BaseType get() const;
-    Currency getCurrency() const;
+    [[nodiscard]] BaseType get() const;
+    [[nodiscard]] Currency getCurrency() const;
 
     static BaseType getSmallestUnit(const Currency& currency = Currency{});
     static BaseType getTenthOfSmallestUnit(const Currency& currency = Currency{});
@@ -129,7 +129,7 @@ public:
         return *this;
     }
 
-    /* implicit */ operator Percent() const
+    /*implicit*/ operator Percent() const
     {
         return this->p;
     }

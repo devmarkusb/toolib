@@ -77,7 +77,7 @@ class Unit
 public:
     struct err_no_string_provided_for_ratio : public std::invalid_argument
     {
-        err_no_string_provided_for_ratio(const Rational& r)
+        explicit err_no_string_provided_for_ratio(const Rational& r)
             : std::invalid_argument("no string provided for ratio " + ul::to_string(r.asFloatingPoint<double>()))
         {
         }

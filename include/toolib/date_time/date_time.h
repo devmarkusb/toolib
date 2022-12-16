@@ -25,7 +25,7 @@ struct TOOLIBSHARED_EXPORT normalize
 {
     static void do_it(std::pair<Years, Months>& y_m);
 };
-//! Doesn't \ref normalize.
+//! Doesn't normalize.
 struct TOOLIBSHARED_EXPORT dont_normalize
 {
     static void do_it(std::pair<Years, Months>&)
@@ -33,7 +33,7 @@ struct TOOLIBSHARED_EXPORT dont_normalize
     }
 };
 
-//! Contract: class is always in that normalized state if \ref normalize policy is chosen.
+//! Contract: class is always in that normalized state if normalize policy is chosen.
 template <class NormalizePolicy = normalize>
 class MonthYear_base;
 
@@ -85,9 +85,9 @@ public:
     void setMonths(Months m);
     void setYears(Years y);
     void get(Months& m, Years& y) const;
-    Months getMonths() const;
-    Years getYears() const;
-    Months asMonths() const;
+    [[nodiscard]] Months getMonths() const;
+    [[nodiscard]] Years getYears() const;
+    [[nodiscard]] Months asMonths() const;
 
     MonthYear_base<NormalizePolicy>& operator-=(const MonthYear_base<NormalizePolicy>& rhs);
     MonthYear_base<NormalizePolicy>& operator+=(const MonthYear_base<NormalizePolicy>& rhs);
@@ -123,8 +123,8 @@ bool operator>=(const MonthYear_base<NP>& lhs, const MonthYear_base<NP>& rhs);
 
 
 const MonthYear_dur one_year(0, 1);
-const MonthYear_dur half_year(MonthYear_decl::twelve / 2, 0);
-const MonthYear_dur quarter_year(MonthYear_decl::twelve / 4, 0);
+[[maybe_unused]] const MonthYear_dur half_year(MonthYear_decl::twelve / 2, 0);
+[[maybe_unused]] const MonthYear_dur quarter_year(MonthYear_decl::twelve / 4, 0);
 const MonthYear_dur one_month(1, 0);
 } // namespace mb::too::date_time
 

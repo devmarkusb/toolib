@@ -11,9 +11,7 @@
 #include <utility>
 
 
-namespace mb::too
-{
-namespace math
+namespace mb::too::math
 {
 template <typename FloatingPointType>
 class Map_LinearScale_Interval_to_Interval
@@ -57,7 +55,7 @@ using ScaleTickCount = unsigned long;
     data value range comprising RangeMinToMax.*/
 template <typename T>
 //  requires T > 0
-inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
+double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
 {
     UL_EXPECT_THROW(MaxTickCount);
     UL_EXPECT_THROW(RangeMinToMax > T());
@@ -82,7 +80,7 @@ inline double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
     scaleTick's apart).*/
 template <typename T>
 //  requires T number
-inline std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, double scaleTick)
+std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, double scaleTick)
 {
     UL_EXPECT(minDataValue <= maxDataValue);
     const double minIn = ul::narrow_cast<double>(minDataValue);
@@ -93,7 +91,6 @@ inline std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataVa
     const double maxOut = std::ceil(maxIn / scaleTick) * scaleTick;
     return std::make_pair(minOut, maxOut);
 }
-} // namespace math
 } // namespace mb::too
 
 #endif

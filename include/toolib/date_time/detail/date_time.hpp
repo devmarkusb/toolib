@@ -14,9 +14,7 @@
 #include <vector>
 
 
-namespace mb::too
-{
-namespace date_time
+namespace mb::too::date_time
 {
 //####################################################################################################################
 // template implementation
@@ -207,7 +205,6 @@ bool operator>=(const MonthYear_base<NormalizePolicy>& lhs, const MonthYear_base
 {
     return !operator<(lhs, rhs);
 }
-} // namespace date_time
 } // namespace mb::too
 
 #endif

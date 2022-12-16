@@ -11,9 +11,7 @@
 #include <vector>
 
 
-namespace mb::too
-{
-namespace file
+namespace mb::too::file
 {
 //! String manipulation helper class only. No file system operations.
 /** DEPRECATED, use too::std_fs::path instead.*/
@@ -42,12 +40,12 @@ public:
         std::string& path, bool useByReference = false, EForm form = EForm::PLATFORMINDEPENDENT,
         EType type = EType::IS_UNKNOWN);
     Path(const Path& other);
-    Path(Path&& other);
+    Path(Path&& other) noexcept;
     Path& operator=(const Path& other);
-    Path& operator=(Path&& other);
+    Path& operator=(Path&& other) noexcept;
     void swap(Path& other);
 
-    operator std::string() const;
+    /*implicit*/ operator std::string() const;
     Path& operator+=(const Path& other);
     std::string getFolderPath() const;
     //! Inclusive extension. Use function remove_extension if desired.
@@ -85,7 +83,6 @@ private:
 };
 
 TOOLIBSHARED_EXPORT Path operator+(const Path& p1, const Path& p2);
-} // namespace file
 } // namespace mb::too
 
 

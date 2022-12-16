@@ -51,7 +51,7 @@ Path::Path(const Path& other)
     m_type = other.m_type;
 }
 
-Path::Path(Path&& other)
+Path::Path(Path&& other) noexcept
 {
     Path::swap(other);
 }
@@ -64,7 +64,7 @@ Path& Path::operator=(const Path& other)
     return *this;
 }
 
-Path& Path::operator=(Path&& other)
+Path& Path::operator=(Path&& other) noexcept
 {
     Path::swap(other);
     return *this;

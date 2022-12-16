@@ -13,9 +13,7 @@
 #include <string>
 
 
-namespace mb::too
-{
-namespace file
+namespace mb::too::file
 {
 /** \param retErrDetail returns error detail string or is empty on success.
     \return false on success.*/
@@ -60,7 +58,6 @@ inline void throwError(const std::string& filePathNameExt, operation op, const s
     ss << ", ec: " << errno_ << ", " << std::strerror(errno_);
     throw std::runtime_error{ss.str()};
 }
-} // namespace file
 } // namespace mb::too
 
 #endif

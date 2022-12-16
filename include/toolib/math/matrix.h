@@ -12,9 +12,7 @@
 #include <string>
 
 
-namespace mb::too
-{
-namespace math
+namespace mb::too::math
 {
 //! Represents a mxn-matrix with m rows and n columns. T should be a reasonable basic numerical type.
 /** The index access is like (row i, column j):<br>
@@ -30,11 +28,9 @@ template <class T>
 class matrix
 {
 public:
-    //!
     class error_division_by_zero : virtual public std::exception
     {
     };
-    //!
     class error_division_by_zero_det : virtual public error_division_by_zero
     {
     };
@@ -141,7 +137,7 @@ public:
                 m[i][j] = init;
     }
     //! Checks if this matrix is zero.
-    bool isZero() const
+    [[nodiscard]] bool isZero() const
     {
         T** m = m_rep->m;
         uint32_t rows = m_rep->dim_rows, cols = m_rep->dim_cols;
@@ -153,12 +149,12 @@ public:
         return true;
     }
     //! Get row dimension.
-    uint32_t RowCount() const
+    [[nodiscard]] uint32_t RowCount() const
     {
         return m_rep->dim_rows;
     }
     //! Get column dimension.
-    uint32_t ColCount() const
+    [[nodiscard]] uint32_t ColCount() const
     {
         return m_rep->dim_cols;
     }
@@ -178,13 +174,13 @@ public:
     /** Two drawbacks: First of all, this provides low-level access to the private matrix data.
     And secondly, the cast assumes that the matrix content will be changed. Hence it starts
     by creating a new matrix representation, *if* the representation was not used only once thus far.*/
-    operator T**()
+    explicit operator T**()
     {
         m_rep = m_rep->get_own_copy();
         return m_rep->m;
     }
     //! Scalar multiplying a matrix.
-    friend const matrix<T> operator*(const matrix<T>& m, const T& t)
+    friend matrix<T> operator*(const matrix<T>& m, const T& t)
     {
         uint32_t m1r = m.m_rep->dim_rows, m1c = m.m_rep->dim_cols;
         matrix<T> res(m1r, m1c);
@@ -200,7 +196,7 @@ public:
         return res;
     }
     //! Scalar multiplying a matrix.
-    friend const matrix<T> operator*(const T& t, const matrix<T>& m)
+    friend matrix<T> operator*(const T& t, const matrix<T>& m)
     {
         uint32_t m1r = m.m_rep->dim_rows, m1c = m.m_rep->dim_cols;
         matrix<T> res(m1r, m1c);
@@ -217,7 +213,7 @@ public:
     }
     //! Scalar reciprocal multiplying a matrix.
     /** Throws error_division_by_zero, where m[.][.]==T() is taken as "zero".*/
-    friend const matrix<T> operator/(const T& t, const matrix<T>& m)
+    friend matrix<T> operator/(const T& t, const matrix<T>& m)
     {
         uint32_t m1r = m.m_rep->dim_rows, m1c = m.m_rep->dim_cols;
         matrix<T> res(m1r, m1c);
@@ -371,7 +367,7 @@ public:
     //! Comparison of two matrices.
     friend bool operator!=(const matrix<T>& m1, const matrix<T>& m2)
     {
-        return !(m1 == m2);
+        return m1 != m2;
     }
     //! Returns the row-"matrix" (1xn) of the specified row of this matrix.
     matrix getrow(uint32_t row) const
@@ -473,22 +469,22 @@ public:
         throw ul::not_implemented{"invert"};
     }
     //! Is invertible?
-    bool isInvertible() const
+    [[nodiscard]] bool isInvertible() const
     {
         throw ul::not_implemented{"isInvertible"};
     }
     //! Is symmetric?
-    bool isSymmetric() const
+    [[nodiscard]] bool isSymmetric() const
     {
         throw ul::not_implemented{"isSymmetric"};
     }
     //! Is orthogonal?
-    bool isOrthogonal() const
+    [[nodiscard]] bool isOrthogonal() const
     {
         throw ul::not_implemented{"isOrthogonal"};
     }
     //! Is diagonal?
-    bool isDiagonal() const
+    [[nodiscard]] bool isDiagonal() const
     {
         throw ul::not_implemented{"isDiagonal"};
     }
@@ -559,6 +555,8 @@ private:
                         m[i][j] = mtrx[i][j];
             }
         }
+        MRep(const MRep&) = delete;
+        MRep& operator=(const MRep&) = delete;
         // The representation is no longer needed (normally a consequence of the counter approaching 0).
         ~MRep()
         {
@@ -605,11 +603,6 @@ private:
             delete[] m;
             m = 0;
         }
-
-        // Forbid copy construction.
-        MRep(const MRep&);
-        // Forbid copy assignment.
-        MRep& operator=(const MRep&);
     }; // MRep
 
     /* The internal representation of the matrix data. This could be shared by more than one matrix,
@@ -652,36 +645,28 @@ public:
     typedef complex<t> T; // for convenience
 
     // Constructors and assignment are transferred trivially.
-    //!
     explicit cmatrix(uint32_t dim_rows, uint32_t dim_cols)
         : matrix<complex<t>>(dim_rows, dim_cols)
     {
     }
-    //!
     cmatrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx)
         : matrix<complex<t>>(dim_rows, dim_cols, mtrx)
     {
     }
-    //!
     cmatrix(const cmatrix& mtrx)
         : matrix<complex<t>>(mtrx)
     {
     }
-    //!
-    cmatrix(const matrix<complex<t>>& mtrx)
+    explicit cmatrix(const matrix<complex<t>>& mtrx)
         : matrix<complex<t>>(mtrx)
     {
     }
-    //!
     cmatrix& operator=(const cmatrix& mtrx)
     {
         matrix<complex<t>>::operator=(mtrx);
         return *this;
     }
-    //!
-    ~cmatrix()
-    {
-    }
+    ~cmatrix() = default;
 
     //! Conjugates this matrix.
     void conjugate()
@@ -715,12 +700,12 @@ public:
             elem[i][i] = std::conj(elem[i][i]);
     }
     //! Is hermitean?
-    bool isHermitean() const
+    [[nodiscard]] bool isHermitean() const
     {
         throw ul::not_implemented{"isHermitean"};
     }
     //! Is unitary?
-    bool isUnitary() const
+    [[nodiscard]] bool isUnitary() const
     {
         throw ul::not_implemented{"isUnitary"};
     }
@@ -728,13 +713,13 @@ public:
 
 //! Sum. Both matrices have to coincide dimensionally.
 template <typename T>
-const matrix<T> operator+(const matrix<T>& t1, const matrix<T>& t2)
+matrix<T> operator+(const matrix<T>& t1, const matrix<T>& t2)
 {
     return matrix<T>(t1) += t2;
 }
 //! Difference. Both matrices have to coincide dimensionally.
 template <typename T>
-const matrix<T> operator-(const matrix<T>& t1, const matrix<T>& t2)
+matrix<T> operator-(const matrix<T>& t1, const matrix<T>& t2)
 {
     return matrix<T>(t1) -= t2;
 }
@@ -748,11 +733,10 @@ No dimension check is performed, so pay attention that
 to
 \return a mxn matrix.*/
 template <typename T>
-const matrix<T> operator*(const matrix<T>& t1, const matrix<T>& t2)
+matrix<T> operator*(const matrix<T>& t1, const matrix<T>& t2)
 {
     return matrix<T>(t1) *= t2;
 }
-} // namespace math
 } // namespace mb::too
 
 #endif

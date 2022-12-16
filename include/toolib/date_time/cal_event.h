@@ -17,9 +17,7 @@ template <typename TimeType>
 class CalEvent
 {
 public:
-    virtual ~CalEvent()
-    {
-    }
+    virtual ~CalEvent() = default;
 
     virtual ul::owner<CalEvent<TimeType>*> clone() const = 0;
 
@@ -29,7 +27,7 @@ public:
     virtual std::unique_ptr<TimeType> getNextTimePoint(const TimeType& RelativeTo) const = 0;
 
     //! Convenience function.
-    bool isSingle() const
+    [[nodiscard]] bool isSingle() const
     {
         return !getNextTimePoint(*getFirstTimePoint());
     }
@@ -114,9 +112,9 @@ public:
     {
         m_backupStart = std::move(m_TimePointStart);
     }
-    bool hasStartBackup() const
+    [[nodiscard]] bool hasStartBackup() const
     {
-        return m_backupStart ? true : false;
+        return m_backupStart;
     }
     void restoreStart_move()
     {
@@ -140,9 +138,9 @@ public:
     {
         m_backupEnd = std::move(m_TimePointEnd);
     }
-    bool hasEndBackup() const
+    [[nodiscard]] bool hasEndBackup() const
     {
-        return m_backupEnd ? true : false;
+        return m_backupEnd;
     }
     void restoreEnd_move()
     {

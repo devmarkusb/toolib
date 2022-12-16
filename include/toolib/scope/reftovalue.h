@@ -15,7 +15,7 @@ template <typename T>
 class RefToValue
 {
 public:
-    RefToValue(T& ref)
+    explicit RefToValue(T& ref)
         : m_ref(ref)
     {
     }
@@ -23,20 +23,19 @@ public:
         : m_ref(rhs.m_ref)
     {
     }
-    operator T&() const
+    RefToValue() = delete;
+    RefToValue& operator=(const RefToValue&) = delete;
+    explicit operator T&() const
     {
         return m_ref;
     }
 
 private:
-    RefToValue();
-    RefToValue& operator=(const RefToValue&);
-
     T& m_ref;
 };
 
 template <typename T>
-inline RefToValue<T> ByRef(T& t)
+RefToValue<T> byRef(T& t)
 {
     return RefToValue<T>(t);
 }

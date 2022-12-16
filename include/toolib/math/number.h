@@ -16,9 +16,7 @@
 #include <type_traits>
 
 
-namespace mb::too
-{
-namespace math
+namespace mb::too::math
 {
 enum class ENumSys : unsigned char
 {
@@ -29,7 +27,7 @@ enum class ENumSys : unsigned char
 };
 
 template <typename T>
-inline unsigned char getDigitCount(T Number, ENumSys Base = ENumSys::DEC)
+unsigned char getDigitCount(T Number, ENumSys Base = ENumSys::DEC)
 {
     static_assert(std::is_integral<T>::value, "only integral numbers are allowed as input");
     unsigned char count = 0;
@@ -50,7 +48,7 @@ int sgn(T val)
 template <typename T>
 std::string toLeadingZeros(T x, int digits)
 {
-    static_assert(std::is_integral<T>::value, "");
+    static_assert(std::is_integral<T>::value);
     UL_EXPECT_THROW(x >= T());
     UL_EXPECT_THROW(digits >= 0);
 
@@ -64,7 +62,7 @@ std::string toLeadingZeros(T x, int digits)
     Note that the return value can be < 0, e.g. 0.5 is the -1 power of base 2.*/
 template <typename ArithType>
 //  ArithType expected to be is_arithmetic
-ul::opt<ArithType> is_power_of(ArithType x, ArithType base)
+ul::opt<ArithType> isPowerOf(ArithType x, ArithType base)
 {
     static_assert(std::is_arithmetic<ArithType>::value, "only arithmetic numbers are allowed as input");
     UL_EXPECT(x > ArithType{});
@@ -80,14 +78,13 @@ ul::opt<ArithType> is_power_of(ArithType x, ArithType base)
             much too small).*/
     const long double exp = std::log(x) / std::log(base);
     const long long intpart = ul::llround(exp);
-    const long double intpart_dbl = ul::narrow_cast<long double>(intpart);
+    const auto intpart_dbl = ul::narrow_cast<long double>(intpart);
 
     if (!too::math::approx_equal(intpart_dbl, exp, 1e-12L))
         return {};
     return ul::narrow_cast<ArithType>(intpart);
 }
 
-} // namespace math
 } // namespace mb::too
 
 #endif

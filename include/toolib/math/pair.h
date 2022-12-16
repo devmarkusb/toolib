@@ -9,9 +9,7 @@
 #include <utility>
 
 
-namespace mb::too
-{
-namespace math
+namespace mb::too::math
 {
 template <typename T1, typename T2>
 struct pair
@@ -29,7 +27,7 @@ struct pair
     {
     }
     template <typename OT1, typename OT2>
-    pair(const pair<OT1, OT2>& p)
+    explicit pair(const pair<OT1, OT2>& p)
         : m_p(p)
         , left(getleft())
         , right(getright())
@@ -52,7 +50,7 @@ struct pair
     }
 
     template <typename OT1, typename OT2>
-    pair(const std::pair<OT1, OT2>& p)
+    explicit pair(const std::pair<OT1, OT2>& p)
         : m_p(p)
         , left(getleft())
         , right(getright())
@@ -60,7 +58,7 @@ struct pair
     }
 
     template <typename OT1, typename OT2>
-    operator std::pair<OT1, OT2>() const
+    explicit operator std::pair<OT1, OT2>() const
     {
         return m_p;
     }
@@ -105,7 +103,6 @@ private:
         return m_p.second;
     }
 };
-} // namespace math
 } // namespace mb::too
 
 #endif

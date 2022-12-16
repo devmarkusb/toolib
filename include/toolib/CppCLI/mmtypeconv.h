@@ -1,10 +1,6 @@
 // 2011
 
-//!
-/** Filename stands for "mixed-mode type conversions".
- */
-//! \file
-
+//! \file Filename stands for "mixed-mode type conversions".
 
 #ifndef MMTYPECONV_H_nbi4lnv5
 #define MMTYPECONV_H_nbi4lnv5
@@ -14,9 +10,7 @@
 #include "ul/macros.h"
 
 
-namespace mb::too
-{
-namespace CLI
+namespace mb::too::CLI
 {
 #if UL_STANDARD_CPP_CLI
 using System::IntPtr;
@@ -74,7 +68,6 @@ template <typename T>
         return converted_a;
     }
 #endif
-} // namespace CLI
 } // namespace mb::too
 
 #include "ul/macros_end.h"

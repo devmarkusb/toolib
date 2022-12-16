@@ -41,7 +41,7 @@ public:
     //! \param NestingLevel is just for dump visualization
     inline explicit PerformanceProfiler(std::string NewItemName, NestingLevel NestingLevel = 0);
     inline ~PerformanceProfiler();
-    SecondsDbl elapsed_currentItem() const;
+    [[nodiscard]] SecondsDbl elapsed_currentItem() const;
 
     //! New item on same hierarchy/nesting level.
     inline void startNewItem(const std::string& NewItemName);
@@ -218,7 +218,7 @@ struct KeyData
 } // namespace implDumpAllItems
 
 template <PerformanceProfiler::DumpFormat fmt>
-inline std::string PerformanceProfiler::dumpAllItems()
+std::string PerformanceProfiler::dumpAllItems()
 {
     if constexpr (fmt != DumpFormat::stringOnly)
         dumpedData().clear();

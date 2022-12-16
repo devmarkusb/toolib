@@ -17,9 +17,7 @@
 #include "ul/macros.h"
 #include "ul/macros/UNDEF_MIN_MAX.h"
 
-namespace mb::too
-{
-namespace math
+namespace mb::too::math
 {
 /** Rough version of almost_equal, where you can pass a user defined eps(ilon) within which x and y are
     understood approx. equal.
@@ -128,7 +126,6 @@ struct ToStringConverter<FloatType, FloatFormat::scientific>
     }
 };
 } // namespace impl
-} // namespace math
 } // namespace mb::too
 
 #include "ul/macros_end.h"

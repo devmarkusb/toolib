@@ -58,31 +58,31 @@ TEST(math_sgnTest, Hex)
 
 TEST(math_is_power_ofTest, simple)
 {
-    EXPECT_EQ(2, *too::math::is_power_of(100, 10));
-    if (too::math::is_power_of(10, 10))
+    EXPECT_EQ(2, *too::math::isPowerOf(100, 10));
+    if (too::math::isPowerOf(10, 10))
         EXPECT_TRUE(true);
     else
         EXPECT_TRUE(false);
-    EXPECT_FALSE(too::math::is_power_of(101, 10));
+    EXPECT_FALSE(too::math::isPowerOf(101, 10));
 }
 
 TEST(math_is_power_ofTest, floatingpoint)
 {
-    EXPECT_DOUBLE_EQ(2.0, *too::math::is_power_of(100.0, 10.0));
-    EXPECT_DOUBLE_EQ(-5.0, *too::math::is_power_of(0.00001, 10.0));
-    EXPECT_FALSE(too::math::is_power_of(100.1, 10.0));
+    EXPECT_DOUBLE_EQ(2.0, *too::math::isPowerOf(100.0, 10.0));
+    EXPECT_DOUBLE_EQ(-5.0, *too::math::isPowerOf(0.00001, 10.0));
+    EXPECT_FALSE(too::math::isPowerOf(100.1, 10.0));
 }
 
 TEST(math_is_power_ofTest, corners)
 {
-    EXPECT_DOUBLE_EQ(0, *too::math::is_power_of(1, 2));
+    EXPECT_DOUBLE_EQ(0, *too::math::isPowerOf(1, 2));
 
-    EXPECT_DOUBLE_EQ(0.0, *too::math::is_power_of(1.0, 0.5));
-    EXPECT_DOUBLE_EQ(0.0, *too::math::is_power_of(1.0, 2.0));
+    EXPECT_DOUBLE_EQ(0.0, *too::math::isPowerOf(1.0, 0.5));
+    EXPECT_DOUBLE_EQ(0.0, *too::math::isPowerOf(1.0, 2.0));
 
-    EXPECT_DOUBLE_EQ(-1.0, *too::math::is_power_of(2.0, 0.5));
-    EXPECT_DOUBLE_EQ(1.0, *too::math::is_power_of(2.0, 2.0));
-    EXPECT_FALSE(too::math::is_power_of(2.0, 4.0));
+    EXPECT_DOUBLE_EQ(-1.0, *too::math::isPowerOf(2.0, 0.5));
+    EXPECT_DOUBLE_EQ(1.0, *too::math::isPowerOf(2.0, 2.0));
+    EXPECT_FALSE(too::math::isPowerOf(2.0, 4.0));
 
-    EXPECT_DOUBLE_EQ(-1.0, *too::math::is_power_of(0.25, 4.0));
+    EXPECT_DOUBLE_EQ(-1.0, *too::math::isPowerOf(0.25, 4.0));
 }

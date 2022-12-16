@@ -1,11 +1,8 @@
 // 2011
 
-//!
-/** Note: I assume that the lack of keyword export (MS VS) made it necessary to put the definitions
+/** \file Note: I assume that the lack of keyword export (MS VS) made it necessary to put the definitions
     m_init and m_flags into this the only file (it took lots of tries with awkward template stuff until it
-    finally	worked).
-*/
-//! \file
+    finally	worked).*/
 
 #ifndef SCOPEFLAGGED_HPP_9283rz3nxznrzn3
 #define SCOPEFLAGGED_HPP_9283rz3nxznrzn3
@@ -63,18 +60,16 @@ template <class user, class bit_container_type = uint16_t>
 class scope_flagged
 {
 public:
-    scope_flagged()
-    {
-    }
+    scope_flagged() = default;
     //! Default copy and assignment are ok. Doesn't make much sense, but shouln't be forbidden to not not spoil
     //! derivates.
     // scope_flagged(const scope_flagged&);
     // scope_flagged& operator=(const scope_flagged&);
 
-    struct SG_flags : public toobit::bits<bit_container_type>
+    struct SG_flags : public toobit::Bits<bit_container_type>
     {
         explicit SG_flags(bit_container_type flags = m_flags->get())
-            : toobit::bits<bit_container_type>(flags)
+            : toobit::Bits<bit_container_type>(flags)
         {
             m_auxLastflags = m_flags;
             m_flags = this;

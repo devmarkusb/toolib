@@ -1,11 +1,8 @@
 // 2011
 
-//!
-/** Note: I assume that the lack of keyword export (MS VS) made it necessary to put the definitions
+/** \file Note: I assume that the lack of keyword export (MS VS) made it necessary to put the definitions
     m_init, m_flags, m_aux, m_auxLastflags into this the only file (it took lots of tries with
-    awkward template stuff until it finally	worked).
-*/
-//! \file
+    awkward template stuff until it finally	worked).*/
 
 #ifndef SCOPEFLAGGED_HPP_inh27dzf237bxfd327
 #define SCOPEFLAGGED_HPP_inh27dzf237bxfd327
@@ -64,21 +61,19 @@ template <class user, class bit_container_type = uint16_t>
 class scope_flagged
 {
 public:
-    scope_flagged()
-    {
-    }
-    //! Default copy and assignment are ok. Doesn't make much sense, but shouln't be forbidden to not not spoil
-    //! derivates.
+    scope_flagged() = default;
+    // Default copy and assignment are ok. Doesn't make much sense, but shouldn't be forbidden to not spoil
+    // inheritance.
     // scope_flagged(const scope_flagged&);
     // scope_flagged& operator=(const scope_flagged&);
 
-    struct SG_flags : public toobit::bits<bit_container_type>
+    struct SG_flags : public toobit::Bits<bit_container_type>
     {
         explicit SG_flags(bit_container_type flags = user::SF_DEF) // = m_flags.get())
-            : toobit::bits<bit_container_type>(flags)
+            : toobit::Bits<bit_container_type>(flags)
         {
             m_auxLastflags.push(*m_flags);
-            m_flags = toobit::bits<bit_container_type>::getAddress();
+            m_flags = toobit::Bits<bit_container_type>::getAddress();
         }
         ~SG_flags()
         {
@@ -93,8 +88,8 @@ public:
             }
         }
 
-        //! Default copy and assignment are ok. Doesn't make much sense, but shouln't be forbidden to not spoil
-        //! derivates.
+        // Default copy and assignment are ok. Doesn't make much sense, but shouldn't be forbidden to not spoil
+        // inheritance.
         // SG_flags(const SG_flags&);
         // SG_flags& operator=(const SG_flags&);
         static std::stack<bit_container_type> m_auxLastflags;
@@ -119,7 +114,6 @@ template <class user, class bit_container_type>
 bit_container_type* scope_flagged<user, bit_container_type>::m_flags = &scope_flagged<user, bit_container_type>::m_init;
 template <class user, class bit_container_type>
 std::stack<bit_container_type> scope_flagged<user, bit_container_type>::SG_flags::m_auxLastflags;
-
 } // namespace mb::too
 
 #endif

@@ -16,7 +16,7 @@
 namespace mb::too::math
 {
 template <typename T>
-inline T round(T r, unsigned short decimal_places)
+T round(T r, unsigned short decimal_places)
 {
     static_assert(std::is_floating_point<T>::value);
     T factor = decimal_places ? pow(10.0, static_cast<T>(decimal_places)) : 1.0;
@@ -24,7 +24,7 @@ inline T round(T r, unsigned short decimal_places)
 }
 
 template <typename TR, typename TP>
-inline TR round_to(TP r, unsigned short decimal_places = 0)
+TR round_to(TP r, unsigned short decimal_places = 0)
 {
     const volatile bool is_TR_integral = std::is_integral<TR>::value;
     if (is_TR_integral)

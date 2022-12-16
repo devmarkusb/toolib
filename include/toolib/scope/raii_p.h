@@ -34,10 +34,6 @@ private:
             m_ptr = 0;
         }
     }
-    //! Copy is forbidden.
-    raii_p(const raii_p&);
-    //! Assignment is forbidden.
-    raii_p& operator=(const raii_p&);
 
 public:
     //! Allocates memory for an internally stored T* and calls its default constructor.
@@ -64,6 +60,8 @@ public:
     {
         flush();
     }
+    raii_p(const raii_p&) = delete;
+    raii_p& operator=(const raii_p&) = delete;
 
     //! Gives opportunity to use raii_p<T> just like T*. Do not delete the return value!
     /** This can be extraordinarily relevant for performance issues, that is the use of loops. There
@@ -127,10 +125,6 @@ private:
             m_ptr = 0;
         }
     }
-    //! Copy is forbidden.
-    raii_ap(const raii_ap&);
-    //! Assignment is forbidden.
-    raii_ap& operator=(const raii_ap&);
 
 public:
     //! Allocates memory for an internally stored T[] and calls its default constructor for every element.
@@ -154,6 +148,8 @@ public:
         UL_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
 #endif
     }
+    raii_ap(const raii_ap&) = delete;
+    raii_ap& operator=(const raii_ap&) = delete;
     //! Releases the internally managed memory for the object.
     ~raii_ap()
     {
@@ -195,12 +191,12 @@ public:
         return ret;
     }
     //! \return Number of objects.
-    uint32_t size() const
+    [[nodiscard]] uint32_t size() const
     {
         return m_count;
     }
-    //! Cleans the class content and inititialises again in a manner just like the corresponding constructor does.
-    /** Please take care of the same remarks as for \see raii_ap(T*, u32).*/
+    //! Cleans the class content and initializes again in a manner just like the corresponding constructor does.
+    /** Please take care of the same remarks as for raii_ap(T*, u32).*/
     void reset(T* pt = 0, uint32_t count = 0)
     {
         if (pt != m_ptr)
@@ -239,10 +235,6 @@ private:
         ul::mem::checked_array_delete(m_ptr);
         m_ptr = 0;
     }
-    //! Copy is forbidden.
-    raii_aap(const raii_aap&);
-    //! Assignment is forbidden.
-    raii_aap& operator=(const raii_aap&);
 
 public:
     //! Allocates memory for an internally stored T[] and calls its default constructor for every element.
@@ -256,6 +248,8 @@ public:
         for (uint32_t i = 0; i < count1; ++i)
             m_ptr[i] = new T[count2];
     }
+    raii_aap(const raii_aap&) = delete;
+    raii_aap& operator=(const raii_aap&) = delete;
     //! Releases the internally managed memory for the object.
     ~raii_aap()
     {
@@ -277,12 +271,12 @@ public:
         return m_ptr[idx1];
     }
     //! \return Number of objects in 1st dimension.
-    uint32_t size1() const
+    [[nodiscard]] uint32_t size1() const
     {
         return m_count1;
     }
     //! \return Number of objects in 2nd dimension.
-    uint32_t size2() const
+    [[nodiscard]] uint32_t size2() const
     {
         return m_count2;
     }

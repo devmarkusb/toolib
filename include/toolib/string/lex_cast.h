@@ -18,14 +18,13 @@ class ErrBadLexCast : public std::bad_cast
 {
 };
 
-//! Converts 'arbitrary' types from or to std::string.
-//! There is also the non-throwing version lex_cast.
+//! Converts 'arbitrary' types from or to std::string. There is also the non-throwing version lex_cast.
 /** It is even possible to cast from float or int or such. Although one might
     need to be sceptic about the use-case of trying such conversions the
     lexicographical way. They also would need to be fail-safe input-wise,
     that is 42.1f doesn't successfully convert to 42 or whatever.*/
 template <typename T, typename S>
-inline T lex_cast_Throw(const S& s)
+T lex_cast_throw(const S& s)
 {
     std::stringstream strs;
     strs << s;
@@ -38,11 +37,11 @@ inline T lex_cast_Throw(const S& s)
 }
 
 template <typename T, typename S>
-inline T lex_cast(const S& s) noexcept
+T lex_cast(const S& s) noexcept
 {
     try
     {
-        return lex_cast_Throw<T, S>(s);
+        return lex_cast_throw<T, S>(s);
     }
     catch (const ErrBadLexCast&)
     {

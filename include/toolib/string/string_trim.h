@@ -9,9 +9,7 @@
 #include <string>
 
 
-namespace mb::too
-{
-namespace str
+namespace mb::too::str
 {
 inline std::string& ltrim(std::string& s, const std::string& trimchars = " \t\n")
 {
@@ -31,7 +29,6 @@ inline std::string& trim(std::string& s)
     ltrim(rtrim(s));
     return s;
 }
-} // namespace str
 } // namespace mb::too
 
 #endif

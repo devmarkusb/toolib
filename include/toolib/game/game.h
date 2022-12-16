@@ -23,9 +23,7 @@ namespace game
 class IMain
 {
 public:
-    virtual ~IMain()
-    {
-    }
+    virtual ~IMain() = default;
     //! The only function to be called. returns main exit code of the program.
     int main()
     {
@@ -38,7 +36,7 @@ public:
         }
         catch (std::exception& e)
         {
-            return HandleMainExceptions(e);
+            return handleMainExceptions(e);
         }
         catch (...)
         {
@@ -62,7 +60,7 @@ protected:
     virtual bool game() = 0;
 
     //! Should return the main exit code.
-    virtual int HandleMainExceptions(std::exception&) throw() = 0;
+    virtual int handleMainExceptions(std::exception&) throw() = 0;
     //! Should return the main exit code.
     virtual int mainTerminationByError() throw() = 0;
 
@@ -85,9 +83,7 @@ private:
 class IGame
 {
 public:
-    virtual ~IGame()
-    {
-    }
+    virtual ~IGame() = default;
 
     enum EEndType
     {
@@ -126,15 +122,15 @@ public:
 
 protected:
     //! \return false if game ends. This can only happen by user exit.
-    virtual bool GetEvents() = 0;
-    virtual void RunAI() = 0;
-    virtual void MoveEnemies() = 0;
+    virtual bool getEvents() = 0;
+    virtual void runAI() = 0;
+    virtual void moveEnemies() = 0;
     //! \return false if game ends. In that case et contains either ET_GAME_OVER or ET_GAME_WON.
-    virtual bool ResolveCollisions(EEndType& et) = 0;
-    virtual void DrawGraphics() = 0;
-    virtual void PlaySounds() = 0;
+    virtual bool resolveCollisions(EEndType& et) = 0;
+    virtual void drawGraphics() = 0;
+    virtual void playSounds() = 0;
     //! \return true if game can be resumed, or otherwise has to be terminated.
-    virtual bool HandleGameExceptions(std::exception&) = 0;
+    virtual bool handleGameExceptions(std::exception&) = 0;
     //! This function should somehow get access to detailed error information and decide whether:
     /** 1) the game can resume from the menu stage
         2) the program has to exit as though the user would have opted for
@@ -151,21 +147,21 @@ private:
     {
         try
         {
-            if (!GetEvents())
+            if (!getEvents())
             {
                 et = ET_USER_EXIT;
                 return false;
             }
-            RunAI();
-            MoveEnemies();
-            if (!ResolveCollisions(et))
+            runAI();
+            moveEnemies();
+            if (!resolveCollisions(et))
                 return false;
-            DrawGraphics();
-            PlaySounds();
+            drawGraphics();
+            playSounds();
         }
         catch (std::exception& e)
         {
-            if (!HandleGameExceptions(e))
+            if (!handleGameExceptions(e))
             {
                 et = ET_ERROR;
                 return false;

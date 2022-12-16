@@ -44,7 +44,6 @@ public:
     class TooManyObjects
     {
     };
-    //!
     static long objectCount()
     {
         return m_numObjects;

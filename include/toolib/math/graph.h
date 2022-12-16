@@ -50,11 +50,9 @@ struct TickStringRepr_setup
 //!
 struct ChartAxis_setup
 {
-    virtual ~ChartAxis_setup()
-    {
-    }
+    virtual ~ChartAxis_setup() = default;
 
-    virtual std::unique_ptr<ChartAxis_setup> clone() const
+    [[nodiscard]] virtual std::unique_ptr<ChartAxis_setup> clone() const
     {
         return std::make_unique<ChartAxis_setup>(*this);
     }
@@ -67,11 +65,9 @@ struct ChartAxis_setup
 //!
 struct ChartAxisProj_setup : public ChartAxis_setup
 {
-    ~ChartAxisProj_setup() override
-    {
-    }
+    ~ChartAxisProj_setup() override = default;
 
-    std::unique_ptr<ChartAxis_setup> clone() const override
+    [[nodiscard]] std::unique_ptr<ChartAxis_setup> clone() const override
     {
         return std::make_unique<ChartAxisProj_setup>(*this);
     }
@@ -88,19 +84,19 @@ class ChartAxis : private ul::NonCopyable
 {
 public:
     ChartAxis(
-        const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
+        const ChartAxis_setup& setup, Quantity  quantity, const QuValueType& min_qu_val,
         const QuValueType& max_qu_val);
     virtual ~ChartAxis()
     {
         UL_EXPECT(this->setup);
     }
 
-    ScaleTickCount getTickCount() const
+    [[nodiscard]] ScaleTickCount getTickCount() const
     {
         return this->tick_count;
     }
 
-    Quantity getQuantity() const
+    [[nodiscard]] Quantity getQuantity() const
     {
         return this->quantity;
     }
@@ -119,11 +115,11 @@ public:
 
     /** \return a new ratio for the Quantity Unit, if there is a better choice, i.e. a common ratio of the tick values
         can be obtained.*/
-    ul::opt<Rational> obtain_suitable_common_ratio_of_tickvals() const;
+    [[nodiscard]] ul::opt<Rational> obtain_suitable_common_ratio_of_tickvals() const;
     void apply_ratio_to_tickvals(const Rational& r);
     void apply_ratio_to_quantity_unit(const Rational& r);
 
-    bool contains_zero_tick() const
+    [[nodiscard]] bool contains_zero_tick() const
     {
         return this->tick_start_qu_val <= QuValueType{} && QuValueType{} <= this->tick_end_qu_val;
     }
@@ -158,9 +154,7 @@ public:
     ChartAxisProj(
         const ChartAxisProj_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
         const QuValueType& max_qu_val);
-    virtual ~ChartAxisProj()
-    {
-    }
+    virtual ~ChartAxisProj() = default;
 
     void initProjections();
 
@@ -169,8 +163,8 @@ public:
     QuValueType projection_to_quvalue(ProjectionValue p) const;
     QuValueType projectionrange_to_qurange(ProjectionValue width) const;
 
-    ProjectionValue getProjectionMinVal() const;
-    ProjectionValue getProjectionMaxVal() const;
+    [[nodiscard]] ProjectionValue getProjectionMinVal() const;
+    [[nodiscard]] ProjectionValue getProjectionMaxVal() const;
 
 private:
     using QuValue_to_Projection = Map_LinearScale_Interval_to_Interval<QuValueType>;
@@ -219,7 +213,7 @@ public:
     {
         this->annotations = std::move(a);
     }
-    const ChartAnnotations* getAnnotations() const
+    [[nodiscard]] const ChartAnnotations* getAnnotations() const
     {
         return this->annotations.get();
     }
@@ -240,12 +234,12 @@ class ChartAnnotations
 {
 public:
     //! Same index can occur multiple times.
-    const VectorOfPairs<size_t, std::string>& getAll() const
+    [[nodiscard]] const VectorOfPairs<size_t, std::string>& getAll() const
     {
         return this->annotations;
     }
     //! Indices occur uniquely together with vector of associated annotations.
-    std::map<size_t, std::vector<std::string>> obtainAllPerIndex() const
+    [[nodiscard]] std::map<size_t, std::vector<std::string>> obtainAllPerIndex() const
     {
         std::map<size_t, std::vector<std::string>> ret;
         for (const auto& an : this->annotations)
@@ -259,7 +253,7 @@ public:
     //! use-case - it is not forbidden.
     void add(const std::pair<const size_t, const std::string>& a)
     {
-        this->annotations.push_back(a);
+        this->annotations.emplace_back(a);
     }
 
 private:
@@ -282,9 +276,9 @@ namespace mb::too::math
 {
 template <typename QuValueType>
 ChartAxis<QuValueType>::ChartAxis(
-    const ChartAxis_setup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
+    const ChartAxis_setup& setup, Quantity quantity, const QuValueType& min_qu_val,
     const QuValueType& max_qu_val)
-    : quantity(quantity)
+    : quantity(std::move(quantity))
     , setup(setup.clone())
 {
     constr_common_impl(min_qu_val, max_qu_val);
@@ -352,7 +346,7 @@ void ChartAxis<QuValueType>::apply_ratio_to_tickvals(const Rational& r)
     this->tick_end_qu_val = unit.convertToDifferentRatio(this->tick_end_qu_val, r);
     this->tick_step_qu_val = unit.convertToDifferentRatio(this->tick_step_qu_val, r);
 
-    if (!too::math::is_power_of(r.asFloatingPoint<double>(), 10.0))
+    if (!too::math::isPowerOf(r.asFloatingPoint<double>(), 10.0))
     {
         // Wow :/ that's a nice error... you need to copy the this-members, because they
         // get modified within non-const calcScaling. Problem is, that the direct change of the
@@ -565,7 +559,6 @@ void Chart2D<QuValueTypeX, QuValueTypeY>::pullout_common_factor_from_data()
         this->y_axis->apply_ratio_to_quantity_unit(new_ratio);
     }
 }
-
 } // namespace mb::too::math
 
 #endif

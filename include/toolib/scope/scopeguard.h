@@ -1,11 +1,7 @@
 // 2011
 
-//!
-/** Implements a scope guard (ScopeGuard)
-    according to the article by Andrei Alexandrescu and Petru Marginean, December 01, 2000.
-*/
-//! \file
-
+/** \file Implements a scope guard (ScopeGuard)
+    according to the article by Andrei Alexandrescu and Petru Marginean, December 01, 2000.*/
 
 #ifndef SCOPEGUARD_H_n2zxr732rmyrz3n2ur
 #define SCOPEGUARD_H_n2zxr732rmyrz3n2ur
@@ -31,7 +27,7 @@ This is an example for usage with a member function with no parameters as possib
 There exist overloads of MakeObjGuard() and MakeGuard() suitable for use cases with 1 or 2 parameters and
 for usual functions, also with 0, 1, or 2 parameters.
 
-If you like to transfer a parameter by reference, use too::ByRef(some_variable) instead of some_variable as parameter.
+If you like to transfer a parameter by reference, use too::byRef(some_variable) instead of some_variable as parameter.
 
 The call to NoRollback() is of course optional.*/
 typedef const ScopeGuardImplBase& ScopeGuard;
@@ -46,7 +42,7 @@ class ScopeGuardImplBase
 public:
     //! Calling this method ensures, that no rollback is performed by the constructor.
     /** So all actions preceding the guarding are commited.*/
-    void NoRollback() const throw()
+    void NoRollback() const noexcept
     {
         m_bRollback = false;
     }
@@ -64,9 +60,7 @@ protected:
         other.NoRollback();
     }
     //! Does nothing.
-    ~ScopeGuardImplBase()
-    {
-    }
+    ~ScopeGuardImplBase() = default;
     //! This holds the decision over rollback.
     mutable bool m_bRollback;
 
@@ -94,7 +88,7 @@ class ScopeGuardImpl0 : public ScopeGuardImplBase
 {
 public:
     //! Assigns the function.
-    ScopeGuardImpl0(Fct fct)
+    explicit ScopeGuardImpl0(Fct fct)
         : m_fct(fct)
     {
     }
@@ -291,19 +285,19 @@ private:
 
 //! Creates a scope guard with a specific rollback function.
 template <typename Fct>
-inline ScopeGuardImpl0<Fct> MakeGuard(Fct fct)
+ScopeGuardImpl0<Fct> MakeGuard(Fct fct)
 {
     return ScopeGuardImpl0<Fct>(fct);
 }
 //! Creates a scope guard with a specific rollback function with 1 parameter.
 template <typename Fct, typename Para1>
-inline ScopeGuardImpl1<Fct, Para1> MakeGuard(Fct fct, Para1 para1)
+ScopeGuardImpl1<Fct, Para1> MakeGuard(Fct fct, Para1 para1)
 {
     return ScopeGuardImpl1<Fct, Para1>(fct, para1);
 }
 //! Creates a scope guard with a specific rollback function with 2 parameters.
 template <typename Fct, typename Para1, typename Para2>
-inline ScopeGuardImpl2<Fct, Para1, Para2> MakeGuard(Fct fct, Para1 para1, Para2 para2)
+ScopeGuardImpl2<Fct, Para1, Para2> MakeGuard(Fct fct, Para1 para1, Para2 para2)
 {
     return ScopeGuardImpl2<Fct, Para1, Para2>(fct, para1, para2);
 }
@@ -312,23 +306,22 @@ inline ScopeGuardImpl2<Fct, Para1, Para2> MakeGuard(Fct fct, Para1 para1, Para2 
 
 //! Creates a scope guard with a specific rollback object plus member function.
 template <class Obj, typename MemFct>
-inline ObjScopeGuardImpl0<Obj, MemFct> MakeObjGuard(Obj& obj, MemFct memFct)
+ObjScopeGuardImpl0<Obj, MemFct> MakeObjGuard(Obj& obj, MemFct memFct)
 {
     return ObjScopeGuardImpl0<Obj, MemFct>(obj, memFct);
 }
 //! Creates a scope guard with a specific rollback object plus member function with 1 parameter.
 template <class Obj, typename MemFct, typename Para1>
-inline ObjScopeGuardImpl1<Obj, MemFct, Para1> MakeObjGuard(Obj& obj, MemFct memFct, Para1 para1)
+ObjScopeGuardImpl1<Obj, MemFct, Para1> MakeObjGuard(Obj& obj, MemFct memFct, Para1 para1)
 {
     return ObjScopeGuardImpl1<Obj, MemFct, Para1>(obj, memFct, para1);
 }
 //! Creates a scope guard with a specific rollback object plus member function with 2 parameters.
 template <class Obj, typename MemFct, typename Para1, typename Para2>
-inline ObjScopeGuardImpl2<Obj, MemFct, Para1, Para2> MakeObjGuard(Obj& obj, MemFct memFct, Para1 para1, Para2 para2)
+ObjScopeGuardImpl2<Obj, MemFct, Para1, Para2> MakeObjGuard(Obj& obj, MemFct memFct, Para1 para1, Para2 para2)
 {
     return ObjScopeGuardImpl2<Obj, MemFct, Para1, Para2>(obj, memFct, para1, para2);
 }
-
 } // namespace mb::too
 
 // always useful together with scopeguard
