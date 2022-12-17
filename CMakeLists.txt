@@ -6,7 +6,7 @@ include(${ul_CMAKE_DIRS}/cmake_util.cmake)
 
 ul_include(buildnr.cmake)
 project(toolib VERSION 0.1.${BUILD_NR}.0)
-message(STATUS "toolib project version: " ${PROJECT_VERSION})
+message(STATUS "${PROJECT_NAME} version: " ${PROJECT_VERSION})
 set(target ${PROJECT_NAME})
 
 ul_include(defaults.cmake)
