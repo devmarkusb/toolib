@@ -5,6 +5,7 @@
 #ifndef MINMAX_VALUES_H_iuwenyg34gnyt487t
 #define MINMAX_VALUES_H_iuwenyg34gnyt487t
 
+#include "../config.h"
 
 #include <algorithm>
 #include <type_traits>

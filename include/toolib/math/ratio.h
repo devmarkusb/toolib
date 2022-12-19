@@ -6,6 +6,7 @@
 #ifndef RATIO_H_louiuzlik79hi965gi6
 #define RATIO_H_louiuzlik79hi965gi6
 
+#include "../config.h"
 #include "ul/ul.h"
 #include <cstdint>
 #include <initializer_list>

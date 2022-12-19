@@ -5,6 +5,7 @@
 #ifndef CAL_EVENT_H_nbvxmcbvxmcnbxcmbierutozreoi
 #define CAL_EVENT_H_nbvxmcbvxmcnbxcmbierutozreoi
 
+#include "../config.h"
 #include "ul/ptr.h"
 #include <memory>
 

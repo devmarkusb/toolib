@@ -6,6 +6,7 @@
 #define MONEY_H_weztuiolkjhgf34567
 
 #include "toolibDEF.h"
+#include "../config.h"
 #include "ul/ul.h"
 #include <locale>
 #include <string>

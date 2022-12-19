@@ -5,6 +5,7 @@
 #ifndef SCALE_H_enrhfu87n83464346ng
 #define SCALE_H_enrhfu87n83464346ng
 
+#include "../config.h"
 #include "ul/ul.h"
 #include <cmath>
 #include <type_traits>

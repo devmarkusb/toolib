@@ -5,6 +5,7 @@
 #ifndef PERFORMANCE_H_sdkfgnxzuwegnf93746ryng342grf
 #define PERFORMANCE_H_sdkfgnxzuwegnf93746ryng342grf
 
+#include "../config.h"
 #include "toolib/math/number.h"
 #include "toolib/math/round.h"
 #include "ul/ul.h"

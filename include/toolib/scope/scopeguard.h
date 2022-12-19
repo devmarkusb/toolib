@@ -6,6 +6,7 @@
 #ifndef SCOPEGUARD_H_n2zxr732rmyrz3n2ur
 #define SCOPEGUARD_H_n2zxr732rmyrz3n2ur
 
+#include "../config.h"
 #include <cstddef>
 
 

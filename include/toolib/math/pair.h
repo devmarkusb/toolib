@@ -6,6 +6,7 @@
 #ifndef PAIR_H_x2ur832rx823r8r
 #define PAIR_H_x2ur832rx823r8r
 
+#include "../config.h"
 #include <utility>
 
 

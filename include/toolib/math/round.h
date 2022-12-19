@@ -6,6 +6,7 @@
 #ifndef ROUND_H_9mj238fz23nf8z
 #define ROUND_H_9mj238fz23nf8z
 
+#include "../config.h"
 #include <cmath>
 #include <limits>
 #include <type_traits>

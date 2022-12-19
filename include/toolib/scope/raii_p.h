@@ -6,6 +6,7 @@
 #ifndef RAII_P_H_on824f287xrz2387r
 #define RAII_P_H_on824f287xrz2387r
 
+#include "../config.h"
 #include "ul/ul.h"
 #if UL_OS_WINDOWS
 #include <crtdbg.h>

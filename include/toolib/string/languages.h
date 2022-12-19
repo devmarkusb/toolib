@@ -5,6 +5,7 @@
 #ifndef LANGUAGES_H_sjdkghfnxz34gf7328f7gfr
 #define LANGUAGES_H_sjdkghfnxz34gf7328f7gfr
 
+#include "../config.h"
 #include "ul/ul.h"
 #include <string>
 #include <vector>

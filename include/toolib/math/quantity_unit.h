@@ -7,6 +7,7 @@
 #define QUANTITY_UNIT_H_dfhgxungh38hgxt38gb
 
 #include "ratio.h"
+#include "../config.h"
 #include "ul/ul.h"
 #include <exception>
 #include <map>

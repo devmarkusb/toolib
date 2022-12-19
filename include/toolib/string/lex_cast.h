@@ -5,6 +5,7 @@
 #ifndef LEX_CAST_H_sopaiem3p2oium32omo
 #define LEX_CAST_H_sopaiem3p2oium32omo
 
+#include "../config.h"
 #include "ul/ul.h"
 #include <exception>
 #include <sstream>

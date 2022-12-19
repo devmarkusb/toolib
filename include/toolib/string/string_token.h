@@ -6,6 +6,7 @@
 #ifndef STRING_TOKEN_H_uwireiwubefeubf
 #define STRING_TOKEN_H_uwireiwubefeubf
 
+#include "../config.h"
 #include <string>
 #include <vector>
 

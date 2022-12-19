@@ -6,6 +6,7 @@
 #ifndef COLOR_H_sdfjlhjcge5zrxdgh85
 #define COLOR_H_sdfjlhjcge5zrxdgh85
 
+#include "../config.h"
 #include <string>
 
 

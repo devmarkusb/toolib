@@ -5,6 +5,7 @@
 #ifndef FILE_H_sduifhg3gfy324n178fsffe4f
 #define FILE_H_sduifhg3gfy324n178fsffe4f
 
+#include "../config.h"
 #include "ul/ul.h"
 #include <cerrno>
 #include <cstring>

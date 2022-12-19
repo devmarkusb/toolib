@@ -6,6 +6,7 @@
 #ifndef NUMBER_H_f29jh8hnf238hrxz23
 #define NUMBER_H_f29jh8hnf238hrxz23
 
+#include "../config.h"
 #include "toolib/math/floating_point.h"
 #include "ul/comp_bwds.h"
 #include "ul/ul.h"

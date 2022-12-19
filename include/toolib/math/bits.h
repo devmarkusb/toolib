@@ -5,6 +5,7 @@
 #ifndef BITS_H_inewhjr4382zrn83
 #define BITS_H_inewhjr4382zrn83
 
+#include "../config.h"
 #include <cstdint>
 #include <utility>
 

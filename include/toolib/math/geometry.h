@@ -5,6 +5,7 @@
 #ifndef GEOMETRY_H_dgiuntgh87xtg3487tg3tgfvscd
 #define GEOMETRY_H_dgiuntgh87xtg3487tg3tgfvscd
 
+#include "../config.h"
 #include "toolib/math/quantity_unit.h"
 #include "toolib/math/scale.h"
 #include "ul/ul.h"

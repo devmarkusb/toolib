@@ -5,6 +5,7 @@
 #ifndef MATRIX_H_mx02983urx23
 #define MATRIX_H_mx02983urx23
 
+#include "../config.h"
 #include "ul/ul.h"
 #include <cmath>
 #include <complex>

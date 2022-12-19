@@ -5,6 +5,7 @@
 #ifndef IABSTRACT_H_ajkshuihnr82374r72ff23rny8fdnbwye
 #define IABSTRACT_H_ajkshuihnr82374r72ff23rny8fdnbwye
 
+#include "../config.h"
 namespace mb::too
 {
 using TInBuffer = void*;

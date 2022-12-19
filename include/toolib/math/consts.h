@@ -5,6 +5,7 @@
 #ifndef CONSTS_H_sjkhnfxgiuexernhgf7834t4
 #define CONSTS_H_sjkhnfxgiuexernhgf7834t4
 
+#include "../config.h"
 #include "ul/ul.h"
 #include <cmath>
 

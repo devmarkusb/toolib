@@ -5,6 +5,7 @@
 #ifndef GAME_H_aubzstex3zubte632yet7
 #define GAME_H_aubzstex3zubte632yet7
 
+#include "../config.h"
 #include "ul/ul.h"
 #include <exception>
 

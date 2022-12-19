@@ -6,6 +6,7 @@
 #ifndef ITYPE_H_39653425hgjdhgxhrgbubeir43
 #define ITYPE_H_39653425hgjdhgxhrgbubeir43
 
+#include "../config.h"
 #include "ul/ptr.h"
 
 

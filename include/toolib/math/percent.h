@@ -5,6 +5,7 @@
 #ifndef PERCENT_H_kjdghnxzre8hgnf83xgfn34gx
 #define PERCENT_H_kjdghnxzre8hgnf83xgfn34gx
 
+#include "../config.h"
 
 namespace mb::too::math
 {

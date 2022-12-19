@@ -9,6 +9,7 @@
 #include "quantity_unit.h"
 #include "ratio.h"
 #include "scale.h"
+#include "../config.h"
 #include "ul/ul.h"
 #include <algorithm>
 #include <map>

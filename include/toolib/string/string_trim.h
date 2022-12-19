@@ -6,6 +6,7 @@
 #ifndef STRING_TRIM_H_cidusbfi243i7324
 #define STRING_TRIM_H_cidusbfi243i7324
 
+#include "../config.h"
 #include <string>
 
 

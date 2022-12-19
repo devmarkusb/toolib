@@ -5,6 +5,7 @@
 #ifndef FLOATING_POINT_H_09458t87t5twd2874t57rbn6
 #define FLOATING_POINT_H_09458t87t5twd2874t57rbn6
 
+#include "../config.h"
 #include "ul/comp_bwds.h"
 #include "ul/ul.h"
 #include <algorithm>

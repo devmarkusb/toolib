@@ -6,6 +6,7 @@
 #define FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn
 
 #include "toolibDEF.h"
+#include "../config.h"
 #include "ul/warnings.h"
 #include <string>
 #include <vector>

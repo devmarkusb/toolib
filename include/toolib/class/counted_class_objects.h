@@ -8,6 +8,7 @@
 #ifndef COUNTED_CLASS_OBJECTS_H_cirewhct34bctgu4372
 #define COUNTED_CLASS_OBJECTS_H_cirewhct34bctgu4372
 
+#include "../config.h"
 
 namespace mb::too
 {

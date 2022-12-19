@@ -5,6 +5,7 @@
 #ifndef MMTYPECONV_H_nbi4lnv5
 #define MMTYPECONV_H_nbi4lnv5
 
+#include "../config.h"
 #include <string>
 
 #include "ul/macros.h"

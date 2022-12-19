@@ -6,6 +6,7 @@
 #ifndef PROMPT_H_8jr82ctrz2tn
 #define PROMPT_H_8jr82ctrz2tn
 
+#include "../config.h"
 #include "ul/ul.h"
 #include <chrono>
 #if UL_OS_WINDOWS

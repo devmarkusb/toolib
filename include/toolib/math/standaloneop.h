@@ -10,6 +10,7 @@
 #ifndef STANDALONEOP_H_98243rz823xr
 #define STANDALONEOP_H_98243rz823xr
 
+#include "../config.h"
 
 namespace mb::too::math::stand_alone_ops
 {
