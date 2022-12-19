@@ -5,6 +5,7 @@
 #ifndef DATE_TIME_HPP_kjgfdhnxui3gfy34z8ry27
 #define DATE_TIME_HPP_kjgfdhnxui3gfy34z8ry27
 
+#include "../../config.h"
 #include "toolib/string/string_token.h"
 #include "ul/comp_bwds.h"
 #include "ul/ul.h"
@@ -206,5 +207,7 @@ bool operator>=(const MonthYear_base<NormalizePolicy>& lhs, const MonthYear_base
     return !operator<(lhs, rhs);
 }
 } // namespace mb::too::date_time
+
+TOO_HEADER_END
 
 #endif

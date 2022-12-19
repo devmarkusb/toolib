@@ -186,4 +186,6 @@ auto transform(const MinMaxValue<ValueTypeSrc>& src, TransformFct&& t)
 }
 } // namespace mb::too::math
 
+TOO_HEADER_END
+
 #endif

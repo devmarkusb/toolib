@@ -740,4 +740,6 @@ matrix<T> operator*(const matrix<T>& t1, const matrix<T>& t2)
 }
 } // namespace mb::too::math
 
+TOO_HEADER_END
+
 #endif

@@ -94,4 +94,6 @@ std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, do
 }
 } // namespace mb::too::math
 
+TOO_HEADER_END
+
 #endif

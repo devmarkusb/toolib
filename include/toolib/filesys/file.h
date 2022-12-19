@@ -61,4 +61,6 @@ inline void throwError(const std::string& filePathNameExt, operation op, const s
 }
 } // namespace mb::too::file
 
+TOO_HEADER_END
+
 #endif

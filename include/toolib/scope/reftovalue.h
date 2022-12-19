@@ -8,6 +8,7 @@
 
 #include "../config.h"
 
+
 namespace mb::too
 {
 //! Transports a reference as a value.
@@ -41,5 +42,7 @@ RefToValue<T> byRef(T& t)
     return RefToValue<T>(t);
 }
 } // namespace mb::too
+
+TOO_HEADER_END
 
 #endif

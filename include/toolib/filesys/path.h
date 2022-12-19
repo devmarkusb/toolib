@@ -86,5 +86,6 @@ private:
 TOOLIBSHARED_EXPORT Path operator+(const Path& p1, const Path& p2);
 } // namespace mb::too::file
 
+TOO_HEADER_END
 
 #endif

@@ -88,4 +88,6 @@ ul::opt<ArithType> isPowerOf(ArithType x, ArithType base)
 
 } // namespace mb::too::math
 
+TOO_HEADER_END
+
 #endif

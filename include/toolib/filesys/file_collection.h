@@ -45,4 +45,6 @@ private:
 
 UL_PRAGMA_WARNINGS_POP
 
+TOO_HEADER_END
+
 #endif

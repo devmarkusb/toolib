@@ -8,8 +8,8 @@ You just need one include and one lib to link statically.*/
 #ifndef DEBUG_LEAKS_H_dj823xfz23xzfn
 #define DEBUG_LEAKS_H_dj823xfz23xzfn
 
-#include "../config.h"
 #include "ul/macros.h"
+
 
 //! Memory leak detection. Include the header as the last one (!) in your main module and use UL_DUMP_MEM_LEAKS.
 /** Detection goes either by standard Visual Studio style or by using vld.h, if available, whereas

@@ -360,4 +360,6 @@ inline PerformanceProfiler::Items& PerformanceProfiler::items()
 }
 } // namespace mb::too
 
+TOO_HEADER_END
+
 #endif

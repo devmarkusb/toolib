@@ -10,6 +10,7 @@
 
 #include "../config.h"
 
+
 namespace mb::too
 {
 //! Base class for classes that want to restrict their instantiations to a certain number.
@@ -79,5 +80,7 @@ private:
 template <class BeingCounted>
 long Counted<BeingCounted>::m_numObjects; // defines and initializes to zero
 } // namespace mb::too
+
+TOO_HEADER_END
 
 #endif

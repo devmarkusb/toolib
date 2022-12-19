@@ -26,4 +26,6 @@ inline void tokenizeString(const std::string& s, const std::string& delimiters, 
 }
 } // namespace mb::too::str
 
+TOO_HEADER_END
+
 #endif

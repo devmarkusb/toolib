@@ -215,4 +215,6 @@ struct Margins_
 using Margins = Margins_<>;
 } // namespace mb::too::math
 
+TOO_HEADER_END
+
 #endif

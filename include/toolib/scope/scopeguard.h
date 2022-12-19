@@ -328,4 +328,6 @@ ObjScopeGuardImpl2<Obj, MemFct, Para1, Para2> MakeObjGuard(Obj& obj, MemFct memF
 // always useful together with scopeguard
 #include "reftovalue.h"
 
+TOO_HEADER_END
+
 #endif

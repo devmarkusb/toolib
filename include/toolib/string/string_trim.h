@@ -32,4 +32,6 @@ inline std::string& trim(std::string& s)
 }
 } // namespace mb::too::str
 
+TOO_HEADER_END
+
 #endif

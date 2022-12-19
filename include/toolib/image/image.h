@@ -22,4 +22,6 @@ const std::string fileext_png{".png"};
 const std::string fileext_svg{".svg"};
 } // namespace mb::too::img
 
+TOO_HEADER_END
+
 #endif

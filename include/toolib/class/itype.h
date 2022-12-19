@@ -51,4 +51,6 @@ struct itype
 };
 } // namespace mb::too
 
+TOO_HEADER_END
+
 #endif

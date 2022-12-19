@@ -6,7 +6,6 @@
 #ifndef CATCH_EXIT_H_34trcx83943g
 #define CATCH_EXIT_H_34trcx83943g
 
-#include "../config.h"
 #include "ul/macros.h"
 #if UL_OS_WINDOWS && UL_OS_WINDOWS_DESKTOP
 #include "../../../toolibDEF.h"

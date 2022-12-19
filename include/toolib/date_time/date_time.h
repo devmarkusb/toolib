@@ -134,5 +134,6 @@ const MonthYear_dur one_month(1, 0);
 
 #include "detail/date_time.hpp"
 
+TOO_HEADER_END
 
 #endif

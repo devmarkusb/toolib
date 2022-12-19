@@ -115,4 +115,6 @@ namespace mb
 namespace toobit = too::math::bit;
 } // namespace mb
 
+TOO_HEADER_END
+
 #endif

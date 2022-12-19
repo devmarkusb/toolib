@@ -7,6 +7,7 @@
 #ifndef SCOPEFLAGGED_HPP_9283rz3nxznrzn3
 #define SCOPEFLAGGED_HPP_9283rz3nxznrzn3
 
+#include "../config.h"
 #include "toolib/math/bits.h"
 
 
@@ -116,5 +117,7 @@ template <class user, class bit_container_type>
 typename scope_flagged<user, bit_container_type>::SG_flags* scope_flagged<user, bit_container_type>::m_auxLastflags =
     scope_flagged<user, bit_container_type>::m_flags;
 } // namespace mb::too
+
+TOO_HEADER_END
 
 #endif

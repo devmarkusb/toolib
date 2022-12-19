@@ -286,4 +286,6 @@ public:
 
 #include "ul/macros_end.h"
 
+TOO_HEADER_END
+
 #endif

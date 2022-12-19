@@ -5,7 +5,7 @@
 #ifndef HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
 #define HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
 
-#include "../config.h"
+#include "../../config.h"
 #include "toolib/math/percent.h"
 #include "toolib/math/scale.h"
 #include "ul/ul.h"
@@ -111,5 +111,7 @@ private:
 } // namespace mb::too::stat
 
 #include "ul/macros_end.h"
+
+TOO_HEADER_END
 
 #endif

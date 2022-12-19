@@ -131,4 +131,6 @@ struct ToStringConverter<FloatType, FloatFormat::scientific>
 
 #include "ul/macros_end.h"
 
+TOO_HEADER_END
+
 #endif

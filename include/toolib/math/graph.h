@@ -560,4 +560,6 @@ void Chart2D<QuValueTypeX, QuValueTypeY>::pullout_common_factor_from_data()
 }
 } // namespace mb::too::math
 
+TOO_HEADER_END
+
 #endif

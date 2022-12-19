@@ -184,4 +184,6 @@ namespace mb
 namespace toog = too::game;
 } // namespace mb
 
+TOO_HEADER_END
+
 #endif

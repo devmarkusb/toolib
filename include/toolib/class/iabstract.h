@@ -6,6 +6,8 @@
 #define IABSTRACT_H_ajkshuihnr82374r72ff23rny8fdnbwye
 
 #include "../config.h"
+
+
 namespace mb::too
 {
 using TInBuffer = void*;
@@ -20,5 +22,7 @@ struct iabstract
     virtual bool execute(const char* command, const TInBuffer params[] = nullptr, TOutBuffer retvalue = nullptr) = 0;
 };
 } // namespace mb::too
+
+TOO_HEADER_END
 
 #endif

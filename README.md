@@ -15,3 +15,11 @@ Sometimes you need to build the lib according to CMakeLists.txt in the root.
 
 To find anything topic specific, just browse through the directory
 structure and read header files.
+
+## FAQ
+
+### Namespace clashes
+
+In rare cases when you need to have another namespace `too`
+around, you can do something like
+`add_compile_definitions(TOO_DISABLE_NAMESPACE_ALIAS=1)`.

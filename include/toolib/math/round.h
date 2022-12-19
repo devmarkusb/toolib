@@ -40,4 +40,6 @@ TR round_to(TP r, unsigned short decimal_places = 0)
 }
 } // namespace mb::too::math
 
+TOO_HEADER_END
+
 #endif

@@ -87,4 +87,6 @@ private:
 };
 } // namespace mb::too::img
 
+TOO_HEADER_END
+
 #endif

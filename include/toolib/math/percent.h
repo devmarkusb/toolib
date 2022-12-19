@@ -17,4 +17,6 @@ const Percent zero_percent = Percent{};
 const Factor factor_zero = Factor{};
 } // namespace mb::too::math
 
+TOO_HEADER_END
+
 #endif

@@ -206,5 +206,6 @@ std::unique_ptr<TimeType> RecurringEvent<TimeType>::getNextTimePoint(const TimeT
 }
 } // namespace mb::too::date_time
 
+TOO_HEADER_END
 
 #endif

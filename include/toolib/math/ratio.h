@@ -302,4 +302,6 @@ UL_TEMPCONSTEXPR const Rational twelvetimes      {std::ratio<12, 1>{}};
 #undef UL_TEMPCONSTEXPR
 } // namespace mb::too::math
 
+TOO_HEADER_END
+
 #endif

@@ -120,4 +120,6 @@ inline std::string getEnglishLanguageName(const LangID_iso639_1& id)
 }
 } // namespace mb::too::str
 
+TOO_HEADER_END
+
 #endif
