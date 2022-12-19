@@ -32,7 +32,7 @@ TR round_to(TP r, unsigned short decimal_places = 0)
         decimal_places = 0; // for integral target values decimal_places make no sense
     using std::numeric_limits;
     const TP d = round(r, decimal_places);
-    if (d > numeric_limits<TR>::max())
+    if (d > static_cast<decltype(d)>(numeric_limits<TR>::max()))
         return numeric_limits<TR>::max();
     else if (d < numeric_limits<TR>::min())
         return numeric_limits<TR>::min();
