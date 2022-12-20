@@ -15,7 +15,7 @@
 namespace mb::too::file
 {
 //! String manipulation helper class only. No file system operations.
-/** DEPRECATED, use too::std_fs::path instead.*/
+/** DEPRECATED, use ul::std_fs::path instead.*/
 class TOOLIBSHARED_EXPORT Path
 {
 public:
