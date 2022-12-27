@@ -9,7 +9,6 @@
 #include "../config.h"
 #include "ul/ptr.h"
 
-
 namespace mb::too
 {
 /** Sometimes you are in the situation of declaring abstract interfaces and

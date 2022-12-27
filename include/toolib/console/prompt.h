@@ -17,7 +17,6 @@
 
 #include "ul/macros.h"
 
-
 namespace mb::too
 {
 inline void prompt()

@@ -11,7 +11,6 @@
 #include <type_traits>
 #include <utility>
 
-
 namespace mb::too::math
 {
 template <typename FloatingPointType>
@@ -47,10 +46,8 @@ private:
     std::pair<FloatingPointType, FloatingPointType> m_ToInterval;
 };
 
-
 //!
 using ScaleTickCount = unsigned long;
-
 
 /** Calculates a meaningful step width (tick) for a scale with at most MaxTickCount tick markers suitable for a
     data value range comprising RangeMinToMax.*/

@@ -12,7 +12,6 @@
 #include <cstdint>
 #include <string>
 
-
 namespace mb::too::math
 {
 //! Represents a mxn-matrix with m rows and n columns. T should be a reasonable basic numerical type.
@@ -32,6 +31,7 @@ public:
     class error_division_by_zero : virtual public std::exception
     {
     };
+
     class error_division_by_zero_det : virtual public error_division_by_zero
     {
     };
@@ -43,6 +43,7 @@ public:
         : m_rep(new MRep(dim_rows, dim_cols, 0))
     {
     }
+
     //! Constructor allocating memory for a matrix with the given dimensions plus initialization.
     /** \param dim_rows Count of rows.
         \param dim_cols Count of columns.
@@ -51,12 +52,14 @@ public:
         : m_rep(new MRep(dim_rows, dim_cols, mtrx))
     {
     }
+
     //! Copies from another matrix, using the same internal representation to speed things up.
     matrix(const matrix& mtrx)
     {
         ++(mtrx.m_rep->iRefCount);
         m_rep = mtrx.m_rep;
     }
+
     //! Replaces itself with another matrix, using the same internal representation to speed things up.
     matrix& operator=(const matrix& mtrx)
     {
@@ -67,6 +70,7 @@ public:
         m_rep = mtrx.m_rep;
         return *this;
     }
+
     /* Applying the idiom "Coercion by Member Template" doesn't work well with private representation
     so far... (perhaps sth. for later improvement)
     //! Copies from another matrix, using the same internal representation to speed things up.
@@ -126,6 +130,7 @@ public:
         }
         return *this;
     }
+
     //! Nulls elements. Fast, if internal representation is referenced only once.
     void zeroize()
     {
@@ -137,6 +142,7 @@ public:
             for (uint32_t j = 0; j < cols; ++j)
                 m[i][j] = init;
     }
+
     //! Checks if this matrix is zero.
     [[nodiscard]] bool isZero() const
     {
@@ -149,11 +155,13 @@ public:
                     return false;
         return true;
     }
+
     //! Get row dimension.
     [[nodiscard]] uint32_t RowCount() const
     {
         return m_rep->dim_rows;
     }
+
     //! Get column dimension.
     [[nodiscard]] uint32_t ColCount() const
     {
@@ -161,16 +169,19 @@ public:
     }
     // Smart equivalent of T&
     class Tref;
+
     //! Matrix entry access. Medium reading, slow writing - do not use it in loops.
     Tref operator()(uint32_t row, uint32_t column)
     {
         return Tref(*this, row, column);
     }
+
     //! Matrix entry access. Medium reading - do not use it in loops.
     const T& operator()(uint32_t row, uint32_t column) const
     {
         return m_rep->m[row][column];
     }
+
     //! Matrix entry access by cast to T**. Fast version, for usage in loops.
     /** Two drawbacks: First of all, this provides low-level access to the private matrix data.
     And secondly, the cast assumes that the matrix content will be changed. Hence it starts
@@ -180,6 +191,7 @@ public:
         m_rep = m_rep->get_own_copy();
         return m_rep->m;
     }
+
     //! Scalar multiplying a matrix.
     friend matrix<T> operator*(const matrix<T>& m, const T& t)
     {
@@ -196,6 +208,7 @@ public:
         }
         return res;
     }
+
     //! Scalar multiplying a matrix.
     friend matrix<T> operator*(const T& t, const matrix<T>& m)
     {
@@ -212,6 +225,7 @@ public:
         }
         return res;
     }
+
     //! Scalar reciprocal multiplying a matrix.
     /** Throws error_division_by_zero, where m[.][.]==T() is taken as "zero".*/
     friend matrix<T> operator/(const T& t, const matrix<T>& m)
@@ -232,6 +246,7 @@ public:
         }
         return res;
     }
+
     //! Scalar reciprocal multiplying a matrix.
     /** Throws error_division_by_zero, where t==T() is taken as zero.*/
     friend const matrix<T> operator/(const matrix<T>& m, const T& t)
@@ -251,6 +266,7 @@ public:
         }
         return res;
     }
+
     //! Matrix multiplication.
     /** Remark: Haven't yet found out why \code matrixd m3(0, 0); m3 = m1*m2; \endcode
     is fast as usual, whereas \code matrixd m3(m1*m2); \endcode is two times slower. The sheer
@@ -286,6 +302,7 @@ public:
         *this = res;
         return *this;
     }
+
     //! Scalar multiplying this matrix.
     matrix& operator*=(const T& t)
     {
@@ -300,6 +317,7 @@ public:
         }
         return *this;
     }
+
     //! Scalar reciprocal multiplying this matrix.
     /** Throws error_division_by_zero, where t==T() is taken as zero.*/
     matrix& operator/=(const T& t)
@@ -317,6 +335,7 @@ public:
         }
         return *this;
     }
+
     //! Another matrix is added this one. Both have to coincide dimensionally.
     matrix& operator+=(const matrix& m)
     {
@@ -332,6 +351,7 @@ public:
         }
         return *this;
     }
+
     //! Another matrix is substracted from this one. Both have to coincide dimensionally.
     matrix& operator-=(const matrix& m)
     {
@@ -347,6 +367,7 @@ public:
         }
         return *this;
     }
+
     //! Comparison of two matrices.
     friend bool operator==(const matrix<T>& m1, const matrix<T>& m2)
     {
@@ -365,11 +386,13 @@ public:
         }
         return true;
     }
+
     //! Comparison of two matrices.
     friend bool operator!=(const matrix<T>& m1, const matrix<T>& m2)
     {
         return m1 != m2;
     }
+
     //! Returns the row-"matrix" (1xn) of the specified row of this matrix.
     matrix getrow(uint32_t row) const
     {
@@ -381,6 +404,7 @@ public:
             reselem[0][j] = melem[row][j];
         return res;
     }
+
     //! Returns the column-"matrix" (mx1) of the specified column of this matrix.
     /** Due to data storage, this is slower than getrow(). Maybe one can consider transposition
     by transpose() first (if one needs to extract dozens of columns or those from the back of a huge
@@ -395,7 +419,6 @@ public:
             reselem[i][0] = melem[i][col];
         return res;
     }
-
 
     //### Operations for quadratic matrices only. ###
 
@@ -440,6 +463,7 @@ public:
         }
         return true;
     }
+
     //! Transposes this matrix. Works only for quadratic matrices.
     /** Of course this could have been implemented also for non-quadratic ones. But it would be
     easier to this externally if ever needed. Also there is no loss of performance, since a new
@@ -459,37 +483,42 @@ public:
                 elem[j][i] = aux;*/
             }
     }
+
     //! Determinant.
     T det() const
     {
         throw ul::not_implemented{"det"};
     }
+
     //! Inverse. Throws error_division_by_zero_det exception if determinant is zero.
     void invert()
     {
         throw ul::not_implemented{"invert"};
     }
+
     //! Is invertible?
     [[nodiscard]] bool isInvertible() const
     {
         throw ul::not_implemented{"isInvertible"};
     }
+
     //! Is symmetric?
     [[nodiscard]] bool isSymmetric() const
     {
         throw ul::not_implemented{"isSymmetric"};
     }
+
     //! Is orthogonal?
     [[nodiscard]] bool isOrthogonal() const
     {
         throw ul::not_implemented{"isOrthogonal"};
     }
+
     //! Is diagonal?
     [[nodiscard]] bool isDiagonal() const
     {
         throw ul::not_implemented{"isDiagonal"};
     }
-
 
     //### Implementation details. ###
 
@@ -500,6 +529,7 @@ public:
         friend class matrix;
         matrix& m;
         uint32_t r, c; // rows, cols
+
         Tref(matrix& mtrx, uint32_t row, uint32_t col)
             : m(mtrx)
             , r(row)
@@ -513,6 +543,7 @@ public:
         {
             return m.m_rep->m[r][c];
         }
+
         // matrix element is written to
         void operator=(const T& t)
         {
@@ -556,8 +587,10 @@ private:
                         m[i][j] = mtrx[i][j];
             }
         }
+
         MRep(const MRep&) = delete;
         MRep& operator=(const MRep&) = delete;
+
         // The representation is no longer needed (normally a consequence of the counter approaching 0).
         ~MRep()
         {
@@ -609,6 +642,7 @@ private:
     /* The internal representation of the matrix data. This could be shared by more than one matrix,
     if they are equal. The amount is reference counted.*/
     MRep* m_rep;
+
     /* Called by the destructor. Checks whether the representation is really no longer needed and
     can be deleted just like the containing matrix class can (because it's leaving its life scope).
     If there are other matrices with equal content out there, the representation nows about them by
@@ -621,6 +655,7 @@ private:
             m_rep = 0;
         }
     }
+
     /* Changes a matrix entry. Of course the representation has to duplicate itself first, when more than
     one matrices share the representations content.*/
     void put(uint32_t row, uint32_t col, const T& t)
@@ -635,6 +670,7 @@ typedef matrix<double> matrixd;
 typedef matrix<int32_t> matrixi;
 
 using std::complex;
+
 //! Extends matrix<T> to cmatrix<t> which at its core is essentially the same as matrix<complex<t>>.
 /** Inheritance seems natural, since this special choice of template type just results in a bunch
 of additional possible operations on the matrix that are complex number related.
@@ -650,23 +686,28 @@ public:
         : matrix<complex<t>>(dim_rows, dim_cols)
     {
     }
+
     cmatrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx)
         : matrix<complex<t>>(dim_rows, dim_cols, mtrx)
     {
     }
+
     cmatrix(const cmatrix& mtrx)
         : matrix<complex<t>>(mtrx)
     {
     }
+
     explicit cmatrix(const matrix<complex<t>>& mtrx)
         : matrix<complex<t>>(mtrx)
     {
     }
+
     cmatrix& operator=(const cmatrix& mtrx)
     {
         matrix<complex<t>>::operator=(mtrx);
         return *this;
     }
+
     ~cmatrix() = default;
 
     //! Conjugates this matrix.
@@ -681,6 +722,7 @@ public:
                 elem[i][j] = std::conj(elem[i][j]);
             }
     }
+
     //! Adjoins this matrix. This method supports only quadratic matrices!
     void adjoin()
     {
@@ -700,11 +742,13 @@ public:
         for (uint32_t i = 0; i < r; ++i)
             elem[i][i] = std::conj(elem[i][i]);
     }
+
     //! Is hermitean?
     [[nodiscard]] bool isHermitean() const
     {
         throw ul::not_implemented{"isHermitean"};
     }
+
     //! Is unitary?
     [[nodiscard]] bool isUnitary() const
     {
@@ -718,12 +762,14 @@ matrix<T> operator+(const matrix<T>& t1, const matrix<T>& t2)
 {
     return matrix<T>(t1) += t2;
 }
+
 //! Difference. Both matrices have to coincide dimensionally.
 template <typename T>
 matrix<T> operator-(const matrix<T>& t1, const matrix<T>& t2)
 {
     return matrix<T>(t1) -= t2;
 }
+
 //! Matrix multiplication.
 /** Remark: Haven't yet found out why \code matrixd m3(0, 0); m3 = m1*m2; \endcode
 is fast as usual, whereas \code matrixd m3(m1*m2); \endcode is two times slower. The sheer

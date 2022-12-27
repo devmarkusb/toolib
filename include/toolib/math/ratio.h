@@ -14,7 +14,6 @@
 #include <string>
 #include <type_traits>
 
-
 namespace mb::too::math
 {
 //! Greatest common divisor. Expects at least on of a, b to be > 0.
@@ -45,7 +44,6 @@ struct Rational;
 
 //! Obviously ensures common denom ofs one, two after the call.
 inline void make_common_denom(Rational& one, Rational& two);
-
 
 //! Value type for rational numbers.
 /** Since member denom is publicly accessible, the user is responsible
@@ -99,6 +97,7 @@ struct Rational
     }
 
     ~Rational() = default; // gcc needs this to be trivial for the use of Rational in constexpr's
+
     //     {
     //         // documenting the important invariant
     //         UL_EXPECT(denom > 0);
@@ -200,16 +199,19 @@ inline Rational operator+(Rational lhs, const Rational& rhs)
     lhs += rhs;
     return lhs;
 }
+
 inline Rational operator-(Rational lhs, const Rational& rhs)
 {
     lhs -= rhs;
     return lhs;
 }
+
 inline Rational operator*(Rational lhs, const Rational& rhs)
 {
     lhs *= rhs;
     return lhs;
 }
+
 inline Rational operator/(Rational lhs, const Rational& rhs)
 {
     lhs /= rhs;
@@ -222,10 +224,12 @@ inline bool operator==(const Rational& lhs, const Rational& rhs)
         return lhs.num == rhs.num;
     return ul::almost_equal(lhs.asFloatingPoint<long double>(), rhs.asFloatingPoint<long double>());
 }
+
 inline bool operator!=(const Rational& lhs, const Rational& rhs)
 {
     return !operator==(lhs, rhs);
 }
+
 inline bool operator<(const Rational& lhs, const Rational& rhs)
 {
     if (lhs.denom == rhs.denom)
@@ -234,14 +238,17 @@ inline bool operator<(const Rational& lhs, const Rational& rhs)
         return lhs.denom > rhs.denom;
     return lhs.asFloatingPoint<long double>() < rhs.asFloatingPoint<long double>();
 }
+
 inline bool operator>(const Rational& lhs, const Rational& rhs)
 {
     return operator<(rhs, lhs);
 }
+
 inline bool operator<=(const Rational& lhs, const Rational& rhs)
 {
     return !operator>(lhs, rhs);
 }
+
 inline bool operator>=(const Rational& lhs, const Rational& rhs)
 {
     return !operator<(lhs, rhs);

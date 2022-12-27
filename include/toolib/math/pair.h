@@ -9,7 +9,6 @@
 #include "../config.h"
 #include <utility>
 
-
 namespace mb::too::math
 {
 template <typename T1, typename T2>
@@ -21,12 +20,14 @@ struct pair
         , right(getright())
     {
     }
+
     pair(const T1& l, const T2& r)
         : m_p(l, r)
         , left(getleft())
         , right(getright())
     {
     }
+
     template <typename OT1, typename OT2>
     explicit pair(const pair<OT1, OT2>& p)
         : m_p(p)
@@ -34,6 +35,7 @@ struct pair
         , right(getright())
     {
     }
+
     template <typename OT1, typename OT2>
     pair<T1, T2>& operator=(const pair<OT1, OT2>& p)
     {
@@ -95,10 +97,12 @@ struct pair
 
 private:
     std::pair<T1, T2> m_p;
+
     T1& getleft()
     {
         return m_p.first;
     }
+
     T2& getright()
     {
         return m_p.second;

@@ -12,7 +12,6 @@
 
 #include "../config.h"
 
-
 namespace mb::too::math::stand_alone_ops
 {
 //!
@@ -21,18 +20,21 @@ T operator+(const T& t1, const T& t2)
 {
     return T(t1) += t2;
 }
+
 //!
 template <typename T>
 T operator-(const T& t1, const T& t2)
 {
     return T(t1) -= t2;
 }
+
 //!
 template <typename T>
 T operator*(const T& t1, const T& t2)
 {
     return T(t1) *= t2;
 }
+
 //!
 template <typename T>
 T operator/(const T& t1, const T& t2)

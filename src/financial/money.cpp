@@ -8,7 +8,6 @@
 #include "ul/ul.h"
 #include <locale>
 
-
 namespace mb::too::fin
 {
 //####################################################################################################################
@@ -53,7 +52,6 @@ bool operator!=(const Currency& lhs, const Currency& rhs)
     return !operator==(lhs, rhs);
 }
 
-
 //####################################################################################################################
 
 Money::Money(BaseType amount, const Currency& currency)
@@ -94,6 +92,7 @@ Money::BaseType Money::getSmallestUnit(const Currency&)
 {
     return 0.01L;
 }
+
 Money::BaseType Money::getTenthOfSmallestUnit(const Currency&)
 {
     return 0.001L;
@@ -224,7 +223,6 @@ bool equal_sufficiently(const Money& lhs, const Money& rhs)
     // tenth of smallest unit needed since this is the relevant digit for rounding
     return too::math::approx_equal(lhs.amount, rhs.amount, Money::getTenthOfSmallestUnit());
 }
-
 
 //####################################################################################################################
 

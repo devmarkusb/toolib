@@ -10,7 +10,6 @@
 #include "../math/geometry.h"
 #include <string>
 
-
 namespace mb::too::img
 {
 using Pixels = long;

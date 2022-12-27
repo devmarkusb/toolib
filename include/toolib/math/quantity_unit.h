@@ -16,7 +16,6 @@
 #include <type_traits>
 #include <vector>
 
-
 namespace mb::too::math
 {
 using Map_Rational_String = std::map<too::math::Rational, std::string>;
@@ -68,7 +67,6 @@ inline Map_Rational_String create_map_ratio_SIprefixunitname(
 
     return ret;
 }
-
 
 //! If you need just SI prefixes, you can use create_map_ratio_SIprefixunitname() for map_ratio_prefixunitname.
 //! Throws Unit::err_no_string_provided_for_ratio if there is no string for the initial or target
@@ -217,7 +215,6 @@ private:
     }
 };
 
-
 //! Describes a physical quantity with unit. Values have to be stored separately to avoid redundancy.
 class Quantity
 {
@@ -232,10 +229,12 @@ public:
     {
         return this->q_name;
     }
+
     Unit& getUnit()
     {
         return this->unit;
     }
+
     [[nodiscard]] const Unit& getUnit() const
     {
         return const_cast<Quantity*>(this)->getUnit();
@@ -245,7 +244,6 @@ private:
     Unit unit;
     std::string q_name;
 };
-
 
 //    requires WhatConcrete to be convertible to BaseType
 // template <class WhatConcrete, typename BaseType = double>

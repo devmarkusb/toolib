@@ -17,7 +17,6 @@
 #include <utility>
 #include <vector>
 
-
 namespace mb::too::math
 {
 //!
@@ -34,7 +33,6 @@ using PairOfVectors = std::pair<std::vector<X>, std::vector<Y>>;
 //! via quantity/unit) and the projection values onto a chart screen/paper.
 //! We use the notions physical value or quantity value synonymously.
 using ProjectionValue = double;
-
 
 //####################################################################################################################
 
@@ -76,7 +74,6 @@ struct ChartAxisProj_setup : public ChartAxis_setup
     std::pair<ProjectionValue, ProjectionValue> projection_range;
 };
 
-
 //####################################################################################################################
 
 //!
@@ -86,6 +83,7 @@ class ChartAxis : private ul::NonCopyable
 public:
     ChartAxis(
         const ChartAxis_setup& setup, Quantity quantity, const QuValueType& min_qu_val, const QuValueType& max_qu_val);
+
     virtual ~ChartAxis()
     {
         UL_EXPECT(this->setup);
@@ -100,14 +98,17 @@ public:
     {
         return this->quantity;
     }
+
     QuValueType getTickStartVal() const
     {
         return this->tick_start_qu_val;
     }
+
     QuValueType getTickEndVal() const
     {
         return this->tick_end_qu_val;
     }
+
     QuValueType getTickStepVal() const
     {
         return this->tick_step_qu_val;
@@ -123,6 +124,7 @@ public:
     {
         return this->tick_start_qu_val <= QuValueType{} && QuValueType{} <= this->tick_end_qu_val;
     }
+
     std::string tickValueAsReadableString(const QuValueType& qu_val) const;
 
 private:
@@ -142,7 +144,6 @@ private:
     void ensureProperMinMax(QuValueType& min_qu_val, QuValueType& max_qu_val) const;
     void calcScaling(const QuValueType& min_qu_val, const QuValueType& max_qu_val);
 };
-
 
 //####################################################################################################################
 
@@ -200,6 +201,7 @@ public:
     {
         return x_axis.get();
     }
+
     ul::not_null<const ChartAxis<QuValueTypeX>*> get_y_axis() const
     {
         return y_axis.get();
@@ -209,10 +211,12 @@ public:
     {
         return this->values;
     }
+
     void setAnnotations(std::unique_ptr<const ChartAnnotations> a)
     {
         this->annotations = std::move(a);
     }
+
     [[nodiscard]] const ChartAnnotations* getAnnotations() const
     {
         return this->annotations.get();
@@ -238,6 +242,7 @@ public:
     {
         return this->annotations;
     }
+
     //! Indices occur uniquely together with vector of associated annotations.
     [[nodiscard]] std::map<size_t, std::vector<std::string>> obtainAllPerIndex() const
     {
@@ -248,6 +253,7 @@ public:
         }
         return ret;
     }
+
     //! Add an optional annotation for a certain value index. The index is expected to be in a valid range.
     //! Also you might have to take care about not using the same index more than once. But that depends on your
     //! use-case - it is not forbidden.
@@ -262,7 +268,6 @@ private:
 
 } // namespace mb::too::math
 
-
 //####################################################################################################################
 // template implementations
 //####################################################################################################################
@@ -270,7 +275,6 @@ private:
 #include "toolib/math/round.h"
 #include "toolib/math/scale.h"
 #include "ul/ul.h"
-
 
 namespace mb::too::math
 {
@@ -391,7 +395,6 @@ std::string ChartAxis<QuValueType>::tickValueAsReadableString(const QuValueType&
     }
 }
 
-
 //####################################################################################################################
 
 template <typename QuValueType>
@@ -471,7 +474,6 @@ ProjectionValue ChartAxisProj<QuValueType>::getProjectionMaxVal() const
 {
     return this->setup->projection_range.second;
 }
-
 
 //####################################################################################################################
 

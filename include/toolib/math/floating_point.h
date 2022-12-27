@@ -70,13 +70,13 @@ typename std::enable_if<std::is_floating_point<FloatType>::value, std::string>::
     return impl::ToStringConverter<FloatType, FF>::convert(x);
 }
 
-
 namespace impl
 {
 template <typename FloatType, FloatFormat FF>
 struct ToStringConverter
 {
 };
+
 template <typename FloatType>
 struct ToStringConverter<FloatType, FloatFormat::default_>
 {
@@ -84,6 +84,7 @@ struct ToStringConverter<FloatType, FloatFormat::default_>
     {
         return ul::to_string(x);
     }
+
     static std::string convert(FloatType x, int precision)
     {
         UL_EXPECT(precision >= 0);
@@ -92,6 +93,7 @@ struct ToStringConverter<FloatType, FloatFormat::default_>
         return ret.str();
     }
 };
+
 template <typename FloatType>
 struct ToStringConverter<FloatType, FloatFormat::fixed>
 {
@@ -101,6 +103,7 @@ struct ToStringConverter<FloatType, FloatFormat::fixed>
         ret << std::fixed << x;
         return ret.str();
     }
+
     static std::string convert(FloatType x, int precision)
     {
         UL_EXPECT(precision >= 0);
@@ -109,6 +112,7 @@ struct ToStringConverter<FloatType, FloatFormat::fixed>
         return ret.str();
     }
 };
+
 template <typename FloatType>
 struct ToStringConverter<FloatType, FloatFormat::scientific>
 {
@@ -118,6 +122,7 @@ struct ToStringConverter<FloatType, FloatFormat::scientific>
         ret << std::scientific << x;
         return ret.str();
     }
+
     static std::string convert(FloatType x, int precision)
     {
         UL_EXPECT(precision >= 0);

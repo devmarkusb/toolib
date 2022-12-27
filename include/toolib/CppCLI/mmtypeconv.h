@@ -10,13 +10,13 @@
 
 #include "ul/macros.h"
 
-
 namespace mb::too::CLI
 {
 #if UL_STANDARD_CPP_CLI
 using System::IntPtr;
 using System::String;
 using System::Runtime::InteropServices::Marshal;
+
 inline String ^ stringA2cli(const char* s) { return gcnew String(s); } inline const char* stringA2cpp(String ^ s)
 {
     IntPtr p = Marshal::StringToHGlobalAnsi(s);
@@ -24,6 +24,7 @@ inline String ^ stringA2cli(const char* s) { return gcnew String(s); } inline co
     Marshal::FreeHGlobal(p);
     return ret.c_str();
 }
+
 inline std::string sstringA2cpp(String ^ s)
 {
     IntPtr p = Marshal::StringToHGlobalAnsi(s);
@@ -31,6 +32,7 @@ inline std::string sstringA2cpp(String ^ s)
     Marshal::FreeHGlobal(p);
     return ret;
 }
+
 inline String ^ stringW2cli(wchar_t* s) { return gcnew String(s); } inline const wchar_t* stringW2cpp(String ^ s)
 {
     IntPtr p = Marshal::StringToHGlobalUni(s);
@@ -38,6 +40,7 @@ inline String ^ stringW2cli(wchar_t* s) { return gcnew String(s); } inline const
     Marshal::FreeHGlobal(p);
     return ret.c_str();
 }
+
 inline std::wstring sstringW2cpp(String ^ s)
 {
     IntPtr p = Marshal::StringToHGlobalUni(s);
@@ -45,12 +48,14 @@ inline std::wstring sstringW2cpp(String ^ s)
     Marshal::FreeHGlobal(p);
     return ret;
 }
+
 template <typename T>
 inline void array2cpp_readonly(array<T> ^ a, T*& converted_a)
 {
     pin_ptr<T> pa = &a[0];
     converted_a = pa;
 }
+
 template <typename T>
 inline void array2cpp(array<T> ^ a, T*& converted_a, size_t size)
 {

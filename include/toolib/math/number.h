@@ -16,7 +16,6 @@
 #include <string>
 #include <type_traits>
 
-
 namespace mb::too::math
 {
 enum class ENumSys : unsigned char

@@ -5,7 +5,6 @@
 
 using namespace mb::too::date_time;
 
-
 TEST(date_time__normalize_do_itTest, already_done)
 {
     std::pair<Years, Months> ym;

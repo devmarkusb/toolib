@@ -9,7 +9,6 @@
 #include "ul/ul.h"
 #include <exception>
 
-
 namespace mb::too
 {
 //! Alias toog::.
@@ -25,6 +24,7 @@ class IMain
 {
 public:
     virtual ~IMain() = default;
+
     //! The only function to be called. returns main exit code of the program.
     int main()
     {
@@ -75,7 +75,6 @@ private:
         }
     }
 };
-
 
 //####################################################################################################################
 // IGame

@@ -14,7 +14,6 @@
 #include <initializer_list>
 #include <type_traits>
 
-
 namespace mb::too::math
 {
 namespace detail
@@ -126,6 +125,7 @@ struct Vector_ : public Point_<T, dim>
         throw ul::not_implemented{"Vector_ +="};
         // return *this;
     }
+
     Vector_<T, dim>& operator-=(const Vector_<T, dim>&)
     {
         throw ul::not_implemented{"Vector_ -="};
@@ -180,6 +180,7 @@ struct Rectangle_
     {
         return std::abs(bottom_right.x - top_left.x);
     }
+
     Height_<T> height() const
     {
         return std::abs(bottom_right.y - top_left.y);
@@ -188,7 +189,6 @@ struct Rectangle_
 
 //! For convenience.
 using Rectangle = Rectangle_<>;
-
 
 //!
 template <typename T = Width>
@@ -202,6 +202,7 @@ struct Margins_
     T bottom{};
 
     Margins_() = default;
+
     Margins_(T left, T right, T top, T bottom)
         : left{left}
         , right{right}

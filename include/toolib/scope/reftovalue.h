@@ -8,7 +8,6 @@
 
 #include "../config.h"
 
-
 namespace mb::too
 {
 //! Transports a reference as a value.
@@ -21,12 +20,15 @@ public:
         : m_ref(ref)
     {
     }
+
     RefToValue(const RefToValue& rhs)
         : m_ref(rhs.m_ref)
     {
     }
+
     RefToValue() = delete;
     RefToValue& operator=(const RefToValue&) = delete;
+
     explicit operator T&() const
     {
         return m_ref;

@@ -10,7 +10,6 @@
 #include "../config.h"
 #include "toolib/math/bits.h"
 
-
 namespace mb::too
 {
 //! Extends any class "user" by the functionality of describing arbitrary options by a set of bit flags.
@@ -62,6 +61,7 @@ class scope_flagged
 {
 public:
     scope_flagged() = default;
+
     //! Default copy and assignment are ok. Doesn't make much sense, but shouln't be forbidden to not not spoil
     //! derivates.
     // scope_flagged(const scope_flagged&);
@@ -75,6 +75,7 @@ public:
             m_auxLastflags = m_flags;
             m_flags = this;
         }
+
         ~SG_flags()
         {
             m_flags = m_auxLastflags;
@@ -85,15 +86,18 @@ public:
         // SG_flags(const SG_flags&);
         // SG_flags& operator=(const SG_flags&);
     };
+
     bool sflags_contains(bit_container_type flags) const
     {
         return m_flags->contains(flags);
     }
+
     //! This could be useful, if you install a global scope guard.
     void sflags_reset_to_def()
     {
         m_auxLastflags = m_flags = &m_init;
     }
+
     //! Useful for a class to modify its internal defaults (that originally started with SF_DEF).
     SG_flags& mod_def_flags()
     {

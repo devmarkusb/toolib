@@ -22,6 +22,7 @@ protected:
     {
     public:
         ~CTest() override = default;
+
         //! Parameter documentation, also for setParameter().
         /** ... (in the real world it is extremely to provide a thorough documention of allowed name-type pairs)*/
         bool getParameter(const char* name, too::TOutBuffer value) const override
@@ -39,6 +40,7 @@ protected:
                 return false;
             return true;
         }
+
         //! Cf. getParameter()
         bool setParameter(const char* name, const too::TInBuffer value) override
         {
@@ -55,6 +57,7 @@ protected:
                 return false;
             return true;
         }
+
         //! In the real world don't forget to provide a detailed documentation like for getParameter().
         bool execute(
             const char* command, const too::TInBuffer params[] = nullptr, too::TOutBuffer retvalue = nullptr) override
@@ -91,6 +94,7 @@ protected:
             m_d = 0.0;
             m_s.clear();
         }
+
         void run() const
         {
             std::cout << "\nCTest::run() called\n";
@@ -101,6 +105,7 @@ protected:
             int i = 0;
             std::string s;
         };
+
         bool ObtainParamsFromAbstract(const too::TInBuffer params[], SCalcSthParams& ret) const
         {
             if (!params || !params[0] || !params[1])
@@ -109,6 +114,7 @@ protected:
             ret.s = *reinterpret_cast<std::string*>(params[1]);
             return true;
         }
+
         std::string CalcSth(const SCalcSthParams& p) const
         {
             std::string ret;

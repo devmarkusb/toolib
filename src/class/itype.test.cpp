@@ -10,6 +10,7 @@ namespace
 struct SomeType
 {
 };
+
 // or
 using SomeOtherType = int;
 
@@ -18,22 +19,27 @@ struct SomeType_flexed : public too::itype
 {
     SomeType_flexed() = default;
     ~SomeType_flexed() override = default;
+
     SomeType_flexed(const SomeType_flexed& other)
         : too::itype()
         , rep(other.rep)
     {
     }
+
     SomeType_flexed& operator=(const SomeType_flexed& other)
     {
         this->rep = other.rep;
         return *this;
     }
+
     SomeType_flexed(SomeType_flexed&&) = delete;
     SomeType_flexed& operator=(SomeType_flexed&&) = delete;
+
     explicit SomeType_flexed(const SomeType& x)
         : rep(x)
     {
     }
+
     explicit SomeType_flexed(SomeType&& x)
         : rep(std::move(x))
     {
@@ -57,6 +63,7 @@ struct IUser
 struct UserA : public IUser
 {
     virtual ~UserA() = default;
+
     virtual void f(too::itype*)
     {
     }

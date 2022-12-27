@@ -10,7 +10,6 @@
 #include <string>
 #include <vector>
 
-
 namespace mb::too::str
 {
 inline void tokenizeString(const std::string& s, const std::string& delimiters, std::vector<std::string>& out)

@@ -13,7 +13,6 @@
 
 #include "ul/macros/UNDEF_MIN_MAX.h"
 
-
 namespace mb::too::math
 {
 template <typename T>

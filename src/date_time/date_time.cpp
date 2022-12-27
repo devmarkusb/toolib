@@ -5,7 +5,6 @@
 #include "toolib/date_time/date_time.h"
 #include "toolib/math/number.h"
 
-
 namespace mb::too::date_time
 {
 const std::string MonthYear_decl::string_delim = "/";

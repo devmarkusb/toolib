@@ -11,13 +11,13 @@
 #include <locale>
 #include <string>
 
-
 namespace mb::too::fin
 {
 //####################################################################################################################
 
 UL_PRAGMA_WARNINGS_PUSH
 UL_WARNING_DISABLE_MSVC(4251)
+
 //!
 class TOOLIBSHARED_EXPORT Currency
 {
@@ -40,11 +40,11 @@ public:
 private:
     ul::opt<std::locale> loc;
 };
+
 UL_PRAGMA_WARNINGS_POP
 
 bool operator==(const Currency& lhs, const Currency& rhs);
 bool operator!=(const Currency& lhs, const Currency& rhs);
-
 
 //####################################################################################################################
 

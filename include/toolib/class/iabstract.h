@@ -7,7 +7,6 @@
 
 #include "../config.h"
 
-
 namespace mb::too
 {
 using TInBuffer = void*;

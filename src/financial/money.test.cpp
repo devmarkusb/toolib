@@ -2,7 +2,6 @@
 #include "gtest/gtest.h"
 #include <iostream>
 
-
 TEST(CurrencyTest, test)
 {
     // doesn't work yet :( Why?!

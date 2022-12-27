@@ -15,7 +15,6 @@
 
 #include "ul/macros.h"
 
-
 namespace mb::too
 {
 //! The most simple smart pointer out there (just RAII).
@@ -43,6 +42,7 @@ public:
         : m_ptr(new T())
     {
     }
+
     //! Starts memory management (i.e. auto deletion) for a properly Heap-allocated object pt.
     /** This gives opportunity to call a non-default constructor for pt, as in the
     example: \code raii_p<someclass> psomeobject(new someclass(somepara1, ...)); \endcode
@@ -56,11 +56,13 @@ public:
         UL_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
 #endif
     }
+
     //! Releases the internally managed memory for the object.
     ~raii_p()
     {
         flush();
     }
+
     raii_p(const raii_p&) = delete;
     raii_p& operator=(const raii_p&) = delete;
 
@@ -71,16 +73,19 @@ public:
     {
         return m_ptr;
     }
+
     //! Gives opportunity to use raii_p<T> just like T* regarding "->"-access.
     T* operator->() const
     {
         return m_ptr;
     }
+
     //! Gives opportunity to use raii_p<T> just like T* regarding *-indirection (dereferencing).
     T& operator*() const
     {
         return *m_ptr;
     }
+
     //! Gives away memory control of the internally stored object.
     /** \return a usual T* pointer with user-responsibility and leaves the raii_p object in a clean state.*/
     T* release()
@@ -89,6 +94,7 @@ public:
         m_ptr = 0;
         return ret;
     }
+
     //! Cleans the class content and inititialises again in a manner just like the corresponding constructor does.
     /** Please take care of the same remarks as for \see raii_p(T* pt).*/
     void reset(T* pt = 0)
@@ -136,6 +142,7 @@ public:
         , m_ptr(new T[count])
     {
     }
+
     //! Starts memory management (i.e. auto deletion) for an already properly Heap-allocated array pt[] resp. pt*.
     /** Be careful that you never delete pt by yourself outside. The responsibility for that is shifted
     to this class.
@@ -149,8 +156,10 @@ public:
         UL_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
 #endif
     }
+
     raii_ap(const raii_ap&) = delete;
     raii_ap& operator=(const raii_ap&) = delete;
+
     //! Releases the internally managed memory for the object.
     ~raii_ap()
     {
@@ -163,18 +172,21 @@ public:
         UL_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr;
     }
+
     //! Gives opportunity to use raii_ap<T> just like T* regarding "->"-access.
     T* operator->() const
     {
         UL_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr;
     }
+
     //! Gives opportunity to use raii_ap<T> just like T* regarding *-indirection (dereferencing).
     T& operator*() const
     {
         UL_DEBUG_BREAK_IF(!m_ptr);
         return *m_ptr;
     }
+
     //! Gives opportunity to use raii_ap<T> just like T* regarding []-indirection (index access).
     /** Note: For performance critical applications one is
     better off using the cast() and work via pointer opposed to this function call (think of loops).*/
@@ -183,6 +195,7 @@ public:
         UL_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr[idx];
     }
+
     //! Gives away memory control of the internally stored object.
     /** \return a usual T* pointer with user-responsibility and leaves the raii_p object in a clean state.*/
     T* release()
@@ -191,11 +204,13 @@ public:
         m_ptr = 0;
         return ret;
     }
+
     //! \return Number of objects.
     [[nodiscard]] uint32_t size() const
     {
         return m_count;
     }
+
     //! Cleans the class content and initializes again in a manner just like the corresponding constructor does.
     /** Please take care of the same remarks as for raii_ap(T*, u32).*/
     void reset(T* pt = 0, uint32_t count = 0)
@@ -249,8 +264,10 @@ public:
         for (uint32_t i = 0; i < count1; ++i)
             m_ptr[i] = new T[count2];
     }
+
     raii_aap(const raii_aap&) = delete;
     raii_aap& operator=(const raii_aap&) = delete;
+
     //! Releases the internally managed memory for the object.
     ~raii_aap()
     {
@@ -263,6 +280,7 @@ public:
         UL_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr;
     }
+
     //! Gives opportunity to use raii_aap<T> just like T** regarding first []-indirection (index access).
     /** For the second dimension a further [] has to follow up. Note: For performance critical applications one is
     better off using the cast() and work via pointer opposed to this function call (think of loops).*/
@@ -271,11 +289,13 @@ public:
         UL_DEBUG_BREAK_IF(!m_ptr);
         return m_ptr[idx1];
     }
+
     //! \return Number of objects in 1st dimension.
     [[nodiscard]] uint32_t size1() const
     {
         return m_count1;
     }
+
     //! \return Number of objects in 2nd dimension.
     [[nodiscard]] uint32_t size2() const
     {

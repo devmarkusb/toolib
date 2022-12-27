@@ -10,7 +10,6 @@
 
 #include "../config.h"
 
-
 namespace mb::too
 {
 //! Base class for classes that want to restrict their instantiations to a certain number.
@@ -46,6 +45,7 @@ public:
     class TooManyObjects
     {
     };
+
     static long objectCount()
     {
         return m_numObjects;
@@ -56,6 +56,7 @@ protected:
     {
         init();
     }
+
     Counted(const Counted&)
     {
         init();

@@ -11,7 +11,6 @@
 
 #include "ul/macros.h"
 
-
 namespace mb::too::math::consts
 {
 template <typename T>

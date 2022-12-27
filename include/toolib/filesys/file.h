@@ -13,7 +13,6 @@
 #include <sstream>
 #include <string>
 
-
 namespace mb::too::file
 {
 /** \param retErrDetail returns error detail string or is empty on success.
@@ -38,6 +37,7 @@ enum class operation
     save,
     load,
 };
+
 inline void throwError(const std::string& filePathNameExt, operation op, const std::string& retErrDetail)
 {
     const auto errno_ = errno;

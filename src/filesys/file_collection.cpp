@@ -7,7 +7,6 @@
 #include "ul/ul.h"
 #include <fstream>
 
-
 namespace mb::too::file
 {
 std::string FileCollection::get_base_name(const std::string& fn)

@@ -9,7 +9,6 @@
 #include <cstdint>
 #include <utility>
 
-
 namespace mb::too::math::bit
 {
 struct B
@@ -31,7 +30,6 @@ B::_ i2B(Ty t = Ty())
     return static_cast<B::_>(t);
 }
 
-
 template <>
 [[maybe_unused]] inline B::_ i2B<int>(int i)
 {
@@ -46,6 +44,7 @@ public:
         : m_bits(bits)
     {
     }
+
     // bits(const bits& b) { m_bits = b.m_bits; }
     // bits& operator=(const bits& b) { bits<T> temp(b); temp.swap(*this); return *this; }
     // void swap(bits& b) { std::swap(m_bits, b.m_bits); }
@@ -55,20 +54,24 @@ public:
         m_bits = bits;
         return m_bits;
     }
+
     T& add(T mask)
     {
         m_bits |= mask;
         return m_bits;
     }
+
     T& remove(T mask)
     {
         m_bits &= ~mask;
         return m_bits;
     }
+
     bool contains(T mask) const
     {
         return (m_bits | mask) == m_bits;
     }
+
     T& fill(B::_ b)
     {
         if (b == B::O)
@@ -77,19 +80,23 @@ public:
             m_bits = ~0;
         return m_bits;
     }
+
     T& fill(T b)
     {
         return fill(i2B<T>(b));
     }
+
     T& clear()
     {
         return fill(B::O);
     }
+
     T& flip()
     {
         m_bits = ~m_bits;
         return m_bits;
     }
+
     T& get()
     {
         return m_bits;

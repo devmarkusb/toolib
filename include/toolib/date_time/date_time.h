@@ -12,7 +12,6 @@
 #include <string>
 #include <utility>
 
-
 namespace mb::too::date_time
 {
 //! Months type, represents absolute as well as difference values.
@@ -26,6 +25,7 @@ struct TOOLIBSHARED_EXPORT normalize
 {
     static void do_it(std::pair<Years, Months>& y_m);
 };
+
 //! Doesn't normalize.
 struct TOOLIBSHARED_EXPORT dont_normalize
 {
@@ -46,11 +46,13 @@ using MonthYear_dur = MonthYear_base<dont_normalize>;
 
 UL_PRAGMA_WARNINGS_PUSH
 UL_WARNING_DISABLE_MSVC(4251)
+
 struct TOOLIBSHARED_EXPORT MonthYear_decl
 {
     static const Months twelve = 12;
     static const std::string string_delim;
 };
+
 UL_PRAGMA_WARNINGS_POP
 
 //! Works as an absolute type as well as a difference type.

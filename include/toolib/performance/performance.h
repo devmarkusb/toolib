@@ -22,7 +22,6 @@
 #include <string>
 #include <vector>
 
-
 namespace mb::too
 {
 namespace implDumpAllItems
@@ -58,6 +57,7 @@ public:
     static std::string dumpAllItems();
     static void reset();
     static std::string toFormattedString(const SecondsDbl& d);
+
     //! Only for testing.
     struct DumpDataset
     {
@@ -68,6 +68,7 @@ public:
         SecondsDbl m_Mean;
         SecondsDbl m_StdDev;
     };
+
     //! Filled with structured data (e.g. for testing) if dumpAllItems() was called with DumpFormat::stringAndStructure.
     static std::vector<DumpDataset>& dumpedData()
     {
@@ -78,6 +79,7 @@ public:
 private:
     friend struct implDumpAllItems::KeyData;
     using UniqueItemStartNr = unsigned long long;
+
     struct ItemData
     {
         TimeValStorageRep m_TimeVal{};
@@ -91,6 +93,7 @@ private:
         {
         }
     };
+
     using ItemNameAsKey = std::string;
     using Items = std::multimap<ItemNameAsKey, ItemData>;
     using chrono_clock = std::chrono::high_resolution_clock;
@@ -106,6 +109,7 @@ private:
 
     inline void startCurrentItem();
     inline void stopCurrentItem();
+
     static UniqueItemStartNr& uniqueItemStartNr()
     {
         static UniqueItemStartNr n = UniqueItemStartNr();
@@ -120,6 +124,7 @@ private:
             : m_key(std::move(key))
         {
         }
+
         bool operator()(const Items::value_type& rhs) const
         {
             return m_key == rhs.first;
@@ -135,6 +140,7 @@ private:
             : m_key(std::move(key))
         {
         }
+
         TimeValStorageRep operator()(const TimeValStorageRep& v, const Items::value_type& rhs) const
         {
             if (m_key == rhs.first)

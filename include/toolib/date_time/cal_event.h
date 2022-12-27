@@ -9,7 +9,6 @@
 #include "ul/ptr.h"
 #include <memory>
 
-
 namespace mb::too::date_time
 {
 //! Base for SingleEvent and RecurringEvent. Provides getFirst/getNext mechanism to
@@ -43,6 +42,7 @@ public:
     {
         setTimePoint(t);
     }
+
     ~SingleEvent() override = default;
 
     ul::owner<SingleEvent<TimeType>*> clone() const override
@@ -64,6 +64,7 @@ public:
     {
         m_TimePoint = t;
     }
+
     TimeType getTimePoint() const
     {
         return m_TimePoint;
@@ -84,6 +85,7 @@ public:
     {
         setTimePeriod(period);
     }
+
     ~RecurringEvent() override = default;
     RecurringEvent(const RecurringEvent& other);
     RecurringEvent& operator=(const RecurringEvent& other);
@@ -101,22 +103,27 @@ public:
     {
         m_TimePointStart = t ? std::make_unique<TimeType>(*t) : nullptr;
     }
+
     const TimeType* getStart() const
     {
         return m_TimePointStart.get();
     }
+
     TimeType* getStart()
     {
         return m_TimePointStart.get();
     }
+
     void backupStart_move()
     {
         m_backupStart = std::move(m_TimePointStart);
     }
+
     [[nodiscard]] bool hasStartBackup() const
     {
         return !!m_backupStart;
     }
+
     void restoreStart_move()
     {
         m_TimePointStart = std::move(m_backupStart);
@@ -127,22 +134,27 @@ public:
     {
         m_TimePointEnd = t ? std::make_unique<TimeType>(*t) : nullptr;
     }
+
     const TimeType* getEnd() const
     {
         return m_TimePointEnd.get();
     }
+
     TimeType* getEnd()
     {
         return m_TimePointEnd.get();
     }
+
     void backupEnd_move()
     {
         m_backupEnd = std::move(m_TimePointEnd);
     }
+
     [[nodiscard]] bool hasEndBackup() const
     {
         return !!m_backupEnd;
     }
+
     void restoreEnd_move()
     {
         m_TimePointEnd = std::move(m_backupEnd);
@@ -152,6 +164,7 @@ public:
     {
         m_TimePeriod = period;
     }
+
     TimeType getTimePeriod() const
     {
         return m_TimePeriod;
@@ -164,7 +177,6 @@ private:
     std::unique_ptr<TimeType> m_backupEnd;
     TimeType m_TimePeriod{};
 };
-
 
 //####################################################################################################################
 // template implementation

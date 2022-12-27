@@ -7,7 +7,6 @@
 #include <sstream>
 #include <stdexcept>
 
-
 namespace mb::too
 {
 namespace con

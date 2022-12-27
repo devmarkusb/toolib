@@ -11,7 +11,6 @@
 #include <string>
 #include <vector>
 
-
 namespace mb::too::file
 {
 //! String manipulation helper class only. No file system operations.

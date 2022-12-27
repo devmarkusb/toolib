@@ -11,7 +11,6 @@
 #include "toolib/math/bits.h"
 #include <stack>
 
-
 namespace mb::too
 {
 //! Extends any class "user" by the functionality of describing arbitrary options by a set of bit flags.
@@ -63,6 +62,7 @@ class scope_flagged
 {
 public:
     scope_flagged() = default;
+
     // Default copy and assignment are ok. Doesn't make much sense, but shouldn't be forbidden to not spoil
     // inheritance.
     // scope_flagged(const scope_flagged&);
@@ -76,6 +76,7 @@ public:
             m_auxLastflags.push(*m_flags);
             m_flags = toobit::Bits<bit_container_type>::getAddress();
         }
+
         ~SG_flags()
         {
             try
@@ -95,11 +96,14 @@ public:
         // SG_flags& operator=(const SG_flags&);
         static std::stack<bit_container_type> m_auxLastflags;
     };
+
     bool sflags_contains(bit_container_type flags) const
     {
         return (*m_flags | flags) == *m_flags;
     }
+
     //{ return toobit::bits<bit_container_type>(*m_flags).contains(flags); }
+
 private:
     static bit_container_type m_init;
     static bit_container_type m_aux;

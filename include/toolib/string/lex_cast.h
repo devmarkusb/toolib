@@ -12,7 +12,6 @@
 
 #include "ul/macros.h"
 
-
 namespace mb::too
 {
 class ErrBadLexCast : public std::bad_cast

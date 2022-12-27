@@ -3,7 +3,6 @@
 
 using namespace mb::too::date_time;
 
-
 namespace
 {
 }
@@ -32,7 +31,6 @@ struct CalEventTest : public ::testing::Test
     SingleEvent<int> seven{7};
     RecurringEvent<int> recurr{2};
 };
-
 
 TEST_F(CalEventTest, test)
 {

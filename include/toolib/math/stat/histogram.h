@@ -15,7 +15,6 @@
 
 #include "ul/macros.h"
 
-
 namespace mb::too::stat
 {
 using too::math::Percent;

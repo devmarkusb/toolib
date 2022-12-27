@@ -10,14 +10,12 @@
 #include <string>
 #include <vector>
 
-
 namespace mb::too::str
 {
 //! Language id type per ISO 639-1 plus an auto/systems choice.
 using LangID_iso639_1 = std::string;
 
 const LangID_iso639_1 auto_systems_language{"auto"};
-
 
 //! Note: if you add to this, don't forget about the other functions in this file.
 inline const std::vector<LangID_iso639_1>& getAllTheoreticallyPossibleLangIDs()
