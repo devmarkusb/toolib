@@ -26,7 +26,7 @@ to find leak informations in the Output window of the Visual Studio IDE.*/
 #define DEBUG_CLIENTBLOCK new (_CLIENT_BLOCK, __FILE__, __LINE__)
 #include <crtdbg.h>
 #include <stdlib.h>
-#define new DEBUG_CLIENTBLOCK
+#define new               DEBUG_CLIENTBLOCK
 #define UL_DUMP_MEM_LEAKS _CrtDumpMemoryLeaks()
 #else
 #define UL_DUMP_MEM_LEAKS 0

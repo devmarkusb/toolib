@@ -234,15 +234,19 @@ std::string PerformanceProfiler::dumpAllItems()
     TKeySet_unsorted keys_unsorted;
     std::transform(
         items().begin(), items().end(), std::inserter(keys_unsorted, keys_unsorted.begin()),
-        [](decltype(*items().begin())& i) {
+        [](decltype(*items().begin())& i)
+        {
             return std::make_pair(i.first, implDumpAllItems::KeyData(i.second));
         });
     using TKeyNameAndData = std::pair<ItemNameAsKey, implDumpAllItems::KeyData>;
     using TKeySet = std::vector<TKeyNameAndData>;
     TKeySet keys(keys_unsorted.begin(), keys_unsorted.end());
-    std::sort(keys.begin(), keys.end(), [](const TKeySet::value_type& k1, const TKeySet::value_type& k2) -> bool {
-        return k1.second.m_StartNr < k2.second.m_StartNr;
-    });
+    std::sort(
+        keys.begin(), keys.end(),
+        [](const TKeySet::value_type& k1, const TKeySet::value_type& k2) -> bool
+        {
+            return k1.second.m_StartNr < k2.second.m_StartNr;
+        });
 
     static const size_t COLUMN_WIDTH = 10;
     static const size_t COLUMN_WIDTH_HUGE = 29;

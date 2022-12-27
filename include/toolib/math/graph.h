@@ -486,11 +486,15 @@ Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(
     if (qu_values && !qu_values->empty())
     {
         const auto minmax_X_pair = std::minmax_element(
-            std::begin(*qu_values), std::end(*qu_values), [](const QuValueXY& lhs, const QuValueXY& rhs) {
+            std::begin(*qu_values), std::end(*qu_values),
+            [](const QuValueXY& lhs, const QuValueXY& rhs)
+            {
                 return lhs.first < rhs.first;
             });
         const auto minmax_Y_pair = std::minmax_element(
-            std::begin(*qu_values), std::end(*qu_values), [](const QuValueXY& lhs, const QuValueXY& rhs) {
+            std::begin(*qu_values), std::end(*qu_values),
+            [](const QuValueXY& lhs, const QuValueXY& rhs)
+            {
                 return lhs.second < rhs.second;
             });
 
@@ -539,9 +543,12 @@ void Chart2D<QuValueTypeX, QuValueTypeY>::pullout_common_factor_from_data()
         this->x_axis->apply_ratio_to_tickvals(new_ratio);
         auto unit = this->x_axis->getQuantity().getUnit();
         if (this->values)
-            std::for_each(std::begin(*this->values), std::end(*this->values), [&unit, &new_ratio](QuValueXY& xy) {
-                xy.first = unit.convertToDifferentRatio(xy.first, new_ratio);
-            });
+            std::for_each(
+                std::begin(*this->values), std::end(*this->values),
+                [&unit, &new_ratio](QuValueXY& xy)
+                {
+                    xy.first = unit.convertToDifferentRatio(xy.first, new_ratio);
+                });
 
         this->x_axis->apply_ratio_to_quantity_unit(new_ratio);
     }
@@ -551,9 +558,12 @@ void Chart2D<QuValueTypeX, QuValueTypeY>::pullout_common_factor_from_data()
         this->y_axis->apply_ratio_to_tickvals(new_ratio);
         auto unit = this->y_axis->getQuantity().getUnit();
         if (this->values)
-            std::for_each(std::begin(*this->values), std::end(*this->values), [&unit, &new_ratio](QuValueXY& xy) {
-                xy.second = unit.convertToDifferentRatio(xy.second, new_ratio);
-            });
+            std::for_each(
+                std::begin(*this->values), std::end(*this->values),
+                [&unit, &new_ratio](QuValueXY& xy)
+                {
+                    xy.second = unit.convertToDifferentRatio(xy.second, new_ratio);
+                });
 
         this->y_axis->apply_ratio_to_quantity_unit(new_ratio);
     }

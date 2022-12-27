@@ -102,7 +102,8 @@ public:
         expectValidRatio(ratio);
         const auto invalid_one_it = std::find_if(
             std::begin(this->ratio_prefixunitname), std::end(this->ratio_prefixunitname),
-            [](const std::pair<too::math::Rational, std::string>& rs) {
+            [](const std::pair<too::math::Rational, std::string>& rs)
+            {
                 return rs.first <= Rational{};
             });
         if (invalid_one_it != ratio_prefixunitname.end())
@@ -153,7 +154,8 @@ public:
         std::vector<Rational> ratios;
         std::transform(
             std::begin(this->ratio_prefixunitname), std::end(this->ratio_prefixunitname), std::back_inserter(ratios),
-            [](const std::pair<Rational, std::string>& elem) {
+            [](const std::pair<Rational, std::string>& elem)
+            {
                 return elem.first;
             });
 
@@ -162,9 +164,12 @@ public:
         const auto current_ratio_it = std::find(std::begin(ratios), std::end(ratios), this->ratio);
         UL_ASSERT(current_ratio_it != std::end(ratios));
 
-        const auto optim_ratio_it = std::find_if(std::begin(ratios), current_ratio_it, [val](const Rational& r) {
-            return val <= r.asFloatingPoint<double>();
-        });
+        const auto optim_ratio_it = std::find_if(
+            std::begin(ratios), current_ratio_it,
+            [val](const Rational& r)
+            {
+                return val <= r.asFloatingPoint<double>();
+            });
 
         if (optim_ratio_it != current_ratio_it)
         {
@@ -173,9 +178,12 @@ public:
         }
 
         const auto current_ratio_revit = std::reverse_iterator<std::vector<Rational>::iterator>{current_ratio_it};
-        const auto optim_ratio_revit = std::find_if(ratios.rbegin(), current_ratio_revit, [val](const Rational& r) {
-            return val >= r.asFloatingPoint<double>();
-        });
+        const auto optim_ratio_revit = std::find_if(
+            ratios.rbegin(), current_ratio_revit,
+            [val](const Rational& r)
+            {
+                return val >= r.asFloatingPoint<double>();
+            });
 
         if (optim_ratio_revit != current_ratio_revit)
         {
