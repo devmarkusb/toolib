@@ -43,7 +43,7 @@ namespace impl
 {
 template <typename FloatType, FloatFormat FF>
 struct ToStringConverter;
-}
+} // namespace impl
 
 //! \return a string of the floating point number x.
 /** \param precision controls either
