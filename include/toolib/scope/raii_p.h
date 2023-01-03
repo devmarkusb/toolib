@@ -13,8 +13,6 @@
 #endif
 #include <cstdint>
 
-#include "ul/macros.h"
-
 namespace mb::too
 {
 //! The most simple smart pointer out there (just RAII).
@@ -303,8 +301,6 @@ public:
     }
 };
 } // namespace mb::too
-
-#include "ul/macros_end.h"
 
 TOO_HEADER_END
 

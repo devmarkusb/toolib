@@ -10,7 +10,6 @@ You just need one include and one lib to link statically.*/
 
 #include "ul/macros.h"
 
-
 //! Memory leak detection. Include the header as the last one (!) in your main module and use UL_DUMP_MEM_LEAKS.
 /** Detection goes either by standard Visual Studio style or by using vld.h, if available, whereas
 one would have to define UL_USE_VLD to 1 in front of the header inclusion.
@@ -32,7 +31,5 @@ to find leak informations in the Output window of the Visual Studio IDE.*/
 #define UL_DUMP_MEM_LEAKS 0
 #endif
 #endif // UL_USE_VLD
-
-#include "ul/macros_end.h"
 
 #endif

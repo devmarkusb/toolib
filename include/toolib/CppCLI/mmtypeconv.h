@@ -6,9 +6,8 @@
 #define MMTYPECONV_H_nbi4lnv5
 
 #include "../config.h"
-#include <string>
-
 #include "ul/macros.h"
+#include <string>
 
 namespace mb::too::CLI
 {
@@ -75,8 +74,6 @@ template <typename T>
     }
 #endif
 } // namespace mb::too::CLI
-
-#include "ul/macros_end.h"
 
 TOO_HEADER_END
 

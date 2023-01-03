@@ -15,8 +15,6 @@
 #include <iostream>
 #include <thread>
 
-#include "ul/macros.h"
-
 namespace mb::too
 {
 inline void prompt()
@@ -34,8 +32,6 @@ inline void prompt()
 #endif
 }
 } // namespace mb::too
-
-#include "ul/macros_end.h"
 
 TOO_HEADER_END
 

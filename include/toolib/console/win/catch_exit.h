@@ -45,6 +45,4 @@ private:
 } // namespace mb::too
 #endif // UL_OS_WINDOWS
 
-#include "ul/macros_end.h"
-
 #endif

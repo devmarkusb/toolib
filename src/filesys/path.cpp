@@ -8,8 +8,6 @@
 #include <algorithm>
 #include <fstream>
 
-#include "ul/macros.h"
-
 namespace
 {
 const std::string OS_POSSIBLE_SEPARATORS = "/\\";

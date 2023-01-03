@@ -7,6 +7,7 @@
 
 #include "../config.h"
 #include "ul/comp_bwds.h"
+#include "ul/macros/UNDEF_MIN_MAX.h"
 #include "ul/ul.h"
 #include <algorithm>
 #include <cmath>
@@ -14,9 +15,6 @@
 #include <limits>
 #include <sstream>
 #include <type_traits>
-
-#include "ul/macros.h"
-#include "ul/macros/UNDEF_MIN_MAX.h"
 
 namespace mb::too::math
 {
@@ -133,8 +131,6 @@ struct ToStringConverter<FloatType, FloatFormat::scientific>
 };
 } // namespace impl
 } // namespace mb::too::math
-
-#include "ul/macros_end.h"
 
 TOO_HEADER_END
 

@@ -13,8 +13,6 @@
 #include <array>
 #include <vector>
 
-#include "ul/macros.h"
-
 namespace mb::too::stat
 {
 using too::math::Percent;
@@ -111,8 +109,6 @@ private:
     ;
 };
 } // namespace mb::too::stat
-
-#include "ul/macros_end.h"
 
 TOO_HEADER_END
 

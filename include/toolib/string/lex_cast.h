@@ -10,8 +10,6 @@
 #include <exception>
 #include <sstream>
 
-#include "ul/macros.h"
-
 namespace mb::too
 {
 class ErrBadLexCast : public std::bad_cast
@@ -50,8 +48,6 @@ T lex_cast(const S& s) noexcept
     return T{};
 }
 } // namespace mb::too
-
-#include "ul/macros_end.h"
 
 TOO_HEADER_END
 
