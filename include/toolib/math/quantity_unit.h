@@ -205,7 +205,7 @@ private:
         return instance;
     }
 
-    /** \return value only needed for calls within assertions. It doesn't need to indicate failure.
+    /** Return value only needed for calls within assertions. It doesn't need to indicate failure.
         The function itself does.*/
     void expectValidRatio(const too::math::Rational& r) const
     {

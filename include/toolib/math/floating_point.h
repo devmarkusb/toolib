@@ -59,7 +59,7 @@ typename std::enable_if<std::is_floating_point<FloatType>::value, std::string>::
 }
 
 //! \return a string of the floating point number x.
-/** \param FF selects the formatting: `default_` being equivalent to a call of std::to_string,
+/** \tparam FF selects the formatting: `default_` being equivalent to a call of std::to_string,
     `fixed` meaning fixed count of decimal places and `scientific` an exponential formatting.*/
 template <FloatFormat FF = FloatFormat::default_, typename FloatType = double>
 //  FloatType expected as floating point

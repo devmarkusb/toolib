@@ -251,9 +251,10 @@ private:
     }
 
 public:
-    //! Allocates memory for an internally stored T[] and calls its default constructor for every element.
-    /** \param count number of objects of T.
-    Example: \code raii_aap<someclass> psomeobject(5); \endcode*/
+    //! Allocates memory for an internally stored T[][] and calls its default constructor for every element.
+    /**
+    \param count1 size in first dimension.
+    \param count2 size in second dimension.*/
     raii_aap(uint32_t count1, uint32_t count2)
         : m_count1(count1)
         , m_count2(count2)
