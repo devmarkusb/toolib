@@ -27,8 +27,7 @@ inline void prompt()
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
 #else
     std::cout << "\nPress ENTER key to continue...";
-    char c{};
-    std::cin >> c;
+    std::getchar();
 #endif
 }
 } // namespace mb::too
