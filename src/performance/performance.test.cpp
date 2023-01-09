@@ -78,7 +78,7 @@ TEST(DISABLED_DumpAllItemsTest, PracticalScenario)
             for (size_t i = 1; i <= 5; ++i)
             {
                 too::PerformanceProfiler perfscope3("6. 500ms", 3);
-                ul::ignore_arg(perfscope3);
+                ul::ignore_unused(perfscope3);
                 std::this_thread::sleep_for(std::chrono::milliseconds(500));
             }
             perfscope2.startNewItem("7. 200ms");

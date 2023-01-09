@@ -21,7 +21,7 @@ inline void prompt()
 {
 #if UL_OS_WINDOWS && !UL_OS_WINDOWS_UWP_APP
     if (_kbhit())
-        ul::ignore_arg(_getch());
+        ul::ignore_unused(_getch());
     std::cout << "\nPress any key to continue...";
     while (!_kbhit())
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
