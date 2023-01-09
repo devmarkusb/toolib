@@ -41,7 +41,7 @@ using ProjectionValue = double;
 struct TickStringRepr_setup
 {
     //! Cf. to_string functions.
-    FloatFormat tick_float_format{FloatFormat::default_};
+    ul::math::FloatFormat tick_float_format{ul::math::FloatFormat::default_};
     //! Cf. to_string functions.
     ul::opt<int> tick_float_precision{};
 };
@@ -373,6 +373,8 @@ std::string ChartAxis<QuValueType>::tickValueAsReadableString(const QuValueType&
     using namespace mb::too::math;
     const auto isPrecDefined = setup->tick_string_repr.tick_float_precision;
     const int prec = isPrecDefined ? *setup->tick_string_repr.tick_float_precision : 0;
+    using ul::math::FloatFormat;
+    using ul::math::to_string;
     switch (setup->tick_string_repr.tick_float_format)
     {
         case FloatFormat::default_:

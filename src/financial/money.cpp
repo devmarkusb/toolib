@@ -4,7 +4,6 @@
 
 #include "toolib/financial/money.h"
 #include "toolib/date_time/date_time.h"
-#include "toolib/math/floating_point.h"
 #include "ul/ul.h"
 #include <locale>
 
@@ -221,11 +220,10 @@ bool equal_sufficiently(const Money& lhs, const Money& rhs)
     if (lhs.currency != rhs.currency) // otherwise not yet implemented
         throw ul::not_implemented{"mixed currencies not yet implemented"};
     // tenth of smallest unit needed since this is the relevant digit for rounding
-    return too::math::approx_equal(lhs.amount, rhs.amount, Money::getTenthOfSmallestUnit());
+    return ul::math::approx_equal(lhs.amount, rhs.amount, Money::getTenthOfSmallestUnit());
 }
 
 //####################################################################################################################
-
 
 Fraction Interest_pa::YearlyEffective_to_MonthlyRelative(Fraction pa)
 {

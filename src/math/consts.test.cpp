@@ -1,4 +1,4 @@
-#include "ul/warnings.h"
+#include "ul/ul.h"
 UL_PRAGMA_WARNINGS_PUSH
 // clang-format off
 UL_WARNING_DISABLE_CLANG(reserved-id-macro)
@@ -9,8 +9,6 @@ UL_WARNING_DISABLE_CLANG(unused-macros)
 #undef _USE_MATH_DEFINES
 UL_PRAGMA_WARNINGS_POP
 #include "toolib/math/consts.h"
-#include "toolib/math/floating_point.h"
-#include "ul/ul.h"
 #include "gtest/gtest.h"
 
 #ifndef M_PI // mingw53 doesn't have it
@@ -31,7 +29,7 @@ TEST(math_constsTest, test)
     EXPECT_TRUE(ul::almost_equal(pi_f, too::math::consts::pi<float>()));
 
     const auto pi_ld = static_cast<long double>(M_PI);
-    EXPECT_TRUE(too::math::approx_equal(pi_ld, too::math::consts::pi<long double>(), 1e-15L));
+    EXPECT_TRUE(ul::math::approx_equal(pi_ld, too::math::consts::pi<long double>(), 1e-15L));
 }
 
 #undef M_PI // anyway

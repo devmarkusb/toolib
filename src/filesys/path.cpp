@@ -3,7 +3,7 @@
 //! \file
 
 #include "toolib/filesys/path.h"
-#include "toolib/string/string_token.h"
+#include "ul/string/string_token.h"
 #include "ul/ul.h"
 #include <algorithm>
 #include <fstream>
@@ -85,7 +85,7 @@ Path& Path::operator+=(const Path& other)
         detectForm();
     ensureTrailingSeparator();
     std::vector<std::string> newparts;
-    too::str::tokenizeString(*other.m_path, OS_POSSIBLE_SEPARATORS, newparts);
+    ul::str::tokenizeString(*other.m_path, OS_POSSIBLE_SEPARATORS, newparts);
     const std::string sep(getSeparatorUsedHere());
     for (const std::string& part : newparts)
     {

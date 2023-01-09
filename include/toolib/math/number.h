@@ -2,13 +2,10 @@
 
 //! \file
 
-
 #ifndef NUMBER_H_f29jh8hnf238hrxz23
 #define NUMBER_H_f29jh8hnf238hrxz23
 
 #include "../config.h"
-#include "toolib/math/floating_point.h"
-#include "ul/comp_bwds.h"
 #include "ul/ul.h"
 #include <cmath>
 #include <iomanip>
@@ -80,7 +77,7 @@ ul::opt<ArithType> isPowerOf(ArithType x, ArithType base)
     const long long intpart = ul::llround(exp);
     const auto intpart_dbl = ul::narrow_cast<long double>(intpart);
 
-    if (!too::math::approx_equal(intpart_dbl, exp, 1e-12L))
+    if (!ul::math::approx_equal(intpart_dbl, exp, 1e-12L))
         return {};
     return ul::narrow_cast<ArithType>(intpart);
 }

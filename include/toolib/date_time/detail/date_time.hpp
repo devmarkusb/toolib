@@ -6,8 +6,8 @@
 #define DATE_TIME_HPP_kjgfdhnxui3gfy34z8ry27
 
 #include "../../config.h"
-#include "toolib/string/string_token.h"
 #include "ul/comp_bwds.h"
+#include "ul/string/string_token.h"
 #include "ul/ul.h"
 #include <ostream>
 #include <string>
@@ -64,7 +64,7 @@ template <class NormalizePolicy>
 MonthYear_base<NormalizePolicy>::MonthYear_base(const std::string& fromString)
 {
     std::vector<std::string> parts;
-    too::str::tokenizeString(fromString, string_delim, parts);
+    ul::str::tokenizeString(fromString, string_delim, parts);
 
     // don't throw the user an invalid_arg or sth., since bug could also have happened within tokenizeString
     UL_ASSERT_THROW(parts.size() == 2);

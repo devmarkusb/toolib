@@ -7,7 +7,25 @@ among apps. Criteria of what goes in:
 properly crafted lib
 * not fundamental enough for util lib
 
-## Usage
+## Usage with CMake
+
+```
+cmake_minimum_required(VERSION 3.14)
+
+if (TARGET toolib)
+    return ()
+endif ()
+
+include(FetchContent)
+
+FetchContent_Declare(mb-toolib
+        GIT_REPOSITORY https://github.com/devmarkusb/toolib
+        GIT_TAG origin/HEAD
+        GIT_SHALLOW ON
+        )
+
+FetchContent_MakeAvailable(mb-toolib)
+```
 
 In most cases you just need to include header files from subdir toolib,
 CMake include dir: `${toolib_INCLUDE_DIRS}`.
@@ -21,6 +39,6 @@ structure and read header files.
 
 ### Namespace clashes
 
-In rare cases when you need to have another namespace `ul`
+In rare cases when you need to have another namespace `too`
 around, you can set `UL_DISABLE_NAMESPACE_ALIAS` to `ON`
-which yields base namespace `mb::ul` instead.
+which yields base namespace `mb::too` instead.
