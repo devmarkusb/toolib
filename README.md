@@ -9,9 +9,10 @@ properly crafted lib
 
 ## Usage
 
-In most cases you just need to include header files from subdir toolib.
+In most cases you just need to include header files from subdir toolib,
+CMake include dir: `${toolib_INCLUDE_DIRS}`.
 
-Sometimes you need to build the lib according to CMakeLists.txt in the root.
+Sometimes you need to link the lib, CMake target `toolib`.
 
 To find anything topic specific, just browse through the directory
 structure and read header files.
@@ -20,6 +21,6 @@ structure and read header files.
 
 ### Namespace clashes
 
-In rare cases when you need to have another namespace `too`
-around, you can do something like
-`add_compile_definitions(TOO_DISABLE_NAMESPACE_ALIAS=1)`.
+In rare cases when you need to have another namespace `ul`
+around, you can set `UL_DISABLE_NAMESPACE_ALIAS` to `ON`
+which yields base namespace `mb::ul` instead.

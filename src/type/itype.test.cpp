@@ -1,4 +1,4 @@
-#include "toolib/class/itype.h"
+#include "toolib/type/itype.h"
 #include "gtest/gtest.h"
 
 namespace too = mb::too;
