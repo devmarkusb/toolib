@@ -1,5 +1,3 @@
-// 2016
-
 //! \file
 
 #include "toolib/filesys/file_collection.h"
@@ -42,7 +40,7 @@ FileCollection::FileCollection(const std::string& file_name)
     UL_PRAGMA_WARNINGS_PUSH
     UL_WARNING_DISABLE_CLANG(comma)
     for (unsigned int file_nr = 0; file_nr_str = too::math::toLeadingZeros(file_nr, digits),
-                      fn = base_file_name + file_nr_str + file_ext, f.open(fn), f.good();
+                      fn = std::string{base_file_name}.append(file_nr_str).append(file_ext), f.open(fn), f.good();
          ++file_nr, f.close())
         UL_PRAGMA_WARNINGS_POP
         {
@@ -56,13 +54,13 @@ std::vector<std::string> FileCollection::get_list_of_existent_files() const
 }
 
 unsigned char FileCollection::obtain_number_of_digits_for_filenames_of_file_collection(
-    const std::string& base_file_name, const std::string& file_ext) const
+    const std::string& base_file_name, const std::string& file_ext)
 {
     std::ifstream f;
     for (unsigned char digits = 1; digits < max_digits; ++digits)
     {
         std::string zeros{too::math::toLeadingZeros(0, digits)};
-        std::string fn{base_file_name + zeros + file_ext};
+        auto fn{std::string{base_file_name}.append(zeros).append(file_ext)};
         f.open(fn);
         if (f.good())
             return digits;

@@ -61,9 +61,9 @@ protected:
     virtual bool game() = 0;
 
     //! Should return the main exit code.
-    virtual int handleMainExceptions(std::exception&) throw() = 0;
+    virtual int handleMainExceptions(std::exception&) noexcept = 0;
     //! Should return the main exit code.
-    virtual int mainTerminationByError() throw() = 0;
+    virtual int mainTerminationByError() noexcept = 0;
 
 private:
     void mainloop()

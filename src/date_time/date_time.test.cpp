@@ -251,7 +251,7 @@ TEST(date_time__MonthYear_baseTest, normalize)
 
 TEST(date_time__MonthYear_baseTest, normalize_ops_and_copy)
 {
-    static_assert(std::is_same<MonthYear_base<normalize>, MonthYear>::value, "");
+    static_assert(std::is_same<MonthYear_base<normalize>, MonthYear>::value);
     MonthYear_base<normalize> my(-1, 1);
     std::string tmp = "13";
     tmp += MonthYear_decl::string_delim + "0";

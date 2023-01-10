@@ -1,5 +1,3 @@
-// 2015
-
 //! \file
 
 #include "toolib/filesys/path.h"
@@ -18,9 +16,7 @@ const std::string OS_FOLDER_SEPARATOR = "/";
 #endif
 } // namespace
 
-namespace mb::too
-{
-namespace file
+namespace mb::too::file
 {
 const std::string Path::FOLDER_SEPARATOR_TO_USE_HERE = "/";
 
@@ -55,6 +51,8 @@ Path::Path(Path&& other) noexcept
 
 Path& Path::operator=(const Path& other)
 {
+    if (this == std::addressof(other))
+        return *this;
     *m_path = *other.m_path;
     m_form = other.m_form;
     m_type = other.m_type;
@@ -98,35 +96,35 @@ Path& Path::operator+=(const Path& other)
 std::string Path::getFolderPath() const
 {
     if (m_type != EType::IS_FILE && m_type != EType::IS_UNKNOWN)
-        return std::string();
+        return {};
     if (isEmpty() || (*m_path)[m_path->size() - 1] == getSeparatorUsedHere()[0])
-        return std::string();
+        return {};
     size_t index = m_path->find_last_of(getSeparatorUsedHere());
     if (index == std::string::npos)
-        return std::string();
+        return {};
     return m_path->substr(0, index + 1);
 }
 
 std::string Path::getFileName() const
 {
     if (m_type != EType::IS_FILE && m_type != EType::IS_UNKNOWN)
-        return std::string();
+        return {};
     if (isEmpty() || (*m_path)[m_path->size() - 1] == getSeparatorUsedHere()[0])
-        return std::string();
+        return {};
     size_t index = m_path->find_last_of(getSeparatorUsedHere());
     if (index == std::string::npos)
-        return std::string();
+        return {};
     return m_path->substr(index + 1);
 }
 
 std::string Path::getExtension(bool with_dot) const
 {
     if (m_type != EType::IS_FILE && m_type != EType::IS_UNKNOWN)
-        return std::string();
+        return {};
     size_t index = m_path->find_last_of('.');
     // no ext || hidden file (starts with dot) || filename ends with a dot
     if (index == std::string::npos || index == 0 || index == m_path->size() - 1)
-        return std::string();
+        return {};
     if (with_dot)
         return std::string(".") + m_path->substr(index + 1);
     else
@@ -220,5 +218,4 @@ void Path::detectForm() const
     else
         m_form = EForm::PLATFORMINDEPENDENT;
 }
-} // namespace file
-} // namespace mb::too
+} // namespace mb::too::file

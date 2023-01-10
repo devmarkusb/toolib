@@ -6,11 +6,11 @@ using mb::too::file::Path;
 class PathTest : public ::testing::Test
 {
 protected:
-    virtual void SetUp()
+    void SetUp() override
     {
     }
 
-    virtual void TearDown()
+    void TearDown() override
     {
     }
 };

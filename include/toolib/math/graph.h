@@ -1,5 +1,3 @@
-// 2015-17
-
 //! \file
 
 #ifndef GRAPH_H_lnkjgngkvfvutzhirthczrec5

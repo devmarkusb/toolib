@@ -1,5 +1,3 @@
-// 2016
-
 /** \file This is left for documentation or future thinking. Apparently there should be
     no application for such a general interface.*/
 

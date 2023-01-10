@@ -1,5 +1,3 @@
-// 2016
-
 //! \file
 
 #ifndef FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn
@@ -38,8 +36,8 @@ public:
 private:
     std::vector<std::string> file_list;
 
-    [[nodiscard]] unsigned char obtain_number_of_digits_for_filenames_of_file_collection(
-        const std::string& base_file_name, const std::string& file_ext) const;
+    [[nodiscard]] static unsigned char obtain_number_of_digits_for_filenames_of_file_collection(
+        const std::string& base_file_name, const std::string& file_ext);
 };
 } // namespace mb::too::file
 

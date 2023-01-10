@@ -1,5 +1,3 @@
-// 2016
-
 //! \file
 
 #ifndef DATE_TIME_HPP_kjgfdhnxui3gfy34z8ry27

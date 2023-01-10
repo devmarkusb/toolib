@@ -1,5 +1,3 @@
-// 2016
-
 //! \file
 
 #ifndef CAL_EVENT_H_nbvxmcbvxmcnbxcmbierutozreoi
@@ -121,7 +119,7 @@ public:
 
     [[nodiscard]] bool hasStartBackup() const
     {
-        return !!m_backupStart;
+        return m_backupStart;
     }
 
     void restoreStart_move()
@@ -152,7 +150,7 @@ public:
 
     [[nodiscard]] bool hasEndBackup() const
     {
-        return !!m_backupEnd;
+        return m_backupEnd;
     }
 
     void restoreEnd_move()

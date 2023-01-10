@@ -1,5 +1,3 @@
-// 2016
-
 //! \file
 
 #ifndef PERCENT_H_kjdghnxzre8hgnf83xgfn34gx

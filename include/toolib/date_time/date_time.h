@@ -1,5 +1,3 @@
-// 2016
-
 //! \file
 
 #ifndef DATE_TIME_H_sdhnfxeuhgf783nx4f2z3t487f
@@ -49,7 +47,7 @@ UL_WARNING_DISABLE_MSVC(4251)
 
 struct TOOLIBSHARED_EXPORT MonthYear_decl
 {
-    static const Months twelve = 12;
+    static constexpr Months twelve = 12;
     static const std::string string_delim;
 };
 
@@ -70,13 +68,13 @@ public:
 
     //! Capable to copy from template class with different policy.
     template <class NP>
-    MonthYear_base(const MonthYear_base<NP>&);
+    explicit MonthYear_base(const MonthYear_base<NP>&);
     //! Capable to copy from template class with different policy.
     template <class NP>
     MonthYear_base<NormalizePolicy>& operator=(const MonthYear_base<NP>&);
     //! Capable to copy from template class with different policy.
     template <class NP>
-    MonthYear_base(MonthYear_base<NP>&&);
+    explicit MonthYear_base(MonthYear_base<NP>&&);
     //! Capable to copy from template class with different policy.
     template <class NP>
     MonthYear_base<NormalizePolicy>& operator=(MonthYear_base<NP>&&);

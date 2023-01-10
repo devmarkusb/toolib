@@ -1,5 +1,3 @@
-// 2015-16
-
 //! \file
 
 #ifndef SCALE_H_enrhfu87n83464346ng

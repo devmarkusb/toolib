@@ -1,5 +1,3 @@
-// 2016
-
 //! \file
 
 #include "toolib/date_time/date_time.h"

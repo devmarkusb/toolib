@@ -1,5 +1,3 @@
-// 2016
-
 //! \file
 
 #include "toolib/financial/money.h"
@@ -19,7 +17,7 @@ Currency::Currency(const std::locale& loc)
 std::string Currency::getString() const
 {
     if (!(this->loc))
-        return std::string();
+        return {};
     const std::string loc_enc = std::use_facet<std::moneypunct<char, true>>(*(this->loc)).curr_symbol();
     const std::wstring utf16ws = ul::str::locenc_s2ws(loc_enc);
     return ul::str::utf16or32to8_ws2s_portable(utf16ws);
@@ -28,7 +26,7 @@ std::string Currency::getString() const
 std::string Currency::getSymbol() const
 {
     if (!(this->loc))
-        return std::string();
+        return {};
     const std::string loc_enc = std::use_facet<std::moneypunct<char>>(*(this->loc)).curr_symbol();
     const std::wstring utf16ws = ul::str::locenc_s2ws(loc_enc);
     return ul::str::utf16or32to8_ws2s_portable(utf16ws);

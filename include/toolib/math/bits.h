@@ -25,15 +25,15 @@ struct B
 };
 
 template <typename Ty>
-B::_ i2B(Ty t = Ty())
+B::_ i2B(Ty x = Ty())
 {
-    return static_cast<B::_>(t);
+    return static_cast<B::_>(x);
 }
 
 template <>
-[[maybe_unused]] inline B::_ i2B<int>(int i)
+[[maybe_unused]] inline B::_ i2B<int>(int x)
 {
-    return static_cast<B::_>(i);
+    return static_cast<B::_>(x);
 }
 
 template <typename T>

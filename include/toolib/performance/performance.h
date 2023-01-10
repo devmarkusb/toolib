@@ -1,5 +1,3 @@
-// 2014-18
-
 //! \file
 
 #ifndef PERFORMANCE_H_sdkfgnxzuwegnf93746ryng342grf

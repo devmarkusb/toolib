@@ -1,5 +1,3 @@
-// 2011
-
 //! \file Filename stands for "mixed-mode type conversions".
 
 #ifndef MMTYPECONV_H_nbi4lnv5

@@ -1,5 +1,3 @@
-// 2011-17
-
 //! \file
 
 #ifndef NUMBER_H_f29jh8hnf238hrxz23

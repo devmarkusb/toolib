@@ -1,5 +1,3 @@
-// 2011-16
-
 //! \file
 
 #ifndef MATRIX_H_mx02983urx23
@@ -63,6 +61,8 @@ public:
     //! Replaces itself with another matrix, using the same internal representation to speed things up.
     matrix& operator=(const matrix& mtrx)
     {
+        if (this == std::addressof(mtrx))
+            return *this;
         /* It is taken care of self-assignment in a logical manner. No need to
         write \code if (this == &mtrx) return *this; \endcode*/
         ++(mtrx.m_rep->iRefCount);
@@ -249,7 +249,7 @@ public:
 
     //! Scalar reciprocal multiplying a matrix.
     /** Throws error_division_by_zero, where t==T() is taken as zero.*/
-    friend const matrix<T> operator/(const matrix<T>& m, const T& t)
+    friend matrix<T> operator/(const matrix<T>& m, const T& t)
     {
         if (t == T())
             throw error_division_by_zero();
@@ -539,15 +539,16 @@ public:
 
     public:
         // matrix element is just read from, appears as simple T
-        operator T() const
+        explicit operator T() const
         {
             return m.m_rep->m[r][c];
         }
 
         // matrix element is written to
-        void operator=(const T& t)
+        T& operator=(const T& t)
         {
             m.put(r, c, t);
+            return *this;
         }
     };
 

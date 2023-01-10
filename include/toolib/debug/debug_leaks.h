@@ -1,5 +1,3 @@
-// 2011-16
-
 /** \file Contains memory leak detection, wrapping just the standard procedure of Visual Studio.
 If you want to use vld.h instead, if available, just define UL_USE_VLD in front of the header inclusion.
 But I would rather suggest to use VLD directly. With version 2.5 it's gotten extremely simple to use.

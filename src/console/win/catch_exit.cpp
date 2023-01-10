@@ -1,5 +1,3 @@
-// 2011-17
-
 //! \file
 
 #include "toolib/console/win/catch_exit.h"

@@ -1,5 +1,3 @@
-// 2011
-
 /** \file Note: I assume that the lack of keyword export (MS VS) made it necessary to put the definitions
     m_init, m_flags, m_aux, m_auxLastflags into this the only file (it took lots of tries with
     awkward template stuff until it finally	worked).*/

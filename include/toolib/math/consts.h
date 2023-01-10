@@ -1,5 +1,3 @@
-// 2016-17
-
 //! \file
 
 #ifndef CONSTS_H_sjkhnfxgiuexernhgf7834t4
