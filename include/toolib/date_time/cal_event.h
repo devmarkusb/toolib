@@ -9,8 +9,7 @@
 
 namespace mb::too::date_time
 {
-//! Base for SingleEvent and RecurringEvent. Provides getFirst/getNext mechanism to
-//! browse through events.
+//! Base for SingleEvent and RecurringEvent. Provides getFirst/getNext mechanism to browse through events.
 template <typename TimeType>
 class CalEvent
 {
@@ -72,9 +71,9 @@ private:
     TimeType m_TimePoint{};
 };
 
-//! For events starting at a certain time (or immediately, at 0, precisely TimeType()),
-//! recurring in a certain period of time, and ending at a certain end time or before
-//! It doesn't end at all when no end is provided.
+/** For events starting at a certain time (or immediately, at 0, precisely TimeType()),
+    recurring in a certain period of time, and ending at a certain end time or before
+    It doesn't end at all when no end is provided.*/
 template <typename TimeType>
 class RecurringEvent : public virtual CalEvent<TimeType>
 {

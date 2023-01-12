@@ -19,8 +19,8 @@ class TOOLIBSHARED_EXPORT FileCollection
 public:
     static const unsigned char max_digits = 10;
 
-    //! Converts a fn filename to one without extension and number.
-    //! Removes extension only, if filename contains nothing but numbers.
+    /** Converts a fn filename to one without extension and number. Removes extension only, if filename contains
+        nothing but numbers.*/
     static std::string get_base_name(const std::string& fn);
 
     /** \param file_name is a path of a file that could be part of a collection of files ending

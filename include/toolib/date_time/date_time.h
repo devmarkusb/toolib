@@ -17,8 +17,7 @@ using Months = int;
 //! Years type, represents absolute as well as difference values.
 using Years = int;
 
-//! Ensures month to be 1..12 and month and year having the same sign.
-//! Only exception: {0, 0} will be mapped to {0, 0}.
+//! Ensures month to be 1..12 and month and year having the same sign. Only exception: {0, 0} will be mapped to {0, 0}.
 struct TOOLIBSHARED_EXPORT normalize
 {
     static void do_it(std::pair<Years, Months>& y_m);
@@ -93,8 +92,8 @@ public:
     MonthYear_base<NormalizePolicy>& operator-=(const MonthYear_base<NormalizePolicy>& rhs);
     MonthYear_base<NormalizePolicy>& operator+=(const MonthYear_base<NormalizePolicy>& rhs);
 
-    //! Outputs string in format analog to one used in constructing with MonthYear_base(const std::string& fromString),
-    //! month and year delimited by MonthYear_decl::string_delim.
+    /** Outputs string in format analog to one used in constructing with MonthYear_base(const std::string& fromString),
+        month and year delimited by MonthYear_decl::string_delim.*/
     template <class NP>
     friend std::ostream& operator<<(std::ostream& out, const MonthYear_base<NP>& my);
 
