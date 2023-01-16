@@ -118,7 +118,7 @@ public:
 
     [[nodiscard]] bool hasStartBackup() const
     {
-        return m_backupStart;
+        return static_cast<bool>(m_backupStart);
     }
 
     void restoreStart_move()
@@ -149,7 +149,7 @@ public:
 
     [[nodiscard]] bool hasEndBackup() const
     {
-        return m_backupEnd;
+        return static_cast<bool>(m_backupEnd);
     }
 
     void restoreEnd_move()
