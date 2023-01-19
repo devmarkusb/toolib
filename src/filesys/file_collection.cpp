@@ -1,7 +1,6 @@
 //! \file
 
 #include "toolib/filesys/file_collection.h"
-#include "toolib/math/number.h"
 #include "ul/ul.h"
 #include <fstream>
 
@@ -39,7 +38,7 @@ FileCollection::FileCollection(const std::string& file_name)
     std::string file_nr_str;
     UL_PRAGMA_WARNINGS_PUSH
     UL_WARNING_DISABLE_CLANG(comma)
-    for (unsigned int file_nr = 0; file_nr_str = too::math::toLeadingZeros(file_nr, digits),
+    for (unsigned int file_nr = 0; file_nr_str = ul::math::toLeadingZeros(file_nr, digits),
                       fn = std::string{base_file_name}.append(file_nr_str).append(file_ext), f.open(fn), f.good();
          ++file_nr, f.close())
         UL_PRAGMA_WARNINGS_POP
@@ -59,7 +58,7 @@ unsigned char FileCollection::obtain_number_of_digits_for_filenames_of_file_coll
     std::ifstream f;
     for (unsigned char digits = 1; digits < max_digits; ++digits)
     {
-        std::string zeros{too::math::toLeadingZeros(0, digits)};
+        std::string zeros{ul::math::toLeadingZeros(0, digits)};
         auto fn{std::string{base_file_name}.append(zeros).append(file_ext)};
         f.open(fn);
         if (f.good())

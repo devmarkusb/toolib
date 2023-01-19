@@ -1,4 +1,8 @@
-//! \file
+/**
+\file
+todos:
+1. Rework to use the notion 'interval'.
+*/
 
 #ifndef MINMAX_VALUES_H_iuwenyg34gnyt487t
 #define MINMAX_VALUES_H_iuwenyg34gnyt487t

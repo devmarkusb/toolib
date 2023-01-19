@@ -1,7 +1,7 @@
 //! \file
 
 #include "toolib/date_time/date_time.h"
-#include "toolib/math/number.h"
+#include "ul/ul.h"
 
 namespace mb::too::date_time
 {
@@ -9,7 +9,7 @@ const std::string MonthYear_decl::string_delim = "/";
 
 void normalize::do_it(std::pair<Years, Months>& y_m)
 {
-    const int MonthSgn = too::math::sgn(y_m.second);
+    const int MonthSgn = ul::math::sgn(y_m.second);
     const Months MonthAbs = std::abs(y_m.second);
     if (MonthAbs > MonthYear_decl::twelve)
     {
@@ -31,7 +31,7 @@ void normalize::do_it(std::pair<Years, Months>& y_m)
         else
             y_m.second = MonthSgn * (MonthAbs % MonthYear_decl::twelve);
     }
-    const int YearSgn = too::math::sgn(y_m.first);
+    const int YearSgn = ul::math::sgn(y_m.first);
     if (y_m.second == 0 && y_m.first != 0)
     {
         UL_ASSERT(YearSgn);

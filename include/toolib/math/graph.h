@@ -3,9 +3,7 @@
 #ifndef GRAPH_H_lnkjgngkvfvutzhirthczrec5
 #define GRAPH_H_lnkjgngkvfvutzhirthczrec5
 
-#include "number.h"
 #include "quantity_unit.h"
-#include "ratio.h"
 #include "scale.h"
 #include "../config.h"
 #include "ul/ul.h"
@@ -114,9 +112,9 @@ public:
 
     /** \return a new ratio for the Quantity Unit, if there is a better choice, i.e. a common ratio of the tick values
         can be obtained.*/
-    [[nodiscard]] ul::opt<Rational> obtain_suitable_common_ratio_of_tickvals() const;
-    void apply_ratio_to_tickvals(const Rational& r);
-    void apply_ratio_to_quantity_unit(const Rational& r);
+    [[nodiscard]] ul::opt<ul::math::Rational> obtain_suitable_common_ratio_of_tickvals() const;
+    void apply_ratio_to_tickvals(const ul::math::Rational& r);
+    void apply_ratio_to_quantity_unit(const ul::math::Rational& r);
 
     [[nodiscard]] bool contains_zero_tick() const
     {
@@ -270,7 +268,6 @@ private:
 // template implementations
 //####################################################################################################################
 
-#include "toolib/math/round.h"
 #include "toolib/math/scale.h"
 #include "ul/ul.h"
 
@@ -322,11 +319,11 @@ void ChartAxis<QuValueType>::calcScaling(const QuValueType& min_qu_val, const Qu
     this->tick_end_qu_val = 0.0;
     std::tie(this->tick_start_qu_val, this->tick_end_qu_val) =
         calcScaleTickFromTo(min_qu_val, max_qu_val, tick_step_qu_val);
-    this->tick_count = round_to<ScaleTickCount>((tick_end_qu_val - tick_start_qu_val) / tick_step_qu_val);
+    this->tick_count = ul::math::round_to<ScaleTickCount>((tick_end_qu_val - tick_start_qu_val) / tick_step_qu_val);
 }
 
 template <typename QuValueType>
-ul::opt<Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio_of_tickvals() const
+ul::opt<ul::math::Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio_of_tickvals() const
 {
     const auto unit = this->quantity.getUnit();
     const auto max_abs = std::max(std::abs(this->tick_start_qu_val), std::abs(this->tick_end_qu_val));
@@ -340,14 +337,14 @@ ul::opt<Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio_of_tickva
 }
 
 template <typename QuValueType>
-void ChartAxis<QuValueType>::apply_ratio_to_tickvals(const Rational& r)
+void ChartAxis<QuValueType>::apply_ratio_to_tickvals(const ul::math::Rational& r)
 {
     const auto unit = this->quantity.getUnit();
     this->tick_start_qu_val = unit.convertToDifferentRatio(this->tick_start_qu_val, r);
     this->tick_end_qu_val = unit.convertToDifferentRatio(this->tick_end_qu_val, r);
     this->tick_step_qu_val = unit.convertToDifferentRatio(this->tick_step_qu_val, r);
 
-    if (!too::math::isPowerOf(r.asFloatingPoint<double>(), 10.0))
+    if (!ul::math::isPowerOf(r.asFloatingPoint<double>(), 10.0))
     {
         // Wow :/ that's a nice error... you need to copy the this-members, because they
         // get modified within non-const calcScaling. Problem is, that the direct change of the
@@ -360,7 +357,7 @@ void ChartAxis<QuValueType>::apply_ratio_to_tickvals(const Rational& r)
 }
 
 template <typename QuValueType>
-void ChartAxis<QuValueType>::apply_ratio_to_quantity_unit(const Rational& r)
+void ChartAxis<QuValueType>::apply_ratio_to_quantity_unit(const ul::math::Rational& r)
 {
     this->quantity.getUnit().switchRatio(r);
 }
