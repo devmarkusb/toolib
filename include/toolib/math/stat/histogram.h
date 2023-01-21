@@ -1,5 +1,3 @@
-// 2016
-
 //! \file
 
 #ifndef HISTOGRAM_H_idungz8c7457gx812334gbxxxdesg
