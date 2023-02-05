@@ -1,5 +1,7 @@
 # toolib library
 
+[![build](https://github.com/devmarkusb/toolib/actions/workflows/build.yml/badge.svg)](https://github.com/devmarkusb/toolib/actions/workflows/build.yml)
+
 A lib containing a wild collection of minimalistic tools to be shared
 among apps. Criteria of what goes in:
 * too general for any single app
