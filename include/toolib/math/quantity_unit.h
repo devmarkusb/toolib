@@ -21,7 +21,7 @@ using Map_Rational_String = std::map<ul::math::Rational, std::string>;
 inline Map_Rational_String create_map_ratio_simple(const std::string& base_unit_name = {})
 {
     std::map<ul::math::Rational, std::string> ret;
-    ret[ul::math::one] = ul::math::one_symb + base_unit_name;
+    ret[ul::math::one] = std::string{ul::math::one_symb} + base_unit_name;
     return ret;
 }
 
@@ -36,31 +36,31 @@ inline Map_Rational_String create_map_ratio_SIprefixunitname(
 {
     Map_Rational_String ret;
 
-    ret[ul::math::atto] = ul::math::atto_symb + base_unit_name;
-    ret[ul::math::femto] = ul::math::femto_symb + base_unit_name;
-    ret[ul::math::pico] = ul::math::pico_symb + base_unit_name;
-    ret[ul::math::nano] = ul::math::nano_symb + base_unit_name;
-    ret[ul::math::micro] = ul::math::micro_symb + base_unit_name;
-    ret[ul::math::milli] = ul::math::milli_symb + base_unit_name;
+    ret[ul::math::atto] = std::string{ul::math::atto_symb} + base_unit_name;
+    ret[ul::math::femto] = std::string{ul::math::femto_symb} + base_unit_name;
+    ret[ul::math::pico] = std::string{ul::math::pico_symb} + base_unit_name;
+    ret[ul::math::nano] = std::string{ul::math::nano_symb} + base_unit_name;
+    ret[ul::math::micro] = std::string{ul::math::micro_symb} + base_unit_name;
+    ret[ul::math::milli] = std::string{ul::math::milli_symb} + base_unit_name;
     if (!only_factors_of_thousand)
     {
-        ret[ul::math::centi] = ul::math::centi_symb + base_unit_name;
-        ret[ul::math::deci] = ul::math::deci_symb + base_unit_name;
+        ret[ul::math::centi] = std::string{ul::math::centi_symb} + base_unit_name;
+        ret[ul::math::deci] = std::string{ul::math::deci_symb} + base_unit_name;
     }
 
-    ret[ul::math::one] = ul::math::one_symb + base_unit_name;
+    ret[ul::math::one] = std::string{ul::math::one_symb} + base_unit_name;
 
     if (!only_factors_of_thousand)
     {
-        ret[ul::math::deca] = ul::math::deka_symb + base_unit_name;
-        ret[ul::math::hecto] = ul::math::hecto_symb + base_unit_name;
+        ret[ul::math::deca] = std::string{ul::math::deka_symb} + base_unit_name;
+        ret[ul::math::hecto] = std::string{ul::math::hecto_symb} + base_unit_name;
     }
-    ret[ul::math::kilo] = ul::math::kilo_symb + base_unit_name;
-    ret[ul::math::mega] = ul::math::mega_symb + base_unit_name;
-    ret[ul::math::giga] = ul::math::giga_symb + base_unit_name;
-    ret[ul::math::tera] = ul::math::tera_symb + base_unit_name;
-    ret[ul::math::peta] = ul::math::peta_symb + base_unit_name;
-    ret[ul::math::exa] = ul::math::exa_symb + base_unit_name;
+    ret[ul::math::kilo] = std::string{ul::math::kilo_symb} + base_unit_name;
+    ret[ul::math::mega] = std::string{ul::math::mega_symb} + base_unit_name;
+    ret[ul::math::giga] = std::string{ul::math::giga_symb} + base_unit_name;
+    ret[ul::math::tera] = std::string{ul::math::tera_symb} + base_unit_name;
+    ret[ul::math::peta] = std::string{ul::math::peta_symb} + base_unit_name;
+    ret[ul::math::exa] = std::string{ul::math::exa_symb} + base_unit_name;
 
     return ret;
 }
