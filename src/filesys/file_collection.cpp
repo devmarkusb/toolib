@@ -4,12 +4,22 @@
 #include "ul/ul.h"
 #include <fstream>
 
+#if UL_OS_ANDROID && UL_ANDROID_NDK_MAJOR < 22
+#include "toolib/filesys/path.h"
+#endif
+
 namespace mb::too::file
 {
 std::string FileCollection::get_base_name(const std::string& fn)
 {
     ul::std_fs::path p{fn};
+#if UL_OS_ANDROID && UL_ANDROID_NDK_MAJOR < 22
+    std::string fn_noext{fn};
+    remove_extension(fn_noext);
+    p = fn_noext;
+#else
     p.replace_extension();
+#endif
     std::string ret = p.string();
     size_t pos = ret.find_last_not_of("0123456789");
     if (pos == std::string::npos)
@@ -21,7 +31,11 @@ std::string FileCollection::get_base_name(const std::string& fn)
 FileCollection::FileCollection(const std::string& file_name)
 {
     ul::std_fs::path p{file_name};
+#if UL_OS_ANDROID && UL_ANDROID_NDK_MAJOR < 22
+    std::string file_ext{Path{p.string()}.getExtension()};
+#else
     std::string file_ext{p.extension().string()};
+#endif
     std::string base_file_name{get_base_name(file_name)};
     std::string fn{base_file_name + file_ext};
     std::ifstream f(fn);
