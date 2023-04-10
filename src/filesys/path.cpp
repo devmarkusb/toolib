@@ -20,6 +20,14 @@ namespace mb::too::file
 {
 const std::string Path::FOLDER_SEPARATOR_TO_USE_HERE = "/";
 
+void remove_extension(std::string& fn)
+{
+    size_t lastdot = fn.find_last_of(".");
+    if (lastdot == std::string::npos)
+        return;
+    fn = fn.substr(0, lastdot);
+}
+
 Path::Path(const std::string& path, EForm form, EType type)
     : m_form(form)
     , m_type(type)
