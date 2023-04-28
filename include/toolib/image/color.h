@@ -7,10 +7,8 @@
 #include "../config.h"
 #include <string>
 
-namespace mb::too::img
-{
-class Color_dbl
-{
+namespace mb::too::img {
+class Color_dbl {
 public:
     Color_dbl() = default;
 
@@ -19,27 +17,22 @@ public:
         : r_{r}
         , g_{g}
         , b_{b}
-        , a_{a}
-    {
+        , a_{a} {
     }
 
-    [[nodiscard]] double r() const
-    {
+    [[nodiscard]] double r() const {
         return r_;
     }
 
-    [[nodiscard]] double g() const
-    {
+    [[nodiscard]] double g() const {
         return g_;
     }
 
-    [[nodiscard]] double b() const
-    {
+    [[nodiscard]] double b() const {
         return b_;
     }
 
-    [[nodiscard]] double a() const
-    {
+    [[nodiscard]] double a() const {
         return a_;
     }
 
@@ -50,8 +43,7 @@ private:
     double a_{};
 };
 
-class Color
-{
+class Color {
 public:
     Color() = default;
 
@@ -60,27 +52,22 @@ public:
         : r_{r}
         , g_{g}
         , b_{b}
-        , a_{a}
-    {
+        , a_{a} {
     }
 
-    [[nodiscard]] int r() const
-    {
+    [[nodiscard]] int r() const {
         return r_;
     }
 
-    [[nodiscard]] int g() const
-    {
+    [[nodiscard]] int g() const {
         return g_;
     }
 
-    [[nodiscard]] int b() const
-    {
+    [[nodiscard]] int b() const {
         return b_;
     }
 
-    [[nodiscard]] int a() const
-    {
+    [[nodiscard]] int a() const {
         return a_;
     }
 

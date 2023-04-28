@@ -8,10 +8,8 @@
 #include "toolib/filesys/path.h"
 #endif
 
-namespace mb::too::file
-{
-std::string FileCollection::get_base_name(const std::string& fn)
-{
+namespace mb::too::file {
+std::string FileCollection::get_base_name(const std::string& fn) {
     ul::std_fs::path p{fn};
 #if UL_OS_ANDROID && UL_ANDROID_NDK_MAJOR < 22
     std::string fn_noext{fn};
@@ -28,8 +26,7 @@ std::string FileCollection::get_base_name(const std::string& fn)
     return retsub.empty() ? ret : retsub;
 }
 
-FileCollection::FileCollection(const std::string& file_name)
-{
+FileCollection::FileCollection(const std::string& file_name) {
     ul::std_fs::path p{file_name};
 #if UL_OS_ANDROID && UL_ANDROID_NDK_MAJOR < 22
     std::string file_ext{Path{p.string()}.getExtension()};
@@ -44,8 +41,7 @@ FileCollection::FileCollection(const std::string& file_name)
 
     f.close();
     const unsigned char digits = obtain_number_of_digits_for_filenames_of_file_collection(base_file_name, file_ext);
-    if (!digits)
-    {
+    if (!digits) {
         this->file_list.push_back(file_name);
         return;
     }
@@ -55,23 +51,19 @@ FileCollection::FileCollection(const std::string& file_name)
     for (unsigned int file_nr = 0; file_nr_str = ul::math::toLeadingZeros(file_nr, digits),
                       fn = std::string{base_file_name}.append(file_nr_str).append(file_ext), f.open(fn), f.good();
          ++file_nr, f.close())
-        UL_PRAGMA_WARNINGS_POP
-        {
+        UL_PRAGMA_WARNINGS_POP {
             this->file_list.push_back(fn);
         }
 }
 
-std::vector<std::string> FileCollection::get_list_of_existent_files() const
-{
+std::vector<std::string> FileCollection::get_list_of_existent_files() const {
     return this->file_list;
 }
 
 unsigned char FileCollection::obtain_number_of_digits_for_filenames_of_file_collection(
-    const std::string& base_file_name, const std::string& file_ext)
-{
+    const std::string& base_file_name, const std::string& file_ext) {
     std::ifstream f;
-    for (unsigned char digits = 1; digits < max_digits; ++digits)
-    {
+    for (unsigned char digits = 1; digits < max_digits; ++digits) {
         std::string zeros{ul::math::toLeadingZeros(0, digits)};
         auto fn{std::string{base_file_name}.append(zeros).append(file_ext)};
         f.open(fn);

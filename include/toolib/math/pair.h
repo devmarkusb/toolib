@@ -6,44 +6,37 @@
 #include "../config.h"
 #include <utility>
 
-namespace mb::too::math
-{
+namespace mb::too::math {
 template <typename T1, typename T2>
-struct pair
-{
+struct pair {
     pair()
         : m_p()
         , left(getleft())
-        , right(getright())
-    {
+        , right(getright()) {
     }
 
     pair(const T1& l, const T2& r)
         : m_p(l, r)
         , left(getleft())
-        , right(getright())
-    {
+        , right(getright()) {
     }
 
     template <typename OT1, typename OT2>
     explicit pair(const pair<OT1, OT2>& p)
         : m_p(p)
         , left(getleft())
-        , right(getright())
-    {
+        , right(getright()) {
     }
 
     template <typename OT1, typename OT2>
-    pair<T1, T2>& operator=(const pair<OT1, OT2>& p)
-    {
+    pair<T1, T2>& operator=(const pair<OT1, OT2>& p) {
         pair<T1, T2> temp(p);
         temp.swap(*this);
         return *this;
     }
 
     template <typename OT1, typename OT2>
-    pair<T1, T2>& operator=(const std::pair<OT1, OT2>& p)
-    {
+    pair<T1, T2>& operator=(const std::pair<OT1, OT2>& p) {
         pair<T1, T2> temp(p);
         temp.swap(*this);
         return *this;
@@ -53,39 +46,33 @@ struct pair
     explicit pair(const std::pair<OT1, OT2>& p)
         : m_p(p)
         , left(getleft())
-        , right(getright())
-    {
+        , right(getright()) {
     }
 
     template <typename OT1, typename OT2>
-    explicit operator std::pair<OT1, OT2>() const
-    {
+    explicit operator std::pair<OT1, OT2>() const {
         return m_p;
     }
 
     template <typename OT1, typename OT2>
-    pair<T1, T2>& operator+=(const pair<OT1, OT2>& p)
-    {
+    pair<T1, T2>& operator+=(const pair<OT1, OT2>& p) {
         m_p.first += p.left;
         m_p.second += p.right;
         return *this;
     }
 
     template <typename OT1, typename OT2>
-    pair<T1, T2>& operator+=(const std::pair<OT1, OT2>& p)
-    {
+    pair<T1, T2>& operator+=(const std::pair<OT1, OT2>& p) {
         m_p.first += p.first;
         m_p.second += p.second;
         return *this;
     }
 
-    void swap(pair<T1, T2>& p)
-    {
+    void swap(pair<T1, T2>& p) {
         m_p.swap(p);
     }
 
-    pair<T1, T2> flip()
-    {
+    pair<T1, T2> flip() {
         return pair<T1, T2>(m_p.second, m_p.first);
     }
 
@@ -95,13 +82,11 @@ struct pair
 private:
     std::pair<T1, T2> m_p;
 
-    T1& getleft()
-    {
+    T1& getleft() {
         return m_p.first;
     }
 
-    T2& getright()
-    {
+    T2& getright() {
         return m_p.second;
     }
 };

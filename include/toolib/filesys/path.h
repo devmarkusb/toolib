@@ -9,24 +9,20 @@
 #include <string>
 #include <vector>
 
-namespace mb::too::file
-{
+namespace mb::too::file {
 TOOLIBSHARED_EXPORT void remove_extension(std::string& fn);
 
 //! String manipulation helper class only. No file system operations.
 /** DEPRECATED, use ul::std_fs::path instead.*/
-class TOOLIBSHARED_EXPORT Path
-{
+class TOOLIBSHARED_EXPORT Path {
 public:
-    enum class EType
-    {
+    enum class EType {
         IS_UNKNOWN,
         IS_FOLDER,
         IS_FILE,
         IS_LINK,
     };
-    enum class EForm
-    {
+    enum class EForm {
         UNKNOWN,
         PLATFORMINDEPENDENT,
         NATIVE,

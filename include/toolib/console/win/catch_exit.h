@@ -9,25 +9,18 @@
 #include "../../../toolibDEF.h"
 #include <windows.h>
 
-namespace mb::too
-{
-namespace con
-{
-class TOOLIBSHARED_EXPORT ExitCatcher
-{
+namespace mb::too {
+namespace con {
+class TOOLIBSHARED_EXPORT ExitCatcher {
 public:
     //! Use global reference W32ConsExitCatcher instead.
     static ExitCatcher& getInstance();
 
-    bool RequestedExit()
-    {
-        if (m_bRequestedExit)
-        {
+    bool RequestedExit() {
+        if (m_bRequestedExit) {
             m_bRequestedExit = false;
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }

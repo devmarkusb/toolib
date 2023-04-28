@@ -5,16 +5,12 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace mb::too
-{
-namespace con
-{
+namespace mb::too {
+namespace con {
 bool ExitCatcher::m_bRequestedExit = false;
 
-BOOL ExitCatcher::CtrlHandler(DWORD fdwCtrlType)
-{
-    switch (fdwCtrlType)
-    {
+BOOL ExitCatcher::CtrlHandler(DWORD fdwCtrlType) {
+    switch (fdwCtrlType) {
         case CTRL_C_EVENT:
             m_bRequestedExit = true;
             return (TRUE);
@@ -36,18 +32,15 @@ BOOL ExitCatcher::CtrlHandler(DWORD fdwCtrlType)
     }
 }
 
-ExitCatcher::ExitCatcher()
-{
-    if (!SetConsoleCtrlHandler(reinterpret_cast<PHANDLER_ROUTINE>(CtrlHandler), TRUE))
-    {
+ExitCatcher::ExitCatcher() {
+    if (!SetConsoleCtrlHandler(reinterpret_cast<PHANDLER_ROUTINE>(CtrlHandler), TRUE)) {
         std::ostringstream os;
         os << "W32ConsExitCatcher: SetConsoleCtrlHandler() error: " << GetLastError();
         throw std::runtime_error(os.str());
     }
 }
 
-ExitCatcher& ExitCatcher::getInstance()
-{
+ExitCatcher& ExitCatcher::getInstance() {
     static ExitCatcher ec;
     return ec;
 }

@@ -8,8 +8,7 @@
 
 #include "../config.h"
 
-namespace mb::too
-{
+namespace mb::too {
 //! Base class for classes that want to restrict their instantiations to a certain number.
 /** Usage: \code
 class Printer: private Counted<Printer> {
@@ -36,32 +35,25 @@ For a maximum number of one, you might use a different approach of using a globa
 returning a reference to a static object.
 */
 template <class BeingCounted>
-class Counted
-{
+class Counted {
 public:
     //! Exception class for exceeding the object maximum.
-    class TooManyObjects
-    {
-    };
+    class TooManyObjects {};
 
-    static long objectCount()
-    {
+    static long objectCount() {
         return m_numObjects;
     }
 
 protected:
-    Counted()
-    {
+    Counted() {
         init();
     }
 
-    Counted(const Counted&)
-    {
+    Counted(const Counted&) {
         init();
     }
 
-    ~Counted()
-    {
+    ~Counted() {
         --m_numObjects;
     }
 
@@ -69,8 +61,7 @@ private:
     static long m_numObjects;
     static const long maxObjects;
 
-    void init()
-    {
+    void init() {
         if (m_numObjects >= maxObjects)
             throw TooManyObjects();
         ++m_numObjects;

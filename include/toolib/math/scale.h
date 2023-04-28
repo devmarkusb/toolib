@@ -9,11 +9,9 @@
 #include <type_traits>
 #include <utility>
 
-namespace mb::too::math
-{
+namespace mb::too::math {
 template <typename FloatingPointType>
-class Map_LinearScale_Interval_to_Interval
-{
+class Map_LinearScale_Interval_to_Interval {
     static_assert(std::is_floating_point<FloatingPointType>::value, "floating point type expected");
 
 public:
@@ -21,20 +19,17 @@ public:
         const std::pair<FloatingPointType, FloatingPointType>& FromInterval,
         const std::pair<FloatingPointType, FloatingPointType>& ToInterval)
         : m_FromInterval(FromInterval)
-        , m_ToInterval(ToInterval)
-    {
+        , m_ToInterval(ToInterval) {
         UL_EXPECT_THROW(FromInterval.first < FromInterval.second);
         UL_EXPECT_THROW(ToInterval.first < ToInterval.second);
     }
 
-    FloatingPointType operator()(const FloatingPointType& from) const
-    {
+    FloatingPointType operator()(const FloatingPointType& from) const {
         return (from - m_FromInterval.first) * (m_ToInterval.second - m_ToInterval.first)
                / (m_FromInterval.second - m_FromInterval.first);
     }
 
-    FloatingPointType inverse(const FloatingPointType& to) const
-    {
+    FloatingPointType inverse(const FloatingPointType& to) const {
         return to * (m_FromInterval.second - m_FromInterval.first) / (m_ToInterval.second - m_ToInterval.first)
                + m_FromInterval.first;
     }
@@ -51,8 +46,7 @@ using ScaleTickCount = unsigned long;
     data value range comprising RangeMinToMax.*/
 template <typename T>
 //  requires T > 0
-double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
-{
+double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount) {
     UL_EXPECT_THROW(MaxTickCount);
     UL_EXPECT_THROW(RangeMinToMax > T());
     const auto MaxTickCount_ = ul::narrow_cast<double>(MaxTickCount);
@@ -76,8 +70,7 @@ double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount)
     scaleTick's apart).*/
 template <typename T>
 //  requires T number
-std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, double scaleTick)
-{
+std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, double scaleTick) {
     UL_EXPECT(minDataValue <= maxDataValue);
     const double minIn = ul::narrow_cast<double>(minDataValue);
     const double maxIn = ul::narrow_cast<double>(maxDataValue);

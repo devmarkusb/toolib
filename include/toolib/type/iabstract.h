@@ -5,13 +5,11 @@
 
 #include "../config.h"
 
-namespace mb::too
-{
+namespace mb::too {
 using TInBuffer = void*;
 using TOutBuffer = void*;
 
-struct iabstract
-{
+struct iabstract {
     virtual ~iabstract() = default;
 
     virtual bool getParameter(const char* name, TOutBuffer value) const = 0;

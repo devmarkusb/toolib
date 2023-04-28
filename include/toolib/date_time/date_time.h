@@ -10,24 +10,20 @@
 #include <string>
 #include <utility>
 
-namespace mb::too::date_time
-{
+namespace mb::too::date_time {
 //! Months type, represents absolute as well as difference values.
 using Months = int;
 //! Years type, represents absolute as well as difference values.
 using Years = int;
 
 //! Ensures month to be 1..12 and month and year having the same sign. Only exception: {0, 0} will be mapped to {0, 0}.
-struct TOOLIBSHARED_EXPORT normalize
-{
+struct TOOLIBSHARED_EXPORT normalize {
     static void do_it(std::pair<Years, Months>& y_m);
 };
 
 //! Doesn't normalize.
-struct TOOLIBSHARED_EXPORT dont_normalize
-{
-    static void do_it(std::pair<Years, Months>&)
-    {
+struct TOOLIBSHARED_EXPORT dont_normalize {
+    static void do_it(std::pair<Years, Months>&) {
     }
 };
 
@@ -44,8 +40,7 @@ using MonthYear_dur = MonthYear_base<dont_normalize>;
 UL_PRAGMA_WARNINGS_PUSH
 UL_WARNING_DISABLE_MSVC(4251)
 
-struct TOOLIBSHARED_EXPORT MonthYear_decl
-{
+struct TOOLIBSHARED_EXPORT MonthYear_decl {
     static constexpr Months twelve = 12;
     static const std::string string_delim;
 };
@@ -54,8 +49,7 @@ UL_PRAGMA_WARNINGS_POP
 
 //! Works as an absolute type as well as a difference type.
 template <class NormalizePolicy>
-class MonthYear_base : public MonthYear_decl
-{
+class MonthYear_base : public MonthYear_decl {
 public:
     MonthYear_base() = default;
     //! Params can have at least full int range.
