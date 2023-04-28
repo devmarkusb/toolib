@@ -5,8 +5,7 @@
 
 using namespace mb::too::date_time;
 
-TEST(date_time__normalize_do_itTest, already_done)
-{
+TEST(date_time__normalize_do_itTest, already_done) {
     std::pair<Years, Months> ym;
 
     ym = {2016, 6};
@@ -42,8 +41,7 @@ TEST(date_time__normalize_do_itTest, already_done)
     EXPECT_EQ(std::make_pair(0, -12), ym);
 }
 
-TEST(date_time__normalize_do_itTest, month_0_year_not)
-{
+TEST(date_time__normalize_do_itTest, month_0_year_not) {
     std::pair<Years, Months> ym;
 
     ym = {-1, 0};
@@ -59,8 +57,7 @@ TEST(date_time__normalize_do_itTest, month_0_year_not)
     EXPECT_EQ(std::make_pair(1, 12), ym);
 }
 
-TEST(date_time__normalize_do_itTest, equal_signs)
-{
+TEST(date_time__normalize_do_itTest, equal_signs) {
     std::pair<Years, Months> ym;
 
     ym = {1, 13};
@@ -92,8 +89,7 @@ TEST(date_time__normalize_do_itTest, equal_signs)
     EXPECT_EQ(std::make_pair(-1, -12), ym);
 }
 
-TEST(date_time__normalize_do_itTest, different_signs)
-{
+TEST(date_time__normalize_do_itTest, different_signs) {
     std::pair<Years, Months> ym;
 
     ym = {-1, 1};
@@ -141,8 +137,7 @@ TEST(date_time__normalize_do_itTest, different_signs)
     EXPECT_EQ(std::make_pair(0, -12), ym);
 }
 
-TEST(date_time__MonthYear_baseTest, dont_normalize)
-{
+TEST(date_time__MonthYear_baseTest, dont_normalize) {
     MonthYear_base<dont_normalize> my;
     std::string s;
     std::string tmp;
@@ -175,8 +170,7 @@ TEST(date_time__MonthYear_baseTest, dont_normalize)
     EXPECT_EQ(13 + 12, my.asMonths());
 }
 
-TEST(date_time__MonthYear_baseTest, dont_normalize_ops_and_copy)
-{
+TEST(date_time__MonthYear_baseTest, dont_normalize_ops_and_copy) {
     MonthYear_base<dont_normalize> my(-1, 1);
     std::string tmp = "13";
     tmp += MonthYear_decl::string_delim + "0";
@@ -215,8 +209,7 @@ TEST(date_time__MonthYear_baseTest, dont_normalize_ops_and_copy)
     EXPECT_TRUE(my_move2 == my_other);
 }
 
-TEST(date_time__MonthYear_baseTest, normalize)
-{
+TEST(date_time__MonthYear_baseTest, normalize) {
     MonthYear_base<normalize> my;
     std::string s;
     std::string tmp;
@@ -249,8 +242,7 @@ TEST(date_time__MonthYear_baseTest, normalize)
     EXPECT_EQ(13 + 12, my.asMonths());
 }
 
-TEST(date_time__MonthYear_baseTest, normalize_ops_and_copy)
-{
+TEST(date_time__MonthYear_baseTest, normalize_ops_and_copy) {
     static_assert(std::is_same<MonthYear_base<normalize>, MonthYear>::value);
     MonthYear_base<normalize> my(-1, 1);
     std::string tmp = "13";

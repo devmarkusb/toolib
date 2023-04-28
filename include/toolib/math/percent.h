@@ -5,8 +5,7 @@
 
 #include "../config.h"
 
-namespace mb::too::math
-{
+namespace mb::too::math {
 using Percent = double;
 using Factor = double;
 const Percent one_hundred_percent = 100.0;

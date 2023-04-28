@@ -7,38 +7,29 @@
 #include "ul/ul.h"
 #include <exception>
 
-namespace mb::too
-{
+namespace mb::too {
 //! Alias toog::.
-namespace game
-{
+namespace game {
 //####################################################################################################################
 // IMain
 
 //! Implementation interface for the frame program of a game.
 /** Gameplay itself shall be started with game() implemented with the help of special
     IGame-implementation, \see IGame. Please study main() and mainloop() for the basic logic.*/
-class IMain
-{
+class IMain {
 public:
     virtual ~IMain() = default;
 
     //! The only function to be called. returns main exit code of the program.
-    int main()
-    {
-        try
-        {
+    int main() {
+        try {
             intro_init();
             mainloop();
             outro_cleanup();
             return ul::prog_exit_success;
-        }
-        catch (std::exception& e)
-        {
+        } catch (std::exception& e) {
             return handleMainExceptions(e);
-        }
-        catch (...)
-        {
+        } catch (...) {
             return mainTerminationByError();
         }
     }
@@ -64,10 +55,8 @@ protected:
     virtual int mainTerminationByError() noexcept = 0;
 
 private:
-    void mainloop()
-    {
-        while (menu())
-        {
+    void mainloop() {
+        while (menu()) {
             if (!game())
                 break;
         }
@@ -78,13 +67,11 @@ private:
 // IGame
 
 //! Implementation interface for actual gameplay, supposed to start its loop by the game() member.
-class IGame
-{
+class IGame {
 public:
     virtual ~IGame() = default;
 
-    enum EEndType
-    {
+    enum EEndType {
         ET_ERROR = -1,
         ET_USER_EXIT = 0,
         ET_GAME_OVER = 1,
@@ -94,13 +81,11 @@ public:
     //! The only function to be called. Starts gameplay.
     /** \return false on user exit (so gameplay provides a direct exit skipping e.g. a framework menu).
         or error treated like user exit.*/
-    bool game()
-    {
+    bool game() {
         EEndType et;
         while (gameloop(et))
             ;
-        switch (et)
-        {
+        switch (et) {
             case ET_USER_EXIT:
                 gameTerminationByUserExit();
                 return false;
@@ -141,12 +126,9 @@ protected:
 
 private:
     //! \return false if game ends. Afterwards et contains reason for ending.
-    bool gameloop(EEndType& et)
-    {
-        try
-        {
-            if (!getEvents())
-            {
+    bool gameloop(EEndType& et) {
+        try {
+            if (!getEvents()) {
                 et = ET_USER_EXIT;
                 return false;
             }
@@ -156,17 +138,12 @@ private:
                 return false;
             drawGraphics();
             playSounds();
-        }
-        catch (std::exception& e)
-        {
-            if (!handleGameExceptions(e))
-            {
+        } catch (std::exception& e) {
+            if (!handleGameExceptions(e)) {
                 et = ET_ERROR;
                 return false;
             }
-        }
-        catch (...)
-        {
+        } catch (...) {
             et = ET_ERROR;
             return false;
         }
@@ -176,8 +153,7 @@ private:
 } // namespace game
 } // namespace mb::too
 
-namespace mb
-{
+namespace mb {
 namespace toog = too::game;
 } // namespace mb
 

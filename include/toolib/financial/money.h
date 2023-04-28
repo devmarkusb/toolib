@@ -9,16 +9,14 @@
 #include <locale>
 #include <string>
 
-namespace mb::too::fin
-{
+namespace mb::too::fin {
 //####################################################################################################################
 
 UL_PRAGMA_WARNINGS_PUSH
 UL_WARNING_DISABLE_MSVC(4251)
 
 //!
-class TOOLIBSHARED_EXPORT Currency
-{
+class TOOLIBSHARED_EXPORT Currency {
 public:
     //! Setting loc to std::locale("") means using the user preferred locale.
     /** On e.g. a German system this could be std::locale("de_DE.utf8") internally.*/
@@ -47,8 +45,7 @@ bool operator!=(const Currency& lhs, const Currency& rhs);
 //####################################################################################################################
 
 //!
-class TOOLIBSHARED_EXPORT Money
-{
+class TOOLIBSHARED_EXPORT Money {
 public:
     using BaseType = long double;
 
@@ -113,35 +110,29 @@ using Percent = long double;
 //! Should be understood in relation to Percent as follows: 'Percent' == 'Fraction' * 100.
 using Fraction = long double;
 
-class TOOLIBSHARED_EXPORT Interest_pa
-{
+class TOOLIBSHARED_EXPORT Interest_pa {
 public:
     explicit Interest_pa(Percent p = Percent())
-        : p(p)
-    {
+        : p(p) {
     }
 
-    Interest_pa& operator=(Percent p_)
-    {
+    Interest_pa& operator=(Percent p_) {
         this->p = p_;
         return *this;
     }
 
-    /*implicit*/ operator Percent() const
-    {
+    /*implicit*/ operator Percent() const {
         return this->p;
     }
 
-    [[nodiscard]] Fraction dividedBy100() const
-    {
+    [[nodiscard]] Fraction dividedBy100() const {
         return this->p / 100.0l;
     }
 
     static Fraction YearlyEffective_to_MonthlyRelative(Fraction pa);
 
     template <class Archive>
-    void serialize(Archive& archive)
-    {
+    void serialize(Archive& archive) {
         archive(this->p);
     }
 

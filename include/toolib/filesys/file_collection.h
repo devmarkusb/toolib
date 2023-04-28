@@ -12,10 +12,8 @@
 UL_PRAGMA_WARNINGS_PUSH
 UL_WARNING_DISABLE_MSVC(4251)
 
-namespace mb::too::file
-{
-class TOOLIBSHARED_EXPORT FileCollection
-{
+namespace mb::too::file {
+class TOOLIBSHARED_EXPORT FileCollection {
 public:
     static const unsigned char max_digits = 10;
 

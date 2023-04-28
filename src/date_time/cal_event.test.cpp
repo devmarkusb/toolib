@@ -3,37 +3,29 @@
 
 using namespace mb::too::date_time;
 
-namespace
-{
-}
+namespace {}
 
-struct CalEventTest : public ::testing::Test
-{
-    CalEventTest()
-    {
+struct CalEventTest : public ::testing::Test {
+    CalEventTest() {
     }
 
-    void SetUp()
-    {
+    void SetUp() {
         int start = 4, end = 9;
         recurr.setStart(&start);
         recurr.setEnd(&end);
     }
 
-    void TearDown()
-    {
+    void TearDown() {
     }
 
-    ~CalEventTest()
-    {
+    ~CalEventTest() {
     }
 
     SingleEvent<int> seven{7};
     RecurringEvent<int> recurr{2};
 };
 
-TEST_F(CalEventTest, test)
-{
+TEST_F(CalEventTest, test) {
     CalEvent<int>* ce = &seven;
     std::unique_ptr<CalEvent<int>> ce_clone(ce->clone());
 
@@ -46,23 +38,20 @@ TEST_F(CalEventTest, test)
     std::unique_ptr<int> tps = ces_clone->getFirstTimePoint();
     EXPECT_EQ(4, *tps);
     int val = 6;
-    while ((tps = ces_clone->getNextTimePoint(*tps)))
-    {
+    while ((tps = ces_clone->getNextTimePoint(*tps))) {
         EXPECT_EQ(val, *tps);
         val += 2;
     }
     EXPECT_EQ(10, val);
 }
 
-TEST_F(CalEventTest, zero_start)
-{
+TEST_F(CalEventTest, zero_start) {
     recurr.setStart(nullptr);
 
     std::unique_ptr<int> tps = recurr.getFirstTimePoint();
     EXPECT_EQ(0, *tps);
     int val = 2;
-    while ((tps = recurr.getNextTimePoint(*tps)) && val <= 6)
-    {
+    while ((tps = recurr.getNextTimePoint(*tps)) && val <= 6) {
         EXPECT_EQ(val, *tps);
         val += 2;
     }

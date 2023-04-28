@@ -7,8 +7,7 @@
 #include "../config.h"
 #include <cstddef>
 
-namespace mb::too
-{
+namespace mb::too {
 class ScopeGuardImplBase; // fwd. decl.
 
 //! This is the type designated for usage.
@@ -35,27 +34,23 @@ typedef const ScopeGuardImplBase& ScopeGuard;
 //=================================
 
 //! Base interface of the ScopeGuard, providing the optional rollback mechanism.
-class ScopeGuardImplBase
-{
+class ScopeGuardImplBase {
 public:
     //! Calling this method ensures, that no rollback is performed by the constructor.
     /** So all actions preceding the guarding are commited.*/
-    void NoRollback() const noexcept
-    {
+    void NoRollback() const noexcept {
         m_bRollback = false;
     }
 
 protected:
     //! Construction, assumes a later rollback.
     ScopeGuardImplBase()
-        : m_bRollback(true)
-    {
+        : m_bRollback(true) {
     }
 
     //! Copy, takes over responsibility.
     ScopeGuardImplBase(const ScopeGuardImplBase& other)
-        : m_bRollback(other.m_bRollback)
-    {
+        : m_bRollback(other.m_bRollback) {
         other.NoRollback();
     }
 
@@ -84,26 +79,19 @@ private:
 
 //! Provides the mechanism for rollback functions with 0 parameters.
 template <typename Fct>
-class ScopeGuardImpl0 : public ScopeGuardImplBase
-{
+class ScopeGuardImpl0 : public ScopeGuardImplBase {
 public:
     //! Assigns the function.
     explicit ScopeGuardImpl0(Fct fct)
-        : m_fct(fct)
-    {
+        : m_fct(fct) {
     }
 
     //! Calls the function for rollback, if not prevented upfront by call of NoRollback().
-    ~ScopeGuardImpl0()
-    {
-        if (m_bRollback)
-        {
-            try
-            {
+    ~ScopeGuardImpl0() {
+        if (m_bRollback) {
+            try {
                 m_fct();
-            }
-            catch (...)
-            {
+            } catch (...) {
             }
         }
     }
@@ -115,25 +103,18 @@ private:
 
 //! Provides the mechanism for rollback functions with 1 parameter.
 template <typename Fct, typename Para1>
-class ScopeGuardImpl1 : public ScopeGuardImplBase
-{
+class ScopeGuardImpl1 : public ScopeGuardImplBase {
 public:
     ScopeGuardImpl1(Fct fct, Para1 para1)
         : m_fct(fct)
-        , m_para1(para1)
-    {
+        , m_para1(para1) {
     }
 
-    ~ScopeGuardImpl1()
-    {
-        if (m_bRollback)
-        {
-            try
-            {
+    ~ScopeGuardImpl1() {
+        if (m_bRollback) {
+            try {
                 m_fct(m_para1);
-            }
-            catch (...)
-            {
+            } catch (...) {
             }
         }
     }
@@ -146,26 +127,19 @@ private:
 
 //! Provides the mechanism for rollback functions with 2 parameters.
 template <typename Fct, typename Para1, typename Para2>
-class ScopeGuardImpl2 : public ScopeGuardImplBase
-{
+class ScopeGuardImpl2 : public ScopeGuardImplBase {
 public:
     ScopeGuardImpl2(Fct fct, Para1 para1, Para2 para2)
         : m_fct(fct)
         , m_para1(para1)
-        , m_para2(para2)
-    {
+        , m_para2(para2) {
     }
 
-    ~ScopeGuardImpl2()
-    {
-        if (m_bRollback)
-        {
-            try
-            {
+    ~ScopeGuardImpl2() {
+        if (m_bRollback) {
+            try {
                 m_fct(m_para1, m_para2);
-            }
-            catch (...)
-            {
+            } catch (...) {
             }
         }
     }
@@ -183,27 +157,20 @@ private:
 
 //! Provides the mechanism for rollback member functions (for a specific object) with 0 parameters.
 template <class Obj, typename MemFct>
-class ObjScopeGuardImpl0 : public ScopeGuardImplBase
-{
+class ObjScopeGuardImpl0 : public ScopeGuardImplBase {
 public:
     //! Assigns the object and the member function.
     ObjScopeGuardImpl0(Obj& obj, MemFct memFct)
         : m_obj(obj)
-        , m_memFct(memFct)
-    {
+        , m_memFct(memFct) {
     }
 
     //! Calls the function for rollback, if not prevented upfront by call of NoRollback().
-    ~ObjScopeGuardImpl0()
-    {
-        if (m_bRollback)
-        {
-            try
-            {
+    ~ObjScopeGuardImpl0() {
+        if (m_bRollback) {
+            try {
                 (m_obj.*m_memFct)();
-            }
-            catch (...)
-            {
+            } catch (...) {
             }
         }
     }
@@ -217,26 +184,19 @@ private:
 
 //! Provides the mechanism for rollback member functions (for a specific object) with 1 parameter.
 template <class Obj, typename MemFct, typename Para1>
-class ObjScopeGuardImpl1 : public ScopeGuardImplBase
-{
+class ObjScopeGuardImpl1 : public ScopeGuardImplBase {
 public:
     ObjScopeGuardImpl1(Obj& obj, MemFct memFct, Para1 para1)
         : m_obj(obj)
         , m_memFct(memFct)
-        , m_para1(para1)
-    {
+        , m_para1(para1) {
     }
 
-    ~ObjScopeGuardImpl1()
-    {
-        if (m_bRollback)
-        {
-            try
-            {
+    ~ObjScopeGuardImpl1() {
+        if (m_bRollback) {
+            try {
                 (m_obj.*m_memFct)(m_para1);
-            }
-            catch (...)
-            {
+            } catch (...) {
             }
         }
     }
@@ -250,27 +210,20 @@ private:
 
 //! Provides the mechanism for rollback member functions (for a specific object) with 2 parameters.
 template <class Obj, typename MemFct, typename Para1, typename Para2>
-class ObjScopeGuardImpl2 : public ScopeGuardImplBase
-{
+class ObjScopeGuardImpl2 : public ScopeGuardImplBase {
 public:
     ObjScopeGuardImpl2(Obj& obj, MemFct memFct, Para1 para1, Para2 para2)
         : m_obj(obj)
         , m_memFct(memFct)
         , m_para1(para1)
-        , m_para2(para2)
-    {
+        , m_para2(para2) {
     }
 
-    ~ObjScopeGuardImpl2()
-    {
-        if (m_bRollback)
-        {
-            try
-            {
+    ~ObjScopeGuardImpl2() {
+        if (m_bRollback) {
+            try {
                 (m_obj.*m_memFct)(m_para1, m_para2);
-            }
-            catch (...)
-            {
+            } catch (...) {
             }
         }
     }
@@ -291,22 +244,19 @@ private:
 
 //! Creates a scope guard with a specific rollback function.
 template <typename Fct>
-ScopeGuardImpl0<Fct> MakeGuard(Fct fct)
-{
+ScopeGuardImpl0<Fct> MakeGuard(Fct fct) {
     return ScopeGuardImpl0<Fct>(fct);
 }
 
 //! Creates a scope guard with a specific rollback function with 1 parameter.
 template <typename Fct, typename Para1>
-ScopeGuardImpl1<Fct, Para1> MakeGuard(Fct fct, Para1 para1)
-{
+ScopeGuardImpl1<Fct, Para1> MakeGuard(Fct fct, Para1 para1) {
     return ScopeGuardImpl1<Fct, Para1>(fct, para1);
 }
 
 //! Creates a scope guard with a specific rollback function with 2 parameters.
 template <typename Fct, typename Para1, typename Para2>
-ScopeGuardImpl2<Fct, Para1, Para2> MakeGuard(Fct fct, Para1 para1, Para2 para2)
-{
+ScopeGuardImpl2<Fct, Para1, Para2> MakeGuard(Fct fct, Para1 para1, Para2 para2) {
     return ScopeGuardImpl2<Fct, Para1, Para2>(fct, para1, para2);
 }
 
@@ -314,22 +264,19 @@ ScopeGuardImpl2<Fct, Para1, Para2> MakeGuard(Fct fct, Para1 para1, Para2 para2)
 
 //! Creates a scope guard with a specific rollback object plus member function.
 template <class Obj, typename MemFct>
-ObjScopeGuardImpl0<Obj, MemFct> MakeObjGuard(Obj& obj, MemFct memFct)
-{
+ObjScopeGuardImpl0<Obj, MemFct> MakeObjGuard(Obj& obj, MemFct memFct) {
     return ObjScopeGuardImpl0<Obj, MemFct>(obj, memFct);
 }
 
 //! Creates a scope guard with a specific rollback object plus member function with 1 parameter.
 template <class Obj, typename MemFct, typename Para1>
-ObjScopeGuardImpl1<Obj, MemFct, Para1> MakeObjGuard(Obj& obj, MemFct memFct, Para1 para1)
-{
+ObjScopeGuardImpl1<Obj, MemFct, Para1> MakeObjGuard(Obj& obj, MemFct memFct, Para1 para1) {
     return ObjScopeGuardImpl1<Obj, MemFct, Para1>(obj, memFct, para1);
 }
 
 //! Creates a scope guard with a specific rollback object plus member function with 2 parameters.
 template <class Obj, typename MemFct, typename Para1, typename Para2>
-ObjScopeGuardImpl2<Obj, MemFct, Para1, Para2> MakeObjGuard(Obj& obj, MemFct memFct, Para1 para1, Para2 para2)
-{
+ObjScopeGuardImpl2<Obj, MemFct, Para1, Para2> MakeObjGuard(Obj& obj, MemFct memFct, Para1 para1, Para2 para2) {
     return ObjScopeGuardImpl2<Obj, MemFct, Para1, Para2>(obj, memFct, para1, para2);
 }
 } // namespace mb::too

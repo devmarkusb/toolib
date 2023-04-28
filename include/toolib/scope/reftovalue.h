@@ -6,29 +6,24 @@
 
 #include "../config.h"
 
-namespace mb::too
-{
+namespace mb::too {
 //! Transports a reference as a value.
 /** Taken from Loki. Serves to implement the Colvin/Gibbons trick for SmartPtr/ScopeGuard*/
 template <typename T>
-class RefToValue
-{
+class RefToValue {
 public:
     explicit RefToValue(T& ref)
-        : m_ref(ref)
-    {
+        : m_ref(ref) {
     }
 
     RefToValue(const RefToValue& rhs)
-        : m_ref(rhs.m_ref)
-    {
+        : m_ref(rhs.m_ref) {
     }
 
     RefToValue() = delete;
     RefToValue& operator=(const RefToValue&) = delete;
 
-    explicit operator T&() const
-    {
+    explicit operator T&() const {
         return m_ref;
     }
 
@@ -37,8 +32,7 @@ private:
 };
 
 template <typename T>
-RefToValue<T> byRef(T& t)
-{
+RefToValue<T> byRef(T& t) {
     return RefToValue<T>(t);
 }
 } // namespace mb::too

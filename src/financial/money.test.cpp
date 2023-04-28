@@ -2,8 +2,7 @@
 #include "gtest/gtest.h"
 #include <iostream>
 
-TEST(CurrencyTest, test)
-{
+TEST(CurrencyTest, test) {
     // doesn't work yet :( Why?!
     //    too::fin::Currency curr(std::locale(""));
     //    std::cout << "locale name: " << curr.getLocaleConstrName() << "\n";

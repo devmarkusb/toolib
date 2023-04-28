@@ -13,10 +13,8 @@
 #include <iostream>
 #include <thread>
 
-namespace mb::too
-{
-inline void prompt()
-{
+namespace mb::too {
+inline void prompt() {
 #if UL_OS_WINDOWS && !UL_OS_WINDOWS_UWP_APP
     if (_kbhit())
         ul::ignore_unused(_getch());
