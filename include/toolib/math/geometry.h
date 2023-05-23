@@ -107,12 +107,12 @@ struct Vector_ : public Point_<T, dim> {
     static_assert(dim >= 1, "expects d >= 1");
 
     Vector_<T, dim>& operator+=(const Vector_<T, dim>&) {
-        throw ul::not_implemented{"Vector_ +="};
+        throw ul::NotImplemented{"Vector_ +="};
         // return *this;
     }
 
     Vector_<T, dim>& operator-=(const Vector_<T, dim>&) {
-        throw ul::not_implemented{"Vector_ -="};
+        throw ul::NotImplemented{"Vector_ -="};
         // return *this;
     }
 };

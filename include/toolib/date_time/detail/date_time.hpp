@@ -55,9 +55,9 @@ MonthYear_base<NormalizePolicy>& MonthYear_base<NormalizePolicy>::operator=(Mont
 template <class NormalizePolicy>
 MonthYear_base<NormalizePolicy>::MonthYear_base(const std::string& fromString) {
     std::vector<std::string> parts;
-    ul::str::tokenizeString(fromString, string_delim, parts);
+    ul::str::tokenize_string(fromString, string_delim, parts);
 
-    // don't throw the user an invalid_arg or sth., since bug could also have happened within tokenizeString
+    // don't throw the user an invalid_arg or sth., since bug could also have happened within tokenize_string
     UL_ASSERT_THROW(parts.size() == 2);
 
     this->y_m.second = ul::stoi(parts[0]);

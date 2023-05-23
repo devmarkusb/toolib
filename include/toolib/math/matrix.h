@@ -417,32 +417,32 @@ public:
 
     //! Determinant.
     T det() const {
-        throw ul::not_implemented{"det"};
+        throw ul::NotImplemented{"det"};
     }
 
     //! Inverse. Throws error_division_by_zero_det exception if determinant is zero.
     void invert() {
-        throw ul::not_implemented{"invert"};
+        throw ul::NotImplemented{"invert"};
     }
 
     //! Is invertible?
     [[nodiscard]] bool isInvertible() const {
-        throw ul::not_implemented{"isInvertible"};
+        throw ul::NotImplemented{"isInvertible"};
     }
 
     //! Is symmetric?
     [[nodiscard]] bool isSymmetric() const {
-        throw ul::not_implemented{"isSymmetric"};
+        throw ul::NotImplemented{"isSymmetric"};
     }
 
     //! Is orthogonal?
     [[nodiscard]] bool isOrthogonal() const {
-        throw ul::not_implemented{"isOrthogonal"};
+        throw ul::NotImplemented{"isOrthogonal"};
     }
 
     //! Is diagonal?
     [[nodiscard]] bool isDiagonal() const {
-        throw ul::not_implemented{"isDiagonal"};
+        throw ul::NotImplemented{"isDiagonal"};
     }
 
     //### Implementation details. ###
@@ -642,12 +642,12 @@ public:
 
     //! Is hermitean?
     [[nodiscard]] bool isHermitean() const {
-        throw ul::not_implemented{"isHermitean"};
+        throw ul::NotImplemented{"isHermitean"};
     }
 
     //! Is unitary?
     [[nodiscard]] bool isUnitary() const {
-        throw ul::not_implemented{"isUnitary"};
+        throw ul::NotImplemented{"isUnitary"};
     }
 };
 

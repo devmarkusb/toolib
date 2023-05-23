@@ -35,9 +35,9 @@ using ProjectionValue = double;
 //! How each tick label on an axis should be formatted to (represented as) string.
 struct TickStringRepr_setup {
     //! Cf. to_string functions.
-    ul::math::FloatFormat tick_float_format{ul::math::FloatFormat::default_};
+    ul::math::FloatFormat tick_float_format{ul::math::FloatFormat::default_choice};
     //! Cf. to_string functions.
-    ul::opt<int> tick_float_precision{};
+    ul::Opt<int> tick_float_precision{};
 };
 
 //!
@@ -49,7 +49,7 @@ struct ChartAxis_setup {
     }
 
     //! If not provided, the maximum count of scale ticks on the axis is chosen automatically.
-    ul::opt<ScaleTickCount> max_tick_count;
+    ul::Opt<ScaleTickCount> max_tick_count;
     TickStringRepr_setup tick_string_repr;
 };
 
@@ -99,7 +99,7 @@ public:
 
     /** \return a new ratio for the Quantity Unit, if there is a better choice, i.e. a common ratio of the tick values
         can be obtained.*/
-    [[nodiscard]] ul::opt<ul::math::Rational> obtain_suitable_common_ratio_of_tickvals() const;
+    [[nodiscard]] ul::Opt<ul::math::Rational> obtain_suitable_common_ratio_of_tickvals() const;
     void apply_ratio_to_tickvals(const ul::math::Rational& r);
     void apply_ratio_to_quantity_unit(const ul::math::Rational& r);
 
@@ -177,11 +177,11 @@ public:
         const ChartAxis_setup& setupX, const ChartAxis_setup& setupY, const std::pair<Quantity, Quantity>& quantitiesXY,
         VectorOfPairs<QuValueTypeX, QuValueTypeY>* qu_values);
 
-    ul::not_null<const ChartAxis<QuValueTypeX>*> get_x_axis() const {
+    ul::NotNull<const ChartAxis<QuValueTypeX>*> get_x_axis() const {
         return x_axis.get();
     }
 
-    ul::not_null<const ChartAxis<QuValueTypeX>*> get_y_axis() const {
+    ul::NotNull<const ChartAxis<QuValueTypeX>*> get_y_axis() const {
         return y_axis.get();
     }
 
@@ -290,7 +290,7 @@ void ChartAxis<QuValueType>::calcScaling(const QuValueType& min_qu_val, const Qu
 }
 
 template <typename QuValueType>
-ul::opt<ul::math::Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio_of_tickvals() const {
+ul::Opt<ul::math::Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio_of_tickvals() const {
     const auto unit = this->quantity.getUnit();
     const auto max_abs = std::max(std::abs(this->tick_start_qu_val), std::abs(this->tick_end_qu_val));
     const auto suitable_ratio = unit.findOptimizedRatio(max_abs);
@@ -309,7 +309,7 @@ void ChartAxis<QuValueType>::apply_ratio_to_tickvals(const ul::math::Rational& r
     this->tick_end_qu_val = unit.convertToDifferentRatio(this->tick_end_qu_val, r);
     this->tick_step_qu_val = unit.convertToDifferentRatio(this->tick_step_qu_val, r);
 
-    if (!ul::math::isPowerOf(r.asFloatingPoint<double>(), 10.0)) {
+    if (!ul::math::is_power_of(r.as_floating_point<double>(), 10.0)) {
         // Wow :/ that's a nice error... you need to copy the this-members, because they
         // get modified within non-const calcScaling. Problem is, that the direct change of the
         // this-members in the called function modifies the functions const& parameters unexpectedly.
@@ -333,11 +333,11 @@ std::string ChartAxis<QuValueType>::tickValueAsReadableString(const QuValueType&
     using ul::math::FloatFormat;
     using ul::math::to_string;
     switch (setup->tick_string_repr.tick_float_format) {
-        case FloatFormat::default_:
+        case FloatFormat::default_choice:
             if (isPrecDefined)
-                return to_string<FloatFormat::default_>(qu_val, prec);
+                return to_string<FloatFormat::default_choice>(qu_val, prec);
             else
-                return to_string<FloatFormat::default_>(qu_val);
+                return to_string<FloatFormat::default_choice>(qu_val);
         case FloatFormat::fixed:
             if (isPrecDefined)
                 return to_string<FloatFormat::fixed>(qu_val, prec);

@@ -14,8 +14,8 @@ TEST(MathCalcNiceScaleTickTest, Basics) {
 }
 
 TEST(MathCalcNiceScaleTickTest, error) {
-    EXPECT_THROW(too::math::calcNiceScaleTick<double>(0.0, 10), ul::fail_fast);
-    EXPECT_THROW(too::math::calcNiceScaleTick<int>(0, 10), ul::fail_fast);
+    EXPECT_THROW(too::math::calcNiceScaleTick<double>(0.0, 10), ul::FailFast);
+    EXPECT_THROW(too::math::calcNiceScaleTick<int>(0, 10), ul::FailFast);
 }
 
 TEST(MathCalcScaleTickFromToTest, Basics) {

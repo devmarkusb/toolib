@@ -34,7 +34,7 @@ public:
     friend bool operator!=(const Currency& lhs, const Currency& rhs);
 
 private:
-    ul::opt<std::locale> loc;
+    ul::Opt<std::locale> loc;
 };
 
 UL_PRAGMA_WARNINGS_POP
