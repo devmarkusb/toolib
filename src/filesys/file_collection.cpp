@@ -19,30 +19,30 @@ std::string FileCollection::get_base_name(const std::string& fn) {
     p.replace_extension();
 #endif
     std::string ret = p.string();
-    size_t pos = ret.find_last_not_of("0123456789");
+    const size_t pos = ret.find_last_not_of("0123456789");
     if (pos == std::string::npos)
         return ret;
-    std::string retsub = ret.substr(0, pos + 1);
+    const std::string retsub = ret.substr(0, pos + 1);
     return retsub.empty() ? ret : retsub;
 }
 
 FileCollection::FileCollection(const std::string& file_name) {
-    ul::std_fs::path p{file_name};
+    const ul::std_fs::path p{file_name};
 #if UL_OS_ANDROID && UL_ANDROID_NDK_MAJOR < 22
     std::string file_ext{Path{p.string()}.getExtension()};
 #else
-    std::string file_ext{p.extension().string()};
+    const std::string file_ext{p.extension().string()};
 #endif
-    std::string base_file_name{get_base_name(file_name)};
+    const std::string base_file_name{get_base_name(file_name)};
     std::string fn{base_file_name + file_ext};
     std::ifstream f(fn);
     if (f.good())
-        this->file_list.push_back(fn);
+        this->file_list_.push_back(fn);
 
     f.close();
     const unsigned char digits = obtain_number_of_digits_for_filenames_of_file_collection(base_file_name, file_ext);
     if (!digits) {
-        this->file_list.push_back(file_name);
+        this->file_list_.push_back(file_name);
         return;
     }
     std::string file_nr_str;
@@ -52,19 +52,19 @@ FileCollection::FileCollection(const std::string& file_name) {
                       fn = std::string{base_file_name}.append(file_nr_str).append(file_ext), f.open(fn), f.good();
          ++file_nr, f.close())
         UL_PRAGMA_WARNINGS_POP {
-            this->file_list.push_back(fn);
+            this->file_list_.push_back(fn);
         }
 }
 
 std::vector<std::string> FileCollection::get_list_of_existent_files() const {
-    return this->file_list;
+    return this->file_list_;
 }
 
 unsigned char FileCollection::obtain_number_of_digits_for_filenames_of_file_collection(
     const std::string& base_file_name, const std::string& file_ext) {
     std::ifstream f;
     for (unsigned char digits = 1; digits < max_digits; ++digits) {
-        std::string zeros{ul::math::to_leading_zeros(0, digits)};
+        const std::string zeros{ul::math::to_leading_zeros(0, digits)};
         auto fn{std::string{base_file_name}.append(zeros).append(file_ext)};
         f.open(fn);
         if (f.good())

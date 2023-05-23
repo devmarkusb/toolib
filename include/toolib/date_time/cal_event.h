@@ -1,7 +1,7 @@
 //! \file
 
-#ifndef CAL_EVENT_H_nbvxmcbvxmcnbxcmbierutozreoi
-#define CAL_EVENT_H_nbvxmcbvxmcnbxcmbierutozreoi
+#ifndef CAL_EVENT_H_NBVXMCBVXMCNBXCMBIERUTOZREOI
+#define CAL_EVENT_H_NBVXMCBVXMCNBXCMBIERUTOZREOI
 
 #include "../config.h"
 #include "ul/ptr.h"
@@ -17,13 +17,13 @@ public:
     virtual ul::Owner<CalEvent<TimeType>*> clone() const = 0;
 
     //! Has to ensure to never return nullptr.
-    virtual std::unique_ptr<TimeType> getFirstTimePoint() const = 0;
+    virtual std::unique_ptr<TimeType> get_first_time_point() const = 0;
     //! If there is no further one, it returns nullptr.
-    virtual std::unique_ptr<TimeType> getNextTimePoint(const TimeType& RelativeTo) const = 0;
+    virtual std::unique_ptr<TimeType> get_next_time_point(const TimeType& relative_to) const = 0;
 
     //! Convenience function.
-    [[nodiscard]] bool isSingle() const {
-        return !getNextTimePoint(*getFirstTimePoint());
+    [[nodiscard]] bool is_single() const {
+        return !get_next_time_point(*get_first_time_point());
     }
 };
 
@@ -32,7 +32,7 @@ template <typename TimeType>
 class SingleEvent : public virtual CalEvent<TimeType> {
 public:
     explicit SingleEvent(const TimeType& t) {
-        setTimePoint(t);
+        set_time_point(t);
     }
 
     ~SingleEvent() override = default;
@@ -41,24 +41,24 @@ public:
         return new SingleEvent<TimeType>(*this);
     }
 
-    std::unique_ptr<TimeType> getFirstTimePoint() const override {
-        return std::make_unique<TimeType>(m_TimePoint);
+    std::unique_ptr<TimeType> get_first_time_point() const override {
+        return std::make_unique<TimeType>(m_time_point_);
     }
 
-    std::unique_ptr<TimeType> getNextTimePoint(const TimeType&) const override {
+    std::unique_ptr<TimeType> get_next_time_point(const TimeType&) const override {
         return nullptr;
     }
 
-    void setTimePoint(const TimeType& t) {
-        m_TimePoint = t;
+    void set_time_point(const TimeType& t) {
+        m_time_point_ = t;
     }
 
-    TimeType getTimePoint() const {
-        return m_TimePoint;
+    TimeType get_time_point() const {
+        return m_time_point_;
     }
 
 private:
-    TimeType m_TimePoint{};
+    TimeType m_time_point_{};
 };
 
 /** For events starting at a certain time (or immediately, at 0, precisely TimeType()),
@@ -68,7 +68,7 @@ template <typename TimeType>
 class RecurringEvent : public virtual CalEvent<TimeType> {
 public:
     explicit RecurringEvent(const TimeType& period) {
-        setTimePeriod(period);
+        set_time_period(period);
     }
 
     ~RecurringEvent() override = default;
@@ -79,73 +79,73 @@ public:
         return new RecurringEvent<TimeType>(*this);
     }
 
-    std::unique_ptr<TimeType> getFirstTimePoint() const override;
-    std::unique_ptr<TimeType> getNextTimePoint(const TimeType& RelativeTo) const override;
+    std::unique_ptr<TimeType> get_first_time_point() const override;
+    std::unique_ptr<TimeType> get_next_time_point(const TimeType& RelativeTo) const override;
 
     //! nullptr means earliest possible start, which is the default construction
-    void setStart(const TimeType* t) {
-        m_TimePointStart = t ? std::make_unique<TimeType>(*t) : nullptr;
+    void set_start(const TimeType* t) {
+        m_time_point_start_ = t ? std::make_unique<TimeType>(*t) : nullptr;
     }
 
-    const TimeType* getStart() const {
-        return m_TimePointStart.get();
+    const TimeType* get_start() const {
+        return m_time_point_start_.get();
     }
 
-    TimeType* getStart() {
-        return m_TimePointStart.get();
+    TimeType* get_start() {
+        return m_time_point_start_.get();
     }
 
-    void backupStart_move() {
-        m_backupStart = std::move(m_TimePointStart);
+    void backup_start_move() {
+        m_backup_start_ = std::move(m_time_point_start_);
     }
 
-    [[nodiscard]] bool hasStartBackup() const {
-        return static_cast<bool>(m_backupStart);
+    [[nodiscard]] bool has_start_backup() const {
+        return static_cast<bool>(m_backup_start_);
     }
 
-    void restoreStart_move() {
-        m_TimePointStart = std::move(m_backupStart);
+    void restore_start_move() {
+        m_time_point_start_ = std::move(m_backup_start_);
     }
 
     //! nullptr means forever, which is default construction
-    void setEnd(const TimeType* t) {
-        m_TimePointEnd = t ? std::make_unique<TimeType>(*t) : nullptr;
+    void set_end(const TimeType* t) {
+        m_time_point_end_ = t ? std::make_unique<TimeType>(*t) : nullptr;
     }
 
-    const TimeType* getEnd() const {
-        return m_TimePointEnd.get();
+    const TimeType* get_end() const {
+        return m_time_point_end_.get();
     }
 
-    TimeType* getEnd() {
-        return m_TimePointEnd.get();
+    TimeType* get_end() {
+        return m_time_point_end_.get();
     }
 
-    void backupEnd_move() {
-        m_backupEnd = std::move(m_TimePointEnd);
+    void backup_end_move() {
+        m_backup_end_ = std::move(m_time_point_end_);
     }
 
-    [[nodiscard]] bool hasEndBackup() const {
-        return static_cast<bool>(m_backupEnd);
+    [[nodiscard]] bool has_end_backup() const {
+        return static_cast<bool>(m_backup_end_);
     }
 
-    void restoreEnd_move() {
-        m_TimePointEnd = std::move(m_backupEnd);
+    void restore_end_move() {
+        m_time_point_end_ = std::move(m_backup_end_);
     }
 
-    void setTimePeriod(const TimeType& period) {
-        m_TimePeriod = period;
+    void set_time_period(const TimeType& period) {
+        m_time_period_ = period;
     }
 
-    TimeType getTimePeriod() const {
-        return m_TimePeriod;
+    TimeType get_time_period() const {
+        return m_time_period_;
     }
 
 private:
-    std::unique_ptr<TimeType> m_TimePointStart;
-    std::unique_ptr<TimeType> m_TimePointEnd;
-    std::unique_ptr<TimeType> m_backupStart;
-    std::unique_ptr<TimeType> m_backupEnd;
-    TimeType m_TimePeriod{};
+    std::unique_ptr<TimeType> m_time_point_start_;
+    std::unique_ptr<TimeType> m_time_point_end_;
+    std::unique_ptr<TimeType> m_backup_start_;
+    std::unique_ptr<TimeType> m_backup_end_;
+    TimeType m_time_period_{};
 };
 
 //####################################################################################################################
@@ -153,11 +153,11 @@ private:
 
 template <typename TimeType>
 RecurringEvent<TimeType>::RecurringEvent(const RecurringEvent<TimeType>& other) {
-    if (other.m_TimePointStart)
-        m_TimePointStart = std::make_unique<TimeType>(*other.m_TimePointStart);
-    if (other.m_TimePointEnd)
-        m_TimePointEnd = std::make_unique<TimeType>(*other.m_TimePointEnd);
-    m_TimePeriod = other.m_TimePeriod;
+    if (other.m_time_point_start_)
+        m_time_point_start_ = std::make_unique<TimeType>(*other.m_time_point_start_);
+    if (other.m_time_point_end_)
+        m_time_point_end_ = std::make_unique<TimeType>(*other.m_time_point_end_);
+    m_time_period_ = other.m_time_period_;
 }
 
 template <typename TimeType>
@@ -168,16 +168,17 @@ RecurringEvent<TimeType>& RecurringEvent<TimeType>::operator=(const RecurringEve
 }
 
 template <typename TimeType>
-std::unique_ptr<TimeType> RecurringEvent<TimeType>::getFirstTimePoint() const {
-    return m_TimePointStart ? std::make_unique<TimeType>(*m_TimePointStart) : std::make_unique<TimeType>(TimeType());
+std::unique_ptr<TimeType> RecurringEvent<TimeType>::get_first_time_point() const {
+    return m_time_point_start_ ? std::make_unique<TimeType>(*m_time_point_start_)
+                               : std::make_unique<TimeType>(TimeType());
 }
 
 template <typename TimeType>
-std::unique_ptr<TimeType> RecurringEvent<TimeType>::getNextTimePoint(const TimeType& RelativeTo) const {
-    if (m_TimePeriod == TimeType{})
+std::unique_ptr<TimeType> RecurringEvent<TimeType>::get_next_time_point(const TimeType& RelativeTo) const {
+    if (m_time_period_ == TimeType{})
         return nullptr;
-    TimeType next = RelativeTo + m_TimePeriod;
-    if (m_TimePointEnd && next > *m_TimePointEnd)
+    TimeType next = RelativeTo + m_time_period_;
+    if (m_time_point_end_ && next > *m_time_point_end_)
         return nullptr;
     else
         return std::make_unique<TimeType>(next);

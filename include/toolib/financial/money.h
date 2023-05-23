@@ -1,7 +1,7 @@
 //! \file
 
-#ifndef MONEY_H_weztuiolkjhgf34567
-#define MONEY_H_weztuiolkjhgf34567
+#ifndef MONEY_H_WEZTUIOLKJHGF34567
+#define MONEY_H_WEZTUIOLKJHGF34567
 
 #include "toolibDEF.h"
 #include "../config.h"
@@ -25,16 +25,16 @@ public:
         convenience.*/
     Currency() = default;
 
-    [[nodiscard]] std::string getString() const;
-    [[nodiscard]] std::string getSymbol() const;
+    [[nodiscard]] std::string get_string() const;
+    [[nodiscard]] std::string get_symbol() const;
     //! \return empty string if no locale was used to construct.
-    [[nodiscard]] std::string getLocaleConstrName() const;
+    [[nodiscard]] std::string get_locale_constr_name() const;
 
     friend bool operator==(const Currency& lhs, const Currency& rhs);
     friend bool operator!=(const Currency& lhs, const Currency& rhs);
 
 private:
-    ul::Opt<std::locale> loc;
+    ul::Opt<std::locale> loc_;
 };
 
 UL_PRAGMA_WARNINGS_POP
@@ -60,10 +60,10 @@ public:
     Money& operator=(BaseType amount);
 
     [[nodiscard]] BaseType get() const;
-    [[nodiscard]] Currency getCurrency() const;
+    [[nodiscard]] Currency get_currency() const;
 
-    static BaseType getSmallestUnit(const Currency& currency = Currency{});
-    static BaseType getTenthOfSmallestUnit(const Currency& currency = Currency{});
+    static BaseType get_smallest_unit(const Currency& currency = Currency{});
+    static BaseType get_tenth_of_smallest_unit(const Currency& currency = Currency{});
 
     Money& operator-=(const Money& rhs);
     Money& operator+=(const Money& rhs);
@@ -81,8 +81,8 @@ public:
     friend TOOLIBSHARED_EXPORT bool equal_sufficiently(const Money& lhs, const Money& rhs);
 
 private:
-    BaseType amount{};
-    Currency currency;
+    BaseType amount_{};
+    Currency currency_;
 };
 
 TOOLIBSHARED_EXPORT Money operator-(Money lhs, const Money& rhs);
@@ -110,34 +110,34 @@ using Percent = long double;
 //! Should be understood in relation to Percent as follows: 'Percent' == 'Fraction' * 100.
 using Fraction = long double;
 
-class TOOLIBSHARED_EXPORT Interest_pa {
+class TOOLIBSHARED_EXPORT InterestPa {
 public:
-    explicit Interest_pa(Percent p = Percent())
-        : p(p) {
+    explicit InterestPa(Percent p = Percent())
+        : p_(p) {
     }
 
-    Interest_pa& operator=(Percent p_) {
-        this->p = p_;
+    InterestPa& operator=(Percent p) {
+        this->p_ = p;
         return *this;
     }
 
     /*implicit*/ operator Percent() const {
-        return this->p;
+        return this->p_;
     }
 
-    [[nodiscard]] Fraction dividedBy100() const {
-        return this->p / 100.0l;
+    [[nodiscard]] Fraction divided_by100() const {
+        return this->p_ / 100.0l;
     }
 
-    static Fraction YearlyEffective_to_MonthlyRelative(Fraction pa);
+    static Fraction yearly_effective_to_monthly_relative(Fraction pa);
 
     template <class Archive>
     void serialize(Archive& archive) {
-        archive(this->p);
+        archive(this->p_);
     }
 
 private:
-    Percent p = Percent();
+    Percent p_ = Percent();
 };
 } // namespace mb::too::fin
 

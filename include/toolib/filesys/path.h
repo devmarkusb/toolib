@@ -1,7 +1,7 @@
 //! \file
 
-#ifndef PATH_H_isdgfx67g42319gyr6r8gfeuiwgfc
-#define PATH_H_isdgfx67g42319gyr6r8gfeuiwgfc
+#ifndef PATH_H_ISDGFX67G42319GYR6R8GFEUIWGFC
+#define PATH_H_ISDGFX67G42319GYR6R8GFEUIWGFC
 
 #include "toolibDEF.h"
 #include "../config.h"
@@ -17,24 +17,24 @@ TOOLIBSHARED_EXPORT void remove_extension(std::string& fn);
 class TOOLIBSHARED_EXPORT Path {
 public:
     enum class EType {
-        IS_UNKNOWN,
-        IS_FOLDER,
-        IS_FILE,
-        IS_LINK,
+        is_unknown,
+        is_folder,
+        is_file,
+        is_link,
     };
     enum class EForm {
-        UNKNOWN,
-        PLATFORMINDEPENDENT,
-        NATIVE,
+        unknown,
+        platformindependent,
+        native,
     };
 
     explicit Path(
-        const std::string& path = std::string(), EForm form = EForm::PLATFORMINDEPENDENT,
-        EType type = EType::IS_UNKNOWN);
+        const std::string& path = std::string(), EForm form = EForm::platformindependent,
+        EType type = EType::is_unknown);
     //! no copy, use input by reference
     explicit Path(
-        std::string& path, bool useByReference = false, EForm form = EForm::PLATFORMINDEPENDENT,
-        EType type = EType::IS_UNKNOWN);
+        std::string& path, bool use_by_reference = false, EForm form = EForm::platformindependent,
+        EType type = EType::is_unknown);
     Path(const Path& other);
     Path(Path&& other) noexcept;
     Path& operator=(const Path& other);
@@ -43,39 +43,39 @@ public:
 
     /*implicit*/ operator std::string() const;
     Path& operator+=(const Path& other);
-    std::string getFolderPath() const;
+    std::string get_folder_path() const;
     //! Inclusive extension. Use function remove_extension if desired.
-    std::string getFileName() const;
+    std::string get_file_name() const;
     //! without dot
-    std::string getExtension(bool with_dot = false) const;
-    bool isAbsolute() const;
-    bool isEmpty() const;
+    std::string get_extension(bool with_dot = false) const;
+    bool is_absolute() const;
+    bool is_empty() const;
 
     //! not yet capable of removing subsequent duplicate separators; just converts them to the native form
-    Path& cleanupNative();
+    Path& cleanup_native();
     //! not yet capable of removing subsequent duplicate separators; just converts them to the platform independent form
-    Path& cleanupPlatformIndep();
-    Path& ensureTrailingSeparator();
-    Path& ensureTrailingSeparator(bool native);
-    const std::string& getSeparatorUsedHere() const;
+    Path& cleanup_platform_indep();
+    Path& ensure_trailing_separator();
+    Path& ensure_trailing_separator(bool native);
+    const std::string& get_separator_used_here() const;
 
-    static const std::string& getSeparatorNative();
+    static const std::string& get_separator_native();
     //! platform independent variant used by this class
-    static const std::string& getSeparatorPlatformIndep();
+    static const std::string& get_separator_platform_indep();
 
 private:
     UL_PRAGMA_WARNINGS_PUSH
     UL_WARNING_DISABLE_MSVC(4251)
     //! platform independent variant used by this class
-    static const std::string FOLDER_SEPARATOR_TO_USE_HERE;
+    static const std::string folder_separator_to_use_here;
 
-    std::string m_path_own_internal;
-    std::string* m_path = &m_path_own_internal; //! contract: never nullptr
+    std::string m_path_own_internal_;
+    std::string* m_path_ = &m_path_own_internal_; //! contract: never nullptr
     UL_PRAGMA_WARNINGS_POP
-    mutable EForm m_form = EForm::PLATFORMINDEPENDENT;
-    EType m_type = EType::IS_UNKNOWN;
+    mutable EForm m_form_ = EForm::platformindependent;
+    EType m_type_ = EType::is_unknown;
 
-    void detectForm() const;
+    void detect_form() const;
 };
 
 TOOLIBSHARED_EXPORT Path operator+(const Path& p1, const Path& p2);

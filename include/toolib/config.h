@@ -1,5 +1,5 @@
-#ifndef CONFIG_H_sdn34gn58924gb302gn
-#define CONFIG_H_sdn34gn58924gb302gn
+#ifndef CONFIG_H_SDN34GN58924GB302GN
+#define CONFIG_H_SDN34GN58924GB302GN
 
 #include "ul/ul.h"
 

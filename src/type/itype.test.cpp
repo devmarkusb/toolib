@@ -12,48 +12,47 @@ struct SomeType {};
 using SomeOtherType = int;
 
 // solution: some kind of wrapper/adapter
-struct SomeType_flexed : public too::itype {
-    SomeType_flexed() = default;
-    ~SomeType_flexed() override = default;
+struct SomeTypeFlexed : public too::Itype {
+    SomeTypeFlexed() = default;
+    ~SomeTypeFlexed() override = default;
 
-    SomeType_flexed(const SomeType_flexed& other)
-        : too::itype()
-        , rep(other.rep) {
+    SomeTypeFlexed(const SomeTypeFlexed& other)
+        : rep_(other.rep_) {
     }
 
-    SomeType_flexed& operator=(const SomeType_flexed& other) {
-        this->rep = other.rep;
+    SomeTypeFlexed& operator=(const SomeTypeFlexed& other) {
+        this->rep_ = other.rep_;
         return *this;
     }
 
-    SomeType_flexed(SomeType_flexed&&) = delete;
-    SomeType_flexed& operator=(SomeType_flexed&&) = delete;
+    SomeTypeFlexed(SomeTypeFlexed&&) = delete;
+    SomeTypeFlexed& operator=(SomeTypeFlexed&&) = delete;
 
-    explicit SomeType_flexed(const SomeType& x)
-        : rep(x) {
+    explicit SomeTypeFlexed(const SomeType& x)
+        : rep_(x) {
     }
 
-    explicit SomeType_flexed(SomeType&& x)
-        : rep(std::move(x)) {
+    explicit SomeTypeFlexed(SomeType&& x)
+        : rep_(x) {
     }
 
-    virtual ul::Owner<SomeType_flexed*> clone() override {
-        return new SomeType_flexed(*this);
+    ul::Owner<SomeTypeFlexed*> clone() override {
+        return new SomeTypeFlexed(*this);
     }
 
 private:
-    SomeType rep;
+    SomeType rep_;
 };
 
 struct IUser {
     virtual ~IUser() = default;
-    virtual void f(too::itype*) = 0;
+    virtual void f(too::Itype*) = 0;
 };
 
 struct UserA : public IUser {
-    virtual ~UserA() = default;
+    ~UserA() override = default;
 
-    virtual void f(too::itype*) {
+    void f(too::Itype* /*unused*/) override {
     }
 };
 } // namespace

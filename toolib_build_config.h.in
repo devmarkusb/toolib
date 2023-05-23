@@ -11,14 +11,14 @@
         Note that you will need to re-run CMake.
 */
 
-#ifndef TOOLIB_BUILD_CONFIG_H_sjkdfhnxuingf872g4ny78fg2
-#define TOOLIB_BUILD_CONFIG_H_sjkdfhnxuingf872g4ny78fg2
+#ifndef TOOLIB_BUILD_CONFIG_H_SJKDFHNXUINGF872G4NY78FG2
+#define TOOLIB_BUILD_CONFIG_H_SJKDFHNXUINGF872G4NY78FG2
 
 #include <string>
 
 namespace mb::too
 {
-inline std::string getVersionOfLib()
+inline std::string get_version_of_lib()
 {
     return "@PROJECT_VERSION@";
 }

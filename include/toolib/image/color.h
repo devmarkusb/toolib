@@ -1,19 +1,19 @@
 //! \file
 
 
-#ifndef COLOR_H_sdfjlhjcge5zrxdgh85
-#define COLOR_H_sdfjlhjcge5zrxdgh85
+#ifndef COLOR_H_SDFJLHJCGE5ZRXDGH85
+#define COLOR_H_SDFJLHJCGE5ZRXDGH85
 
 #include "../config.h"
 #include <string>
 
 namespace mb::too::img {
-class Color_dbl {
+class ColorDbl {
 public:
-    Color_dbl() = default;
+    ColorDbl() = default;
 
     //! Params expected to range between 0.0 and 1.0 (inclusive).
-    Color_dbl(double r, double g, double b, double a = 1.0)
+    ColorDbl(double r, double g, double b, double a = 1.0)
         : r_{r}
         , g_{g}
         , b_{b}

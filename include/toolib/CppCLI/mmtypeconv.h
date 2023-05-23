@@ -1,13 +1,13 @@
 //! \file Filename stands for "mixed-mode type conversions".
 
-#ifndef MMTYPECONV_H_nbi4lnv5
-#define MMTYPECONV_H_nbi4lnv5
+#ifndef MMTYPECONV_H_NBI4LNV5
+#define MMTYPECONV_H_NBI4LNV5
 
 #include "../config.h"
 #include "ul/macros.h"
 #include <string>
 
-namespace mb::too::CLI {
+namespace mb::too::cli {
 #if UL_STANDARD_CPP_CLI
 using System::IntPtr;
 using System::String;
@@ -64,7 +64,7 @@ template <typename T>
         return converted_a;
     }
 #endif
-} // namespace mb::too::CLI
+} // namespace mb::too::cli
 
 TOO_HEADER_END
 

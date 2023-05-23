@@ -3,8 +3,8 @@
 
 // Implementation taken from Meyers' book.
 
-#ifndef COUNTED_CLASS_OBJECTS_H_cirewhct34bctgu4372
-#define COUNTED_CLASS_OBJECTS_H_cirewhct34bctgu4372
+#ifndef COUNTED_CLASS_OBJECTS_H_CIREWHCT34BCTGU4372
+#define COUNTED_CLASS_OBJECTS_H_CIREWHCT34BCTGU4372
 
 #include "../config.h"
 
@@ -40,8 +40,8 @@ public:
     //! Exception class for exceeding the object maximum.
     class TooManyObjects {};
 
-    static long objectCount() {
-        return m_numObjects;
+    static long object_count() {
+        return m_num_objects;
     }
 
 protected:
@@ -54,21 +54,21 @@ protected:
     }
 
     ~Counted() {
-        --m_numObjects;
+        --m_num_objects;
     }
 
 private:
-    static long m_numObjects;
-    static const long maxObjects;
+    static long m_num_objects;
+    static const long max_objects;
 
     void init() {
-        if (m_numObjects >= maxObjects)
+        if (m_num_objects >= max_objects)
             throw TooManyObjects();
-        ++m_numObjects;
+        ++m_num_objects;
     }
 };
 template <class BeingCounted>
-long Counted<BeingCounted>::m_numObjects; // defines and initializes to zero
+long Counted<BeingCounted>::m_num_objects; // defines and initializes to zero
 } // namespace mb::too
 
 TOO_HEADER_END

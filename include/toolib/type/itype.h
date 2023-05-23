@@ -1,8 +1,8 @@
 /** \file This is left for documentation or future thinking. Apparently there should be
     no application for such a general interface.*/
 
-#ifndef ITYPE_H_39653425hgjdhgxhrgbubeir43
-#define ITYPE_H_39653425hgjdhgxhrgbubeir43
+#ifndef ITYPE_H_39653425HGJDHGXHRGBUBEIR43
+#define ITYPE_H_39653425HGJDHGXHRGBUBEIR43
 
 #include "../config.h"
 #include "ul/ptr.h"
@@ -34,15 +34,15 @@ namespace mb::too {
     for an arbitrary type that you really wanted to use as IType, in the test code,
     IType.test.cpp.
 */
-struct itype {
-    virtual ~itype() = default;
-    itype() = default;
-    itype(const itype&) = delete;
-    itype& operator=(const itype&) = delete;
-    itype(itype&&) = delete;
-    itype& operator=(itype&&) = delete;
+struct Itype {
+    virtual ~Itype() = default;
+    Itype() = default;
+    Itype(const Itype&) = delete;
+    Itype& operator=(const Itype&) = delete;
+    Itype(Itype&&) = delete;
+    Itype& operator=(Itype&&) = delete;
 
-    virtual ul::Owner<itype*> clone() = 0;
+    virtual ul::Owner<Itype*> clone() = 0;
 };
 } // namespace mb::too
 

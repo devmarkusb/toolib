@@ -3,8 +3,8 @@ If you want to use vld.h instead, if available, just define UL_USE_VLD in front 
 But I would rather suggest to use VLD directly. With version 2.5 it's gotten extremely simple to use.
 You just need one include and one lib to link statically.*/
 
-#ifndef DEBUG_LEAKS_H_dj823xfz23xzfn
-#define DEBUG_LEAKS_H_dj823xfz23xzfn
+#ifndef DEBUG_LEAKS_H_DJ823XFZ23XZFN
+#define DEBUG_LEAKS_H_DJ823XFZ23XZFN
 
 #include "ul/macros.h"
 

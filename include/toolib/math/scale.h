@@ -1,7 +1,7 @@
 //! \file
 
-#ifndef SCALE_H_enrhfu87n83464346ng
-#define SCALE_H_enrhfu87n83464346ng
+#ifndef SCALE_H_ENRHFU87N83464346NG
+#define SCALE_H_ENRHFU87N83464346NG
 
 #include "../config.h"
 #include "ul/ul.h"
@@ -11,32 +11,32 @@
 
 namespace mb::too::math {
 template <typename FloatingPointType>
-class Map_LinearScale_Interval_to_Interval {
+class MapLinearScaleIntervalToInterval {
     static_assert(std::is_floating_point<FloatingPointType>::value, "floating point type expected");
 
 public:
-    Map_LinearScale_Interval_to_Interval(
-        const std::pair<FloatingPointType, FloatingPointType>& FromInterval,
-        const std::pair<FloatingPointType, FloatingPointType>& ToInterval)
-        : m_FromInterval(FromInterval)
-        , m_ToInterval(ToInterval) {
-        UL_EXPECT_THROW(FromInterval.first < FromInterval.second);
-        UL_EXPECT_THROW(ToInterval.first < ToInterval.second);
+    MapLinearScaleIntervalToInterval(
+        const std::pair<FloatingPointType, FloatingPointType>& from_interval,
+        const std::pair<FloatingPointType, FloatingPointType>& to_interval)
+        : m_from_interval_(from_interval)
+        , m_to_interval_(to_interval) {
+        UL_EXPECT_THROW(from_interval.first < from_interval.second);
+        UL_EXPECT_THROW(to_interval.first < to_interval.second);
     }
 
     FloatingPointType operator()(const FloatingPointType& from) const {
-        return (from - m_FromInterval.first) * (m_ToInterval.second - m_ToInterval.first)
-               / (m_FromInterval.second - m_FromInterval.first);
+        return (from - m_from_interval_.first) * (m_to_interval_.second - m_to_interval_.first)
+               / (m_from_interval_.second - m_from_interval_.first);
     }
 
     FloatingPointType inverse(const FloatingPointType& to) const {
-        return to * (m_FromInterval.second - m_FromInterval.first) / (m_ToInterval.second - m_ToInterval.first)
-               + m_FromInterval.first;
+        return to * (m_from_interval_.second - m_from_interval_.first) / (m_to_interval_.second - m_to_interval_.first)
+               + m_from_interval_.first;
     }
 
 private:
-    std::pair<FloatingPointType, FloatingPointType> m_FromInterval;
-    std::pair<FloatingPointType, FloatingPointType> m_ToInterval;
+    std::pair<FloatingPointType, FloatingPointType> m_from_interval_;
+    std::pair<FloatingPointType, FloatingPointType> m_to_interval_;
 };
 
 //!
@@ -46,15 +46,15 @@ using ScaleTickCount = unsigned long;
     data value range comprising RangeMinToMax.*/
 template <typename T>
 //  requires T > 0
-double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount) {
-    UL_EXPECT_THROW(MaxTickCount);
-    UL_EXPECT_THROW(RangeMinToMax > T());
-    const auto MaxTickCount_ = ul::narrow_cast<double>(MaxTickCount);
-    const double MinimalTick = ul::narrow_cast<double>(RangeMinToMax) / MaxTickCount_;
-    const double magnitude = std::pow(10.0, std::floor(std::log10(MinimalTick)));
+double calc_nice_scale_tick(T range_min_to_max, ScaleTickCount max_tick_count) {
+    UL_EXPECT_THROW(max_tick_count);
+    UL_EXPECT_THROW(range_min_to_max > T());
+    const auto max_tick_count_d = ul::narrow_cast<double>(max_tick_count);
+    const double minimal_tick = ul::narrow_cast<double>(range_min_to_max) / max_tick_count_d;
+    const double magnitude = std::pow(10.0, std::floor(std::log10(minimal_tick)));
     if (ul::almost_equal(magnitude, 0.0))
         return 0.0;
-    const double residual = MinimalTick / magnitude;
+    const double residual = minimal_tick / magnitude;
     if (residual > 5.0)
         return 10.0 * magnitude;
     else if (residual > 2.0)
@@ -70,15 +70,15 @@ double calcNiceScaleTick(T RangeMinToMax, ScaleTickCount MaxTickCount) {
     scaleTick's apart).*/
 template <typename T>
 //  requires T number
-std::pair<double, double> calcScaleTickFromTo(T minDataValue, T maxDataValue, double scaleTick) {
-    UL_EXPECT(minDataValue <= maxDataValue);
-    const double minIn = ul::narrow_cast<double>(minDataValue);
-    const double maxIn = ul::narrow_cast<double>(maxDataValue);
-    if (ul::almost_equal(scaleTick, 0.0))
-        return std::make_pair(minIn, maxIn);
-    const double minOut = std::floor(minIn / scaleTick) * scaleTick;
-    const double maxOut = std::ceil(maxIn / scaleTick) * scaleTick;
-    return std::make_pair(minOut, maxOut);
+std::pair<double, double> calc_scale_tick_from_to(T min_data_value, T max_data_value, double scale_tick) {
+    UL_EXPECT(min_data_value <= max_data_value);
+    const double min_in = ul::narrow_cast<double>(min_data_value);
+    const double max_in = ul::narrow_cast<double>(max_data_value);
+    if (ul::almost_equal(scale_tick, 0.0))
+        return std::make_pair(min_in, max_in);
+    const double min_out = std::floor(min_in / scale_tick) * scale_tick;
+    const double max_out = std::ceil(max_in / scale_tick) * scale_tick;
+    return std::make_pair(min_out, max_out);
 }
 } // namespace mb::too::math
 

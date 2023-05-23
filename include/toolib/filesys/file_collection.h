@@ -1,7 +1,7 @@
 //! \file
 
-#ifndef FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn
-#define FILE_COLLECTION_H_sdhgfnxoi452178943tzx3t1gfn
+#ifndef FILE_COLLECTION_H_SDHGFNXOI452178943TZX3T1GFN
+#define FILE_COLLECTION_H_SDHGFNXOI452178943TZX3T1GFN
 
 #include "toolibDEF.h"
 #include "../config.h"
@@ -32,7 +32,7 @@ public:
     [[nodiscard]] std::vector<std::string> get_list_of_existent_files() const;
 
 private:
-    std::vector<std::string> file_list;
+    std::vector<std::string> file_list_;
 
     [[nodiscard]] static unsigned char obtain_number_of_digits_for_filenames_of_file_collection(
         const std::string& base_file_name, const std::string& file_ext);

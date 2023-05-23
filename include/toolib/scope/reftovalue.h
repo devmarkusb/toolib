@@ -1,8 +1,8 @@
 //! \file
 
 
-#ifndef REFTOVALUE_H_o4nv5ht84n82ch
-#define REFTOVALUE_H_o4nv5ht84n82ch
+#ifndef REFTOVALUE_H_O4NV5HT84N82CH
+#define REFTOVALUE_H_O4NV5HT84N82CH
 
 #include "../config.h"
 
@@ -13,26 +13,26 @@ template <typename T>
 class RefToValue {
 public:
     explicit RefToValue(T& ref)
-        : m_ref(ref) {
+        : m_ref_(ref) {
     }
 
     RefToValue(const RefToValue& rhs)
-        : m_ref(rhs.m_ref) {
+        : m_ref_(rhs.m_ref_) {
     }
 
     RefToValue() = delete;
     RefToValue& operator=(const RefToValue&) = delete;
 
     explicit operator T&() const {
-        return m_ref;
+        return m_ref_;
     }
 
 private:
-    T& m_ref;
+    T& m_ref_;
 };
 
 template <typename T>
-RefToValue<T> byRef(T& t) {
+RefToValue<T> by_ref(T& t) {
     return RefToValue<T>(t);
 }
 } // namespace mb::too

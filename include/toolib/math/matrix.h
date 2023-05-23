@@ -1,7 +1,7 @@
 //! \file
 
-#ifndef MATRIX_H_mx02983urx23
-#define MATRIX_H_mx02983urx23
+#ifndef MATRIX_H_MX02983URX23
+#define MATRIX_H_MX02983URX23
 
 #include "../config.h"
 #include "ul/ul.h"
@@ -22,42 +22,42 @@ Note that this class doesn't throw any own exceptions (except divisions by zero)
 You have to take care about ranges.*/
 // Implementation uses intrusive reference counting (idiom).
 template <class T>
-class matrix {
+class Matrix {
 public:
-    class error_division_by_zero : virtual public std::exception {};
+    class ErrorDivisionByZero : virtual public std::exception {};
 
-    class error_division_by_zero_det : virtual public error_division_by_zero {};
+    class ErrorDivisionByZeroDet : virtual public ErrorDivisionByZero {};
 
     //! Constructor allocating memory for a matrix with the given dimensions.
     /** \param dim_rows Count of rows.
         \param dim_cols Count of columns.*/
-    matrix(uint32_t dim_rows, uint32_t dim_cols)
-        : m_rep(new MRep(dim_rows, dim_cols, 0)) {
+    Matrix(uint32_t dim_rows, uint32_t dim_cols)
+        : m_rep_(new MRep(dim_rows, dim_cols, 0)) {
     }
 
     //! Constructor allocating memory for a matrix with the given dimensions plus initialization.
     /** \param dim_rows Count of rows.
         \param dim_cols Count of columns.
         \param mtrx A usual 2-dimensional C array initializing the matrix entries.*/
-    matrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx)
-        : m_rep(new MRep(dim_rows, dim_cols, mtrx)) {
+    Matrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx)
+        : m_rep_(new MRep(dim_rows, dim_cols, mtrx)) {
     }
 
     //! Copies from another matrix, using the same internal representation to speed things up.
-    matrix(const matrix& mtrx) {
-        ++(mtrx.m_rep->iRefCount);
-        m_rep = mtrx.m_rep;
+    Matrix(const Matrix& mtrx) {
+        ++(mtrx.m_rep_->iRefCount);
+        m_rep_ = mtrx.m_rep_;
     }
 
     //! Replaces itself with another matrix, using the same internal representation to speed things up.
-    matrix& operator=(const matrix& mtrx) {
+    Matrix& operator=(const Matrix& mtrx) {
         if (this == std::addressof(mtrx))
             return *this;
         /* It is taken care of self-assignment in a logical manner. No need to
         write \code if (this == &mtrx) return *this; \endcode*/
-        ++(mtrx.m_rep->iRefCount);
+        ++(mtrx.m_rep_->iRefCount);
         free();
-        m_rep = mtrx.m_rep;
+        m_rep_ = mtrx.m_rep_;
         return *this;
     }
 
@@ -78,7 +78,7 @@ public:
         return *this;
     }*/
     //! Frees the memory allocated for the internally stored matrix data.
-    ~matrix() {
+    ~Matrix() {
         try {
             free();
         } catch (...) {
@@ -87,10 +87,10 @@ public:
 
     //! Cast this matrix<T> to a differently "typed" matrix<T2>. Works if conversion from T to T2 exists.
     template <class T2>
-    matrix<T2> matrix_cast() const {
-        uint32_t rows = m_rep->dim_rows, cols = m_rep->dim_cols;
-        T** pptm = m_rep->m;
-        matrix<T2> ret(rows, cols);
+    Matrix<T2> matrix_cast() const {
+        uint32_t rows = m_rep_->dim_rows, cols = m_rep_->dim_cols;
+        T** pptm = m_rep_->m;
+        Matrix<T2> ret(rows, cols);
         T2** ppt2m = ret;
         for (uint32_t i = 0; i < rows; ++i)
             for (uint32_t j = 0; j < cols; ++j)
@@ -101,12 +101,12 @@ public:
     //! Replaces itself with another matrix given as usual 2-dimensional C array.
     /** \param mtrx has to have the same dimensions as this internal matrix. Otherwise you should
     use a constructor instead. If mtrx is 0 nothing happens.*/
-    matrix& assign(T** mtrx) {
+    Matrix& assign(T** mtrx) {
         if (!mtrx)
             return *this;
-        m_rep = m_rep->get_own_copy(false);
-        T** m = m_rep->m;
-        uint32_t rows = m_rep->dim_rows, cols = m_rep->dim_cols;
+        m_rep_ = m_rep_->get_own_copy(false);
+        T** m = m_rep_->m;
+        uint32_t rows = m_rep_->dim_rows, cols = m_rep_->dim_cols;
         for (uint32_t i = 0; i < rows; ++i) {
             for (uint32_t j = 0; j < cols; ++j)
                 m[i][j] = mtrx[i][j];
@@ -116,9 +116,9 @@ public:
 
     //! Nulls elements. Fast, if internal representation is referenced only once.
     void zeroize() {
-        m_rep = m_rep->get_own_copy(false);
-        T** m = m_rep->m;
-        uint32_t rows = m_rep->dim_rows, cols = m_rep->dim_cols;
+        m_rep_ = m_rep_->get_own_copy(false);
+        T** m = m_rep_->m;
+        uint32_t rows = m_rep_->dim_rows, cols = m_rep_->dim_cols;
         T init = T();
         for (uint32_t i = 0; i < rows; ++i)
             for (uint32_t j = 0; j < cols; ++j)
@@ -126,9 +126,9 @@ public:
     }
 
     //! Checks if this matrix is zero.
-    [[nodiscard]] bool isZero() const {
-        T** m = m_rep->m;
-        uint32_t rows = m_rep->dim_rows, cols = m_rep->dim_cols;
+    [[nodiscard]] bool is_zero() const {
+        T** m = m_rep_->m;
+        uint32_t rows = m_rep_->dim_rows, cols = m_rep_->dim_cols;
         T init = T();
         for (uint32_t i = 0; i < rows; ++i)
             for (uint32_t j = 0; j < cols; ++j)
@@ -138,13 +138,13 @@ public:
     }
 
     //! Get row dimension.
-    [[nodiscard]] uint32_t RowCount() const {
-        return m_rep->dim_rows;
+    [[nodiscard]] uint32_t row_count() const {
+        return m_rep_->dim_rows;
     }
 
     //! Get column dimension.
-    [[nodiscard]] uint32_t ColCount() const {
-        return m_rep->dim_cols;
+    [[nodiscard]] uint32_t col_count() const {
+        return m_rep_->dim_cols;
     }
     // Smart equivalent of T&
     class Tref;
@@ -156,7 +156,7 @@ public:
 
     //! Matrix entry access. Medium reading - do not use it in loops.
     const T& operator()(uint32_t row, uint32_t column) const {
-        return m_rep->m[row][column];
+        return m_rep_->m[row][column];
     }
 
     //! Matrix entry access by cast to T**. Fast version, for usage in loops.
@@ -164,16 +164,16 @@ public:
     And secondly, the cast assumes that the matrix content will be changed. Hence it starts
     by creating a new matrix representation, *if* the representation was not used only once thus far.*/
     explicit operator T**() {
-        m_rep = m_rep->get_own_copy();
-        return m_rep->m;
+        m_rep_ = m_rep_->get_own_copy();
+        return m_rep_->m;
     }
 
     //! Scalar multiplying a matrix.
-    friend matrix<T> operator*(const matrix<T>& m, const T& t) {
-        uint32_t m1r = m.m_rep->dim_rows, m1c = m.m_rep->dim_cols;
-        matrix<T> res(m1r, m1c);
-        T** m1elem = m.m_rep->m;
-        T** reselem = res.m_rep->m;
+    friend Matrix<T> operator*(const Matrix<T>& m, const T& t) {
+        uint32_t m1r = m.m_rep_->dim_rows, m1c = m.m_rep_->dim_cols;
+        Matrix<T> res(m1r, m1c);
+        T** m1elem = m.m_rep_->m;
+        T** reselem = res.m_rep_->m;
         for (uint32_t i = 0; i < m1r; ++i) {
             for (uint32_t j = 0; j < m1c; ++j) {
                 reselem[i][j] = m1elem[i][j] * t;
@@ -183,11 +183,11 @@ public:
     }
 
     //! Scalar multiplying a matrix.
-    friend matrix<T> operator*(const T& t, const matrix<T>& m) {
-        uint32_t m1r = m.m_rep->dim_rows, m1c = m.m_rep->dim_cols;
-        matrix<T> res(m1r, m1c);
-        T** m1elem = m.m_rep->m;
-        T** reselem = res.m_rep->m;
+    friend Matrix<T> operator*(const T& t, const Matrix<T>& m) {
+        uint32_t m1r = m.m_rep_->dim_rows, m1c = m.m_rep_->dim_cols;
+        Matrix<T> res(m1r, m1c);
+        T** m1elem = m.m_rep_->m;
+        T** reselem = res.m_rep_->m;
         for (uint32_t i = 0; i < m1r; ++i) {
             for (uint32_t j = 0; j < m1c; ++j) {
                 reselem[i][j] = t * m1elem[i][j];
@@ -198,16 +198,16 @@ public:
 
     //! Scalar reciprocal multiplying a matrix.
     /** Throws error_division_by_zero, where m[.][.]==T() is taken as "zero".*/
-    friend matrix<T> operator/(const T& t, const matrix<T>& m) {
-        uint32_t m1r = m.m_rep->dim_rows, m1c = m.m_rep->dim_cols;
-        matrix<T> res(m1r, m1c);
-        T** m1elem = m.m_rep->m;
-        T** reselem = res.m_rep->m;
+    friend Matrix<T> operator/(const T& t, const Matrix<T>& m) {
+        uint32_t m1r = m.m_rep_->dim_rows, m1c = m.m_rep_->dim_cols;
+        Matrix<T> res(m1r, m1c);
+        T** m1elem = m.m_rep_->m;
+        T** reselem = res.m_rep_->m;
         T zero = T();
         for (uint32_t i = 0; i < m1r; ++i) {
             for (uint32_t j = 0; j < m1c; ++j) {
                 if (m1elem[i][j] == zero)
-                    throw error_division_by_zero();
+                    throw ErrorDivisionByZero();
                 reselem[i][j] = t / m1elem[i][j];
             }
         }
@@ -216,13 +216,13 @@ public:
 
     //! Scalar reciprocal multiplying a matrix.
     /** Throws error_division_by_zero, where t==T() is taken as zero.*/
-    friend matrix<T> operator/(const matrix<T>& m, const T& t) {
+    friend Matrix<T> operator/(const Matrix<T>& m, const T& t) {
         if (t == T())
-            throw error_division_by_zero();
-        uint32_t m1r = m.m_rep->dim_rows, m1c = m.m_rep->dim_cols;
-        matrix<T> res(m1r, m1c);
-        T** m1elem = m.m_rep->m;
-        T** reselem = res.m_rep->m;
+            throw ErrorDivisionByZero();
+        uint32_t m1r = m.m_rep_->dim_rows, m1c = m.m_rep_->dim_cols;
+        Matrix<T> res(m1r, m1c);
+        T** m1elem = m.m_rep_->m;
+        T** reselem = res.m_rep_->m;
         for (uint32_t i = 0; i < m1r; ++i) {
             for (uint32_t j = 0; j < m1c; ++j) {
                 reselem[i][j] = m1elem[i][j] / t;
@@ -240,12 +240,12 @@ public:
     \param m is a kxn matrix,
     to
     \return a mxn matrix.*/
-    matrix& operator*=(const matrix& m) {
-        uint32_t m1r = m_rep->dim_rows, m2c = m.m_rep->dim_cols, m1c = m_rep->dim_cols;
-        matrix<T> res(m1r, m2c);
-        T** m1elem = m_rep->m;
-        T** m2elem = m.m_rep->m;
-        T** reselem = res.m_rep->m;
+    Matrix& operator*=(const Matrix& m) {
+        uint32_t m1r = m_rep_->dim_rows, m2c = m.m_rep_->dim_cols, m1c = m_rep_->dim_cols;
+        Matrix<T> res(m1r, m2c);
+        T** m1elem = m_rep_->m;
+        T** m2elem = m.m_rep_->m;
+        T** reselem = res.m_rep_->m;
         T sum;
         T* m1elemr;
         T init = T(); // eliminating every single function call and address jumping from the loops
@@ -264,9 +264,9 @@ public:
     }
 
     //! Scalar multiplying this matrix.
-    matrix& operator*=(const T& t) {
-        uint32_t m1r = m_rep->dim_rows, m1c = m_rep->dim_cols;
-        T** m1elem = m_rep->m;
+    Matrix& operator*=(const T& t) {
+        uint32_t m1r = m_rep_->dim_rows, m1c = m_rep_->dim_cols;
+        T** m1elem = m_rep_->m;
         for (uint32_t i = 0; i < m1r; ++i) {
             for (uint32_t j = 0; j < m1c; ++j) {
                 m1elem[i][j] *= t;
@@ -277,11 +277,11 @@ public:
 
     //! Scalar reciprocal multiplying this matrix.
     /** Throws error_division_by_zero, where t==T() is taken as zero.*/
-    matrix& operator/=(const T& t) {
+    Matrix& operator/=(const T& t) {
         if (t == T())
-            throw error_division_by_zero();
-        uint32_t m1r = m_rep->dim_rows, m1c = m_rep->dim_cols;
-        T** m1elem = m_rep->m;
+            throw ErrorDivisionByZero();
+        uint32_t m1r = m_rep_->dim_rows, m1c = m_rep_->dim_cols;
+        T** m1elem = m_rep_->m;
         for (uint32_t i = 0; i < m1r; ++i) {
             for (uint32_t j = 0; j < m1c; ++j) {
                 m1elem[i][j] /= t;
@@ -291,10 +291,10 @@ public:
     }
 
     //! Another matrix is added this one. Both have to coincide dimensionally.
-    matrix& operator+=(const matrix& m) {
-        uint32_t m1r = m_rep->dim_rows, m1c = m_rep->dim_cols;
-        T** m1elem = m_rep->m;
-        T** m2elem = m.m_rep->m;
+    Matrix& operator+=(const Matrix& m) {
+        uint32_t m1r = m_rep_->dim_rows, m1c = m_rep_->dim_cols;
+        T** m1elem = m_rep_->m;
+        T** m2elem = m.m_rep_->m;
         for (uint32_t i = 0; i < m1r; ++i) {
             for (uint32_t j = 0; j < m1c; ++j) {
                 m1elem[i][j] += m2elem[i][j];
@@ -304,10 +304,10 @@ public:
     }
 
     //! Another matrix is substracted from this one. Both have to coincide dimensionally.
-    matrix& operator-=(const matrix& m) {
-        uint32_t m1r = m_rep->dim_rows, m1c = m_rep->dim_cols;
-        T** m1elem = m_rep->m;
-        T** m2elem = m.m_rep->m;
+    Matrix& operator-=(const Matrix& m) {
+        uint32_t m1r = m_rep_->dim_rows, m1c = m_rep_->dim_cols;
+        T** m1elem = m_rep_->m;
+        T** m2elem = m.m_rep_->m;
         for (uint32_t i = 0; i < m1r; ++i) {
             for (uint32_t j = 0; j < m1c; ++j) {
                 m1elem[i][j] -= m2elem[i][j];
@@ -317,12 +317,13 @@ public:
     }
 
     //! Comparison of two matrices.
-    friend bool operator==(const matrix<T>& m1, const matrix<T>& m2) {
-        uint32_t m1r = m1.m_rep->dim_rows, m1c = m1.m_rep->dim_cols, m2r = m2.m_rep->dim_rows, m2c = m2.m_rep->dim_cols;
+    friend bool operator==(const Matrix<T>& m1, const Matrix<T>& m2) {
+        uint32_t m1r = m1.m_rep_->dim_rows, m1c = m1.m_rep_->dim_cols, m2r = m2.m_rep_->dim_rows,
+                 m2c = m2.m_rep_->dim_cols;
         if (m1r != m2r || m1c != m2c)
             return false;
-        T** m1elem = m1.m_rep->m;
-        T** m2elem = m2.m_rep->m;
+        T** m1elem = m1.m_rep_->m;
+        T** m2elem = m2.m_rep_->m;
         for (uint32_t i = 0; i < m1r; ++i) {
             for (uint32_t j = 0; j < m1c; ++j) {
                 if (m1elem[i][j] != m2elem[i][j])
@@ -333,16 +334,16 @@ public:
     }
 
     //! Comparison of two matrices.
-    friend bool operator!=(const matrix<T>& m1, const matrix<T>& m2) {
+    friend bool operator!=(const Matrix<T>& m1, const Matrix<T>& m2) {
         return m1 != m2;
     }
 
     //! Returns the row-"matrix" (1xn) of the specified row of this matrix.
-    matrix getrow(uint32_t row) const {
-        uint32_t c = m_rep->dim_cols;
-        matrix res(1, c);
-        T** melem = m_rep->m;
-        T** reselem = res.m_rep->m;
+    Matrix getrow(uint32_t row) const {
+        uint32_t c = m_rep_->dim_cols;
+        Matrix res(1, c);
+        T** melem = m_rep_->m;
+        T** reselem = res.m_rep_->m;
         for (uint32_t j = 0; j < c; ++j)
             reselem[0][j] = melem[row][j];
         return res;
@@ -352,11 +353,11 @@ public:
     /** Due to data storage, this is slower than getrow(). Maybe one can consider transposition
     by transpose() first (if one needs to extract dozens of columns or those from the back of a huge
     matrix).*/
-    matrix getcol(uint32_t col) const {
-        uint32_t r = m_rep->dim_rows;
-        matrix res(r, 1);
-        T** melem = m_rep->m;
-        T** reselem = res.m_rep->m;
+    Matrix getcol(uint32_t col) const {
+        uint32_t r = m_rep_->dim_rows;
+        Matrix res(r, 1);
+        T** melem = m_rep_->m;
+        T** reselem = res.m_rep_->m;
         for (uint32_t i = 0; i < r; ++i)
             reselem[i][0] = melem[i][col];
         return res;
@@ -366,14 +367,14 @@ public:
 
     //! Checks whether this matrix is the identity.
     /** Only applicable for quadratic matrices.
-    \param bMakeIt true changes this matrix into identity. False leaves it unchanged.*/
-    bool identity(bool bMakeIt = false) {
-        uint32_t r = m_rep->dim_rows;
+    \param b_make_it true changes this matrix into identity. False leaves it unchanged.*/
+    bool identity(bool b_make_it = false) {
+        uint32_t r = m_rep_->dim_rows;
         T one = static_cast<T>(1.0);
         T zero = T();
-        if (bMakeIt) {
-            m_rep = m_rep->get_own_copy(false);
-            T** elem = m_rep->m;
+        if (b_make_it) {
+            m_rep_ = m_rep_->get_own_copy(false);
+            T** elem = m_rep_->m;
             for (uint32_t i = 0; i < r; ++i)
                 for (uint32_t j = i; j < r; ++j) {
                     if (i == j)
@@ -384,7 +385,7 @@ public:
                     }
                 }
         } else {
-            T** elem = m_rep->m;
+            T** elem = m_rep_->m;
             for (uint32_t i = 0; i < r; ++i)
                 for (uint32_t j = i; j < r; ++j) {
                     if (i == j) {
@@ -402,9 +403,9 @@ public:
     easier to this externally if ever needed. Also there is no loss of performance, since a new
     allocation is needed in that case nevertheless.*/
     void transpose() {
-        m_rep = m_rep->get_own_copy();
-        uint32_t r = m_rep->dim_rows;
-        T** elem = m_rep->m;
+        m_rep_ = m_rep_->get_own_copy();
+        uint32_t r = m_rep_->dim_rows;
+        T** elem = m_rep_->m;
         // T aux;
         for (uint32_t i = 0; i < r; ++i)
             for (uint32_t j = i + 1; j < r; ++j) {
@@ -426,22 +427,22 @@ public:
     }
 
     //! Is invertible?
-    [[nodiscard]] bool isInvertible() const {
+    [[nodiscard]] bool is_invertible() const {
         throw ul::NotImplemented{"isInvertible"};
     }
 
     //! Is symmetric?
-    [[nodiscard]] bool isSymmetric() const {
+    [[nodiscard]] bool is_symmetric() const {
         throw ul::NotImplemented{"isSymmetric"};
     }
 
     //! Is orthogonal?
-    [[nodiscard]] bool isOrthogonal() const {
+    [[nodiscard]] bool is_orthogonal() const {
         throw ul::NotImplemented{"isOrthogonal"};
     }
 
     //! Is diagonal?
-    [[nodiscard]] bool isDiagonal() const {
+    [[nodiscard]] bool is_diagonal() const {
         throw ul::NotImplemented{"isDiagonal"};
     }
 
@@ -450,33 +451,33 @@ public:
     //! Smart equivalent of T& (proxy class). Used to implement "index" access to the matrix entries.
     class Tref {
     private:
-        friend class matrix;
-        matrix& m;
-        uint32_t r, c; // rows, cols
+        friend class Matrix;
+        Matrix& m_;
+        uint32_t r_, c_; // rows, cols
 
-        Tref(matrix& mtrx, uint32_t row, uint32_t col)
-            : m(mtrx)
-            , r(row)
-            , c(col) {
+        Tref(Matrix& mtrx, uint32_t row, uint32_t col)
+            : m_(mtrx)
+            , r_(row)
+            , c_(col) {
         }
 
     public:
         // matrix element is just read from, appears as simple T
         explicit operator T() const {
-            return m.m_rep->m[r][c];
+            return m_.m_rep_->m[r_][c_];
         }
 
         // matrix element is written to
         T& operator=(const T& t) {
-            m.put(r, c, t);
+            m_.put(r_, c_, t);
             return *this;
         }
     };
 
 protected:
     //! This was introduced mainly for inheriting classes to provide proper reference counting operations.
-    void get_own_rep_copy(bool bInitialiseIfNeededNew = true) {
-        m_rep = m_rep->get_own_copy(bInitialiseIfNeededNew);
+    void get_own_rep_copy(bool b_initialise_if_needed_new = true) {
+        m_rep_ = m_rep_->get_own_copy(b_initialise_if_needed_new);
     }
 
 private:
@@ -490,11 +491,11 @@ private:
         // The internal matrix data.
         T** m;
         // The reference counter.
-        mutable int32_t iRefCount;
+        mutable int32_t i_ref_count;
 
         // Allocating a brand new single representation.
         MRep(uint32_t rows, uint32_t cols, T** mtrx)
-            : iRefCount(1)
+            : i_ref_count(1)
             , dim_rows(rows)
             , dim_cols(cols)
             , m(new T*[rows]) {
@@ -521,15 +522,15 @@ private:
         is only single, changing is immediately allowed. If it is shared twice or more often, it has to
         be extracted to a new single representation. In either case the method returns the appropriate
         object to work with.
-        \param bInitialiseIfNeededNew If a new representation is needed, there is this additional option.
+        \param b_initialise_if_needed_new If a new representation is needed, there is this additional option.
         When true (default) a normal copy of the existing (multiple referenced) representation is returned.
         When false, the new representation is not initialised and has undefined content. This is useful, when
         the whole matrix is intended to be replaced by something in the next step.*/
-        MRep* get_own_copy(bool bInitialiseIfNeededNew = true) {
-            if (iRefCount == 1)
+        MRep* get_own_copy(bool b_initialise_if_needed_new = true) {
+            if (i_ref_count == 1)
                 return this;
-            --iRefCount;
-            if (bInitialiseIfNeededNew)
+            --i_ref_count;
+            if (b_initialise_if_needed_new)
                 return new MRep(dim_rows, dim_cols, m);
             else
                 return new MRep(dim_rows, dim_cols, 0);
@@ -552,30 +553,30 @@ private:
 
     /* The internal representation of the matrix data. This could be shared by more than one matrix,
     if they are equal. The amount is reference counted.*/
-    MRep* m_rep;
+    MRep* m_rep_;
 
     /* Called by the destructor. Checks whether the representation is really no longer needed and
     can be deleted just like the containing matrix class can (because it's leaving its life scope).
     If there are other matrices with equal content out there, the representation nows about them by
     its counter and keeps being alive.*/
     void free() {
-        if (--(m_rep->iRefCount) == 0 && m_rep) {
-            delete m_rep;
-            m_rep = 0;
+        if (--(m_rep_->i_ref_count) == 0 && m_rep_) {
+            delete m_rep_;
+            m_rep_ = 0;
         }
     }
 
     /* Changes a matrix entry. Of course the representation has to duplicate itself first, when more than
     one matrices share the representations content.*/
     void put(uint32_t row, uint32_t col, const T& t) {
-        m_rep = m_rep->get_own_copy();
-        m_rep->m[row][col] = t;
+        m_rep_ = m_rep_->get_own_copy();
+        m_rep_->m[row][col] = t;
     }
 }; // matrix
 
-typedef matrix<float> matrixf;
-typedef matrix<double> matrixd;
-typedef matrix<int32_t> matrixi;
+typedef Matrix<float> Matrixf;
+typedef Matrix<double> Matrixd;
+typedef Matrix<int32_t> Matrixi;
 
 using std::complex;
 
@@ -583,39 +584,39 @@ using std::complex;
 /** Inheritance seems natural, since this special choice of template type just results in a bunch
 of additional possible operations on the matrix that are complex number related.
 You could also use matrix<complex<t>> instead of cmatrix<t>. But then you would miss these operations.*/
-template <class t>
-class cmatrix : public matrix<complex<t>> {
+template <class T>
+class Cmatrix : public Matrix<complex<T>> {
 public:
-    typedef complex<t> T; // for convenience
+    typedef complex<T> C; // for convenience
 
     // Constructors and assignment are transferred trivially.
-    explicit cmatrix(uint32_t dim_rows, uint32_t dim_cols)
-        : matrix<complex<t>>(dim_rows, dim_cols) {
+    explicit Cmatrix(uint32_t dim_rows, uint32_t dim_cols)
+        : Matrix<complex<T>>(dim_rows, dim_cols) {
     }
 
-    cmatrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx)
-        : matrix<complex<t>>(dim_rows, dim_cols, mtrx) {
+    Cmatrix(uint32_t dim_rows, uint32_t dim_cols, T** mtrx)
+        : Matrix<complex<T>>(dim_rows, dim_cols, mtrx) {
     }
 
-    cmatrix(const cmatrix& mtrx)
-        : matrix<complex<t>>(mtrx) {
+    Cmatrix(const Cmatrix& mtrx)
+        : Matrix<complex<T>>(mtrx) {
     }
 
-    explicit cmatrix(const matrix<complex<t>>& mtrx)
-        : matrix<complex<t>>(mtrx) {
+    explicit Cmatrix(const Matrix<complex<T>>& mtrx)
+        : Matrix<complex<T>>(mtrx) {
     }
 
-    cmatrix& operator=(const cmatrix& mtrx) {
-        matrix<complex<t>>::operator=(mtrx);
+    Cmatrix& operator=(const Cmatrix& mtrx) {
+        Matrix<complex<T>>::operator=(mtrx);
         return *this;
     }
 
-    ~cmatrix() = default;
+    ~Cmatrix() = default;
 
     //! Conjugates this matrix.
     void conjugate() {
-        matrix<complex<t>>::get_own_rep_copy();
-        uint32_t r = matrix<complex<t>>::RowCount(), c = matrix<complex<t>>::ColCount();
+        Matrix<complex<T>>::get_own_rep_copy();
+        uint32_t r = Matrix<complex<T>>::row_count(), c = Matrix<complex<T>>::col_count();
         T** elem = *this;
         for (uint32_t i = 0; i < r; ++i)
             for (uint32_t j = 0; j < c; ++j) {
@@ -625,8 +626,8 @@ public:
 
     //! Adjoins this matrix. This method supports only quadratic matrices!
     void adjoin() {
-        matrix<complex<t>>::get_own_rep_copy();
-        uint32_t r = matrix<complex<t>>::RowCount();
+        Matrix<complex<T>>::get_own_rep_copy();
+        uint32_t r = Matrix<complex<T>>::row_count();
         T** elem = *this;
         T aux;
         for (uint32_t i = 0; i < r; ++i) {
@@ -641,26 +642,26 @@ public:
     }
 
     //! Is hermitean?
-    [[nodiscard]] bool isHermitean() const {
+    [[nodiscard]] bool is_hermitean() const {
         throw ul::NotImplemented{"isHermitean"};
     }
 
     //! Is unitary?
-    [[nodiscard]] bool isUnitary() const {
+    [[nodiscard]] bool is_unitary() const {
         throw ul::NotImplemented{"isUnitary"};
     }
 };
 
 //! Sum. Both matrices have to coincide dimensionally.
 template <typename T>
-matrix<T> operator+(const matrix<T>& t1, const matrix<T>& t2) {
-    return matrix<T>(t1) += t2;
+Matrix<T> operator+(const Matrix<T>& t1, const Matrix<T>& t2) {
+    return Matrix<T>(t1) += t2;
 }
 
 //! Difference. Both matrices have to coincide dimensionally.
 template <typename T>
-matrix<T> operator-(const matrix<T>& t1, const matrix<T>& t2) {
-    return matrix<T>(t1) -= t2;
+Matrix<T> operator-(const Matrix<T>& t1, const Matrix<T>& t2) {
+    return Matrix<T>(t1) -= t2;
 }
 
 //! Matrix multiplication.
@@ -673,8 +674,8 @@ No dimension check is performed, so pay attention that
 to
 \return a mxn matrix.*/
 template <typename T>
-matrix<T> operator*(const matrix<T>& t1, const matrix<T>& t2) {
-    return matrix<T>(t1) *= t2;
+Matrix<T> operator*(const Matrix<T>& t1, const Matrix<T>& t2) {
+    return Matrix<T>(t1) *= t2;
 }
 } // namespace mb::too::math
 

@@ -1,8 +1,8 @@
 //! \file
 
 
-#ifndef QUANTITY_UNIT_H_dfhgxungh38hgxt38gb
-#define QUANTITY_UNIT_H_dfhgxungh38hgxt38gb
+#ifndef QUANTITY_UNIT_H_DFHGXUNGH38HGXT38GB
+#define QUANTITY_UNIT_H_DFHGXUNGH38HGXT38GB
 
 #include "../config.h"
 #include "ul/ul.h"
@@ -14,10 +14,10 @@
 #include <vector>
 
 namespace mb::too::math {
-using Map_Rational_String = std::map<ul::math::Rational, std::string>;
+using MapRationalString = std::map<ul::math::Rational, std::string>;
 
 //! To create a simple default for constructing a Unit in cases you don't want to think about details.
-inline Map_Rational_String create_map_ratio_simple(const std::string& base_unit_name = {}) {
+inline MapRationalString create_map_ratio_simple(const std::string& base_unit_name = {}) {
     std::map<ul::math::Rational, std::string> ret;
     ret[ul::math::one] = std::string{ul::math::one_symb} + base_unit_name;
     return ret;
@@ -29,9 +29,9 @@ inline Map_Rational_String create_map_ratio_simple(const std::string& base_unit_
 //! so that it is better to keep strings under your control.
 /** \param only_factors_of_thousand resticts output to the most popular steps of thousands, factors of 10^3.
     That misses e.g. cm, dm.*/
-inline Map_Rational_String create_map_ratio_SIprefixunitname(
+inline MapRationalString create_map_ratio_s_iprefixunitname(
     const std::string& base_unit_name, bool only_factors_of_thousand = true) {
-    Map_Rational_String ret;
+    MapRationalString ret;
 
     ret[ul::math::atto] = std::string{ul::math::atto_symb} + base_unit_name;
     ret[ul::math::femto] = std::string{ul::math::femto_symb} + base_unit_name;
@@ -65,8 +65,8 @@ inline Map_Rational_String create_map_ratio_SIprefixunitname(
 //! ratio in the map. That would make the class useless.
 class Unit {
 public:
-    struct err_no_string_provided_for_ratio : public std::invalid_argument {
-        explicit err_no_string_provided_for_ratio(const ul::math::Rational& r)
+    struct ErrNoStringProvidedForRatio : public std::invalid_argument {
+        explicit ErrNoStringProvidedForRatio(const ul::math::Rational& r)
             : std::invalid_argument("no string provided for ratio " + ul::to_string(r.as_floating_point<double>())) {
         }
     };
@@ -78,68 +78,68 @@ public:
         Constructing the class with default parameters is only reasonable for testing purposes or temporary jump starts
         to construct other things.*/
     explicit Unit(
-        const ul::math::Rational& ratio = ul::math::one, const Map_Rational_String& map_ratio_prefixunitname = {})
+        const ul::math::Rational& ratio = ul::math::one, const MapRationalString& map_ratio_prefixunitname = {})
 #if !UL_HAS_NO_CPP11_NOEXCEPT
 /*noexcept(false)*/
 #endif
-        : ratio(ratio)
-        , ratio_prefixunitname(
+        : ratio_(ratio)
+        , ratio_prefixunitname_(
               map_ratio_prefixunitname.empty() ? simple_noop_default_ratio_map() : map_ratio_prefixunitname) {
-        expectValidRatio(ratio);
+        expect_valid_ratio(ratio);
         const auto invalid_one_it = std::find_if(
-            std::begin(this->ratio_prefixunitname), std::end(this->ratio_prefixunitname),
+            std::begin(this->ratio_prefixunitname_), std::end(this->ratio_prefixunitname_),
             [](const std::pair<ul::math::Rational, std::string>& rs) {
                 return rs.first <= ul::math::Rational{};
             });
-        if (invalid_one_it != ratio_prefixunitname.end())
+        if (invalid_one_it != ratio_prefixunitname_.end())
             throw std::invalid_argument("ratio <= zero found in passed map");
     }
 
     ~Unit() {
-        expectValidRatio(this->ratio);
+        expect_valid_ratio(this->ratio_);
     }
 
-    [[nodiscard]] std::string getString() const {
-        return this->ratio_prefixunitname.at(this->ratio);
+    [[nodiscard]] std::string get_string() const {
+        return this->ratio_prefixunitname_.at(this->ratio_);
     }
 
-    [[nodiscard]] ul::math::Rational getRatio() const {
-        return this->ratio;
+    [[nodiscard]] ul::math::Rational get_ratio() const {
+        return this->ratio_;
     }
 
     /** Throws Unit::err_no_string_provided_for_ratio if there is no string for the target_ratio
         in the map. That would make the class useless.*/
     template <typename ValueType>
     //  ValueType expected to be arithmetic
-    ValueType convertToDifferentRatio(ValueType src, const ul::math::Rational& target_ratio) const {
+    ValueType convert_to_different_ratio(ValueType src, const ul::math::Rational& target_ratio) const {
         static_assert(
             std::is_arithmetic<ValueType>::value, "only arithmetic (integral or floating point) types allowed");
-        expectValidRatio(target_ratio);
-        return static_cast<ValueType>(src * (this->ratio / target_ratio).as_floating_point<double>());
+        expect_valid_ratio(target_ratio);
+        return static_cast<ValueType>(src * (this->ratio_ / target_ratio).as_floating_point<double>());
     }
 
-    void switchRatio(const ul::math::Rational& r) {
-        expectValidRatio(r);
-        this->ratio = r;
+    void switch_ratio(const ul::math::Rational& r) {
+        expect_valid_ratio(r);
+        this->ratio_ = r;
     }
 
     //! Ensures a return ratio valid to be set again via switchRatio.
     template <typename ValueType>
     //  ValueType expected to be arithmetic
-    ul::math::Rational findOptimizedRatio(ValueType val) const {
+    ul::math::Rational find_optimized_ratio(ValueType val) const {
         static_assert(
             std::is_arithmetic<ValueType>::value, "only arithmetic (integral or floating point) types allowed");
 
         std::vector<ul::math::Rational> ratios;
         std::transform(
-            std::begin(this->ratio_prefixunitname), std::end(this->ratio_prefixunitname), std::back_inserter(ratios),
+            std::begin(this->ratio_prefixunitname_), std::end(this->ratio_prefixunitname_), std::back_inserter(ratios),
             [](const std::pair<ul::math::Rational, std::string>& elem) {
                 return elem.first;
             });
 
         std::sort(std::begin(ratios), std::end(ratios));
 
-        const auto current_ratio_it = std::find(std::begin(ratios), std::end(ratios), this->ratio);
+        const auto current_ratio_it = std::find(std::begin(ratios), std::end(ratios), this->ratio_);
         UL_ASSERT(current_ratio_it != std::end(ratios));
 
         const auto optim_ratio_it =
@@ -148,7 +148,7 @@ public:
             });
 
         if (optim_ratio_it != current_ratio_it) {
-            expectValidRatio(*optim_ratio_it);
+            expect_valid_ratio(*optim_ratio_it);
             return *optim_ratio_it;
         }
 
@@ -160,28 +160,28 @@ public:
             });
 
         if (optim_ratio_revit != current_ratio_revit) {
-            expectValidRatio(*optim_ratio_it);
+            expect_valid_ratio(*optim_ratio_it);
             return *optim_ratio_revit;
         } else {
-            expectValidRatio(*current_ratio_it);
+            expect_valid_ratio(*current_ratio_it);
             return *current_ratio_it;
         }
     }
 
 private:
-    ul::math::Rational ratio;
-    Map_Rational_String ratio_prefixunitname;
+    ul::math::Rational ratio_;
+    MapRationalString ratio_prefixunitname_;
 
-    static const Map_Rational_String& simple_noop_default_ratio_map() {
-        static const Map_Rational_String instance{create_map_ratio_simple()};
+    static const MapRationalString& simple_noop_default_ratio_map() {
+        static const MapRationalString instance{create_map_ratio_simple()};
         return instance;
     }
 
     /** Return value only needed for calls within assertions. It doesn't need to indicate failure.
         The function itself does.*/
-    void expectValidRatio(const ul::math::Rational& r) const {
-        if (ratio_prefixunitname.find(r) == ratio_prefixunitname.end())
-            throw err_no_string_provided_for_ratio(r);
+    void expect_valid_ratio(const ul::math::Rational& r) const {
+        if (ratio_prefixunitname_.find(r) == ratio_prefixunitname_.end())
+            throw ErrNoStringProvidedForRatio(r);
         UL_EXPECT(r > ul::math::Rational{});
     }
 };
@@ -190,25 +190,25 @@ private:
 class Quantity {
 public:
     Quantity(std::string quantity_name, const Unit& unit)
-        : unit{unit}
-        , q_name{std::move(quantity_name)} {
+        : unit_{unit}
+        , q_name_{std::move(quantity_name)} {
     }
 
-    [[nodiscard]] std::string getName() const {
-        return this->q_name;
+    [[nodiscard]] std::string get_name() const {
+        return this->q_name_;
     }
 
-    Unit& getUnit() {
-        return this->unit;
+    Unit& get_unit() {
+        return this->unit_;
     }
 
-    [[nodiscard]] const Unit& getUnit() const {
-        return const_cast<Quantity*>(this)->getUnit();
+    [[nodiscard]] const Unit& get_unit() const {
+        return const_cast<Quantity*>(this)->get_unit();
     }
 
 private:
-    Unit unit;
-    std::string q_name;
+    Unit unit_;
+    std::string q_name_;
 };
 
 //    requires WhatConcrete to be convertible to BaseType

@@ -1,8 +1,8 @@
 //! \file
 
 
-#ifndef PROMPT_H_8jr82ctrz2tn
-#define PROMPT_H_8jr82ctrz2tn
+#ifndef PROMPT_H_8JR82CTRZ2TN
+#define PROMPT_H_8JR82CTRZ2TN
 
 #include "../config.h"
 #include "ul/ul.h"

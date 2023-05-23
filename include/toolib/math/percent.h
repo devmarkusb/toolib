@@ -1,7 +1,7 @@
 //! \file
 
-#ifndef PERCENT_H_kjdghnxzre8hgnf83xgfn34gx
-#define PERCENT_H_kjdghnxzre8hgnf83xgfn34gx
+#ifndef PERCENT_H_KJDGHNXZRE8HGNF83XGFN34GX
+#define PERCENT_H_KJDGHNXZRE8HGNF83XGFN34GX
 
 #include "../config.h"
 
