@@ -8,7 +8,7 @@ include(FetchContent)
 
 FetchContent_Declare(mb-util
         GIT_REPOSITORY https://github.com/devmarkusb/util
-        GIT_TAG origin/HEAD
+        GIT_TAG origin/wip-tidy
         GIT_SHALLOW ON
         )
 
