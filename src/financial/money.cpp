@@ -9,33 +9,33 @@ namespace mb::too::fin {
 //####################################################################################################################
 
 Currency::Currency(const std::locale& loc)
-    : loc(loc) {
+    : loc_(loc) {
 }
 
-std::string Currency::getString() const {
-    if (!(this->loc))
+std::string Currency::get_string() const {
+    if (!(this->loc_))
         return {};
-    const std::string loc_enc = std::use_facet<std::moneypunct<char, true>>(*(this->loc)).curr_symbol();
+    const std::string loc_enc = std::use_facet<std::moneypunct<char, true>>(*(this->loc_)).curr_symbol();
     const std::wstring utf16ws = ul::str::locenc_s2ws(loc_enc);
     return ul::str::utf16or32to8_ws2s_portable(utf16ws);
 }
 
-std::string Currency::getSymbol() const {
-    if (!(this->loc))
+std::string Currency::get_symbol() const {
+    if (!(this->loc_))
         return {};
-    const std::string loc_enc = std::use_facet<std::moneypunct<char>>(*(this->loc)).curr_symbol();
+    const std::string loc_enc = std::use_facet<std::moneypunct<char>>(*(this->loc_)).curr_symbol();
     const std::wstring utf16ws = ul::str::locenc_s2ws(loc_enc);
     return ul::str::utf16or32to8_ws2s_portable(utf16ws);
 }
 
-std::string Currency::getLocaleConstrName() const {
-    if (!this->loc)
+std::string Currency::get_locale_constr_name() const {
+    if (!this->loc_)
         return {};
-    return (*this->loc).name();
+    return (*this->loc_).name();
 }
 
 bool operator==(const Currency& lhs, const Currency& rhs) {
-    return lhs.loc == rhs.loc;
+    return lhs.loc_ == rhs.loc_;
 }
 
 bool operator!=(const Currency& lhs, const Currency& rhs) {
@@ -48,61 +48,61 @@ Money::Money(BaseType amount, const Currency& currency) {
     set(amount, currency);
 }
 
-void Money::set(BaseType amount_, const Currency& currency_) {
-    set(amount_);
-    this->currency = currency_;
+void Money::set(BaseType amount, const Currency& currency) {
+    set(amount);
+    this->currency_ = currency;
 }
 
-void Money::set(BaseType amount_) {
-    UL_EXPECT(std::isfinite(amount_));
-    this->amount = amount_;
+void Money::set(BaseType amount) {
+    UL_EXPECT(std::isfinite(amount));
+    this->amount_ = amount;
 }
 
-Money& Money::operator=(BaseType amount_) {
-    this->set(amount_);
+Money& Money::operator=(BaseType amount) {
+    this->set(amount);
     return *this;
 }
 
 auto Money::get() const -> BaseType {
-    return amount;
+    return amount_;
 }
 
-Currency Money::getCurrency() const {
-    return this->currency;
+Currency Money::get_currency() const {
+    return this->currency_;
 }
 
 // perhaps needs to be different for some exotic currencies?
-Money::BaseType Money::getSmallestUnit(const Currency&) {
+Money::BaseType Money::get_smallest_unit(const Currency& /*unused*/) {
     return 0.01L;
 }
 
-Money::BaseType Money::getTenthOfSmallestUnit(const Currency&) {
+Money::BaseType Money::get_tenth_of_smallest_unit(const Currency& /*unused*/) {
     return 0.001L;
 }
 
 Money& Money::operator-=(const Money& rhs) {
-    if (this->currency != rhs.currency) // otherwise not yet implemented
+    if (this->currency_ != rhs.currency_) // otherwise not yet implemented
         throw ul::NotImplemented{"mixed currencies not yet implemented"};
-    amount -= rhs.amount;
+    amount_ -= rhs.amount_;
     return *this;
 }
 
 Money& Money::operator+=(const Money& rhs) {
-    if (this->currency != rhs.currency) // otherwise not yet implemented
+    if (this->currency_ != rhs.currency_) // otherwise not yet implemented
         throw ul::NotImplemented{"mixed currencies not yet implemented"};
-    amount += rhs.amount;
+    amount_ += rhs.amount_;
     return *this;
 }
 
 Money& Money::operator/=(const Money& rhs) {
-    if (this->currency != rhs.currency) // otherwise not yet implemented
+    if (this->currency_ != rhs.currency_) // otherwise not yet implemented
         throw ul::NotImplemented{"mixed currencies not yet implemented"};
-    amount /= rhs.amount;
+    amount_ /= rhs.amount_;
     return *this;
 }
 
 Money& Money::operator*=(BaseType rhs) {
-    amount *= rhs;
+    amount_ *= rhs;
     return *this;
 }
 
@@ -111,13 +111,13 @@ Money& Money::operator/=(BaseType rhs) {
     // You then would have to check for multiplication by inf as well.
     // At least the checks shouldn't be done here, since the function just perfect forwards the
     // mathematical operation.
-    amount /= rhs;
+    amount_ /= rhs;
     return *this;
 }
 
 Money Money::operator-() const {
     Money tmp{*this};
-    tmp.amount = -tmp.amount;
+    tmp.amount_ = -tmp.amount_;
     return tmp;
 }
 
@@ -153,15 +153,15 @@ Money operator*(Money::BaseType lhs, const Money& rhs) {
 }
 
 bool operator==(const Money& lhs, const Money& rhs) {
-    if (lhs.currency != rhs.currency) // otherwise not yet implemented
+    if (lhs.currency_ != rhs.currency_) // otherwise not yet implemented
         throw ul::NotImplemented{"mixed currencies not yet implemented"};
-    return ul::almost_equal(lhs.amount, rhs.amount);
+    return ul::almost_equal(lhs.amount_, rhs.amount_);
 }
 
 bool operator<(const Money& lhs, const Money& rhs) {
-    if (lhs.currency != rhs.currency) // otherwise not yet implemented
+    if (lhs.currency_ != rhs.currency_) // otherwise not yet implemented
         throw ul::NotImplemented{"mixed currencies not yet implemented"};
-    return lhs.amount < rhs.amount;
+    return lhs.amount_ < rhs.amount_;
 }
 
 bool operator!=(const Money& lhs, const Money& rhs) {
@@ -181,15 +181,15 @@ bool operator>=(const Money& lhs, const Money& rhs) {
 }
 
 bool equal_sufficiently(const Money& lhs, const Money& rhs) {
-    if (lhs.currency != rhs.currency) // otherwise not yet implemented
+    if (lhs.currency_ != rhs.currency_) // otherwise not yet implemented
         throw ul::NotImplemented{"mixed currencies not yet implemented"};
     // tenth of smallest unit needed since this is the relevant digit for rounding
-    return ul::math::approx_equal(lhs.amount, rhs.amount, Money::getTenthOfSmallestUnit());
+    return ul::math::approx_equal(lhs.amount_, rhs.amount_, Money::get_tenth_of_smallest_unit());
 }
 
 //####################################################################################################################
 
-Fraction Interest_pa::YearlyEffective_to_MonthlyRelative(Fraction pa) {
-    return std::pow(1.0L + pa, 1.0L / too::date_time::MonthYear_decl::twelve) - 1.0L;
+Fraction InterestPa::yearly_effective_to_monthly_relative(Fraction pa) {
+    return std::pow(1.0L + pa, 1.0L / too::date_time::MonthYearDecl::twelve) - 1.0L;
 }
 } // namespace mb::too::fin

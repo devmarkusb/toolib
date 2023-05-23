@@ -1,8 +1,8 @@
 //! \file
 
 
-#ifndef CATCH_EXIT_H_34trcx83943g
-#define CATCH_EXIT_H_34trcx83943g
+#ifndef CATCH_EXIT_H_34TRCX83943G
+#define CATCH_EXIT_H_34TRCX83943G
 
 #include "ul/macros.h"
 #if UL_OS_WINDOWS && UL_OS_WINDOWS_DESKTOP

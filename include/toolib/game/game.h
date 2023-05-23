@@ -1,7 +1,7 @@
 //! \file
 
-#ifndef GAME_H_aubzstex3zubte632yet7
-#define GAME_H_aubzstex3zubte632yet7
+#ifndef GAME_H_AUBZSTEX3ZUBTE632YET7
+#define GAME_H_AUBZSTEX3ZUBTE632YET7
 
 #include "../config.h"
 #include "ul/ul.h"
@@ -28,9 +28,9 @@ public:
             outro_cleanup();
             return ul::prog_exit_success;
         } catch (std::exception& e) {
-            return handleMainExceptions(e);
+            return handle_main_exceptions(e);
         } catch (...) {
-            return mainTerminationByError();
+            return main_termination_by_error();
         }
     }
 
@@ -50,9 +50,9 @@ protected:
     virtual bool game() = 0;
 
     //! Should return the main exit code.
-    virtual int handleMainExceptions(std::exception&) noexcept = 0;
+    virtual int handle_main_exceptions(std::exception&) noexcept = 0;
     //! Should return the main exit code.
-    virtual int mainTerminationByError() noexcept = 0;
+    virtual int main_termination_by_error() noexcept = 0;
 
 private:
     void mainloop() {
@@ -72,10 +72,10 @@ public:
     virtual ~IGame() = default;
 
     enum EEndType {
-        ET_ERROR = -1,
-        ET_USER_EXIT = 0,
-        ET_GAME_OVER = 1,
-        ET_GAME_WON = 2,
+        et_error = -1,
+        et_user_exit = 0,
+        et_game_over = 1,
+        et_game_won = 2,
     };
 
     //! The only function to be called. Starts gameplay.
@@ -86,18 +86,18 @@ public:
         while (gameloop(et))
             ;
         switch (et) {
-            case ET_USER_EXIT:
-                gameTerminationByUserExit();
+            case et_user_exit:
+                game_termination_by_user_exit();
                 return false;
-            case ET_GAME_OVER:
-                gameTerminationByGameOver();
+            case et_game_over:
+                game_termination_by_game_over();
                 break;
-            case ET_GAME_WON:
-                gameTerminationByGameWon();
+            case et_game_won:
+                game_termination_by_game_won();
                 break;
-            case ET_ERROR:
+            case et_error:
             default:
-                if (!gameTerminationByError())
+                if (!game_termination_by_error())
                     return false;
         }
         return true;
@@ -105,46 +105,46 @@ public:
 
 protected:
     //! \return false if game ends. This can only happen by user exit.
-    virtual bool getEvents() = 0;
-    virtual void runAI() = 0;
-    virtual void moveEnemies() = 0;
+    virtual bool get_events() = 0;
+    virtual void run_ai() = 0;
+    virtual void move_enemies() = 0;
     //! \return false if game ends. In that case et contains either ET_GAME_OVER or ET_GAME_WON.
-    virtual bool resolveCollisions(EEndType& et) = 0;
-    virtual void drawGraphics() = 0;
-    virtual void playSounds() = 0;
+    virtual bool resolve_collisions(EEndType& et) = 0;
+    virtual void draw_graphics() = 0;
+    virtual void play_sounds() = 0;
     //! \return true if game can be resumed, or otherwise has to be terminated.
-    virtual bool handleGameExceptions(std::exception&) = 0;
+    virtual bool handle_game_exceptions(std::exception&) = 0;
     //! This function should somehow get access to detailed error information and decide whether:
     /** 1) the game can resume from the menu stage
         2) the program has to exit as though the user would have opted for
         3) it even throws again.
         \return true for 1), false for 2), or throws.*/
-    virtual bool gameTerminationByError() = 0;
-    virtual void gameTerminationByUserExit() = 0;
-    virtual void gameTerminationByGameOver() = 0;
-    virtual void gameTerminationByGameWon() = 0;
+    virtual bool game_termination_by_error() = 0;
+    virtual void game_termination_by_user_exit() = 0;
+    virtual void game_termination_by_game_over() = 0;
+    virtual void game_termination_by_game_won() = 0;
 
 private:
     //! \return false if game ends. Afterwards et contains reason for ending.
     bool gameloop(EEndType& et) {
         try {
-            if (!getEvents()) {
-                et = ET_USER_EXIT;
+            if (!get_events()) {
+                et = et_user_exit;
                 return false;
             }
-            runAI();
-            moveEnemies();
-            if (!resolveCollisions(et))
+            run_ai();
+            move_enemies();
+            if (!resolve_collisions(et))
                 return false;
-            drawGraphics();
-            playSounds();
+            draw_graphics();
+            play_sounds();
         } catch (std::exception& e) {
-            if (!handleGameExceptions(e)) {
-                et = ET_ERROR;
+            if (!handle_game_exceptions(e)) {
+                et = et_error;
                 return false;
             }
         } catch (...) {
-            et = ET_ERROR;
+            et = et_error;
             return false;
         }
         return true;

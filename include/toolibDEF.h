@@ -3,8 +3,8 @@
 /** \file File serves to export symbols for toolib as a library.
     Note that it uses itself a little bit to do that.*/
 
-#ifndef TOOLIBDEF_H_aibuxsgfnz342975ty31
-#define TOOLIBDEF_H_aibuxsgfnz342975ty31
+#ifndef TOOLIBDEF_H_AIBUXSGFNZ342975TY31
+#define TOOLIBDEF_H_AIBUXSGFNZ342975TY31
 
 #include "ul/linklib/LINKLIB_DEFS.h"
 

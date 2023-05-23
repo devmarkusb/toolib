@@ -16,51 +16,51 @@ TEST_F(PathTest, EmptyConstruction) {
     Path p;
     std::string s(p);
     EXPECT_TRUE(s.empty());
-    p.ensureTrailingSeparator(false);
+    p.ensure_trailing_separator(false);
     s = p;
     EXPECT_EQ("", s);
-    p.ensureTrailingSeparator(true);
+    p.ensure_trailing_separator(true);
     s = p;
     EXPECT_EQ("", s);
-    p.cleanupNative();
+    p.cleanup_native();
     s = p;
     EXPECT_EQ("", s);
-    p.cleanupPlatformIndep();
+    p.cleanup_platform_indep();
     s = p;
     EXPECT_EQ("", s);
-    EXPECT_EQ("", p.getFolderPath());
-    EXPECT_EQ("", p.getFileName());
-    EXPECT_EQ("", p.getExtension());
-    EXPECT_FALSE(p.isAbsolute());
-    EXPECT_TRUE(p.isEmpty());
+    EXPECT_EQ("", p.get_folder_path());
+    EXPECT_EQ("", p.get_file_name());
+    EXPECT_EQ("", p.get_extension());
+    EXPECT_FALSE(p.is_absolute());
+    EXPECT_TRUE(p.is_empty());
 }
 
 TEST_F(PathTest, Statics) {
 #if UL_OS_WINDOWS
     EXPECT_EQ("\\", Path::getSeparatorNative());
 #else
-    EXPECT_EQ("/", Path::getSeparatorNative());
+    EXPECT_EQ("/", Path::get_separator_native());
 #endif
     Path p("/");
-    std::string s(p.cleanupPlatformIndep());
-    EXPECT_EQ(s, Path::getSeparatorPlatformIndep());
-    s = p.cleanupNative();
-    EXPECT_EQ(s, Path::getSeparatorNative());
+    std::string s(p.cleanup_platform_indep());
+    EXPECT_EQ(s, Path::get_separator_platform_indep());
+    s = p.cleanup_native();
+    EXPECT_EQ(s, Path::get_separator_native());
 }
 
 TEST_F(PathTest, Constructions) {
     std::string pstr("test");
     Path p(pstr);
-    p.ensureTrailingSeparator();
+    p.ensure_trailing_separator();
     EXPECT_EQ("test", pstr);
     Path pr(pstr, true);
-    pr.ensureTrailingSeparator();
+    pr.ensure_trailing_separator();
     EXPECT_EQ("test/", pstr);
     Path pconst("test");
-    pconst.ensureTrailingSeparator();
+    pconst.ensure_trailing_separator();
     std::string str(pconst);
     EXPECT_EQ("test/", str);
-    Path cpy(pconst);
+    const Path cpy(pconst);
     str = cpy;
     EXPECT_EQ("test/", str);
     Path cpy2(pr);
@@ -73,9 +73,9 @@ TEST_F(PathTest, Constructions) {
 }
 
 TEST_F(PathTest, Swapping) {
-    Path p1("p1", Path::EForm::PLATFORMINDEPENDENT, Path::EType::IS_FOLDER);
+    Path p1("p1", Path::EForm::platformindependent, Path::EType::is_folder);
     std::string s2("p2");
-    Path p2(s2, true, Path::EForm::NATIVE, Path::EType::IS_FILE);
+    Path p2(s2, true, Path::EForm::native, Path::EType::is_file);
     p1.swap(p2);
     std::string str(p2);
     EXPECT_EQ("p1", str);
@@ -85,13 +85,13 @@ TEST_F(PathTest, Swapping) {
 
 TEST_F(PathTest, ensureTrailingSeparator) {
     Path p("");
-    std::string s(p.ensureTrailingSeparator());
+    std::string s(p.ensure_trailing_separator());
     EXPECT_TRUE(s.empty());
     p = Path("a");
-    s = p.ensureTrailingSeparator();
+    s = p.ensure_trailing_separator();
     EXPECT_EQ("a/", s);
-    Path p2("a", Path::EForm::NATIVE);
-    s = p2.ensureTrailingSeparator();
+    Path p2("a", Path::EForm::native);
+    s = p2.ensure_trailing_separator();
 #if UL_OS_WINDOWS
     EXPECT_EQ("a\\", s);
 #else
@@ -101,53 +101,53 @@ TEST_F(PathTest, ensureTrailingSeparator) {
 
 TEST_F(PathTest, AppendTo) {
     Path p1("a/b");
-    Path p2("c\\d/e");
+    const Path p2("c\\d/e");
     p1 += p2;
-    std::string s(p1);
+    const std::string s(p1);
     EXPECT_EQ("a/b/c/d/e/", s);
 }
 
 TEST_F(PathTest, getFolderPath) {
-    Path p1("a/b");
-    EXPECT_EQ("a/", p1.getFolderPath());
+    const Path p1("a/b");
+    EXPECT_EQ("a/", p1.get_folder_path());
 #if UL_OS_WINDOWS
     Path p2("a\\b", Path::EForm::NATIVE);
     EXPECT_EQ("a\\", p2.getFolderPath());
 #else
-    Path p2("a/b", Path::EForm::NATIVE);
-    EXPECT_EQ("a/", p2.getFolderPath());
+    const Path p2("a/b", Path::EForm::native);
+    EXPECT_EQ("a/", p2.get_folder_path());
 #endif
 }
 
 TEST_F(PathTest, getFileName) {
-    Path p1("a/b");
-    EXPECT_EQ("b", p1.getFileName());
-    Path p2("a/b.exe");
-    EXPECT_EQ("b.exe", p2.getFileName());
+    const Path p1("a/b");
+    EXPECT_EQ("b", p1.get_file_name());
+    const Path p2("a/b.exe");
+    EXPECT_EQ("b.exe", p2.get_file_name());
 }
 
 TEST_F(PathTest, getExtension) {
-    Path p1("a/b.ext");
-    EXPECT_EQ("ext", p1.getExtension());
+    const Path p1("a/b.ext");
+    EXPECT_EQ("ext", p1.get_extension());
 }
 
 TEST_F(PathTest, isAbsolute) {
-    Path p1("a/b");
-    EXPECT_FALSE(p1.isAbsolute());
+    const Path p1("a/b");
+    EXPECT_FALSE(p1.is_absolute());
 #if UL_OS_WINDOWS
     Path p2("c:\\a\\b");
     EXPECT_TRUE(p2.isAbsolute());
 #else
-    Path p2("/a/b");
-    EXPECT_TRUE(p2.isAbsolute());
+    const Path p2("/a/b");
+    EXPECT_TRUE(p2.is_absolute());
 #endif
 }
 
 TEST_F(PathTest, cleanupX) {
     Path p1("a/b/c");
-    std::string s(p1.cleanupPlatformIndep());
+    std::string s(p1.cleanup_platform_indep());
     EXPECT_EQ("a/b/c", s);
-    s = p1.cleanupNative();
+    s = p1.cleanup_native();
 #if UL_OS_WINDOWS
     EXPECT_EQ("a\\b\\c", s);
 #else
@@ -156,20 +156,20 @@ TEST_F(PathTest, cleanupX) {
 }
 
 TEST_F(PathTest, getSeparatorUsedHere) {
-    Path p1("a/b");
-    EXPECT_EQ("/", p1.getSeparatorUsedHere());
+    const Path p1("a/b");
+    EXPECT_EQ("/", p1.get_separator_used_here());
 #if UL_OS_WINDOWS
     Path p2("a\\b", Path::EForm::UNKNOWN);
     EXPECT_EQ("\\", p2.getSeparatorUsedHere());
 #else
-    Path p2("a/b", Path::EForm::UNKNOWN);
-    EXPECT_EQ("/", p2.getSeparatorUsedHere());
+    const Path p2("a/b", Path::EForm::unknown);
+    EXPECT_EQ("/", p2.get_separator_used_here());
 #endif
 #if UL_OS_WINDOWS
     Path p3("a\\b", Path::EForm::NATIVE);
     EXPECT_EQ("\\", p3.getSeparatorUsedHere());
 #else
-    Path p3("a/b", Path::EForm::NATIVE);
-    EXPECT_EQ("/", p3.getSeparatorUsedHere());
+    const Path p3("a/b", Path::EForm::native);
+    EXPECT_EQ("/", p3.get_separator_used_here());
 #endif
 }
