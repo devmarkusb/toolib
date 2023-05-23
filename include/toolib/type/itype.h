@@ -42,7 +42,7 @@ struct itype {
     itype(itype&&) = delete;
     itype& operator=(itype&&) = delete;
 
-    virtual ul::owner<itype*> clone() = 0;
+    virtual ul::Owner<itype*> clone() = 0;
 };
 } // namespace mb::too
 

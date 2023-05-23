@@ -14,7 +14,7 @@ class CalEvent {
 public:
     virtual ~CalEvent() = default;
 
-    virtual ul::owner<CalEvent<TimeType>*> clone() const = 0;
+    virtual ul::Owner<CalEvent<TimeType>*> clone() const = 0;
 
     //! Has to ensure to never return nullptr.
     virtual std::unique_ptr<TimeType> getFirstTimePoint() const = 0;
@@ -37,7 +37,7 @@ public:
 
     ~SingleEvent() override = default;
 
-    ul::owner<SingleEvent<TimeType>*> clone() const override {
+    ul::Owner<SingleEvent<TimeType>*> clone() const override {
         return new SingleEvent<TimeType>(*this);
     }
 
@@ -75,7 +75,7 @@ public:
     RecurringEvent(const RecurringEvent& other);
     RecurringEvent& operator=(const RecurringEvent& other);
 
-    ul::owner<RecurringEvent<TimeType>*> clone() const override {
+    ul::Owner<RecurringEvent<TimeType>*> clone() const override {
         return new RecurringEvent<TimeType>(*this);
     }
 

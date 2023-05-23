@@ -79,7 +79,7 @@ Path& Path::operator+=(const Path& other) {
         detectForm();
     ensureTrailingSeparator();
     std::vector<std::string> newparts;
-    ul::str::tokenizeString(*other.m_path, OS_POSSIBLE_SEPARATORS, newparts);
+    ul::str::tokenize_string(*other.m_path, OS_POSSIBLE_SEPARATORS, newparts);
     const std::string sep(getSeparatorUsedHere());
     for (const std::string& part : newparts) {
         *m_path += part;

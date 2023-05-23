@@ -67,7 +67,7 @@ class Unit {
 public:
     struct err_no_string_provided_for_ratio : public std::invalid_argument {
         explicit err_no_string_provided_for_ratio(const ul::math::Rational& r)
-            : std::invalid_argument("no string provided for ratio " + ul::to_string(r.asFloatingPoint<double>())) {
+            : std::invalid_argument("no string provided for ratio " + ul::to_string(r.as_floating_point<double>())) {
         }
     };
 
@@ -115,7 +115,7 @@ public:
         static_assert(
             std::is_arithmetic<ValueType>::value, "only arithmetic (integral or floating point) types allowed");
         expectValidRatio(target_ratio);
-        return static_cast<ValueType>(src * (this->ratio / target_ratio).asFloatingPoint<double>());
+        return static_cast<ValueType>(src * (this->ratio / target_ratio).as_floating_point<double>());
     }
 
     void switchRatio(const ul::math::Rational& r) {
@@ -144,7 +144,7 @@ public:
 
         const auto optim_ratio_it =
             std::find_if(std::begin(ratios), current_ratio_it, [val](const ul::math::Rational& r) {
-                return val <= r.asFloatingPoint<double>();
+                return val <= r.as_floating_point<double>();
             });
 
         if (optim_ratio_it != current_ratio_it) {
@@ -156,7 +156,7 @@ public:
             std::reverse_iterator<std::vector<ul::math::Rational>::iterator>{current_ratio_it};
         const auto optim_ratio_revit =
             std::find_if(ratios.rbegin(), current_ratio_revit, [val](const ul::math::Rational& r) {
-                return val >= r.asFloatingPoint<double>();
+                return val >= r.as_floating_point<double>();
             });
 
         if (optim_ratio_revit != current_ratio_revit) {

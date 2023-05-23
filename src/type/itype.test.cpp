@@ -37,7 +37,7 @@ struct SomeType_flexed : public too::itype {
         : rep(std::move(x)) {
     }
 
-    virtual ul::owner<SomeType_flexed*> clone() override {
+    virtual ul::Owner<SomeType_flexed*> clone() override {
         return new SomeType_flexed(*this);
     }
 
