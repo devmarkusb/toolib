@@ -29,7 +29,7 @@ inline MapRationalString create_map_ratio_simple(const std::string& base_unit_na
 //! so that it is better to keep strings under your control.
 /** \param only_factors_of_thousand resticts output to the most popular steps of thousands, factors of 10^3.
     That misses e.g. cm, dm.*/
-inline MapRationalString create_map_ratio_s_iprefixunitname(
+inline MapRationalString create_map_ratio_si_prefix_unitname(
     const std::string& base_unit_name, bool only_factors_of_thousand = true) {
     MapRationalString ret;
 
@@ -123,7 +123,7 @@ public:
         this->ratio_ = r;
     }
 
-    //! Ensures a return ratio valid to be set again via switchRatio.
+    //! Ensures a return ratio valid to be set again via switch_ratio.
     template <typename ValueType>
     //  ValueType expected to be arithmetic
     ul::math::Rational find_optimized_ratio(ValueType val) const {

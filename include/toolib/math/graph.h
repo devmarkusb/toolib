@@ -281,20 +281,20 @@ template <typename QuValueType>
 void ChartAxis<QuValueType>::calc_scaling(const QuValueType& min_qu_val, const QuValueType& max_qu_val) {
     this->tick_count_ = this->setup_->max_tick_count ? *this->setup_->max_tick_count : 11;
 
-    this->tick_step_qu_val_ = calcNiceScaleTick(max_qu_val - min_qu_val, this->tick_count_);
+    this->tick_step_qu_val_ = calc_nice_scale_tick(max_qu_val - min_qu_val, this->tick_count_);
     this->tick_start_qu_val_ = 0.0;
     this->tick_end_qu_val_ = 0.0;
     std::tie(this->tick_start_qu_val_, this->tick_end_qu_val_) =
-        calcScaleTickFromTo(min_qu_val, max_qu_val, tick_step_qu_val_);
+        calc_scale_tick_from_to(min_qu_val, max_qu_val, tick_step_qu_val_);
     this->tick_count_ = ul::math::round_to<ScaleTickCount>((tick_end_qu_val_ - tick_start_qu_val_) / tick_step_qu_val_);
 }
 
 template <typename QuValueType>
 ul::Opt<ul::math::Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio_of_tickvals() const {
-    const auto unit = this->quantity_.getUnit();
+    const auto unit = this->quantity_.get_unit();
     const auto max_abs = std::max(std::abs(this->tick_start_qu_val_), std::abs(this->tick_end_qu_val_));
-    const auto suitable_ratio = unit.findOptimizedRatio(max_abs);
-    const auto old_ratio = unit.getRatio();
+    const auto suitable_ratio = unit.find_optimized_ratio(max_abs);
+    const auto old_ratio = unit.get_ratio();
 
     if (old_ratio == suitable_ratio)
         return {};
@@ -304,10 +304,10 @@ ul::Opt<ul::math::Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio
 
 template <typename QuValueType>
 void ChartAxis<QuValueType>::apply_ratio_to_tickvals(const ul::math::Rational& r) {
-    const auto unit = this->quantity_.getUnit();
-    this->tick_start_qu_val_ = unit.convertToDifferentRatio(this->tick_start_qu_val_, r);
-    this->tick_end_qu_val_ = unit.convertToDifferentRatio(this->tick_end_qu_val_, r);
-    this->tick_step_qu_val_ = unit.convertToDifferentRatio(this->tick_step_qu_val_, r);
+    const auto unit = this->quantity_.get_unit();
+    this->tick_start_qu_val_ = unit.convert_to_different_ratio(this->tick_start_qu_val_, r);
+    this->tick_end_qu_val_ = unit.convert_to_different_ratio(this->tick_end_qu_val_, r);
+    this->tick_step_qu_val_ = unit.convert_to_different_ratio(this->tick_step_qu_val_, r);
 
     if (!ul::math::is_power_of(r.as_floating_point<double>(), 10.0)) {
         // Wow :/ that's a nice error... you need to copy the this-members, because they
@@ -322,7 +322,7 @@ void ChartAxis<QuValueType>::apply_ratio_to_tickvals(const ul::math::Rational& r
 
 template <typename QuValueType>
 void ChartAxis<QuValueType>::apply_ratio_to_quantity_unit(const ul::math::Rational& r) {
-    this->quantity_.getUnit().switchRatio(r);
+        this->quantity_.get_unit().switch_ratio(r);
 }
 
 template <typename QuValueType>
@@ -468,9 +468,9 @@ Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(
     pullout_common_factor_from_data();
 
     if (x_is_as_proj_axis)
-        x_is_as_proj_axis->initProjections();
+        x_is_as_proj_axis->init_projections();
     if (y_is_as_proj_axis)
-        y_is_as_proj_axis->initProjections();
+        y_is_as_proj_axis->init_projections();
 
     UL_ENSURE(this->x_axis_ && this->y_axis_);
 }
@@ -483,10 +483,10 @@ void Chart2D<QuValueTypeX, QuValueTypeY>::pullout_common_factor_from_data() {
     if (x_new_ratio) {
         const auto new_ratio = *x_new_ratio;
         this->x_axis_->apply_ratio_to_tickvals(new_ratio);
-        auto unit = this->x_axis_->getQuantity().getUnit();
+        auto unit = this->x_axis_->get_quantity().get_unit();
         if (this->values_)
             std::for_each(std::begin(*this->values_), std::end(*this->values_), [&unit, &new_ratio](QuValueXY& xy) {
-                xy.first = unit.convertToDifferentRatio(xy.first, new_ratio);
+                xy.first = unit.convert_to_different_ratio(xy.first, new_ratio);
             });
 
         this->x_axis_->apply_ratio_to_quantity_unit(new_ratio);
@@ -494,10 +494,10 @@ void Chart2D<QuValueTypeX, QuValueTypeY>::pullout_common_factor_from_data() {
     if (y_new_ratio) {
         const auto new_ratio = *y_new_ratio;
         this->y_axis_->apply_ratio_to_tickvals(new_ratio);
-        auto unit = this->y_axis_->getQuantity().getUnit();
+        auto unit = this->y_axis_->get_quantity().get_unit();
         if (this->values_)
             std::for_each(std::begin(*this->values_), std::end(*this->values_), [&unit, &new_ratio](QuValueXY& xy) {
-                xy.second = unit.convertToDifferentRatio(xy.second, new_ratio);
+                xy.second = unit.convert_to_different_ratio(xy.second, new_ratio);
             });
 
         this->y_axis_->apply_ratio_to_quantity_unit(new_ratio);
