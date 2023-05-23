@@ -10,7 +10,7 @@
 
 namespace mb::too::img {
 using Pixels = long;
-using PixelsMargins = too::math::Margins_<Pixels>;
+using PixelsMargins = too::math::MarginsImpl<Pixels>;
 
 const std::string fileext_bmp{".bmp"};
 const std::string fileext_jpg{".jpg"};

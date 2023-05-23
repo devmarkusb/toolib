@@ -56,7 +56,7 @@ public:
     explicit MonthYearBase(Months m, Years y = Years());
     /** \param from_string must have form "<months><string_delim><years>",
         e.g. "2/2016", or "-387/235", full int range allowed. Please use
-        MonthYear_decl::string_delim as delimiter (in the above examples defined as "/").*/
+        MonthYearDecl::string_delim as delimiter (in the above examples defined as "/").*/
     explicit MonthYearBase(const std::string& from_string);
 
     //! Capable to copy from template class with different policy.
@@ -87,7 +87,7 @@ public:
     MonthYearBase<NormalizePolicy>& operator+=(const MonthYearBase<NormalizePolicy>& rhs);
 
     /** Outputs string in format analog to one used in constructing with MonthYearBase(const std::string& from_string),
-        month and year delimited by MonthYear_decl::string_delim.*/
+        month and year delimited by MonthYearDecl::string_delim.*/
     template <class NP>
     friend std::ostream& operator<<(std::ostream& out, const MonthYearBase<NP>& my);
 
