@@ -29,7 +29,7 @@ std::string FileCollection::get_base_name(const std::string& fn) {
 FileCollection::FileCollection(const std::string& file_name) {
     const ul::std_fs::path p{file_name};
 #if UL_OS_ANDROID && UL_ANDROID_NDK_MAJOR < 22
-    std::string file_ext{Path{p.string()}.getExtension()};
+    std::string file_ext{Path{p.string()}.get_extension()};
 #else
     const std::string file_ext{p.extension().string()};
 #endif

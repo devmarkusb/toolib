@@ -126,7 +126,7 @@ TEST_F(PathTest, getFileName) {
     EXPECT_EQ("b.exe", p2.get_file_name());
 }
 
-TEST_F(PathTest, getExtension) {
+TEST_F(PathTest, get_extension) {
     const Path p1("a/b.ext");
     EXPECT_EQ("ext", p1.get_extension());
 }
