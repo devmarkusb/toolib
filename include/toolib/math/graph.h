@@ -322,7 +322,7 @@ void ChartAxis<QuValueType>::apply_ratio_to_tickvals(const ul::math::Rational& r
 
 template <typename QuValueType>
 void ChartAxis<QuValueType>::apply_ratio_to_quantity_unit(const ul::math::Rational& r) {
-        this->quantity_.get_unit().switch_ratio(r);
+    this->quantity_.get_unit().switch_ratio(r);
 }
 
 template <typename QuValueType>
