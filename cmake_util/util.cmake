@@ -9,7 +9,8 @@ include(FetchContent)
 FetchContent_Declare(mb-util
         GIT_REPOSITORY https://github.com/devmarkusb/util
         GIT_TAG origin/HEAD
-        GIT_SHALLOW ON
+        GIT_SHALLOW  ON
+        GIT_PROGRESS ON
         )
 
 FetchContent_MakeAvailable(mb-util)
