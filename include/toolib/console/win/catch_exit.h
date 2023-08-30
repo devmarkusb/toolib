@@ -1,6 +1,5 @@
 //! \file
 
-
 #ifndef CATCH_EXIT_H_34TRCX83943G
 #define CATCH_EXIT_H_34TRCX83943G
 
