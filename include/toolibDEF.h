@@ -1,5 +1,3 @@
-// 2014
-
 /** \file File serves to export symbols for toolib as a library.
     Note that it uses itself a little bit to do that.*/
 

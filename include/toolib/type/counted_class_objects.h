@@ -1,6 +1,5 @@
 //! \file Not yet tested.
 
-
 // Implementation taken from Meyers' book.
 
 #ifndef COUNTED_CLASS_OBJECTS_H_CIREWHCT34BCTGU4372

@@ -1,6 +1,5 @@
 //! \file
 
-
 #ifndef PROMPT_H_8JR82CTRZ2TN
 #define PROMPT_H_8JR82CTRZ2TN
 
