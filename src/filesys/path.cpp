@@ -6,8 +6,7 @@
 #include <algorithm>
 #include <fstream>
 
-namespace
-{
+namespace {
 const std::string os_possible_separators = "/\\"; // NOLINT
 #if UL_OS_WINDOWS
 const std::string os_folder_separator = "\\"; // NOLINT
@@ -16,12 +15,10 @@ const std::string os_folder_separator = "/"; // NOLINT
 #endif
 } // namespace
 
-namespace mb::too::file
-{
+namespace mb::too::file {
 const std::string Path::folder_separator_to_use_here = "/";
 
-void remove_extension(std::string& fn)
-{
+void remove_extension(std::string& fn) {
     const size_t lastdot = fn.find_last_of('.');
     if (lastdot == std::string::npos)
         return;
@@ -30,15 +27,13 @@ void remove_extension(std::string& fn)
 
 Path::Path(const std::string& path, EForm form, EType type)
     : m_form_(form)
-    , m_type_(type)
-{
+    , m_type_(type) {
     *m_path_ = path;
 }
 
 Path::Path(std::string& path, bool use_by_reference, EForm form, EType type)
     : m_form_(form)
-    , m_type_(type)
-{
+    , m_type_(type) {
     if (use_by_reference)
         m_path_ = &path;
     else
@@ -47,18 +42,15 @@ Path::Path(std::string& path, bool use_by_reference, EForm form, EType type)
 
 Path::Path(const Path& other)
     : m_form_(other.m_form_)
-    , m_type_(other.m_type_)
-{
+    , m_type_(other.m_type_) {
     *m_path_ = *other.m_path_;
 }
 
-Path::Path(Path&& other) noexcept
-{
+Path::Path(Path&& other) noexcept {
     Path::swap(other);
 }
 
-Path& Path::operator=(const Path& other)
-{
+Path& Path::operator=(const Path& other) {
     if (this == std::addressof(other))
         return *this;
     *m_path_ = *other.m_path_;
@@ -67,42 +59,36 @@ Path& Path::operator=(const Path& other)
     return *this;
 }
 
-Path& Path::operator=(Path&& other) noexcept
-{
+Path& Path::operator=(Path&& other) noexcept {
     Path::swap(other);
     return *this;
 }
 
-void Path::swap(Path& other)
-{
+void Path::swap(Path& other) {
     std::swap(*m_path_, *other.m_path_);
     std::swap(m_form_, other.m_form_);
     std::swap(m_type_, other.m_type_);
 }
 
-Path::operator std::string() const
-{
+Path::operator std::string() const {
     return *m_path_;
 }
 
-Path& Path::operator+=(const Path& other)
-{
+Path& Path::operator+=(const Path& other) {
     if (m_form_ == EForm::unknown)
         detect_form();
     ensure_trailing_separator();
     std::vector<std::string> newparts;
     ul::str::tokenize_string(*other.m_path_, os_possible_separators, newparts);
     const std::string sep(get_separator_used_here());
-    for (const std::string& part : newparts)
-    {
+    for (const std::string& part : newparts) {
         *m_path_ += part;
         *m_path_ += sep;
     }
     return *this;
 }
 
-std::string Path::get_folder_path() const
-{
+std::string Path::get_folder_path() const {
     if (m_type_ != EType::is_file && m_type_ != EType::is_unknown)
         return {};
     if (is_empty() || (*m_path_)[m_path_->size() - 1] == get_separator_used_here()[0])
@@ -113,8 +99,7 @@ std::string Path::get_folder_path() const
     return m_path_->substr(0, index + 1);
 }
 
-std::string Path::get_file_name() const
-{
+std::string Path::get_file_name() const {
     if (m_type_ != EType::is_file && m_type_ != EType::is_unknown)
         return {};
     if (is_empty() || (*m_path_)[m_path_->size() - 1] == get_separator_used_here()[0])
@@ -125,8 +110,7 @@ std::string Path::get_file_name() const
     return m_path_->substr(index + 1);
 }
 
-std::string Path::get_extension(bool with_dot) const
-{
+std::string Path::get_extension(bool with_dot) const {
     if (m_type_ != EType::is_file && m_type_ != EType::is_unknown)
         return {};
     const size_t index = m_path_->find_last_of('.');
@@ -138,8 +122,7 @@ std::string Path::get_extension(bool with_dot) const
     return m_path_->substr(index + 1);
 }
 
-bool Path::is_absolute() const
-{
+bool Path::is_absolute() const {
     if (is_empty())
         return false;
 #if UL_OS_WINDOWS
@@ -152,13 +135,11 @@ bool Path::is_absolute() const
 #endif
 }
 
-bool Path::is_empty() const
-{
+bool Path::is_empty() const {
     return m_path_->empty();
 }
 
-Path& Path::cleanup_native()
-{
+Path& Path::cleanup_native() {
 #if UL_OS_WINDOWS
     std::replace(m_path_->begin(), m_path_->end(), '/', '\\');
 #else
@@ -168,20 +149,17 @@ Path& Path::cleanup_native()
     return *this;
 }
 
-Path& Path::cleanup_platform_indep()
-{
+Path& Path::cleanup_platform_indep() {
     std::replace(m_path_->begin(), m_path_->end(), '\\', folder_separator_to_use_here[0]);
     m_form_ = EForm::platformindependent;
     return *this;
 }
 
-Path& Path::ensure_trailing_separator()
-{
+Path& Path::ensure_trailing_separator() {
     return ensure_trailing_separator(m_form_ == EForm::native);
 }
 
-Path& Path::ensure_trailing_separator(bool native)
-{
+Path& Path::ensure_trailing_separator(bool native) {
     if (m_path_->empty() || m_type_ == EType::is_file || m_type_ == EType::is_link)
         return *this;
     std::string sep_to_use = folder_separator_to_use_here;
@@ -193,36 +171,30 @@ Path& Path::ensure_trailing_separator(bool native)
     return *this;
 }
 
-const std::string& Path::get_separator_used_here() const
-{
+const std::string& Path::get_separator_used_here() const {
     if (m_form_ == EForm::unknown)
         detect_form();
     return m_form_ == EForm::native ? get_separator_native() : get_separator_platform_indep();
 }
 
-const std::string& Path::get_separator_native()
-{
+const std::string& Path::get_separator_native() {
     UL_ASSERT(!os_folder_separator.empty());
     return os_folder_separator;
 }
 
-const std::string& Path::get_separator_platform_indep()
-{
+const std::string& Path::get_separator_platform_indep() {
     UL_ASSERT(!folder_separator_to_use_here.empty());
     return folder_separator_to_use_here;
 }
 
-void Path::detect_form() const
-{
+void Path::detect_form() const {
     const size_t pos = m_path_->find_first_of(os_possible_separators);
-    if (pos != std::string::npos)
-    {
+    if (pos != std::string::npos) {
         if ((*m_path_)[pos] == get_separator_platform_indep()[0])
             m_form_ = EForm::platformindependent;
         else
             m_form_ = EForm::native;
-    }
-    else
+    } else
         m_form_ = EForm::platformindependent;
 }
 } // namespace mb::too::file
