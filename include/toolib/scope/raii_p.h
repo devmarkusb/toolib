@@ -125,7 +125,7 @@ public:
     /** Be careful that you never delete pt by yourself outside. The responsibility for that is shifted
     to this class.
     \param pt pointer to some Heap-allocated memory.
-    \count number of instances of T.*/
+    \param count number of instances of T.*/
     RaiiAp(T* pt, uint32_t count)
         : m_count_(count)
         , m_ptr_(pt) {

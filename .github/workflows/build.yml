@@ -8,8 +8,8 @@ jobs:
       matrix:
         build_type: [Debug, RelWithDebInfo]
         config:
-          - {os: ubuntu-latest, compiler: GNU,  CC: gcc,   CXX: g++     , qtcomp: gcc_64}
-          - {os: ubuntu-latest, compiler: LLVM, CC: clang, CXX: clang++ , qtcomp: gcc_64}
+          - {os: ubuntu-latest,  compiler: GNU,  CC: gcc-13,   CXX: g++-13,     warnall: ON,  clanglib: OFF}
+          - {os: ubuntu-latest,  compiler: LLVM, CC: clang-15, CXX: clang++-15, warnall: ON,  clanglib: ON}
 
     env:
       CC: ${{matrix.config.CC}}
@@ -23,11 +23,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Install libc++
+      if: ${{startsWith(matrix.config.os, 'ubuntu')}}
+      run: >
+        sudo apt-get install -y libc++abi-15-dev libc++-15-dev
+
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: >
         cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
+        -DUL_ALL_WARNINGS=${{matrix.config.warnall}}
+        -DUL_USE_CLANG_STDLIB=${{matrix.config.clanglib}}
 
     - name: Build
       # Build your program with the given configuration
