@@ -1,6 +1,6 @@
 /** \file
-todos:
-1. Rework to use the notion 'interval'. */
+    todos:
+    1. Rework to use the notion 'interval'. */
 
 #ifndef MINMAX_VALUES_H_IUWENYG34GNYT487T
 #define MINMAX_VALUES_H_IUWENYG34GNYT487T
