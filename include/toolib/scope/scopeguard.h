@@ -65,7 +65,7 @@ private:
 #pragma push_macro("new")
 #undef new
     //! Forbid heap allocation. ScopeGuard is intended to be used as automatic mechanism in definite blocks.
-    void* operator new(std::size_t);
+    void* operator new(size_t);
 #pragma pop_macro("new")
     //! Forbid address investigation.
     ScopeGuardImplBase* operator&();
