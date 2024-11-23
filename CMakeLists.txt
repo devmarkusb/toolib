@@ -42,7 +42,7 @@ target_include_directories(${target} PRIVATE ${CMAKE_BINARY_DIR})
 target_include_directories(${target} PUBLIC include)
 target_include_directories(${target} PUBLIC ${ul_INCLUDE_DIRS})
 
-target_link_libraries(${target})
+target_link_libraries(${target} PUBLIC mb-util)
 
 ul_set_target_filesystem(${target})
 
