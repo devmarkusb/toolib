@@ -9,6 +9,7 @@
 #include "ul/ul.h"
 #include <algorithm>
 #include <array>
+#include <cstddef>
 #include <vector>
 
 namespace mb::too::stat {
@@ -53,7 +54,7 @@ public:
             for (auto i = BarCount{}; i < number_of_bars; ++i) {
                 it = std::upper_bound(prev_it, std::end(percentual_data), (i + 1) * 10.0);
                 if (it != std::end(percentual_data) && it != prev_it) {
-                    abs_rates[i] = std::distance(prev_it, it);
+                    abs_rates[i] = static_cast<size_t>(std::distance(prev_it, it));
                     sum_of_rates += abs_rates[i];
                 } else
                     abs_rates[i] = 0;
