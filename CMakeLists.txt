@@ -22,7 +22,6 @@ file(GLOB_RECURSE target_SRC_INCS "src/*.h*")
 
 set(target_SOURCES
     src/console/win/catch_exit.cpp
-    src/date_time/date_time.cpp
     src/filesys/path.cpp
     src/filesys/file_collection.cpp
     src/financial/money.cpp
