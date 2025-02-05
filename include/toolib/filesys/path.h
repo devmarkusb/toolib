@@ -7,6 +7,7 @@
 #include "../config.h"
 #include "ul/warnings.h"
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace mb::too::file {
@@ -57,17 +58,17 @@ public:
     Path& cleanup_platform_indep();
     Path& ensure_trailing_separator();
     Path& ensure_trailing_separator(bool native);
-    const std::string& get_separator_used_here() const;
+    std::string_view get_separator_used_here() const;
 
-    static const std::string& get_separator_native();
+    static std::string_view get_separator_native();
     //! platform independent variant used by this class
-    static const std::string& get_separator_platform_indep();
+    static std::string_view get_separator_platform_indep();
 
 private:
     UL_PRAGMA_WARNINGS_PUSH
     UL_WARNING_DISABLE_MSVC(4251)
     //! platform independent variant used by this class
-    static const std::string folder_separator_to_use_here;
+    static constexpr std::string_view folder_separator_to_use_here{"/"};
 
     std::string m_path_own_internal_;
     std::string* m_path_ = &m_path_own_internal_; //! contract: never nullptr

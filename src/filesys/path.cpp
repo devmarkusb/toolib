@@ -5,19 +5,18 @@
 #include "ul/ul.h"
 #include <algorithm>
 #include <fstream>
+#include <string_view>
 
 namespace {
-const std::string os_possible_separators = "/\\"; // NOLINT
+constexpr std::string_view os_possible_separators = "/\\"; // NOLINT
 #if UL_OS_WINDOWS
-const std::string os_folder_separator = "\\"; // NOLINT
+constexpr std::string_view os_folder_separator = "\\"; // NOLINT
 #else
-const std::string os_folder_separator = "/"; // NOLINT
+constexpr std::string_view os_folder_separator = "/"; // NOLINT
 #endif
 } // namespace
 
 namespace mb::too::file {
-const std::string Path::folder_separator_to_use_here = "/";
-
 void remove_extension(std::string& fn) {
     const size_t lastdot = fn.find_last_of('.');
     if (lastdot == std::string::npos)
@@ -79,7 +78,7 @@ Path& Path::operator+=(const Path& other) {
         detect_form();
     ensure_trailing_separator();
     std::vector<std::string> newparts;
-    ul::str::tokenize_string(*other.m_path_, os_possible_separators, newparts);
+    ul::str::tokenize_string(*other.m_path_, std::string{os_possible_separators}, newparts);
     const std::string sep(get_separator_used_here());
     for (const std::string& part : newparts) {
         *m_path_ += part;
@@ -162,7 +161,7 @@ Path& Path::ensure_trailing_separator() {
 Path& Path::ensure_trailing_separator(bool native) {
     if (m_path_->empty() || m_type_ == EType::is_file || m_type_ == EType::is_link)
         return *this;
-    std::string sep_to_use = folder_separator_to_use_here;
+    auto sep_to_use = folder_separator_to_use_here;
     if (native)
         sep_to_use = os_folder_separator;
     UL_ASSERT(!sep_to_use.empty());
@@ -171,18 +170,18 @@ Path& Path::ensure_trailing_separator(bool native) {
     return *this;
 }
 
-const std::string& Path::get_separator_used_here() const {
+std::string_view Path::get_separator_used_here() const {
     if (m_form_ == EForm::unknown)
         detect_form();
     return m_form_ == EForm::native ? get_separator_native() : get_separator_platform_indep();
 }
 
-const std::string& Path::get_separator_native() {
+std::string_view Path::get_separator_native() {
     UL_ASSERT(!os_folder_separator.empty());
     return os_folder_separator;
 }
 
-const std::string& Path::get_separator_platform_indep() {
+std::string_view Path::get_separator_platform_indep() {
     UL_ASSERT(!folder_separator_to_use_here.empty());
     return folder_separator_to_use_here;
 }

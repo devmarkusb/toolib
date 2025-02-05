@@ -18,12 +18,12 @@ using Years = int;
 
 //! Ensures month to be 1..12 and month and year having the same sign. Only exception: {0, 0} will be mapped to {0, 0}.
 struct TOOLIBSHARED_EXPORT Normalize {
-    static void do_it(std::pair<Years, Months>& y_m);
+    static constexpr void do_it(std::pair<Years, Months>& y_m);
 };
 
 //! Doesn't normalize.
 struct TOOLIBSHARED_EXPORT DontNormalize {
-    static void do_it(std::pair<Years, Months>&) {
+    static constexpr void do_it(std::pair<Years, Months>&) {
     }
 };
 
@@ -52,8 +52,13 @@ template <class NormalizePolicy>
 class MonthYearBase : public MonthYearDecl {
 public:
     MonthYearBase() = default;
+
     //! Params can have at least full int range.
-    explicit MonthYearBase(Months m, Years y = Years());
+    constexpr explicit MonthYearBase(Months m, Years y = Years())
+        : y_m_{y, m} {
+        NormalizePolicy::do_it(this->y_m_);
+    }
+
     /** \param from_string must have form "<months><string_delim><years>",
         e.g. "2/2016", or "-387/235", full int range allowed. Please use
         MonthYearDecl::string_delim as delimiter (in the above examples defined as "/").*/
@@ -114,10 +119,10 @@ template <class NP>
 bool operator>=(const MonthYearBase<NP>& lhs, const MonthYearBase<NP>& rhs);
 
 
-const MonthYearDur one_year(0, 1);
-[[maybe_unused]] const MonthYearDur half_year(MonthYearDecl::twelve / 2, 0);
-[[maybe_unused]] const MonthYearDur quarter_year(MonthYearDecl::twelve / 4, 0);
-const MonthYearDur one_month(1, 0);
+constexpr MonthYearDur one_year(0, 1);
+[[maybe_unused]] constexpr MonthYearDur half_year(MonthYearDecl::twelve / 2, 0);
+[[maybe_unused]] constexpr MonthYearDur quarter_year(MonthYearDecl::twelve / 4, 0);
+constexpr MonthYearDur one_month(1, 0);
 } // namespace mb::too::date_time
 
 //####################################################################################################################
