@@ -28,7 +28,7 @@ UL_PRAGMA_WARNINGS_POP
 
 //! Ensures month to be 1..12 and month and year having the same sign. Only exception: {0, 0} will be mapped to {0, 0}.
 struct TOOLIBSHARED_EXPORT Normalize {
-    constexpr void do_it(std::pair<Years, Months>& y_m) {
+    static constexpr void do_it(std::pair<Years, Months>& y_m) {
         const int month_sgn = ul::math::sgn(y_m.second);
         const Months month_abs = std::abs(y_m.second);
         if (month_abs > MonthYearDecl::twelve) {
