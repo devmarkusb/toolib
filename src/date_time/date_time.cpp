@@ -6,7 +6,7 @@
 namespace mb::too::date_time {
 const std::string MonthYearDecl::string_delim = "/";
 
-void Normalize::do_it(std::pair<Years, Months>& y_m) {
+constexpr void Normalize::do_it(std::pair<Years, Months>& y_m) {
     const int month_sgn = ul::math::sgn(y_m.second);
     const Months month_abs = std::abs(y_m.second);
     if (month_abs > MonthYearDecl::twelve) {

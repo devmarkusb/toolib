@@ -17,12 +17,6 @@ namespace mb::too::date_time {
 // template implementation
 
 template <class NormalizePolicy>
-MonthYearBase<NormalizePolicy>::MonthYearBase(Months m, Years y)
-    : y_m_{y, m} {
-    NormalizePolicy::do_it(this->y_m_);
-}
-
-template <class NormalizePolicy>
 template <class NP>
 MonthYearBase<NormalizePolicy>::MonthYearBase(const MonthYearBase<NP>& other) {
     this->y_m_ = other.y_m;
