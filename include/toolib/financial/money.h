@@ -7,6 +7,7 @@
 #include "../config.h"
 #include "ul/ul.h"
 #include <locale>
+#include <optional>
 #include <string>
 
 namespace mb::too::fin {
@@ -34,7 +35,7 @@ public:
     friend bool operator!=(const Currency& lhs, const Currency& rhs);
 
 private:
-    ul::Opt<std::locale> loc_;
+    std::optional<std::locale> loc_;
 };
 
 UL_PRAGMA_WARNINGS_POP

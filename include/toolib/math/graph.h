@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <map>
 #include <memory>
+#include <optional>
 #include <utility>
 #include <vector>
 
@@ -37,7 +38,7 @@ struct TickStringReprSetup {
     //! Cf. to_string functions.
     ul::math::FloatFormat tick_float_format{ul::math::FloatFormat::default_choice};
     //! Cf. to_string functions.
-    ul::Opt<int> tick_float_precision{};
+    std::optional<int> tick_float_precision{};
 };
 
 //!
@@ -49,7 +50,7 @@ struct ChartAxisSetup {
     }
 
     //! If not provided, the maximum count of scale ticks on the axis is chosen automatically.
-    ul::Opt<ScaleTickCount> max_tick_count;
+    std::optional<ScaleTickCount> max_tick_count;
     TickStringReprSetup tick_string_repr;
 };
 
@@ -58,7 +59,7 @@ struct ChartAxisProjSetup : public ChartAxisSetup {
     ~ChartAxisProjSetup() override = default;
 
     [[nodiscard]] std::unique_ptr<ChartAxisSetup> clone() const override {
-        return std::make_unique<ChartAxisProjSetup>(*this);
+        return std::unique_ptr<ChartAxisSetup>(new ChartAxisProjSetup(*this));
     }
 
     std::pair<ProjectionValue, ProjectionValue> projection_range;
@@ -99,7 +100,7 @@ public:
 
     /** \return a new ratio for the Quantity Unit, if there is a better choice, i.e. a common ratio of the tick values
         can be obtained.*/
-    [[nodiscard]] ul::Opt<ul::math::Rational> obtain_suitable_common_ratio_of_tickvals() const;
+    [[nodiscard]] std::optional<ul::math::Rational> obtain_suitable_common_ratio_of_tickvals() const;
     void apply_ratio_to_tickvals(const ul::math::Rational& r);
     void apply_ratio_to_quantity_unit(const ul::math::Rational& r);
 
@@ -290,7 +291,7 @@ void ChartAxis<QuValueType>::calc_scaling(const QuValueType& min_qu_val, const Q
 }
 
 template <typename QuValueType>
-ul::Opt<ul::math::Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio_of_tickvals() const {
+std::optional<ul::math::Rational> ChartAxis<QuValueType>::obtain_suitable_common_ratio_of_tickvals() const {
     const auto unit = this->quantity_.get_unit();
     const auto max_abs = std::max(std::abs(this->tick_start_qu_val_), std::abs(this->tick_end_qu_val_));
     const auto suitable_ratio = unit.find_optimized_ratio(max_abs);
