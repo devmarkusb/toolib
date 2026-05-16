@@ -12,7 +12,7 @@ set(target ${PROJECT_NAME})
 ul_include(defaults.cmake)
 
 ul_include(clang-format.cmake)
-ul_include(githooks.cmake)
+#ul_include(githooks.cmake)
 
 set(UL_USE_DEFAULT_CLANG_TIDY_CONFIG ON)
 ul_include(clang-tidy.cmake)
