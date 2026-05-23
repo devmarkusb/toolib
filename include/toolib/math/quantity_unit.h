@@ -4,7 +4,7 @@
 #define QUANTITY_UNIT_H_DFHGXUNGH38HGXT38GB
 
 #include "../config.h"
-#include "ul/ul.h"
+#include "mb/ul/ul.hpp"
 #include <exception>
 #include <map>
 #include <ratio>
@@ -13,11 +13,17 @@
 #include <vector>
 
 namespace mb::too::math {
-using MapRationalString = std::map<ul::math::Rational, std::string>;
+struct RationalLess {
+    bool operator()(const ul::math::Rational& lhs, const ul::math::Rational& rhs) const {
+        return lhs.as_floating_point<long double>() < rhs.as_floating_point<long double>();
+    }
+};
+
+using MapRationalString = std::map<ul::math::Rational, std::string, RationalLess>;
 
 //! To create a simple default for constructing a Unit in cases you don't want to think about details.
 inline MapRationalString create_map_ratio_simple(const std::string& base_unit_name = {}) {
-    std::map<ul::math::Rational, std::string> ret;
+    MapRationalString ret;
     ret[ul::math::one] = std::string{ul::math::one_symb} + base_unit_name;
     return ret;
 }

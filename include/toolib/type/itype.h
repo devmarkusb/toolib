@@ -5,7 +5,7 @@
 #define ITYPE_H_39653425HGJDHGXHRGBUBEIR43
 
 #include "../config.h"
-#include "ul/ptr.h"
+#include "mb/ul/basiccodesupport/ptr.hpp"
 
 namespace mb::too {
 /** Sometimes you are in the situation of declaring abstract interfaces and

@@ -1,21 +1,9 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.30...4.3)
 
-include(${CMAKE_CURRENT_LIST_DIR}/cmake_util/util.cmake)
-
-include(${ul_CMAKE_DIRS}/cmake_util.cmake)
-
-ul_include(buildnr.cmake)
-project(toolib VERSION 0.1.${BUILD_NR}.0)
+project(toolib VERSION 0.1.0)
+include(cmake_util/dependencies.cmake)
 message(STATUS "${PROJECT_NAME} version: " ${PROJECT_VERSION})
 set(target ${PROJECT_NAME})
-
-ul_include(defaults.cmake)
-
-ul_include(clang-format.cmake)
-#ul_include(githooks.cmake)
-
-set(UL_USE_DEFAULT_CLANG_TIDY_CONFIG ON)
-ul_include(clang-tidy.cmake)
 
 file(GLOB_RECURSE target_INCS "include/*.h*")
 file(GLOB_RECURSE target_SRC_INCS "src/*.h*")
@@ -32,31 +20,49 @@ add_library(${target} SHARED
     ${target_INCS}
     ${target_SRC_INCS}
 )
+target_compile_features(${target} PUBLIC cxx_std_23)
 
-ul_set_target_lib_export_def(${target} TOOLIB_LIBRARY)
+if(COMMAND mb_devenv_set_target_lib_export_def)
+    mb_devenv_set_target_lib_export_def(${target} TOOLIB_LIBRARY)
+else()
+    target_compile_definitions(${target} PRIVATE TOOLIB_LIBRARY)
+endif()
 
 configure_file(${target}_build_config.h.in ${CMAKE_BINARY_DIR}/${target}_build_config.h)
 
 target_include_directories(${target} PRIVATE ${CMAKE_BINARY_DIR})
 target_include_directories(${target} PUBLIC include)
-target_include_directories(${target} PUBLIC ${ul_INCLUDE_DIRS})
 
-target_link_libraries(${target} PUBLIC mb-util)
+target_link_libraries(${target} PUBLIC mb::util)
 
-ul_set_target_filesystem(${target})
+if(COMMAND mb_devenv_set_target_filesystem)
+    mb_devenv_set_target_filesystem(${target})
+endif()
 
-ul_set_target_defaults(${target})
+if(COMMAND mb_devenv_set_target_defaults)
+    mb_devenv_set_target_defaults(${target})
+endif()
 
 set(${target}_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/include
     CACHE INTERNAL "${target}: include directories" FORCE)
 
-    
 ################################################################################################
 
-if (NOT UL_BUILD_UNITTESTS)
+option(
+    MB_TOOLIB_BUILD_TESTS
+    "Enable building toolib unit tests. Default: ${PROJECT_IS_TOP_LEVEL}. Values: { ON, OFF }."
+    ${PROJECT_IS_TOP_LEVEL}
+)
+
+if (NOT MB_TOOLIB_BUILD_TESTS)
     return ()
 endif ()
+
+if(NOT TARGET GTest::gtest_main)
+    find_package(GTest CONFIG REQUIRED)
+endif()
+include(GoogleTest)
 
 set(targetTest ${PROJECT_NAME}-test)
 
@@ -67,12 +73,12 @@ add_executable(${targetTest}
     ${target_INCS}
 )
 
-ul_add_test(${targetTest})
-
 target_include_directories(${targetTest} PRIVATE ${target}_INCLUDE_DIRS)
 
-target_link_libraries(${targetTest} PRIVATE gtest_main ${target})
+target_link_libraries(${targetTest} PRIVATE GTest::gtest_main ${target})
 
-ul_set_target_defaults(${targetTest})
+if(COMMAND mb_devenv_set_target_defaults)
+    mb_devenv_set_target_defaults(${targetTest})
+endif()
 
-ul_run_target_postbuild(${targetTest})
+gtest_discover_tests(${targetTest})

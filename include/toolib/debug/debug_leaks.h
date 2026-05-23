@@ -6,7 +6,7 @@
 #ifndef DEBUG_LEAKS_H_DJ823XFZ23XZFN
 #define DEBUG_LEAKS_H_DJ823XFZ23XZFN
 
-#include "ul/macros.h"
+#include "mb/ul/buildenv/macros.hpp"
 
 //! Memory leak detection. Include the header as the last one (!) in your main module and use UL_DUMP_MEM_LEAKS.
 /** Detection goes either by standard Visual Studio style or by using vld.h, if available, whereas
