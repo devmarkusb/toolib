@@ -6,7 +6,7 @@
 #include "quantity_unit.h"
 #include "scale.h"
 #include "../config.h"
-#include "ul/ul.h"
+#include "mb/ul/ul.hpp"
 #include <algorithm>
 #include <map>
 #include <memory>
@@ -244,7 +244,7 @@ private:
 //####################################################################################################################
 
 #include "toolib/math/scale.h"
-#include "ul/ul.h"
+#include "mb/ul/ul.hpp"
 
 namespace mb::too::math {
 template <typename QuValueType>
