@@ -1,4 +1,4 @@
-# toolib library
+# mb.toolib
 
 [![build](https://github.com/devmarkusb/toolib/actions/workflows/build.yml/badge.svg)](https://github.com/devmarkusb/toolib/actions/workflows/build.yml)
 
@@ -12,9 +12,9 @@ properly crafted lib
 ## Usage with CMake
 
 ```
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.30)
 
-if (TARGET toolib)
+if(TARGET mb::toolib)
     return ()
 endif ()
 
@@ -30,18 +30,11 @@ FetchContent_Declare(mb-toolib
 FetchContent_MakeAvailable(mb-toolib)
 ```
 
-In most cases you just need to include header files from subdir toolib,
-CMake include dir: `${toolib_INCLUDE_DIRS}`.
+Include public headers from `mb/toolib`, for example:
 
-Sometimes you need to link the lib, CMake target `toolib`.
+```cpp
+#include "mb/toolib/toolib.hpp"
+```
 
-To find anything topic specific, just browse through the directory
-structure and read header files.
-
-## FAQ
-
-### Namespace clashes
-
-In rare cases when you need to have another namespace `too`
-around, you can set `UL_DISABLE_NAMESPACE_ALIAS` to `ON`
-which yields base namespace `mb::too` instead.
+Link the CMake target `mb::toolib`. The primary C++ namespace is `mb::too`; by default headers also expose the
+shortcut alias `too::`, matching `ul::` from `mb.util`.

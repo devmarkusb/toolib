@@ -1,7 +1,7 @@
-#include "toolib/date_time/cal_event.h"
+#include "mb/toolib/date_time/cal_event.h"
 #include "gtest/gtest.h"
 
-using namespace mb::too::date_time;
+using namespace too::date_time;
 
 namespace {}
 

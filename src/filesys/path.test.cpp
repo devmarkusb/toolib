@@ -1,7 +1,7 @@
-#include "toolib/filesys/path.h"
+#include "mb/toolib/filesys/path.h"
 #include "gtest/gtest.h"
 
-using mb::too::file::Path;
+using too::file::Path;
 
 class PathTest : public ::testing::Test {
 protected:
