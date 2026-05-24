@@ -1,0 +1,30 @@
+#ifndef TOOLIB_HPP_N3G8XW9SQJ3SSK3UTM3Q
+#define TOOLIB_HPP_N3G8XW9SQJ3SSK3UTM3Q
+
+#include "mb/toolib/config.h"
+#include "mb/toolib/console/prompt.h"
+#include "mb/toolib/date_time/cal_event.h"
+#include "mb/toolib/date_time/date_time.h"
+#include "mb/toolib/filesys/file_collection.h"
+#include "mb/toolib/filesys/path.h"
+#include "mb/toolib/financial/money.h"
+#include "mb/toolib/game/game.h"
+#include "mb/toolib/image/color.h"
+#include "mb/toolib/image/image.h"
+#include "mb/toolib/math/geometry.h"
+#include "mb/toolib/math/graph.h"
+#include "mb/toolib/math/matrix.h"
+#include "mb/toolib/math/minmax_values.h"
+#include "mb/toolib/math/pair.h"
+#include "mb/toolib/math/percent.h"
+#include "mb/toolib/math/quantity_unit.h"
+#include "mb/toolib/math/scale.h"
+#include "mb/toolib/math/stat/histogram.h"
+#include "mb/toolib/scope/raii_p.h"
+#include "mb/toolib/scope/reftovalue.h"
+#include "mb/toolib/scope/scopeguard.h"
+#include "mb/toolib/type/counted_class_objects.h"
+#include "mb/toolib/type/iabstract.h"
+#include "mb/toolib/type/itype.h"
+
+#endif

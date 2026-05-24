@@ -1,7 +1,7 @@
-#include "toolib/math/scale.h"
+#include "mb/toolib/math/scale.h"
 #include "gtest/gtest.h"
 
-namespace too = mb::too;
+
 namespace ul = mb::ul;
 
 TEST(MathCalcNiceScaleTickTest, Basics) {

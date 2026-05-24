@@ -1,7 +1,7 @@
-#include "toolib/type/itype.h"
+#include "mb/toolib/type/itype.h"
 #include "gtest/gtest.h"
 
-namespace too = mb::too;
+
 namespace ul = mb::ul;
 
 namespace {
