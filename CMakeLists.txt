@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.30...4.3)
 
 project(toolib VERSION 0.1.0)
+list(PREPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/devenv/cmake")
+include(mb-devenv-defaults)
 include(cmake_util/dependencies.cmake)
 message(STATUS "${PROJECT_NAME} version: " ${PROJECT_VERSION})
 set(target ${PROJECT_NAME})
@@ -22,11 +24,7 @@ add_library(${target} SHARED
 )
 target_compile_features(${target} PUBLIC cxx_std_23)
 
-if(COMMAND mb_devenv_set_target_lib_export_def)
-    mb_devenv_set_target_lib_export_def(${target} TOOLIB_LIBRARY)
-else()
-    target_compile_definitions(${target} PRIVATE TOOLIB_LIBRARY)
-endif()
+mb_devenv_set_target_lib_export_def(${target} TOOLIB_LIBRARY)
 
 configure_file(${target}_build_config.h.in ${CMAKE_BINARY_DIR}/${target}_build_config.h)
 
@@ -35,13 +33,9 @@ target_include_directories(${target} PUBLIC include)
 
 target_link_libraries(${target} PUBLIC mb::util)
 
-if(COMMAND mb_devenv_set_target_filesystem)
-    mb_devenv_set_target_filesystem(${target})
-endif()
+mb_devenv_set_target_filesystem(${target})
 
-if(COMMAND mb_devenv_set_target_defaults)
-    mb_devenv_set_target_defaults(${target})
-endif()
+mb_devenv_set_target_defaults(${target})
 
 set(${target}_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/include
@@ -77,8 +71,6 @@ target_include_directories(${targetTest} PRIVATE ${target}_INCLUDE_DIRS)
 
 target_link_libraries(${targetTest} PRIVATE GTest::gtest_main ${target})
 
-if(COMMAND mb_devenv_set_target_defaults)
-    mb_devenv_set_target_defaults(${targetTest})
-endif()
+mb_devenv_set_target_defaults(${targetTest})
 
 gtest_discover_tests(${targetTest})
