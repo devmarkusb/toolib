@@ -48,7 +48,7 @@ target_compile_definitions(
     mb.toolib
     PUBLIC MB_TOOLIB_DISABLE_NAMESPACE_ALIAS=$<BOOL:${MB_TOOLIB_DISABLE_NAMESPACE_ALIAS}>
 )
-target_link_libraries(mb.toolib PUBLIC mb::util)
+target_link_libraries(mb.toolib PUBLIC "$<BUILD_LOCAL_INTERFACE:mb::util>")
 
 mb_devenv_set_target_filesystem(mb.toolib)
 mb_devenv_set_target_defaults(mb.toolib)
