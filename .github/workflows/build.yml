@@ -6,7 +6,7 @@ jobs:
   build:
     strategy:
       matrix:
-        build_type: [Debug, RelWithDebInfo]
+        preset: [debug, relwithdebinfo]
         config:
           - {os: ubuntu-24.04,  compiler: GNU,  CC: gcc-14,   CXX: g++-14,     warnall: ON,  clanglib: OFF}
           #todo clanglib ON as soon as packages below are installable again
@@ -34,19 +34,13 @@ jobs:
 #         sudo apt-get install -y libc++abi-18-dev libc++-18-dev
 
     - name: Configure CMake
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: >
-        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
+        cmake --preset ${{matrix.preset}}
         -DUL_ALL_WARNINGS=${{matrix.config.warnall}}
         -DUL_USE_CLANG_STDLIB=${{matrix.config.clanglib}}
 
     - name: Build
-      # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build --config ${{matrix.build_type}}
+      run: cmake --build --preset ${{matrix.preset}}
 
     - name: Test
-      working-directory: ${{github.workspace}}/build
-      # Execute tests defined by the CMake configuration.
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest -C ${{matrix.build_type}} --output-on-failure
+      run: ctest --preset ${{matrix.preset}}
