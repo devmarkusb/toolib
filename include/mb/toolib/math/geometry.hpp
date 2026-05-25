@@ -8,6 +8,7 @@
 #include "mb/toolib/math/scale.hpp"
 #include "mb/ul/ul.hpp"
 #include <array>
+#include <cstddef>
 #include <cmath>
 #include <initializer_list>
 #include <type_traits>
@@ -53,7 +54,7 @@ struct PointImpl {
     static_assert(std::is_arithmetic<T>::value, "T has to be an arithmetic type");
     static_assert(dim >= 1, "expects d >= 1");
 
-    std::array<T, dim> x{};
+    std::array<T, static_cast<std::size_t>(dim)> x{};
 
     PointImpl()
         : x{} {
