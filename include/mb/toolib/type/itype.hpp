@@ -1,10 +1,10 @@
 /** \file This is left for documentation or future thinking. Apparently there should be
     no application for such a general interface.*/
 
-#ifndef ITYPE_H_39653425HGJDHGXHRGBUBEIR43
-#define ITYPE_H_39653425HGJDHGXHRGBUBEIR43
+#ifndef ITYPE_HPP_39653425HGJDHGXHRGBUBEIR43
+#define ITYPE_HPP_39653425HGJDHGXHRGBUBEIR43
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/basiccodesupport/ptr.hpp"
 
 namespace mb::too {

@@ -2,10 +2,10 @@
     todos:
     1. Rework to use the notion 'interval'. */
 
-#ifndef MINMAX_VALUES_H_IUWENYG34GNYT487T
-#define MINMAX_VALUES_H_IUWENYG34GNYT487T
+#ifndef MINMAX_VALUES_HPP_IUWENYG34GNYT487T
+#define MINMAX_VALUES_HPP_IUWENYG34GNYT487T
 
-#include "../config.h"
+#include "../config.hpp"
 
 #include <algorithm>
 #include <type_traits>

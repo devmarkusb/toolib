@@ -1,5 +1,5 @@
 /** This is more demonstration of how to use the IAbstract, less a test. But could still be a worthy playground.*/
-#include "mb/toolib/type/iabstract.h"
+#include "mb/toolib/type/iabstract.hpp"
 #include "gtest/gtest.h"
 #include <iostream>
 #include <sstream>

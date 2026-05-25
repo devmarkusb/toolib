@@ -1,0 +1,27 @@
+{
+  "dependencies": [
+    {
+      "name": "mb_pre_commit",
+      "git_repository": "https://github.com/devmarkusb/pre-commit",
+      "git_tag": "v3.0.0",
+      "cmake_include": "cmake/mb-pre-commit.cmake"
+    },
+    {
+      "name": "googletest",
+      "package_name": "GTest",
+      "git_repository": "https://github.com/google/googletest.git",
+      "git_tag": "v1.17.0"
+    },
+    {
+      "name": "mb_util",
+      "package_name": "mb.util",
+      "git_repository": "https://github.com/devmarkusb/util.git",
+      "git_tag": "b332d2d0c95453cf6f946a058ea7fadfdfc468b5",
+      "cmake_variables": {
+        "MB_PRE_COMMIT_SETUP_LAYOUT": "TOP_LEVEL",
+        "MB_UTIL_BUILD_EXAMPLES": "OFF",
+        "MB_UTIL_BUILD_TESTS": "OFF"
+      }
+    }
+  ]
+}

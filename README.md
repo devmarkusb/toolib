@@ -23,6 +23,7 @@ include(FetchContent)
 FetchContent_Declare(mb-toolib
         GIT_REPOSITORY https://github.com/devmarkusb/toolib
         GIT_TAG origin/HEAD
+        GIT_SUBMODULES_RECURSE ON
         GIT_SHALLOW  ON
         GIT_PROGRESS ON
         )
@@ -38,3 +39,6 @@ Include public headers from `mb/toolib`, for example:
 
 Link the CMake target `mb::toolib`. The primary C++ namespace is `mb::too`; by default headers also expose the
 shortcut alias `too::`, matching `ul::` from `mb.util`.
+
+When configured as a top-level project, `toolib` fetches GoogleTest via `fetchcontent-lockfile.json` and falls back to
+fetching `mb.util` if no installed `mb.util` package is available. CI checks out the `devenv` submodule recursively.

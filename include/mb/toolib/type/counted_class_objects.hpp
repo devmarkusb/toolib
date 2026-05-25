@@ -2,10 +2,10 @@
 
 // Implementation taken from Meyers' book.
 
-#ifndef COUNTED_CLASS_OBJECTS_H_CIREWHCT34BCTGU4372
-#define COUNTED_CLASS_OBJECTS_H_CIREWHCT34BCTGU4372
+#ifndef COUNTED_CLASS_OBJECTS_HPP_CIREWHCT34BCTGU4372
+#define COUNTED_CLASS_OBJECTS_HPP_CIREWHCT34BCTGU4372
 
-#include "../config.h"
+#include "../config.hpp"
 
 namespace mb::too {
 //! Base class for classes that want to restrict their instantiations to a certain number.

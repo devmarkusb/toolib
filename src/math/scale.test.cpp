@@ -1,4 +1,4 @@
-#include "mb/toolib/math/scale.h"
+#include "mb/toolib/math/scale.hpp"
 #include "gtest/gtest.h"
 
 

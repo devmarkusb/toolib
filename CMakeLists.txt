@@ -58,9 +58,6 @@ set(_mb_toolib_fs_scope PUBLIC)
 add_subdirectory(include/mb/toolib)
 add_subdirectory(src)
 
-if(NOT PROJECT_IS_TOP_LEVEL)
-    set(MB_TOOLIB_INSTALL_CONFIG_FILE_PACKAGE OFF CACHE BOOL "" FORCE)
-endif()
 mb_devenv_install_library(mb.toolib)
 
 if(MB_TOOLIB_BUILD_EXAMPLES)

@@ -1,9 +1,9 @@
 //! \file Keep it C-ABI linkable.
 
-#ifndef IABSTRACT_H_AJKSHUIHNR82374R72FF23RNY8FDNBWYE
-#define IABSTRACT_H_AJKSHUIHNR82374R72FF23RNY8FDNBWYE
+#ifndef IABSTRACT_HPP_AJKSHUIHNR82374R72FF23RNY8FDNBWYE
+#define IABSTRACT_HPP_AJKSHUIHNR82374R72FF23RNY8FDNBWYE
 
-#include "../config.h"
+#include "../config.hpp"
 
 namespace mb::too {
 using TInBuffer = void*;

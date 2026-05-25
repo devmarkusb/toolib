@@ -1,4 +1,4 @@
-#include "mb/toolib/date_time/cal_event.h"
+#include "mb/toolib/date_time/cal_event.hpp"
 #include "gtest/gtest.h"
 
 using namespace too::date_time;

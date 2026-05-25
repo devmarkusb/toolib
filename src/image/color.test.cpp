@@ -1,1 +1,1 @@
-#include "mb/toolib/image/color.h"
+#include "mb/toolib/image/color.hpp"

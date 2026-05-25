@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef COLOR_H_SDFJLHJCGE5ZRXDGH85
-#define COLOR_H_SDFJLHJCGE5ZRXDGH85
+#ifndef COLOR_HPP_SDFJLHJCGE5ZRXDGH85
+#define COLOR_HPP_SDFJLHJCGE5ZRXDGH85
 
-#include "../config.h"
+#include "../config.hpp"
 #include <string>
 
 namespace mb::too::img {

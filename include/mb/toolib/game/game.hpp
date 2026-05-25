@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef GAME_H_AUBZSTEX3ZUBTE632YET7
-#define GAME_H_AUBZSTEX3ZUBTE632YET7
+#ifndef GAME_HPP_AUBZSTEX3ZUBTE632YET7
+#define GAME_HPP_AUBZSTEX3ZUBTE632YET7
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/ul.hpp"
 #include <exception>
 
@@ -153,9 +153,7 @@ private:
 } // namespace game
 } // namespace mb::too
 
-namespace mb {
-
-} // namespace mb
+namespace mb {} // namespace mb
 
 
 #endif

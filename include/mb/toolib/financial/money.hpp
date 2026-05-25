@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef MONEY_H_WEZTUIOLKJHGF34567
-#define MONEY_H_WEZTUIOLKJHGF34567
+#ifndef MONEY_HPP_WEZTUIOLKJHGF34567
+#define MONEY_HPP_WEZTUIOLKJHGF34567
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/ul.hpp"
 #include <locale>
 #include <optional>

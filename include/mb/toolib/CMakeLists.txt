@@ -2,7 +2,6 @@ file(
     GLOB_RECURSE headers
     CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )
 target_sources(
     mb.toolib

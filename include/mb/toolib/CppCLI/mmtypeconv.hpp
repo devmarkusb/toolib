@@ -1,9 +1,9 @@
 //! \file Filename stands for "mixed-mode type conversions".
 
-#ifndef MMTYPECONV_H_NBI4LNV5
-#define MMTYPECONV_H_NBI4LNV5
+#ifndef MMTYPECONV_HPP_NBI4LNV5
+#define MMTYPECONV_HPP_NBI4LNV5
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/buildenv/macros.hpp"
 #include <string>
 
@@ -13,7 +13,11 @@ using System::IntPtr;
 using System::String;
 using System::Runtime::InteropServices::Marshal;
 
-inline String ^ stringA2cli(const char* s) { return gcnew String(s); } inline const char* stringA2cpp(String ^ s) {
+inline String ^ stringA2cli(const char* s) {
+    return gcnew String(s);
+}
+
+inline const char* stringA2cpp(String ^ s) {
     IntPtr p = Marshal::StringToHGlobalAnsi(s);
     std::string ret(static_cast<char*>(p.ToPointer()));
     Marshal::FreeHGlobal(p);
@@ -27,7 +31,11 @@ inline std::string sstringA2cpp(String ^ s) {
     return ret;
 }
 
-inline String ^ stringW2cli(wchar_t* s) { return gcnew String(s); } inline const wchar_t* stringW2cpp(String ^ s) {
+inline String ^ stringW2cli(wchar_t* s) {
+    return gcnew String(s);
+}
+
+inline const wchar_t* stringW2cpp(String ^ s) {
     IntPtr p = Marshal::StringToHGlobalUni(s);
     std::wstring ret(static_cast<wchar_t*>(p.ToPointer()));
     Marshal::FreeHGlobal(p);

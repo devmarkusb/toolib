@@ -1,10 +1,10 @@
 /** \file Implements a scope guard (ScopeGuard)
     according to the article by Andrei Alexandrescu and Petru Marginean, December 01, 2000.*/
 
-#ifndef SCOPEGUARD_H_N2ZXR732RMYRZ3N2UR
-#define SCOPEGUARD_H_N2ZXR732RMYRZ3N2UR
+#ifndef SCOPEGUARD_HPP_N2ZXR732RMYRZ3N2UR
+#define SCOPEGUARD_HPP_N2ZXR732RMYRZ3N2UR
 
-#include "../config.h"
+#include "../config.hpp"
 #include <cstddef>
 
 namespace mb::too {
@@ -282,7 +282,7 @@ ObjScopeGuardImpl2<Obj, MemFct, Para1, Para2> make_obj_guard(Obj& obj, MemFct me
 } // namespace mb::too
 
 // always useful together with scopeguard
-#include "reftovalue.h"
+#include "reftovalue.hpp"
 
 
 #endif

@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef QUANTITY_UNIT_H_DFHGXUNGH38HGXT38GB
-#define QUANTITY_UNIT_H_DFHGXUNGH38HGXT38GB
+#ifndef QUANTITY_UNIT_HPP_DFHGXUNGH38HGXT38GB
+#define QUANTITY_UNIT_HPP_DFHGXUNGH38HGXT38GB
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/ul.hpp"
 #include <exception>
 #include <map>

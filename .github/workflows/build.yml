@@ -23,6 +23,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4.1.1
+      with:
+        submodules: recursive
 
 #todo also see comment above
 # currently not found :(

@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef REFTOVALUE_H_O4NV5HT84N82CH
-#define REFTOVALUE_H_O4NV5HT84N82CH
+#ifndef REFTOVALUE_HPP_O4NV5HT84N82CH
+#define REFTOVALUE_HPP_O4NV5HT84N82CH
 
-#include "../config.h"
+#include "../config.hpp"
 
 namespace mb::too {
 //! Transports a reference as a value.

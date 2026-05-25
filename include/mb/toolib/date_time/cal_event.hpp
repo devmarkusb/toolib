@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef CAL_EVENT_H_NBVXMCBVXMCNBXCMBIERUTOZREOI
-#define CAL_EVENT_H_NBVXMCBVXMCNBXCMBIERUTOZREOI
+#ifndef CAL_EVENT_HPP_NBVXMCBVXMCNBXCMBIERUTOZREOI
+#define CAL_EVENT_HPP_NBVXMCBVXMCNBXCMBIERUTOZREOI
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/basiccodesupport/ptr.hpp"
 #include <memory>
 
