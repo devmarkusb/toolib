@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef FILE_COLLECTION_H_SDHGFNXOI452178943TZX3T1GFN
-#define FILE_COLLECTION_H_SDHGFNXOI452178943TZX3T1GFN
+#ifndef FILE_COLLECTION_HPP_SDHGFNXOI452178943TZX3T1GFN
+#define FILE_COLLECTION_HPP_SDHGFNXOI452178943TZX3T1GFN
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/buildenv/warnings.hpp"
 #include <string>
 #include <vector>

@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef PROMPT_H_8JR82CTRZ2TN
-#define PROMPT_H_8JR82CTRZ2TN
+#ifndef PROMPT_HPP_8JR82CTRZ2TN
+#define PROMPT_HPP_8JR82CTRZ2TN
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/ul.hpp"
 #include <chrono>
 #if UL_OS_WINDOWS

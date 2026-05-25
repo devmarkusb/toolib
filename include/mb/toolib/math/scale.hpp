@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef SCALE_H_ENRHFU87N83464346NG
-#define SCALE_H_ENRHFU87N83464346NG
+#ifndef SCALE_HPP_ENRHFU87N83464346NG
+#define SCALE_HPP_ENRHFU87N83464346NG
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/ul.hpp"
 #include <cmath>
 #include <type_traits>

@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef MATRIX_H_MX02983URX23
-#define MATRIX_H_MX02983URX23
+#ifndef MATRIX_HPP_MX02983URX23
+#define MATRIX_HPP_MX02983URX23
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/ul.hpp"
 #include <cmath>
 #include <complex>

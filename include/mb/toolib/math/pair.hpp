@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef PAIR_H_X2UR832RX823R8R
-#define PAIR_H_X2UR832RX823R8R
+#ifndef PAIR_HPP_X2UR832RX823R8R
+#define PAIR_HPP_X2UR832RX823R8R
 
-#include "../config.h"
+#include "../config.hpp"
 #include <utility>
 
 namespace mb::too::math {

@@ -1,11 +1,11 @@
 //! \file
 
-#ifndef GRAPH_H_LNKJGNGKVFVUTZHIRTHCZREC5
-#define GRAPH_H_LNKJGNGKVFVUTZHIRTHCZREC5
+#ifndef GRAPH_HPP_LNKJGNGKVFVUTZHIRTHCZREC5
+#define GRAPH_HPP_LNKJGNGKVFVUTZHIRTHCZREC5
 
-#include "quantity_unit.h"
-#include "scale.h"
-#include "../config.h"
+#include "quantity_unit.hpp"
+#include "scale.hpp"
+#include "../config.hpp"
 #include "mb/ul/ul.hpp"
 #include <algorithm>
 #include <map>
@@ -243,7 +243,7 @@ private:
 // template implementations
 //####################################################################################################################
 
-#include "mb/toolib/math/scale.h"
+#include "mb/toolib/math/scale.hpp"
 #include "mb/ul/ul.hpp"
 
 namespace mb::too::math {

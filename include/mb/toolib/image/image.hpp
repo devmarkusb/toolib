@@ -1,10 +1,10 @@
 //! \file
 
-#ifndef IMAGE_H_dhfgniv8h5oo87zu4587t546xt5
-#define IMAGE_H_dhfgniv8h5oo87zu4587t546xt5
+#ifndef IMAGE_HPP_dhfgniv8h5oo87zu4587t546xt5
+#define IMAGE_HPP_dhfgniv8h5oo87zu4587t546xt5
 
-#include "../config.h"
-#include "../math/geometry.h"
+#include "../config.hpp"
+#include "../math/geometry.hpp"
 #include <string>
 #include <string_view>
 

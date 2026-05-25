@@ -1,11 +1,11 @@
 //! \file
 
-#ifndef HISTOGRAM_H_IDUNGZ8C7457GX812334GBXXXDESG
-#define HISTOGRAM_H_IDUNGZ8C7457GX812334GBXXXDESG
+#ifndef HISTOGRAM_HPP_IDUNGZ8C7457GX812334GBXXXDESG
+#define HISTOGRAM_HPP_IDUNGZ8C7457GX812334GBXXXDESG
 
-#include "../../config.h"
-#include "mb/toolib/math/percent.h"
-#include "mb/toolib/math/scale.h"
+#include "../../config.hpp"
+#include "mb/toolib/math/percent.hpp"
+#include "mb/toolib/math/scale.hpp"
 #include "mb/ul/ul.hpp"
 #include <algorithm>
 #include <array>

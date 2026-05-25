@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef PERCENT_H_KJDGHNXZRE8HGNF83XGFN34GX
-#define PERCENT_H_KJDGHNXZRE8HGNF83XGFN34GX
+#ifndef PERCENT_HPP_KJDGHNXZRE8HGNF83XGFN34GX
+#define PERCENT_HPP_KJDGHNXZRE8HGNF83XGFN34GX
 
-#include "../config.h"
+#include "../config.hpp"
 
 namespace mb::too::math {
 using Percent = double;

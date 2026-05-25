@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef PATH_H_ISDGFX67G42319GYR6R8GFEUIWGFC
-#define PATH_H_ISDGFX67G42319GYR6R8GFEUIWGFC
+#ifndef PATH_HPP_ISDGFX67G42319GYR6R8GFEUIWGFC
+#define PATH_HPP_ISDGFX67G42319GYR6R8GFEUIWGFC
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/buildenv/warnings.hpp"
 #include <string>
 #include <string_view>

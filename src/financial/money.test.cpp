@@ -1,4 +1,4 @@
-#include "mb/toolib/financial/money.h"
+#include "mb/toolib/financial/money.hpp"
 #include "gtest/gtest.h"
 #include <iostream>
 

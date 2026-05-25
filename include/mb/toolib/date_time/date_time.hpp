@@ -1,9 +1,9 @@
 //! \file
 
-#ifndef DATE_TIME_H_SDHNFXEUHGF783NX4F2Z3T487F
-#define DATE_TIME_H_SDHNFXEUHGF783NX4F2Z3T487F
+#ifndef DATE_TIME_HPP_SDHNFXEUHGF783NX4F2Z3T487F
+#define DATE_TIME_HPP_SDHNFXEUHGF783NX4F2Z3T487F
 
-#include "../config.h"
+#include "../config.hpp"
 #include "mb/ul/buildenv/warnings.hpp"
 #include <ostream>
 #include <string>
