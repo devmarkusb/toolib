@@ -20,10 +20,9 @@ std::string FileCollection::get_base_name(const std::string& fn) {
 #endif
     std::string ret = p.string();
     const size_t pos = ret.find_last_not_of("0123456789");
-    if (pos == std::string::npos)
-        return ret;
-    const std::string retsub = ret.substr(0, pos + 1);
-    return retsub.empty() ? ret : retsub;
+    if (pos != std::string::npos)
+        ret.erase(pos + 1);
+    return ret;
 }
 
 FileCollection::FileCollection(const std::string& file_name) {
