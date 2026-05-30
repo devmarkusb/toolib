@@ -20,7 +20,7 @@ UL_WARNING_DISABLE_MSVC(4251)
 
 struct MonthYearDecl {
     static constexpr Months twelve = 12;
-    static constexpr std::string string_delim{"/"};
+    static inline const std::string string_delim{"/"};
 };
 
 UL_PRAGMA_WARNINGS_POP
