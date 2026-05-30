@@ -58,7 +58,9 @@ set(_mb_toolib_fs_scope PUBLIC)
 add_subdirectory(include/mb/toolib)
 add_subdirectory(src)
 
-mb_devenv_install_library(mb.toolib)
+if(PROJECT_IS_TOP_LEVEL)
+    mb_devenv_install_library(mb.toolib)
+endif()
 
 if(MB_TOOLIB_BUILD_EXAMPLES)
     add_subdirectory(examples)
