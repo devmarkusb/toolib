@@ -102,8 +102,7 @@ public:
 
     ~Unit() noexcept {
         UL_ASSERT(ratio_prefixunitname_.find(this->ratio_) != ratio_prefixunitname_.end());
-        const bool ratio_is_positive = this->ratio_ > ul::math::Rational{};
-        UL_ASSERT(ratio_is_positive);
+        UL_ASSERT(this->ratio_ > ul::math::Rational{});
     }
 
     [[nodiscard]] std::string get_string() const {
