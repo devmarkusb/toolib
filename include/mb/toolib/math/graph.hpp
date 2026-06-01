@@ -124,7 +124,7 @@ protected:
 private:
     void constr_common_impl(const QuValueType& min_qu_val, const QuValueType& max_qu_val);
     void expect_proper_setup() const;
-    void ensure_proper_min_max(QuValueType& min_qu_val, QuValueType& max_qu_val) const;
+    static void ensure_proper_min_max(QuValueType& min_qu_val, QuValueType& max_qu_val);
     void calc_scaling(const QuValueType& min_qu_val, const QuValueType& max_qu_val);
 };
 
@@ -137,7 +137,7 @@ public:
     ChartAxisProj(
         const ChartAxisProjSetup& setup, const Quantity& quantity, const QuValueType& min_qu_val,
         const QuValueType& max_qu_val);
-    virtual ~ChartAxisProj() = default;
+    ~ChartAxisProj() override = default;
 
     void init_projections();
 
@@ -152,7 +152,7 @@ public:
 private:
     using QuValueToProjection = MapLinearScaleIntervalToInterval<QuValueType>;
     std::unique_ptr<QuValueToProjection> map_quvalue_to_projection_;
-    const mb::too::math::ChartAxisProjSetup* setup_{nullptr}; // dyn-casted aux. alias of original setup member variable
+    const ChartAxisProjSetup* proj_setup_{nullptr}; // dyn-casted aux. alias of original setup member variable
 
     void constr_impl();
     void expect_proper_setup() const;
@@ -267,7 +267,7 @@ void ChartAxis<QuValueType>::expect_proper_setup() const {
 }
 
 template <typename QuValueType>
-void ChartAxis<QuValueType>::ensure_proper_min_max(QuValueType& min_qu_val, QuValueType& max_qu_val) const {
+void ChartAxis<QuValueType>::ensure_proper_min_max(QuValueType& min_qu_val, QuValueType& max_qu_val) {
     UL_EXPECT_THROW(min_qu_val <= max_qu_val);
     if (ul::almost_equal_alltypes(min_qu_val, max_qu_val, expected_ulp_difference_minmax)) {
         min_qu_val -= 1;
@@ -363,16 +363,16 @@ ChartAxisProj<QuValueType>::ChartAxisProj(
 
 template <typename QuValueType>
 void ChartAxisProj<QuValueType>::constr_impl() {
-    this->setup_ = dynamic_cast<const mb::too::math::ChartAxisProjSetup*>(ChartAxis<QuValueType>::setup_.get());
-    UL_EXPECT_THROW(this->setup_);
+    this->proj_setup_ = dynamic_cast<const ChartAxisProjSetup*>(ChartAxis<QuValueType>::setup_.get());
+    UL_EXPECT_THROW(this->proj_setup_);
     expect_proper_setup();
 }
 
 template <typename QuValueType>
 void ChartAxisProj<QuValueType>::expect_proper_setup() const {
-    UL_EXPECT_THROW(this->setup_->projection_range.first < this->setup_->projection_range.second);
+    UL_EXPECT_THROW(this->proj_setup_->projection_range.first < this->proj_setup_->projection_range.second);
     UL_EXPECT_THROW(!ul::almost_equal(
-        this->setup_->projection_range.first, this->setup_->projection_range.second,
+        this->proj_setup_->projection_range.first, this->proj_setup_->projection_range.second,
         ChartAxisProj<QuValueType>::expected_ulp_difference_minmax));
 }
 
@@ -380,7 +380,7 @@ template <typename QuValueType>
 void ChartAxisProj<QuValueType>::init_projections() {
     this->map_quvalue_to_projection_ = std::make_unique<QuValueToProjection>(
         std::make_pair(ChartAxisProj<QuValueType>::tick_start_qu_val_, ChartAxisProj<QuValueType>::tick_end_qu_val_),
-        std::make_pair(this->setup_->projection_range.first, this->setup_->projection_range.second));
+        std::make_pair(this->proj_setup_->projection_range.first, this->proj_setup_->projection_range.second));
 }
 
 template <typename QuValueType>
@@ -413,12 +413,12 @@ QuValueType ChartAxisProj<QuValueType>::projectionrange_to_qurange(ProjectionVal
 
 template <typename QuValueType>
 ProjectionValue ChartAxisProj<QuValueType>::get_projection_min_val() const {
-    return this->setup_->projection_range.first;
+    return this->proj_setup_->projection_range.first;
 }
 
 template <typename QuValueType>
 ProjectionValue ChartAxisProj<QuValueType>::get_projection_max_val() const {
-    return this->setup_->projection_range.second;
+    return this->proj_setup_->projection_range.second;
 }
 
 //####################################################################################################################
@@ -444,7 +444,7 @@ Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(
         minmax_y = {(*minmax_y_pair.first).second, (*minmax_y_pair.second).second};
     }
 
-    const auto x_is_as_proj_axis_setup = dynamic_cast<const mb::too::math::ChartAxisProjSetup*>(&setup_x);
+    const auto x_is_as_proj_axis_setup = dynamic_cast<const ChartAxisProjSetup*>(&setup_x);
     if (x_is_as_proj_axis_setup)
         this->x_axis_ = std::make_unique<ChartAxisProj<QuValueTypeX>>(
             *x_is_as_proj_axis_setup, quantities_xy.first, minmax_x.first, minmax_x.second);
@@ -453,7 +453,7 @@ Chart2D<QuValueTypeX, QuValueTypeY>::Chart2D(
             std::make_unique<ChartAxis<QuValueTypeX>>(setup_x, quantities_xy.first, minmax_x.first, minmax_x.second);
     auto x_is_as_proj_axis = dynamic_cast<ChartAxisProj<QuValueTypeX>*>(this->x_axis_.get());
 
-    const auto y_is_as_proj_axis_setup = dynamic_cast<const mb::too::math::ChartAxisProjSetup*>(&setup_y);
+    const auto y_is_as_proj_axis_setup = dynamic_cast<const ChartAxisProjSetup*>(&setup_y);
     if (y_is_as_proj_axis_setup)
         this->y_axis_ = std::make_unique<ChartAxisProj<QuValueTypeY>>(
             *y_is_as_proj_axis_setup, quantities_xy.second, minmax_y.first, minmax_y.second);

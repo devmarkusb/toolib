@@ -60,7 +60,7 @@ private:
     static long m_num_objects;
     static const long max_objects;
 
-    void init() {
+    static void init() {
         if (m_num_objects >= max_objects)
             throw TooManyObjects();
         ++m_num_objects;

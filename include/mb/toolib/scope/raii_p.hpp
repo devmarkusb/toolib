@@ -79,7 +79,7 @@ public:
         return ret;
     }
 
-    //! Cleans the class content and inititialises again in a manner just like the corresponding constructor does.
+    //! Cleans the class content and initialises again in a manner just like the corresponding constructor does.
     /** Please take care of the same remarks as for \see raii_p(T* pt).*/
     void reset(T* pt = 0) {
         if (pt != m_ptr_) {
@@ -117,8 +117,8 @@ public:
     /** \param count number of objects of T.
     Example: \code raii_ap<someclass> psomeobject(5); \endcode*/
     explicit RaiiAp(uint32_t count)
-        : m_count_(count)
-        , m_ptr_(new T[count]) {
+        : m_ptr_(new T[count])
+        , m_count_(count) {
     }
 
     //! Starts memory management (i.e. auto deletion) for an already properly Heap-allocated array pt[] resp. pt*.
@@ -127,8 +127,8 @@ public:
     \param pt pointer to some Heap-allocated memory.
     \param count number of instances of T.*/
     RaiiAp(T* pt, uint32_t count)
-        : m_count_(count)
-        , m_ptr_(pt) {
+        : m_ptr_(pt)
+        , m_count_(count) {
 #if UL_OS_WINDOWS
         UL_DEBUG_BREAK_IF(!_CrtIsValidHeapPointer(pt));
 #endif
@@ -224,9 +224,9 @@ public:
     \param count1 size in first dimension.
     \param count2 size in second dimension.*/
     RaiiAap(uint32_t count1, uint32_t count2)
-        : m_count1_(count1)
-        , m_count2_(count2)
-        , m_ptr_(new T*[count1]) {
+        : m_ptr_(new T*[count1])
+        , m_count1_(count1)
+        , m_count2_(count2) {
         for (uint32_t i = 0; i < count1; ++i)
             m_ptr_[i] = new T[count2];
     }
