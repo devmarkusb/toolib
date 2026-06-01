@@ -1,13 +1,10 @@
 //! \file
+// No include guard, intentionally; implementation of date_time.hpp (cf. mb/ul/string/detail/str_convert_detail.hpp)
 
-#ifndef DATE_TIME_HPP_KJGFDHNXUI3GFY34Z8RY27
-#define DATE_TIME_HPP_KJGFDHNXUI3GFY34Z8RY27
-
-#include "../../config.hpp"
+#include "../date_time_decl.hpp"
 #include "mb/ul/buildenv/comp_bwds.hpp"
 #include "mb/ul/string/string_token.hpp"
 #include "mb/ul/ul.hpp"
-#include <ostream>
 #include <string>
 #include <utility>
 #include <vector>
@@ -19,7 +16,7 @@ namespace mb::too::date_time {
 template <class NormalizePolicy>
 template <class NP>
 MonthYearBase<NormalizePolicy>::MonthYearBase(const MonthYearBase<NP>& other) {
-    this->y_m_ = other.y_m;
+    this->y_m_ = other.y_m_;
     NormalizePolicy::do_it(this->y_m_);
 }
 
@@ -34,14 +31,14 @@ MonthYearBase<NormalizePolicy>& MonthYearBase<NormalizePolicy>::operator=(const 
 template <class NormalizePolicy>
 template <class NP>
 MonthYearBase<NormalizePolicy>::MonthYearBase(MonthYearBase<NP>&& other) {
-    this->y_m_ = std::move(other.y_m);
+    this->y_m_ = std::move(other.y_m_);
     NormalizePolicy::do_it(this->y_m_);
 }
 
 template <class NormalizePolicy>
 template <class NP>
 MonthYearBase<NormalizePolicy>& MonthYearBase<NormalizePolicy>::operator=(MonthYearBase<NP>&& other) {
-    this->y_m_ = std::move(other.y_m);
+    this->y_m_ = std::move(other.y_m_);
     NormalizePolicy::do_it(this->y_m_);
     return *this;
 }
@@ -172,6 +169,3 @@ bool operator>=(const MonthYearBase<NormalizePolicy>& lhs, const MonthYearBase<N
     return !operator<(lhs, rhs);
 }
 } // namespace mb::too::date_time
-
-
-#endif
