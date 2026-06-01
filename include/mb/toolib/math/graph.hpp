@@ -158,10 +158,35 @@ private:
     void expect_proper_setup() const;
 };
 
-
 //####################################################################################################################
 
-class ChartAnnotations;
+//! Optional annotations for certain values (such that e.g. the graph could get a label at that point).
+class ChartAnnotations {
+public:
+    //! Same index can occur multiple times.
+    [[nodiscard]] const VectorOfPairs<size_t, std::string>& get_all() const {
+        return this->annotations_;
+    }
+
+    //! Indices occur uniquely together with vector of associated annotations.
+    [[nodiscard]] std::map<size_t, std::vector<std::string>> obtain_all_per_index() const {
+        std::map<size_t, std::vector<std::string>> ret;
+        for (const auto& an : this->annotations_) {
+            ret[an.first].push_back(an.second);
+        }
+        return ret;
+    }
+
+    //! Add an optional annotation for a certain value index. The index is expected to be in a valid range.
+    //! Also you might have to take care about not using the same index more than once. But that depends on your
+    //! use-case - it is not forbidden.
+    void add(const std::pair<const size_t, const std::string>& a) {
+        this->annotations_.emplace_back(a);
+    }
+
+private:
+    VectorOfPairs<size_t, std::string> annotations_;
+};
 
 //!
 template <typename QuValueTypeX, typename QuValueTypeY>
@@ -207,34 +232,6 @@ private:
     std::unique_ptr<const ChartAnnotations> annotations_;
 
     void pullout_common_factor_from_data();
-};
-
-//! Optional annotations for certain values (such that e.g. the graph could get a label at that point).
-class ChartAnnotations {
-public:
-    //! Same index can occur multiple times.
-    [[nodiscard]] const VectorOfPairs<size_t, std::string>& get_all() const {
-        return this->annotations_;
-    }
-
-    //! Indices occur uniquely together with vector of associated annotations.
-    [[nodiscard]] std::map<size_t, std::vector<std::string>> obtain_all_per_index() const {
-        std::map<size_t, std::vector<std::string>> ret;
-        for (const auto& an : this->annotations_) {
-            ret[an.first].push_back(an.second);
-        }
-        return ret;
-    }
-
-    //! Add an optional annotation for a certain value index. The index is expected to be in a valid range.
-    //! Also you might have to take care about not using the same index more than once. But that depends on your
-    //! use-case - it is not forbidden.
-    void add(const std::pair<const size_t, const std::string>& a) {
-        this->annotations_.emplace_back(a);
-    }
-
-private:
-    VectorOfPairs<size_t, std::string> annotations_;
 };
 
 } // namespace mb::too::math
