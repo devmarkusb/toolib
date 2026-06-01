@@ -157,6 +157,10 @@ RecurringEvent<TimeType>::RecurringEvent(const RecurringEvent<TimeType>& other) 
         m_time_point_start_ = std::make_unique<TimeType>(*other.m_time_point_start_);
     if (other.m_time_point_end_)
         m_time_point_end_ = std::make_unique<TimeType>(*other.m_time_point_end_);
+    if (other.m_backup_start_)
+        m_backup_start_ = std::make_unique<TimeType>(*other.m_backup_start_);
+    if (other.m_backup_end_)
+        m_backup_end_ = std::make_unique<TimeType>(*other.m_backup_end_);
     m_time_period_ = other.m_time_period_;
 }
 

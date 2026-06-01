@@ -25,7 +25,7 @@ struct CalEventTest : public ::testing::Test {
 };
 
 TEST_F(CalEventTest, test) {
-    CalEvent<int>* ce = &seven;
+    const CalEvent<int>* ce = &seven;
     std::unique_ptr<CalEvent<int>> ce_clone(ce->clone());
 
     std::unique_ptr<int> tp = ce_clone->get_first_time_point();

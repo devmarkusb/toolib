@@ -21,7 +21,7 @@ void remove_extension(std::string& fn) {
     const size_t lastdot = fn.find_last_of('.');
     if (lastdot == std::string::npos)
         return;
-    fn = fn.substr(0, lastdot);
+    fn.resize(lastdot);
 }
 
 Path::Path(const std::string& path, EForm form, EType type)
@@ -40,18 +40,29 @@ Path::Path(std::string& path, bool use_by_reference, EForm form, EType type)
 }
 
 Path::Path(const Path& other)
-    : m_form_(other.m_form_)
+    : m_path_own_internal_(*other.m_path_)
+    , m_path_(&m_path_own_internal_)
+    , m_form_(other.m_form_)
     , m_type_(other.m_type_) {
-    *m_path_ = *other.m_path_;
 }
 
-Path::Path(Path&& other) noexcept {
-    Path::swap(other);
+Path::Path(Path&& other) noexcept
+    : m_path_own_internal_(std::move(other.m_path_own_internal_))
+    , m_path_(&m_path_own_internal_)
+    , m_form_(other.m_form_)
+    , m_type_(other.m_type_) {
+    if (other.m_path_ != &other.m_path_own_internal_) {
+        m_path_own_internal_ = std::move(*other.m_path_);
+    }
+    other.m_path_ = &other.m_path_own_internal_;
+    other.m_form_ = EForm::platformindependent;
+    other.m_type_ = EType::is_unknown;
 }
 
 Path& Path::operator=(const Path& other) {
     if (this == std::addressof(other))
         return *this;
+    m_path_ = &m_path_own_internal_;
     *m_path_ = *other.m_path_;
     m_form_ = other.m_form_;
     m_type_ = other.m_type_;
@@ -59,7 +70,18 @@ Path& Path::operator=(const Path& other) {
 }
 
 Path& Path::operator=(Path&& other) noexcept {
-    Path::swap(other);
+    if (this == &other)
+        return *this;
+    m_path_own_internal_ = std::move(other.m_path_own_internal_);
+    m_path_ = &m_path_own_internal_;
+    if (other.m_path_ != &other.m_path_own_internal_) {
+        m_path_own_internal_ = std::move(*other.m_path_);
+    }
+    m_form_ = other.m_form_;
+    m_type_ = other.m_type_;
+    other.m_path_ = &other.m_path_own_internal_;
+    other.m_form_ = EForm::platformindependent;
+    other.m_type_ = EType::is_unknown;
     return *this;
 }
 

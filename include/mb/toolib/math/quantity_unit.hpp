@@ -32,7 +32,7 @@ inline MapRationalString create_map_ratio_simple(const std::string& base_unit_na
 //! Unfortunately you will have to build custom maps for some quantity types, e.g. time, money,
 //! even for masses you would like to write t instead of Mg; also internationalization plays a role
 //! so that it is better to keep strings under your control.
-/** \param only_factors_of_thousand resticts output to the most popular steps of thousands, factors of 10^3.
+/** \param only_factors_of_thousand restricts output to the most popular steps of thousands, factors of 10^3.
     That misses e.g. cm, dm.*/
 inline MapRationalString create_map_ratio_si_prefix_unitname(
     const std::string& base_unit_name, bool only_factors_of_thousand = true) {
@@ -100,8 +100,10 @@ public:
             throw std::invalid_argument("ratio <= zero found in passed map");
     }
 
-    ~Unit() {
-        expect_valid_ratio(this->ratio_);
+    ~Unit() noexcept {
+        UL_ASSERT(ratio_prefixunitname_.find(this->ratio_) != ratio_prefixunitname_.end());
+        const bool ratio_is_positive = this->ratio_ > ul::math::Rational{};
+        UL_ASSERT(ratio_is_positive);
     }
 
     [[nodiscard]] std::string get_string() const {
@@ -187,7 +189,8 @@ private:
     void expect_valid_ratio(const ul::math::Rational& r) const {
         if (ratio_prefixunitname_.find(r) == ratio_prefixunitname_.end())
             throw ErrNoStringProvidedForRatio(r);
-        UL_EXPECT(r > ul::math::Rational{});
+        if (!(r > ul::math::Rational{}))
+            throw std::invalid_argument("ratio must be positive");
     }
 };
 

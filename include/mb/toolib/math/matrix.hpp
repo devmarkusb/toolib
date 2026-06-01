@@ -46,7 +46,7 @@ public:
     //! Copies from another matrix, using the same internal representation to speed things up.
     Matrix(const Matrix& mtrx) {
         ++(mtrx.m_rep_->iRefCount);
-        m_rep_ = mtrx.m_rep_;
+        m_rep_ = mtrx.m_rep_; // cppcheck-suppress copyCtorPointerCopying ; refcounted MRep is shared intentionally.
     }
 
     //! Replaces itself with another matrix, using the same internal representation to speed things up.
@@ -247,12 +247,11 @@ public:
         T** m2elem = m.m_rep_->m;
         T** reselem = res.m_rep_->m;
         T sum;
-        T* m1elemr;
         T init = T(); // eliminating every single function call and address jumping from the loops
         for (uint32_t i = 0; i < m1r; ++i) {
+            const T* m1elemr = m1elem[i]; // speeds thing up tremendously
             for (uint32_t j = 0; j < m2c; ++j) {
                 sum = init;
-                m1elemr = m1elem[i]; // speeds thing up tremendously
                 for (uint32_t k = 0; k < m1c; ++k) {
                     sum += m1elemr[k] * m2elem[k][j];
                 }
@@ -303,7 +302,7 @@ public:
         return *this;
     }
 
-    //! Another matrix is substracted from this one. Both have to coincide dimensionally.
+    //! Another matrix is subtracted from this one. Both have to coincide dimensionally.
     Matrix& operator-=(const Matrix& m) {
         uint32_t m1r = m_rep_->dim_rows, m1c = m_rep_->dim_cols;
         T** m1elem = m_rep_->m;
@@ -417,32 +416,32 @@ public:
     }
 
     //! Determinant.
-    T det() const {
+    static T det() {
         throw ul::NotImplemented{"det"};
     }
 
     //! Inverse. Throws error_division_by_zero_det exception if determinant is zero.
-    void invert() {
+    static void invert() {
         throw ul::NotImplemented{"invert"};
     }
 
     //! Is invertible?
-    [[nodiscard]] bool is_invertible() const {
+    [[nodiscard]] static bool is_invertible() {
         throw ul::NotImplemented{"isInvertible"};
     }
 
     //! Is symmetric?
-    [[nodiscard]] bool is_symmetric() const {
+    [[nodiscard]] static bool is_symmetric() {
         throw ul::NotImplemented{"isSymmetric"};
     }
 
     //! Is orthogonal?
-    [[nodiscard]] bool is_orthogonal() const {
+    [[nodiscard]] static bool is_orthogonal() {
         throw ul::NotImplemented{"isOrthogonal"};
     }
 
     //! Is diagonal?
-    [[nodiscard]] bool is_diagonal() const {
+    [[nodiscard]] static bool is_diagonal() {
         throw ul::NotImplemented{"isDiagonal"};
     }
 
@@ -495,10 +494,10 @@ private:
 
         // Allocating a brand new single representation.
         MRep(uint32_t rows, uint32_t cols, T** mtrx)
-            : i_ref_count(1)
-            , dim_rows(rows)
+            : dim_rows(rows)
             , dim_cols(cols)
-            , m(new T*[rows]) {
+            , m(new T*[rows])
+            , i_ref_count(1) {
             for (uint32_t i = 0; i < rows; ++i) {
                 m[i] = new T[cols];
                 if (mtrx)
@@ -518,7 +517,7 @@ private:
             }
         }
 
-        /* This method is usually called when someone wants to change the matrix. If the represention
+        /* This method is usually called when someone wants to change the matrix. If the representation
         is only single, changing is immediately allowed. If it is shared twice or more often, it has to
         be extracted to a new single representation. In either case the method returns the appropriate
         object to work with.
@@ -642,12 +641,12 @@ public:
     }
 
     //! Is hermitean?
-    [[nodiscard]] bool is_hermitean() const {
+    [[nodiscard]] static bool is_hermitean() {
         throw ul::NotImplemented{"isHermitean"};
     }
 
     //! Is unitary?
-    [[nodiscard]] bool is_unitary() const {
+    [[nodiscard]] static bool is_unitary() {
         throw ul::NotImplemented{"isUnitary"};
     }
 };
