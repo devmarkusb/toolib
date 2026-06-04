@@ -9,6 +9,21 @@
 namespace mb::too::math {
 template <typename T1, typename T2>
 struct Pair {
+private:
+    std::pair<T1, T2> m_p_;
+
+    T1& getleft() {
+        return m_p_.first;
+    }
+
+    T2& getright() {
+        return m_p_.second;
+    }
+
+public:
+    T1& left;
+    T2& right;
+
     Pair()
         : m_p_()
         , left(getleft())
@@ -74,20 +89,6 @@ struct Pair {
 
     Pair<T1, T2> flip() {
         return Pair<T1, T2>(m_p_.second, m_p_.first);
-    }
-
-    T1& left;
-    T2& right;
-
-private:
-    std::pair<T1, T2> m_p_;
-
-    T1& getleft() {
-        return m_p_.first;
-    }
-
-    T2& getright() {
-        return m_p_.second;
     }
 };
 } // namespace mb::too::math
