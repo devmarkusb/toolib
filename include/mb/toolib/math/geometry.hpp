@@ -3,13 +3,9 @@
 #ifndef GEOMETRY_HPP_DGIUNTGH87XTG3487TG3TGFVSCD
 #define GEOMETRY_HPP_DGIUNTGH87XTG3487TG3TGFVSCD
 
-#include "../config.hpp"
-#include "mb/toolib/math/quantity_unit.hpp"
-#include "mb/toolib/math/scale.hpp"
 #include "mb/ul/ul.hpp"
 #include <array>
 #include <cstddef>
-#include <cmath>
 #include <initializer_list>
 #include <type_traits>
 

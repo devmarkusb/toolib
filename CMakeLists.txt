@@ -1,11 +1,6 @@
 cmake_minimum_required(VERSION 3.30...4.3)
 
-project(
-    mb.toolib
-    DESCRIPTION "toolib library"
-    LANGUAGES CXX
-    VERSION 0.1.0
-)
+project(mb.toolib DESCRIPTION "toolib library" LANGUAGES CXX VERSION 0.1.0)
 
 option(
     MB_TOOLIB_BUILD_TESTS
@@ -46,7 +41,8 @@ add_library(mb::toolib ALIAS mb.toolib)
 target_compile_features(mb.toolib PUBLIC cxx_std_23)
 target_compile_definitions(
     mb.toolib
-    PUBLIC MB_TOOLIB_DISABLE_NAMESPACE_ALIAS=$<BOOL:${MB_TOOLIB_DISABLE_NAMESPACE_ALIAS}>
+    PUBLIC
+        MB_TOOLIB_DISABLE_NAMESPACE_ALIAS=$<BOOL:${MB_TOOLIB_DISABLE_NAMESPACE_ALIAS}>
 )
 target_link_libraries(mb.toolib PUBLIC "$<BUILD_LOCAL_INTERFACE:mb::util>")
 

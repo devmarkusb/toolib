@@ -13,7 +13,7 @@ namespace mb::too {
     a template (which is not outright recommended for base classes and not
     possible for virtual functions).
     So IType is your 'type template parameter' so to say. And it is an alternate
-    choice next to any or variant tyes. Of course here the approach is inheritence
+    choice next to any or variant types. Of course here the approach is inheritance
     and dynamic typing.
     Usage:
     \code
@@ -22,7 +22,7 @@ namespace mb::too {
         virtual void f(IType*) = 0;
     };
 
-    struct UserA : public IUser
+    struct ConcreteUser : public IUser
     {
         virtual void f(IType*) {}
     };

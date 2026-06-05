@@ -35,7 +35,7 @@ TEST_F(PathTest, EmptyConstruction) {
     EXPECT_TRUE(p.is_empty());
 }
 
-TEST_F(PathTest, Statics) {
+TEST_F(PathTest, StaticMethods) {
 #if UL_OS_WINDOWS
     EXPECT_EQ("\\", Path::get_separator_native());
 #else

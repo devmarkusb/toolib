@@ -18,7 +18,7 @@ protected:
         ~CTest() override = default;
 
         //! Parameter documentation, also for setParameter().
-        /** ... (in the real world it is extremely to provide a thorough documention of allowed name-type pairs)*/
+        /** ... (in the real world it is extremely to provide a thorough documentation of allowed name-type pairs)*/
         bool get_parameter(const char* name, too::TOutBuffer value) const override {
             if (!name || !value)
                 return false;

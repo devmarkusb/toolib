@@ -49,8 +49,8 @@ struct IUser {
     virtual void f(too::Itype*) = 0;
 };
 
-struct UserA : public IUser {
-    ~UserA() override = default;
+struct ConcreteUser : public IUser {
+    ~ConcreteUser() override = default;
 
     void f(too::Itype* /*unused*/) override {
     }
