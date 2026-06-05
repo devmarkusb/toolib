@@ -5,6 +5,10 @@
 #include <sstream>
 #include <string>
 
+UL_PRAGMA_WARNINGS_PUSH
+// GCC 15 -O3 reports false positives when void* buffer calls are inlined into tests.
+UL_WARNING_DISABLE_GCC(array-bounds)
+
 class IAbstractTest : public ::testing::Test {
 protected:
     void SetUp() override {
@@ -198,3 +202,5 @@ TEST_F(IAbstractTest, ExecuteWithParaAndRet) {
     EXPECT_TRUE(m_test_obj_.execute("calcSth", param, &out));
     EXPECT_EQ("20;\"Hello World! And once more: Hello World!\"", out);
 }
+
+UL_PRAGMA_WARNINGS_POP
