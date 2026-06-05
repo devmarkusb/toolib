@@ -37,7 +37,7 @@ typedef const ScopeGuardImplBase& ScopeGuard;
 class ScopeGuardImplBase {
 public:
     //! Calling this method ensures, that no rollback is performed by the constructor.
-    /** So all actions preceding the guarding are commited.*/
+    /** So all actions preceding the guarding are committed.*/
     void no_rollback() const noexcept {
         m_b_rollback_ = false;
     }

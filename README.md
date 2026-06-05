@@ -4,6 +4,7 @@
 
 A lib containing a wild collection of minimalistic tools to be shared
 among apps. Criteria of what goes in:
+
 * too general for any single app
 * minimal or quick and dirty state, insufficient for an own
 properly crafted lib

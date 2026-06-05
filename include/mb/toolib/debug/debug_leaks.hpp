@@ -12,7 +12,7 @@
 /** Detection goes either by standard Visual Studio style or by using vld.h, if available, whereas
 one would have to define UL_USE_VLD to 1 in front of the header inclusion.
 In the standard case, one has to call UL_DUMP_MEM_LEAKS; before the program exits in order
-to find leak informations in the Output window of the Visual Studio IDE.*/
+to find leak information in the Output window of the Visual Studio IDE.*/
 #if UL_USE_VLD
 #include <vld.h>
 #define UL_DUMP_MEM_LEAKS 0
